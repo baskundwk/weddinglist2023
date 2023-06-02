@@ -1,0 +1,40 @@
+<div class="row">
+  <div class="form-floating col-12">
+    <!-- <label for="name">ชื่อ - นามสกุล*</label> -->
+    [text* name-lastname id:name-lastname class:form-control placeholder "ชื่อ - นามสกุล*"]
+  </div>
+  <div class="form-floating col-12">
+    <!-- <label for="tel">เบอร์โทรติดต่อ*</label> -->
+    [tel* tel id:tel class:form-control placeholder "เบอร์โทรติดต่อ*"]
+  </div>
+  <div class="form-floating col-12">
+    <!-- <label for="email">E-mail*</label> -->
+    [email* email id:email class:form-control placeholder "E-mail*"]
+  </div>
+  <div class="form-floating col-12 col-md-6">
+    <!-- <label for="lineid">Line ID</label> -->
+    [text lineid id:lineid class:form-control placeholder "Line ID"]
+  </div>
+  <div class="form-floating col-12 col-md-6">
+    <!-- <label for="guest">จำนวนแขก</label> -->
+    [number guest id:guest class:form-control placeholder "จำนวนแขก"]
+  </div>
+  <div class="form-floating col-12">
+    <!-- <label for="budget">งบประมาณ</label> -->
+    [number budget id:budget class:form-control placeholder "งบประมาณ"]
+  </div>
+  <div class="form-floating col-12">
+    <label for="date">วันที่จัดงาน</label>
+    [date date id:date class:form-control placeholder "วันที่จัดงาน"]
+  </div>
+  <div class="form-floating col-12">
+    <!-- <label for="message">ข้อความเพิ่มเติม</label> -->
+    [textarea message id:message class:form-control placeholder "ข้อความเพิ่มเติม"]
+  </div>
+  <div class="col-12">
+    <label>ช่วงเวลาจัดงาน</label>
+    [checkbox daytime class:wdl-checkbox-button use_label_element "งานเลี้ยงเช้า" "งานเลี้ยงเที่ยง" "งานเลี้ยงเย็น"]
+  </div>
+</div>
+<div class="pt-4 text-center">[submit "Submit"]</div>
+[dynamichidden recipient-email readonly "CF7_get_custom_field key='FormReceipeint'"]
