@@ -28,18 +28,6 @@
 								<?php endif; ?>
 							</div>
 
-							<?php
-							$relatedVenue = get_field('RelatedVenue');
-							if ($relatedVenue) :
-								foreach ($relatedVenue as $venue) :
-									$venueType = get_field('VenueType', $venue->ID);
-							?>
-									<div class="wdl-archive-pretitle mb-2">
-										<small><?php echo $venueType[0]->name ?></small>
-									</div>
-							<?php endforeach;
-							endif; ?>
-
 							<h3 class="wdl-archive-title"><a href="<?php the_permalink(); ?>"><?php the_split_title(); ?></a></h3>
 
 							<?php

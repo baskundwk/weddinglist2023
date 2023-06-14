@@ -28,7 +28,7 @@
 					<div id="su-post-<?php the_ID(); ?>" class="swiper-slide card su-post <?php echo esc_attr($atts['class_single']); ?>">
 
 						<?php if (has_post_thumbnail(get_the_ID())) : ?>
-							<a class="card-img-top" href="<?php the_permalink(); ?>"><img class="" src="<?php echo esc_html(get_the_post_thumbnail_url($post)) ?>" width="100%"></a>
+							<a class="card-img-top" href="<?php the_permalink(); ?>"><?php the_post_thumbnail('medium_large') ?></a>
 						<?php endif; ?>
 
 						<div class="card-body">

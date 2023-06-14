@@ -96,6 +96,10 @@
 }
 
 /* Bootstrap Patches */
+tbody, td, tfoot, th, thead, tr {
+  border-width: 1px;
+}
+
 .form-control:focus {
   box-shadow: none;
 }
@@ -175,6 +179,10 @@ ul {
 
 body .et_pb_button {
   font-weight: 400 !important;
+}
+
+.text-sm {
+  font-size: 0.875rem !important;
 }
 
 @media (min-width: 1200px) {
@@ -307,6 +315,10 @@ input[type=date] {
   min-height: 0;
 }
 
+.form-floating {
+  position: relative;
+  display: block;
+}
 .form-floating input.text,
 .form-floating input.title,
 .form-floating input[type=number],
@@ -399,6 +411,7 @@ input[type=date] {
   font-size: 16px;
   line-height: 1;
   border-radius: 4px;
+  transition: 0.25s background, 0.25s border;
 }
 
 .wpcf7-list-item input[type=checkbox]:checked + .wpcf7-list-item-label:before {
@@ -447,7 +460,8 @@ input[type=date] {
 
 .wdl-checkbox-button {
   display: flex;
-  gap: 16px;
+  gap: 0.5rem 1rem;
+  flex-wrap: wrap;
 }
 
 .wdl-checkbox-button .wpcf7-list-item,
@@ -528,7 +542,7 @@ input[type=date] {
   background: #ff2758 !important;
   color: #fff !important;
   border-radius: 5rem;
-  width: 49%;
+  width: auto;
   padding: 13px 55px;
   border: none;
 }
@@ -694,6 +708,13 @@ input[type=date] {
 }
 
 /* Search */
+.wdl-search {
+  border-radius: 10px !important;
+  transition: 0.25s box-shadow;
+}
+.wdl-search:focus-within {
+  box-shadow: 0 0 0 1px #FF2758;
+}
 .wdl-search .et_pb_searchform .et_pb_s {
   border-radius: 10px 0 0 10px !important;
 }
@@ -1046,7 +1067,7 @@ input[type=date] {
 .wdl-single-title {
   font-size: 1.5rem;
   line-height: 1.5;
-  font-weight: 700;
+  font-weight: 500;
   color: #333333;
 }
 
@@ -1284,10 +1305,9 @@ input[type=date] {
   position: fixed;
   top: 66px;
   width: 100%;
-  box-shadow: 0 0 6px rgba(0, 0, 0, 0.16);
   padding: 8px 0;
   z-index: 99998;
-  background: #ffffff;
+  background: #F8F7F9;
   transform: translateY(-100%);
   opacity: 0;
   transition: 0.25s transform, 0.25s opacity;
@@ -1306,6 +1326,14 @@ input[type=date] {
 @media (max-width: 767px) {
   .wdl-sticky-bar .wdl-btn {
     font-size: 0.875rem;
+  }
+}
+@media (max-width: 991px) {
+  .wdl-sticky-bar {
+    bottom: 0;
+    top: auto !important;
+    background: #F8F7F9;
+    transform: translateY(100%);
   }
 }
 
@@ -1670,6 +1698,45 @@ body .wpc-filters-main-wrap .wpc-filters-widget-controls-container a.wpc-filters
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+/* Monarch social plugin */
+.et_monarch .et_social_networks .et_social_icons_container {
+  display: flex;
+  gap: 0.3rem;
+}
+
+.et_monarch .et_social_networks {
+  width: auto;
+}
+
+.wdl-line-share-icon {
+  transform: scale(0.9);
+  transform-origin: top left;
+  margin: 0 0.15rem;
+}
+
+/* Sidbear */
+@media (min-width: 992px) {
+  .et_right_sidebar #sidebar {
+    border-left: 1px solid #E1E1E1 !important;
+  }
+}
+
+.et_right_sidebar #main-content .container:before {
+  content: none !important;
+}
+
+@media (min-width: 981px) {
+  #content-area {
+    display: flex;
+  }
+  .et_right_sidebar #left-area {
+    flex: 3 1 0;
+  }
+  .et_right_sidebar #sidebar {
+    flex: 0.8 0.8 0;
+  }
 }
 
 /*# sourceMappingURL=style.css.map */

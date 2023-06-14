@@ -13,7 +13,7 @@
 
 						<?php if (has_post_thumbnail(get_the_ID())) : ?>
 							<a class="card-img-top wdl-archive-card-img-top" href="<?php the_permalink(); ?>">
-								<img class="" src="<?php echo esc_html(get_the_post_thumbnail_url($post, 'medium')) ?>" width="100%">
+								<?php the_post_thumbnail('medium_large') ?>
 								<?php $sponsored = get_field('Sponsor');
 								if ($sponsored && in_array('Sponsored', $sponsored)) : ?>
 									<span class="badge wdl-badge-sm">Sponsored</span>

@@ -26,7 +26,6 @@
               <div class="row pb-4">
                 <div class="col">
                   <h1 class="h4"><?php echo _e('โปรโมชั่นแต่งงาน', 'โปรโมชั่นแต่งงาน')?></h1>
-                  <p class="text-secondary"><?php echo _e('รวบรวมโปรโมชั่นแต่งงานให้คุณไว้ที่เดียว', 'รวบรวมโปรโมชั่นแต่งงานให้คุณไว้ที่เดียว')?></p>
                 </div>
               </div>
               <div class="row">
@@ -101,7 +100,6 @@
               <div class="row pb-4">
                 <div class="col">
                   <h1 class="h4"><?php echo _e('Wedding Fair', 'Wedding Fair')?></h1>
-                  <p class="text-secondary"><?php echo _e('รวบรวม Wedding Fair ให้คุณไว้ที่เดียว', 'รวบรวม Wedding Fair ให้คุณไว้ที่เดียว')?></p>
                 </div>
               </div>
               <div class="row">
@@ -177,7 +175,6 @@
                 <div class="row pb-4">
                   <div class="col">
                     <h1 class="h4"><?php echo _e('สถานที่จัดงานแต่งงาน', 'สถานที่จัดงานแต่งงาน') ?></h1>
-                    <p class="text-secondary"><?php echo _e('รวบรวมสถานที่จัดงานแต่งงานให้คุณไว้ที่เดียว', 'รวบรวมสถานที่จัดงานแต่งงานให้คุณไว้ที่เดียว') ?></p>
                   </div>
                 </div>
                 <div class="row">
@@ -258,7 +255,6 @@
               <div class="row pb-4">
                 <div class="col">
                   <h1 class="h4"><?php echo _e('บทความ', 'บทความ')?></h1>
-                  <p class="text-secondary"><?php echo _e('รวบรวมบทความให้คุณไว้ที่เดียว', 'รวบรวมบทความให้คุณไว้ที่เดียว')?></p>
                 </div>
               </div>
               <div class="row">

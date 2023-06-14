@@ -12,187 +12,32 @@
   </div>
 </div>
 <div class="pb-4">
-  
+
   [radio choice id:choice use_label_element class:wdl-radio-button default:1 "เลือกจากประเภทของสถานที่" "เลือกจากทำเลที่ตั้งองสถานที่"]
-  
+
   [group choice-1]
   <p><label for="choice-1-tier">ระดับสถานที่จัดงาน</label><br/><small>(เราจะติดต่อเพื่อแนะนำแพ็กเกจสถานที่จัดงานแต่งงานตาม ระดับและทำเลที่ตั้งที่คุณเลือก)</small></p>
   [radio chioce-1-tier id:chioce-1-tier class:chioce-1-tier class:wdl-radio-button use_label_element default:1 "Hotels (5 Star)" "Hotels" "Venue"]
-  
+
   [group choice-1-1]
   <p><small class="float-end">16 รายการ</small><label for="choice-1-tier-1">โรงแรมห้าดาว </label></p>
-  [checkbox choice-1-tier-1 id:choice-1-tier-1 class:wdl-grid-col-2 use_label_element "ทั้งหมด" "SO/ BANGKOK" "Pullman Bangkok Hotel G" "S31 Sukhumvit Hotel" "Crowne Plaza Bangkok Lumpini Park" "Hotel Nikko Bangkok" "JW Marriott Hotel Bangkok" "The Peninsula Bangkok" "Swissôtel Bangkok Ratchada" "Marriott Executive Apartments Sukhumvit Park" "The Westin Grande Sukhumvit, Bangkok" "Eastin Grand Hotel Sathorn" "อนุสาวรีย์ชัยฯ/ศรีอยุธยา/รางน้ำ" "Montien Hotel Surawong Bangkok" "Kimpton Maa-Lai Bangkok" "Amari Watergate" "Royal Orchid Sheraton Hotel & Towers" "Bangkok Marriott Hotel The Surawongse" "Hilton Sukhumvit Bangkok" "Capella BangkokW Bangkok" "Mandarin Oriental, Bangkok" "Sofitel Bangkok Sukhumvit" "Renaissance Bangkok Ratchaprasong Hotel" "Millennium Hilton Bangkok" "Radisson Blu Plaza Bangkok" "Bangkok Marriott Hotel Sukhumvit" "Le Méridien Bangkok"]
+	<div id="choice-1-tier-1" class="wdl-grid-col-2">[venue_list_hotel5s choice-1-tier-1]</div>
   [/group]
-  
+
   [group choice-1-2]
   <p><small class="float-end">16 รายการ</small><label for="choice-1-tier-2">โรงแรมธรรมดา</label></p>
-  [checkbox choice-1-tier-2 id:choice-1-tier-2 class:wdl-grid-col-2 use_label_element "ทั้งหมด" "Riverine Place Hotel And Residence" "Amara BangkokHoliday Inn Bangkok Sukhumvit" "Avani Atrium Bangkok" "Novotel Bangkok Bangna" "Alexander Hotel Bangkok" "Century Park Hotel Bangkok" "Bliston Suwan Park View Hotel & Serviced Residence" "Avana Bangkok Bangna" "Montien Riverside Hotel" "Rembrandt Hotel" "Ramada Plaza by Wyndham Bangkok Menam Riverside" "Mandarin Hotel Bangkok" "Ibis Styles Bangkok Ratchada" "Grand Richmond Stylish Convention Hotel" "Holiday Inn Silom"]
-  [/group]
-  
+  <div id="choice-1-tier-2" class="wdl-grid-col-2">[venue_list_hotel choice-1-tier-2]</div>
+	[/group]
+
   [group choice-1-3]
   <p><small class="float-end">16 รายการ</small><label for="choice-1-tier-3">สถานที่จัดงานแต่งงาน</label></p>
-  [checkbox choice-1-tier-3 id:choice-1-tier-3 class:wdl-grid-col-2 use_label_element "ทั้งหมด" "เรือนนพเก้า" "Summit Windmill Golf Residence" "Prince Palace Hotel" "Villa de Bua" "รัตนพิมาน" "เรือนเจ้าสาว" "บ้านรับรอง (ศรีนครินทร์)" "LE VIVA Boutique Colonial House" "Gaysorn Urban Resort " "The Banquet Hall at Nathong " "IMPACT Exhibition hall " "CDC Crystal Grand Ballroom" "VALA DE CIA"]
+  <div id="choice-1-tier-3" class="wdl-grid-col-2">[venue_list_other choice-1-tier-3]</div>
+	[/group]
+
   [/group]
-  
-  [/group]
-  
+
   [group choice-2]
-  <div class="accordion" id="choice-2-location">
-  <div class="accordion-item">
-  	<div class="accordion-header">
-  		<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-1">พระราม 4/ลุมพินี/สามย่าน/หัวลำโพง</button>
-  	</div>
-  	<div id="collapse-1" class="accordion-collapse collapse" data-bs-parent="#choice-2-location">
-  		<div class="accordion-body">
-  			[checkbox location-1 id:location-1 use_label_element "ทั้งหมด" "Mandarin Hotel Bangkok" "Oriental Residence Bangkok" "Crowne Plaza Bangkok Lumpini Park"]
-  		</div>
-  	</div>
-  </div>
-  <div class="accordion-item">
-  	<div class="accordion-header">
-  		<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-2">กัลปพฤกษ์</button>
-  	</div>
-  	<div id="collapse-2" class="accordion-collapse collapse" data-bs-parent="#choice-2-location">
-  		<div class="accordion-body">
-  			[checkbox location-2 id:location-2 use_label_element "ทั้งหมด" "VALA DE CIA"]
-  		</div>
-  	</div>
-  </div>
-  <div class="accordion-item">
-  	<div class="accordion-header">
-  		<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-3">มหานาค/หลานหลวง/ข้าวสาร</button>
-  	</div>
-  	<div id="collapse-3" class="accordion-collapse collapse" data-bs-parent="#choice-2-location">
-  		<div class="accordion-body">
-  			[checkbox location-3 id:location-3 use_label_element "ทั้งหมด" "Prince Palace Hotel"]
-  		</div>
-  	</div>
-  </div>
-  <div class="accordion-item">
-  	<div class="accordion-header">
-  		<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-4">รัชดา/ประชาอุทิศ</button>
-  	</div>
-  	<div id="collapse-4" class="accordion-collapse collapse" data-bs-parent="#choice-2-location">
-  		<div class="accordion-body">
-  			[checkbox location-4 id:location-4 use_label_element "ทั้งหมด" "Swissôtel Bangkok Ratchada" "The Banquet Hall at Nathong" "ibis Styles Bangkok Ratchada"]
-  		</div>
-  	</div>
-  </div>
-  <div class="accordion-item">
-  	<div class="accordion-header">
-  		<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-5">ราชประสงค์/วิทยุ/เพลินจิต/ชิดลม</button>
-  	</div>
-  	<div id="collapse-5" class="accordion-collapse collapse" data-bs-parent="#choice-2-location">
-  		<div class="accordion-body">
-  			[checkbox location-5 id:location-5 use_label_element "ทั้งหมด" "Gaysorn Urban Resort" "Renaissance Bangkok Ratchaprasong Hotel" "Kimpton Maa-Lai Bangkok" "JW Marriott Hotel Bangkok" "Bliston Suwan Park View Hotel & Serviced Residence"]
-  		</div>
-  	</div>
-  </div>
-  <div class="accordion-item">
-  	<div class="accordion-header">
-  		<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-6">รามคำแหง/พระราม 9/ศรีนครินทร์</button>
-  	</div>
-  		<div id="collapse-6" class="accordion-collapse collapse" data-bs-parent="#choice-2-location">
-  		<div class="accordion-body">
-  			[checkbox location-6 id:location-6 use_label_element "ทั้งหมด" "Alexander Hotel" "บ้านรับรอง (ศรีนครินทร์)"]
-  		</div>
-  	</div>
-  </div>
-  <div class="accordion-item">
-  	<div class="accordion-header">
-  		<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-7">ริมแม่น้ำเจ้าพระยา</button>
-  	</div>
-  	<div id="collapse-7" class="accordion-collapse collapse" data-bs-parent="#choice-2-location">
-  		<div class="accordion-body">
-  			[checkbox location-7 id:location-7 use_label_element "ทั้งหมด" "The Peninsula Bangkok" "Millennium Hilton Bangkok" "Ramada Plaza by Wyndham Bangkok Menam Riverside" "Montien Riverside Hotel" "Royal Orchid Sheraton Hotel & Towers"]
-  		</div>
-  	</div>
-  </div>
-  <div class="accordion-item">
-  	<div class="accordion-header">
-  		<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-8">ลาดกระบัง/บางนา/สุวรรณภูมิ</button>
-  	</div>
-  	<div id="collapse-8" class="accordion-collapse collapse" data-bs-parent="#choice-2-location">
-  		<div class="accordion-body">
-  			[checkbox location-8 id:location-8 use_label_element "ทั้งหมด" "Summit Windmill Golf Residence" "Novotel Bangkok Bangna" "Avana Bangkok Bangna"]
-  		</div>
-  	</div>
-  </div>
-  <div class="accordion-item">
-  	<div class="accordion-header">
-  		<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-9">วิภาวดี/ดอนเมือง/แจ้งวัฒนะ</button>
-  	</div>
-  	<div id="collapse-9" class="accordion-collapse collapse" data-bs-parent="#choice-2-location">
-  		<div class="accordion-body">
-  			[checkbox location-9 id:location-9 use_label_element "ทั้งหมด" "Wedding at IMPACT"]
-  		</div>
-  	</div>
-  </div>
-  <div class="accordion-item">
-  	<div class="accordion-header">
-  		<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-10">สีลม/สุรวงศ์/สาทร</button>
-  	</div>
-  	<div id="collapse-10" class="accordion-collapse collapse"  data-bs-parent="#choice-2-location">
-  		<div class="accordion-body">
-  			[checkbox location-10 id:location-10 use_label_element "ทั้งหมด" "Eastin Grand Hotel Sathorn" "Le Meridien Bangkok" "W Bangkok" "Holiday Inn Bangkok Silom" "Bangkok Marriott Hotel The Surawongse" "SO/ BANGKOK" "Amara Bangkok" "Montien Hotel Surawong Bangkok" ]
-  		</div>
-  	</div>
-  </div>
-  <div class="accordion-item"><div class="accordion-item-heade">
-  		<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-11">รัชดา/ประชาอุทิศ</button>
-  	</div>
-  	<div id="collapse-11" class="accordion-collapse collapse"  data-bs-parent="#choice-2-location">
-  		<div class="accordion-body">
-  			[checkbox location-11 id:location-11 use_label_element "ทั้งหมด" "Holiday Inn Bangkok Sukhumvit" "Sofitel Bangkok Sukhumvit" "Rembrandt Hotel & Suites Bangkok" "S31 Sukhumvit Hotel" "Radisson Blu Plaza Bangkok" "Hotel Nikko Bangkok" "The Westin Grande Sukhumvit Bangkok" "Hilton Sukhumvit Bangkok" "Eastin Hotel Makkasan Bangkok" "AVANI Atrium Bangkok" "Amari Watergate Bangkok" "Marriott Executive Apartments Sukhumvit Park"]
-  		</div>
-  	</div>
-  </div>
-  <div class="accordion-item"><div class="accordion-item-heade">
-  		<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-12">อนุสาวรีย์ชัยฯ/ศรีอยุธยา/รางน้ำ</button>
-  	</div>
-  	<div id="collapse-12" class="accordion-collapse collapse"  data-bs-parent="#choice-2-location">
-  		<div class="accordion-body">
-  			[checkbox location-12 id:location-12 use_label_element "ทั้งหมด" "Pullman Bangkok King Power" "Century Park Hotel Bangkok"]
-  		</div>
-  	</div>
-  </div>
-  <div class="accordion-item"><div class="accordion-item-heade">
-  		<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-13">เจริญกรุง</button>
-  	</div>
-  	<div id="collapse-13" class="accordion-collapse collapse"  data-bs-parent="#choice-2-location">
-  		<div class="accordion-body">
-  			[checkbox location-13 id:location-13 use_label_element "ทั้งหมด" "Mandarin Oriental, Bangkok" "Hotel Once Bangkok" "Capella Bangkok"]
-  		</div>
-  	</div>
-  </div>
-  <div class="accordion-item"><div class="accordion-item-heade">
-  		<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-14">เทพรักษ์/เลียบทางด่วนรามอินทรา</button>
-  	</div>
-  	<div id="collapse-14" class="accordion-collapse collapse"  data-bs-parent="#choice-2-location">
-  		<div class="accordion-body">
-  			[checkbox location-14 id:location-14 use_label_element "ทั้งหมด" "Villa de Bua" "CDC Ballroom"]
-  		</div>
-  	</div>
-  </div>
-  <div class="accordion-item"><div class="accordion-item-heade">
-  		<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-15">พระราม 5/นนทบุรี/ปทุมธานี</button>
-  	</div>
-  	<div id="collapse-15" class="accordion-collapse collapse"  data-bs-parent="#choice-2-location">
-  		<div class="accordion-body">
-  			[checkbox location-15 id:location-15 use_label_element "ทั้งหมด" "LE VIVA Boutique Colonial House" "Grand Richmond Stylish Convention Hotel" "เรือนเจ้าสาว" "เรือนนพเก้า" "รัตนพิมาน" "Riverine Place Hotel And Residence"]
-  		</div>
-  	</div>
-  </div>
-  <div class="accordion-item"><div class="accordion-item-heade">
-  		<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-16">เชียงใหม่/เชียงราย</button>
-  	</div>
-  	<div id="collapse-16" class="accordion-collapse collapse"  data-bs-parent="#choice-2-location">
-  		<div class="accordion-body">
-  			[checkbox location-16 id:location-16 use_label_element "ทั้งหมด" "Flora Creek Chiang Mai"]
-  			</div>
-  	</div>
-  </div>
-  </div>
+  [venue_list_by_location choice-2-1]
   [/group]
 </div>
-[submit id:step-2-submit class:wdl-btn class:wdl-btn-primary "ส่งข้อมูล"]
+[submit "ส่งข้อมูล"]

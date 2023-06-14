@@ -2,7 +2,7 @@
 <main>
 	<section>
 		<div class="container-xl">
-			<div class="row">
+			<div class="row mb-3 mt-xl-3">
 				<?php $banner = get_field('Banner');
 						if( $banner ): ?>
 					<div class="col-12 order-xl-2 pb-0 pb-xl-4 px-0 px-xl-3">
@@ -12,13 +12,13 @@
 					</div>
 				<?php endif; ?>
 
-				<div class="col-12 order-xl-1 py-4">
+				<!-- <div class="col-12 order-xl-1 py-4">
 				<?php if (function_exists('rank_math_the_breadcrumbs')) : ?>
 					<div class="wdl-breadcrumb">
 						<?php rank_math_the_breadcrumbs(); ?>
 					</div>
 					<?php endif; ?>
-				</div>
+				</div> -->
 			</div>
 		</div>
 	</section>
@@ -42,15 +42,16 @@
 				</div>
 				<?php $sponsored = get_field('Sponsor', $relatedPost->ID); ?>
 				<div class="col-12 col-sm-auto col-lg-3 text-center text-lg-end mb-2 mb-sm-0">
-					<a href="#apply" class="wdl-btn" data-bs-toggle="modal"><?php _e('สนใจรับโปรโมชั่น<br class="d-sm-none">และสิทธิพิเศษ', 'Apply for Promotion'); ?></a>
+					<p class="d-lg-none"><?php _e('“สะดวก รวดเร็ว ปลอดภัย พร้อมทีมงานให้คำปรึกษา”')?></p>
+					<a href="#apply" class="wdl-btn" data-bs-toggle="modal"><?php _e('สนใจรับโปรโมชั่นและสิทธิพิเศษ', 'Apply for Promotion'); ?></a>
 				</div>
 			</div>
 		</div>
 	</section>
 	<section class="wdl-main-bar">
 		<div class="container-xl">
-			<div class="row align-items-center text-center text-sm-start">
-				<div class="col-sm-2 mb-4 mb-xl-0">
+			<div class="row align-items-center">
+				<div class="col-sm-2 mb-4 mb-xl-0 d-none d-lg-block">
 					<?php $logo = get_field('Logo');
 						if( $logo ): ?>
 							<div class="wdl-metadata-logo">
@@ -59,7 +60,7 @@
 						<?php endif; ?>
 				</div>
 				<div class="col-sm mb-3 mb-sm-0">
-					<p class="text-accent mb-0"><?php _e('Wedding Fair', 'Wedding Fair')?></p>
+					<p class="mb-0"><a class="text-accent" href="/promotion"><?php _e('Promotion', 'Promotion')?></a></p>
 					<h1 class="wdl-single-title"><?php the_title(); ?></h1>
 					<?php
 						$date = get_field('Date');
@@ -76,7 +77,7 @@
 						<?php endforeach; endif; ?>
 				</div>
 				<div class="col-sm-auto text-center text-sm-end">
-					<a href="#apply" class="wdl-btn-lg" data-bs-toggle="modal"><?php _e('สนใจรับโปรโมชั่น<br class="d-sm-none">และสิทธิพิเศษ', 'Apply for Promotion'); ?></a>
+					<a href="#apply" class="wdl-btn-lg" data-bs-toggle="modal"><?php _e('สนใจรับโปรโมชั่นและสิทธิพิเศษ', 'Apply for Promotion'); ?></a>
 				</div>
 			</div>
 		</div>
@@ -90,7 +91,7 @@
 			</div>
 			<div class="row my-4">
 				<div class="col text-center">
-					<a href="#apply" class="wdl-btn-lg" data-bs-toggle="modal"><?php _e('สนใจรับโปรโมชั่น<br class="d-sm-none">และสิทธิพิเศษ', 'Apply for Promotion'); ?></a>
+					<a href="#apply" class="wdl-btn-lg" data-bs-toggle="modal"><?php _e('สนใจรับโปรโมชั่นและสิทธิพิเศษ', 'Apply for Promotion'); ?></a>
 				</div>
 			</div>
 			<?php
@@ -153,11 +154,13 @@
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
 				<div class="modal-body">
-					<p class="wdl-archive-location mb-2"><?php the_title() ?></p>
+					<?php if ($venueTitle) : ?>
+						<p class="wdl-archive-location mb-2"><?php echo esc_html($venueTitle)?></p>
+					<?php endif; ?>
 					<?php if ($sponsored && in_array('Sponsored', $sponsored)) : ?>
-						<?php echo apply_shortcodes('[contact-form-7 id="35"]'); ?>
+						<?php echo apply_shortcodes('[contact-form-7 id="35" title="Promotion Form"]'); ?>
 					<?php else : ?>
-						<?php echo apply_shortcodes('[contact-form-7 id="202424"]') ?>
+						<?php echo apply_shortcodes('[contact-form-7 id="206309" title="Promotion Form : Free"]') ?>
 					<?php endif; ?>
 				</div>
 			</div>

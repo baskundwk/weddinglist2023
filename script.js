@@ -222,3 +222,15 @@ document.querySelectorAll('.wpc-search-field-wrapper').forEach((element, index) 
     element.querySelector('.wpc-search-field').after(floatingLabel)
   }
 })
+
+const selectAll = () => {
+  document.querySelectorAll('.select-all').forEach((e)=> {
+    e.addEventListener('change', ()=> {
+      document.querySelectorAll('input[type=checkbox][name=' + e.getAttribute('name') + ']').forEach((checkbox)=> {
+        checkbox.checked = e.checked
+      })
+    })
+  })
+}
+
+document.querySelector('.select-all') ? selectAll() : false

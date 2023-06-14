@@ -39,7 +39,7 @@
 	<section class="wdl-sticky-bar">
 		<div class="container-xl">
 			<div class="row align-items-center g-3">
-				<div class="col col-sm col-lg-9">
+				<div class="col col-lg-9 d-none d-lg-block">
 					<div class="row g-4 align-items-center">
 						<div class="col-auto">
 							<?php $logo = get_field('Logo');
@@ -55,16 +55,17 @@
 					</div>
 				</div>
 				<?php $sponsored = get_field('Sponsor', $relatedPost->ID); ?>
-				<div class="col-auto col-sm-auto col-lg-3 text-center text-lg-end mb-2 mb-sm-0">
-					<a href="#apply" class="wdl-btn" data-bs-toggle="modal"><?php _e('สนใจรับโปรโมชั่น<br class="d-sm-none">และสิทธิพิเศษ', 'Apply for Promotion'); ?></a>
+				<div class="col col-lg-3 text-center text-lg-end mb-2 mb-sm-0">
+					<p class="d-lg-none"><?php _e('“สะดวก รวดเร็ว ปลอดภัย พร้อมทีมงานให้คำปรึกษา”')?></p>
+					<a href="#apply" class="wdl-btn" data-bs-toggle="modal"><?php _e('สนใจรับโปรโมชั่นและสิทธิพิเศษ', 'Apply for Promotion'); ?></a>
 				</div>
 			</div>
 		</div>
 	</section>
 	<section class="wdl-main-bar">
 		<div class="container-xl">
-			<div class="row align-items-center text-center text-sm-start">
-				<div class="col-sm-2 mb-4 mb-lg-0">
+			<div class="row align-items-center">
+				<div class="col-lg-2 mb-4 mb-lg-0 d-none d-lg-block">
 					<?php $logo = get_field('Logo');
 						if( $logo ): ?>
 							<div class="wdl-metadata-logo">
@@ -72,13 +73,13 @@
 							</div>
 						<?php endif; ?>
 				</div>
-				<div class="col-sm mb-3 mb-sm-0">
+				<div class="col-lg mb-3 mb-lg-0">
 					<?php $venueTypes = get_field('VenueType');
 					if ($venueTypes) : ?>
-					<p class="text-accent mb-0">
-						<?php foreach($venueTypes as $venueType) :
-							echo esc_html($venueType->name);
-						endforeach;	?>
+					<p class="text-accent mb-0 d-flex gap-3">
+						<?php foreach($venueTypes as $venueType) : ?>
+							<span><?php echo esc_html($venueType->name); ?></span>
+						<?php endforeach;	?>
 					</p>
 					
 					<?php endif ?>
@@ -123,8 +124,11 @@
 							</p>
 						<?php endif ;?>
 				</div>
-				<div class="col-sm-auto text-center text-sm-end">
-					<a href="#apply" class="wdl-btn-lg" data-bs-toggle="modal"><?php _e('สนใจรับโปรโมชั่น<br class="d-sm-none">และสิทธิพิเศษ', 'Apply for Promotion'); ?></a>
+				<div class="col-lg-auto text-center">
+					<div class="wdl-pricing-row p-3">
+						<p><?php _e('“สะดวก รวดเร็ว ปลอดภัย พร้อมทีมงานให้คำปรึกษา”')?></p>
+						<a href="#apply" class="wdl-btn-lg" data-bs-toggle="modal"><?php _e('สนใจรับโปรโมชั่นและสิทธิพิเศษ', 'Apply for Promotion'); ?></a>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -149,7 +153,9 @@
 											<div class="text-primary fw-semibold">
 												<?php if (get_sub_field('PackageType')) :?>
 													<?php $packageType = get_sub_field('PackageType');?>
-													<img src="<?php echo esc_url(get_field('icon', $packageType)['url'])?>" alt="">
+													<?php if(get_field('icon', $packageType)) :?>
+														<img src="<?php echo esc_url(get_field('icon', $packageType)['url'])?>" alt="">
+													<?php endif; ?>
 													<p class="mb-0"><?php echo esc_html($packageType->name); ?></p>
 												<?php endif; ?>
 											</div>
@@ -178,7 +184,9 @@
 											<div class="text-primary fw-semibold">
 												<?php if (get_sub_field('WeddingPackageType')) :?>
 													<?php $weddingPackageType = get_sub_field('WeddingPackageType');?>
-													<img src="<?php echo esc_url(get_field('icon', $weddingPackageType)['url'])?>" alt="">
+													<?php if(get_field('icon', $weddingPackageType)) :?>
+														<img src="<?php echo esc_url(get_field('icon', $weddingPackageType)['url'])?>" alt="">
+													<?php endif; ?>
 													<p class="mb-0"><?php echo esc_html($weddingPackageType->name); ?></p>
 												<?php endif; ?>
 											</div>
@@ -207,7 +215,9 @@
 											<div class="text-primary fw-semibold">
 												<?php if (get_sub_field('FoodBeverageType')) :
 													$fbType = get_sub_field('FoodBeverageType');?>
-													<img src="<?php echo esc_url(get_field('icon', $fbType)['url'])?>" alt="">
+													<?php if(get_field('icon', $fbType)) :?>
+														<img src="<?php echo esc_url(get_field('icon', $fbType)['url'])?>" alt="">
+													<?php endif; ?>
 													<p class="mb-0"><?php echo esc_html($fbType -> name); ?></p>
 												<?php endif; ?>
 											</div>
@@ -593,9 +603,9 @@
 				<div class="modal-body">
 					<p class="wdl-archive-location mb-2"><?php the_title() ?></p>
 					<?php if ($sponsored && in_array('Sponsored', $sponsored)) : ?>
-						<?php echo apply_shortcodes('[contact-form-7 id="35"]'); ?>
+						<?php echo apply_shortcodes('[contact-form-7 id="206300" title="Venue Form"]'); ?>
 					<?php else : ?>
-						<?php echo apply_shortcodes('[contact-form-7 id="202424"]') ?>
+						<?php echo apply_shortcodes('[contact-form-7 id="206307" title="Venue Form : Free"]') ?>
 					<?php endif; ?>
 
 				</div>
