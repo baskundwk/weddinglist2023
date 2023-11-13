@@ -6,15 +6,17 @@
 		<div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 g-3">
 
 			<?php while ($posts->have_posts()) : ?>
-				<?php $posts->the_post(); ?>
+				<?php $posts->the_post(); 
+				$sponsored = get_field('Sponsor');
+				?>
 
-				<div class="col">
+				<div class="col <?php if ($sponsored && in_array('Sponsored', $sponsored)) { echo('order-first'); } ?>">
 					<div id="wdl-post-<?php the_ID(); ?>" class="card wdl-archive-card <?php echo esc_attr($atts['class_single']); ?>">
 
 						<?php if (has_post_thumbnail(get_the_ID())) : ?>
 							<a class="card-img-top wdl-archive-card-img-top" href="<?php the_permalink(); ?>">
 								<?php the_post_thumbnail('medium_large') ?>
-								<?php $sponsored = get_field('Sponsor');
+								<?php 
 								if ($sponsored && in_array('Sponsored', $sponsored)) : ?>
 									<span class="badge wdl-badge-sm">Sponsored</span>
 								<?php endif; ?>
@@ -22,7 +24,7 @@
 						<?php endif; ?>
 
 						<div class="card-body wdl-archive-card-body">
-							<h3 class="wdl-archive-title "><a href="<?php the_permalink(); ?>"><?php the_split_title(); ?></a></h3>
+							<h3 class="wdl-archive-title "><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
 
 							<div class="wdl-metadata">
 								<?php
@@ -43,7 +45,7 @@
 								$minPrice = get_field('MinPrice');
 								if ($minPrice) : ?>
 									<div class="wdl-archive-min-price">
-										<?php _e('ราคาเริ่มต้น', 'Starting price') ?>&nbsp;<strong><?php echo the_field('MinPrice') ?>+ <?php _e('บาท', 'THB') ?></strong>
+										<?php _e('ราคาเริ่มต้น', 'Starting price') ?>&nbsp;<strong><?php echo number_format(get_field('MinPrice')) ?>+ <?php _e('บาท', 'THB') ?></strong>
 									</div>
 								<?php endif; ?>
 
@@ -51,7 +53,7 @@
 								$maxGuest = get_field('MaxGuest');
 								if ($maxGuest) : ?>
 									<div class="wdl-archive-max-guest">
-										<?php _e('รองรับแขกสูงสุด', 'Max guest') ?>&nbsp;<strong><?php echo the_field('MaxGuest') ?> <?php _e('คน', 'people') ?></strong>
+										<?php _e('รองรับแขกสูงสุด', 'Max guest') ?>&nbsp;<strong><?php echo number_format(get_field('MaxGuest')) ?> <?php _e('คน', 'people') ?></strong>
 									</div>
 								<?php endif; ?>
 							</div>

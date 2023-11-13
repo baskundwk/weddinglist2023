@@ -15,13 +15,22 @@
 
 <?php if ($posts->have_posts()) : ?>
   <div class="wdl-ad-popup-loop <?php echo esc_attr($atts['class']); ?>">
-
     <?php while ($posts->have_posts()) : ?>
-      <?php $posts->the_post(); ?>
-      <div id="ad-popup-<?php the_ID(); ?>" class="wdl-ad-popup">
-        <a href="<?php the_permalink(); ?>"><img class="" src="<?php echo esc_html(get_field('PopupAdImage')['url']) ?>" width="100%" alt="<?php get_field('PopupAdImage')['alt'] ?>"></a>
-      </div>
-    <?php break; endwhile; ?>
+      <?php $posts->the_post(); 
+      if(get_field('PopupActivate') == 1 ) { ?>
+        <div id="ad-popup-<?php the_ID(); ?>" class="wdl-ad-popup">
+          <a href="<?php the_permalink(); ?>"><img loading="lazy" class="no-lazyload" src="<?php echo esc_html(get_field('PopupAdImage')['url']) ?>" width="600" height="600" alt="<?php get_field('PopupAdImage')['alt'] ?>"></a>
+        </div>
+        <script>
+          console.log('!! Popup : ' + '<?php echo get_the_title() ?>')
+        </script>
+
+      <?php break; } else { ?>
+	  	<script>
+          console.log('x Non-popup : ' + '<?php echo get_the_title() ?>')
+        </script>
+	  <?php }
+    endwhile; ?>
 
   </div>
 	<?php else : ?>

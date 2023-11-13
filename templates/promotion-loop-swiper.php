@@ -12,7 +12,7 @@
 				<div id="wdl-post-<?php the_ID(); ?>" class="swiper-slide card wdl-archive-card <?php echo esc_attr($atts['class_single']); ?>">
 
 					<?php if (has_post_thumbnail(get_the_ID())) : ?>
-						<a class="card-img-top wdl-archive-card-img-top" href="<?php the_permalink(); ?>"><?php the_post_thumbnail('medium_large') ?></a>
+						<a class="card-img-top wdl-archive-card-img-top" href="<?php the_permalink(); ?>"><?php echo get_the_post_thumbnail(get_the_ID(), 'medium_large') ?></a>
 					<?php endif; ?>
 
 					<div class="card-body wdl-archive-card-body">
@@ -39,7 +39,7 @@
 							</div>
 						<?php endforeach; endif; ?>
 
-						<h3 class="wdl-archive-title"><a href="<?php the_permalink(); ?>"><?php the_split_title(); ?></a></h3>
+						<h3 class="wdl-archive-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
 
 						<?php
 						$relatedVenue = get_field('RelatedVenue');

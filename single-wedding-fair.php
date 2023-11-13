@@ -1,13 +1,54 @@
-<?php get_header(); ?>
+<!DOCTYPE html>
+<html <?php language_attributes(); ?>>
+<head>
+	<meta charset="<?php bloginfo( 'charset' ); ?>" />
+	<link rel="pingback" href="<?php bloginfo('pingback_url'); ?>" />
+	<script type="text/javascript">
+		document.documentElement.className = 'js';
+	</script>
+
+	<?php wp_head(); ?>
+</head>
+<body <?php body_class(); ?>>
+<?php
+	wp_body_open();
+?>
+<header id="main-header" class="fixed-top">
+  <div class="navbar navbar-expand-xl">
+    <div class="container-xl">
+      <div class="navbar-brand">
+      <?php echo esc_url( wp_get_attachment_image_src( get_theme_mod( 'custom_logo' ), 'full' )[0] ); ?>
+			<?php 
+					$logo = ( $user_logo = et_get_option( 'divi_logo' ) ) && ! empty( $user_logo )
+					? $user_logo
+					: $template_directory_uri . '/images/logo.png';
+				?>
+        <a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="ไปหน้าแรกของ Weddinglist"><img loading="lazy" src="<?php echo esc_attr( $logo ); ?>" alt="Weddinglist" width="181" height="44"></a>
+      </div>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#top-menu-collapse" aria-controls="wdlNavbar" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <?php 
+        wp_nav_menu( array (
+          'theme_location' => 'primary-menu',
+          'container_class' => 'collapse navbar-collapse',
+          'container_id' => 'top-menu-collapse',
+          'menu_class' => 'navbar-nav nav justify-content-end w-100',
+          'menu_id' => 'top-menu'
+        ));
+      ?>
+    </div>
+  </div>
+</header>
 <main>
 	<section>
 		<div class="container-xl">
 			<div class="row mb-3 mt-xl-3">
 				<?php $banner = get_field('Banner');
 						if( $banner ): ?>
-					<div class="col-12 order-xl-2 pb-0 pb-xl-4 px-0 px-xl-3">
-						<div class="wdl-metadata-banner mb-xl-4">
-							<img src="<?php the_field('Banner'); ?>" alt="<?php the_split_title(); ?>"/>
+					<div class="col-12 order-xl-2 pb-0 px-0 px-xl-3">
+						<div class="wdl-metadata-banner">
+							<img loading="lazy" src="<?php the_field('Banner'); ?>" alt="<?php the_title(); ?>"/>
 						</div>
 					</div>
 				<?php endif; ?>
@@ -31,19 +72,18 @@
 							<?php $logo = get_field('Logo');
 							if( $logo ): ?>
 								<div class="wdl-metadata-logo">
-									<img src="<?php echo esc_url($logo['sizes']['medium']); ?>" alt="<?php echo esc_attr($logo['alt']); ?>" height="40" />
+									<img loading="lazy" src="<?php echo esc_url($logo['sizes']['medium']); ?>" alt="<?php echo esc_attr($logo['alt']); ?>" height="40" />
 								</div>
 							<?php endif; ?>
 						</div>
 						<div class="col">
-							<h1 class="h6 text-secondary mb-0 wdl-sticky-bar-title"><?php the_split_title() ?></h1>
+							<h1 class="h6 text-secondary mb-0 wdl-sticky-bar-title"><?php the_title() ?></h1>
 						</div>
 					</div>
 				</div>
 				<?php $sponsored = get_field('Sponsor', $relatedPost->ID); ?>
 				<div class="col-12 col-sm-auto col-lg-3 text-center text-lg-end mb-2 mb-sm-0">
-					<p class="d-lg-none"><?php _e('“สะดวก รวดเร็ว ปลอดภัย พร้อมทีมงานให้คำปรึกษา”')?></p>
-					<a href="#apply" class="wdl-btn" data-bs-toggle="modal"><?php _e('ลงทะเบียนเพื่อรับสิทธิพิเศษ', 'Get Privilege'); ?></a>
+					<a id="apply-cta" href="#apply" class="wdl-btn" data-bs-toggle="modal"><?php _e('ลงทะเบียนเพื่อรับสิทธิพิเศษ', 'Get Privilege'); ?></a>
 				</div>
 			</div>
 		</div>
@@ -55,7 +95,7 @@
 					<?php $logo = get_field('Logo');
 						if( $logo ): ?>
 							<div class="wdl-metadata-logo">
-								<img src="<?php echo esc_url($logo['sizes']['medium']); ?>" alt="<?php echo esc_attr($logo['alt']); ?>" />
+								<img loading="lazy" src="<?php echo esc_url($logo['sizes']['medium']); ?>" alt="<?php echo esc_attr($logo['alt']); ?>" />
 							</div>
 						<?php endif; ?>
 				</div>
@@ -73,11 +113,11 @@
 						foreach ($relatedVenue as $venue) :
 						$venuePermalink = get_permalink($venue->ID);
 						$venueTitle = get_the_title($venue->ID); ?>
-							<p class="wdl-archive-location mb-0"><a href="<?php echo esc_html($venuePermalink)?>"><?php echo esc_html( $venueTitle ); ?></a></p>
+							<p class="wdl-archive-location mb-0"><a class="wdl-data-venue" href="<?php echo esc_html($venuePermalink)?>"><?php echo esc_html( $venueTitle ); ?></a></p>
 						<?php endforeach; endif; ?>
 				</div>
 				<div class="col-sm-auto text-center text-sm-end">
-					<a href="#apply" class="wdl-btn-lg" data-bs-toggle="modal"><?php _e('ลงทะเบียนเพื่อรับสิทธิพิเศษ', 'Get Privilege'); ?></a>
+					<a id="apply-cta" href="#apply" class="wdl-btn-lg" data-bs-toggle="modal"><?php _e('ลงทะเบียนเพื่อรับสิทธิพิเศษ', 'Get Privilege'); ?></a>
 				</div>
 			</div>
 		</div>
@@ -91,7 +131,7 @@
 			</div>
 			<div class="row my-4">
 				<div class="col text-center">
-					<a href="#apply" class="wdl-btn-lg" data-bs-toggle="modal"><?php _e('ลงทะเบียนเพื่อรับสิทธิพิเศษ', 'Get Privilege'); ?></a>
+					<a id="apply-cta" href="#apply" class="wdl-btn-lg" data-bs-toggle="modal"><?php _e('ลงทะเบียนเพื่อรับสิทธิพิเศษ', 'Get Privilege'); ?></a>
 				</div>
 			</div>
 			<?php
@@ -145,11 +185,11 @@
 
 
 
-	<div class="modal fade" id="apply">
-		<div class="modal-dialog modal-dialog-centered">
+	<div class="modal fade modal-lg" id="apply">
+		<div class="modal-dialog modal-dialog-centered m-auto">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h3 class="m-0">ขอแพ็กเกจราคา</h3>
+					<h3 class="m-0">ตอบคำถามสั้น ๆ เพื่อรับสิทธิพิเศษสำหรับคุณ!</h3>
 					
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
@@ -157,10 +197,11 @@
 					<?php if ($venueTitle) : ?>
 						<p class="wdl-archive-location mb-2"><?php echo esc_html($venueTitle)?></p>
 					<?php endif; ?>
-					<?php if ($sponsored && in_array('Sponsored', $sponsored)) : ?>
-						<?php echo apply_shortcodes('[contact-form-7 id="35" title="Promotion Form"]'); ?>
+					<?php $microsite = get_field('Microsite');
+					 if ($microsite && in_array('Free Microsite', $microsite)) : ?>
+						<?php echo apply_shortcodes('[contact-form-7 id="207674" title="Wedding Fair Form : Free"]') ?>
 					<?php else : ?>
-						<?php echo apply_shortcodes('[contact-form-7 id="206309" title="Promotion Form : Free"]') ?>
+						<?php echo apply_shortcodes('[contact-form-7 id="207673" title="Wedding Fair Form"]'); ?>
 					<?php endif; ?>
 				</div>
 			</div>
@@ -219,7 +260,7 @@
 										<div id="wdl-post-<?php the_ID(); ?>" class="swiper-slide card wdl-archive-card <?php echo esc_attr($atts['class_single']); ?>">
 
 											<?php if (has_post_thumbnail(get_the_ID())) : ?>
-												<a class="card-img-top wdl-archive-card-img-top" href="<?php the_permalink(); ?>"><img class="" src="<?php echo esc_html(get_the_post_thumbnail_url($post, 'medium_large')) ?>" width="100%"></a>
+												<a class="card-img-top wdl-archive-card-img-top" href="<?php the_permalink(); ?>"><img loading="lazy" class="" src="<?php echo esc_html(get_the_post_thumbnail_url($post, 'medium_large')) ?>" width="100%"></a>
 											<?php endif; ?>
 
 											<div class="card-body wdl-archive-card-body">
@@ -244,7 +285,7 @@
 													<?php endif; ?>
 												</div>
 
-												<h3 class="wdl-archive-title"><a href="<?php the_permalink(); ?>"><?php the_split_title(); ?></a></h3>
+												<h3 class="wdl-archive-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
 
 												<div class="wdl-archive-location">
 													<?php

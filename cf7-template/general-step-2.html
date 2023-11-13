@@ -11,26 +11,26 @@
     </div>
   </div>
 </div>
-<div class="pb-4">
+<div class="pb-4 wdl-checkbox-convert">
 
-  [radio choice id:choice use_label_element class:wdl-radio-button default:1 "เลือกจากประเภทของสถานที่" "เลือกจากทำเลที่ตั้งองสถานที่"]
+  [radio choice id:choice use_label_element class:wdl-radio-button default:1 "เลือกจากประเภทของสถานที่" "เลือกจากทำเลที่ตั้งของสถานที่"]
 
   [group choice-1]
-  <p><label for="choice-1-tier">ระดับสถานที่จัดงาน</label><br/><small>(เราจะติดต่อเพื่อแนะนำแพ็กเกจสถานที่จัดงานแต่งงานตาม ระดับและทำเลที่ตั้งที่คุณเลือก)</small></p>
-  [radio chioce-1-tier id:chioce-1-tier class:chioce-1-tier class:wdl-radio-button use_label_element default:1 "Hotels (5 Star)" "Hotels" "Venue"]
+  <p>ระดับสถานที่จัดงาน<br/><small>(เราจะติดต่อเพื่อแนะนำแพ็กเกจสถานที่จัดงานแต่งงานตาม ระดับและทำเลที่ตั้งที่คุณเลือก)</small></p>
+  [radio chioce-1-tier id:chioce-1-tier class:chioce-1-tier class:wdl-radio-button use_label_element default:1 "โรงแรม (5 ดาว)" "โรงแรม" "สถานที่จัดงานแต่งงาน"]
 
   [group choice-1-1]
-  <p><small class="float-end">16 รายการ</small><label for="choice-1-tier-1">โรงแรมห้าดาว </label></p>
+  <p>โรงแรมห้าดาว</p>
 	<div id="choice-1-tier-1" class="wdl-grid-col-2">[venue_list_hotel5s choice-1-tier-1]</div>
   [/group]
 
   [group choice-1-2]
-  <p><small class="float-end">16 รายการ</small><label for="choice-1-tier-2">โรงแรมธรรมดา</label></p>
+  <p>โรงแรมธรรมดา</p>
   <div id="choice-1-tier-2" class="wdl-grid-col-2">[venue_list_hotel choice-1-tier-2]</div>
 	[/group]
 
   [group choice-1-3]
-  <p><small class="float-end">16 รายการ</small><label for="choice-1-tier-3">สถานที่จัดงานแต่งงาน</label></p>
+  <p>สถานที่จัดงานแต่งงาน</p>
   <div id="choice-1-tier-3" class="wdl-grid-col-2">[venue_list_other choice-1-tier-3]</div>
 	[/group]
 
@@ -39,5 +39,9 @@
   [group choice-2]
   [venue_list_by_location choice-2-1]
   [/group]
+</div>
+<div class="d-none">
+  [text type "General" readonly]
+  [text message class:wdl-checkbox-summary readonly]
 </div>
 [submit "ส่งข้อมูล"]

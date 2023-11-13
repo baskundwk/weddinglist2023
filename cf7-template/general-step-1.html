@@ -12,29 +12,30 @@
   </div>
 </div>
 
-<div class="row row-cols-lg-2">
-  <div class="col">
-    ชื่อ-นามสกุล / Name-Surname <span class="text-danger">*</span>
-    [text* name-surname id:name-surname]
+<div class="row g-2">
+  <div class="form-floating col-md-6">
+    [text* name-lastname autocomplete:name id:name-lastname class:form-control placeholder "ชื่อ - นามสกุล*"]
   </div>
-  
-  <div class="col">
-    อีเมล / E-mail Address <span class="text-danger">*</span>
-    [email* email id:email]
+  <div class="form-floating col-md-6">
+    [tel* tel autocomplete:tel id:tel class:form-control placeholder "เบอร์โทรติดต่อ*"]
   </div>
-  
-  <div class="col">
-    เบอร์โทรติดต่อกลับ / Phone Number <span class="text-danger">*</span>
-    [tel* tel id:tel]
+  <div class="form-floating col-md-6">
+    [email* email autocomplete:tel id:email class:form-control placeholder "E-mail*"]
   </div>
-  
-  <div class="col">
-    จำนวนแขก / Expected Number of Guests
-    [text guest id:guest]
+  <div class="form-floating col-md-6">
+    [text lineid autocomplete:lineid id:lineid class:form-control placeholder "Line ID"]
   </div>
-  
-  <div class="col">
-    วันที่คาดว่าจะจัดงาน / Expected Wedding Date
-    [date date id:date]
+  <div class="form-floating col-md-6">
+    [number* guest autocomplete:guest id:guest class:form-control placeholder "จำนวนแขก*"]
+  </div>
+  <div class="form-floating col-md-6">
+    [number budget autocomplete:budget id:budget class:form-control placeholder "งบประมาณ"]
+  </div>
+  <div class="form-floating col-12">
+    [date date autocomplete:date id:date class:form-control placeholder "วันที่จัดงาน"]
+  </div>
+  <div class="col-12">
+    <p><label>ช่วงเวลาจัดงาน</label></p>
+    [checkbox daytime class:wdl-checkbox-button use_label_element "งานเลี้ยงเช้า" "งานเลี้ยงเที่ยง" "งานเลี้ยงเย็น"]
   </div>
 </div>

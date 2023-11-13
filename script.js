@@ -1,3 +1,25 @@
+if($('.row-cols-archive-randomized')) {
+
+  $('.row-cols-archive-randomized').each((index, element) => {
+    $(element).append($(element).find('.wdl-archive-primary').sort( function(){ return ( Math.round( Math.random() ) - 0.5 ) } ))
+    $(element).append($(element).find('.wdl-archive-default').sort( function(){ return ( Math.round( Math.random() ) - 0.5 ) } ))
+    $(element).addClass('opacity-1')
+
+  })
+}
+
+$('main').css('padding-top', ($('#main-header').height()) + 'px')
+
+if(window.innerWidth < 1200) {
+  $('#top-menu > .menu-item').each((menuIndex, menuElement) => {
+    $(menuElement).find('.sub-menu').each((submenuIndex, submenuElement)=> {
+      $(submenuElement).addClass('collapse')
+      $(submenuElement).attr('id', 'sub-menu-' + (menuIndex + 1) + '-' + (submenuIndex + 1))
+      $(submenuElement).parent().prepend($(`<button class="menu-item-toggler" data-bs-target="#sub-menu-${(menuIndex + 1)}-${(submenuIndex + 1)}" data-bs-toggle="collapse"></button>`))
+    })
+  })
+}
+
 const wdlMultistepProgressBar = () => {
   const multiforms = document.querySelectorAll('.fieldset-cf7mls')
   const totalProgress = multiforms.length
@@ -36,46 +58,114 @@ document.querySelector('.fieldset-cf7mls') ?
   wdlMultistepProgressBarInit()
 ) : false
 
-const wdlArchiveSwiper = new Swiper('.wdl-archive-swiper', {
-  slidesPerView: 'auto',
-  spaceBetween: 16,
-  breakpoints: {
-    576: {
+$(()=> {
+  const wdlArchiveSwiper = new Swiper('.wdl-archive-swiper', {
+    slidesPerView: 1,
+    spaceBetween: 16,
+    breakpoints: {
+      576: {
+        slidesPerView: 'auto',
+      },
+      992: {
+        slidesPerView: 3,
+      },
+    },
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true
+    }
+  })
+  if($('.wdl-compare-swiper .swiper-slide').length < 3) {
+    const wdlCompareSwiper = new Swiper('.wdl-compare-swiper', {
       slidesPerView: 'auto',
+      spaceBetween: 12,
+      centerInsufficientSlides: true,
+      breakpoints: {
+        768: {
+          slidesPerView: 'auto',
+          spaceBetween: 16,
+          centerInsufficientSlides: true,
+        },
+        1200: {
+          slidesPerView: 2,
+          spaceBetween: 39,
+          centerInsufficientSlides: true,
+        },
+      },
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true
+      },
+      on: {
+        init: (swiper)=> {
+            swiper.el.classList.add('wdl-compare-swiper-2')
+        }
+      }
+    })
+  } else {
+    const wdlCompareSwiper = new Swiper('.wdl-compare-swiper', {
+      slidesPerView: 'auto',
+      spaceBetween: 12,
+      centerInsufficientSlides: true,
+      breakpoints: {
+        768: {
+          slidesPerView: 'auto',
+          spaceBetween: 16,
+          centerInsufficientSlides: true,
+        },
+        1200: {
+          slidesPerView: 3,
+          spaceBetween: 39,
+          centerInsufficientSlides: true,
+        },
+      },
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true
+      },
+      on: {
+        init: (swiper)=> {
+            swiper.el.classList.add('wdl-compare-swiper-3')
+        }
+      }
+    })
+  }
+  const wdlBadgeSwiper = new Swiper('.wdl-badge-container.swiper', {
+    slidesPerView: 'auto',
+    spaceBetween: 8,
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true
+    }
+  })
+  const wdlHeroSwiper = new Swiper('.wdl-hero-swiper', {
+    slidesPerView: 1,
+    spaceBetween: 40,
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true,
+      type: 'bullets',
     },
-    992: {
-      slidesPerView: 3,
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev'
     },
-  },
-  pagination: {
-    el: '.swiper-pagination',
-    clickable: true
-  }
-})
-const wdlBadgeSwiper = new Swiper('.wdl-badge-container.swiper', {
-  slidesPerView: 'auto',
-  pagination: {
-    el: '.swiper-pagination',
-    clickable: true
-  }
-})
-
-const wdlHeroSwiper = new Swiper('.wdl-hero-swiper', {
-  slidesPerView: 1,
-  spaceBetween: 40,
-  pagination: {
-    el: '.swiper-pagination',
-    clickable: true,
-    type: 'bullets',
-  },
-  navigation: {
-    nextEl: '.swiper-button-next',
-    prevEl: '.swiper-button-prev'
-  },
-  speed: 1000,
-  autoplay: {
-    delay: 7000,
-  }
+    speed: 1000,
+    autoplay: {
+      delay: 5000,
+    },
+    loop: true
+  })
+  const wdlLeadMenuSmallSwiper = new Swiper('.wdl-lead-menu-small-swiper', {
+    slideClass: 'menu-item',
+    slidesPerView: 'auto',
+    spaceBetween: 16,
+    breakpoints: {
+      992: {
+        slidesPerView: 5,
+      }
+    }
+  })
 })
 
 const wdlStickyBar = () => {
@@ -144,8 +234,9 @@ const wdlHeroGallery = () => {
     },
     speed: 1000,
     autoplay: {
-      delay: 7000,
-    }
+      delay: 5000,
+    },
+    loop: true
   })
 }
 
@@ -165,39 +256,46 @@ const leadMenuSmallSwiper = new Swiper('.lead-menu-small-swiper', {
 })
 
 // Search floating label
-document.querySelectorAll('.et_pb_searchform > div').forEach((element, index) => {
-  element.classList.add('form-floating')
-  element.querySelector('input.et_pb_s').classList.add('form-control')
-  
-  if (element.querySelector('input.et_pb_s').placeholder) {
-    let placeholderText = element.querySelector('input.et_pb_s').placeholder
-    let inputId = 'search-' + (index + 1)
-    let floatingLabel = document.createElement('label')
-    floatingLabel.setAttribute('for', inputId)
-    floatingLabel.innerText = placeholderText
+const etSearchFloatingLabel = () => {
+  document.querySelectorAll('.et_pb_searchform > div').forEach((element, index) => {
+    element.classList.add('form-floating');
+    element.querySelector('input.et_pb_s').classList.add('form-control');
     
-    element.querySelector('input.et_pb_s').id = inputId
-    element.querySelector('input.et_pb_s').after(floatingLabel)
-  }
-})
+    if (element.querySelector('input.et_pb_s').placeholder) {
+      let placeholderText = element.querySelector('input.et_pb_s').placeholder
+      let inputId = 'search-' + (index + 1)
+      let floatingLabel = document.createElement('label')
+      floatingLabel.setAttribute('for', inputId)
+      floatingLabel.innerText = placeholderText
+      
+      element.querySelector('input.et_pb_s').id = inputId
+      element.querySelector('input.et_pb_s').after(floatingLabel)
+    }
+  })
+}
 
+document.querySelector('.et_pb_searchform') && document.querySelector('input.et_pb_s') ? etSearchFloatingLabel() : false
 // WPCF7 floating label
-document.querySelectorAll('.wpcf7-form-control-wrap').forEach((element, index) => {
-  element.classList.add('form-floating')
-  element.querySelector('input.wpcf7-form-control') ? element.querySelector('input.wpcf7-form-control').classList.add('form-control') : false
-  element.querySelector('textarea.wpcf7-form-control') ? element.querySelector('input.wpcf7-form-control').classList.add('form-control') : false
-  
-  if (element.querySelector('.wpcf7-form-control').placeholder) {
-    let placeholderText = element.querySelector('.wpcf7-form-control').placeholder
-    let inputId = element.querySelector('.wpcf7-form-control').id
-    let floatingLabel = document.createElement('label')
+const cf7FloatingLabel = () => {
+  document.querySelectorAll('.wpcf7-form-control-wrap').forEach((element, index) => {
+    element.classList.add('form-floating')
+    element.querySelector('input.wpcf7-form-control') ? element.querySelector('input.wpcf7-form-control').classList.add('form-control') : false
+    element.querySelector('textarea.wpcf7-form-control') ? element.querySelector('textarea.wpcf7-form-control').classList.add('form-control') : false
     
-    floatingLabel.setAttribute('for', inputId)
-    floatingLabel.innerText = placeholderText
-    
-    element.querySelector('.wpcf7-form-control').after(floatingLabel)
-  }
-})
+    if (element.querySelector('.wpcf7-form-control').placeholder) {
+      let placeholderText = element.querySelector('.wpcf7-form-control').placeholder
+      let inputId = element.querySelector('.wpcf7-form-control').id
+      let floatingLabel = document.createElement('label')
+      
+      floatingLabel.setAttribute('for', inputId)
+      floatingLabel.innerText = placeholderText
+      
+      element.querySelector('.wpcf7-form-control').after(floatingLabel)
+    }
+  })
+}
+
+document.querySelector('.wpcf7-form-control-wrap') ? cf7FloatingLabel() : false
 
 // Search page default value
 const wdlSearchQuery = () => {
@@ -226,11 +324,124 @@ document.querySelectorAll('.wpc-search-field-wrapper').forEach((element, index) 
 const selectAll = () => {
   document.querySelectorAll('.select-all').forEach((e)=> {
     e.addEventListener('change', ()=> {
-      document.querySelectorAll('input[type=checkbox][name=' + e.getAttribute('name') + ']').forEach((checkbox)=> {
+      e.parentElement.parentElement.querySelectorAll('input[type=checkbox]').forEach((checkbox)=> {
         checkbox.checked = e.checked
       })
     })
   })
+
 }
 
 document.querySelector('.select-all') ? selectAll() : false
+
+// Set Default Form Venue Data
+const dataVenue = () => {
+  if (document.querySelector('.wdl-data-venue') && document.querySelector('.wdl-set-venue')){
+    setTimeout(()=> {
+    document.querySelector('.wdl-set-venue').value = document.querySelector('.wdl-data-venue').innerText
+    }, 2000)
+  }
+}
+
+document.querySelector('.wdl-data-venue') && document.querySelector('.wdl-set-venue') ? dataVenue() : false
+
+$('#apply-cta').click(dataVenue())
+$('.wdl-apply-btn').on('click', (event) => {
+  $(event.target).closest('.wdl-archive-title')
+})
+
+// Set Collected Checkbox Data from General Form
+
+const collectCheckbox = () => {
+  document.querySelector('input[type=submit]').addEventListener('mouseover', () => {
+    let selected = []
+    
+    document.querySelectorAll('.wdl-checkbox-convert input[type="checkbox"]:not(.select-all):checked ~ label').forEach((element) => {
+      selected.push(element.innerText)
+    })
+  
+    document.querySelector('.wdl-checkbox-summary').value = selected.join(', ')
+  })
+  document.querySelector('input[type=submit]').addEventListener('click', () => {
+    let selected = []
+    
+    document.querySelectorAll('.wdl-checkbox-convert input[type="checkbox"]:not(.select-all):checked ~ label').forEach((element) => {
+      selected.push(element.innerText)
+    })
+  
+    document.querySelector('.wdl-checkbox-summary').value = selected.join(', ')
+  })
+}
+
+document.querySelector('.wdl-checkbox-convert') ? collectCheckbox() : false
+
+/* Prefill form */
+$('.wpcf7-submit').click(()=> {
+  console.log('Prefill function fired')
+
+  localStorage.setItem('wdl-name-lastname', $('#name-lastname').val())
+  localStorage.setItem('wdl-tel', $('#tel').val())
+  localStorage.setItem('wdl-email', $('#email').val())
+  localStorage.setItem('wdl-lineid', $('#lineid').val())
+  localStorage.setItem('wdl-guest', $('#guest').val())
+  localStorage.setItem('wdl-budget', $('#budget').val())
+  localStorage.setItem('wdl-date', $('#date').val())
+  localStorage.setItem('wdl-message', $('#message').val())
+})
+
+$(document).ready(()=> {
+  setTimeout(()=>{
+    $('#name-lastname').val(localStorage.getItem('wdl-name-lastname'))
+    $('#tel').val(localStorage.getItem('wdl-tel'))
+    $('#email').val(localStorage.getItem('wdl-email'))
+    $('#lineid').val(localStorage.getItem('wdl-lineid'))
+    $('#guest').val(localStorage.getItem('wdl-guest'))
+    $('#budget').val(localStorage.getItem('wdl-budget'))
+    $('#date').val(localStorage.getItem('wdl-date'))
+    $('#message').val(localStorage.getItem('wdl-message'))
+  }, 2000)
+})
+
+// Find and force word wrapping
+  
+$(document).ready(()=> {
+  let replaceWords = ['สถานที่', 'จะเป็น', 'โรงแรม', 'ย่านใจกลางเมือง', 'ใจกลางเมือง', 'ขอบคุณ', 'จริง ๆ ค่ะ', 'ข้อผิดพลาด', 'ความทรงจำ', 'บ่าว-สาว', 'บ่าวสาว', 'แบบนั้น', 'ของเรา', 'แต่งงาน', 'แกรนด์', 'กรุงเทพ', 'กรุงเทพฯ']
+  let replaceElement = ['p', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'a', 'span', 'td', 'th']
+  $(replaceWords).each((index, word) => {
+    $(".wdl-main-content p").html(function(_, html) {
+      return html.replaceAll(word, '<word>' + word + '</word>')
+    });
+    $(".wdl-main-content h1").html(function(_, html) {
+      return html.replaceAll(word, '<word>' + word + '</word>')
+    });
+    $(".wdl-main-content h2").html(function(_, html) {
+      return html.replaceAll(word, '<word>' + word + '</word>')
+    });
+    $(".wdl-main-content h3").html(function(_, html) {
+      return html.replaceAll(word, '<word>' + word + '</word>')
+    });
+    $(".wdl-main-content h4").html(function(_, html) {
+      return html.replaceAll(word, '<word>' + word + '</word>')
+    });
+    $(".wdl-main-content h5").html(function(_, html) {
+      return html.replaceAll(word, '<word>' + word + '</word>')
+    });
+    $(".wdl-main-content h6").html(function(_, html) {
+      return html.replaceAll(word, '<word>' + word + '</word>')
+    });
+  })
+})
+
+// Compare
+/* $(function() {
+  console.log($('.wdl-compare-group')[0])
+
+  $('.wdl-compare-group')[0].matchHeight({
+    property: 'height',
+    remove: true
+  })
+}) */
+
+$('.wdl-link-print').click(()=> {
+  window.print()
+})

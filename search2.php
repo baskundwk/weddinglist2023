@@ -1,17 +1,55 @@
 <?php get_header(); ?>
 <main>
   <section>
-    <div class="container-xl">
-      <div class="row">
-        <div class="col-12 py-4">
+    <div class="container">
+      <div class="row mb-3">
+        <div class="col-12 py-2">
 				  <?php if (function_exists('rank_math_the_breadcrumbs')) : ?>
 					<div class="wdl-breadcrumb">
 						<?php rank_math_the_breadcrumbs(); ?>
 					</div>
 					<?php endif; ?>
 				</div>
-        <div class="col-12 pb-4 overflow-hidden">
-          <?php echo do_shortcode('[showmodule id="204967"]') ?>
+        <div class="col">
+          <div class="wdl-search">
+            <form role="search" method="get" id="searchform" class="searchform" action="<?php echo esc_url( home_url( '/' ) ); ?>">
+              <div class="form-floating d-flex">
+                <input class="form-control" type="text" name="s" id="s" placeholder="คุณกำลังมองหาอะไร">
+                <label for="s">คุณกำลังมองหาอะไร</label>
+                <input class="wdl-search-submit" type="submit" id="searchsubmit" value="Search">
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-auto">
+          <p>คำค้นหายอดนิยม :</p>
+        </div>
+        <div class="col">
+          <?php 
+            wp_nav_menu( array (
+              'menu' => 'Lead menu location',
+              'container_class' => '',
+              'menu_class' => 'wdl-badge-container',
+              'menu_id' => 'lead-menu'
+            ));
+          ?>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 px-0 overflow-hidden">
+          <?php 
+            wp_nav_menu( array (
+              'menu' => 'Lead menu',
+              'container_class' => 'wdl-lead-menu-small-swiper',
+              'menu_class' => 'wdl-lead-menu-container wdl-lead-menu-small-container swiper-wrapper',
+              'menu_id' => 'lead-menu'
+            ));
+          ?>
+        </div>
+        <div class="col-12">
+          <hr>
         </div>
       </div>
     </div>
@@ -36,7 +74,7 @@
                     <div id="wdl-post-<?php the_ID(); ?>" class="swiper-slide card wdl-archive-card <?php echo esc_attr($atts['class_single']); ?>">
 
                       <?php if (has_post_thumbnail(get_the_ID())) : ?>
-                        <a class="card-img-top wdl-archive-card-img-top" href="<?php the_permalink(); ?>"><img class="" src="<?php echo esc_html(get_the_post_thumbnail_url($post, 'medium_large')) ?>" width="100%"></a>
+                        <a class="card-img-top wdl-archive-card-img-top" href="<?php the_permalink(); ?>"><img loading="lazy" class="" src="<?php echo esc_html(get_the_post_thumbnail_url($post, 'medium_large')) ?>" width="100%"></a>
                       <?php endif; ?>
 
                       <div class="card-body wdl-archive-card-body">
@@ -64,7 +102,7 @@
                         <?php endforeach;
                         endif; ?>
 
-                        <h3 class="wdl-archive-title"><a href="<?php the_permalink(); ?>"><?php the_split_title(); ?></a></h3>
+                        <h3 class="wdl-archive-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
 
                         <?php
                         $relatedVenue = get_field('RelatedVenue');
@@ -110,7 +148,7 @@
                     <div id="wdl-post-<?php the_ID(); ?>" class="swiper-slide card wdl-archive-card <?php echo esc_attr($atts['class_single']); ?>">
 
                       <?php if (has_post_thumbnail(get_the_ID())) : ?>
-                        <a class="card-img-top wdl-archive-card-img-top" href="<?php the_permalink(); ?>"><img class="" src="<?php echo esc_html(get_the_post_thumbnail_url($post, 'medium_large')) ?>" width="100%"></a>
+                        <a class="card-img-top wdl-archive-card-img-top" href="<?php the_permalink(); ?>"><img loading="lazy" class="" src="<?php echo esc_html(get_the_post_thumbnail_url($post, 'medium_large')) ?>" width="100%"></a>
                       <?php endif; ?>
 
                       <div class="card-body wdl-archive-card-body">
@@ -138,7 +176,7 @@
                         <?php endforeach;
                         endif; ?>
 
-                        <h3 class="wdl-archive-title"><a href="<?php the_permalink(); ?>"><?php the_split_title(); ?></a></h3>
+                        <h3 class="wdl-archive-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
 
                         <?php
                         $relatedVenue = get_field('RelatedVenue');
@@ -186,7 +224,7 @@
 
                       <?php if (has_post_thumbnail(get_the_ID())) : ?>
                         <a class="card-img-top wdl-archive-card-img-top" href="<?php the_permalink(); ?>">
-                          <img class="" src="<?php echo esc_html(get_the_post_thumbnail_url($post, 'medium')) ?>" width="100%">
+                          <img loading="lazy" class="" src="<?php echo esc_html(get_the_post_thumbnail_url($post, 'medium_large')) ?>" width="100%">
                           <?php $sponsored = get_field('Sponsor');
                           if ($sponsored && in_array('Sponsored', $sponsored)) : ?>
                             <span class="badge wdl-badge-sm">Sponsored</span>
@@ -195,7 +233,7 @@
                       <?php endif; ?>
 
                       <div class="card-body wdl-archive-card-body">
-                        <h3 class="wdl-archive-title "><a href="<?php the_permalink(); ?>"><?php the_split_title(); ?></a></h3>
+                        <h3 class="wdl-archive-title "><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
 
                         <div class="wdl-metadata">
                           <?php
@@ -216,7 +254,7 @@
                           $minPrice = get_field('MinPrice');
                           if ($minPrice) : ?>
                             <div class="wdl-archive-min-price">
-                              <?php _e('ราคาเริ่มต้น', 'Starting price') ?>&nbsp;<strong><?php echo the_field('MinPrice') ?>+ <?php _e('บาท', 'THB') ?></strong>
+                              <?php _e('ราคาเริ่มต้น', 'Starting price') ?>&nbsp;<strong><?php echo number_format(get_field('MinPrice')) ?>+ <?php _e('บาท', 'THB') ?></strong>
                             </div>
                           <?php endif; ?>
 
@@ -224,7 +262,7 @@
                           $maxGuest = get_field('MaxGuest');
                           if ($maxGuest) : ?>
                             <div class="wdl-archive-max-guest">
-                              <?php _e('รองรับแขกสูงสุด', 'Max guest') ?>&nbsp;<strong><?php echo the_field('MaxGuest') ?> <?php _e('คน', 'people') ?></strong>
+                              <?php _e('รองรับแขกสูงสุด', 'Max guest') ?>&nbsp;<strong><?php echo number_format(get_field('MaxGuest')) ?> <?php _e('คน', 'people') ?></strong>
                             </div>
                           <?php endif; ?>
                         </div>
