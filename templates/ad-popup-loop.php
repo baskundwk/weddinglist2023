@@ -12,12 +12,11 @@
  */
 ?>
 
-
-<?php if ($posts->have_posts()) : ?>
+<?php if ($posts->have_posts()): ?>
   <div class="wdl-ad-popup-loop <?php echo esc_attr($atts['class']); ?>">
-    <?php while ($posts->have_posts()) : ?>
-      <?php $posts->the_post(); 
-      if(get_field('PopupActivate') == 1 ) { ?>
+    <?php while ($posts->have_posts()): ?>
+      <?php $posts->the_post();
+      if (get_field('PopupActivate') == 1) { ?>
         <div id="ad-popup-<?php the_ID(); ?>" class="wdl-ad-popup">
           <a href="<?php the_permalink(); ?>"><img loading="lazy" class="no-lazyload" src="<?php echo esc_html(get_field('PopupAdImage')['url']) ?>" width="600" height="600" alt="<?php get_field('PopupAdImage')['alt'] ?>"></a>
         </div>
@@ -25,14 +24,17 @@
           console.log('!! Popup : ' + '<?php echo get_the_title() ?>')
         </script>
 
-      <?php break; } else { ?>
-	  	<script>
+        <?php break;
+      } else { ?>
+        <script>
           console.log('x Non-popup : ' + '<?php echo get_the_title() ?>')
         </script>
-	  <?php }
+      <?php }
     endwhile; ?>
 
   </div>
-	<?php else : ?>
-		<h4><?php esc_html_e('Posts not found', 'shortcodes-ultimate'); ?></h4>
+<?php else: ?>
+  <h4>
+    <?php esc_html_e('Posts not found', 'shortcodes-ultimate'); ?>
+  </h4>
 <?php endif; ?>

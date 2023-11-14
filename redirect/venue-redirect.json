@@ -1,0 +1,1570 @@
+{
+  "redirects": [
+    {
+      "url": "/u-sathorn-bangkok",
+      "match_data": {
+        "source": {
+          "flag_query": "exact",
+          "flag_case": false,
+          "flag_trailing": false,
+          "flag_regex": false
+        }
+      },
+      "action_code": 301,
+      "acton_type": "url",
+      "action_data": {
+        "url": "/venue/u-sathorn-bangkok"
+      },
+      "match_type": "url",
+      "enabled": true
+    },
+    {
+      "url": "/siam-mandarina-hotel",
+      "match_data": {
+        "source": {
+          "flag_query": "exact",
+          "flag_case": false,
+          "flag_trailing": false,
+          "flag_regex": false
+        }
+      },
+      "action_code": 301,
+      "acton_type": "url",
+      "action_data": {
+        "url": "/venue/siam-mandarina-hotel"
+      },
+      "match_type": "url",
+      "enabled": true
+    },
+    {
+      "url": "/chatrium-grand-bangkok",
+      "match_data": {
+        "source": {
+          "flag_query": "exact",
+          "flag_case": false,
+          "flag_trailing": false,
+          "flag_regex": false
+        }
+      },
+      "action_code": 301,
+      "acton_type": "url",
+      "action_data": {
+        "url": "/venue/chatrium-grand-bangkok"
+      },
+      "match_type": "url",
+      "enabled": true
+    },
+    {
+      "url": "/sheraton-grande-sukhumvit",
+      "match_data": {
+        "source": {
+          "flag_query": "exact",
+          "flag_case": false,
+          "flag_trailing": false,
+          "flag_regex": false
+        }
+      },
+      "action_code": 301,
+      "acton_type": "url",
+      "action_data": {
+        "url": "/venue/sheraton-grande-sukhumvit"
+      },
+      "match_type": "url",
+      "enabled": true
+    },
+    {
+      "url": "/renaissance-bangkok-ratchaprasong-hotel",
+      "match_data": {
+        "source": {
+          "flag_query": "exact",
+          "flag_case": false,
+          "flag_trailing": false,
+          "flag_regex": false
+        }
+      },
+      "action_code": 301,
+      "acton_type": "url",
+      "action_data": {
+        "url": "/venue/renaissance-bangkok-ratchaprasong-hotel"
+      },
+      "match_type": "url",
+      "enabled": true
+    },
+    {
+      "url": "/away-bkk-riverside-kene",
+      "match_data": {
+        "source": {
+          "flag_query": "exact",
+          "flag_case": false,
+          "flag_trailing": false,
+          "flag_regex": false
+        }
+      },
+      "action_code": 301,
+      "acton_type": "url",
+      "action_data": {
+        "url": "/venue/away-bkk-riverside-kene"
+      },
+      "match_type": "url",
+      "enabled": true
+    },
+    {
+      "url": "/swissotelbangkokratchada",
+      "match_data": {
+        "source": {
+          "flag_query": "exact",
+          "flag_case": false,
+          "flag_trailing": false,
+          "flag_regex": false
+        }
+      },
+      "action_code": 301,
+      "acton_type": "url",
+      "action_data": {
+        "url": "/venue/swissotelbangkokratchada"
+      },
+      "match_type": "url",
+      "enabled": true
+    },
+    {
+      "url": "/the-sukhothai-bangkok",
+      "match_data": {
+        "source": {
+          "flag_query": "exact",
+          "flag_case": false,
+          "flag_trailing": false,
+          "flag_regex": false
+        }
+      },
+      "action_code": 301,
+      "acton_type": "url",
+      "action_data": {
+        "url": "/venue/the-sukhothai-bangkok"
+      },
+      "match_type": "url",
+      "enabled": true
+    },
+    {
+      "url": "/oriental-residence-bkk",
+      "match_data": {
+        "source": {
+          "flag_query": "exact",
+          "flag_case": false,
+          "flag_trailing": false,
+          "flag_regex": false
+        }
+      },
+      "action_code": 301,
+      "acton_type": "url",
+      "action_data": {
+        "url": "/venue/oriental-residence-bkk"
+      },
+      "match_type": "url",
+      "enabled": true
+    },
+    {
+      "url": "/the-upper-ground",
+      "match_data": {
+        "source": {
+          "flag_query": "exact",
+          "flag_case": false,
+          "flag_trailing": false,
+          "flag_regex": false
+        }
+      },
+      "action_code": 301,
+      "acton_type": "url",
+      "action_data": {
+        "url": "/venue/the-upper-ground"
+      },
+      "match_type": "url",
+      "enabled": true
+    },
+    {
+      "url": "/thesalilhotelsriverside",
+      "match_data": {
+        "source": {
+          "flag_query": "exact",
+          "flag_case": false,
+          "flag_trailing": false,
+          "flag_regex": false
+        }
+      },
+      "action_code": 301,
+      "acton_type": "url",
+      "action_data": {
+        "url": "/venue/thesalilhotelsriverside"
+      },
+      "match_type": "url",
+      "enabled": true
+    },
+    {
+      "url": "/le-meridien-suvarnabhumi",
+      "match_data": {
+        "source": {
+          "flag_query": "exact",
+          "flag_case": false,
+          "flag_trailing": false,
+          "flag_regex": false
+        }
+      },
+      "action_code": 301,
+      "acton_type": "url",
+      "action_data": {
+        "url": "/venue/le-meridien-suvarnabhumi"
+      },
+      "match_type": "url",
+      "enabled": true
+    },
+    {
+      "url": "/centara-grand-at-central-plaza-ladprao-bangkok",
+      "match_data": {
+        "source": {
+          "flag_query": "exact",
+          "flag_case": false,
+          "flag_trailing": false,
+          "flag_regex": false
+        }
+      },
+      "action_code": 301,
+      "acton_type": "url",
+      "action_data": {
+        "url": "/venue/centara-grand-at-central-plaza-ladprao-bangkok"
+      },
+      "match_type": "url",
+      "enabled": true
+    },
+    {
+      "url": "/rattanapiman",
+      "match_data": {
+        "source": {
+          "flag_query": "exact",
+          "flag_case": false,
+          "flag_trailing": false,
+          "flag_regex": false
+        }
+      },
+      "action_code": 301,
+      "acton_type": "url",
+      "action_data": {
+        "url": "/venue/rattanapiman"
+      },
+      "match_type": "url",
+      "enabled": true
+    },
+    {
+      "url": "/novotel-bangkok-bangna",
+      "match_data": {
+        "source": {
+          "flag_query": "exact",
+          "flag_case": false,
+          "flag_trailing": false,
+          "flag_regex": false
+        }
+      },
+      "action_code": 301,
+      "acton_type": "url",
+      "action_data": {
+        "url": "/venue/novotel-bangkok-bangna"
+      },
+      "match_type": "url",
+      "enabled": true
+    },
+    {
+      "url": "/jwmarriotthotelbangkok",
+      "match_data": {
+        "source": {
+          "flag_query": "exact",
+          "flag_case": false,
+          "flag_trailing": false,
+          "flag_regex": false
+        }
+      },
+      "action_code": 301,
+      "acton_type": "url",
+      "action_data": {
+        "url": "/venue/jwmarriotthotelbangkok"
+      },
+      "match_type": "url",
+      "enabled": true
+    },
+    {
+      "url": "/cdccrystalgrandballroom",
+      "match_data": {
+        "source": {
+          "flag_query": "exact",
+          "flag_case": false,
+          "flag_trailing": false,
+          "flag_regex": false
+        }
+      },
+      "action_code": 301,
+      "acton_type": "url",
+      "action_data": {
+        "url": "/venue/cdccrystalgrandballroom"
+      },
+      "match_type": "url",
+      "enabled": true
+    },
+    {
+      "url": "/asawin-grand-convention-hotel",
+      "match_data": {
+        "source": {
+          "flag_query": "exact",
+          "flag_case": false,
+          "flag_trailing": false,
+          "flag_regex": false
+        }
+      },
+      "action_code": 301,
+      "acton_type": "url",
+      "action_data": {
+        "url": "/venue/asawin-grand-convention-hotel"
+      },
+      "match_type": "url",
+      "enabled": true
+    },
+    {
+      "url": "/ruennoppagao",
+      "match_data": {
+        "source": {
+          "flag_query": "exact",
+          "flag_case": false,
+          "flag_trailing": false,
+          "flag_regex": false
+        }
+      },
+      "action_code": 301,
+      "acton_type": "url",
+      "action_data": {
+        "url": "/venue/ruennoppagao"
+      },
+      "match_type": "url",
+      "enabled": true
+    },
+    {
+      "url": "/holidayinnbangkoksilom",
+      "match_data": {
+        "source": {
+          "flag_query": "exact",
+          "flag_case": false,
+          "flag_trailing": false,
+          "flag_regex": false
+        }
+      },
+      "action_code": 301,
+      "acton_type": "url",
+      "action_data": {
+        "url": "/venue/holidayinnbangkoksilom"
+      },
+      "match_type": "url",
+      "enabled": true
+    },
+    {
+      "url": "/summit-windmill-golf-residence",
+      "match_data": {
+        "source": {
+          "flag_query": "exact",
+          "flag_case": false,
+          "flag_trailing": false,
+          "flag_regex": false
+        }
+      },
+      "action_code": 301,
+      "acton_type": "url",
+      "action_data": {
+        "url": "/venue/summit-windmill-golf-residence"
+      },
+      "match_type": "url",
+      "enabled": true
+    },
+    {
+      "url": "/eastin-grand-hotel-phayathai-bangkok",
+      "match_data": {
+        "source": {
+          "flag_query": "exact",
+          "flag_case": false,
+          "flag_trailing": false,
+          "flag_regex": false
+        }
+      },
+      "action_code": 301,
+      "acton_type": "url",
+      "action_data": {
+        "url": "/venue/eastin-grand-hotel-phayathai-bangkok"
+      },
+      "match_type": "url",
+      "enabled": true
+    },
+    {
+      "url": "/thehouseonsathorn",
+      "match_data": {
+        "source": {
+          "flag_query": "exact",
+          "flag_case": false,
+          "flag_trailing": false,
+          "flag_regex": false
+        }
+      },
+      "action_code": 301,
+      "acton_type": "url",
+      "action_data": {
+        "url": "/venue/thehouseonsathorn"
+      },
+      "match_type": "url",
+      "enabled": true
+    },
+    {
+      "url": "/bluetel_residence",
+      "match_data": {
+        "source": {
+          "flag_query": "exact",
+          "flag_case": false,
+          "flag_trailing": false,
+          "flag_regex": false
+        }
+      },
+      "action_code": 301,
+      "acton_type": "url",
+      "action_data": {
+        "url": "/venue/bluetel_residence"
+      },
+      "match_type": "url",
+      "enabled": true
+    },
+    {
+      "url": "/anantara-riverside-bkk-resort",
+      "match_data": {
+        "source": {
+          "flag_query": "exact",
+          "flag_case": false,
+          "flag_trailing": false,
+          "flag_regex": false
+        }
+      },
+      "action_code": 301,
+      "acton_type": "url",
+      "action_data": {
+        "url": "/venue/anantara-riverside-bkk-resort"
+      },
+      "match_type": "url",
+      "enabled": true
+    },
+    {
+      "url": "/ramadaplazabangkokmenamriverside",
+      "match_data": {
+        "source": {
+          "flag_query": "exact",
+          "flag_case": false,
+          "flag_trailing": false,
+          "flag_regex": false
+        }
+      },
+      "action_code": 301,
+      "acton_type": "url",
+      "action_data": {
+        "url": "/venue/ramadaplazabangkokmenamriverside"
+      },
+      "match_type": "url",
+      "enabled": true
+    },
+    {
+      "url": "/museumwedding",
+      "match_data": {
+        "source": {
+          "flag_query": "exact",
+          "flag_case": false,
+          "flag_trailing": false,
+          "flag_regex": false
+        }
+      },
+      "action_code": 301,
+      "acton_type": "url",
+      "action_data": {
+        "url": "/venue/museumwedding"
+      },
+      "match_type": "url",
+      "enabled": true
+    },
+    {
+      "url": "/thebanquethall-at-nathong",
+      "match_data": {
+        "source": {
+          "flag_query": "exact",
+          "flag_case": false,
+          "flag_trailing": false,
+          "flag_regex": false
+        }
+      },
+      "action_code": 301,
+      "acton_type": "url",
+      "action_data": {
+        "url": "/venue/thebanquethall-at-nathong"
+      },
+      "match_type": "url",
+      "enabled": true
+    },
+    {
+      "url": "/montien-riverside-hotel",
+      "match_data": {
+        "source": {
+          "flag_query": "exact",
+          "flag_case": false,
+          "flag_trailing": false,
+          "flag_regex": false
+        }
+      },
+      "action_code": 301,
+      "acton_type": "url",
+      "action_data": {
+        "url": "/venue/montien-riverside-hotel"
+      },
+      "match_type": "url",
+      "enabled": true
+    },
+    {
+      "url": "/le-viva-boutique-colonial-house",
+      "match_data": {
+        "source": {
+          "flag_query": "exact",
+          "flag_case": false,
+          "flag_trailing": false,
+          "flag_regex": false
+        }
+      },
+      "action_code": 301,
+      "acton_type": "url",
+      "action_data": {
+        "url": "/venue/le-viva-boutique-colonial-house"
+      },
+      "match_type": "url",
+      "enabled": true
+    },
+    {
+      "url": "/bangna-pride-hotel",
+      "match_data": {
+        "source": {
+          "flag_query": "exact",
+          "flag_case": false,
+          "flag_trailing": false,
+          "flag_regex": false
+        }
+      },
+      "action_code": 301,
+      "acton_type": "url",
+      "action_data": {
+        "url": "/venue/bangna-pride-hotel"
+      },
+      "match_type": "url",
+      "enabled": true
+    },
+    {
+      "url": "/conrad-bangkok",
+      "match_data": {
+        "source": {
+          "flag_query": "exact",
+          "flag_case": false,
+          "flag_trailing": false,
+          "flag_regex": false
+        }
+      },
+      "action_code": 301,
+      "acton_type": "url",
+      "action_data": {
+        "url": "/venue/conrad-bangkok"
+      },
+      "match_type": "url",
+      "enabled": true
+    },
+    {
+      "url": "/avani-riverside-bkk-hotel",
+      "match_data": {
+        "source": {
+          "flag_query": "exact",
+          "flag_case": false,
+          "flag_trailing": false,
+          "flag_regex": false
+        }
+      },
+      "action_code": 301,
+      "acton_type": "url",
+      "action_data": {
+        "url": "/venue/avani-riverside-bkk-hotel"
+      },
+      "match_type": "url",
+      "enabled": true
+    },
+    {
+      "url": "/amarabangkok",
+      "match_data": {
+        "source": {
+          "flag_query": "exact",
+          "flag_case": false,
+          "flag_trailing": false,
+          "flag_regex": false
+        }
+      },
+      "action_code": 301,
+      "acton_type": "url",
+      "action_data": {
+        "url": "/venue/amarabangkok"
+      },
+      "match_type": "url",
+      "enabled": true
+    },
+    {
+      "url": "/thewestingrande_sukhumvit_bangkok",
+      "match_data": {
+        "source": {
+          "flag_query": "exact",
+          "flag_case": false,
+          "flag_trailing": false,
+          "flag_regex": false
+        }
+      },
+      "action_code": 301,
+      "acton_type": "url",
+      "action_data": {
+        "url": "/venue/thewestingrande_sukhumvit_bangkok"
+      },
+      "match_type": "url",
+      "enabled": true
+    },
+    {
+      "url": "/the-peninsula-bangkok",
+      "match_data": {
+        "source": {
+          "flag_query": "exact",
+          "flag_case": false,
+          "flag_trailing": false,
+          "flag_regex": false
+        }
+      },
+      "action_code": 301,
+      "acton_type": "url",
+      "action_data": {
+        "url": "/venue/the-peninsula-bangkok"
+      },
+      "match_type": "url",
+      "enabled": true
+    },
+    {
+      "url": "/ruenjoawsao",
+      "match_data": {
+        "source": {
+          "flag_query": "exact",
+          "flag_case": false,
+          "flag_trailing": false,
+          "flag_regex": false
+        }
+      },
+      "action_code": 301,
+      "acton_type": "url",
+      "action_data": {
+        "url": "/venue/ruenjoawsao"
+      },
+      "match_type": "url",
+      "enabled": true
+    },
+    {
+      "url": "/mandarinhotelbangkok",
+      "match_data": {
+        "source": {
+          "flag_query": "exact",
+          "flag_case": false,
+          "flag_trailing": false,
+          "flag_regex": false
+        }
+      },
+      "action_code": 301,
+      "acton_type": "url",
+      "action_data": {
+        "url": "/venue/mandarinhotelbangkok"
+      },
+      "match_type": "url",
+      "enabled": true
+    },
+    {
+      "url": "/centuryparkhotelbangkok",
+      "match_data": {
+        "source": {
+          "flag_query": "exact",
+          "flag_case": false,
+          "flag_trailing": false,
+          "flag_regex": false
+        }
+      },
+      "action_code": 301,
+      "acton_type": "url",
+      "action_data": {
+        "url": "/venue/centuryparkhotelbangkok"
+      },
+      "match_type": "url",
+      "enabled": true
+    },
+    {
+      "url": "/millennium-hilton",
+      "match_data": {
+        "source": {
+          "flag_query": "exact",
+          "flag_case": false,
+          "flag_trailing": false,
+          "flag_regex": false
+        }
+      },
+      "action_code": 301,
+      "acton_type": "url",
+      "action_data": {
+        "url": "/venue/millennium-hilton"
+      },
+      "match_type": "url",
+      "enabled": true
+    },
+    {
+      "url": "/royalsheraton",
+      "match_data": {
+        "source": {
+          "flag_query": "exact",
+          "flag_case": false,
+          "flag_trailing": false,
+          "flag_regex": false
+        }
+      },
+      "action_code": 301,
+      "acton_type": "url",
+      "action_data": {
+        "url": "/venue/royalsheraton"
+      },
+      "match_type": "url",
+      "enabled": true
+    },
+    {
+      "url": "/jasmine-city-hotel",
+      "match_data": {
+        "source": {
+          "flag_query": "exact",
+          "flag_case": false,
+          "flag_trailing": false,
+          "flag_regex": false
+        }
+      },
+      "action_code": 301,
+      "acton_type": "url",
+      "action_data": {
+        "url": "/venue/jasmine-city-hotel"
+      },
+      "match_type": "url",
+      "enabled": true
+    },
+    {
+      "url": "/kimptonmaa-laibangkok",
+      "match_data": {
+        "source": {
+          "flag_query": "exact",
+          "flag_case": false,
+          "flag_trailing": false,
+          "flag_regex": false
+        }
+      },
+      "action_code": 301,
+      "acton_type": "url",
+      "action_data": {
+        "url": "/venue/kimptonmaa-laibangkok"
+      },
+      "match_type": "url",
+      "enabled": true
+    },
+    {
+      "url": "/avana-bangkok-hotel",
+      "match_data": {
+        "source": {
+          "flag_query": "exact",
+          "flag_case": false,
+          "flag_trailing": false,
+          "flag_regex": false
+        }
+      },
+      "action_code": 301,
+      "acton_type": "url",
+      "action_data": {
+        "url": "/venue/avana-bangkok-hotel"
+      },
+      "match_type": "url",
+      "enabled": true
+    },
+    {
+      "url": "/siamdasada-khaoyai-resort",
+      "match_data": {
+        "source": {
+          "flag_query": "exact",
+          "flag_case": false,
+          "flag_trailing": false,
+          "flag_regex": false
+        }
+      },
+      "action_code": 301,
+      "acton_type": "url",
+      "action_data": {
+        "url": "/venue/siamdasada-khaoyai-resort"
+      },
+      "match_type": "url",
+      "enabled": true
+    },
+    {
+      "url": "/so-sofitel-bangkok",
+      "match_data": {
+        "source": {
+          "flag_query": "exact",
+          "flag_case": false,
+          "flag_trailing": false,
+          "flag_regex": false
+        }
+      },
+      "action_code": 301,
+      "acton_type": "url",
+      "action_data": {
+        "url": "/venue/so-sofitel-bangkok"
+      },
+      "match_type": "url",
+      "enabled": true
+    },
+    {
+      "url": "/gaysorn-urban",
+      "match_data": {
+        "source": {
+          "flag_query": "exact",
+          "flag_case": false,
+          "flag_trailing": false,
+          "flag_regex": false
+        }
+      },
+      "action_code": 301,
+      "acton_type": "url",
+      "action_data": {
+        "url": "/venue/gaysorn-urban"
+      },
+      "match_type": "url",
+      "enabled": true
+    },
+    {
+      "url": "/scparkhotel",
+      "match_data": {
+        "source": {
+          "flag_query": "exact",
+          "flag_case": false,
+          "flag_trailing": false,
+          "flag_regex": false
+        }
+      },
+      "action_code": 301,
+      "acton_type": "url",
+      "action_data": {
+        "url": "/venue/scparkhotel"
+      },
+      "match_type": "url",
+      "enabled": true
+    },
+    {
+      "url": "/shanghai-bkk",
+      "match_data": {
+        "source": {
+          "flag_query": "exact",
+          "flag_case": false,
+          "flag_trailing": false,
+          "flag_regex": false
+        }
+      },
+      "action_code": 301,
+      "acton_type": "url",
+      "action_data": {
+        "url": "/venue/shanghai-bkk"
+      },
+      "match_type": "url",
+      "enabled": true
+    },
+    {
+      "url": "/marriottexecutiveapartmentssukhumvitpark",
+      "match_data": {
+        "source": {
+          "flag_query": "exact",
+          "flag_case": false,
+          "flag_trailing": false,
+          "flag_regex": false
+        }
+      },
+      "action_code": 301,
+      "acton_type": "url",
+      "action_data": {
+        "url": "/venue/marriottexecutiveapartmentssukhumvitpark"
+      },
+      "match_type": "url",
+      "enabled": true
+    },
+    {
+      "url": "/radisson-blu",
+      "match_data": {
+        "source": {
+          "flag_query": "exact",
+          "flag_case": false,
+          "flag_trailing": false,
+          "flag_regex": false
+        }
+      },
+      "action_code": 301,
+      "acton_type": "url",
+      "action_data": {
+        "url": "/venue/radisson-blu"
+      },
+      "match_type": "url",
+      "enabled": true
+    },
+    {
+      "url": "/le-meridien-bangkok",
+      "match_data": {
+        "source": {
+          "flag_query": "exact",
+          "flag_case": false,
+          "flag_trailing": false,
+          "flag_regex": false
+        }
+      },
+      "action_code": 301,
+      "acton_type": "url",
+      "action_data": {
+        "url": "/venue/le-meridien-bangkok"
+      },
+      "match_type": "url",
+      "enabled": true
+    },
+    {
+      "url": "/alexanderhotel",
+      "match_data": {
+        "source": {
+          "flag_query": "exact",
+          "flag_case": false,
+          "flag_trailing": false,
+          "flag_regex": false
+        }
+      },
+      "action_code": 301,
+      "acton_type": "url",
+      "action_data": {
+        "url": "/venue/alexanderhotel"
+      },
+      "match_type": "url",
+      "enabled": true
+    },
+    {
+      "url": "/varavela-garden-hall",
+      "match_data": {
+        "source": {
+          "flag_query": "exact",
+          "flag_case": false,
+          "flag_trailing": false,
+          "flag_regex": false
+        }
+      },
+      "action_code": 301,
+      "acton_type": "url",
+      "action_data": {
+        "url": "/venue/varavela-garden-hall"
+      },
+      "match_type": "url",
+      "enabled": true
+    },
+    {
+      "url": "/bangkok-marriott-hotel-sukhumvit",
+      "match_data": {
+        "source": {
+          "flag_query": "exact",
+          "flag_case": false,
+          "flag_trailing": false,
+          "flag_regex": false
+        }
+      },
+      "action_code": 301,
+      "acton_type": "url",
+      "action_data": {
+        "url": "/venue/bangkok-marriott-hotel-sukhumvit"
+      },
+      "match_type": "url",
+      "enabled": true
+    },
+    {
+      "url": "/amari-dmk",
+      "match_data": {
+        "source": {
+          "flag_query": "exact",
+          "flag_case": false,
+          "flag_trailing": false,
+          "flag_regex": false
+        }
+      },
+      "action_code": 301,
+      "acton_type": "url",
+      "action_data": {
+        "url": "/venue/amari-dmk"
+      },
+      "match_type": "url",
+      "enabled": true
+    },
+    {
+      "url": "/lovestoryphetkasem81",
+      "match_data": {
+        "source": {
+          "flag_query": "exact",
+          "flag_case": false,
+          "flag_trailing": false,
+          "flag_regex": false
+        }
+      },
+      "action_code": 301,
+      "acton_type": "url",
+      "action_data": {
+        "url": "/venue/lovestoryphetkasem81"
+      },
+      "match_type": "url",
+      "enabled": true
+    },
+    {
+      "url": "/eastin-grand-hotel-sathorn",
+      "match_data": {
+        "source": {
+          "flag_query": "exact",
+          "flag_case": false,
+          "flag_trailing": false,
+          "flag_regex": false
+        }
+      },
+      "action_code": 301,
+      "acton_type": "url",
+      "action_data": {
+        "url": "/venue/eastin-grand-hotel-sathorn"
+      },
+      "match_type": "url",
+      "enabled": true
+    },
+    {
+      "url": "/best-western-plus-wanda-grand-hotel",
+      "match_data": {
+        "source": {
+          "flag_query": "exact",
+          "flag_case": false,
+          "flag_trailing": false,
+          "flag_regex": false
+        }
+      },
+      "action_code": 301,
+      "acton_type": "url",
+      "action_data": {
+        "url": "/venue/best-western-plus-wanda-grand-hotel"
+      },
+      "match_type": "url",
+      "enabled": true
+    },
+    {
+      "url": "/amari-watergate-bangkok",
+      "match_data": {
+        "source": {
+          "flag_query": "exact",
+          "flag_case": false,
+          "flag_trailing": false,
+          "flag_regex": false
+        }
+      },
+      "action_code": 301,
+      "acton_type": "url",
+      "action_data": {
+        "url": "/venue/amari-watergate-bangkok"
+      },
+      "match_type": "url",
+      "enabled": true
+    },
+    {
+      "url": "/holiday-inn-bangkok-sukhumvit",
+      "match_data": {
+        "source": {
+          "flag_query": "exact",
+          "flag_case": false,
+          "flag_trailing": false,
+          "flag_regex": false
+        }
+      },
+      "action_code": 301,
+      "acton_type": "url",
+      "action_data": {
+        "url": "/venue/holiday-inn-bangkok-sukhumvit"
+      },
+      "match_type": "url",
+      "enabled": true
+    },
+    {
+      "url": "/bellabhotel",
+      "match_data": {
+        "source": {
+          "flag_query": "exact",
+          "flag_case": false,
+          "flag_trailing": false,
+          "flag_regex": false
+        }
+      },
+      "action_code": 301,
+      "acton_type": "url",
+      "action_data": {
+        "url": "/venue/bellabhotel"
+      },
+      "match_type": "url",
+      "enabled": true
+    },
+    {
+      "url": "/pullmanbangkokkingpower",
+      "match_data": {
+        "source": {
+          "flag_query": "exact",
+          "flag_case": false,
+          "flag_trailing": false,
+          "flag_regex": false
+        }
+      },
+      "action_code": 301,
+      "acton_type": "url",
+      "action_data": {
+        "url": "/venue/pullmanbangkokkingpower"
+      },
+      "match_type": "url",
+      "enabled": true
+    },
+    {
+      "url": "/capella-bangkok",
+      "match_data": {
+        "source": {
+          "flag_query": "exact",
+          "flag_case": false,
+          "flag_trailing": false,
+          "flag_regex": false
+        }
+      },
+      "action_code": 301,
+      "acton_type": "url",
+      "action_data": {
+        "url": "/venue/capella-bangkok"
+      },
+      "match_type": "url",
+      "enabled": true
+    },
+    {
+      "url": "/thegardenatsurawongse",
+      "match_data": {
+        "source": {
+          "flag_query": "exact",
+          "flag_case": false,
+          "flag_trailing": false,
+          "flag_regex": false
+        }
+      },
+      "action_code": 301,
+      "acton_type": "url",
+      "action_data": {
+        "url": "/venue/thegardenatsurawongse"
+      },
+      "match_type": "url",
+      "enabled": true
+    },
+    {
+      "url": "/w-bangkok",
+      "match_data": {
+        "source": {
+          "flag_query": "exact",
+          "flag_case": false,
+          "flag_trailing": false,
+          "flag_regex": false
+        }
+      },
+      "action_code": 301,
+      "acton_type": "url",
+      "action_data": {
+        "url": "/venue/w-bangkok"
+      },
+      "match_type": "url",
+      "enabled": true
+    },
+    {
+      "url": "/thegrandfourwingsconventionhotelbangkokatsrinakarin",
+      "match_data": {
+        "source": {
+          "flag_query": "exact",
+          "flag_case": false,
+          "flag_trailing": false,
+          "flag_regex": false
+        }
+      },
+      "action_code": 301,
+      "acton_type": "url",
+      "action_data": {
+        "url": "/venue/thegrandfourwingsconventionhotelbangkokatsrinakarin"
+      },
+      "match_type": "url",
+      "enabled": true
+    },
+    {
+      "url": "/ibis-styles-bangkok-ratchada",
+      "match_data": {
+        "source": {
+          "flag_query": "exact",
+          "flag_case": false,
+          "flag_trailing": false,
+          "flag_regex": false
+        }
+      },
+      "action_code": 301,
+      "acton_type": "url",
+      "action_data": {
+        "url": "/venue/ibis-styles-bangkok-ratchada"
+      },
+      "match_type": "url",
+      "enabled": true
+    },
+    {
+      "url": "/valadecia",
+      "match_data": {
+        "source": {
+          "flag_query": "exact",
+          "flag_case": false,
+          "flag_trailing": false,
+          "flag_regex": false
+        }
+      },
+      "action_code": 301,
+      "acton_type": "url",
+      "action_data": {
+        "url": "/venue/valadecia"
+      },
+      "match_type": "url",
+      "enabled": true
+    },
+    {
+      "url": "/avani-sukhumvit-bangkok",
+      "match_data": {
+        "source": {
+          "flag_query": "exact",
+          "flag_case": false,
+          "flag_trailing": false,
+          "flag_regex": false
+        }
+      },
+      "action_code": 301,
+      "acton_type": "url",
+      "action_data": {
+        "url": "/venue/avani-sukhumvit-bangkok"
+      },
+      "match_type": "url",
+      "enabled": true
+    },
+    {
+      "url": "/theokuraprestigebangkok",
+      "match_data": {
+        "source": {
+          "flag_query": "exact",
+          "flag_case": false,
+          "flag_trailing": false,
+          "flag_regex": false
+        }
+      },
+      "action_code": 301,
+      "acton_type": "url",
+      "action_data": {
+        "url": "/venue/theokuraprestigebangkok"
+      },
+      "match_type": "url",
+      "enabled": true
+    },
+    {
+      "url": "/vibhavadi-palace",
+      "match_data": {
+        "source": {
+          "flag_query": "exact",
+          "flag_case": false,
+          "flag_trailing": false,
+          "flag_regex": false
+        }
+      },
+      "action_code": 301,
+      "acton_type": "url",
+      "action_data": {
+        "url": "/venue/vibhavadi-palace"
+      },
+      "match_type": "url",
+      "enabled": true
+    },
+    {
+      "url": "/hilton-sukhumvit-bangkok",
+      "match_data": {
+        "source": {
+          "flag_query": "exact",
+          "flag_case": false,
+          "flag_trailing": false,
+          "flag_regex": false
+        }
+      },
+      "action_code": 301,
+      "acton_type": "url",
+      "action_data": {
+        "url": "/venue/hilton-sukhumvit-bangkok"
+      },
+      "match_type": "url",
+      "enabled": true
+    },
+    {
+      "url": "/blistonsuwanparkviewhotel",
+      "match_data": {
+        "source": {
+          "flag_query": "exact",
+          "flag_case": false,
+          "flag_trailing": false,
+          "flag_regex": false
+        }
+      },
+      "action_code": 301,
+      "acton_type": "url",
+      "action_data": {
+        "url": "/venue/blistonsuwanparkviewhotel"
+      },
+      "match_type": "url",
+      "enabled": true
+    },
+    {
+      "url": "/princepalace",
+      "match_data": {
+        "source": {
+          "flag_query": "exact",
+          "flag_case": false,
+          "flag_trailing": false,
+          "flag_regex": false
+        }
+      },
+      "action_code": 301,
+      "acton_type": "url",
+      "action_data": {
+        "url": "/venue/princepalace"
+      },
+      "match_type": "url",
+      "enabled": true
+    },
+    {
+      "url": "/mandarin-oriental-bangkok",
+      "match_data": {
+        "source": {
+          "flag_query": "exact",
+          "flag_case": false,
+          "flag_trailing": false,
+          "flag_regex": false
+        }
+      },
+      "action_code": 301,
+      "acton_type": "url",
+      "action_data": {
+        "url": "/venue/mandarin-oriental-bangkok"
+      },
+      "match_type": "url",
+      "enabled": true
+    },
+    {
+      "url": "/theberkeleyhotelpratunambangkok",
+      "match_data": {
+        "source": {
+          "flag_query": "exact",
+          "flag_case": false,
+          "flag_trailing": false,
+          "flag_regex": false
+        }
+      },
+      "action_code": 301,
+      "acton_type": "url",
+      "action_data": {
+        "url": "/venue/theberkeleyhotelpratunambangkok"
+      },
+      "match_type": "url",
+      "enabled": true
+    },
+    {
+      "url": "/wedding-at-impact",
+      "match_data": {
+        "source": {
+          "flag_query": "exact",
+          "flag_case": false,
+          "flag_trailing": false,
+          "flag_regex": false
+        }
+      },
+      "action_code": 301,
+      "acton_type": "url",
+      "action_data": {
+        "url": "/venue/wedding-at-impact"
+      },
+      "match_type": "url",
+      "enabled": true
+    },
+    {
+      "url": "/s31-sukhumvit-hotel",
+      "match_data": {
+        "source": {
+          "flag_query": "exact",
+          "flag_case": false,
+          "flag_trailing": false,
+          "flag_regex": false
+        }
+      },
+      "action_code": 301,
+      "acton_type": "url",
+      "action_data": {
+        "url": "/venue/s31-sukhumvit-hotel"
+      },
+      "match_type": "url",
+      "enabled": true
+    },
+    {
+      "url": "/crowneplazabangkoklumpinipark",
+      "match_data": {
+        "source": {
+          "flag_query": "exact",
+          "flag_case": false,
+          "flag_trailing": false,
+          "flag_regex": false
+        }
+      },
+      "action_code": 301,
+      "acton_type": "url",
+      "action_data": {
+        "url": "/venue/crowneplazabangkoklumpinipark"
+      },
+      "match_type": "url",
+      "enabled": true
+    },
+    {
+      "url": "/pullman-bangkok-hotel-g",
+      "match_data": {
+        "source": {
+          "flag_query": "exact",
+          "flag_case": false,
+          "flag_trailing": false,
+          "flag_regex": false
+        }
+      },
+      "action_code": 301,
+      "acton_type": "url",
+      "action_data": {
+        "url": "/venue/pullman-bangkok-hotel-g"
+      },
+      "match_type": "url",
+      "enabled": true
+    },
+    {
+      "url": "/hoteloncebangkok",
+      "match_data": {
+        "source": {
+          "flag_query": "exact",
+          "flag_case": false,
+          "flag_trailing": false,
+          "flag_regex": false
+        }
+      },
+      "action_code": 301,
+      "acton_type": "url",
+      "action_data": {
+        "url": "/venue/hoteloncebangkok"
+      },
+      "match_type": "url",
+      "enabled": true
+    },
+    {
+      "url": "/richmond-hotel",
+      "match_data": {
+        "source": {
+          "flag_query": "exact",
+          "flag_case": false,
+          "flag_trailing": false,
+          "flag_regex": false
+        }
+      },
+      "action_code": 301,
+      "acton_type": "url",
+      "action_data": {
+        "url": "/venue/richmond-hotel"
+      },
+      "match_type": "url",
+      "enabled": true
+    },
+    {
+      "url": "/marriott-surawongse",
+      "match_data": {
+        "source": {
+          "flag_query": "exact",
+          "flag_case": false,
+          "flag_trailing": false,
+          "flag_regex": false
+        }
+      },
+      "action_code": 301,
+      "acton_type": "url",
+      "action_data": {
+        "url": "/venue/marriott-surawongse"
+      },
+      "match_type": "url",
+      "enabled": true
+    },
+    {
+      "url": "/sofitel-bkk-sukhumvit",
+      "match_data": {
+        "source": {
+          "flag_query": "exact",
+          "flag_case": false,
+          "flag_trailing": false,
+          "flag_regex": false
+        }
+      },
+      "action_code": 301,
+      "acton_type": "url",
+      "action_data": {
+        "url": "/venue/sofitel-bkk-sukhumvit"
+      },
+      "match_type": "url",
+      "enabled": true
+    },
+    {
+      "url": "/tkpalace",
+      "match_data": {
+        "source": {
+          "flag_query": "exact",
+          "flag_case": false,
+          "flag_trailing": false,
+          "flag_regex": false
+        }
+      },
+      "action_code": 301,
+      "acton_type": "url",
+      "action_data": {
+        "url": "/venue/tkpalace"
+      },
+      "match_type": "url",
+      "enabled": true
+    },
+    {
+      "url": "/montienhotelsurawongbangkok",
+      "match_data": {
+        "source": {
+          "flag_query": "exact",
+          "flag_case": false,
+          "flag_trailing": false,
+          "flag_regex": false
+        }
+      },
+      "action_code": 301,
+      "acton_type": "url",
+      "action_data": {
+        "url URLt": "/venue/montienhotelsurawongbangkok"
+      },
+      "match_type": "url",
+      "enabled": true
+    }
+  ]
+}

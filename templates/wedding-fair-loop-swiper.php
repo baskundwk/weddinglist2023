@@ -2,16 +2,16 @@
 
 <div class="wdl-archive <?php echo esc_attr($atts['class']); ?>">
 
-	<?php if ($posts->have_posts()) : ?>
+	<?php if ($posts->have_posts()): ?>
 
 		<div class="swiper wdl-archive-swiper overflow-visible">
 			<div class="swiper-wrapper">
-				<?php while ($posts->have_posts()) : ?>
+				<?php while ($posts->have_posts()): ?>
 					<?php $posts->the_post(); ?>
 
 					<div id="wdl-post-<?php the_ID(); ?>" class="swiper-slide card wdl-archive-card <?php echo esc_attr($atts['class_single']); ?>">
 
-						<?php if (has_post_thumbnail(get_the_ID())) : ?>
+						<?php if (has_post_thumbnail(get_the_ID())): ?>
 							<a class="card-img-top wdl-archive-card-img-top" href="<?php the_permalink(); ?>"><img loading="lazy" class="" src="<?php echo esc_html(get_the_post_thumbnail_url($post, 'medium_large')) ?>" width="100%"></a>
 						<?php endif; ?>
 
@@ -19,25 +19,31 @@
 							<div class="wdl-badge-container mb-2">
 								<?php
 								$date = get_field('Date');
-								if ($date) : ?>
-									<span class="badge wdl-badge-sm-primary"><?php the_field('Date') ?></span>
+								if ($date): ?>
+									<span class="badge wdl-badge-sm-primary">
+										<?php the_field('Date') ?>
+									</span>
 								<?php endif; ?>
 								<?php $hotDeal = get_field('HotDeal');
-								if ($hotDeal && in_array('Hot Deal', $hotDeal)) : ?>
+								if ($hotDeal && in_array('Hot Deal', $hotDeal)): ?>
 									<span class="badge wdl-badge-sm">Hot Deal</span>
 								<?php endif; ?>
 							</div>
 
-							<h3 class="wdl-archive-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
+							<h3 class="wdl-archive-title"><a href="<?php the_permalink(); ?>">
+									<?php the_title(); ?>
+								</a></h3>
 
 							<?php
 							$relatedVenue = get_field('RelatedVenue');
-							if ($relatedVenue) :
-								foreach ($relatedVenue as $venue) :
+							if ($relatedVenue):
+								foreach ($relatedVenue as $venue):
 									$venuePermalink = get_permalink($venue->ID);
 									$venueTitle = get_the_title($venue->ID); ?>
-									<p class="wdl-archive-location mb-0"><a href="<?php echo esc_html($venuePermalink) ?>"><?php echo esc_html($venueTitle); ?></a></p>
-							<?php endforeach;
+									<p class="wdl-archive-location mb-0"><a href="<?php echo esc_html($venuePermalink) ?>">
+											<?php echo esc_html($venueTitle); ?>
+										</a></p>
+								<?php endforeach;
 							endif; ?>
 						</div>
 
@@ -48,10 +54,12 @@
 			<div class="swiper-pagination"></div>
 		</div>
 
-	<?php else : ?>
+	<?php else: ?>
 		<div class="row">
 			<div class="col">
-				<h4><?php esc_html_e('ไม่พบโพสต์ในหมวดหมู่ดังกล่าว', 'Post not found'); ?></h4>
+				<h4>
+					<?php esc_html_e('ไม่พบโพสต์ในหมวดหมู่ดังกล่าว', 'Post not found'); ?>
+				</h4>
 			</div>
 		</div>
 	<?php endif; ?>

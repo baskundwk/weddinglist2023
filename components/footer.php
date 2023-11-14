@@ -2,7 +2,7 @@
 
   <div class="wdl-footer-nav">
     <div class="container">
-    <?php echo esc_url(wp_get_attachment_image_src(get_theme_mod('custom_logo'), 'full')[0]); ?>
+      <?php echo esc_url(wp_get_attachment_image_src(get_theme_mod('custom_logo'), 'full')[0]); ?>
       <div class="row">
         <div class="col-md-4 text-center text-md-start">
           <?php
@@ -13,18 +13,19 @@
           <a href="<?php echo esc_url(home_url('/')); ?>" title="ไปหน้าแรกของ Weddinglist"><img loading="lazy" src="<?php echo esc_attr($logo); ?>" alt="Weddinglist" width="181" height="44"></a>
         </div>
         <div class="col-md-8 text-center text-md-end">
-        <?php
-          wp_nav_menu( array(
-            'theme_location' => 'footer-menu',
-            'menu_class'     => 'footer-menu nav',
-            'menu_id' => 'footer-menu',
-            'container'      => '',
-            'fallback_cb'    => '',
-          ) );
-        ?>
+          <?php
+          wp_nav_menu(
+            array(
+              'theme_location' => 'footer-menu',
+              'menu_class' => 'footer-menu nav',
+              'menu_id' => 'footer-menu',
+              'container' => '',
+              'fallback_cb' => '',
+            ));
+          ?>
         </div>
       </div>
-      
+
     </div>
   </div>
 
@@ -32,15 +33,16 @@
     <div class="container clearfix">
       <div class="row">
         <div class="col-md-8 text-center text-md-start">
-        <?php
-          wp_nav_menu( array(
-            'menu' => 'Footer bottom menu',
-            'menu_class'     => 'footer-menu nav',
-            'menu_id' => 'footer-bottom-menu',
-            'container'      => '',
-            'fallback_cb'    => '',
-          ) );
-        ?>
+          <?php
+          wp_nav_menu(
+            array(
+              'menu' => 'Footer bottom menu',
+              'menu_class' => 'footer-menu nav',
+              'menu_id' => 'footer-bottom-menu',
+              'container' => '',
+              'fallback_cb' => '',
+            ));
+          ?>
         </div>
         <div class="col-md-4 text-center text-md-end">
           <p>©2023 Weddinglist สงวนสิทธิ์ทั้งหมด </p>
@@ -51,4 +53,5 @@
 </footer>
 <?php wp_footer(); ?>
 </body>
+
 </html>
