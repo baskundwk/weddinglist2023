@@ -1,0 +1,355 @@
+
+
+input.text,
+input.title,
+input[type="number"],
+input[type="email"],
+input[type="password"],
+input[type="tel"],
+input[type="text"],
+select,
+textarea,
+input[type="date"] {
+  border-radius: 0.5rem;
+  display: block;
+  max-width: none !important;
+  width: 100%;
+  margin: 0 !important;
+  padding: 1rem 1rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #495057;
+  background-color: #f7f7f7 !important;
+  border: none !important;
+  border-radius: 0.25rem;
+  transition:
+    border-color 0.15s ease-in-out,
+    box-shadow 0.15s ease-in-out;
+  height: auto !important;
+  min-height: 0;
+}
+.form-floating {
+  position: relative;
+  display: block;
+  input.text,
+  input.title,
+  input[type="number"],
+  input[type="email"],
+  input[type="password"],
+  input[type="tel"],
+  input[type="text"],
+  select,
+  textarea,
+  input[type="date"] {
+    padding-top: 1.625rem !important;
+    padding-bottom: 0.625rem !important;
+  }
+  > label {
+    font-weight: 400;
+    color: #c1c1c1;
+  }
+}
+
+.form-floating {
+  > .form-control:not(:placeholder-shown) ~ label::after {
+    background: none;
+  }
+}
+
+.wdl-circle-progress {
+  display: flex;
+  position: relative;
+  min-width: 60px;
+  min-height: 60px;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+  font-weight: 700;
+  color: #ff2758;
+}
+
+.wdl-circle-progress canvas {
+  position: absolute;
+}
+
+.wpcf7 p {
+  margin-bottom: 0.5rem;
+}
+
+.wpcf7 small {
+  display: block;
+  font-size: 0.875rem;
+  line-height: 1.2;
+}
+
+.wpcf7-list-item-label,
+.wdl-radio,
+.wdl-checkbox {
+  display: inline-block;
+  cursor: pointer;
+  position: relative;
+  padding-left: 30px;
+  margin-right: 15px;
+  margin-bottom: 0px;
+  line-height: 1.4;
+}
+
+.wpcf7-list-item {
+  display: block;
+  margin-bottom: 0.5rem;
+
+  @media (max-width: 1199px) {
+    font-size: 14px;
+    margin-left: 0;
+  }
+}
+
+.wpcf7-form.submitting {
+  opacity: 0.35;
+  cursor: wait;
+
+  * {
+    pointer-events: none;
+  }
+}
+
+.accordion-button:not(.collapsed) {
+  background-color: #ffe2e2;
+  color: #ff2758;
+}
+
+.wpcf7-list-item input[type="checkbox"],
+.wpcf7-list-item input[type="radio"],
+.wdl-radio input[type="radio"],
+.wdl-checkbox input[type="checkbox"] {
+  display: none;
+}
+
+.wpcf7-list-item input[type="radio"] + .wpcf7-list-item-label:before,
+.wdl-radio input[type="radio"] + label:before {
+  content: "";
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  left: 0;
+  top: 0px;
+  background-color: #ffffff;
+  border: 2px solid #cdcdcd;
+  border-radius: 2rem;
+}
+
+.wpcf7-list-item input[type="radio"]:checked + .wpcf7-list-item-label:before,
+.wdl-radio input[type="radio"]:checked + label:before {
+  box-shadow:
+    0 0 0 3px #ffffff inset,
+    0 0 0 10px #ff2758 inset;
+  border-color: #ff2758;
+}
+
+.wpcf7-list-item input[type="checkbox"] + .wpcf7-list-item-label:before,
+.wdl-checkbox input[type="checkbox"] + label:before {
+  content: "\f147";
+  font-family: "Dashicons", "dashicons";
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  left: 0;
+  top: 0px;
+  background-color: #ffffff;
+  border: 2px solid #cdcdcd;
+  color: transparent;
+  font-size: 16px;
+  line-height: 1;
+  border-radius: 4px;
+  transition:
+    0.25s background,
+    0.25s border;
+}
+
+.wpcf7-list-item input[type="checkbox"]:checked + .wpcf7-list-item-label:before,
+.wdl-checkbox input[type="checkbox"]:checked + label:before {
+  background-color: #ff2758;
+  border: 2px solid #ff2758;
+  color: #ffffff;
+}
+
+.wdl-radio-button {
+  display: flex;
+  gap: 16px;
+
+  @media (max-width: 1199px) {
+    gap: 8px;
+  }
+}
+.wdl-radio-button .wpcf7-list-item,
+.wdl-radio-button input[type="radio"] + label,
+.wdl-radio-button input[type="radio"] + .wpcf7-list-item-label {
+  display: inline-block;
+  margin: 0;
+}
+
+.wdl-radio-button input[type="radio"] {
+  display: none;
+}
+
+.wdl-radio-button input[type="radio"] + label,
+.wdl-radio-button input[type="radio"] + .wpcf7-list-item-label {
+  background: #fff;
+  box-shadow: 0 0 0 1px #cccccc inset;
+  padding: 8px 55px;
+  border-radius: 8px;
+
+  @media (max-width: 1199px) {
+    padding: 8px 8px;
+    font-size: 13px;
+  }
+}
+
+.wdl-radio-button input[type="radio"]:checked + label,
+.wdl-radio-button input[type="radio"]:checked + .wpcf7-list-item-label {
+  background: #ff2758;
+  color: #fff;
+  box-shadow: 0 0 0 0 #cccccc inset;
+}
+
+.wdl-radio-button input[type="radio"] + label:before,
+.wdl-radio-button input[type="radio"] + label:after,
+.wdl-radio-button input[type="radio"] + .wpcf7-list-item-label:before,
+.wdl-radio-button input[type="radio"] + .wpcf7-list-item-label:after {
+  content: none;
+}
+.wdl-checkbox-button {
+  display: flex;
+  gap: 0.3rem;
+  flex-wrap: wrap;
+}
+.wdl-checkbox-button .wpcf7-list-item,
+.wdl-checkbox-button input[type="checkbox"] + label,
+.wdl-checkbox-button input[type="checkbox"] + .wpcf7-list-item-label {
+  display: inline-block;
+  margin: 0;
+}
+
+.wdl-checkbox-button input[type="checkbox"] {
+  display: none;
+}
+
+.wdl-checkbox-button input[type="checkbox"] + label,
+.wdl-checkbox-button input[type="checkbox"] + .wpcf7-list-item-label {
+  background: #fff;
+  box-shadow: 0 0 0 1px #cccccc inset;
+  padding: 4px 8px;
+  border-radius: 30px;
+  transition:
+    0.25s background,
+    0.25s color,
+    0.25s box-shadow;
+}
+
+.wdl-checkbox-button input[type="checkbox"]:checked + label,
+.wdl-checkbox-button input[type="checkbox"]:checked + .wpcf7-list-item-label {
+  background: #ff2758;
+  color: #fff;
+  box-shadow: 0 0 0 0 #cccccc inset;
+}
+
+.wdl-checkbox-button input[type="checkbox"] + label:before,
+.wdl-checkbox-button input[type="checkbox"] + label:after,
+.wdl-checkbox-button input[type="checkbox"] + .wpcf7-list-item-label:before,
+.wdl-checkbox-button input[type="checkbox"] + .wpcf7-list-item-label:after {
+  content: none;
+}
+
+.wdl-grid-col-2 {
+  @media (min-width: 981px) {
+    display: grid;
+    grid-template: 1fr / 1fr 1fr;
+    grid-auto-rows: 1fr;
+  }
+}
+
+.wdl-form-progress {
+  gap: 20px;
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid #eee;
+}
+
+.wdl-form-progress p {
+  margin: 0;
+}
+
+.wdl-form-progress h2 {
+  font-size: 1.25rem;
+  padding: 0;
+  margin: 0;
+}
+
+.cf7mls_back.action-button {
+  color: #ff2758;
+  box-shadow: 0 0 0 2px #ff2758 inset;
+  background-color: #fff;
+  width: 49%;
+  margin: 0;
+  margin-right: 1%;
+  line-height: 1;
+  padding: 13px 55px;
+  position: relative;
+  border-radius: 5rem;
+}
+
+form.cf7mls input.wpcf7-form-control.wpcf7-submit {
+  color: #ffffff;
+  background-color: #fff;
+  width: 49%;
+  margin: 0;
+  margin-right: 1%;
+  line-height: 1;
+  padding: 13px 55px;
+  position: relative;
+  border-radius: 5rem;
+}
+
+.cf7mls-btns .cf7mls_next.action-button,
+.wpcf7-submit {
+  position: relative;
+  background: #ff2758 !important;
+  color: #fff !important;
+  border-radius: 5rem;
+  width: auto;
+  padding: 13px 55px;
+  border: none;
+}
+
+.wpcf7-spinner {
+  display: none;
+}
+
+.wpcf7-form-control[type="submit"]:after {
+  display: none !important;
+}
+
+.wdl-select select {
+  padding: 4px 8px;
+  font-size: 16px;
+  font-weight: 400;
+  background: #fff !important;
+  color: #ff2758;
+  box-shadow: 0 0 0 1px #ff2758 inset;
+  border-radius: 4px;
+  display: inline-block;
+}
+
+
+/* Register page */
+.wdl-page-register {
+  background: #f7f7f7;
+
+  .wdl-page-register-container {
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 20px 24px;
+  }
+}

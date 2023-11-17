@@ -242,31 +242,87 @@ add_action('wp_print_scripts', function () {
 });
 
 
-/** Step 1. */
-/* function my_menu() {
-	 add_options_page(
-		 'My Options',
-		 'My Menu',
-		 'manage_options',
-		 'my-unique-identifier',
-		 'my_options'
-	 );
- } */
+function myprefix_register_options_page() {
+	add_menu_page(
+			'My Options',
+			'My Options',
+			'manage_options',
+			'my_options',
+			'my_options_page_html'
+	);
+}
+add_action( 'admin_menu', 'myprefix_register_options_page' );
 
+function my_options_page_html() {
+	if ( ! current_user_can( 'manage_options' ) ) {
+			return;
+	}
 
-/** Step 2 (from text above). */
-/* add_action( 'admin_menu', 'my_menu' ) */;
+	if ( isset( $_GET['settings-updated'] ) ) {
+			add_settings_error(
+					'my_options_mesages',
+					'my_options_message',
+					esc_html__( 'Settings Saved', 'text_domain' ),
+					'updated'
+			);
+	}
 
-/** Step 3. */
-/* function my_options() {
-	 if ( ! current_user_can( 'manage_options' ) ) {
-		 wp_die( __( 'You do not have sufficient permissions to access this page.' ) );
-	 }
-	 echo 'Here is where I output the HTML for my screen.';
-	 echo '</div><pre>';
- }
+	settings_errors( 'my_options_mesages' );
+
+	?>
+	<div class="wrap">
+			<h1><?php echo esc_html( get_admin_page_title() ); ?></h1>
+			<form action="options.php" method="post">
+					<?php
+							settings_fields( 'my_options_group' );
+							do_settings_sections( 'my_options' );
+							submit_button( 'Save Settings' );
+					?>
+			</form>
+	</div>
+	<?php
+}
+
+/**
+ * Register our settings.
  */
+function myprefix_register_settings() {
+	register_setting( 'my_options', 'my_options' );
 
+	add_settings_section(
+			'my_options_sections',
+			false,
+			false,
+			'my_options'
+	);
+
+	add_settings_field(
+			'my_option_1',
+			esc_html__( 'My Option 1', 'text_domain' ),
+			'render_my_option_1_field',
+			'my_options',
+			'my_options_sections',
+			[
+					'label_for' => 'my_option_1',
+			]
+	);
+}
+add_action( 'admin_init', 'myprefix_register_settings' );
+
+/**
+ * Render the "my_option_1" field.
+ */
+function render_my_option_1_field( $args ) {
+	$value = get_option( 'my_options' )[$args['label_for']] ?? '';
+	?>
+	<input
+			type="text"
+			id="<?php echo esc_attr( $args['label_for'] ); ?>"
+			name="my_options[<?php echo esc_attr( $args['label_for'] ); ?>]"
+			value="<?php echo esc_attr( $value ); ?>">
+	<p class="description"><?php esc_html_e( 'This is a description for our field.', 'text_domain' ); ?></p>
+	<?php
+}
 
 /* * Customize plugin WP Search Suggest */
 function wp_search_suggest_custom($query_args)

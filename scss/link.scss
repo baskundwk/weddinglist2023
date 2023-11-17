@@ -1,0 +1,51 @@
+
+.wdl-link-back {
+  display: inline-block;
+  &:before {
+    content: "\23";
+    font-size: 1em;
+    vertical-align: middle;
+    font-family: ETmodules !important;
+    color: #ff2758;
+    margin-right: 0.5rem;
+    width: 1em;
+  }
+}
+.wdl-link-print {
+  display: inline-block;
+  padding: 8px 12px;
+  &:before {
+    content: "\e0fa";
+    font-size: 1em;
+    vertical-align: middle;
+    font-family: ETmodules !important;
+    color: #ff2758;
+    margin-right: 0.5rem;
+    width: 1em;
+  }
+}
+.wdl-link-share {
+  display: inline-block;
+  padding: 8px 12px;
+  &:before {
+    content: "\e0a0";
+    font-size: 1em;
+    vertical-align: middle;
+    font-family: ETmodules !important;
+    color: #ff2758;
+    margin-right: 0.5rem;
+    width: 1em;
+  }
+}
+.wdl-link-external {
+  display: inline-block;
+  &:after {
+    content: "\26";
+    font-size: 1em;
+    vertical-align: middle;
+    font-family: ETmodules !important;
+    color: #ff2758;
+    margin-right: 0.5rem;
+    width: 1em;
+  }
+}

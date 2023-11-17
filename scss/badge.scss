@@ -1,0 +1,119 @@
+/* Badge */
+
+.wdl-badge-container {
+  display: flex;
+  gap: 12px;
+  padding: 0;
+
+  .mobile_menu_bar {
+    display: none !important;
+  }
+
+  .et-menu,
+  .et_mobile_menu {
+    display: flex !important;
+    gap: 0.5rem;
+    position: relative !important;
+    background: none !important;
+    box-shadow: none !important;
+    border: none !important;
+    padding: 0 !important;
+    margin: 0;
+  }
+  .et-menu-nav {
+    padding: 0;
+  }
+  li {
+    display: block;
+    padding: 0 !important;
+    margin: 0 !important;
+    a,
+    a:hover,
+    a:focus,
+    a:active {
+      display: block;
+      padding: 4px 16px !important;
+      box-shadow: 0 0 0 1px #c1c1c1;
+      border-radius: 5rem;
+      font-size: 1rem;
+      font-weight: 400;
+      line-height: 1.5;
+      color: #c1c1c1 !important;
+    }
+  }
+
+  .swiper-slide {
+    width: auto;
+  }
+}
+
+.wdl-badge {
+  padding: 8px 24px;
+  white-space: nowrap;
+  box-shadow: 0 0 0 1px #777777 inset;
+  color: #777777 !important;
+  border-radius: 5rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  display: inline-block;
+}
+.wdl-badge-primary {
+  padding: 8px 24px;
+  white-space: nowrap;
+  background: #ff2758;
+  color: #ffffff !important;
+  border-radius: 5rem;
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.5;
+  display: inline;
+}
+.wdl-badge-sm-primary {
+  padding: 4px 12px;
+  white-space: nowrap;
+  background: #ff2758;
+  color: #ffffff !important;
+  border-radius: 5rem;
+  font-size: 0.75rem;
+  font-weight: 400;
+  line-height: 1.5;
+  display: inline-block;
+}
+.wdl-badge-sm {
+  padding: 4px 12px;
+  white-space: nowrap;
+  box-shadow: 0 0 0 1px #ff2758 inset;
+  background: #ffffff;
+  color: #ff2758 !important;
+  border-radius: 5rem;
+  font-size: 0.75rem;
+  font-weight: 400;
+  line-height: 1.5;
+  display: inline-block;
+}
+.wdl-badge-sm-secondary {
+  padding: 4px 12px;
+  white-space: nowrap;
+  box-shadow: 0 0 0 1px #777777 inset;
+  color: #777777 !important;
+  border-radius: 5rem;
+  font-size: 0.75rem;
+  font-weight: 400;
+  line-height: 1.5;
+
+  a {
+    color: #777777;
+  }
+}
+.wdl-badge-xs {
+  padding: 4px 8px;
+  white-space: nowrap;
+  box-shadow: 0 0 0 1px #ff2758 inset;
+  background: #ffffff;
+  color: #ff2758 !important;
+  border-radius: 5rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  line-height: 1;
+}

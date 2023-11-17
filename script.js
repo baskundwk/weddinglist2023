@@ -96,7 +96,7 @@ document.querySelector(".fieldset-cf7mls")
   : false;
 
 $(() => {
-  const wdlArchiveSwiper = new Swiper(".wdl-archive-swiper", {
+  const wdlArchiveSwiper = new Swiper(".wdl-archive:not(.wdl-archive-swiper-extended).wdl-archive-swiper", {
     slidesPerView: 1,
     spaceBetween: 16,
     breakpoints: {
@@ -105,6 +105,24 @@ $(() => {
       },
       992: {
         slidesPerView: 3,
+      },
+    },
+    pagination: {
+      el: ".swiper-pagination",
+      clickable: true,
+    },
+  });
+  const wdlArchiveExtendedSwiper = new Swiper(".wdl-archive-extended .wdl-archive-swiper", {
+    slidesPerView: 'auto',
+    spaceBetween: 16,
+    breakpoints: {
+      576: {
+        slidesPerView: "auto",
+        spaceBetween: 12,
+      },
+      992: {
+        slidesPerView: 'auto',
+        spaceBetween: 12,
       },
     },
     pagination: {
@@ -564,3 +582,6 @@ $(document).ready(() => {
 $(".wdl-link-print").click(() => {
   window.print();
 });
+
+$('.card-select input[type=checkbox]').change((event)=> {
+})

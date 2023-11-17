@@ -1,0 +1,125 @@
+
+/* Search */
+.wdl-search {
+  border-radius: 10px !important;
+  transition: 0.25s box-shadow;
+  &:focus-within {
+    box-shadow: 0 0 0 1px #ff2758;
+  }
+  .et_pb_searchform {
+    .et_pb_s {
+      border-radius: 10px 0 0 10px !important;
+
+      ::placeholder {
+        color: transparent;
+      }
+    }
+    input.et_pb_searchsubmit {
+      color: transparent !important;
+      background: #f7f7f7 !important;
+      border-radius: 0 10px 10px 0 !important;
+    }
+  }
+  .form-floating {
+    &:after {
+      content: "\55";
+      font-family: ETmodules;
+      font-size: 1.25rem !important;
+      color: #cccccc !important;
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 65px;
+      pointer-events: none;
+    }
+  }
+
+  .forn-control {
+    border-radius: 10px 0 0 10px;
+  }
+
+  .wdl-search-submit {
+    border: none;
+    border-radius: 0 10px 10px 0;
+    color: transparent;
+    background: #f7f7f7;
+  }
+}
+
+// Search suggestion
+.ac_results {
+  border-radius: 6px;
+  min-width: 330px;
+  margin-top: 6px;
+  border: none;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05);
+  padding: 0.5rem 1rem;
+  .ac_match {
+    color: #e31644;
+    text-decoration: none;
+  }
+
+  li {
+    color: #333333;
+    padding: 0.5rem 0;
+    font-size: 0.75rem;
+  }
+
+  .ac_over {
+    background: none;
+  }
+}
+
+/* Filter Everything */
+body .wpc-filters-main-wrap .wpc-filters-widget-controls-container a.wpc-filters-apply-button,
+body .wpc-filters-main-wrap a.wpc-filters-submit-button {
+  padding: 4px 16px;
+  font-size: 16px;
+  font-weight: 400;
+  color: #ffffff;
+  background: #ff2758 !important;
+  border-radius: 4px !important;
+  border: none !important;
+  display: inline-block;
+  line-height: 1.8;
+}
+
+.wpc-filters-range-inputs .ui-slider-horizontal .ui-slider-range {
+  background: #ff2758 !important;
+}
+
+.wpc-search-icon {
+  left: auto !important;
+  right: 1rem !important;
+}
+
+.wpc-filter-content select {
+  padding: 1rem 1rem !important;
+}
+
+.wpc-edit-filter-set {
+  display: none;
+}
+
+.wpc-search-field-wrapper .wpc-search-icon:before {
+  vertical-align: baseline;
+  line-height: 1;
+  background-image: none;
+  background-repeat: no-repeat;
+  background-size: 14px;
+  content: "U";
+  font-family: ETmodules;
+  font-size: 1.25rem !important;
+  color: #cccccc !important;
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

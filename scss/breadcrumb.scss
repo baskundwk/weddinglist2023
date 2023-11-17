@@ -1,0 +1,19 @@
+.wdl-breadcrumb {
+  p {
+    margin: 0;
+    font-size: 13px;
+
+    > a,
+    a:hover,
+    a:focus,
+    a:active {
+      color: #777777;
+    }
+    .last {
+      color: #333333;
+    }
+    > .separator {
+      margin: 0 1rem;
+    }
+  }
+}

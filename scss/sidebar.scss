@@ -1,0 +1,24 @@
+/* Sidebar */
+.et_right_sidebar #sidebar {
+  @media (min-width: 992px) {
+    border-left: 1px solid #e1e1e1 !important;
+  }
+}
+
+.et_right_sidebar #main-content .container:before {
+  content: none !important;
+}
+
+@media (min-width: 981px) {
+  #content-area {
+    display: flex;
+  }
+
+  .et_right_sidebar #left-area {
+    flex: 3 1 0;
+  }
+
+  .et_right_sidebar #sidebar {
+    flex: 0.8 0.8 0;
+  }
+}

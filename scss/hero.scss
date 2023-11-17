@@ -1,0 +1,57 @@
+
+/* Hero Banner */
+.wdl-hero {
+  position: relative;
+}
+.wdl-hero-swiper {
+  @media (min-width: 1160px) {
+    filter: drop-shadow(0 4px 15px rgba(0, 0, 0, 0.16));
+    border-radius: 0.5rem;
+  }
+
+  .swiper-wrapper {
+    .swiper-slide {
+      height: auto;
+      margin: 0;
+      overflow: hidden;
+
+      @media (min-width: 1160px) {
+        border-radius: 0.5rem;
+      }
+
+      .wdl-hero-banner {
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          aspect-ratio: 580/240;
+        }
+      }
+    }
+  }
+
+  .swiper-pagination {
+    bottom: 10px;
+  }
+
+  @media (max-width: 980px) {
+    padding: 0;
+    border-radius: 0;
+    filter: none;
+
+    .swiper-wrapper {
+      .swiper-slide {
+        border-radius: 0;
+      }
+    }
+
+    .swiper-navigation {
+      .swiper-button-prev {
+        left: 10px;
+      }
+      .swiper-button-next {
+        right: 10px;
+      }
+    }
+  }
+}

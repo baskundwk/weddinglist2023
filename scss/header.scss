@@ -1,0 +1,217 @@
+#main-header {
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.15), 0 1px 0 #D9D9D9 !important;
+  backdrop-filter: blur(5px) saturate(4);
+}
+
+#main-header.et-fixed-header {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.15), 0 1px 0 #D9D9D9 !important;
+
+  @media (min-width: 981px) {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.15), 0 1px 0 #D9D9D9 !important;
+  }
+}
+
+@media (max-width: 980px) {
+  .et_fixed_nav #main-header {
+    position: fixed !important;
+  }
+}
+.navbar-toggler {
+  border: 0;
+  .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 39, 88, 1%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+  }
+}
+#top-menu {
+  @media (max-width: 980px) {
+    display: flex;
+  }
+
+  @media (min-width: 981px) and (max-width: 1199px) {
+    li {
+      a {
+        font-size: 0.875rem !important;
+      }
+    }
+  }
+
+  @media (max-width: 1199px) {
+    padding: 0 !important;
+  }
+
+  > li {
+    padding-right: 0;
+    position: relative;
+
+    > .menu-item-toggler {
+      background: none;
+      border: none;
+      padding: 24px;
+      position: absolute;
+      top: 0;
+      right: 0;
+      transition: 0.25s transform;
+      z-index: 1;
+
+      &::before {
+        content: "";
+        border: 5px solid transparent;
+        border-top-color: #333333;
+        border-bottom-width: 0;
+        display: block;
+      }
+      @media (min-width: 1200px) {
+        display: none;
+      }
+
+      &[aria-expanded="true"] {
+        transform: scaleY(-100%);
+      }
+    }
+
+    > a {
+      color: #666666;
+      font-weight: 500;
+      line-height: 1.3;
+      padding: 16px 0;
+      display: block;
+
+      &:hover,
+      &:focus,
+      &:active {
+        background: none;
+        color: #fa0403;
+      }
+    }
+
+    .sub-menu {
+      position: absolute;
+      top: 100%;
+      background: #fff;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.16);
+      border-radius: 8px;
+      right: 0;
+      opacity: 0;
+      transition: 0.25s opacity;
+      pointer-events: none;
+      padding: 0;
+      list-style: none;
+
+      li {
+        padding: 0;
+        position: relative;
+        a {
+          padding: 6px 24px;
+          line-height: 1.3;
+          display: block;
+          width: 200px;
+
+          @media (max-width: 1199px) {
+            width: 100%;
+          }
+        }
+      }
+
+      @media (max-width: 1199px) {
+        position: relative;
+        top: 0;
+        left: 0;
+        right: auto;
+        opacity: 1;
+        transition: 0.25s height;
+        background: #f7f7f7;
+        box-shadow: none;
+        width: 100%;
+        border: none !important;
+        padding-top: 0;
+        li {
+          display: block;
+          width: 100%;
+          a {
+            padding: 8px 14px;
+          }
+        }
+      }
+    }
+
+    &:hover {
+      > .sub-menu {
+        opacity: 1;
+        pointer-events: initial;
+      }
+    }
+
+    &.et-show-dropdown {
+      .sub-menu {
+        display: block;
+        visibility: visible;
+      }
+    }
+  }
+}
+
+
+/* Modified DIVI Menu */
+.et_header_style_left .logo_container {
+  width: fit-content;
+  float: none;
+  position: relative;
+}
+
+.et_header_style_left #et-top-navigation,
+.et_header_style_split #et-top-navigation {
+  padding-left: 0 !important;
+  display: flex;
+  gap: 60px;
+  float: none;
+  flex: 1 1 0;
+  justify-content: flex-end;
+}
+
+#logo {
+  height: 44px;
+}
+
+.container.et_menu_container {
+  display: flex;
+  align-items: center;
+  /* padding: 0; */
+}
+
+.et_mobile_menu li a {
+  font-weight: 400;
+}
+
+@media (max-width: 980px) {
+  .et_mobile_menu {
+    list-style: none;
+    /* text-align: center; */
+    padding: 16px;
+  }
+
+  .et_mobile_menu li a {
+    font-size: 0.875rem !important;
+    padding: 4px 12px;
+    font-weight: 400;
+  }
+}
+
+nav#top-menu-nav,
+#top-menu,
+nav.et-menu-nav,
+.et-menu {
+  width: 100%;
+  justify-content: space-between;
+  padding-left: 30px;
+}
+
+@media (min-width: 1200px) {
+  nav#top-menu-nav,
+  #top-menu,
+  nav.et-menu-nav,
+  .et-menu {
+    justify-content: flex-end;
+    gap: 20px;
+  }
+}

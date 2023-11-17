@@ -1,0 +1,17 @@
+/* Monarch social plugin */
+.et_monarch .et_social_networks .et_social_icons_container {
+  display: flex;
+  gap: 0.3rem;
+}
+
+.et_monarch .et_social_networks {
+  width: auto;
+}
+
+.wdl-line-share-icon {
+  margin: 0 0.15rem;
+
+  img {
+    height: 40px;
+  }
+}
