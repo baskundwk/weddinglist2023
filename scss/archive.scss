@@ -245,6 +245,8 @@
   }
 }
 .wdl-archive-extended, .wdl-archive-extended .wdl-archive-swiper {
+  padding: 0 24px 24px;
+  margin: 0 -24px 0 -24px;
   .card {
     height: auto;
     transition: 0.25s box-shadow;
@@ -255,14 +257,21 @@
     }
     &:hover {
       z-index: 1;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
       .card-footer {
         opacity: 1;
         transform: translateY(0);
       }
+    }
+    &:hover, &.active {
       .card-select {
         transform: translate(0, 0);
         opacity: 1;
       }
+    }
+    &.active {
+      z-index: 1;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05), 0 0 0 2px #ff2758;
     }
   }
 
@@ -271,7 +280,6 @@
   }
 
   .card-select{
-    padding: 4px;
     border-radius: 0 6px 0 6px;
     box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05);
     position: absolute;
@@ -281,10 +289,19 @@
     opacity: 0;
     transform: translate(20%, 0%);
     transition: .25s opacity ease-out, .25s transform ease-out;
-
+    
     .wdl-checkbox {
-      padding-left: 26px;
       margin: 0;
+      padding: 0;
+
+      label {
+        padding: 4px 4px 4px 30px;
+
+        &:before {
+          top: 4px;
+          left: 4px;
+        }
+      }
     }
   }
   
@@ -313,19 +330,6 @@
   }
   .wdl-btn-more {
     font-size: 14px;
-    &::after {
-      content: "$";
-      color: #ff2758;
-      text-align: right;
-      font-family: ETmodules !important;
-      font-size: 20px;
-      display: inline-block;
-      opacity: 1;
-      transition: 0.25s transform, 0.25s opacity;
-      vertical-align: middle;
-      transform: none;
-      margin-left: 4px;
-    }
   }
 }
 .wdl-archive-card-blog {
@@ -451,6 +455,32 @@
   align-items: center;
   &:before {
     content: "\e081";
+    font-size: 17px;
+    vertical-align: middle;
+    font-family: ETmodules !important;
+    color: #37bad6;
+    margin-right: 0.5rem;
+    width: 1em;
+  }
+}
+.wdl-archive-facebook {
+  display: flex;
+  align-items: center;
+  &:before {
+    content: "\e0aa";
+    font-size: 17px;
+    vertical-align: middle;
+    font-family: ETmodules !important;
+    color: #37bad6;
+    margin-right: 0.5rem;
+    width: 1em;
+  }
+}
+.wdl-archive-instagram {
+  display: flex;
+  align-items: center;
+  &:before {
+    content: "\e0b1";
     font-size: 17px;
     vertical-align: middle;
     font-family: ETmodules !important;

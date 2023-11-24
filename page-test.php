@@ -65,7 +65,7 @@
     </div>
   </section>
 
-  <?php include 'components/lead-menu.php' ?>
+  <?php include 'components/lead-menu-revamped.php' ?>
 
   <section class="overflow-x-hidden">
     <?php $promotionArgs = array(
@@ -92,7 +92,7 @@
             <?php
             if ($promotion->have_posts()): ?>
 
-              <div id="promotions" class="swiper wdl-archive-swiper overflow-visible">
+              <div id="promotions" class="swiper wdl-archive-swiper">
                 <div class="swiper-wrapper row-cols-archive-randomized">
                   <?php while ($promotion->have_posts()): ?>
                     <?php $promotion->the_post(); ?>
@@ -109,6 +109,18 @@
                           <?php echo esc_html(wp_get_attachment_image_src(get_post_thumbnail_id(), 'medium_large')[0]) ?> 2x" alt="<?php get_the_title() ?>">
                         </a>
                       <?php endif; ?>
+
+                      <div class="card-select">
+                        <div class="wdl-checkbox">
+                          <input id="card-select-<?php the_ID()?>" type="checkbox" data-select='
+                            {
+                              "title": "<?php the_title() ?>",
+                              "postType": "<?php echo get_post_type() ?>",
+                              "id": "<?php the_ID() ?>"
+                            }'>
+                          <label for="card-select-<?php the_ID()?>">เลือก</label>
+                        </div>
+                      </div>
 
                       <div class="card-body wdl-archive-card-body">
                         <div class="wdl-badge-container mb-2">
@@ -153,6 +165,7 @@
                               </a></p>
                           <?php endforeach; endif; ?>
                       </div>
+
                       <div class="card-footer">
                         <a href="#" class="wdl-btn-cta">ลงทะเบียนรับสิทธิพิเศษ</a>
                         <a href="#" class="wdl-btn-more">ดูรายละเอียด</a>
@@ -161,6 +174,10 @@
                   <?php endwhile; ?>
                 </div>
                 <div class="swiper-pagination"></div>
+                <div class="swiper-navigation swiper-navigation-small">
+                  <div class="swiper-button-prev"></div>
+                  <div class="swiper-button-next"></div>
+                </div>
               </div>
 
             <?php else: ?>
@@ -210,7 +227,7 @@
 
             <?php if ($weddingfair->have_posts()): ?>
 
-              <div class="swiper wdl-archive-swiper overflow-visible">
+              <div class="swiper wdl-archive-swiper">
                 <div class="swiper-wrapper row-cols-archive-randomized">
                   <?php while ($weddingfair->have_posts()): ?>
                     <?php $weddingfair->the_post(); ?>
@@ -233,7 +250,8 @@
                           <input id="card-select-<?php the_ID()?>" type="checkbox" data-select='
                             {
                               "title": "<?php the_title() ?>",
-                              "postType": "<?php echo get_post_type() ?>"
+                              "postType": "<?php echo get_post_type() ?>",
+                              "id": "<?php the_ID() ?>"
                             }'>
                           <label for="card-select-<?php the_ID()?>">เลือก</label>
                         </div>
@@ -281,6 +299,10 @@
                   <?php endwhile; ?>
                 </div>
                 <div class="swiper-pagination"></div>
+                <div class="swiper-navigation swiper-navigation-small">
+                  <div class="swiper-button-prev"></div>
+                  <div class="swiper-button-next"></div>
+                </div>
               </div>
 
             <?php else: ?>
@@ -354,6 +376,18 @@
                           <?php endif; ?>
                         </a>
                       <?php endif; ?>
+
+                      <div class="card-select">
+                        <div class="wdl-checkbox">
+                          <input id="card-select-<?php the_ID()?>" type="checkbox" data-select='
+                            {
+                              "title": "<?php the_title() ?>",
+                              "postType": "<?php echo get_post_type() ?>",
+                              "id": "<?php the_ID() ?>"
+                            }'>
+                          <label for="card-select-<?php the_ID()?>">เลือก</label>
+                        </div>
+                      </div>
 
                       <div class="card-body wdl-archive-card-body">
                         <h3 class="wdl-archive-title "><a href="<?php the_permalink(); ?>">
@@ -429,6 +463,37 @@
       </div>
     </div>
   </section>
+
+  <div class="wdl-compare-bar">
+    <div class="wdl-compare-bar-wrapper container">
+      <div class="wdl-compare-bar-selection">
+        <div class="wdl-compare-bar-selection-label">
+          <p>เลือก <span>1</span> รายการ</p>
+        </div>
+        <div class="wdl-compare-bar-selection-group">
+          <div class="wdl-compare-bar-selection-card empty">
+            <p></p>
+          </div>
+          <div class="wdl-compare-bar-selection-card empty">
+            <p></p>
+          </div>
+          <div class="wdl-compare-bar-selection-card empty">
+            <p></p>
+          </div>
+          <div class="wdl-compare-bar-selection-card empty">
+            <p></p>
+          </div>
+          <div class="wdl-compare-bar-selection-card empty">
+            <p></p>
+          </div>
+        </div>
+      </div>
+      <div class="wdl-compare-bar-action">
+        <a href="#" id="compare-selected" class="wdl-btn-secondary" data-bs-toggle="tooltip" data-bs-title="<?php _e('เปรียบเทียบสถานที่จัดงานแต่งงานได้สูงสุดถึง 3 แห่ง', 'สามารถเปรียบเทียบสถานที่จัดงานแต่งงานได้สูงสุดถึง 3 แห่ง')?>">เปรียบเทียบ</a>
+        <a href="#" id="register-selected" class="wdl-btn">ลงทะเบียน</a>
+      </div>
+    </div>
+  </div>
 </main>
 
 <?php include 'components/footer.php' ?>

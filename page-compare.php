@@ -59,9 +59,6 @@
                   </div>
 
                   <div class="mb-4 wdl-compare-group" data-mh="wdl-compare-group-3">
-                    <h4>
-                      <?php _e('ภาพรวม','ภาพรวม') ?>
-                    </h4>
                     <div class="wdl-metadata">
                         <?php
                         $locations = get_field('Location');
@@ -95,30 +92,6 @@
                       </div>
                   </div>
 
-                  <div class="mb-4 wdl-compare-group" data-mh="wdl-compare-group-4">
-                    <h4><?php _e('ข้อมูลค่าใช้จ่าย','ข้อมูลค่าใช้จ่าย')?></h4>
-                    <ul>
-                    <?php while (have_rows('Pricing')):
-                      the_row(); ?>
-                      <?php if (get_row_layout() == 'WeddingPackage'): ?>
-                          <li class="wdl-metadata">
-                          <?php if (get_sub_field('WeddingPackageType')): ?>
-                              <?php $weddingPackageType = get_sub_field('WeddingPackageType'); ?>
-                              <?php echo esc_html($weddingPackageType->name); ?>
-                            <?php endif; ?>
-                            <span class="text-red">
-                              <?php if (get_sub_field('WeddingPackagePrice')):
-                                the_sub_field('WeddingPackagePrice'); endif; ?>
-                            </span>
-                            <?php if (get_sub_field('WeddingPackageNote')):
-                              the_sub_field('WeddingPackageNote'); endif; ?>
-                          </li>
-                      <?php endif; ?>
-                      <?php endwhile; ?>
-                    </ul>
-
-                  </div>
-
                   <div class="mb-4 wdl-compare-group" data-mh="wdl-compare-group-5">
                     <h4><?php _e('รูปแบบการจัดงาน','รูปแบบการจัดงาน')?></h4>
                     <ul>
@@ -143,48 +116,54 @@
                     </ul>
                   </div>
 
-                  <div class="mb-4 wdl-compare-group" data-mh="wdl-compare-group-7">
+                  <div class="mb-4 wdl-compare-group position-relative">
                     <h4><?php _e('ห้องจัดเลี้ยง', 'Banquet room')?></h4>
-                    <?php while( have_rows('BanquetRoom') ): the_row(); ?>
-                      <?php if( get_row_layout() == 'BanquetRoomEntry' ): ?>
-                        <div class="wdl-pricing-card mb-1 row g-2 mb-3">
-                          <div class="col-12">
-                            <?php if( get_sub_field('BanquetRoomImage')) : ?>
-                              <a class="card-img-top wdl-archive-card-img-top" <?php if( get_sub_field('BanquetRoomGallery') ): ?> href="#" data-bs-toggle="modal" data-bs-target="#banquet-gallery-<?php echo get_row_index(); ?>"<?php endif; ?>>
-                                  <img loading="lazy" src="<?php the_sub_field('BanquetRoomImage')?>" alt="">
-                              </a>
-                            <?php endif; ?>
-                          </div>
-                          <div class="col-12">
-                            <?php if( get_sub_field('BanquetRoomName')) : ?>
-                            <div class="text-sm fw-600">
-                              <?php the_sub_field('BanquetRoomName')?>
+                    <div class="swiper wdl-compare-group-room-swiper p-3">
+                      <div class="swiper-wrapper">
+                        <?php while( have_rows('BanquetRoom') ): the_row(); ?>
+                        <?php if( get_row_layout() == 'BanquetRoomEntry' ): ?>
+                          <div class="swiper-slide" data-mh="wdl-compare-group-7">
+                            <div class="wdl-pricing-card wdl-card">
+                              <?php if( get_sub_field('BanquetRoomImage')) : ?>
+                              <figure class="card-img-top wdl-archive-card-img-top p-0">
+                                <img loading="lazy" src="<?php the_sub_field('BanquetRoomImage')?>" alt="">
+                              </figure>
+                              <?php endif; ?>
+                              <?php if( get_sub_field('BanquetRoomName')) : ?>
+                              <div class="text-sm fw-600">
+                                <?php the_sub_field('BanquetRoomName')?>
+                              </div>
+                              <?php endif; ?>
+  
+                              <?php if( get_sub_field('BanquetRoomArea')) : ?>
+                                <div class="wdl-metadata text-secondary"><?php _e('พื้นที่', 'Area')?> <?php the_sub_field('BanquetRoomArea')?></div>
+                              <?php endif; ?>
+  
+                              <?php if( get_sub_field('BanquetRoomChineseDinner')) : ?>
+                                <div class="wdl-metadata text-secondary"><?php _e('โต๊ะจีน', 'Chinese dinner')?> <?php the_sub_field('BanquetRoomChineseDinner')?></div>
+                              <?php endif; ?>
+  
+                              <?php if( get_sub_field('BanquetRoomCocktailDinner')) : ?>                                
+                                <div class="wdl-metadata text-secondary"><?php _e('ค็อกเทล', 'Cocktail dinner')?> <?php the_sub_field('BanquetRoomCocktailDinner')?></div>
+                              <?php endif; ?>
+  
+                              <?php if( get_sub_field('BanquetRoomBuffetDinner')) : ?>                                
+                                <div class="wdl-metadata text-secondary"><?php _e('บุฟเฟ่ต์', 'Buffet dinner')?> <?php the_sub_field('BanquetRoomBuffetDinner')?></div>
+                              <?php endif; ?>
+                                
+                              <?php if( get_sub_field('BanquetRoomSitdownDinner')) : ?>                                
+                                <div class="wdl-metadata text-secondary"><?php _e('ซิทดาวน์', 'Sitdown dinner')?> <?php the_sub_field('BanquetRoomSitdownDinner')?></div>
+                              <?php endif; ?>
                             </div>
-                            <?php endif; ?>
-
-                            <?php if( get_sub_field('BanquetRoomArea')) : ?>
-                              <div class="wdl-metadata text-secondary"><?php _e('พื้นที่', 'Area')?> <?php the_sub_field('BanquetRoomArea')?></div>
-                            <?php endif; ?>
-
-                            <?php if( get_sub_field('BanquetRoomChineseDinner')) : ?>
-                              <div class="wdl-metadata text-secondary"><?php _e('โต๊ะจีน', 'Chinese dinner')?> <?php the_sub_field('BanquetRoomChineseDinner')?></div>
-                            <?php endif; ?>
-
-                            <?php if( get_sub_field('BanquetRoomCocktailDinner')) : ?>                                
-                              <div class="wdl-metadata text-secondary"><?php _e('ค็อกเทล', 'Cocktail dinner')?> <?php the_sub_field('BanquetRoomCocktailDinner')?></div>
-                            <?php endif; ?>
-
-                            <?php if( get_sub_field('BanquetRoomBuffetDinner')) : ?>                                
-                              <div class="wdl-metadata text-secondary"><?php _e('บุฟเฟ่ต์', 'Buffet dinner')?> <?php the_sub_field('BanquetRoomBuffetDinner')?></div>
-                            <?php endif; ?>
-                              
-                            <?php if( get_sub_field('BanquetRoomSitdownDinner')) : ?>                                
-                              <div class="wdl-metadata text-secondary"><?php _e('ซิทดาวน์', 'Sitdown dinner')?> <?php the_sub_field('BanquetRoomSitdownDinner')?></div>
-                            <?php endif; ?>
                           </div>
-                        </div>
-                      <?php endif; ?>
-                    <?php endwhile; ?>
+                        <?php endif; ?>
+                        <?php endwhile; ?>
+                      </div>
+                      <div class="swiper-navigation swiper-navigation-small">
+                        <div class="swiper-button-prev"></div>
+                        <div class="swiper-button-next"></div>
+                      </div>
+                    </div>
 
                   </div>
                   

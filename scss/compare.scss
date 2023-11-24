@@ -42,3 +42,139 @@
     }
   }
 }
+
+.wdl-compare-bar {
+  position: sticky;
+  bottom: 12px;
+  margin-bottom: 12px;
+  left: 0;
+  width: 100%;
+  z-index: 1020;
+  transform: translateY(20%);
+  opacity: 0;
+  transition: .25s transform, .25s opacity;
+
+  @include max-width-xl {
+    padding: 0 16px;
+  }
+
+  &.active {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  .wdl-compare-bar-wrapper {
+    background: #FFFFFF;
+    border-radius: 8px;
+    box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.25);
+    padding: 8px 12px;
+    display: flex;
+    gap: 10px;
+    justify-content: space-between;
+    align-items: center;
+
+    @include max-width-xl {
+      flex-direction: column;
+    }
+
+    .wdl-compare-bar-selection {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #777777;
+
+      @include max-width-xl {
+        flex-direction: column;
+      }
+
+
+      .wdl-compare-bar-selection-label {
+        p {
+          font-size: 14px;
+          margin-bottom: 0;
+        }
+      }
+      .wdl-compare-bar-selection-group {
+        display: flex;
+        gap: 10px;
+
+        @include max-width-xl {
+          flex-wrap: wrap;
+          justify-content: center;
+        }
+        .wdl-compare-bar-selection-card {
+          width: 112px;
+          height: 32px;
+          border-radius: 4px;
+          border: 1px solid #777;
+          background: #FFF;
+          padding: 4px 6px;
+          position: relative;
+          cursor: pointer;
+          transition: .25s border ease-out;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          text-align: center;
+
+          &:hover {
+            border: 1px solid #ff2758;
+            p {
+              color: #ff2758;
+            }
+
+            &::before {
+              color: #ff2758;
+            }
+          }
+
+          p {
+            @extend .lineclamp-2;
+            color: #777;
+            font-size: 12px;
+            font-weight: 400;
+            line-height: 12px;
+            margin-bottom: 0;
+            transition: .25s color ease-out;
+          }
+
+          &::before {
+            content: '\e051';
+            font-family: ETmodules !important;
+            position: absolute;
+            top: 0;
+            right: 0;
+            font-size: 16px;
+            line-height: 16px;
+            color: #333333;
+            transform: translate(50%, -50%);
+            transition: .25s opacity ease-out, .25s color ease-out;
+          }
+
+
+          &.empty {
+            border-style: dashed;
+
+            &::before {
+              opacity: 0;
+            }
+
+            p {
+              color: transparent;
+            }
+          }
+        }
+      }
+    }
+    .wdl-compare-bar-action {
+      display: flex;
+      gap: 10px;
+
+      a {
+        padding: 6px 7px;
+        min-width: 112px;
+        text-align: center;
+        font-size: 14px;
+      }
+    }
+  }
+}

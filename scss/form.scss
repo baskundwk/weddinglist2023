@@ -147,6 +147,15 @@ input[type="date"] {
   border-color: #ff2758;
 }
 
+.wpcf7-list-item input[type="radio"]:disabled + .wpcf7-list-item-label,
+.wdl-radio input[type="radio"]:disabled + label {
+  color: #999999;
+  cursor: not-allowed;
+  &:before {
+    background: #cdcdcd;
+  }
+}
+
 .wpcf7-list-item input[type="checkbox"] + .wpcf7-list-item-label:before,
 .wdl-checkbox input[type="checkbox"] + label:before {
   content: "\f147";
@@ -166,6 +175,15 @@ input[type="date"] {
   transition:
     0.25s background,
     0.25s border;
+}
+
+.wpcf7-list-item input[type="checkbox"]:disabled + .wpcf7-list-item-label,
+.wdl-checkbox input[type="checkbox"]:disabled + label {
+  color: #999999;
+  cursor: not-allowed;
+  &:before {
+    background: #cdcdcd;
+  }
 }
 
 .wpcf7-list-item input[type="checkbox"]:checked + .wpcf7-list-item-label:before,

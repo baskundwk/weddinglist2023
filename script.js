@@ -96,7 +96,7 @@ document.querySelector(".fieldset-cf7mls")
   : false;
 
 $(() => {
-  const wdlArchiveSwiper = new Swiper(".wdl-archive:not(.wdl-archive-swiper-extended).wdl-archive-swiper", {
+  const wdlArchiveSwiper = new Swiper(".wdl-archive:not(.wdl-archive-swiper-extended) .wdl-archive-swiper", {
     slidesPerView: 1,
     spaceBetween: 16,
     breakpoints: {
@@ -116,18 +116,18 @@ $(() => {
     slidesPerView: 'auto',
     spaceBetween: 16,
     breakpoints: {
-      576: {
-        slidesPerView: "auto",
-        spaceBetween: 12,
-      },
-      992: {
-        slidesPerView: 'auto',
-        spaceBetween: 12,
+      1200: {
+        slidesPerView: 3,
+        spaceBetween: 24,
       },
     },
     pagination: {
       el: ".swiper-pagination",
       clickable: true,
+    },
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
     },
   });
   if ($(".wdl-compare-swiper .swiper-slide").length < 3) {
@@ -216,10 +216,47 @@ $(() => {
     slidesPerView: "auto",
     spaceBetween: 16,
     breakpoints: {
-      992: {
+      1200: {
         slidesPerView: 5,
       },
     },
+  });
+  const wdlLeadMenuRevampedSwiper = new Swiper(".wdl-lead-menu-revamped-swiper", {
+    slideClass: "menu-item",
+    slidesPerView: "auto",
+    spaceBetween: 8,
+    breakpoints: {
+      992: {
+        spaceBetween: 16,
+        slidesPerView: 5,
+      },
+    },
+  });
+  const wdlCompareGroupRoomSwiper = new Swiper(".wdl-compare-group-room-swiper", {
+    slidesPerView: "1",
+    spaceBetween: 24,
+    navigation: {
+      nextEl: ".swiper-navigation .swiper-button-next",
+      prevEl: ".swiper-navigation .swiper-button-prev",
+    },
+  });
+  const wdlListingCardGallerygSwiper = new Swiper(".wdl-listing-card-gallery-swiper", {
+    slidesPerView: 1,
+    autoplay: {
+      delay: 5000,
+    },
+  });
+  const wdlListingCardDetailPricingSwiper = new Swiper(".wdl-listing-card-detail-pricing-swiper", {
+    slidesPerView: "auto",
+    spaceBetween: 6,
+  });
+  const wdlListingCardDetailFeaturesSwiper = new Swiper(".wdl-listing-card-detail-features-swiper", {
+    slidesPerView: "auto",
+    spaceBetween: 16,
+  });
+  const wdlListingCardDetailRoomSwiper = new Swiper(".wdl-listing-card-detail-room-swiper", {
+    slidesPerView: "auto",
+    spaceBetween: 16,
   });
 });
 
@@ -294,6 +331,7 @@ const wdlHeroGallery = () => {
       prevEl: ".swiper-button-prev",
       nextEl: ".swiper-button-next",
     },
+    centerInsufficientSlides: true,
     speed: 1000,
     autoplay: {
       delay: 5000,
@@ -583,5 +621,128 @@ $(".wdl-link-print").click(() => {
   window.print();
 });
 
-$('.card-select input[type=checkbox]').change((event)=> {
+let selectedCard = []
+
+const compareBarActive = () => {
+  // Compare : disable if selected card is not venue and more than 3
+  if (selectedCard.findIndex(item => item.postType !== "venue") === -1 && selectedCard.length < 4) {
+      $('#compare-selected').removeClass('disabled');
+      $('#compare-selected').attr('href', '/compare/?compare_id=' + selectedCard.map((card) => {return card.id}).join(','))
+  } else {
+      $('#compare-selected').addClass('disabled');
+      $('#compare-selected').attr('href', 'javascript:void(0);')
+  }
+
+  // Compare : update compare bar label
+  $('.wdl-compare-bar-selection-label p span').text(selectedCard.length > 0 ? selectedCard.length : 1)
+
+  // Compare : switch compare bar active status
+  if(selectedCard.length > 0) {
+    $('.wdl-compare-bar').addClass('active')
+
+    setTimeout(()=> {bootstrap.Tooltip.getInstance('#compare-selected').show()}, 250)
+  } else {
+    $('.wdl-compare-bar').removeClass('active')
+    
+    bootstrap.Tooltip.getInstance('#compare-selected').hide()
+  }
+}
+
+// Compare : add item
+const compareBarAdd = (title) => {
+  $('.wdl-compare-bar .wdl-compare-bar-selection-card').each((index, element)=> {
+    if($(element).hasClass('empty')) {
+      $(element).removeClass('empty')
+      $(element).find('p').text(title)
+
+      return false
+    }
+  })
+}
+
+// Compare : remove item
+const compareBarRemove = (title) => {
+  $('.wdl-compare-bar .wdl-compare-bar-selection-card').each((index, element)=> {
+    let matchElement = $(element).find('p:contains('+ title +')')
+
+    $(matchElement).closest('.wdl-compare-bar-selection-card').appendTo($(element).closest('.wdl-compare-bar-selection-group'))
+    $(matchElement).closest('.wdl-compare-bar-selection-card').addClass('empty')
+    $(matchElement).text('')
+  })
+}
+
+// Compare : reset all selection after coming 'back'
+$(document).ready(()=> {
+  setTimeout(()=> {$('.card-select input[type=checkbox]').prop('checked', false)}, 50)
+})
+
+// Compare : add or remove selection
+const compareBarUpdate = (element) => {
+  if ($(element).is(':checked')) {
+    selectedCard.push(JSON.parse($(element).attr('data-select')))
+    compareBarAdd(JSON.parse($(element).attr('data-select')).title)
+    $(element).closest('.card').addClass('active')
+  } else {
+    selectedCard.pop(JSON.parse($(element).attr('data-select')))
+    compareBarRemove(JSON.parse($(element).attr('data-select')).title)
+    $(element).closest('.card').removeClass('active')
+  }
+
+  compareBarActive()
+}
+
+// Compare : checkbox trigger
+$('.card-select input[type=checkbox]').each((index, element) => {
+  $(element).change(()=> {
+    compareBarUpdate(element)
+
+// Compare : prevent over-selection
+    if(selectedCard.length < 5 ) {
+      $('.card-select input[type=checkbox]:not(:checked)').prop('disabled', false)
+    } else {
+      $('.card-select input[type=checkbox]:not(:checked)').prop('disabled', true)
+    }
+  })
+})
+
+// Compare : uncheck selected item from compare bar
+$('.wdl-compare-bar .wdl-compare-bar-selection-card').each((index, element) => {
+  $(element).click(()=> {
+    let title = $(element).find('p').text()
+    let titleEl = $('.wdl-archive-title a:contains(' + title + ')')
+    console.log(titleEl)
+
+    compareBarRemove(title)
+    
+    selectedCard.pop(JSON.parse($(titleEl).closest('.card').find('.card-select input[type=checkbox]').attr('data-select')))
+
+    $(titleEl).closest('.card').find('.card-select input[type=checkbox]').prop('checked', false)
+    $(titleEl).closest('.card').removeClass('active')
+
+    compareBarActive()
+  })
+})
+
+// Enable tooltips
+const tooltipTriggerList = $('[data-bs-toggle="tooltip"]')
+const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+
+$('.wdl-iframe').each((index, element) => {
+  setTimeout(()=> {$(element).find('iframe').css('height', $(element).find('iframe').contents().find('body').height() + 'px')}, 10)
+
+  $(document).ready(()=> {
+    setTimeout(()=> {$(element).find('iframe').css('height', $(element).find('iframe').contents().find('body').height() + 'px')}, 250)
+  })
+
+  $(window).resize(()=> {
+    setTimeout(()=> {$(element).find('iframe').css('height', $(element).find('iframe').contents().find('body').height() + 'px')}, 10)
+  })
+  
+  $(element).find('iframe').contents().click(()=> {
+    setTimeout(()=> {
+      $(element).find('iframe').css('height', $(element).find('iframe').contents().find('body').height() + 'px')
+      console.log($(element).find('iframe').contents())
+      console.log($(element).find('iframe').contents().find('body').height())
+  }, 350)
+  })
 })
