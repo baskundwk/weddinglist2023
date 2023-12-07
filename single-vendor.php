@@ -1,7 +1,9 @@
 <?php include 'components/header.php' ?>
-
+<script>
+  document.querySelector('body').classList.add('beta')
+</script>
 <main>
-	<section class="py-3 overflow-hidden">
+	<section class="my-3 overflow-hidden">
 		<div class="container-fluid">
 			<?php
 			$images = get_field('Gallery');
@@ -61,7 +63,7 @@
 					<?php $sponsored = get_field('Sponsor', $relatedPost->ID); ?>
 					<div class="col col-lg-3 text-center text-lg-end mb-2 mb-sm-0">
 						<button class="wdl-btn">
-							<?php _e('สนใจรับโปรโมชั่นและสิทธิพิเศษ', 'Apply for Promotion'); ?>
+							<?php _e('คลิกขอแพ็กเกจ', 'Apply for Promotion'); ?>
 						</button>
 					</div>
 				</div>
@@ -143,7 +145,7 @@
 				<div class="col-lg-auto text-center">
 					<div class="wdl-pricing-row-- p-3">
 						<a id="apply-cta" href="#apply" class="wdl-btn-lg" data-bs-toggle="modal">
-							<?php _e('สนใจรับโปรโมชั่นและสิทธิพิเศษ', 'Apply for Promotion'); ?>
+							<?php _e('คลิกขอแพ็กเกจ', 'Apply for Promotion'); ?>
 						</a>
 					</div>
 				</div>

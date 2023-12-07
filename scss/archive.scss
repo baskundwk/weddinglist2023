@@ -275,10 +275,6 @@
     }
   }
 
-  .swiper-wrapper .card {
-    width: 300px;
-  }
-
   .card-select{
     border-radius: 0 6px 0 6px;
     box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05);
@@ -367,7 +363,7 @@
   a:focus,
   a:active {
     color: #333333;
-    font-size: 0.75rem;
+    font-size: 0.875rem;
   }
   &:before {
     content: "\e081";
@@ -491,7 +487,7 @@
 }
 
 .wdl-metadata {
-  font-size: 0.75rem;
+  font-size: 0.875rem;
   color: #555555;
   margin-bottom: 8px;
 }

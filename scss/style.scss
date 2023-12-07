@@ -11,6 +11,10 @@
 /* @import "../fonts/fonts.scss"; */
 @import 'variable.scss';
 
+@import "../fonts/fonts.scss";
+@import "global.scss";
+
+@import "allpage.scss";
 @import "archive.scss";
 @import "badge.scss";
 @import "breadcrumb.scss";
@@ -18,12 +22,12 @@
 @import "compare.scss";
 @import "footer.scss";
 @import "form.scss";
-@import "global.scss";
 @import "header.scss";
 @import "hero.scss";
 @import "lead-menu.scss";
 @import "link.scss";
 @import "listing.scss";
+@import "icon.scss";
 @import "popup.scss";
 @import "reboot.scss";
 @import "search.scss";

@@ -46,7 +46,7 @@
 				<?php $sponsored = get_field('Sponsor', $relatedPost->ID); ?>
 				<div class="col-12 col-sm-auto col-lg-3 text-center text-lg-end mb-2 mb-sm-0">
 					<a id="apply-cta" href="#apply" class="wdl-btn" data-bs-toggle="modal">
-						<?php _e('ลงทะเบียนเพื่อรับสิทธิพิเศษ', 'Get Privilege'); ?>
+						<?php _e('ลงทะเบียนร่วมงาน', 'ลงทะเบียนร่วมงาน'); ?>
 					</a>
 				</div>
 			</div>

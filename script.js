@@ -113,9 +113,13 @@ $(() => {
     },
   });
   const wdlArchiveExtendedSwiper = new Swiper(".wdl-archive-extended .wdl-archive-swiper", {
-    slidesPerView: 'auto',
+    slidesPerView: 1,
     spaceBetween: 16,
     breakpoints: {
+      768: {
+        slidesPerView: 2,
+        spaceBetween: 16,
+      },
       1200: {
         slidesPerView: 3,
         spaceBetween: 24,
@@ -211,6 +215,24 @@ $(() => {
     },
     loop: true,
   });
+  const wdlHero2Swiper = new Swiper(".wdl-hero-2-swiper", {
+    slidesPerView: 1,
+    spaceBetween: 40,
+    pagination: {
+      el: ".swiper-pagination",
+      clickable: true,
+      type: "bullets",
+    },
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
+    },
+    speed: 1000,
+    autoplay: {
+      delay: 5000,
+    },
+    loop: true,
+  });
   const wdlLeadMenuSmallSwiper = new Swiper(".wdl-lead-menu-small-swiper", {
     slideClass: "menu-item",
     slidesPerView: "auto",
@@ -258,6 +280,18 @@ $(() => {
     slidesPerView: "auto",
     spaceBetween: 16,
   });
+
+  const wdlAdPopupSwiper = new Swiper(".wdl-ad-popup-swiper", {
+    slidesPerView: 1,
+    spaceBetween: 0,
+    autoplay: {
+      delay: 7000
+    },
+    loop: true,
+   /*  pagination: {
+      el: '.swiper-pagination'
+    } */
+  })
 });
 
 const wdlStickyBar = () => {
@@ -522,8 +556,16 @@ document.querySelector(".wdl-checkbox-convert") ? collectCheckbox() : false;
 
 /* Prefill form */
 $(".wpcf7-submit").click(() => {
-  console.log("Prefill function fired");
-
+  localStorage.setItem("wdl-name-lastname", $("#name-lastname").val());
+  localStorage.setItem("wdl-tel", $("#tel").val());
+  localStorage.setItem("wdl-email", $("#email").val());
+  localStorage.setItem("wdl-lineid", $("#lineid").val());
+  localStorage.setItem("wdl-guest", $("#guest").val());
+  localStorage.setItem("wdl-budget", $("#budget").val());
+  localStorage.setItem("wdl-date", $("#date").val());
+  localStorage.setItem("wdl-message", $("#message").val());
+});
+$(".wdl-form-submit").click(() => {
   localStorage.setItem("wdl-name-lastname", $("#name-lastname").val());
   localStorage.setItem("wdl-tel", $("#tel").val());
   localStorage.setItem("wdl-email", $("#email").val());
@@ -745,4 +787,9 @@ $('.wdl-iframe').each((index, element) => {
       console.log($(element).find('iframe').contents().find('body').height())
   }, 350)
   })
+})
+
+// Auto-trigger modal
+$(window).load(()=> {
+  setTimeout(()=> {$('.wdl-modal-autotrigger').modal('show')}, 5000)
 })

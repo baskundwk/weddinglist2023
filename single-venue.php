@@ -61,7 +61,7 @@
 					<?php $sponsored = get_field('Sponsor', $relatedPost->ID); ?>
 					<div class="col col-lg-3 text-center text-lg-end mb-2 mb-sm-0">
 						<button class="wdl-btn">
-							<?php _e('สนใจรับโปรโมชั่นและสิทธิพิเศษ', 'Apply for Promotion'); ?>
+							<?php _e('คลิกขอแพ็กเกจ', 'Apply for Promotion'); ?>
 						</button>
 					</div>
 				</div>
@@ -128,7 +128,7 @@
 						<p class="wdl-metadata wdl-archive-max-guest mb-0">
 							<span>
 								<?php _e('รองรับแขกสูงสุด', 'Max. guest') ?>&nbsp;<b>
-									<?php number_format(get_field('MaxGuest')) ?>
+									<?php echo number_format(get_field('MaxGuest')) ?>
 									<?php _e('คน', '') ?>
 								</b>
 							</span>
@@ -151,7 +151,7 @@
 				<div class="col-lg-auto text-center">
 					<div class="wdl-pricing-row-- p-3">
 						<a id="apply-cta" href="#apply" class="wdl-btn-lg" data-bs-toggle="modal">
-							<?php _e('สนใจรับโปรโมชั่นและสิทธิพิเศษ', 'Apply for Promotion'); ?>
+							<?php _e('คลิกขอแพ็กเกจ', 'คลิกขอแพ็กเกจ'); ?>
 						</a>
 					</div>
 				</div>

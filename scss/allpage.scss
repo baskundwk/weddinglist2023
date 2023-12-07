@@ -1,0 +1,15 @@
+.wdl-ad-allpage {
+  figure {
+    margin: 0;
+    
+    img {
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.16);
+      border-radius: 8px;
+      
+      @include max-width-xl {
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.16);
+        border-radius: 8px;
+      }
+    }
+  }
+}

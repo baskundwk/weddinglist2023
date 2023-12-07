@@ -1,5 +1,9 @@
 <?php include 'components/header.php' ?>
 
+<script>
+	console.log('test')
+</script>
+<?php $currentPostID = get_the_ID() ?>
 <main>
 	<div class="container-xl overflow-hidden">
 		<div class="row">
@@ -15,11 +19,18 @@
 			<!-- <main class="col-12 col-md-8"> -->
 			<div class="col-md-12 col-lg-9">
 				<div class="col-12">
-					<div class="row justify-content-center mb-4">
+					<?php include 'components/all-page-ads.php' ?>
+					<?php $postArgs = array(
+						'ID' => $currentPostID
+					);
+
+					$post = new WP_Query($postArgs);
+					?>
+					<!-- <div class="row justify-content-center mb-4">
 						<div class="col-12 wdl-metadata-banner">
 							<?php echo do_shortcode('[su_posts template="templates/ad-allpage-loop.php" post_type="promotion,wedding-fair" orderby="rand"]') ?>
 						</div>
-					</div>
+					</div> -->
 				</div>
 				<section class="wdl-main-bar">
 					<div class="row mb-3">
@@ -75,4 +86,6 @@
 	</div>
 </main>
 
-<?php include 'components/footer.php' ?>
+<?php include 'components/popup-ads.php' ?>
+
+<?php include 'components/footer.php' ?> 

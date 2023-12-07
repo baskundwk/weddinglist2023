@@ -75,4 +75,6 @@
 	</div>
 </main>
 
+<?php include 'components/popup-ads.php' ?>
+
 <?php include 'components/footer.php' ?>

@@ -7,6 +7,11 @@
     flex-direction: column;
     gap: 16px;
   }
+
+  @include max-width-xl {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
 }
 
 .wdl-listing-card {
@@ -17,6 +22,10 @@
   --bs-gutter-x: 16px;
   .wdl-listing-card-gallery {
     overflow: hidden;
+
+    @include max-width-xl {
+      margin-bottom: 16px;
+    }
 
     .wdl-listing-card-gallery-swiper {
       overflow: hidden;
@@ -99,7 +108,7 @@
             &:before {
               content: "N";
               font-family: ETmodules;
-              font-size: 12px;
+              font-size: 0.875rem;
               color: #37bad6;
               vertical-align: middle;
             }          
@@ -152,7 +161,7 @@
       }
 
       .wdl-btn-more {
-        font-size: 12px;
+        font-size: 0.875rem;
       }
     }
     

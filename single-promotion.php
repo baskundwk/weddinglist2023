@@ -47,7 +47,7 @@
 					<?php $sponsored = get_field('Sponsor', $relatedPost->ID); ?>
 					<div class="col-12 col-sm-auto col-lg-3 text-center text-lg-end mb-2 mb-sm-0">
 						<button class="wdl-btn">
-							<?php _e('สนใจรับโปรโมชั่นและสิทธิพิเศษ', 'Apply for Promotion'); ?>
+							<?php _e('สนใจรับโปรโมชั่น', 'สนใจรับโปรโมชั่น'); ?>
 						</button>
 					</div>
 				</div>
@@ -94,7 +94,7 @@
 				</div>
 				<div class="col-sm-auto text-center text-sm-end">
 					<a id="apply-cta" href="#apply" class="wdl-btn-lg" data-bs-toggle="modal">
-						<?php _e('สนใจรับโปรโมชั่นและสิทธิพิเศษ', 'Apply for Promotion'); ?>
+						<?php _e('คลิกขอแพ็กเกจ', 'Apply for Promotion'); ?>
 					</a>
 				</div>
 			</div>
@@ -112,7 +112,7 @@
 			<div class="row my-4">
 				<div class="col text-center">
 					<a id="apply-cta" href="#apply" class="wdl-btn-lg" data-bs-toggle="modal">
-						<?php _e('สนใจรับโปรโมชั่นและสิทธิพิเศษ', 'Apply for Promotion'); ?>
+						<?php _e('คลิกขอแพ็กเกจ', 'Apply for Promotion'); ?>
 					</a>
 				</div>
 			</div>

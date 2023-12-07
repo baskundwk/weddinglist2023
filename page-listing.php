@@ -1,6 +1,10 @@
 <?php include 'components/header.php' ?>
-
+<script>
+  document.querySelector('body').classList.add('beta')
+</script>
 <main>
+  <?php include 'components/lead-menu-revamped.php' ?>
+
   <section class="wdl-listing-section">
   <div class="container">
   <?php
@@ -37,7 +41,7 @@
           <?php endif; ?>
         </div>
         <div class="wdl-listing-card-detail col-md-8">
-          <div class="wdl-listing-card-detail-title">
+          <a href="<?php the_permalink(); ?>" class="wdl-listing-card-detail-title">
             <h2 class="h4">
                 <?php the_title(); ?>
             </h2>
@@ -51,7 +55,7 @@
               <?php endforeach; ?>
             </p>
             <?php endif ?>
-          </div>
+          </a>
           <div class="wdl-listing-card-detail-address">
             <?php
             $address = get_field('Address');
@@ -87,9 +91,9 @@
                         the_sub_field('PackagePrice');
                       endif; ?>
                     </span>
-                    <?php /* if (get_sub_field('PackageNote')):
+                    <!-- if (get_sub_field('PackageNote')):
                       the_sub_field('PackageNote');
-                    endif; */ ?>
+                    endif; -->
                   </div>
                   <?php endif; ?>
 
@@ -105,9 +109,9 @@
                         the_sub_field('WeddingPackagePrice');
                       endif; ?>
                     </span>
-                    <?php if (get_sub_field('WeddingPackageNote')):
+                    <!-- if (get_sub_field('WeddingPackageNote')):
                       the_sub_field('WeddingPackageNote');
-                    endif; ?>
+                    endif; -->
                   </div>
                   <?php endif; ?>
 
@@ -123,9 +127,9 @@
                         the_sub_field('FoodBeveragePrice');
                       endif; ?>
                     </span>
-                    <?php if (get_sub_field('FoodBeverageNote')):
+                    <!-- if (get_sub_field('FoodBeverageNote')):
                       the_sub_field('FoodBeverageNote');
-                    endif; ?>
+                    endif; -->
                   </div>
                   <?php endif; ?>
                 <?php endwhile; ?>
@@ -174,7 +178,7 @@
           </div>
           <div class="wdl-listing-card-detail-action">
             <a id="apply-cta" href="#apply" class="wdl-btn" data-bs-toggle="modal">
-              <?php _e('สนใจรับโปรโมชั่นและสิทธิพิเศษ', 'Apply for Promotion'); ?>
+              <?php _e('คลิกขอแพ็กเกจ', 'Apply for Promotion'); ?>
             </a>
             <a href="<?php the_permalink();?>" class="wdl-btn-more">
               <?php _e('ดูรายละเอียด', 'More detail'); ?>

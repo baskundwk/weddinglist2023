@@ -27,6 +27,13 @@
           ?>
           <a href="<?php echo esc_url(home_url('/')); ?>" title="ไปหน้าแรกของ Weddinglist"><img loading="lazy" src="<?php echo esc_attr($logo); ?>" alt="Weddinglist" width="181" height="44"></a>
         </div>
+        <nav class="navbar-social">
+          <ul class="navbar-nav">
+            <li><a href="https://www.facebook.com/weddinglist.th/" target="_blank"><i class="wdl-icon-facebook"></i></a></li>
+            <li><a href="https://line.me/R/ti/p/%40ety4154i" target="_blank"><i class="wdl-icon-line"></i></a></li>
+            <li><a href="mailto:sales@weddinglist.co.th"><i class="wdl-icon-email"></i></a></li>
+          </ul>
+        </nav>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#top-menu-collapse" aria-controls="wdlNavbar" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>

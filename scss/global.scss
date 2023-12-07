@@ -5,11 +5,65 @@ body {
 
   --bs-tooltip-bg: #333333;
   --bs-tooltip-color: #FFFFFF;
+
+  --font-family: "Prompt", Helvetica, Arial, Lucida, sans-serif;
+
+  &.beta {
+    --font-family: "Noto Sans Thai", Helvetica, Arial, Lucida, sans-serif;
+
+    .h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+      font-weight: 600;
+    }
+
+    .wdl-archive-title a, .wdl-archive-title a:hover, .wdl-archive-title a:focus, .wdl-archive-title a:active {
+      font-weight: 600;
+    }
+
+    #main-header, #et-top-navigation,
+    #top-menu>li>a {
+      font-weight: 600 !important;
+    }
+
+    .wdl-btn, .wdl-archive-extended .wdl-btn-cta, .wdl-archive-extended .wdl-archive-swiper .wdl-btn-cta {
+      font-weight: 600 !important;
+    }
+
+    .wdl-btn-secondary {
+      font-weight: 600;
+    }
+
+    a {
+      font-weight: 600;
+    }
+
+    .navbar-social {
+      display: flex;
+      flex: 1 1 0;
+      ul {
+        display: flex;
+        gap: 16px;
+        flex-direction: row;
+      }
+    }
+  }
 }
 
 body,input,textarea,select {
-  font-family: "Prompt",Helvetica,Arial,Lucida,sans-serif;
+  font-family: var(--font-family) !important;
 }
+
+#main-header, #et-top-navigation {
+  font-family: var(--font-family) !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-family) !important;
+}
+
+.navbar-social {
+  display: none;
+}
+
 
 a {
   text-decoration: none;

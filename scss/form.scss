@@ -48,9 +48,38 @@ input[type="date"] {
     font-weight: 400;
     color: #c1c1c1;
   }
+  > .form-control:not(:placeholder-shown) ~ label::after {
+    background: none;
+  }
 }
+.form-floating-small {
+  position: relative;
+  display: block;
+  input.text,
+  input.title,
+  input[type="number"],
+  input[type="email"],
+  input[type="password"],
+  input[type="tel"],
+  input[type="text"],
+  select,
+  textarea,
+  input[type="date"] {
+    padding-top: 8px !important;
+    padding-bottom: 8px !important;
+  }
+  > label {
+    font-weight: 400;
+    color: #c1c1c1;
+    padding: 8px;
+  }
 
-.form-floating {
+  >.form-control-plaintext~label,
+  >.form-control:focus~label,
+  >.form-control:not(:placeholder-shown)~label,
+  >.form-select~label {
+    
+  }
   > .form-control:not(:placeholder-shown) ~ label::after {
     background: none;
   }
@@ -221,7 +250,7 @@ input[type="date"] {
 
   @media (max-width: 1199px) {
     padding: 8px 8px;
-    font-size: 13px;
+    font-size: 0.875rem;
   }
 }
 
