@@ -793,3 +793,29 @@ $('.wdl-iframe').each((index, element) => {
 $(window).load(()=> {
   setTimeout(()=> {$('.wdl-modal-autotrigger').modal('show')}, 5000)
 })
+
+// General register form onClick
+$(document).ready(function($) {   
+  let frm = $('.wdl-form-general');
+  frm.submit(function (e) {
+      let formData = {
+          name: $('#name-lastname').val(),
+          email: 'alphafghaos@gmail.com',
+          action:'invio_mail'
+      };
+      $.ajax({
+          type        : 'POST', 
+          url         : "<?php echo admin_url('admin-ajax.php'); ?>",
+          data        : formData,
+          dataType    : 'json',
+          encode          : true
+      }).done(function(data) {
+          console.log(data);        
+      }).fail(function(data) {
+          console.log(data);
+
+      });
+      e.preventDefault();     
+  });
+
+});

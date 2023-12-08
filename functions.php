@@ -348,6 +348,7 @@ add_filter('rank_math/frontend/breadcrumb/items', function ($crumbs, $class) {
 	}
 	return $crumbs;
 }, 10, 2);
+
 add_filter('rank_math/frontend/breadcrumb/items', function ($crumbs, $class) {
 	$post_type = get_post_type(get_queried_object());
 
@@ -362,6 +363,7 @@ add_filter('rank_math/frontend/breadcrumb/items', function ($crumbs, $class) {
 	}
 	return $crumbs;
 }, 10, 2);
+
 add_filter('rank_math/frontend/breadcrumb/items', function ($crumbs, $class) {
 	$post_type = get_post_type(get_queried_object());
 
@@ -376,3 +378,25 @@ add_filter('rank_math/frontend/breadcrumb/items', function ($crumbs, $class) {
 	}
 	return $crumbs;
 }, 10, 2);
+
+function ajax_form_scripts() {
+	$translation_array = array(
+        'ajax_url' => admin_url( 'admin-ajax.php' )
+    );
+    wp_localize_script( 'main', 'cpm_object', $translation_array );
+}
+add_action( 'wp_enqueue_scripts', 'ajax_form_scripts' );
+
+function invio_mail(){
+	$to = 'sendto@example.com';
+	$subject = 'The subject';
+	$body = 'The email body content';
+	$headers = array('Content-Type: text/html; charset=UTF-8');
+	
+	wp_mail( $to, $subject, $body, $headers );
+	echo 'mail send';
+	die;
+}
+
+add_action("wp_ajax_invio_mail", "invio_mail");
+add_action("wp_ajax_nopriv_invio_mail", "invio_mail");

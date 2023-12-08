@@ -477,53 +477,59 @@
 </main>
 
 <h2>อยู่ระหว่างการพัฒนาระบบส่งอีเมล ห้ามกดส่งฟอร์มนะครับ</h2>
-<script>
-    $("#name-lastname").val(localStorage.getItem("wdl-name-lastname"));
-    $("#tel").val(localStorage.getItem("wdl-tel"));
-    $("#email").val(localStorage.getItem("wdl-email"));
-    $("#lineid").val(localStorage.getItem("wdl-lineid"));
-    $("#guest").val(localStorage.getItem("wdl-guest"));
-    $("#budget").val(localStorage.getItem("wdl-budget"));
-    $("#date").val(localStorage.getItem("wdl-date"));
-    $("#message").val(localStorage.getItem("wdl-message"));
-</script>
-<form action="">
-  <div class="row">
-    <div class="form-floating col-md-6">
-      <label for="name-lastname">ชื่อ - นามสกุล*</label>
-      <input id="name-lastname" type="text" placeholder="ชื่อ - นามสกุล*" required/>
+<form class="wdl-form-general" action="<?php wp_mail( 'alphafg<alphafghaos@gmail.com>', 'Test message', '$message', array('Content-Type: text/html; charset=UTF-8') ); ?>">
+  <div class="row g-3">
+    <div class="col-md-6">
+      <div class="form-floating">
+        <input class="form-control" id="name-lastname" type="text" placeholder="ชื่อ - นามสกุล*" required/>
+        <label for="name-lastname">ชื่อ - นามสกุล*</label>
+      </div>
     </div>
-    <div class="form-floating col-md-6">
-      <label for="tel">เบอร์โทรติดต่อ*</label>
-      <input id="tel" type="text" placeholder="เบอร์โทรติดต่อ*" required/>
+    <div class="col-md-6">
+      <div class="form-floating">
+        <input class="form-control" id="tel" type="text" placeholder="เบอร์โทรติดต่อ*" required/>
+        <label for="tel">เบอร์โทรติดต่อ*</label>
+      </div>
     </div>
-    <div class="form-floating col-md-6">
-      <label for="email">E-mail*</label>
-      <input id="email" type="email" placeholder="E-mail*" required/>
+    <div class="col-md-6">
+      <div class="form-floating">
+        <input class="form-control" id="email" type="email" placeholder="E-mail*" required/>
+        <label for="email">E-mail*</label>
+      </div>
     </div>
-    <div class="form-floating col-md-6">
-      <label for="lineid">Line ID</label>
-      <input id="lineid" type="text" placeholder="Line ID"/>
+    <div class="col-md-6">
+      <div class="form-floating">
+        <input class="form-control" id="lineid" type="text" placeholder="Line ID"/>
+        <label for="lineid">Line ID</label>
+      </div>
     </div>
-    <div class="form-floating col-md-12">
-      <label for="guest">จำนวนแขก*</label>
-      <input id="guest" type="number" placeholder="จำนวนแขก*"/>
+    <div class="col-md-12">
+      <div class="form-floating">
+        <input class="form-control" id="guest" type="number" placeholder="จำนวนแขก*"/>
+        <label for="guest">จำนวนแขก*</label>
+      </div>
     </div>
-    <div class="form-floating col-md-12">
-      <label for="budget">งบประมาณ</label>
-      <input id="budget" type="number" placeholder="งบประมาณ"/>
+    <div class="col-md-12">
+      <div class="form-floating">
+        <input class="form-control" id="budget" type="number" placeholder="งบประมาณ"/>
+        <label for="budget">งบประมาณ</label>
+      </div>
     </div>
-    <div class="form-floating col-md-12">
-      <label for="date">วันที่จัดงาน</label>
-      <input id="date" type="date" placeholder="วันที่จัดงาน"/>
+    <div class="col-md-12">
+      <div class="form-floating">
+        <input class="form-control" id="date" type="date" placeholder="วันที่จัดงาน"/>
+        <label for="date">วันที่จัดงาน</label>
+      </div>
     </div>
-    <div class="form-floating col-md-12">
-      <label for="message">ข้อความเพิ่มเติม</label>
-      <textarea id="message" label="ข้อความเพิ่มเติม"></textarea>
+    <div class="col-md-12">
+      <div class="form-floating">
+        <textarea class="form-control" id="message" label="ข้อความเพิ่มเติม"></textarea>
+        <label for="message">ข้อความเพิ่มเติม</label>
+      </div>
     </div>
   
-    <button type="submit" class="wdl-form-submit">ลงทะเบียน</button>
-  </กรอ>
+    <button type="submit" class="wdl-btn-lg wdl-form-submit">ลงทะเบียน</button>
+  </div>
 </form>
 
 <?php include 'components/popup-ads.php' ?>
