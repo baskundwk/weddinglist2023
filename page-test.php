@@ -477,7 +477,7 @@
 </main>
 
 <h2>อยู่ระหว่างการพัฒนาระบบส่งอีเมล ห้ามกดส่งฟอร์มนะครับ</h2>
-<form class="wdl-form-general" action="<?php wp_mail( 'alphafg<alphafghaos@gmail.com>', 'Test message', '$message', array('Content-Type: text/html; charset=UTF-8') ); ?>">
+<form class="wdl-form-general" action="#" method="post">
   <div class="row g-3">
     <div class="col-md-6">
       <div class="form-floating">
