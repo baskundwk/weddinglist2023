@@ -1,4 +1,14 @@
+form {
+  .fail-message {
+    display: none;
+  }
 
+  &.failed {
+    .fail-message {
+      display: block;
+    }
+  }
+}
 
 input.text,
 input.title,

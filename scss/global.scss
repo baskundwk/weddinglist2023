@@ -60,6 +60,18 @@ h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-family) !important;
 }
 
+.w-img-100 {
+  img {
+    width: 100%;
+  }
+  .vc_figure { 
+    display: block;
+    .vc_single_image-wrapper {
+      display: block;
+    }
+  }
+}
+
 .navbar-social {
   display: none;
 }
@@ -224,6 +236,7 @@ body .et_pb_button {
         height: 1.75rem;
         border-radius: 5rem;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+        transition: .35s opacity;
 
         &:after {
           font-size: .85rem;
@@ -232,6 +245,10 @@ body .et_pb_button {
         @media (max-width: 991px) {
           width: 1.5rem;
           height: 1.5rem;
+        }
+
+        &[aria-disabled=true] {
+          opacity: 0.3;
         }
       }
     }

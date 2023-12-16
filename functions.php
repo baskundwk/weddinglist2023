@@ -379,24 +379,97 @@ add_filter('rank_math/frontend/breadcrumb/items', function ($crumbs, $class) {
 	return $crumbs;
 }, 10, 2);
 
-function ajax_form_scripts() {
-	$translation_array = array(
-        'ajax_url' => admin_url( 'admin-ajax.php' )
-    );
-    wp_localize_script( 'main', 'cpm_object', $translation_array );
-}
-add_action( 'wp_enqueue_scripts', 'ajax_form_scripts' );
+// Form General AJAX
+add_action( 'wp_ajax_send_email', 'send_email' );
+add_action( 'wp_ajax_nopriv_send_email', 'send_email' );
 
-function invio_mail(){
-	$to = 'sendto@example.com';
-	$subject = 'The subject';
-	$body = 'The email body content';
-	$headers = array('Content-Type: text/html; charset=UTF-8');
-	
-	wp_mail( $to, $subject, $body, $headers );
-	echo 'mail send';
-	die;
-}
+function send_email(){
 
-add_action("wp_ajax_invio_mail", "invio_mail");
-add_action("wp_ajax_nopriv_invio_mail", "invio_mail");
+		$name = $_REQUEST['name'];
+		$tel = $_REQUEST['tel'];
+		$email = $_REQUEST['email'];
+		$lineid = $_REQUEST['lineid'];
+		$guest = $_REQUEST['guest'];
+		$budget = $_REQUEST['budget'];
+		$date = $_REQUEST['date'];
+		$daytime = $_REQUEST['daytime'];
+		$message = $_REQUEST['message'];
+		$cardId = $_REQUEST['cardId'];
+		$recepient = get_field('Email', $cardId);
+		$cardTitle = $_REQUEST['cardTitle'];
+
+		$timestamp = wp_date("d M Y H:i:s", null );
+	  
+		$subject = "คุณ $name ได้ลงทะเบียนที่ $cardTitle";
+		$to = "alphafghaos@gmail.com";
+		$headers  = "MIME-Version: 1.0" . "\r\n";
+		$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+		$headers .= "From: Weddinglist Team <support@weddinglist.co.th> \r\n";
+		$headers .= "Reply-To: support@weddinglist.co.th \r\n";
+		$headers .= "Bcc: support@weddinglist.co.th \r\n";
+
+		$file = get_theme_file_uri() . '/images/logo-w.png'; //phpmailer will load this file
+
+		$email_body = 
+		"<div style='background: #EEE; padding: 32px;'>".
+		"	<div style='max-width: 600px; margin: auto;'>".
+		"		<div style='background: #FF2758; padding: 24px; text-align: center;'>".
+		"			<img src='$file' alt='Weddinglist' width='243' height='60'>".
+		"		</div>".
+		"		<div style='background: #FFF; padding: 16px; font-family: Tahoma; color: #555; line-height: 1.7;'>".
+		"			<p>สวัสดีค่ะ $recepient</p>".
+		"			<p><strong>มีลูกค้าสนใจรับสิทธิพิเศษผ่าน $cardTitle</strong></p>".
+		"			<ul style='list-style: none; padding: 0;'>".
+		"				<li>เวลาลงทะเบียน : <strong>$timestamp</strong></li>".
+		"				<li>ลูกค้าชื่อ : <strong>$name</strong></li>".
+		"				<li>อีเมล : <strong>$email</strong></li>".
+		"				<li>เบอร์โทร​ : <strong>$tel</strong></li>".
+		"				<li>LINE ID : <strong>$lineid</strong></li>".
+		"				<li>จำนวนแขก : <strong>$guest</strong></li>".
+		"				<li>งบประมาณ : <strong>$budget</strong></li>".
+		"				<li>วันที่จัดงาน : <strong>$date</strong></li>".
+		"				<li>ช่วงเวลาจัดงาน : <strong>$daytime</strong></li>".
+		"			</ul>".
+		"			<p>ข้อความเพิ่มเติม :</p>".
+		"			<p><strong>$message</strong></p>".
+		"			<p style='color: #999; font-weight: 700;'>ขอขอบพระคุณอย่างสูง<br>Weddinglist Support</p>".
+		"			<p style='font-size: 14px;'>แจ้งปัญหาการใช้งาน".
+		"				<br>โทร. <a href='tel:0634748111'>063 474 8111</a>".
+		"				<br>อีเมล <a href='mailto:support@weddinglist.co.th'>support@weddinglist.co.th</a>".
+		"			</p>".
+		"		</div>".
+		"	</div>".
+		"</div>";
+		
+		$mail = wp_mail($to, $subject, $email_body, $headers);
+		
+		if($mail){
+			echo "Email Sent Successfully";
+		};
+
+		// Store lead in database
+
+		if(get_post_type($cardId) === 'venue') {
+			$venue = $cardTitle;
+		} else {
+			$venue = get_field('RelatedVenue', $cardId);
+		}
+		wp_insert_post( array(
+			'post_title' => $name,
+			'post_type' => 'lead',
+			'post_status' => 'draft',
+			'meta_input' => [
+				'tel' => $tel,
+				'email' => $email,
+				'lineid' => $lineid,
+				'guest' => $guest,
+				'budget' => $budget,
+				'date' => $date,
+				'daytime' => $daytime,
+				'message' => $message,
+				'source' => $cardTitle,
+				'venue' => $venue,
+				'type' => 'General'
+			]
+		));
+}

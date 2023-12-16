@@ -121,6 +121,14 @@
   font-weight: 400;
   line-height: 1.5;
   display: inline-block;
+  transition: .35s cubic-bezier(0,0,0,1);
+
+  &:hover {
+    background: #ff2758;
+    box-shadow: 0 0 0 1px #ff2758 inset;
+    color: #FFFFFF !important;  
+  }
+
 }
 .wdl-badge-sm-secondary {
   padding: 4px 12px;
@@ -131,6 +139,12 @@
   font-size: 0.875rem;
   font-weight: 400;
   line-height: 1.5;
+  transition: .35s cubic-bezier(0,0,0,1);
+
+  &:hover {
+    box-shadow: 0 0 0 1px #ff2758 inset;
+    color: #ff2758 !important;  
+  }
 
   a {
     color: #777777;

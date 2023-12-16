@@ -1,27 +1,17 @@
-/* Ads Popup */
+.modal {
 
-.wdl-ad-popup {
-  width: 100%;
-  max-width: 600px;
-}
-
-.wdl-ad-popup img {
-  max-height: 600px;
-  width: auto;
-  height: auto;
-}
-
-.wdl-ad-popup-extended {
-  .modal-dialog {
-    padding: 24px;
-  }
   .modal-content {
-    position: relative;
-    width: 100%;
-    max-width: 600px;
     background: none;
     border: none;
   }
+
+  .modal-body {
+    padding: 1rem;
+    background: #ffffff;
+    border-radius: 1rem;
+
+  }
+  
   .btn-close {
     position: absolute;
     top: 0;
@@ -37,18 +27,5 @@
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
     opacity: 1;
     z-index: 2;
-  }
-  figure {
-    margin: 0;
-  }
-  img {
-    max-height: 600px;
-    width: auto;
-    height: auto;
-    border-radius: 8px;
-  }
-
-  .wdl-ad-popup-swiper {
-    width: 100%;
   }
 }

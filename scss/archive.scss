@@ -245,10 +245,10 @@
   }
 }
 .wdl-archive-extended, .wdl-archive-extended .wdl-archive-swiper {
-  padding: 0 24px 24px;
-  margin: 0 -24px 0 -24px;
+  padding: 2px 24px 24px;
+  margin: -2px -24px -2px -24px;
   .card {
-    height: auto;
+    height: 100%;
     transition: 0.25s box-shadow;
     border-radius: 6px;
     overflow: hidden;

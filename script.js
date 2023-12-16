@@ -96,44 +96,54 @@ document.querySelector(".fieldset-cf7mls")
   : false;
 
 $(() => {
-  const wdlArchiveSwiper = new Swiper(".wdl-archive:not(.wdl-archive-swiper-extended) .wdl-archive-swiper", {
-    slidesPerView: 1,
-    spaceBetween: 16,
-    breakpoints: {
-      576: {
-        slidesPerView: "auto",
+  const wdlArchiveSwiper = new Swiper(
+    ".wdl-archive:not(.wdl-archive-swiper-extended) .wdl-archive-swiper",
+    {
+      slidesPerView: 1,
+      spaceBetween: 16,
+      breakpoints: {
+        576: {
+          slidesPerView: "auto",
+        },
+        992: {
+          slidesPerView: 3,
+        },
       },
-      992: {
-        slidesPerView: 3,
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
       },
-    },
-    pagination: {
-      el: ".swiper-pagination",
-      clickable: true,
-    },
-  });
-  const wdlArchiveExtendedSwiper = new Swiper(".wdl-archive-extended .wdl-archive-swiper", {
-    slidesPerView: 1,
-    spaceBetween: 16,
-    breakpoints: {
-      768: {
-        slidesPerView: 2,
-        spaceBetween: 16,
+    }
+  );
+  const wdlArchiveExtendedSwiper = new Swiper(
+    ".wdl-archive-extended .wdl-archive-swiper",
+    {
+      slidesPerView: 1,
+      spaceBetween: 16,
+      breakpoints: {
+        768: {
+          slidesPerView: 2,
+          spaceBetween: 16,
+        },
+        1200: {
+          slidesPerView: 3,
+          spaceBetween: 24,
+        },
       },
-      1200: {
-        slidesPerView: 3,
-        spaceBetween: 24,
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
       },
-    },
-    pagination: {
-      el: ".swiper-pagination",
-      clickable: true,
-    },
-    navigation: {
-      nextEl: ".swiper-button-next",
-      prevEl: ".swiper-button-prev",
-    },
-  });
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+      },
+      speed: 1000,
+      autoplay: {
+        delay: 5000,
+      },
+    }
+  );
   if ($(".wdl-compare-swiper .swiper-slide").length < 3) {
     const wdlCompareSwiper = new Swiper(".wdl-compare-swiper", {
       slidesPerView: "auto",
@@ -243,55 +253,70 @@ $(() => {
       },
     },
   });
-  const wdlLeadMenuRevampedSwiper = new Swiper(".wdl-lead-menu-revamped-swiper", {
-    slideClass: "menu-item",
-    slidesPerView: "auto",
-    spaceBetween: 8,
-    breakpoints: {
-      992: {
-        spaceBetween: 16,
-        slidesPerView: 5,
+  const wdlLeadMenuRevampedSwiper = new Swiper(
+    ".wdl-lead-menu-revamped-swiper",
+    {
+      slideClass: "menu-item",
+      slidesPerView: "auto",
+      spaceBetween: 8,
+      breakpoints: {
+        992: {
+          spaceBetween: 16,
+          slidesPerView: 5,
+        },
       },
-    },
-  });
-  const wdlCompareGroupRoomSwiper = new Swiper(".wdl-compare-group-room-swiper", {
-    slidesPerView: "1",
-    spaceBetween: 24,
-    navigation: {
-      nextEl: ".swiper-navigation .swiper-button-next",
-      prevEl: ".swiper-navigation .swiper-button-prev",
-    },
-  });
-  const wdlListingCardGallerygSwiper = new Swiper(".wdl-listing-card-gallery-swiper", {
-    slidesPerView: 1,
-    autoplay: {
-      delay: 5000,
-    },
-  });
-  const wdlListingCardDetailPricingSwiper = new Swiper(".wdl-listing-card-detail-pricing-swiper", {
-    slidesPerView: "auto",
-    spaceBetween: 6,
-  });
-  const wdlListingCardDetailFeaturesSwiper = new Swiper(".wdl-listing-card-detail-features-swiper", {
-    slidesPerView: "auto",
-    spaceBetween: 16,
-  });
-  const wdlListingCardDetailRoomSwiper = new Swiper(".wdl-listing-card-detail-room-swiper", {
-    slidesPerView: "auto",
-    spaceBetween: 16,
-  });
+    }
+  );
+  const wdlCompareGroupRoomSwiper = new Swiper(
+    ".wdl-compare-group-room-swiper",
+    {
+      slidesPerView: "1",
+      spaceBetween: 24,
+      navigation: {
+        nextEl: ".swiper-navigation .swiper-button-next",
+        prevEl: ".swiper-navigation .swiper-button-prev",
+      },
+    }
+  );
+  const wdlListingCardGallerygSwiper = new Swiper(
+    ".wdl-listing-card-gallery-swiper",
+    {
+      slidesPerView: 1,
+      autoplay: {
+        delay: 5000,
+      },
+    }
+  );
+  const wdlListingCardDetailPricingSwiper = new Swiper(
+    ".wdl-listing-card-detail-pricing-swiper",
+    {
+      slidesPerView: "auto",
+      spaceBetween: 6,
+    }
+  );
+  const wdlListingCardDetailFeaturesSwiper = new Swiper(
+    ".wdl-listing-card-detail-features-swiper",
+    {
+      slidesPerView: "auto",
+      spaceBetween: 16,
+    }
+  );
+  const wdlListingCardDetailRoomSwiper = new Swiper(
+    ".wdl-listing-card-detail-room-swiper",
+    {
+      slidesPerView: "auto",
+      spaceBetween: 16,
+    }
+  );
 
   const wdlAdPopupSwiper = new Swiper(".wdl-ad-popup-swiper", {
     slidesPerView: 1,
     spaceBetween: 0,
+    speed: 1000,
     autoplay: {
-      delay: 7000
+      delay: 5000,
     },
-    loop: true,
-   /*  pagination: {
-      el: '.swiper-pagination'
-    } */
-  })
+  });
 });
 
 const wdlStickyBar = () => {
@@ -651,7 +676,6 @@ $(document).ready(() => {
 
 // Compare
 /* $(function() {
-  console.log($('.wdl-compare-group')[0])
 
   $('.wdl-compare-group')[0].matchHeight({
     property: 'height',
@@ -663,159 +687,217 @@ $(".wdl-link-print").click(() => {
   window.print();
 });
 
-let selectedCard = []
+let selectedCard = [];
 
 const compareBarActive = () => {
   // Compare : disable if selected card is not venue and more than 3
-  if (selectedCard.findIndex(item => item.postType !== "venue") === -1 && selectedCard.length < 4) {
-      $('#compare-selected').removeClass('disabled');
-      $('#compare-selected').attr('href', '/compare/?compare_id=' + selectedCard.map((card) => {return card.id}).join(','))
+  if (
+    selectedCard.findIndex((item) => item.postType !== "venue") === -1 &&
+    selectedCard.length > 1 &&
+    selectedCard.length < 4
+  ) {
+    $("#compare-selected").removeClass("disabled");
+    $("#compare-selected").attr(
+      "href",
+      "/compare/?compare_id=" +
+        selectedCard
+          .map((card) => {
+            return card.id;
+          })
+          .join(",")
+    );
   } else {
-      $('#compare-selected').addClass('disabled');
-      $('#compare-selected').attr('href', 'javascript:void(0);')
+    $("#compare-selected").addClass("disabled");
+    $("#compare-selected").attr("href", "javascript:void(0);");
   }
 
   // Compare : update compare bar label
-  $('.wdl-compare-bar-selection-label p span').text(selectedCard.length > 0 ? selectedCard.length : 1)
+  $(".wdl-compare-bar-selection-label p span").text(
+    selectedCard.length > 0 ? selectedCard.length : 1
+  );
 
   // Compare : switch compare bar active status
-  if(selectedCard.length > 0) {
-    $('.wdl-compare-bar').addClass('active')
+  if (selectedCard.length > 0) {
+    $(".wdl-compare-bar").addClass("active");
 
-    setTimeout(()=> {bootstrap.Tooltip.getInstance('#compare-selected').show()}, 250)
+    setTimeout(() => {
+      bootstrap.Tooltip.getInstance("#compare-selected").show();
+    }, 250);
   } else {
-    $('.wdl-compare-bar').removeClass('active')
-    
-    bootstrap.Tooltip.getInstance('#compare-selected').hide()
+    $(".wdl-compare-bar").removeClass("active");
+
+    bootstrap.Tooltip.getInstance("#compare-selected").hide();
   }
-}
+};
 
 // Compare : add item
 const compareBarAdd = (title) => {
-  $('.wdl-compare-bar .wdl-compare-bar-selection-card').each((index, element)=> {
-    if($(element).hasClass('empty')) {
-      $(element).removeClass('empty')
-      $(element).find('p').text(title)
+  $(".wdl-compare-bar .wdl-compare-bar-selection-card").each(
+    (index, element) => {
+      if ($(element).hasClass("empty")) {
+        $(element).removeClass("empty");
+        $(element).find("p").text(title);
 
-      return false
+        return false;
+      }
     }
-  })
-}
+  );
+};
 
 // Compare : remove item
 const compareBarRemove = (title) => {
-  $('.wdl-compare-bar .wdl-compare-bar-selection-card').each((index, element)=> {
-    let matchElement = $(element).find('p:contains('+ title +')')
+  $(".wdl-compare-bar .wdl-compare-bar-selection-card").each(
+    (index, element) => {
+      let matchElement = $(element).find("p:contains(" + title + ")");
 
-    $(matchElement).closest('.wdl-compare-bar-selection-card').appendTo($(element).closest('.wdl-compare-bar-selection-group'))
-    $(matchElement).closest('.wdl-compare-bar-selection-card').addClass('empty')
-    $(matchElement).text('')
+      $(matchElement)
+        .closest(".wdl-compare-bar-selection-card")
+        .appendTo($(element).closest(".wdl-compare-bar-selection-group"));
+      $(matchElement)
+        .closest(".wdl-compare-bar-selection-card")
+        .addClass("empty");
+      $(matchElement).text("");
+    }
+  );
+};
+
+// Compare : register button
+let generalDirectData = []
+$('.wdl-form-general-direct').each( (index, element) => {
+  $(element).click(()=> {
+    generalDirectData.push(JSON.parse($(element).closest('.wdl-archive-card').find('.wdl-checkbox input[type="checkbox"]').attr('data-select')))
   })
-}
+})
+
+$('.wdl-form-general-modal').on('hidden.bs.modal', ()=> {
+  generalDirectData = []
+})
 
 // Compare : reset all selection after coming 'back'
-$(document).ready(()=> {
-  setTimeout(()=> {$('.card-select input[type=checkbox]').prop('checked', false)}, 50)
-})
+$(document).ready(() => {
+  setTimeout(() => {
+    $(".card-select input[type=checkbox]").prop("checked", false);
+  }, 50);
+});
 
 // Compare : add or remove selection
 const compareBarUpdate = (element) => {
-  if ($(element).is(':checked')) {
-    selectedCard.push(JSON.parse($(element).attr('data-select')))
-    compareBarAdd(JSON.parse($(element).attr('data-select')).title)
-    $(element).closest('.card').addClass('active')
+  if ($(element).is(":checked")) {
+    selectedCard.push(JSON.parse($(element).attr("data-select")));
+    compareBarAdd(JSON.parse($(element).attr("data-select")).title);
+    $(element).closest(".card").addClass("active");
   } else {
-    selectedCard.pop(JSON.parse($(element).attr('data-select')))
-    compareBarRemove(JSON.parse($(element).attr('data-select')).title)
-    $(element).closest('.card').removeClass('active')
+    selectedCard.pop(JSON.parse($(element).attr("data-select")));
+    compareBarRemove(JSON.parse($(element).attr("data-select")).title);
+    $(element).closest(".card").removeClass("active");
   }
 
-  compareBarActive()
-}
+  compareBarActive();
+};
 
 // Compare : checkbox trigger
-$('.card-select input[type=checkbox]').each((index, element) => {
-  $(element).change(()=> {
-    compareBarUpdate(element)
+$(".card-select input[type=checkbox]").each((index, element) => {
+  $(element).change(() => {
+    compareBarUpdate(element);
 
-// Compare : prevent over-selection
-    if(selectedCard.length < 5 ) {
-      $('.card-select input[type=checkbox]:not(:checked)').prop('disabled', false)
+    // Compare : prevent over-selection
+    if (selectedCard.length < 5) {
+      $(".card-select input[type=checkbox]:not(:checked)").prop(
+        "disabled",
+        false
+      );
     } else {
-      $('.card-select input[type=checkbox]:not(:checked)').prop('disabled', true)
+      $(".card-select input[type=checkbox]:not(:checked)").prop(
+        "disabled",
+        true
+      );
     }
-  })
-})
+  });
+});
 
 // Compare : uncheck selected item from compare bar
-$('.wdl-compare-bar .wdl-compare-bar-selection-card').each((index, element) => {
-  $(element).click(()=> {
-    let title = $(element).find('p').text()
-    let titleEl = $('.wdl-archive-title a:contains(' + title + ')')
-    console.log(titleEl)
+$(".wdl-compare-bar .wdl-compare-bar-selection-card").each((index, element) => {
+  $(element).click(() => {
+    let title = $(element).find("p").text();
+    let titleEl = $(".wdl-archive-title a:contains(" + title + ")");
 
-    compareBarRemove(title)
-    
-    selectedCard.pop(JSON.parse($(titleEl).closest('.card').find('.card-select input[type=checkbox]').attr('data-select')))
+    compareBarRemove(title);
 
-    $(titleEl).closest('.card').find('.card-select input[type=checkbox]').prop('checked', false)
-    $(titleEl).closest('.card').removeClass('active')
+    selectedCard.pop(
+      JSON.parse(
+        $(titleEl)
+          .closest(".card")
+          .find(".card-select input[type=checkbox]")
+          .attr("data-select")
+      )
+    );
 
-    compareBarActive()
-  })
-})
+    $(titleEl)
+      .closest(".card")
+      .find(".card-select input[type=checkbox]")
+      .prop("checked", false);
+    $(titleEl).closest(".card").removeClass("active");
+
+    compareBarActive();
+  });
+});
 
 // Enable tooltips
-const tooltipTriggerList = $('[data-bs-toggle="tooltip"]')
-const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+const tooltipTriggerList = $('[data-bs-toggle="tooltip"]');
+const tooltipList = [...tooltipTriggerList].map(
+  (tooltipTriggerEl) => new bootstrap.Tooltip(tooltipTriggerEl)
+);
 
-$('.wdl-iframe').each((index, element) => {
-  setTimeout(()=> {$(element).find('iframe').css('height', $(element).find('iframe').contents().find('body').height() + 'px')}, 10)
+$(".wdl-iframe").each((index, element) => {
+  setTimeout(() => {
+    $(element)
+      .find("iframe")
+      .css(
+        "height",
+        $(element).find("iframe").contents().find("body").height() + "px"
+      );
+  }, 10);
 
-  $(document).ready(()=> {
-    setTimeout(()=> {$(element).find('iframe').css('height', $(element).find('iframe').contents().find('body').height() + 'px')}, 250)
-  })
-
-  $(window).resize(()=> {
-    setTimeout(()=> {$(element).find('iframe').css('height', $(element).find('iframe').contents().find('body').height() + 'px')}, 10)
-  })
-  
-  $(element).find('iframe').contents().click(()=> {
-    setTimeout(()=> {
-      $(element).find('iframe').css('height', $(element).find('iframe').contents().find('body').height() + 'px')
-      console.log($(element).find('iframe').contents())
-      console.log($(element).find('iframe').contents().find('body').height())
-  }, 350)
-  })
-})
-
-// Auto-trigger modal
-$(window).load(()=> {
-  setTimeout(()=> {$('.wdl-modal-autotrigger').modal('show')}, 5000)
-})
-
-// General register form onClick
-$(document).ready(function($) {   
-  let frm = $('.wdl-form-general');
-  frm.submit(function (e) {
-      let formData = {
-          name: $('#name-lastname').val(),
-          email: 'alphafghaos@gmail.com',
-          action:'invio_mail'
-      };
-      $.ajax({
-          type        : 'POST', 
-          url         : "<?php echo admin_url('admin-ajax.php'); ?>",
-          data        : formData,
-          dataType    : 'json',
-          encode          : true
-      }).done(function(data) {
-          console.log(data);        
-      }).fail(function(data) {
-          console.log(data);
-
-      });
-      e.preventDefault();     
+  $(document).ready(() => {
+    setTimeout(() => {
+      $(element)
+        .find("iframe")
+        .css(
+          "height",
+          $(element).find("iframe").contents().find("body").height() + "px"
+        );
+    }, 250);
   });
 
+  $(window).resize(() => {
+    setTimeout(() => {
+      $(element)
+        .find("iframe")
+        .css(
+          "height",
+          $(element).find("iframe").contents().find("body").height() + "px"
+        );
+    }, 10);
+  });
+
+  $(element)
+    .find("iframe")
+    .contents()
+    .click(() => {
+      setTimeout(() => {
+        $(element)
+          .find("iframe")
+          .css(
+            "height",
+            $(element).find("iframe").contents().find("body").height() + "px"
+          );
+      }, 350);
+    });
+});
+
+// Auto-trigger modal
+$(window).load(() => {
+  setTimeout(() => {
+    $(".wdl-modal-autotrigger").modal("show");
+  }, 5000);
 });
