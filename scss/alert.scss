@@ -1,0 +1,22 @@
+.alert {
+  background: #F4F4F4;
+  color: #333333;
+  box-shadow: 0 4px 20px rgba(0,0,0,.1);
+  width: fit-content;
+  border: none;
+  margin-bottom: 0;
+  font-weight: 600;
+
+  &.alert-secondary {
+    background: none;
+    box-shadow: 0 0 0 1px #F4F4F4;
+  }
+}
+
+.wdl-copy-alert {
+  position: fixed;
+  top: 3em;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 110000;
+}

@@ -18,7 +18,6 @@ if ($(".row-cols-archive-randomized")) {
   });
 }
 
-$("main").css("padding-top", $("#main-header").height() + "px");
 
 if (window.innerWidth < 1200) {
   $("#top-menu > .menu-item").each((menuIndex, menuElement) => {
@@ -42,6 +41,49 @@ if (window.innerWidth < 1200) {
       });
   });
 }
+const initLocalnav = () => {
+  let heading = $('.wdl-localnav-heading')
+  $(heading).each((index, element) => {
+    $(element).attr('id', 'section-' + (index + 1))
+    $('.wdl-localnav-swiper .swiper-wrapper').append($(
+      `<li class="swiper-slide"><a href="#" data-href="#section-${(index + 1)}">${$(element).text()}</a></li>`
+    ))
+  })
+  let activeLocalnav = 0
+  let localnavSlides = $('.wdl-localnav-swiper .swiper-wrapper .swiper-slide')
+
+  $(localnavSlides[activeLocalnav]).addClass('active')
+
+  $(window).scroll(()=> {
+    $('.wdl-localnav-heading').each((index, element) => {
+      if(element.getBoundingClientRect().top > 0) {
+        activeLocalnav = index
+
+        return false
+      }
+    })
+    $(localnavSlides).removeClass('active')
+    $(localnavSlides[activeLocalnav]).addClass('active')
+  })
+
+  const wdlLocalnavSwiper = new Swiper('.wdl-localnav-swiper', {
+    slidesPerView: 'auto',
+    spaceBetween: 0
+  })
+
+  $('.wdl-localnav a').each((index, element) => {
+    $(element).click((event)=>{
+      let scrollMargin = $('html').css('scroll-margin-top').replace('px', '')
+      let target = $(element).attr('data-href')
+      console.log(target)
+
+      $('html, body').animate({scrollTop: $(target).offset().top - scrollMargin}, 50);
+    })
+  })
+}
+$(document).ready(initLocalnav())
+
+$("html").css("--header-height", $("#main-header").height() + "px");
 
 const wdlMultistepProgressBar = () => {
   const multiforms = document.querySelectorAll(".fieldset-cf7mls");
@@ -109,6 +151,10 @@ $(() => {
           slidesPerView: 3,
         },
       },
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+      },
       pagination: {
         el: ".swiper-pagination",
         clickable: true,
@@ -120,14 +166,20 @@ $(() => {
     {
       slidesPerView: 1,
       spaceBetween: 16,
+      speed: 1000,
+      autoplay: false,
       breakpoints: {
         768: {
           slidesPerView: 2,
           spaceBetween: 16,
+          autoplay: false,
         },
         1200: {
           slidesPerView: 3,
           spaceBetween: 24,
+          autoplay: {
+            delay: 5000,
+          },
         },
       },
       pagination: {
@@ -138,67 +190,36 @@ $(() => {
         nextEl: ".swiper-button-next",
         prevEl: ".swiper-button-prev",
       },
-      speed: 1000,
-      autoplay: {
-        delay: 5000,
-      },
     }
   );
-  if ($(".wdl-compare-swiper .swiper-slide").length < 3) {
-    const wdlCompareSwiper = new Swiper(".wdl-compare-swiper", {
-      slidesPerView: "auto",
-      spaceBetween: 12,
-      centerInsufficientSlides: true,
-      breakpoints: {
-        768: {
-          slidesPerView: "auto",
-          spaceBetween: 16,
-          centerInsufficientSlides: true,
-        },
-        1200: {
-          slidesPerView: 2,
-          spaceBetween: 39,
-          centerInsufficientSlides: true,
-        },
+  let compareSlide = $(".wdl-compare-swiper .wdl-compare-card").length
+
+  const wdlCompareSwiper = new Swiper(".wdl-compare-swiper", {
+    slidesPerView: "auto",
+    spaceBetween: 12,
+    centerInsufficientSlides: true,
+    breakpoints: {
+      768: {
+        slidesPerView: "auto",
+        spaceBetween: 16,
+        centerInsufficientSlides: true,
       },
-      pagination: {
-        el: ".swiper-pagination",
-        clickable: true,
+      1200: {
+        slidesPerView: compareSlide,
+        spaceBetween: 55 - (8 * compareSlide),
+        centerInsufficientSlides: true,
       },
-      on: {
-        init: (swiper) => {
-          swiper.el.classList.add("wdl-compare-swiper-2");
-        },
+    },
+    pagination: {
+      el: ".swiper-pagination",
+      clickable: true,
+    },
+    on: {
+      init: (swiper) => {
+        swiper.el.classList.add("wdl-compare-swiper-" + compareSlide);
       },
-    });
-  } else {
-    const wdlCompareSwiper = new Swiper(".wdl-compare-swiper", {
-      slidesPerView: "auto",
-      spaceBetween: 12,
-      centerInsufficientSlides: true,
-      breakpoints: {
-        768: {
-          slidesPerView: "auto",
-          spaceBetween: 16,
-          centerInsufficientSlides: true,
-        },
-        1200: {
-          slidesPerView: 3,
-          spaceBetween: 39,
-          centerInsufficientSlides: true,
-        },
-      },
-      pagination: {
-        el: ".swiper-pagination",
-        clickable: true,
-      },
-      on: {
-        init: (swiper) => {
-          swiper.el.classList.add("wdl-compare-swiper-3");
-        },
-      },
-    });
-  }
+    },
+  });
   const wdlBadgeSwiper = new Swiper(".wdl-badge-container.swiper", {
     slidesPerView: "auto",
     spaceBetween: 8,
@@ -278,12 +299,26 @@ $(() => {
       },
     }
   );
+  const wdlCardGallerygSwiper = new Swiper(
+    ".wdl-card-gallery-swiper",
+    {
+      slidesPerView: 1,
+      navigation: {
+        nextEl: ".swiper-navigation .swiper-button-next",
+        prevEl: ".swiper-navigation .swiper-button-prev",
+      },
+    }
+  );
   const wdlListingCardGallerygSwiper = new Swiper(
     ".wdl-listing-card-gallery-swiper",
     {
       slidesPerView: 1,
-      autoplay: {
+      /* autoplay: {
         delay: 5000,
+      }, */
+      navigation: {
+        nextEl: ".swiper-navigation .swiper-button-next",
+        prevEl: ".swiper-navigation .swiper-button-prev",
       },
     }
   );
@@ -298,7 +333,7 @@ $(() => {
     ".wdl-listing-card-detail-features-swiper",
     {
       slidesPerView: "auto",
-      spaceBetween: 16,
+      spaceBetween: 24,
     }
   );
   const wdlListingCardDetailRoomSwiper = new Swiper(
@@ -311,11 +346,51 @@ $(() => {
 
   const wdlAdPopupSwiper = new Swiper(".wdl-ad-popup-swiper", {
     slidesPerView: 1,
-    spaceBetween: 0,
+    spaceBetween: 16,
     speed: 1000,
     autoplay: {
       delay: 5000,
     },
+    navigation: {
+      nextEl: ".swiper-navigation .swiper-button-next",
+      prevEl: ".swiper-navigation .swiper-button-prev",
+    },
+  });
+
+  const wdlArchivePricingSwiper = new Swiper(
+    ".wdl-archive-pricing-swiper",
+    {
+      slidesPerView: 1,
+      spaceBetween: 16,
+      breakpoints: {
+        768: {
+          slidesPerView: 2,
+          spaceBetween: 16,
+        },
+        1200: {
+          slidesPerView: 3,
+          spaceBetween: 24,
+        },
+      },
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+      },
+      speed: 1000,
+    }
+  );
+
+  const wdlHeroGallerySwiper = new Swiper(".wdl-archive-pricing-gallery-swiper", {
+    enableTouchSwipe: false,
+    slidesPerView: "auto",
+    spaceBetween: 16,
+    navigation: {
+      prevEl: ".swiper-button-prev",
+      nextEl: ".swiper-button-next",
+    },
+    centerInsufficientSlides: true,
+    speed: 1000,
+    loop: true,
   });
 });
 
@@ -383,20 +458,33 @@ const wdlGallery = () => {
 document.querySelector(".wdl-gallery") ? wdlGallery() : false;
 
 const wdlHeroGallery = () => {
-  const wdlHeroGallerySwiper = new Swiper(".wdl-hero-gallery-swiper", {
-    slidesPerView: "auto",
-    spaceBetween: 16,
-    navigation: {
-      prevEl: ".swiper-button-prev",
-      nextEl: ".swiper-button-next",
-    },
-    centerInsufficientSlides: true,
-    speed: 1000,
-    autoplay: {
-      delay: 5000,
-    },
-    loop: true,
-  });
+  if($('.wdl-hero-gallery-swiper').hasClass('wdl-hero-gallery-video-swiper')) {
+    const wdlHeroGalleryVideoSwiper = new Swiper(".wdl-hero-gallery-video-swiper", {
+      slidesPerView: "auto",
+      spaceBetween: 16,
+      navigation: {
+        prevEl: ".swiper-button-prev",
+        nextEl: ".swiper-button-next",
+      },
+      centerInsufficientSlides: true,
+      loop: true,
+    });
+  } else {
+    const wdlHeroGallerySwiper = new Swiper(".wdl-hero-gallery-swiper", {
+      slidesPerView: "auto",
+      spaceBetween: 16,
+      navigation: {
+        prevEl: ".swiper-button-prev",
+        nextEl: ".swiper-button-next",
+      },
+      centerInsufficientSlides: true,
+      speed: 1000,
+      autoplay: {
+        delay: 5000,
+      },
+      loop: true,
+    });
+  }
 };
 
 document.querySelector(".wdl-hero-gallery") ? wdlHeroGallery() : false;
@@ -693,8 +781,7 @@ const compareBarActive = () => {
   // Compare : disable if selected card is not venue and more than 3
   if (
     selectedCard.findIndex((item) => item.postType !== "venue") === -1 &&
-    selectedCard.length > 1 &&
-    selectedCard.length < 4
+    selectedCard.length > 1
   ) {
     $("#compare-selected").removeClass("disabled");
     $("#compare-selected").attr(
@@ -726,7 +813,7 @@ const compareBarActive = () => {
   } else {
     $(".wdl-compare-bar").removeClass("active");
 
-    bootstrap.Tooltip.getInstance("#compare-selected").hide();
+    //bootstrap.Tooltip.getInstance("#compare-selected").hide();
   }
 };
 
@@ -802,7 +889,7 @@ $(".card-select input[type=checkbox]").each((index, element) => {
 
     // Compare : prevent over-selection
     if (selectedCard.length < 5) {
-      $(".card-select input[type=checkbox]:not(:checked)").prop(
+      $(".card-select input[type=checkbox]").prop(
         "disabled",
         false
       );
@@ -839,6 +926,19 @@ $(".wdl-compare-bar .wdl-compare-bar-selection-card").each((index, element) => {
     $(titleEl).closest(".card").removeClass("active");
 
     compareBarActive();
+
+    // Compare : prevent over-selection
+    if (selectedCard.length < 5) {
+      $(".card-select input[type=checkbox]").prop(
+        "disabled",
+        false
+      );
+    } else {
+      $(".card-select input[type=checkbox]:not(:checked)").prop(
+        "disabled",
+        true
+      );
+    }
   });
 });
 
@@ -895,9 +995,55 @@ $(".wdl-iframe").each((index, element) => {
     });
 });
 
+// General Form List
+$('[data-bs-toggle="modal"][data-bs-target=".wdl-form-general-modal"]').click(()=> {
+  if(generalDirectData.length > 0) {
+    $('.wdl-form-general-list').html($(`<li><span>${generalDirectData[0].title}</span></li>`))
+  } else {
+    let formGeneralList = () => {
+      return selectedCard.map((card)=>`<li><span>${card.title}</span></li>`)
+    }
+    $('.wdl-form-general-list').html(formGeneralList())
+  }
+  
+})
+
+
 // Auto-trigger modal
 $(window).load(() => {
   setTimeout(() => {
     $(".wdl-modal-autotrigger").modal("show");
-  }, 5000);
+  }, 50);
 });
+
+// Init Feather icons
+$(document).ready(()=> {
+  feather.replace()
+})
+
+// Copy button
+$('.wdl-btn-copy').each((index, element) => {
+  $(element).click(()=> {
+    if($($(element).attr('data-copy')).val() !== '') {
+      navigator.clipboard.writeText($($(element).attr('data-copy')).val())
+    } else {
+      navigator.clipboard.writeText($($(element).attr('data-copy')).text())
+    }
+
+    $('body').append($(`
+      <div class="alert wdl-copy-alert" role="alert">
+        <span class="text-red"><svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" height="1.5em" width="1.5em" viewBox="0 0 512 512"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"/></svg></span>
+        คัดลอกข้อความเสร็จสมบูรณ์
+      </div>
+    `))
+
+    setTimeout(()=> {
+      $('.wdl-copy-alert').remove()
+    }, 5000)
+  })
+})
+
+$(document).ready(()=>{
+  $($('.wdl-tab-related').find('.nav-link')[0]).addClass('active')
+  $($('.wdl-tab-related-content').find('.tab-pane')[0]).addClass(['show', 'active'])
+})

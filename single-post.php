@@ -35,7 +35,7 @@
 				<section class="wdl-main-bar">
 					<div class="row mb-3">
 						<div class="col">
-							<?php the_post_thumbnail('large') ?>
+							<div class="wdl-single-thumbnail"><?php the_post_thumbnail('large') ?></div>
 						</div>
 					</div>
 					<div class="row align-items-center">

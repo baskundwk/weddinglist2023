@@ -20,7 +20,7 @@
 								<?php the_post_thumbnail('medium_large') ?>
 								<?php
 								if ($sponsored && in_array('Sponsored', $sponsored)): ?>
-									<span class="badge wdl-badge-sm">Sponsored</span>
+									<span class="badge wdl-badge-sm">Most Popular</span>
 								<?php endif; ?>
 							</a>
 						<?php endif; ?>

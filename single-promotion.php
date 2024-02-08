@@ -3,7 +3,7 @@
 <main>
 	<section>
 		<div class="container-xl">
-			<div class="row mb-3 mt-xl-3">
+			<div class="row pb-3 pt-lg-3">
 				<?php $banner = get_field('Banner');
 				if ($banner): ?>
 					<div class="col-12 order-xl-2 pb-0 px-0 px-xl-3">
@@ -94,7 +94,7 @@
 				</div>
 				<div class="col-sm-auto text-center text-sm-end">
 					<a id="apply-cta" href="#apply" class="wdl-btn-lg" data-bs-toggle="modal">
-						<?php _e('คลิกขอแพ็กเกจ', 'Apply for Promotion'); ?>
+						<?php _e('สนใจรับโปรโมชั่น', 'Apply for Promotion'); ?>
 					</a>
 				</div>
 			</div>
@@ -112,7 +112,7 @@
 			<div class="row my-4">
 				<div class="col text-center">
 					<a id="apply-cta" href="#apply" class="wdl-btn-lg" data-bs-toggle="modal">
-						<?php _e('คลิกขอแพ็กเกจ', 'Apply for Promotion'); ?>
+						<?php _e('สนใจรับโปรโมชั่น', 'Apply for Promotion'); ?>
 					</a>
 				</div>
 			</div>
@@ -173,13 +173,11 @@
 
 	<div class="modal fade modal-lg" id="apply">
 		<div class="modal-dialog modal-dialog-centered m-auto">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h3 class="m-0">ตอบคำถามสั้น ๆ เพื่อรับสิทธิพิเศษสำหรับคุณ!</h3>
-
-					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-				</div>
+			<div class="modal-content m-3 mb-0">
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				<div class="modal-body">
+					<h3 class="mt-2">ตอบคำถามสั้น ๆ เพื่อรับสิทธิพิเศษสำหรับคุณ!</h3>
+					<hr>
 					<?php if ($venueTitle): ?>
 						<p class="wdl-archive-location mb-2">
 							<?php echo esc_html($venueTitle) ?>
@@ -198,7 +196,7 @@
 
 	<div class="modal fade wdl-gallery-modal" id="gallery">
 		<div class="modal-dialog modal-dialog-centered modal-xl">
-			<div class="modal-content">
+			<div class="modal-content m-3 mb-0">
 				<div class="modal-body">
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 

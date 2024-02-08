@@ -11,10 +11,10 @@ $popup = new WP_Query($popupArgs);
 ?>
 <?php if($popup->have_posts()): ?>
   <div class="modal fade wdl-ad-popup-extended wdl-modal-autotrigger" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content mb-0">
         <button class="btn-close" data-bs-dismiss="modal" aria-label="Close" type="button" ่></button>
-        <div class="swiper wdl-ad-popup-swiper">
+        <div class="swiper wdl-ad-popup-swiper p-lg-3">
           <div class="swiper-wrapper">
             <?php while($popup->have_posts()):
             $popup->the_post(); ?>
@@ -33,7 +33,10 @@ $popup = new WP_Query($popupArgs);
             </div>
             <?php endwhile; ?>
           </div>
-          <!-- <div class="swiper-pagination"></div> -->
+          <div class="swiper-navigation swiper-navigation-small">
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+          </div>
         </div>
       </div>
     </div>

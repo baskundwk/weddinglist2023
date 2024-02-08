@@ -257,6 +257,7 @@ input[type="date"] {
   box-shadow: 0 0 0 1px #cccccc inset;
   padding: 8px 55px;
   border-radius: 8px;
+  cursor: pointer;
 
   @media (max-width: 1199px) {
     padding: 8px 8px;
@@ -408,5 +409,17 @@ form.cf7mls input.wpcf7-form-control.wpcf7-submit {
     background: #ffffff;
     border-radius: 20px;
     padding: 20px 24px;
+  }
+}
+
+
+.wdl-form-general-list {
+  padding-left: 1.1rem;
+  > li {
+    font-size: 14px;
+    @extend .text-accent;
+    > span {
+      @extend .lineclamp-1;
+    }
   }
 }

@@ -1,0 +1,140 @@
+.wdl-character {
+  --background-image: unset;
+  --color: #777777;
+  --color-50: #77777700;
+  --color-0: #77777700;
+  --box-shadow: 0 0 0 1px #7777777F;
+  box-shadow: var(--box-shadow);
+  color: var(--color);
+  background-image: var(--background-image);
+  
+  display: inline-block;
+  padding: 2px;
+  white-space: nowrap;
+  border-radius: 5rem;
+  transition: .35s cubic-bezier(0,0,0,1);
+  background-size: cover;
+  margin-bottom: 6px;
+  margin-left: 8px;
+  > span {
+    display: inline-block;
+    border-radius: 5rem;
+    padding: 2px 10px;
+    line-height: 1.5;
+    font-size: 0.875rem;
+    font-weight: 400;
+  }
+
+  &.wdl-character-border {
+    > span {
+      background: #FFFFFF;
+    }
+  }
+
+  &.wdl-character-animation-fade {
+    animation-name: wdl-character-animation-fade;
+    animation-duration: 1.5s;
+    animation-fill-mode: both;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+  }
+  &.wdl-character-animation-bounce {
+    animation-name: wdl-character-animation-bounce;
+    animation-duration: 1.5s;
+    animation-fill-mode: both;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+
+  }
+  &.wdl-character-animation-glow {
+    animation-name: wdl-character-animation-glow;
+    animation-duration: 5s;
+    animation-fill-mode: both;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+
+  }
+  &.wdl-character-animation-radiate {
+    animation-name: wdl-character-animation-radiate;
+    animation-duration: 2.5s;
+    animation-fill-mode: both;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-out;
+  }
+  &.wdl-character-animation-shimmer {
+    background-size: 200%;
+    animation-name: wdl-character-animation-shimmer;
+    animation-duration: 5s;
+    animation-fill-mode: both;
+    animation-iteration-count: infinite;
+    animation-timing-function: cubic-bezier(0,0,0,1);
+  }
+}
+
+@keyframes wdl-character-animation-fade {
+  0% {opacity: 50%;}
+  50% {opacity: 100%;}
+  100% {opacity: 50%;}
+}
+
+@keyframes wdl-character-animation-bounce {
+    0% {
+      transform: scale(100%);
+    }
+  
+    12% {
+      transform: scale(101.089%);
+    }
+  
+    24% {
+      transform: scale(104.356%);
+    }
+  
+    36% {
+      transform: scale(109.801%);
+    }
+  
+    54% {
+      transform: scale(107.502%);
+    }
+  
+    74% {
+      transform: scale(109.837%);
+    }
+  
+    82% {
+      transform: scale(109.375%);
+    }
+  
+    92% {
+      transform: scale(109.934%);
+    }
+  
+    93% {
+      transform: scale(109.846%);
+    }
+  
+    96% {
+      transform: scale(110%);
+    }
+
+    100% {
+      transform: scale(100%);
+    }
+}
+
+@keyframes wdl-character-animation-glow {
+  0% {box-shadow: 0 0 3px -3px var(--color-50);}
+  50% {box-shadow: 0 0 16px -3px var(--color);}
+  100% {box-shadow: 0 0 3px -3px var(--color-50);}
+}
+
+@keyframes wdl-character-animation-radiate {
+  0% {box-shadow: 0 0 0 0 var(--color-50);}
+  100% {box-shadow: 0 0 0 8px var(--color-0);}
+}
+@keyframes wdl-character-animation-shimmer {
+  0% {background-position: 0% 0%;}
+  50% {background-position: 100% 0%;}
+  100% {background-position: 0% 0%;}
+}

@@ -87,6 +87,10 @@
   font-weight: 400;
   line-height: 1.5;
   display: inline-block;
+  
+  a {
+    color: #777777 !important;
+  }
 }
 .wdl-badge-primary {
   padding: 8px 24px;
@@ -98,6 +102,10 @@
   font-weight: 400;
   line-height: 1.5;
   display: inline;
+  
+  a {
+    color: #ffffff !important;
+  }
 }
 .wdl-badge-sm-primary {
   padding: 4px 12px;
@@ -109,6 +117,10 @@
   font-weight: 400;
   line-height: 1.5;
   display: inline-block;
+  
+  a {
+    color: #ffffff !important;
+  }
 }
 .wdl-badge-sm {
   padding: 4px 12px;
@@ -122,11 +134,19 @@
   line-height: 1.5;
   display: inline-block;
   transition: .35s cubic-bezier(0,0,0,1);
+  
+  a {
+    color: #ff2758 !important;
+  }
 
   &:hover {
     background: #ff2758;
     box-shadow: 0 0 0 1px #ff2758 inset;
     color: #FFFFFF !important;  
+
+    a {
+      color: #FFFFFF !important;  
+    }
   }
 
 }
@@ -135,15 +155,24 @@
   white-space: nowrap;
   box-shadow: 0 0 0 1px #777777 inset;
   color: #777777 !important;
+
+  a {
+    color: #777777 !important;
+  }
   border-radius: 5rem;
   font-size: 0.875rem;
   font-weight: 400;
   line-height: 1.5;
   transition: .35s cubic-bezier(0,0,0,1);
+  display: inline-block;
 
   &:hover {
     box-shadow: 0 0 0 1px #ff2758 inset;
     color: #ff2758 !important;  
+
+    a {
+      color: #ff2758 !important;  
+    }
   }
 
   a {
@@ -160,4 +189,8 @@
   font-size: 0.875rem;
   font-weight: 700;
   line-height: 1;
+  display: inline-block;
+  a {
+    color: #ff2758 !important;
+  }
 }

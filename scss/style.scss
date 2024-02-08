@@ -14,12 +14,15 @@
 @import "../fonts/fonts.scss";
 @import "global.scss";
 
+@import "alert.scss";
 @import "allpage.scss";
 @import "archive.scss";
 @import "badge.scss";
 @import "breadcrumb.scss";
 @import "button.scss";
+@import "character.scss";
 @import "compare.scss";
+@import "dropdown.scss";
 @import "footer.scss";
 @import "form.scss";
 @import "header.scss";
@@ -27,6 +30,7 @@
 @import "lead-menu.scss";
 @import "link.scss";
 @import "listing.scss";
+@import "localnav.scss";
 @import "icon.scss";
 @import "modal.scss";
 @import "popup.scss";
@@ -35,3 +39,4 @@
 @import "sidebar.scss";
 @import "single.scss";
 @import "social.scss";
+@import "tab.scss";

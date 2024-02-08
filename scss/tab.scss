@@ -1,0 +1,44 @@
+.wdl-tab {
+  display: flex;
+  gap: 1.5em;
+  > li {
+    > a {
+      padding: 1rem 0;
+      display: flex;
+      flex-direction: column;
+      gap: .5rem;
+      color: #666666 !important;
+      text-align: center;
+      justify-content: center;
+      align-items: center;
+      transition: .35s cubic-bezier(0,0,0,1);
+      font-size: 14px;
+
+      > .wdl-tab-icon {
+        width: 1rem;
+        height: 1rem;
+      }
+
+      @include max-width-xl {
+        flex-direction: row;
+      }
+
+      &.active {
+        color: #ff2758 !important;
+        box-shadow: 0 -3px 0 #ff2758 inset;
+      }
+    }
+
+    &:hover {
+      > a {
+        color: #ff2758 !important;
+      }
+    }
+
+    &:active, &:focus {
+      > a {
+        color: #ff2758 !important;
+      }
+    }
+  }
+}

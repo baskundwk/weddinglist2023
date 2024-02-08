@@ -1,9 +1,20 @@
-
 .wdl-single-title {
   font-size: 1.5rem;
   line-height: 1.5;
   font-weight: 500;
   color: #333333;
+}
+
+.wdl-single-thumbnail {
+  width: 100%;
+  max-width: 100%;
+  border-radius: 16px;
+  
+  img {
+    width: 100%;
+    max-width: 100%;
+    border-radius: 16px;
+  }
 }
 
 .wdl-sticky-bar {
@@ -76,6 +87,13 @@ body.admin-bar.et_fixed_nav .wdl-sticky-bar {
     display: flex;
     align-items: center;
     overflow: hidden;
+    iframe {
+      width: 100%;
+      height: auto;
+      aspect-ratio: 16/9;
+      border-radius: 8px;
+      
+    }
     img {
       width: 100%;
       height: auto;
@@ -123,6 +141,15 @@ body.admin-bar.et_fixed_nav .wdl-sticky-bar {
     width: fit-content;
   }
   .wdl-gallery-item {
+    display: block;
+    pointer-events: auto;
+    iframe {
+      width: auto;
+      height: 270px;
+      border-radius: 8px;
+      aspect-ratio: 16/9;
+      pointer-events: none;
+    }
     img {
       height: 270px;
       width: auto;

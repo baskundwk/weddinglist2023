@@ -1,18 +1,28 @@
 <?php include 'components/header.php' ?>
-
 <main>
 	<section class="py-3 overflow-hidden">
 		<div class="container-fluid">
 			<?php
 			$images = get_field('Gallery');
-			if ($images):
+			$videos = get_field('Video');
+			if ($images || $videos):
 				?>
 				<div class="row g-3 wdl-gallery wdl-hero-gallery">
 					<div class="col position-relative">
-						<div id="hero-gallery" class="swiper wdl-hero-gallery-swiper overflow-visible">
+						<div id="hero-gallery" class="swiper wdl-hero-gallery-swiper <?php if($videos) { echo 'wdl-hero-gallery-video-swiper';} ?>">
 							<div class="swiper-wrapper">
 								<?php
-								// Grab each image.
+								foreach ($videos as $video):
+									?>
+									<div class="swiper-slide">
+										<a href="#" class="wdl-gallery-item" data-bs-toggle="modal" data-bs-target="#gallery">
+											<?php echo($video['iframe_code']) ?>
+										</a>
+									</div>
+									<?php
+								endforeach;
+								?>
+								<?php
 								foreach ($images as $image):
 									$image_id = $image['ID'];
 									$image_src = $image['ursl'];
@@ -38,58 +48,140 @@
 		</div>
 	</section>
 	<section class="wdl-sticky-bar">
-		<a id="apply-cta" href="#apply" data-bs-toggle="modal">
-			<div class="container-xl">
-				<div class="row align-items-center g-3">
-					<div class="col col-lg-9 d-none d-lg-block">
-						<div class="row g-4 align-items-center">
-							<div class="col-auto">
-								<?php $logo = get_field('Logo');
-								if ($logo): ?>
-									<div class="wdl-metadata-logo">
-										<img loading="lazy" src="<?php echo esc_url($logo['sizes']['medium']); ?>" alt="<?php echo esc_attr($logo['alt']); ?>" height="40" />
-									</div>
-								<?php endif; ?>
-							</div>
-							<div class="col col-lg-auto">
-								<h1 class="h6 text-secondary mb-0 wdl-sticky-bar-title">
-									<?php the_title() ?>
-								</h1>
-							</div>
+		<div class="container-xl">
+			<div class="row align-items-center g-3">
+				<div class="col col-lg-6 d-none d-lg-block">
+					<div class="row g-4 align-items-center">
+						<div class="col-auto">
+							<?php $logo = get_field('Logo');
+							if ($logo): ?>
+								<div class="wdl-metadata-logo">
+									<img loading="lazy" src="<?php echo esc_url($logo['sizes']['medium']); ?>" alt="<?php echo esc_attr($logo['alt']); ?>" height="40" />
+								</div>
+							<?php endif; ?>
+						</div>
+						<div class="col col-lg-auto">
+							<h1 class="h6 text-secondary mb-0 wdl-sticky-bar-title">
+								<?php the_title() ?>
+							</h1>
 						</div>
 					</div>
-					<?php $sponsored = get_field('Sponsor', $relatedPost->ID); ?>
-					<div class="col col-lg-3 text-center text-lg-end mb-2 mb-sm-0">
-						<button class="wdl-btn">
-							<?php _e('คลิกขอแพ็กเกจ', 'Apply for Promotion'); ?>
-						</button>
-					</div>
+				</div>
+				<?php $sponsored = get_field('Sponsor', $relatedPost->ID); ?>
+				<div class="col col-lg-6 d-flex align-items-center justify-content-center justify-content-lg-end gap-3">
+					<a class="wdl-btn" id="apply-cta" href="#apply" data-bs-toggle="modal">
+						<?php _e('คลิกขอแพ็กเกจ', 'คลิกขอแพ็กเกจ'); ?>
+					</a>
+					<a class="wdl-btn-line d-inline-flex d-lg-none" href="https://line.me/R/oaMessage/%40ety4154i/?สวัสดี%20ต้องการขอแพ็คเกจ%20<?php the_title(); ?>%0A<?php the_permalink(); ?>">
+						<?php _e('ติดต่อแอดมินผ่าน LINE', 'ติดต่อแอดมินผ่าน LINE'); ?>
+					</a>
+					<a class="wdl-btn-line d-none d-lg-inline-flex" href="https://line.me/R/ti/p/%40ety4154i">
+						<?php _e('ติดต่อแอดมินผ่าน LINE', 'ติดต่อแอดมินผ่าน LINE'); ?>
+					</a>
 				</div>
 			</div>
-		</a>
+		</div>
 	</section>
-	<section class="wdl-main-bar">
+	<section class="wdl-main-bar pb-3">
 		<div class="container-xl">
-			<div class="row align-items-center">
-				<div class="col-lg-2 mb-4 mb-lg-0 d-none d-lg-block">
+			<div class="row">
+				<div class="col-lg-2 mb-4 mb-lg-0">
 					<?php $logo = get_field('Logo');
 					if ($logo): ?>
-						<div class="wdl-metadata-logo">
+						<div class="wdl-metadata-logo d-none d-lg-block">
 							<img loading="lazy" src="<?php echo esc_url($logo['sizes']['medium']); ?>" alt="<?php echo esc_attr($logo['alt']); ?>" />
 						</div>
 					<?php endif; ?>
-				</div>
-				<div class="col-lg mb-3 mb-lg-0">
-					<?php $venueTypes = get_field('VenueType');
-					if ($venueTypes): ?>
-						<p class="text-accent mb-0 d-flex gap-3">
-							<?php foreach ($venueTypes as $venueType): ?>
-								<span>
-									<?php echo esc_html($venueType->name); ?>
-								</span>
-							<?php endforeach; ?>
-						</p>
+					<?php $brochure = get_field('Brochure');
+					if ($brochure): ?>
+						<div class="mt-1 text-center">
+							<a href="#brochure" data-bs-toggle="modal" class="wdl-link-brochure">ดูโบรชัวร์โรงแรม</a>
+						</div>
+						<div class="modal fade modal-xl" id="brochure">
+							<div class="modal-dialog modal-dialog-centered m-auto">
+								<div class="modal-content m-3 mb-0">
+									<button class="btn-close"></button>
+									<div class="modal-body">
+										<iframe class="wdl-iframe wdl-iframe-80vh" src="<?php echo($brochure) ?>" width="100%" height="560"></iframe>
+										<div class="d-flex flex-column flex-sm-row align-items-center justify-content-center gap-3 mt-3">
+											<a id="apply-cta" href="#apply" class="wdl-btn d-inline-block" data-bs-toggle="modal">
+												<?php _e('คลิกขอแพ็กเกจ', 'คลิกขอแพ็กเกจ'); ?>
+											</a>
+											<a class="wdl-btn-line d-inline-flex d-lg-none" href="https://line.me/R/oaMessage/%40ety4154i/?สวัสดี%20ต้องการขอแพ็คเกจ%20<?php the_title(); ?>%0A<?php the_permalink(); ?>">
+												<?php _e('ติดต่อแอดมินผ่าน LINE', 'ติดต่อแอดมินผ่าน LINE'); ?>
+											</a>
+											<a class="wdl-btn-line d-none d-lg-inline-flex" href="https://line.me/R/ti/p/%40ety4154i">
+												<?php _e('ติดต่อแอดมินผ่าน LINE', 'ติดต่อแอดมินผ่าน LINE'); ?>
+											</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
 
+					<?php endif; ?>
+				</div>
+				<div class="col-lg mb-3 mb-lg-0 pt-lg-3">
+					<?php
+						if(get_the_id() === 204937) :
+					?>
+						<div>
+							<div class="wdl-character wdl-character-border wdl-character-animation-bounce" style=" --background-image: url(/wp-content/uploads/2023/12/gold-gradient.png); --box-shadow: none; --color: rgba(191,149,63,1); --color-50: rgba(191,149,63, 50%); --color-0: rgba(191,149,63, 0);">
+								<span>Bounce</span>
+							</div>
+							<div class="wdl-character wdl-character-border wdl-character-animation-fade" style=" --background-image: url(/wp-content/uploads/2023/12/gold-gradient.png); --box-shadow: none; --color: rgba(191,149,63,1); --color-50: rgba(191,149,63, 50%); --color-0: rgba(191,149,63, 0);">
+								<span>Fade</span>
+							</div>
+							<div class="wdl-character wdl-character-border wdl-character-animation-glow" style=" --background-image: url(/wp-content/uploads/2023/12/gold-gradient.png); --box-shadow: none; --color: rgba(191,149,63,1); --color-50: rgba(191,149,63, 50%); --color-0: rgba(191,149,63, 0);">
+								<span>Glow</span>
+							</div>
+							<div class="wdl-character wdl-character-border wdl-character-animation-radiate" style=" --background-image: url(/wp-content/uploads/2023/12/gold-gradient.png); --box-shadow: none; --color: rgba(191,149,63,1); --color-50: rgba(191,149,63, 50%); --color-0: rgba(191,149,63, 0);">
+								<span>Radiate</span>
+							</div>
+							<div class="wdl-character wdl-character-border wdl-character-animation-shimmer" style=" --background-image: url(/wp-content/uploads/2023/12/gold-gradient.png); --box-shadow: none; --color: rgba(191,149,63,1); --color-50: rgba(191,149,63, 50%); --color-0: rgba(191,149,63, 0);">
+								<span>Shimmer</span>
+							</div>
+						</div>
+					<?php endif; ?>
+					<?php
+					$venueTypes = get_field('VenueType');
+					$venueCharacter = get_field('Character');
+					if($venueCharacter || $venueTypes) : ?>
+					<p class="mb-0 d-flex gap-3">
+						<?php if ($venueCharacter): ?>
+						<?php //foreach ($venueCharacter as $character):
+						$characterBackground = get_field('CharacterBackground', $venueCharacter);
+						$characterBorder = get_field('CharacterBorder', $venueCharacter);
+						$characterColor = get_field('CharacterColor', $venueCharacter);
+						$characterEffect = get_field('CharacterEffect', $venueCharacter);
+						?>
+						<div class="wdl-character
+							<?php if($characterBorder) {echo('wdl-character-border');} ?>
+							<?php if($characterEffect) {echo('wdl-character-animation-' . $characterEffect);} ?>"
+						<?php 
+						if($characterColor || $characterBackground) :?>
+						style="
+							--background-image: url(<?php echo( $characterBackground['url'] )?>);
+							--box-shadow: none;
+							--color: rgba(<?php echo( $characterColor['red']) ?>,<?php echo( $characterColor['green']) ?>,<?php echo( $characterColor['blue']) ?>,<?php echo( $characterColor['alpha'])?>);
+							--color-50: rgba(<?php echo( $characterColor['red']) ?>,<?php echo( $characterColor['green']) ?>,<?php echo( $characterColor['blue']) ?>, 50%);
+							--color-0: rgba(<?php echo( $characterColor['red']) ?>,<?php echo( $characterColor['green']) ?>,<?php echo( $characterColor['blue']) ?>, 0);
+						"
+						<?php endif ?>
+						>
+							<span><?php echo esc_html($venueCharacter->name); ?></span>
+						</div>
+						<?php //endforeach; ?>
+						<?php endif ?>
+						<?php if ($venueTypes): ?>
+						<?php foreach ($venueTypes as $venueType): ?>
+						<span class="text-accent">
+							<?php echo esc_html($venueType->name); ?>
+						</span>
+						<?php endforeach; ?>
+						<?php endif ?>
+					</p>
+					
 					<?php endif ?>
 					<h1 class="wdl-single-title">
 						<?php the_title(); ?>
@@ -112,11 +204,12 @@
 						<p class="wdl-metadata wdl-archive-pin mb-0">
 							<span>
 								<?php the_field('Address') ?>
-								&nbsp;
 								<?php if ($googleMaps): ?>
-									<a href="<?php echo esc_url(the_field('GoogleMaps')) ?>" target="_blank" class="wdl-link-external">
-										<?php _e('ดูแผนที่', 'Map') ?>
-									</a>
+									<strong>
+										<a href="<?php echo esc_url(the_field('GoogleMaps')) ?>" target="_blank" class="wdl-link-external">
+											<?php _e('ดูแผนที่', 'Map') ?>
+										</a>
+									</strong>
 								<?php endif; ?>
 							</span>
 						</p>
@@ -124,169 +217,390 @@
 
 					<?php
 					$maxGuest = get_field('MaxGuest');
-					if ($maxGuest): ?>
+					$maxCarpark = get_field('MaxCarpark');
+					if ($maxGuest || $maxCarpark): ?>
 						<p class="wdl-metadata wdl-archive-max-guest mb-0">
 							<span>
-								<?php _e('รองรับแขกสูงสุด', 'Max. guest') ?>&nbsp;<b>
-									<?php echo number_format(get_field('MaxGuest')) ?>
-									<?php _e('คน', '') ?>
-								</b>
+								<?php _e('รองรับแขกสูงสุด', 'Max. guest') ?>
+								<strong class="text-red"><?php echo number_format(get_field('MaxGuest')) ?></strong>
+								<?php _e('คน', '') ?>
+							</span> / 
+							<span>
+								<?php _e('จอดรถได้', 'Max. car park') ?>
+								<strong class="text-red"><?php the_field('MaxCarpark') ?></strong>
+								<?php _e('คัน', '') ?>
 							</span>
 						</p>
 					<?php endif; ?>
-
 					<?php
-					$maxCarpark = get_field('MaxCarpark');
-					if ($maxCarpark): ?>
-						<p class="wdl-metadata wdl-archive-max-carpark mb-0">
+					$minPrice = get_field('MinPrice', $relatedVenue->ID);
+					if ($minPrice): ?>
+						<p class="wdl-metadata wdl-archive-min-price mb-0">
 							<span>
-								<?php _e('รองรับที่จอดรถสูงสุด', 'Max. car park') ?>&nbsp;<b>
-									<?php the_field('MaxCarpark') ?>
-									<?php _e('คัน', '') ?>
-								</b>
+								<?php _e('ราคาเริ่มต้น', 'Starting price') ?>
+								<strong class="text-red"><?php echo number_format(get_field('MinPrice')) ?>+</strong>
+								<?php _e('บาท', 'THB') ?>
 							</span>
 						</p>
 					<?php endif; ?>
 				</div>
 				<div class="col-lg-auto text-center">
 					<div class="wdl-pricing-row-- p-3">
-						<a id="apply-cta" href="#apply" class="wdl-btn-lg" data-bs-toggle="modal">
+						<a id="apply-cta" href="#apply" class="wdl-btn-lg d-block mb-3" data-bs-toggle="modal">
 							<?php _e('คลิกขอแพ็กเกจ', 'คลิกขอแพ็กเกจ'); ?>
+						</a>
+						<a class="wdl-btn-line-lg d-flex d-lg-none" href="https://line.me/R/oaMessage/%40ety4154i/?สวัสดี%20ต้องการขอแพ็คเกจ%20<?php the_title(); ?>%0A<?php the_permalink(); ?>">
+							<?php _e('ติดต่อแอดมินผ่าน LINE', 'ติดต่อแอดมินผ่าน LINE'); ?>
+						</a>
+						<a class="wdl-btn-line-lg d-none d-lg-inline-flex" href="https://line.me/R/ti/p/%40ety4154i">
+							<?php _e('ติดต่อแอดมินผ่าน LINE', 'ติดต่อแอดมินผ่าน LINE'); ?>
 						</a>
 					</div>
 				</div>
 			</div>
 		</div>
 	</section>
-	<section>
-		<div class="container">
+	<?php if(get_the_excerpt() != '' && is_user_logged_in()) : ?>
+	<section class="pb-3">
+		<div class="container-xl">
+			<div class="alert alert-secondary"><p class="mb-0"><?php echo(get_the_excerpt()); ?></p></div>
+		</div>
+	</section>
+	<?php endif; ?>
+	<?php 
+		$relatedPromotions = get_posts(
+			array(
+				'post_type' => 'promotion',
+				'meta_query' => array(
+					array(
+						'key' => 'RelatedVenue',
+						'value' => '"' . get_the_ID() . '"',
+						'compare' => 'LIKE'
+					)
+				)
+			)
+		);
+		$relatedWeddingFairs = get_posts(
+			array(
+				'post_type' => 'wedding-fair',
+				'meta_query' => array(
+					array(
+						'key' => 'RelatedVenue',
+						'value' => '"' . get_the_ID() . '"',
+						'compare' => 'LIKE'
+					)
+				)
+			)
+		);
 
-			<?php if (have_rows('Pricing')): ?>
-				<div class="row my-5">
-					<div class="col text-secondary">
-						<div class="wdl-main-content">
-							<h2>
-								<?php _e('ข้อมูลค่าใช้จ่าย', 'Pricing') ?>
-							</h2>
 
-							<h3 class="h6 text-secondary">
-								<?php _e('แพ็คเกจงานหมั้น', 'Packages') ?>
-							</h3>
-							<div class="px-2">
-								<div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-5 row-cols-xl-6 wdl-pricing-row mb-4">
-									<?php while (have_rows('Pricing')):
-										the_row(); ?>
+		$tags = wp_get_post_tags(get_the_ID(), array('fields' => 'ids'));
+		$tagsArray = wp_get_post_tags(get_the_ID());
 
-										<?php if (get_row_layout() == 'Package'): ?>
-											<div class="col">
-												<div class="wdl-pricing-card">
-													<div class="text-primary fw-semibold">
-														<?php if (get_sub_field('PackageType')): ?>
-															<?php $packageType = get_sub_field('PackageType'); ?>
-															<?php if (get_field('icon', $packageType)): ?>
-																<img loading="lazy" src="<?php echo esc_url(get_field('icon', $packageType)['url']) ?>" alt="">
-															<?php endif; ?>
-															<p class="mb-0">
-																<?php echo esc_html($packageType->name); ?>
-															</p>
+		$relatedPosts = get_posts(
+			array(
+				'post_type' => 'post',
+				'posts_per_page' => 8,
+				'orderby' => 'date',
+				'order' => 'DESC',
+				'tax_query' => array(
+					array(
+						'taxonomy' => 'post_tag',
+						'field' => 'term_id',
+						'terms' => $tags,
+					)
+				)
+			)
+		);
+	?>
+	<?php if($relatedPromotions || $relatedWeddingFairs || $relatedPosts) : ?>
+	<section class="pb-3 overflow-hidden">
+		<div class="container-xl">
+			<ul class="wdl-tab nav mb-3 wdl-tab-related">
+				<?php if($relatedPromotions) : ?><li class="nav-item">
+					<a role="tab" aria-control="tab-promotion" data-bs-toggle="tab" data-bs-target="#tab-promotion" class="nav-link" aria-current="tab" href="#"><i class="wdl-tab-icon" data-feather="tag"></i> โปรโมชั่น</a>
+				</li><?php endif; ?>
+				<?php if($relatedWeddingFairs) : ?><li class="nav-item">
+					<a role="tab" aria-control="tab-wedding-fair" data-bs-toggle="tab" data-bs-target="#tab-wedding-fair" class="nav-link" href="#"><i class="wdl-tab-icon" data-feather="calendar"></i> Wedding Fair & Event</a>
+				</li><?php endif; ?>
+				<?php if($relatedPosts) : ?><li class="nav-item">
+					<a role="tab" aria-control="tab-post" data-bs-toggle="tab" data-bs-target="#tab-post" class="nav-link" href="#"><i class="wdl-tab-icon" data-feather="bookmark"></i> บทความ</a>
+				</li><?php endif; ?>
+			</ul>
+			<div class="tab-content wdl-tab-related-content">
+				<?php if($relatedPromotions) : ?><div id="tab-promotion" class="tab-pane fade">
+					<div class="row align-items-center">
+						<div class="col-12">
+							<div class="wdl-archive <?php echo esc_attr($atts['class']); ?>">
+								<div id="promotion-swiper" class="swiper wdl-archive-swiper">
+									<div class="swiper-wrapper">
+										<?php foreach ($relatedPromotions as $relatedPromotion): ?>
+											<div id="wdl-post-<?php echo $relatedPromotion->ID ?>" class="swiper-slide card wdl-archive-card <?php echo esc_attr($atts['class_single']); ?>">
+
+												<a class="card-img-top wdl-archive-card-img-top" href="<?php echo get_permalink($relatedPromotion->ID); ?>">
+													<img loading="lazy" class="" src="<?php echo esc_html(get_the_post_thumbnail_url($relatedPromotion, 'medium_large')) ?>" width="100%">
+												</a>
+
+												<div class="card-body wdl-archive-card-body">
+													<div class="wdl-badge-container mb-2">
+														<?php
+														$date = get_field('Date', $relatedPromotion->ID);
+														if ($date): ?>
+															<span class="badge wdl-badge-sm-primary">
+																<?php the_field('Date', $relatedPromotion->ID) ?>
+															</span>
+														<?php endif; ?>
+														<?php $hotDeal = get_field('HotDeal', $relatedPromotion->ID);
+														if ($hotDeal && in_array('Hot Deal', $hotDeal)): ?>
+															<span class="badge wdl-badge-sm">Hot Deal</span>
 														<?php endif; ?>
 													</div>
 
-													<div class="text-red">
-														<?php if (get_sub_field('PackagePrice')):
-															the_sub_field('PackagePrice'); endif; ?>
-													</div>
-													<div class="wdl-metadata">
-														<?php if (get_sub_field('PackageNote')):
-															the_sub_field('PackageNote'); endif; ?>
-													</div>
+													<h3 class="wdl-archive-title">
+														<a href="<?php echo get_permalink($relatedPromotion->ID); ?>">
+															<?php echo get_the_title($relatedPromotion->ID); ?>
+														</a>
+													</h3>
 												</div>
 											</div>
-										<?php endif; ?>
-									<?php endwhile; ?>
-								</div>
-							</div>
-
-							<h3 class="h6 text-secondary">
-								<?php _e('แพ็คเกจงานแต่งงาน', 'WeddingPackages') ?>
-							</h3>
-							<div class="px-2">
-								<div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-5 row-cols-xl-6 wdl-pricing-row mb-4">
-									<?php while (have_rows('Pricing')):
-										the_row(); ?>
-
-										<?php if (get_row_layout() == 'WeddingPackage'): ?>
-											<div class="col">
-												<div class="wdl-pricing-card">
-													<div class="text-primary fw-semibold">
-														<?php if (get_sub_field('WeddingPackageType')): ?>
-															<?php $weddingPackageType = get_sub_field('WeddingPackageType'); ?>
-															<?php if (get_field('icon', $weddingPackageType)): ?>
-																<img loading="lazy" src="<?php echo esc_url(get_field('icon', $weddingPackageType)['url']) ?>" alt="">
-															<?php endif; ?>
-															<p class="mb-0">
-																<?php echo esc_html($weddingPackageType->name); ?>
-															</p>
-														<?php endif; ?>
-													</div>
-
-													<div class="text-red">
-														<?php if (get_sub_field('WeddingPackagePrice')):
-															the_sub_field('WeddingPackagePrice'); endif; ?>
-													</div>
-													<div class="wdl-metadata">
-														<?php if (get_sub_field('WeddingPackageNote')):
-															the_sub_field('WeddingPackageNote'); endif; ?>
-													</div>
-												</div>
-											</div>
-										<?php endif; ?>
-									<?php endwhile; ?>
-								</div>
-							</div>
-
-							<h3 class="h6 text-secondary">
-								<?php _e('อาหารและเครื่องดื่ม', 'Food and Beverages') ?>
-							</h3>
-							<div class="px-2">
-								<div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-5 row-cols-xl-6 wdl-pricing-row">
-									<?php while (have_rows('Pricing')):
-										the_row(); ?>
-
-										<?php if (get_row_layout() == 'FoodBeverage'): ?>
-											<div class="col">
-												<div class="wdl-pricing-card">
-													<div class="text-primary fw-semibold">
-														<?php if (get_sub_field('FoodBeverageType')):
-															$fbType = get_sub_field('FoodBeverageType'); ?>
-															<?php if (get_field('icon', $fbType)): ?>
-																<img loading="lazy" src="<?php echo esc_url(get_field('icon', $fbType)['url']) ?>" alt="">
-															<?php endif; ?>
-															<p class="mb-0">
-																<?php echo esc_html($fbType->name); ?>
-															</p>
-														<?php endif; ?>
-													</div>
-
-													<div class="text-red">
-														<?php if (get_sub_field('FoodBeveragePrice')):
-															the_sub_field('FoodBeveragePrice'); endif; ?>
-													</div>
-													<div class="wdl-metadata">
-														<?php if (get_sub_field('FoodBeverageNote')):
-															the_sub_field('FoodBeverageNote'); endif; ?>
-													</div>
-												</div>
-											</div>
-										<?php endif; ?>
-
-									<?php endwhile; ?>
+										<?php endforeach; ?>
+									</div>
+									<div class="swiper-navigation swiper-navigation-small">
+										<div class="swiper-button-prev"></div>
+										<div class="swiper-button-next"></div>
+									</div>
+									<div class="swiper-pagination"></div>
 								</div>
 							</div>
 						</div>
 					</div>
+				</div><?php endif; ?>
+				<?php if($relatedWeddingFairs) : ?><div id="tab-wedding-fair" class="tab-pane fade">
+					<div class="row align-items-center">
+						<div class="col-12">
+							<div class="wdl-archive <?php echo esc_attr($atts['class']); ?>">
+								<div class="swiper wdl-archive-swiper">
+									<div class="swiper-wrapper">
+										<?php foreach ($relatedWeddingFairs as $relatedWeddingFair): ?>
+											<div id="wdl-post-<?php echo $relatedWeddingFair->ID ?>" class="swiper-slide card wdl-archive-card <?php echo esc_attr($atts['class_single']); ?>">
+
+												<?php if (has_post_thumbnail($relatedWeddingFair->ID)): ?>
+													<a class="card-img-top wdl-archive-card-img-top" href="<?php echo get_permalink($relatedWeddingFair->ID); ?>"><img loading="lazy" class="" src="<?php echo esc_html(get_the_post_thumbnail_url($relatedWeddingFair, 'medium_large')) ?>" width="100%"></a>
+												<?php endif; ?>
+
+												<div class="card-body wdl-archive-card-body">
+													<div class="wdl-badge-container mb-2">
+														<?php
+														$date = get_field('Date', $relatedWeddingFair->ID);
+														if ($date): ?>
+															<span class="badge wdl-badge-sm-primary">
+																<?php the_field('Date', $relatedWeddingFair->ID) ?>
+															</span>
+														<?php endif; ?>
+														<?php $hotDeal = get_field('HotDeal', $relatedWeddingFair->ID);
+														if ($hotDeal && in_array('Hot Deal', $hotDeal)): ?>
+															<span class="badge wdl-badge-sm">Hot Deal</span>
+														<?php endif; ?>
+													</div>
+
+													<h3 class="wdl-archive-title"><a href="<?php echo get_permalink($relatedWeddingFair->ID); ?>">
+															<?php echo get_the_title($relatedWeddingFair->ID); ?>
+														</a></h3>
+												</div>
+											</div>
+										<?php endforeach; ?>
+									</div>
+									<div class="swiper-navigation swiper-navigation-small">
+										<div class="swiper-button-prev"></div>
+										<div class="swiper-button-next"></div>
+									</div>
+									<div class="swiper-pagination"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div><?php endif; ?>
+				<?php if($relatedPosts) : ?><div id="tab-post" class="tab-pane fade">
+					<div class="row align-items-center">
+						<div class="col-12">
+							<div class="wdl-archive <?php echo esc_attr($atts['class']); ?>">
+								<div class="swiper wdl-archive-swiper">
+									<div class="swiper-wrapper">
+										<?php foreach ($relatedPosts as $relatedPost): ?>
+											<div id="wdl-post-<?php echo $relatedPost->ID ?>" class="swiper-slide card wdl-archive-card <?php echo esc_attr($atts['class_single']); ?>">
+
+												<?php if (has_post_thumbnail($relatedPost->ID)): ?>
+													<a class="card-img-top wdl-archive-card-img-top" href="<?php echo get_permalink($relatedPost->ID); ?>"><img loading="lazy" class="" src="<?php echo esc_html(get_the_post_thumbnail_url($relatedPost, 'medium_large')) ?>" width="100%"></a>
+												<?php endif; ?>
+
+												<div class="card-body wdl-archive-card-body">
+													<div class="wdl-badge-container mb-2">
+														<?php
+														$date = get_field('Date', $relatedPost->ID);
+														if ($date): ?>
+															<span class="badge wdl-badge-sm-primary">
+																<?php the_field('Date', $relatedPost->ID) ?>
+															</span>
+														<?php endif; ?>
+														<?php $hotDeal = get_field('HotDeal', $relatedPost->ID);
+														if ($hotDeal && in_array('Hot Deal', $hotDeal)): ?>
+															<span class="badge wdl-badge-sm">Hot Deal</span>
+														<?php endif; ?>
+													</div>
+
+													<h3 class="wdl-archive-title"><a href="<?php echo get_permalink($relatedPost->ID); ?>">
+															<?php echo get_the_title($relatedPost->ID); ?>
+														</a></h3>
+												</div>
+											</div>
+										<?php endforeach; ?>
+									</div>
+									<div class="swiper-navigation swiper-navigation-small">
+										<div class="swiper-button-prev"></div>
+										<div class="swiper-button-next"></div>
+									</div>
+									<div class="swiper-pagination"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div><?php endif; ?>
+			</div>
+		</div>
+	</section>
+	<?php endif; ?>
+
+	<section class="pb-3">
+		<div class="container">
+
+			<div class="row">
+				<div class="col text-secondary">
+					<?php the_content(); ?>
+					<?php if (have_rows('Pricing')): ?>
+					<div class="wdl-main-content">
+						<h2>
+							<?php _e('ข้อมูลค่าใช้จ่าย', 'Pricing') ?>
+						</h2>
+
+						<h3 class="h6 text-secondary">
+							<?php _e('แพ็คเกจงานหมั้น', 'Packages') ?>
+						</h3>
+						<div class="px-2">
+							<div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-5 row-cols-xl-6 wdl-pricing-row mb-4">
+								<?php while (have_rows('Pricing')):
+									the_row(); ?>
+
+									<?php if (get_row_layout() == 'Package'): ?>
+										<div class="col">
+											<div class="wdl-pricing-card">
+												<div class="text-primary fw-semibold">
+													<?php if (get_sub_field('PackageType')): ?>
+														<?php $packageType = get_sub_field('PackageType'); ?>
+														<?php if (get_field('icon', $packageType)): ?>
+															<img loading="lazy" src="<?php echo esc_url(get_field('icon', $packageType)['url']) ?>" alt="">
+														<?php endif; ?>
+														<p class="mb-0">
+															<?php echo esc_html($packageType->name); ?>
+														</p>
+													<?php endif; ?>
+												</div>
+
+												<div class="text-red">
+													<?php if (get_sub_field('PackagePrice')):
+														the_sub_field('PackagePrice');
+													endif; ?>
+												</div>
+												<div class="wdl-metadata">
+													<?php if (get_sub_field('PackageNote')):
+														the_sub_field('PackageNote'); endif; ?>
+												</div>
+											</div>
+										</div>
+									<?php endif; ?>
+								<?php endwhile; ?>
+							</div>
+						</div>
+
+						<h3 class="h6 text-secondary">
+							<?php _e('แพ็คเกจงานแต่งงาน', 'WeddingPackages') ?>
+						</h3>
+						<div class="px-2">
+							<div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-5 row-cols-xl-6 wdl-pricing-row mb-4">
+								<?php while (have_rows('Pricing')):
+									the_row(); ?>
+
+									<?php if (get_row_layout() == 'WeddingPackage'): ?>
+										<div class="col">
+											<div class="wdl-pricing-card">
+												<div class="text-primary fw-semibold">
+													<?php if (get_sub_field('WeddingPackageType')): ?>
+														<?php $weddingPackageType = get_sub_field('WeddingPackageType'); ?>
+														<?php if (get_field('icon', $weddingPackageType)): ?>
+															<img loading="lazy" src="<?php echo esc_url(get_field('icon', $weddingPackageType)['url']) ?>" alt="">
+														<?php endif; ?>
+														<p class="mb-0">
+															<?php echo esc_html($weddingPackageType->name); ?>
+														</p>
+													<?php endif; ?>
+												</div>
+
+												<div class="text-red">
+													<?php if (get_sub_field('WeddingPackagePrice')):
+														the_sub_field('WeddingPackagePrice'); endif; ?>
+												</div>
+												<div class="wdl-metadata">
+													<?php if (get_sub_field('WeddingPackageNote')):
+														the_sub_field('WeddingPackageNote'); endif; ?>
+												</div>
+											</div>
+										</div>
+									<?php endif; ?>
+								<?php endwhile; ?>
+							</div>
+						</div>
+
+						<h3 class="h6 text-secondary">
+							<?php _e('อาหารและเครื่องดื่ม', 'Food and Beverages') ?>
+						</h3>
+						<div class="px-2">
+							<div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-5 row-cols-xl-6 wdl-pricing-row">
+								<?php while (have_rows('Pricing')):
+									the_row(); ?>
+
+									<?php if (get_row_layout() == 'FoodBeverage'): ?>
+										<div class="col">
+											<div class="wdl-pricing-card">
+												<div class="text-primary fw-semibold">
+													<?php if (get_sub_field('FoodBeverageType')):
+														$fbType = get_sub_field('FoodBeverageType'); ?>
+														<?php if (get_field('icon', $fbType)): ?>
+															<img loading="lazy" src="<?php echo esc_url(get_field('icon', $fbType)['url']) ?>" alt="">
+														<?php endif; ?>
+														<p class="mb-0">
+															<?php echo esc_html($fbType->name); ?>
+														</p>
+													<?php endif; ?>
+												</div>
+
+												<div class="text-red">
+													<?php if (get_sub_field('FoodBeveragePrice')):
+														the_sub_field('FoodBeveragePrice'); endif; ?>
+												</div>
+												<div class="wdl-metadata">
+													<?php if (get_sub_field('FoodBeverageNote')):
+														the_sub_field('FoodBeverageNote'); endif; ?>
+												</div>
+											</div>
+										</div>
+									<?php endif; ?>
+
+								<?php endwhile; ?>
+							</div>
+						</div>
+					</div>
+					<?php endif; ?>
 				</div>
-			<?php endif; ?>
+			</div>
 
 			<?php if (get_field('CeremonyTypes')): ?>
 				<div class="row my-3">
@@ -328,17 +642,17 @@
 
 		</div>
 	</section>
-	<section class="overflow-hidden">
+	<section class="pb-3 overflow-hidden">
 		<div class="container">
 			<?php if (have_rows('BanquetRoom')): ?>
-				<div class="row my-5">
+				<div class="row">
 					<div class="col text-secondary">
-						<div class="wdl-main-content">
+						<div class="wdl-main-content wdl-archive">
 							<h2>
 								<?php _e('ห้องจัดเลี้ยง', 'Banquet room') ?>
 							</h2>
 
-							<div id="banquet" class="wdl-archive-swiper">
+							<div id="banquet" class="swiper wdl-archive-swiper">
 								<div class="swiper-wrapper">
 									<?php while (have_rows('BanquetRoom')):
 										the_row(); ?>
@@ -421,8 +735,11 @@
 										<?php endif; ?>
 									<?php endwhile; ?>
 								</div>
-								<!-- <div class="swiper-pagination"></div> -->
-
+								<div class="swiper-navigation swiper-navigation-small">
+									<div class="swiper-button-prev"></div>
+									<div class="swiper-button-next"></div>
+								</div>
+								<div class="swiper-pagination"></div>
 							</div>
 						</div>
 					</div>
@@ -431,313 +748,13 @@
 		</div>
 	</section>
 
-	<?php
-	$relatedPromotions = get_posts(
-		array(
-			'post_type' => 'promotion',
-			'meta_query' => array(
-				array(
-					'key' => 'RelatedVenue',
-					// name of custom field
-					'value' => '"' . get_the_ID() . '"',
-					// matches exactly "123", not just 123. This prevents a match for "1234"
-					'compare' => 'LIKE'
-				)
-			)
-		)
-	);
-	if ($relatedPromotions): ?>
-		<section class="pb-5 overflow-hidden">
-			<div class="container-xl">
-				<div class="row align-items-center">
-					<div class="col-12">
-						<div class="wdl-archive <?php echo esc_attr($atts['class']); ?>">
-							<h3 class="h4 mb-4">
-								<?php _e('โปรโมชั่นงานแต่งงานแนะนำ', 'Recommended Wedding Promotion') ?>
-							</h3>
-							<div id="promotion-swiper" class="swiper wdl-archive-swiper overflow-visible">
-								<div class="swiper-wrapper">
-									<?php foreach ($relatedPromotions as $relatedPromotion): ?>
-										<div id="wdl-post-<?php echo $relatedPromotion->ID ?>" class="swiper-slide card wdl-archive-card <?php echo esc_attr($atts['class_single']); ?>">
-
-											<a class="card-img-top wdl-archive-card-img-top" href="<?php echo get_permalink($relatedPromotion->ID); ?>">
-												<img loading="lazy" class="" src="<?php echo esc_html(get_the_post_thumbnail_url($relatedPromotion, 'medium_large')) ?>" width="100%">
-											</a>
-
-											<div class="card-body wdl-archive-card-body">
-												<div class="wdl-badge-container mb-2">
-													<?php
-													$date = get_field('Date', $relatedPromotion->ID);
-													if ($date): ?>
-														<span class="badge wdl-badge-sm-primary">
-															<?php the_field('Date', $relatedPromotion->ID) ?>
-														</span>
-													<?php endif; ?>
-													<?php $hotDeal = get_field('HotDeal', $relatedPromotion->ID);
-													if ($hotDeal && in_array('Hot Deal', $hotDeal)): ?>
-														<span class="badge wdl-badge-sm">Hot Deal</span>
-													<?php endif; ?>
-												</div>
-
-												<h3 class="wdl-archive-title">
-													<a href="<?php echo get_permalink($relatedPromotion->ID); ?>">
-														<?php echo get_the_title($relatedPromotion->ID); ?>
-													</a>
-												</h3>
-											</div>
-										</div>
-									<?php endforeach; ?>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
-	<?php endif; ?>
-
-	<?php
-	$relatedWeddingFairs = get_posts(
-		array(
-			'post_type' => 'wedding-fair',
-			'meta_query' => array(
-				array(
-					'key' => 'RelatedVenue',
-					// name of custom field
-					'value' => '"' . get_the_ID() . '"',
-					// matches exactly "123", not just 123. This prevents a match for "1234"
-					'compare' => 'LIKE'
-				)
-			)
-		)
-	);
-	if ($relatedWeddingFairs): ?>
-		<section class="pb-5 overflow-hidden">
-			<div class="container-xl">
-				<div class="row align-items-center">
-					<div class="col-12">
-						<div class="wdl-archive <?php echo esc_attr($atts['class']); ?>">
-							<h3 class="h4 mb-4">
-								<?php _e('Wedding Fair แนะนำ', 'Recommended Wedding Fair') ?>
-							</h3>
-							<div class="swiper wdl-archive-swiper overflow-visible">
-								<div class="swiper-wrapper">
-									<?php foreach ($relatedWeddingFairs as $relatedWeddingFair): ?>
-										<div id="wdl-post-<?php echo $relatedWeddingFair->ID ?>" class="swiper-slide card wdl-archive-card <?php echo esc_attr($atts['class_single']); ?>">
-
-											<?php if (has_post_thumbnail($relatedWeddingFair->ID)): ?>
-												<a class="card-img-top wdl-archive-card-img-top" href="<?php echo get_permalink($relatedWeddingFair->ID); ?>"><img loading="lazy" class="" src="<?php echo esc_html(get_the_post_thumbnail_url($relatedWeddingFair, 'medium_large')) ?>" width="100%"></a>
-											<?php endif; ?>
-
-											<div class="card-body wdl-archive-card-body">
-												<div class="wdl-badge-container mb-2">
-													<?php
-													$date = get_field('Date', $relatedWeddingFair->ID);
-													if ($date): ?>
-														<span class="badge wdl-badge-sm-primary">
-															<?php the_field('Date', $relatedWeddingFair->ID) ?>
-														</span>
-													<?php endif; ?>
-													<?php $hotDeal = get_field('HotDeal', $relatedWeddingFair->ID);
-													if ($hotDeal && in_array('Hot Deal', $hotDeal)): ?>
-														<span class="badge wdl-badge-sm">Hot Deal</span>
-													<?php endif; ?>
-												</div>
-
-												<h3 class="wdl-archive-title"><a href="<?php echo get_permalink($relatedWeddingFair->ID); ?>">
-														<?php echo get_the_title($relatedWeddingFair->ID); ?>
-													</a></h3>
-											</div>
-										</div>
-									<?php endforeach; ?>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
-	<?php endif; ?>
-	<?php
-	$tags = wp_get_post_tags(get_the_ID(), array('fields' => 'ids'));
-	$tagsArray = wp_get_post_tags(get_the_ID());
-
-	$relatedPosts = get_posts(
-		array(
-			'post_type' => 'post',
-			'tax_query' => array(
-				array(
-					'taxonomy' => 'post_tag',
-					// name of custom field
-					'field' => 'term_id',
-					'terms' => $tags,
-					// matches exactly "123", not just 123. This prevents a match for "1234"
-				)
-			)
-		)
-	);
-	if ($relatedPosts): ?>
-		<section class="pb-5 overflow-hidden">
-			<div class="container-xl">
-				<div class="row align-items-center">
-					<div class="col-12">
-						<div class="wdl-archive <?php echo esc_attr($atts['class']); ?>">
-							<h3 class="h4 mb-4">
-								<?php _e('บทความที่เกี่ยวข้อง', 'Related Posts') ?>
-							</h3>
-							<div class="mb-3">
-								<?php
-								if ($tagsArray) {
-									?>
-									<div class="wdl-badge-container">
-										<?php foreach ($tagsArray as $tag) {
-											echo "<a href='" . get_tag_link($tag->term_id) . " ' class='wdl-badge-sm'>" . $tag->name . "</a>";
-										} ?>
-									</div>
-								<?php }
-								?>
-							</div>
-							<div class="swiper wdl-archive-swiper overflow-visible">
-								<div class="swiper-wrapper">
-									<?php foreach ($relatedPosts as $relatedPost): ?>
-										<div id="wdl-post-<?php echo $relatedPost->ID ?>" class="swiper-slide card wdl-archive-card <?php echo esc_attr($atts['class_single']); ?>">
-
-											<?php if (has_post_thumbnail($relatedPost->ID)): ?>
-												<a class="card-img-top wdl-archive-card-img-top" href="<?php echo get_permalink($relatedPost->ID); ?>"><img loading="lazy" class="" src="<?php echo esc_html(get_the_post_thumbnail_url($relatedPost, 'medium_large')) ?>" width="100%"></a>
-											<?php endif; ?>
-
-											<div class="card-body wdl-archive-card-body">
-												<div class="wdl-badge-container mb-2">
-													<?php
-													$date = get_field('Date', $relatedPost->ID);
-													if ($date): ?>
-														<span class="badge wdl-badge-sm-primary">
-															<?php the_field('Date', $relatedPost->ID) ?>
-														</span>
-													<?php endif; ?>
-													<?php $hotDeal = get_field('HotDeal', $relatedPost->ID);
-													if ($hotDeal && in_array('Hot Deal', $hotDeal)): ?>
-														<span class="badge wdl-badge-sm">Hot Deal</span>
-													<?php endif; ?>
-												</div>
-
-												<h3 class="wdl-archive-title"><a href="<?php echo get_permalink($relatedPost->ID); ?>">
-														<?php echo get_the_title($relatedPost->ID); ?>
-													</a></h3>
-											</div>
-										</div>
-									<?php endforeach; ?>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
-	<?php endif; ?>
-
-	<?php $relatedVenues = get_posts(
-		array(
-			'post_type' => 'venue',
-			'tax_query' => array(
-				array(
-					'taxonomy' => 'post_tag',
-					// name of custom field
-					'field' => 'term_id',
-					'terms' => '"' . get_the_ID() . '"',
-					// matches exactly "123", not just 123. This prevents a match for "1234"
-				)
-			)
-		)
-	);
-	if ($relatedVenues): ?>
-		<section class="pb-5 overflow-hidden">
-			<div class="container-xl">
-				<div class="row align-items-center">
-					<div class="col-12">
-						<div class="wdl-archive">
-							<h3 class="h4 mb-4">
-								<?php _e('สถานที่จัดงานแต่งงานอื่นที่คุณอาจสนใจ', 'Other Wedding Venues') ?>
-							</h3>
-							<div class="swiper wdl-archive-swiper overflow-visible">
-								<div class="swiper-wrapper">
-									<?php foreach ($relatedVenues as $relatedVenue): ?>
-										<div id="wdl-post-<?php echo $relatedVenue->ID; ?>" class="swiper-slide card wdl-archive-card <?php echo esc_attr($atts['class_single']); ?>">
-
-											<?php if (has_post_thumbnail($relatedVenue->ID)): ?>
-												<a class="card-img-top wdl-archive-card-img-top" href="<?php echo get_permalink($relatedVenue->ID); ?>">
-													<img loading="lazy" class="" src="<?php echo esc_html(get_the_post_thumbnail_url($relatedVenue->ID, 'medium_large')) ?>" width="100%">
-													<?php $sponsored = get_field('Sponsored', $relatedVenue->ID);
-													if ($sponsored && in_array('Sponsored', $sponsored)): ?>
-														<span class="badge wdl-badge-sm">Sponsored</span>
-													<?php endif; ?>
-												</a>
-											<?php endif; ?>
-
-											<div class="card-body wdl-archive-card-body">
-												<h3 class="wdl-archive-title"><a href="<?php echo get_permalink($relatedVenue->ID); ?>">
-														<?php the_title($relatedVenue->ID); ?>
-													</a></h3>
-
-												<div class="wdl-metadata">
-													<?php
-													$locations = get_field('Location', $relatedVenue->ID);
-													if ($locations): ?>
-														<div class="wdl-archive-neighborhood">
-															<ul>
-																<?php foreach ($locations as $location): ?>
-																	<li>
-																		<?php echo esc_html($location->name); ?>
-																	</li>
-																<?php endforeach; ?>
-															</ul>
-														</div>
-													<?php endif; ?>
-
-													<?php
-													$minPrice = get_field('MinPrice', $relatedVenue->ID);
-													if ($minPrice): ?>
-														<div class="wdl-archive-min-price">
-															<?php _e('ราคาเริ่มต้น', 'Starting price') ?>&nbsp;<strong>
-																<?php echo number_format(get_field('MinPrice')) ?>+
-																<?php _e('บาท', 'THB') ?>
-															</strong>
-														</div>
-													<?php endif; ?>
-
-													<?php
-													$maxGuest = get_field('MaxGuest', $relatedVenue->ID);
-													if ($maxGuest): ?>
-														<div class="wdl-archive-max-guest">
-															<?php _e('รองรับแขกสูงสุด', 'Max guest') ?>&nbsp;<strong>
-																<?php echo number_format(get_field('MaxGuest')) ?>
-																<?php _e('คน', 'people') ?>
-															</strong>
-														</div>
-													<?php endif; ?>
-												</div>
-											</div>
-
-										</div>
-									<?php endforeach; ?>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
-	<?php endif; ?>
-
 	<div class="modal fade modal-lg" id="apply">
 		<div class="modal-dialog modal-dialog-centered m-auto">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h3 class="m-0">ตอบคำถามสั้น ๆ เพื่อรับสิทธิพิเศษสำหรับคุณ!</h3>
-
-					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-				</div>
+			<div class="modal-content m-3 mb-0">
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				<div class="modal-body">
+					<h3 class="mt-2">ตอบคำถามสั้น ๆ เพื่อรับสิทธิพิเศษสำหรับคุณ!</h3>
+					<hr>
 					<p class="wdl-archive-location mb-2">
 						<?php the_title() ?>
 					</p>
@@ -755,7 +772,7 @@
 
 	<div class="modal fade wdl-gallery-modal" id="gallery">
 		<div class="modal-dialog modal-dialog-centered modal-xl">
-			<div class="modal-content">
+			<div class="modal-content m-3 mb-0">
 				<div class="modal-body">
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 
@@ -765,7 +782,15 @@
 						<div class="swiper wdl-gallery-modal-swiper">
 							<div class="swiper-wrapper">
 								<?php
-								// Grab each image.
+								foreach ($videos as $video):
+									?>
+									<div class="swiper-slide wdl-gallery-modal-item">
+										<?php echo($video['iframe_code']) ?>
+									</div>
+									<?php
+								endforeach;
+								?>
+								<?php
 								foreach ($images as $image):
 									$image_id = $image['ID'];
 									$image_src = $image['url'];
@@ -776,11 +801,10 @@
 									</div>
 								<?php endforeach; ?>
 							</div>
-							<!-- <div class="swiper-pagination"></div> -->
-						</div>
-						<div class="swiper-navigation">
-							<div class="swiper-button-prev"></div>
-							<div class="swiper-button-next"></div>
+							<div class="swiper-navigation swiper-navigation-small">
+								<div class="swiper-button-prev"></div>
+								<div class="swiper-button-next"></div>
+							</div>
 						</div>
 					<?php endif; ?>
 				</div>
@@ -794,7 +818,7 @@
 			<?php if (get_row_layout() == 'BanquetRoomEntry'): ?>
 				<div class="modal fade wdl-gallery-modal" id="banquet-gallery-<?php echo get_row_index() ?>">
 					<div class="modal-dialog modal-dialog-centered modal-xl">
-						<div class="modal-content">
+						<div class="modal-content m-3 mb-0">
 							<div class="modal-body">
 								<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 
@@ -818,7 +842,7 @@
 										</div>
 										<!-- <div class="swiper-pagination"></div> -->
 									</div>
-									<div class="swiper-navigation">
+									<div class="swiper-navigation swiper-navigation-small">
 										<div class="swiper-button-prev"></div>
 										<div class="swiper-button-next"></div>
 									</div>

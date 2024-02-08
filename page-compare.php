@@ -1,7 +1,4 @@
 <?php include 'components/header.php' ?>
-<script>
-  document.querySelector('body').classList.add('beta')
-</script>
 <main>
   <?php include 'components/lead-menu-revamped.php' ?>
 
@@ -15,26 +12,39 @@
   ) ?>
 
   <section class="wdl-archive overflow-hidden">
-    <div class="container">
-      <hr class="mt-0">
+    <div class="container-xxl">
       <div class="row mb-3">
         <div class="col-md-6 text-center text-md-start">
           <a class="wdl-link-back" href="#" onclick="history.back()">ย้อนกลับ</a>
-          <h2 class="h1">
+          <h1>
             <?php echo _e('เปรียบเทียบสถานที่จัดงานแต่งงาน', 'เปรียบเทียบสถานที่จัดงานแต่งงาน') ?>
-          </h2>
+          </h1>
         </div>
         <div class="col-md-6 pt-3 text-center text-md-end">
           <a class="wdl-link-print" href="#">Print หน้านี้</a>
-          <a class="wdl-link-share" href="#">แชร์หน้านี้</a>
+          <a class="wdl-link-share" href="#share" data-bs-toggle="modal">แชร์หน้านี้</a>
         </div>
       </div>
+    </div>
+    <div class="container-xxl container-archive">
       <div class="swiper wdl-compare-swiper mb-5">
         <div class="swiper-wrapper">
           <?php while ($comparePosts->have_posts()): ?>
             <?php $comparePosts->the_post(); ?>
 
-            <div id="wdl-post-<?php the_ID(); ?>" class="swiper-slide card p-0 h-100 <?php echo esc_attr($atts['class_single']); ?> wdl-archive-card-blog">
+            <div id="wdl-post-<?php the_ID(); ?>" class="swiper-slide wdl-archive-card card p-0 h-100 <?php echo esc_attr($atts['class_single']); ?> wdl-archive-card-blog wdl-compare-card">
+
+              <div class="card-select d-none">
+                <div class="wdl-checkbox">
+                  <input id="card-select-<?php the_ID() ?>" type="checkbox" data-select='
+                    {
+                      "title": "<?php the_title() ?>",
+                      "postType": "<?php echo get_post_type() ?>",
+                      "id": "<?php the_ID() ?>"
+                    }'>
+                  <label for="card-select-<?php the_ID() ?>"><?php _e('เลือก','เลือก')?></label>
+                </div>
+              </div>
 
               <?php if (has_post_thumbnail(get_the_ID())): ?>
                 <a class="card-img-top wdl-archive-card-img-top" href="<?php the_permalink(); ?>"><img loading="lazy" class="" src="<?php echo esc_html(get_the_post_thumbnail_url($post, 'medium_large')) ?>" width="100%"></a>
@@ -42,7 +52,7 @@
 
               <div class="card-body wdl-archive-card-body">
                 <div class="mb-3 wdl-compare-group" data-mh="wdl-compare-group-1">
-                  <p class="wdl-archive-pretitle">
+                  <div class="wdl-archive-pretitle">
                     <small>
                       <?php if(get_field('VenueType')[0]->name) {
                           echo esc_html(get_field('VenueType')[0]->name);
@@ -50,7 +60,7 @@
                           echo esc_html('&nbsp;');
                         }?>
                     </small>
-                  </p>
+                  </div>
                   <h3 class="wdl-archive-title">
                     <a href="<?php the_permalink(); ?>">
                       <?php the_title(); ?>
@@ -59,7 +69,7 @@
                 </div>
 
                 <div class="mb-4 wdl-compare-group" data-mh="wdl-compare-group-2">
-                  <a href="#" class="wdl-btn w-100 text-center wdl-apply-btn">คลิกขอแพ็กเกจ</a>
+                  <a href="#" class="wdl-btn w-100 text-center wdl-apply-btn wdl-btn-cta wdl-form-general-direct" data-bs-toggle="modal" data-bs-target=".wdl-form-general-modal">คลิกขอแพ็กเกจ</a>
                 </div>
 
                 <div class="mb-4 wdl-compare-group" data-mh="wdl-compare-group-3">
@@ -82,7 +92,7 @@
                       $minPrice = get_field('MinPrice');
                       if ($minPrice) : ?>
                         <div class="wdl-archive-min-price">
-                          <?php _e('ราคาเริ่มต้น', 'Starting price') ?>&nbsp;<strong><?php echo number_format(get_field('MinPrice')) ?>+ <?php _e('บาท', 'THB') ?></strong>
+                          <span><?php _e('ราคาเริ่มต้น', 'Starting price') ?>&nbsp;<strong><?php echo number_format(get_field('MinPrice')) ?>+ <?php _e('บาท', 'THB') ?></strong></span>
                         </div>
                       <?php endif; ?>
 
@@ -90,10 +100,49 @@
                       $maxGuest = get_field('MaxGuest');
                       if ($maxGuest) : ?>
                         <div class="wdl-archive-max-guest">
-                          <?php _e('รองรับแขกสูงสุด', 'Max guest') ?>&nbsp;<strong><?php echo number_format(get_field('MaxGuest')) ?> <?php _e('คน', 'people') ?></strong>
+                          <span><?php _e('รองรับแขกสูงสุด', 'Max guest') ?>&nbsp;<strong><?php echo number_format(get_field('MaxGuest')) ?> <?php _e('คน', 'people') ?></strong></span>
                         </div>
                       <?php endif; ?>
                     </div>
+                </div>
+
+                <div class="mb-4 wdl-compare-group" data-mh="wdl-compare-group-4">
+                  <h4><?php _e('ข้อมูลค่าใช้จ่าย','ข้อมูลค่าใช้จ่าย')?></h4>
+                  <ul>
+                  <?php $pricings = get_field('Pricing');
+                    while (have_rows('Pricing')):
+                    the_row();?>
+                    <?php if (get_row_layout() == 'Package'): ?>
+                      <li class="wdl-metadata">
+                        งานหมั้น
+                        <?php // echo esc_html(get_sub_field('PackageType')->name); ?>
+                        <span class="text-red fw-semibold"><?php the_sub_field('PackagePrice'); ?></span>
+                      </li>
+                      <?php break; ?>
+                    <?php endif; ?>
+                    <?php endwhile; ?>
+                    <?php while (have_rows('Pricing')):
+                    the_row();?>
+                    
+                    <?php if (get_row_layout() == 'WeddingPackage'): ?>
+                      <li class="wdl-metadata">
+                        งานแต่งงาน
+                        <?php // echo esc_html(get_sub_field('WeddingPackageType')->name); ?>
+                        <span class="text-red fw-semibold"><?php the_sub_field('WeddingPackagePrice'); ?></span>
+                      </li>
+                      <?php break; ?>
+                    <?php endif; ?>
+                    <?php endwhile; ?>
+                    <?php while (have_rows('Pricing')):
+                    the_row();?>
+                    <?php if (get_row_layout() == 'FoodBeverage'): ?>
+                      <li class="wdl-metadata">
+                        <?php echo esc_html(get_sub_field('FoodBeverageType')->name); ?>
+                        <span class="text-red fw-semibold"><?php the_sub_field('FoodBeveragePrice'); ?></span>
+                      </li>
+                    <?php endif; ?>
+                    <?php endwhile; ?>
+                  </ul>
                 </div>
 
                 <div class="mb-4 wdl-compare-group" data-mh="wdl-compare-group-5">
@@ -134,7 +183,7 @@
                             </figure>
                             <?php endif; ?>
                             <?php if( get_sub_field('BanquetRoomName')) : ?>
-                            <div class="text-sm fw-600">
+                            <div class="text-sm fw-semibold">
                               <?php the_sub_field('BanquetRoomName')?>
                             </div>
                             <?php endif; ?>
@@ -185,7 +234,7 @@
 
   <div class="modal fade modal-lg" id="apply">
     <div class="modal-dialog modal-dialog-centered m-auto">
-      <div class="modal-content">
+      <div class="modal-content m-3 mb-0">
         <div class="modal-header">
           <h3 class="m-0">ตอบคำถามสั้น ๆ เพื่อรับสิทธิพิเศษสำหรับคุณ!</h3>
           
@@ -205,4 +254,7 @@
     </div>
   </div>
 </main>
+
+<?php include 'components/form-general.php' ?>
+<?php include 'components/share-modal.php' ?>
 <?php include 'components/footer.php' ?>

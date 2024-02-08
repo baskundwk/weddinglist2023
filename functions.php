@@ -12,6 +12,7 @@ function wdl_enqueue_styles()
 	wp_enqueue_script('jquery', get_theme_file_uri() . '/library/jquery/jquery-3.7.0.slim.min.js', '', true);
 	wp_enqueue_script('jquery-match-height', get_theme_file_uri() . '/library/jquery-match-height/jquery.matchHeight.js', array('jquery'), true);
 	wp_enqueue_script('jquery-shuffle', get_theme_file_uri() . '/library/jquery/jquery-shuffle.min.js', '', true);
+	wp_enqueue_script('feather-icons', get_theme_file_uri() . '/library/feather-icons/feather.min.js', array('jquery'), '', true);
 	wp_enqueue_script('boostrap', get_theme_file_uri() . '/library/bootstrap/js/bootstrap.bundle.min.js', array('jquery'), '', true);
 	wp_enqueue_script('circle-progress', get_theme_file_uri() . '/library/circle-progress/circle-progress.min.js', array('jquery'), '', true);
 	wp_enqueue_script('swiperjs', get_theme_file_uri() . '/library/swiperjs/swiper-bundle.min.js', array('jquery'), '', true);
@@ -232,14 +233,14 @@ function venue_list_by_location($tag)
 	return $output;
 }
 
-add_action('wp_print_scripts', function () {
-	if (is_singular(array('venue', 'promotion', 'wedding-fair')) || is_page('register')) {
+/* add_action('wp_print_scripts', function () {
+	if (is_singular(array('venue', 'promotion', 'wedding-fair', 'vendor')) || is_page('register') || is_front_page()) {
 
 	} else {
 		wp_dequeue_script('google-recaptcha');
 		wp_dequeue_script('wpcf7-recaptcha');
 	}
-});
+}); */
 
 
 function myprefix_register_options_page() {
@@ -397,11 +398,12 @@ function send_email(){
 		$cardId = $_REQUEST['cardId'];
 		$recepient = get_field('Email', $cardId);
 		$cardTitle = $_REQUEST['cardTitle'];
-
+		$microsite = get_field('Microsite', $cardId);
+		
 		$timestamp = wp_date("d M Y H:i:s", null );
 	  
 		$subject = "คุณ $name ได้ลงทะเบียนที่ $cardTitle";
-		$to = "alphafghaos@gmail.com";
+		$to = $recepient;
 		$headers  = "MIME-Version: 1.0" . "\r\n";
 		$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
 		$headers .= "From: Weddinglist Team <support@weddinglist.co.th> \r\n";
@@ -410,36 +412,73 @@ function send_email(){
 
 		$file = get_theme_file_uri() . '/images/logo-w.png'; //phpmailer will load this file
 
-		$email_body = 
-		"<div style='background: #EEE; padding: 32px;'>".
-		"	<div style='max-width: 600px; margin: auto;'>".
-		"		<div style='background: #FF2758; padding: 24px; text-align: center;'>".
-		"			<img src='$file' alt='Weddinglist' width='243' height='60'>".
-		"		</div>".
-		"		<div style='background: #FFF; padding: 16px; font-family: Tahoma; color: #555; line-height: 1.7;'>".
-		"			<p>สวัสดีค่ะ $recepient</p>".
-		"			<p><strong>มีลูกค้าสนใจรับสิทธิพิเศษผ่าน $cardTitle</strong></p>".
-		"			<ul style='list-style: none; padding: 0;'>".
-		"				<li>เวลาลงทะเบียน : <strong>$timestamp</strong></li>".
-		"				<li>ลูกค้าชื่อ : <strong>$name</strong></li>".
-		"				<li>อีเมล : <strong>$email</strong></li>".
-		"				<li>เบอร์โทร​ : <strong>$tel</strong></li>".
-		"				<li>LINE ID : <strong>$lineid</strong></li>".
-		"				<li>จำนวนแขก : <strong>$guest</strong></li>".
-		"				<li>งบประมาณ : <strong>$budget</strong></li>".
-		"				<li>วันที่จัดงาน : <strong>$date</strong></li>".
-		"				<li>ช่วงเวลาจัดงาน : <strong>$daytime</strong></li>".
-		"			</ul>".
-		"			<p>ข้อความเพิ่มเติม :</p>".
-		"			<p><strong>$message</strong></p>".
-		"			<p style='color: #999; font-weight: 700;'>ขอขอบพระคุณอย่างสูง<br>Weddinglist Support</p>".
-		"			<p style='font-size: 14px;'>แจ้งปัญหาการใช้งาน".
-		"				<br>โทร. <a href='tel:0634748111'>063 474 8111</a>".
-		"				<br>อีเมล <a href='mailto:support@weddinglist.co.th'>support@weddinglist.co.th</a>".
-		"			</p>".
-		"		</div>".
-		"	</div>".
-		"</div>";
+		if ($microsite && in_array('Free Microsite', $microsite)) {
+
+			$email_body = 
+			"<div style='background: #EEE; padding: 32px;'>".
+			"	<div style='max-width: 600px; margin: auto;'>".
+			"		<div style='background: #FF2758; padding: 24px; text-align: center;'>".
+			"			<img src='$file' alt='Weddinglist' width='243' height='60'>".
+			"		</div>".
+			"		<div style='background: #FFF; padding: 16px; font-family: Tahoma; color: #555; line-height: 1.7;'>".
+			"			<p>สวัสดีค่ะ</p>".
+			"			<p><strong>มีลูกค้าสนใจรับสิทธิพิเศษผ่าน $cardTitle</strong></p>".
+			"			<ul style='list-style: none; padding: 0;'>".
+			"				<li>เวลาลงทะเบียน : <strong>$timestamp</strong></li>".
+			"				<li>ลูกค้าชื่อ : <strong>$name</strong></li>".
+			"				<li>อีเมล : <strong>$email</strong></li>".
+			"				<li>เบอร์โทร​ : <strong>xxxxxxxxxxxx</strong></li>".
+			"				<li>LINE ID : <strong>xxxxxxxxxxxx</strong></li>".
+			"				<li>จำนวนแขก : <strong>$guest</strong></li>".
+			"				<li>งบประมาณ : <strong>$budget</strong></li>".
+			"				<li>วันที่จัดงาน : <strong>$date</strong></li>".
+			"				<li>ช่วงเวลาจัดงาน : <strong>$daytime</strong></li>".
+			"			</ul>".
+			"			<p>ข้อความเพิ่มเติม :</p>".
+			"			<p><strong>$message</strong></p>".
+			"			<p style='color: #999; font-weight: 700;'>ขอขอบพระคุณอย่างสูง<br>Weddinglist Support</p>".
+			"			<p style='font-size: 14px;'>แจ้งปัญหาการใช้งาน".
+			"				<br>โทร. <a href='tel:0634748111'>063 474 8111</a>".
+			"				<br>อีเมล <a href='mailto:support@weddinglist.co.th'>support@weddinglist.co.th</a>".
+			"			</p>".
+			"		</div>".
+			"	</div>".
+			"</div>";
+
+		} else {
+
+			$email_body = 
+			"<div style='background: #EEE; padding: 32px;'>".
+			"	<div style='max-width: 600px; margin: auto;'>".
+			"		<div style='background: #FF2758; padding: 24px; text-align: center;'>".
+			"			<img src='$file' alt='Weddinglist' width='243' height='60'>".
+			"		</div>".
+			"		<div style='background: #FFF; padding: 16px; font-family: Tahoma; color: #555; line-height: 1.7;'>".
+			"			<p>สวัสดีค่ะ</p>".
+			"			<p><strong>มีลูกค้าสนใจรับสิทธิพิเศษผ่าน $cardTitle</strong></p>".
+			"			<ul style='list-style: none; padding: 0;'>".
+			"				<li>เวลาลงทะเบียน : <strong>$timestamp</strong></li>".
+			"				<li>ลูกค้าชื่อ : <strong>$name</strong></li>".
+			"				<li>อีเมล : <strong>$email</strong></li>".
+			"				<li>เบอร์โทร​ : <strong>$tel</strong></li>".
+			"				<li>LINE ID : <strong>$lineid</strong></li>".
+			"				<li>จำนวนแขก : <strong>$guest</strong></li>".
+			"				<li>งบประมาณ : <strong>$budget</strong></li>".
+			"				<li>วันที่จัดงาน : <strong>$date</strong></li>".
+			"				<li>ช่วงเวลาจัดงาน : <strong>$daytime</strong></li>".
+			"			</ul>".
+			"			<p>ข้อความเพิ่มเติม :</p>".
+			"			<p><strong>$message</strong></p>".
+			"			<p style='color: #999; font-weight: 700;'>ขอขอบพระคุณอย่างสูง<br>Weddinglist Support</p>".
+			"			<p style='font-size: 14px;'>แจ้งปัญหาการใช้งาน".
+			"				<br>โทร. <a href='tel:0634748111'>063 474 8111</a>".
+			"				<br>อีเมล <a href='mailto:support@weddinglist.co.th'>support@weddinglist.co.th</a>".
+			"			</p>".
+			"		</div>".
+			"	</div>".
+			"</div>";
+
+		}
 		
 		$mail = wp_mail($to, $subject, $email_body, $headers);
 		

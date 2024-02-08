@@ -1,0 +1,32 @@
+.wdl-localnav {
+  border-top: 1px solid #eee;
+  .wdl-localnav-swiper {
+    .swiper-wrapper {
+      padding: 0;
+      margin: 0;
+
+      .swiper-slide {
+        width: auto;
+        transition: .35s cubic-bezier(0,0,0,1);
+        a {
+          display: block;
+          padding: 8px;
+          font-weight: 400;
+          color: #666666;
+
+        }
+        &.active {
+          box-shadow: 0 -2px 0 #ff2758 inset;
+          a {
+            color: #ff2758;
+          }
+        }
+      }
+    }
+  }
+}
+
+/* .wdl-localnav-heading {
+  padding-top: 16px;
+  margin-top: -16px;
+} */

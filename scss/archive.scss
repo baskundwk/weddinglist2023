@@ -234,8 +234,8 @@
       position: relative;
       .badge {
         position: absolute;
-        bottom: 10px;
-        left: 10px;
+        bottom: 14px;
+        left: 14px;
       }
 
       img {
@@ -247,17 +247,20 @@
 .wdl-archive-extended, .wdl-archive-extended .wdl-archive-swiper {
   padding: 2px 24px 24px;
   margin: -2px -24px -2px -24px;
+  //margin: -2px 0;
   .card {
     height: 100%;
     transition: 0.25s box-shadow;
     border-radius: 6px;
     overflow: hidden;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1) inset, 0 0 0 rgba(0, 0, 0, 0.05);
+
     &::after {
       content: none !important;
     }
     &:hover {
       z-index: 1;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+      box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1) inset, 0 4px 30px rgba(0, 0, 0, 0.05);
       .card-footer {
         opacity: 1;
         transform: translateY(0);
@@ -273,6 +276,29 @@
       z-index: 1;
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05), 0 0 0 2px #ff2758;
     }
+
+    .wdl-card-gallery-swiper {
+      .swiper-navigation {
+        .swiper-button-next {
+          right: 8px;
+        }
+        .swiper-button-prev {
+          left: 8px;
+        }
+      }
+    }
+
+    &:not(:hover) {
+      .wdl-card-gallery-swiper {
+        .swiper-navigation {
+
+          .swiper-button-next,
+          .swiper-button-prev {
+            opacity: 0;
+          }
+        }
+      }
+    }
   }
 
   .card-select{
@@ -285,6 +311,12 @@
     opacity: 0;
     transform: translate(20%, 0%);
     transition: .25s opacity ease-out, .25s transform ease-out;
+    z-index: 1;
+
+    @include max-width-xl {
+      transform: translate(0, 0);
+      opacity: 1;
+    }
     
     .wdl-checkbox {
       margin: 0;
@@ -316,6 +348,11 @@
     > *:last-child {
       margin-right: 8px;
     }
+
+    @include max-width-xl {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
   .wdl-btn-cta {
@@ -328,6 +365,7 @@
     font-size: 14px;
   }
 }
+
 .wdl-archive-card-blog {
   &:after {
     content: none !important;
@@ -336,21 +374,21 @@
 .wdl-archive-pretitle {
   color: #37bad6;
   font-size: 0.875rem;
-  margin-bottom: 8px;
+  margin-bottom: 0;
 }
 .wdl-archive-title {
   @extend .lineclamp-2;
 
   font-size: 1rem;
   line-height: 1.5;
-  font-weight: 500;
   color: #333333;
+  font-weight: 600;
 
   a,
   a:hover,
   a:focus,
   a:active {
-    font-weight: 500;
+    font-weight: 600;
     color: #333333;
   }
 }
