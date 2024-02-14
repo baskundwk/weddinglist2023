@@ -375,6 +375,9 @@
   color: #37bad6;
   font-size: 0.875rem;
   margin-bottom: 0;
+  display: flex;
+  gap: 8px;
+  align-items: baseline;
 }
 .wdl-archive-title {
   @extend .lineclamp-2;

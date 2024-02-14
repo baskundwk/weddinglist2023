@@ -1,8 +1,5 @@
 <?php include 'components/header.php' ?>
 
-<script>
-	console.log('test')
-</script>
 <?php $currentPostID = get_the_ID() ?>
 <main>
 	<div class="container-xl overflow-hidden">

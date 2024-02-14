@@ -119,7 +119,7 @@
           $('#wdl-form-general').removeClass('failed')
           $('.wdl-form-general-modal').modal('hide')
           $('.wdl-form-general-succeed-modal').modal('show')
-          generalDirectData = []
+          generalDirectData = {}
         }).fail(()=> {
           $('#wdl-form-general').addClass('failed')
         })

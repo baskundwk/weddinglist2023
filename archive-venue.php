@@ -54,9 +54,6 @@
     );
     ?>
     <?php if (have_posts()): ?>
-    <script>
-      console.log("<?php if($_GET['order']) { echo $_GET['order']; } else { echo 'false' ;}?>")
-    </script>
       <div class="container-xl">
         <div class="row pb-0">
           <div class="col">
@@ -155,7 +152,7 @@
 
                 <div class="card-select">
                   <div class="wdl-checkbox">
-                    <input id="card-select-<?php the_ID() ?>" type="checkbox" data-select='
+                    <input class="card-select-input" id="card-select-<?php the_ID() ?>" type="checkbox" data-select='
                       {
                         "title": "<?php the_title() ?>",
                         "postType": "<?php echo get_post_type() ?>",

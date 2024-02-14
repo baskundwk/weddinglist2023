@@ -808,7 +808,7 @@ const compareBarActive = () => {
 
     setTimeout(() => {
       bootstrap.Tooltip.getInstance("#compare-selected").show();
-    }, 350);
+    }, 250);
   } else {
     $(".wdl-compare-bar").removeClass("active");
 
@@ -848,46 +848,16 @@ const compareBarRemove = (title) => {
 };
 
 // Compare : register button
-/* $('.wdl-form-general-direct').each( (index, element) => {
+let generalDirectData = []
+$('.wdl-form-general-direct').each( (index, element) => {
   $(element).click(()=> {
     generalDirectData.push(JSON.parse($(element).closest('.wdl-archive-card').find('.wdl-checkbox input[type="checkbox"]').attr('data-select')))
   })
-}) */
-
-let generalDirectData = []
-$(window).click((event)=>{
-  if($(event.target).hasClass('wdl-form-general-direct')) {
-    generalDirectData = [JSON.parse($(event.target).closest('.wdl-archive-card').find('.wdl-checkbox input[type="checkbox"]').attr('data-select'))]
-    $('.wdl-form-general-list').html($(`<li><span>${generalDirectData[0].title}</span></li>`))
-  }
-  if($(event.target).hasClass('card-select-input')) {
-    compareBarUpdate($(event.target));
-    // Compare : prevent over-selection
-    if (selectedCard.length < 5) {
-      $(".card-select input[type=checkbox]").prop(
-        "disabled",
-        false
-      );
-    } else {
-      $(".card-select input[type=checkbox]:not(:checked)").prop(
-        "disabled",
-        true
-      );
-    }
-    let formGeneralList = () => {
-      return selectedCard.map((card)=>`<li><span>${card.title}</span></li>`)
-    }
-    $('.wdl-form-general-list').html(formGeneralList())
-  }
-  /* if(generalDirectData) {
-  } else {
-    
-  } */
 })
 
-/* $('.wdl-form-general-modal').on('hidden.bs.modal', ()=> {
+$('.wdl-form-general-modal').on('hidden.bs.modal', ()=> {
   generalDirectData = []
-}) */
+})
 
 // Compare : reset all selection after coming 'back'
 $(document).ready(() => {
@@ -912,7 +882,7 @@ const compareBarUpdate = (element) => {
 };
 
 // Compare : checkbox trigger
-/* $(".card-select input[type=checkbox]").each((index, element) => {
+$(".card-select input[type=checkbox]").each((index, element) => {
   $(element).change(() => {
     compareBarUpdate(element);
 
@@ -930,7 +900,7 @@ const compareBarUpdate = (element) => {
     }
   });
 });
- */
+
 // Compare : uncheck selected item from compare bar
 $(".wdl-compare-bar .wdl-compare-bar-selection-card").each((index, element) => {
   $(element).click(() => {
@@ -1023,6 +993,20 @@ $(".wdl-iframe").each((index, element) => {
       }, 350);
     });
 });
+
+// General Form List
+$('[data-bs-toggle="modal"][data-bs-target=".wdl-form-general-modal"]').click(()=> {
+  if(generalDirectData.length > 0) {
+    $('.wdl-form-general-list').html($(`<li><span>${generalDirectData[0].title}</span></li>`))
+  } else {
+    let formGeneralList = () => {
+      return selectedCard.map((card)=>`<li><span>${card.title}</span></li>`)
+    }
+    $('.wdl-form-general-list').html(formGeneralList())
+  }
+  
+})
+
 
 // Auto-trigger modal
 $(window).load(() => {

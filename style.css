@@ -793,6 +793,9 @@ body .et_pb_button {
   color: #37bad6;
   font-size: 0.875rem;
   margin-bottom: 0;
+  display: flex;
+  gap: 8px;
+  align-items: baseline;
 }
 
 .wdl-archive-title {
@@ -1468,8 +1471,6 @@ body .et_pb_button {
   border-radius: 5rem;
   transition: 0.35s cubic-bezier(0, 0, 0, 1);
   background-size: cover;
-  margin-bottom: 6px;
-  margin-left: 8px;
 }
 .wdl-character > span {
   display: inline-block;

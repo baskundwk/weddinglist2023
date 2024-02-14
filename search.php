@@ -70,7 +70,7 @@
                       <div id="wdl-post-<?php the_ID(); ?>" class="wdl-listing-card row m-0 wdl-archive-infinite-scroll-post wdl-archive-card">
                         <div class="card-select d-none">
                           <div class="wdl-checkbox">
-                            <input id="card-select-<?php echo get_the_ID() ?>" type="checkbox" data-select='
+                            <input class="card-select-input" id="card-select-<?php echo get_the_ID() ?>" type="checkbox" data-select='
                           {
                             "title": "<?php echo get_the_title() ?>",
                             "postType": "<?php echo get_post_type() ?>",
@@ -270,7 +270,7 @@
   
                           <div class="card-select">
                             <div class="wdl-checkbox">
-                              <input id="card-select-<?php the_ID() ?>" type="checkbox" data-select='
+                              <input class="card-select-input" id="card-select-<?php the_ID() ?>" type="checkbox" data-select='
                                 {
                                   "title": "<?php the_title() ?>",
                                   "postType": "<?php echo get_post_type() ?>",
@@ -356,7 +356,7 @@
   
                           <div class="card-select">
                             <div class="wdl-checkbox">
-                              <input id="card-select-<?php the_ID() ?>" type="checkbox" data-select='
+                              <input class="card-select-input" id="card-select-<?php the_ID() ?>" type="checkbox" data-select='
                                 {
                                   "title": "<?php the_title() ?>",
                                   "postType": "<?php echo get_post_type() ?>",
@@ -483,7 +483,7 @@
     
                                 <div class="card-select">
                                   <div class="wdl-checkbox">
-                                    <input id="card-select-<?php the_ID() ?>" type="checkbox" data-select='
+                                    <input class="card-select-input" id="card-select-<?php the_ID() ?>" type="checkbox" data-select='
                                       {
                                         "title": "<?php the_title() ?>",
                                         "postType": "<?php echo get_post_type() ?>",
