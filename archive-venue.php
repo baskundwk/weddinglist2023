@@ -244,6 +244,12 @@
                         </strong>
                       </div>
                     <?php endif; ?>
+
+                    <?php if(is_user_logged_in() === true && get_field('AcceptAppointment')) : ?>
+                      <div class="wdl-archive-appointment">
+                        <a href="<?php the_permalink(); ?>"><?php _e('รับนัดหมายเข้าชมสถานที่', 'Accept Appointment') ?></a>
+                      </div>
+                    <?php endif; ?>
                   </div>
                 </div>
 

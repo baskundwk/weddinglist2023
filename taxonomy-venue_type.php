@@ -2,6 +2,7 @@
 
 <main>
   <?php include 'components/lead-menu-revamped.php' ?>
+  
   <section class="wdl-archive wdl-archive-extended pb-5">
 
     <?php
@@ -55,9 +56,11 @@
         'posts_per_page' => '16',
         'meta_query' => $has_field,
         'tax_query' => array(
-          'taxonomy' => $current_tax,
-          'field' => 'term_id',
-          'terms' => $current_term_id
+          array(
+            'taxonomy' => $current_tax,
+            'field' => 'term_id',
+            'terms' => $current_term_id
+          )
         )
       )
     );

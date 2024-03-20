@@ -1,4 +1,4 @@
-<div class="wdl-form-general-modal modal fade">
+<div id="apply" class="wdl-form-general-modal modal fade">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content m-1 mb-0">
       <button class="btn-close" data-bs-dismiss="modal"></button>
@@ -120,47 +120,42 @@
     $('#wdl-form-general').submit(function (e) {
       e.preventDefault();
 
-      let selectedItems = generalDirectData.length > 0 ? generalDirectData : selectedCard
-
       $('.wdl-form-general-modal .modal-body').addClass('submitting')
 
-      for(i = 0; i < selectedItems.length; i++) {
+      let selectedDaytime = []
 
-        let selectedDaytime = []
+      $('input[name=daytime]:checked').each((index, element)=> {
+        selectedDaytime.push(element.value)
+      })
+      
+      $.post("<?php echo admin_url('admin-ajax.php'); ?>", {
+        action: 'send_email',
+        name: $('#name-lastname').val(),
+        tel: $('#tel').val(),
+        email: $('#email').val(),
+        lineid: $('#lineid').val(),
+        guest: $('#guest').val(),
+        budget: $('#budget').val(),
+        date: $('#date').val(),
+        daytime: selectedDaytime.join(', '),
+        appoint: $('#appoint').is(':checked'),
+        appointDate: $('#appoint-date').val(),
+        appointTime: $('#appoint-time').val(),
+        message: $('#message').val(),
+        cardTitle: '<?php echo get_the_title()?>',
+        cardId: <?php echo get_the_id()?>,
+        leadType: 'Venue'
+      }, ()=> {
+        $('#wdl-form-general').removeClass('failed')
+        $('.wdl-form-general-modal').modal('hide')
+        $('.wdl-form-general-succeed-modal').modal('show')
 
-        $('input[name=daytime]:checked').each((index, element)=> {
-          selectedDaytime.push(element.value)
-        })
-        
-        $.post("<?php echo admin_url('admin-ajax.php'); ?>", {
-          action: 'send_email',
-          name: $('#name-lastname').val(),
-          tel: $('#tel').val(),
-          email: $('#email').val(),
-          lineid: $('#lineid').val(),
-          guest: $('#guest').val(),
-          budget: $('#budget').val(),
-          date: $('#date').val(),
-          daytime: selectedDaytime.join(', '),
-          appoint: $('#appoint').is(':checked'),
-          appointDate: $('#appoint-date').val(),
-          appointTime: $('#appoint-time').val(),
-          message: $('#message').val(),
-          cardTitle: selectedItems[i].title,
-          cardId: selectedItems[i].id,
-          leadType: 'General'
-        }, ()=> {
-          $('#wdl-form-general').removeClass('failed')
-          $('.wdl-form-general-modal').modal('hide')
-          $('.wdl-form-general-succeed-modal').modal('show')
-
-          $('.wdl-form-general-modal .modal-body').removeClass('submitting')
-          generalDirectData = {}
-        }).fail(()=> {
-          $('.wdl-form-general-modal .modal-body').removeClass('submitting')
-          $('#wdl-form-general').addClass('failed')
-        })
-      }
+        $('.wdl-form-general-modal .modal-body').removeClass('submitting')
+        generalDirectData = {}
+      }).fail(()=> {
+        $('.wdl-form-general-modal .modal-body').removeClass('submitting')
+        $('#wdl-form-general').addClass('failed')
+      })
     });
   })
 </script>

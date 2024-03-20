@@ -243,6 +243,11 @@
 							</span>
 						</p>
 					<?php endif; ?>
+					<?php if(is_user_logged_in() === true && get_field('AcceptAppointment')) : ?>
+						<div class="wdl-archive-appointment">
+							<?php _e('รับนัดหมายเข้าชมสถานที่', 'Accept Appointment') ?>
+						</div>
+					<?php endif; ?>
 				</div>
 				<div class="col-lg-auto text-center">
 					<div class="wdl-pricing-row-- p-3">
@@ -313,6 +318,7 @@
 			)
 		);
 	?>
+
 	<?php if($relatedPromotions || $relatedWeddingFairs || $relatedPosts) : ?>
 	<section class="pb-3 overflow-hidden">
 		<div class="container-xl">
@@ -470,6 +476,50 @@
 	</section>
 	<?php endif; ?>
 
+	<?php 
+	if(is_user_logged_in()) :
+
+	$coupon = get_posts(array(
+			'posts_per_page'    => -1,
+			'post_type'         => 'coupon',
+			'meta_query'					=> array(
+				array(
+					'key' => 'Venue',
+					'value' => '"'. get_the_ID() .'"',
+					'compare' => 'LIKE'
+				)
+			)
+	));
+
+	if($coupon) : ?>
+	<section class="pb-3">
+		<div class="container">
+				<?php foreach($coupon as $singleCoupon) :
+				?>
+						<div class="wdl-coupon-picker">
+							<div class="wdl-coupon-picker-image">
+								<img src="<?php echo(get_field('Image', $singleCoupon->ID)['sizes']['medium'])?>" />
+							</div>
+							<div class="wdl-coupon-picker-info">
+								<div class="wdl-coupon-picker-title">
+									<p><?php echo(get_the_title($singleCoupon->ID))?></p>
+								</div>
+								<div class="d-flex justify-content-between align-items-center">
+									<div class="wdl-coupon-picker-action">
+										<p>เก็บคูปอง</p>
+									</div>
+									<div class="wdl-coupon-picker-term">
+										<a href="<?php echo(get_the_permalink($singleCoupon->ID))?>?popup=true" target="blank">เงื่อนไข</a>
+									</div>
+								</div>
+							</div>
+						</div>
+						<?php 
+				endforeach; ?>
+		</div>
+	</section>
+	<?php endif;
+	endif; ?>
 	<section class="pb-3">
 		<div class="container">
 
@@ -482,6 +532,12 @@
 							<?php _e('ข้อมูลค่าใช้จ่าย', 'Pricing') ?>
 						</h2>
 
+						<?php 
+						$package = array_filter(get_field('Pricing'), function($item) {
+							return ($item["acf_fc_layout"] === 'Package');
+						});
+						if(count($package) > 0) :
+						?>
 						<h3 class="h6 text-secondary">
 							<?php _e('แพ็คเกจงานหมั้น', 'Packages') ?>
 						</h3>
@@ -520,7 +576,14 @@
 								<?php endwhile; ?>
 							</div>
 						</div>
+						<?php endif; ?>
 
+						<?php 
+						$weddingPackage = array_filter(get_field('Pricing'), function($item) {
+							return ($item["acf_fc_layout"] === 'WeddingPackage');
+						});
+						if(count($weddingPackage) > 0) :
+						?>
 						<h3 class="h6 text-secondary">
 							<?php _e('แพ็คเกจงานแต่งงาน', 'WeddingPackages') ?>
 						</h3>
@@ -558,7 +621,14 @@
 								<?php endwhile; ?>
 							</div>
 						</div>
+						<?php endif; ?>
 
+						<?php 
+						$fbPackage = array_filter(get_field('Pricing'), function($item) {
+							return ($item["acf_fc_layout"] === 'FoodBeverage');
+						});
+						if(count($fbPackage) > 0) :
+						?>
 						<h3 class="h6 text-secondary">
 							<?php _e('อาหารและเครื่องดื่ม', 'Food and Beverages') ?>
 						</h3>
@@ -597,6 +667,8 @@
 								<?php endwhile; ?>
 							</div>
 						</div>
+						<?php endif; ?>
+
 					</div>
 					<?php endif; ?>
 				</div>
@@ -748,28 +820,6 @@
 		</div>
 	</section>
 
-	<div class="modal fade modal-lg" id="apply">
-		<div class="modal-dialog modal-dialog-centered m-auto">
-			<div class="modal-content m-3 mb-0">
-				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-				<div class="modal-body">
-					<h3 class="mt-2">ตอบคำถามสั้น ๆ เพื่อรับสิทธิพิเศษสำหรับคุณ!</h3>
-					<hr>
-					<p class="wdl-archive-location mb-2">
-						<?php the_title() ?>
-					</p>
-					<?php $microsite = get_field('Microsite');
-					if ($microsite && in_array('Free Microsite', $microsite)): ?>
-						<?php echo apply_shortcodes('[contact-form-7 id="206307" title="Venue Form : Free"]') ?>
-					<?php else: ?>
-						<?php echo apply_shortcodes('[contact-form-7 id="206300" title="Venue Form"]'); ?>
-					<?php endif; ?>
-
-				</div>
-			</div>
-		</div>
-	</div>
-
 	<div class="modal fade wdl-gallery-modal" id="gallery">
 		<div class="modal-dialog modal-dialog-centered modal-xl">
 			<div class="modal-content m-3 mb-0">
@@ -856,4 +906,5 @@
 	<?php endif; ?>
 </main>
 
+<?php include 'components/form-venue.php' ?>
 <?php include 'components/footer.php' ?>

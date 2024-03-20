@@ -167,29 +167,6 @@
 		</div>
 	</section>
 
-	<div class="modal fade modal-lg" id="apply">
-		<div class="modal-dialog modal-dialog-centered m-auto">
-			<div class="modal-content m-3 mb-0">
-				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-				<div class="modal-body">
-					<h3 class="mt-2">ตอบคำถามสั้น ๆ เพื่อรับสิทธิพิเศษสำหรับคุณ!</h3>
-					<hr>
-					<?php if ($venueTitle): ?>
-						<p class="wdl-archive-location mb-2">
-							<?php echo esc_html($venueTitle) ?>
-						</p>
-					<?php endif; ?>
-					<?php $microsite = get_field('Microsite');
-					if ($microsite && in_array('Free Microsite', $microsite)): ?>
-						<?php echo apply_shortcodes('[contact-form-7 id="207674" title="Wedding Fair Form : Free"]') ?>
-					<?php else: ?>
-						<?php echo apply_shortcodes('[contact-form-7 id="207673" title="Wedding Fair Form"]'); ?>
-					<?php endif; ?>
-				</div>
-			</div>
-		</div>
-	</div>
-
 	<div class="modal fade wdl-gallery-modal" id="gallery">
 		<div class="modal-dialog modal-dialog-centered modal-xl">
 			<div class="modal-content m-3 mb-0">
@@ -301,4 +278,5 @@
 
 </main>
 
+<?php include 'components/form-wedding-fair.php' ?>
 <?php include 'components/footer.php' ?>

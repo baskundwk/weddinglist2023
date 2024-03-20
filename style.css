@@ -98,7 +98,7 @@
   font-style: normal;
   src: url("/wp-content/themes/weddinglist2023/fonts/NotoSansThai/NotoSansThai-Black.ttf");
 }
-html, * {
+html, body {
   scroll-margin-top: calc(var(--wp-admin--admin-bar--height) + var(--header-height) + 16px);
   scroll-padding-top: calc(var(--wp-admin--admin-bar--height) + var(--header-height) + 16px);
 }
@@ -631,8 +631,11 @@ body .et_pb_button {
 .wdl-archive .col, .wdl-archive .swiper-slide {
   position: relative;
 }
+.wdl-archive .swiper-wrapper {
+  align-items: stretch;
+}
 .wdl-archive .card {
-  height: 100%;
+  height: auto;
   border-radius: 1rem;
   border: 0;
   box-shadow: 0 0 0 rgba(0, 0, 0, 0.05);
@@ -688,8 +691,11 @@ body .et_pb_button {
   padding: 2px 24px 24px;
   margin: -2px -24px -2px -24px;
 }
+.wdl-archive-extended .swiper-wrapper, .wdl-archive-extended .wdl-archive-swiper .swiper-wrapper {
+  align-items: stretch;
+}
 .wdl-archive-extended .card, .wdl-archive-extended .wdl-archive-swiper .card {
-  height: 100%;
+  height: auto;
   transition: 0.25s box-shadow;
   border-radius: 6px;
   overflow: hidden;
@@ -889,6 +895,22 @@ body .et_pb_button {
   width: 1em;
 }
 
+.wdl-archive-appointment {
+  display: flex;
+  align-items: center;
+  font-weight: 700;
+  text-decoration: underline;
+}
+.wdl-archive-appointment:before {
+  content: "\e023";
+  font-size: 17px;
+  vertical-align: middle;
+  font-family: ETmodules !important;
+  color: #37bad6;
+  margin-right: 0.5rem;
+  width: 1em;
+}
+
 .wdl-archive-max-carpark {
   display: flex;
   align-items: center;
@@ -952,6 +974,8 @@ body .et_pb_button {
 }
 
 .wdl-metadata-banner img {
+  aspect-ratio: 1128/330;
+  object-fit: cover;
   border-radius: 8px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.16);
 }
@@ -1772,6 +1796,125 @@ body .et_pb_button {
   display: none;
 }
 
+.wdl-coupon-card {
+  box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.1490196078);
+  padding: 20px 16px;
+}
+.wdl-coupon-card .wdl-coupon-card-share {
+  width: 40px;
+  height: 40px;
+  border: 1px solid #E1E1E1;
+  border-radius: 70px;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+}
+.wdl-coupon-card .wdl-coupon-card-share img {
+  width: 14px;
+  height: 14px;
+}
+.wdl-coupon-card .wdl-coupon-card-image {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 4px;
+}
+.wdl-coupon-card .wdl-coupon-card-title {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+.wdl-coupon-card .wdl-coupon-card-subtitle {
+  font-size: 16px;
+  font-weight: 600;
+  color: #FF2758;
+  margin-bottom: 4px;
+}
+.wdl-coupon-card .wdl-coupon-card-datetime {
+  font-size: 14px;
+  font-family: Noto Sans Thai;
+  margin-bottom: 16px;
+}
+.wdl-coupon-card .wdl-coupon-card-condition {
+  border: 1px solid #E1E1E1;
+  background-color: #F7F7F7;
+  border-radius: 12px;
+  padding: 16px 12px;
+  margin-bottom: 24px;
+  font-size: 14px;
+}
+.wdl-coupon-card .wdl-coupon-card-condition .wdl-coupon-card-condition-title {
+  font-size: 14px;
+  color: #37BAD6;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+.wdl-coupon-card .wdl-coupon-card-condition *:last-child {
+  margin-bottom: 0;
+}
+
+.wdl-coupon-picker {
+  box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.1490196078);
+  width: 307px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+.wdl-coupon-picker .wdl-coupon-picker-image img {
+  width: 143px;
+  height: 71px;
+  border-radius: 4px;
+}
+.wdl-coupon-picker .wdl-coupon-picker-info {
+  padding-right: 8px;
+}
+.wdl-coupon-picker .wdl-coupon-picker-info .wdl-coupon-picker-title {
+  font-family: Noto Sans Thai;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 14px;
+}
+.wdl-coupon-picker .wdl-coupon-picker-info .wdl-coupon-picker-title p {
+  margin-bottom: 4px;
+}
+.wdl-coupon-picker .wdl-coupon-picker-info .wdl-coupon-picker-action {
+  color: #FF2758;
+  font-family: Noto Sans Thai;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 18px;
+}
+.wdl-coupon-picker .wdl-coupon-picker-info .wdl-coupon-picker-action p {
+  margin-bottom: 0;
+  border: 1px solid #FF2758;
+  padding: 2px 12px;
+  border-radius: 6px;
+  display: flex;
+  gap: 10px;
+}
+.wdl-coupon-picker .wdl-coupon-picker-info .wdl-coupon-picker-term {
+  font-family: Noto Sans Thai;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 18px;
+  text-decoration: underline;
+}
+.wdl-coupon-picker .wdl-coupon-picker-info .wdl-coupon-picker-term a {
+  color: #333333;
+  text-decoration: underline;
+  margin-bottom: 0;
+}
+.wdl-coupon-picker.active {
+  background: rgba(255, 39, 88, 0.1019607843);
+}
+.wdl-coupon-picker.active .wdl-coupon-picker-info .wdl-coupon-picker-action p {
+  background: rgba(255, 39, 88, 0.1019607843);
+  border: none;
+}
+
 .wdl-dropdown {
   position: relative;
 }
@@ -1996,7 +2139,6 @@ input[type=password],
 input[type=tel],
 input[type=text],
 select,
-textarea,
 input[type=date] {
   border-radius: 0.5rem;
   display: block;
@@ -2013,6 +2155,21 @@ input[type=date] {
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   height: auto !important;
   min-height: 0;
+}
+
+textarea {
+  border-radius: 0.5rem;
+  max-width: none !important;
+  width: 100%;
+  margin: 0 !important;
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: #495057;
+  background-color: #f7f7f7 !important;
+  border: none !important;
+  border-radius: 0.25rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
 .form-floating {
@@ -2388,6 +2545,40 @@ form.cf7mls input.wpcf7-form-control.wpcf7-submit {
 .wdl-form-general-list > li {
   font-size: 14px;
 }
+/* General form loader */
+.wdl-form-general-modal .modal-body::before {
+  content: "";
+  border-radius: 1rem;
+  position: absolute;
+  background: rgba(255, 255, 255, 0.6);
+  inset: 0 0 0 0;
+  z-index: 5;
+  opacity: 0;
+  transition: 0.5s opacity cubic-bezier(0, 0, 0, 1);
+  pointer-events: none;
+}
+.wdl-form-general-modal .modal-body::after {
+  content: "";
+  position: absolute;
+  inset: 0 0 0 0;
+  background-size: contain;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3CradialGradient id='a12' cx='.66' fx='.66' cy='.3125' fy='.3125' gradientTransform='scale(1.5)'%3E%3Cstop offset='0' stop-color='%23FF156D'%3E%3C/stop%3E%3Cstop offset='.3' stop-color='%23FF156D' stop-opacity='.9'%3E%3C/stop%3E%3Cstop offset='.6' stop-color='%23FF156D' stop-opacity='.6'%3E%3C/stop%3E%3Cstop offset='.8' stop-color='%23FF156D' stop-opacity='.3'%3E%3C/stop%3E%3Cstop offset='1' stop-color='%23FF156D' stop-opacity='0'%3E%3C/stop%3E%3C/radialGradient%3E%3Ccircle transform-origin='center' fill='none' stroke='url(%23a12)' stroke-width='5' stroke-linecap='round' stroke-dasharray='200 1000' stroke-dashoffset='0' cx='100' cy='100' r='70'%3E%3CanimateTransform type='rotate' attributeName='transform' calcMode='spline' dur='1' values='360;0' keyTimes='0;1' keySplines='0 0 1 1' repeatCount='indefinite'%3E%3C/animateTransform%3E%3C/circle%3E%3Ccircle transform-origin='center' fill='none' opacity='.2' stroke='%23FF156D' stroke-width='5' stroke-linecap='round' cx='100' cy='100' r='70'%3E%3C/circle%3E%3C/svg%3E");
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: 100px;
+  opacity: 0;
+  transition: 0.5s opacity cubic-bezier(0, 0, 0, 1);
+  pointer-events: none;
+}
+.wdl-form-general-modal .modal-body.submitting::before {
+  opacity: 1;
+  pointer-events: all;
+}
+.wdl-form-general-modal .modal-body.submitting::after {
+  opacity: 1;
+  pointer-events: all;
+}
+
 #main-header {
   background: rgba(255, 255, 255, 0.9);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.15), 0 1px 0 #D9D9D9 !important;

@@ -14,7 +14,11 @@
 <body <?php body_class(); ?>>
   <?php
   wp_body_open();
+  $post_type = get_post_type();
+  $popup = $_GET['popup'];
+  if($popup != true || $post_type != 'coupon') :
   ?>
+  
   <header id="main-header" class="fixed-top">
     <div class="navbar navbar-expand-xl">
       <div class="container-xl">
@@ -61,3 +65,5 @@
       </div>
     <?php endif; ?>
   </header>
+
+  <?php endif; ?>

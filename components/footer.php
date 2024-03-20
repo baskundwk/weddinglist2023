@@ -1,3 +1,9 @@
+<?php 
+  $post_type = get_post_type();
+  $popup = $_GET['popup'];
+  if($popup != true || $post_type != 'coupon') :
+?>
+
 <footer class="wdl-footer">
 
   <div class="wdl-footer-nav">
@@ -51,6 +57,7 @@
     </div>
   </div>
 </footer>
+<?php endif; ?>
 <?php wp_footer(); ?>
 </body>
 

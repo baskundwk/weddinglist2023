@@ -1,4 +1,4 @@
-html, * {
+html, body {
   scroll-margin-top: calc(var(--wp-admin--admin-bar--height) + var(--header-height) + 16px);
   scroll-padding-top: calc(var(--wp-admin--admin-bar--height) + var(--header-height) + 16px);
 }

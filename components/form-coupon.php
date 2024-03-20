@@ -1,4 +1,4 @@
-<div class="wdl-form-general-modal modal fade">
+<div id="apply" class="wdl-form-general-modal modal fade">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content m-1 mb-0">
       <button class="btn-close" data-bs-dismiss="modal"></button>
@@ -54,7 +54,7 @@
             </div>
             <div class="col-md-12">
               <label class="text-sm" for="message">ข้อความเพิ่มเติม</label>
-              <textarea rows="4" class="form-control" name="message" id="message" label="ข้อความเพิ่มเติม"></textarea>
+              <textarea rows="4" name="message" id="message" label="ข้อความเพิ่มเติม"></textarea>
             </div>
             <div class="col-md-12">
               <div class="d-block"><label>ช่วงเวลาจัดงาน</label></div>
@@ -64,34 +64,6 @@
                 <input type="checkbox" name="daytime" id="daytime-3" value="งานเลี้ยงเย็น"/><label for="daytime-3">งานเลี้ยงเย็น</label>
               </div>
             </div>
-            <?php if(is_user_logged_in() === true && get_field('AcceptAppointment') === true) : ?>
-            <div class="col-md-12 mt-3">
-              <div class="wdl-checkbox">
-                <input id="appoint" type="checkbox">
-                <label for="appoint"><?php _e('สนใจนัดหมายเพื่อเข้าชมสถานที่','สนใจนัดหมายเพื่อเข้าชมสถานที่')?></label>
-              </div>
-              <div id="appoint-field" class="d-none row">
-                <div class="col-md-6 mt-3">
-                  <div class="form-floating">
-                    <input class="form-control" id="appoint-date" type="date" placeholder="วันที่ต้องการนัดหมาย">
-                    <label class="text-sm" for="appoint-date">วันที่ต้องการนัดหมาย</label>
-                  </div>
-                </div>
-                <div class="col-md-6 mt-3">
-                  <div class="form-floating">
-                    <select class="form-select" id="appoint-time" placeholder="วันที่ต้องการนัดหมาย">
-                      <option value="" selected disabled><?php _e('กรุณาเลือกเวลานัดหมาย','กรุณาเลือกเวลานัดหมาย')?></option>
-                      <option value="ช่วงเช้า (09:00 - 12:00 น.)"><?php _e('ช่วงเช้า (09:00 - 12:00 น.)','ช่วงเช้า (09:00 - 12:00 น.)') ?></option>
-                      <option value="ช่วงบ่าย (12:00 - 16:00 น.)"><?php _e('ช่วงบ่าย (12:00 - 16:00 น.)','ช่วงบ่าย (12:00 - 16:00 น.)') ?></option>
-                      <option value="ช่วงเย็น (16:00 - 19:00 น.)"><?php _e('ช่วงเย็น (16:00 - 19:00 น.)','ช่วงเย็น (16:00 - 19:00 น.)') ?></option>
-                      <option value="ช่วงค่ำ (19:00 - 22:00 น.)"><?php _e('ช่วงค่ำ (19:00 - 22:00 น.)','ช่วงค่ำ (19:00 - 22:00 น.)') ?></option>
-                    </select>
-                    <label class="text-sm" for="appoint-time">ช่วงเวลาที่ต้องการ</label>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <?php endif; ?>
             <hr class="my-1 opacity-0">
             <button id="wdl-form-general-submit" type="submit" name="submit" class="wdl-btn-lg wdl-form-submit">ลงทะเบียน</button>
             <p class="fail-message text-red"><?php _e('ขออภัยค่ะ ไม่สามารถส่งข้อมูลได้ กรุณาลองใหม่','ขออภัยค่ะ ไม่สามารถส่งข้อมูลได้ กรุณาลองใหม่') ?></p>
@@ -115,52 +87,63 @@
     </div>
   </div>
 </div>
+
+<!-- <?php
+  $recepient = "";
+  if(get_field('Venue')){
+    $venue = get_field('Venue');
+
+    foreach($venue as $item) {
+      $recepient != "" && $recepient .= ","; 
+      $recepient .= get_field('Email', $item->ID);
+    }
+
+    echo $recepient;
+  }
+?> -->
 <script>
   $(document).ready(() => {
     $('#wdl-form-general').submit(function (e) {
       e.preventDefault();
 
-      let selectedItems = generalDirectData.length > 0 ? generalDirectData : selectedCard
-
       $('.wdl-form-general-modal .modal-body').addClass('submitting')
 
-      for(i = 0; i < selectedItems.length; i++) {
+      let selectedDaytime = []
 
-        let selectedDaytime = []
+      $('input[name=daytime]:checked').each((index, element)=> {
+        selectedDaytime.push(element.value)
+      })
+      
+      $.post("<?php echo admin_url('admin-ajax.php'); ?>", {
+        toClient: true,
+        action: 'send_email',
+        name: $('#name-lastname').val(),
+        tel: $('#tel').val(),
+        email: $('#email').val(),
+        recepient: '<?php $recepient?>' ,
+        lineid: $('#lineid').val(),
+        guest: $('#guest').val(),
+        budget: $('#budget').val(),
+        date: $('#date').val(),
+        daytime: selectedDaytime.join(', '),
+        appoint: $('#appoint').is(':checked'),
+        appointDate: $('#appoint-date').val(),
+        appointTime: $('#appoint-time').val(),
+        message: $('#message').val(),
+        cardTitle: '<?php echo get_the_title()?>',
+        cardId: <?php echo get_the_id()?>,
+        leadType: 'Coupon'
+      }, ()=> {
+        $('#wdl-form-general').removeClass('failed')
+        $('.wdl-form-general-modal').modal('hide')
+        $('.wdl-form-general-succeed-modal').modal('show')
 
-        $('input[name=daytime]:checked').each((index, element)=> {
-          selectedDaytime.push(element.value)
-        })
-        
-        $.post("<?php echo admin_url('admin-ajax.php'); ?>", {
-          action: 'send_email',
-          name: $('#name-lastname').val(),
-          tel: $('#tel').val(),
-          email: $('#email').val(),
-          lineid: $('#lineid').val(),
-          guest: $('#guest').val(),
-          budget: $('#budget').val(),
-          date: $('#date').val(),
-          daytime: selectedDaytime.join(', '),
-          appoint: $('#appoint').is(':checked'),
-          appointDate: $('#appoint-date').val(),
-          appointTime: $('#appoint-time').val(),
-          message: $('#message').val(),
-          cardTitle: selectedItems[i].title,
-          cardId: selectedItems[i].id,
-          leadType: 'General'
-        }, ()=> {
-          $('#wdl-form-general').removeClass('failed')
-          $('.wdl-form-general-modal').modal('hide')
-          $('.wdl-form-general-succeed-modal').modal('show')
-
-          $('.wdl-form-general-modal .modal-body').removeClass('submitting')
-          generalDirectData = {}
-        }).fail(()=> {
-          $('.wdl-form-general-modal .modal-body').removeClass('submitting')
-          $('#wdl-form-general').addClass('failed')
-        })
-      }
+        $('.wdl-form-general-modal .modal-body').removeClass('submitting')
+        generalDirectData = {}
+      }).fail(()=> {
+        $('.wdl-form-general-modal .modal-body').removeClass('submitting')
+        $('#wdl-form-general').addClass('failed')
+      })
     });
   })
 </script>

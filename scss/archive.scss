@@ -182,8 +182,11 @@
   .col, .swiper-slide {
     position: relative;
   }
+  .swiper-wrapper {
+    align-items: stretch;
+  }
   .card {
-    height: 100%;
+    height: auto;
     border-radius: 1rem;
     border: 0;
     box-shadow: 0 0 0 rgba(0, 0, 0, 0.05);
@@ -248,8 +251,12 @@
   padding: 2px 24px 24px;
   margin: -2px -24px -2px -24px;
   //margin: -2px 0;
+
+  .swiper-wrapper {
+    align-items: stretch;
+  }
   .card {
-    height: 100%;
+    height: auto;
     transition: 0.25s box-shadow;
     border-radius: 6px;
     overflow: hidden;
@@ -474,6 +481,21 @@
     width: 1em;
   }
 }
+.wdl-archive-appointment {
+  display: flex;
+  align-items: center;
+  font-weight: 700;
+  text-decoration: underline;
+  &:before {
+    content: "\e023";
+    font-size: 17px;
+    vertical-align: middle;
+    font-family: ETmodules !important;
+    color: #37bad6;
+    margin-right: 0.5rem;
+    width: 1em;
+  }
+}
 .wdl-archive-max-carpark {
   display: flex;
   align-items: center;
@@ -535,6 +557,8 @@
 
 .wdl-metadata-banner {
   img {
+    aspect-ratio: 1128/330;
+    object-fit: cover;
     border-radius: 8px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.16);
   }

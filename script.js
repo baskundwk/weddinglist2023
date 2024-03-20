@@ -1,641 +1,663 @@
-if ($(".row-cols-archive-randomized")) {
-  $(".row-cols-archive-randomized").each((index, element) => {
-    $(element).append(
-      $(element)
-        .find(".wdl-archive-primary")
-        .sort(function () {
-          return Math.round(Math.random()) - 0.5;
-        })
-    );
-    $(element).append(
-      $(element)
-        .find(".wdl-archive-default")
-        .sort(function () {
-          return Math.round(Math.random()) - 0.5;
-        })
-    );
-    $(element).addClass("opacity-1");
-  });
-}
+// Randomize post cards
+  if ($(".row-cols-archive-randomized")) {
+    $(".row-cols-archive-randomized").each((index, element) => {
+      $(element).append(
+        $(element)
+          .find(".wdl-archive-primary")
+          .sort(function () {
+            return Math.round(Math.random()) - 0.5;
+          })
+      );
+      $(element).append(
+        $(element)
+          .find(".wdl-archive-default")
+          .sort(function () {
+            return Math.round(Math.random()) - 0.5;
+          })
+      );
+      $(element).addClass("opacity-1");
+    });
+  }
 
-
-if (window.innerWidth < 1200) {
-  $("#top-menu > .menu-item").each((menuIndex, menuElement) => {
-    $(menuElement)
-      .find(".sub-menu")
-      .each((submenuIndex, submenuElement) => {
-        $(submenuElement).addClass("collapse");
-        $(submenuElement).attr(
-          "id",
-          "sub-menu-" + (menuIndex + 1) + "-" + (submenuIndex + 1)
-        );
-        $(submenuElement)
-          .parent()
-          .prepend(
-            $(
-              `<button class="menu-item-toggler" data-bs-target="#sub-menu-${
-                menuIndex + 1
-              }-${submenuIndex + 1}" data-bs-toggle="collapse"></button>`
-            )
+// Header
+  if (window.innerWidth < 1200) {
+    $("#top-menu > .menu-item").each((menuIndex, menuElement) => {
+      $(menuElement)
+        .find(".sub-menu")
+        .each((submenuIndex, submenuElement) => {
+          $(submenuElement).addClass("collapse");
+          $(submenuElement).attr(
+            "id",
+            "sub-menu-" + (menuIndex + 1) + "-" + (submenuIndex + 1)
           );
-      });
-  });
-}
-const initLocalnav = () => {
-  let heading = $('.wdl-localnav-heading')
-  $(heading).each((index, element) => {
-    $(element).attr('id', 'section-' + (index + 1))
-    $('.wdl-localnav-swiper .swiper-wrapper').append($(
-      `<li class="swiper-slide"><a href="#" data-href="#section-${(index + 1)}">${$(element).text()}</a></li>`
-    ))
-  })
-  let activeLocalnav = 0
-  let localnavSlides = $('.wdl-localnav-swiper .swiper-wrapper .swiper-slide')
-
-  $(localnavSlides[activeLocalnav]).addClass('active')
-
-  $(window).scroll(()=> {
-    $('.wdl-localnav-heading').each((index, element) => {
-      if(element.getBoundingClientRect().top > 0) {
-        activeLocalnav = index
-
-        return false
-      }
+          $(submenuElement)
+            .parent()
+            .prepend(
+              $(
+                `<button class="menu-item-toggler" data-bs-target="#sub-menu-${
+                  menuIndex + 1
+                }-${submenuIndex + 1}" data-bs-toggle="collapse"></button>`
+              )
+            );
+        });
+    });
+  }
+  const initLocalnav = () => {
+    let heading = $('.wdl-localnav-heading')
+    $(heading).each((index, element) => {
+      $(element).attr('id', 'section-' + (index + 1))
+      $('.wdl-localnav-swiper .swiper-wrapper').append($(
+        `<li class="swiper-slide"><a href="#" data-href="#section-${(index + 1)}">${$(element).text()}</a></li>`
+      ))
     })
-    $(localnavSlides).removeClass('active')
+    let activeLocalnav = 0
+    let localnavSlides = $('.wdl-localnav-swiper .swiper-wrapper .swiper-slide')
+
     $(localnavSlides[activeLocalnav]).addClass('active')
-  })
 
-  const wdlLocalnavSwiper = new Swiper('.wdl-localnav-swiper', {
-    slidesPerView: 'auto',
-    spaceBetween: 0
-  })
+    $(window).scroll(()=> {
+      $('.wdl-localnav-heading').each((index, element) => {
+        if(element.getBoundingClientRect().top > 0) {
+          activeLocalnav = index
 
-  $('.wdl-localnav a').each((index, element) => {
-    $(element).click((event)=>{
-      let scrollMargin = $('html').css('scroll-margin-top').replace('px', '')
-      let target = $(element).attr('data-href')
-
-      $('html, body').animate({scrollTop: $(target).offset().top - scrollMargin}, 50);
+          return false
+        }
+      })
+      $(localnavSlides).removeClass('active')
+      $(localnavSlides[activeLocalnav]).addClass('active')
     })
-  })
-}
-$(document).ready(initLocalnav())
 
-$("html").css("--header-height", $("#main-header").height() + "px");
+    const wdlLocalnavSwiper = new Swiper('.wdl-localnav-swiper', {
+      slidesPerView: 'auto',
+      spaceBetween: 0
+    })
 
-const wdlMultistepProgressBar = () => {
-  const multiforms = document.querySelectorAll(".fieldset-cf7mls");
-  const totalProgress = multiforms.length;
+    $('.wdl-localnav a').each((index, element) => {
+      $(element).click((event)=>{
+        let scrollMargin = $('html').css('scroll-margin-top').replace('px', '')
+        let target = $(element).attr('data-href')
 
-  let currentProgress;
-  multiforms.forEach((e, i) => {
-    return e.classList.contains("cf7mls_current_fs")
-      ? (currentProgress = i + 1)
-      : false;
-  });
+        $('html, body').animate({scrollTop: $(target).offset().top - scrollMargin}, 50);
+      })
+    })
+  }
+  $(document).ready(initLocalnav())
 
-  let circleProgress = $(".wdl-circle-progress").circleProgress({
-    value: currentProgress / totalProgress,
-    fill: {
-      color: ["#ff2758"],
-    },
-    size: 60,
-    lineCap: "round",
-    startAngle: -Math.PI / 2,
-  });
+  $("html").css("--header-height", $("#main-header").height() + "px");
 
-  document.querySelector(".wdl-circle-progress-text").innerText =
-    currentProgress + "/" + totalProgress;
-};
-const wdlMultistepProgressBarInit = () => {
-  document.addEventListener("load", () => {
-    setTimeout(() => {
-      wdlMultistepProgressBar();
-    }, 500);
-  });
-  document.querySelectorAll(".cf7mls_back").forEach((e) => {
-    e.addEventListener("click", () => {
+// Form progress
+  const wdlMultistepProgressBar = () => {
+    const multiforms = document.querySelectorAll(".fieldset-cf7mls");
+    const totalProgress = multiforms.length;
+
+    let currentProgress;
+    multiforms.forEach((e, i) => {
+      return e.classList.contains("cf7mls_current_fs")
+        ? (currentProgress = i + 1)
+        : false;
+    });
+
+    let circleProgress = $(".wdl-circle-progress").circleProgress({
+      value: currentProgress / totalProgress,
+      fill: {
+        color: ["#ff2758"],
+      },
+      size: 60,
+      lineCap: "round",
+      startAngle: -Math.PI / 2,
+    });
+
+    document.querySelector(".wdl-circle-progress-text").innerText =
+      currentProgress + "/" + totalProgress;
+  };
+  const wdlMultistepProgressBarInit = () => {
+    document.addEventListener("load", () => {
       setTimeout(() => {
         wdlMultistepProgressBar();
       }, 500);
     });
-  });
-  document.querySelectorAll(".cf7mls_next").forEach((e) => {
-    e.addEventListener("click", () => {
-      setTimeout(() => {
-        wdlMultistepProgressBar();
-      }, 500);
+    document.querySelectorAll(".cf7mls_back").forEach((e) => {
+      e.addEventListener("click", () => {
+        setTimeout(() => {
+          wdlMultistepProgressBar();
+        }, 500);
+      });
     });
-  });
-};
-document.querySelector(".fieldset-cf7mls")
-  ? (setTimeout(() => {
-      wdlMultistepProgressBar();
-    }, 500),
-    wdlMultistepProgressBarInit())
-  : false;
+    document.querySelectorAll(".cf7mls_next").forEach((e) => {
+      e.addEventListener("click", () => {
+        setTimeout(() => {
+          wdlMultistepProgressBar();
+        }, 500);
+      });
+    });
+  };
+  document.querySelector(".fieldset-cf7mls")
+    ? (setTimeout(() => {
+        wdlMultistepProgressBar();
+      }, 500),
+      wdlMultistepProgressBarInit())
+    : false;
 
-$(() => {
-  const wdlArchiveSwiper = new Swiper(
-    ".wdl-archive:not(.wdl-archive-swiper-extended) .wdl-archive-swiper",
-    {
-      slidesPerView: 1,
-      spaceBetween: 16,
-      breakpoints: {
-        576: {
-          slidesPerView: "auto",
-        },
-        992: {
-          slidesPerView: 3,
-        },
-      },
-      navigation: {
-        nextEl: ".swiper-button-next",
-        prevEl: ".swiper-button-prev",
-      },
-      pagination: {
-        el: ".swiper-pagination",
-        clickable: true,
-      },
-    }
-  );
-  const wdlArchiveExtendedSwiper = new Swiper(
-    ".wdl-archive-extended .wdl-archive-swiper",
-    {
-      slidesPerView: 1,
-      spaceBetween: 16,
-      speed: 1000,
-      autoplay: false,
-      breakpoints: {
-        768: {
-          slidesPerView: 2,
-          spaceBetween: 16,
-          autoplay: false,
-        },
-        1200: {
-          slidesPerView: 3,
-          spaceBetween: 24,
-          autoplay: {
-            delay: 5000,
+// Swipers
+  $(() => {
+    const wdlArchiveSwiper = new Swiper(
+      ".wdl-archive:not(.wdl-archive-swiper-extended) .wdl-archive-swiper",
+      {
+        slidesPerView: 1,
+        spaceBetween: 16,
+        breakpoints: {
+          576: {
+            slidesPerView: "auto",
+          },
+          992: {
+            slidesPerView: 3,
           },
         },
-      },
-      pagination: {
-        el: ".swiper-pagination",
-        clickable: true,
-      },
-      navigation: {
-        nextEl: ".swiper-button-next",
-        prevEl: ".swiper-button-prev",
-      },
-    }
-  );
-  let compareSlide = $(".wdl-compare-swiper .wdl-compare-card").length
-
-  const wdlCompareSwiper = new Swiper(".wdl-compare-swiper", {
-    slidesPerView: "auto",
-    spaceBetween: 12,
-    centerInsufficientSlides: true,
-    breakpoints: {
-      768: {
-        slidesPerView: "auto",
-        spaceBetween: 16,
-        centerInsufficientSlides: true,
-      },
-      1200: {
-        slidesPerView: compareSlide,
-        spaceBetween: 55 - (8 * compareSlide),
-        centerInsufficientSlides: true,
-      },
-    },
-    pagination: {
-      el: ".swiper-pagination",
-      clickable: true,
-    },
-    on: {
-      init: (swiper) => {
-        swiper.el.classList.add("wdl-compare-swiper-" + compareSlide);
-      },
-    },
-  });
-  const wdlBadgeSwiper = new Swiper(".wdl-badge-container.swiper", {
-    slidesPerView: "auto",
-    spaceBetween: 8,
-    pagination: {
-      el: ".swiper-pagination",
-      clickable: true,
-    },
-  });
-  const wdlHeroSwiper = new Swiper(".wdl-hero-swiper", {
-    slidesPerView: 1,
-    spaceBetween: 40,
-    pagination: {
-      el: ".swiper-pagination",
-      clickable: true,
-      type: "bullets",
-    },
-    navigation: {
-      nextEl: ".swiper-button-next",
-      prevEl: ".swiper-button-prev",
-    },
-    speed: 1000,
-    autoplay: {
-      delay: 5000,
-    },
-    loop: true,
-  });
-  const wdlHero2Swiper = new Swiper(".wdl-hero-2-swiper", {
-    slidesPerView: 1,
-    spaceBetween: 40,
-    pagination: {
-      el: ".swiper-pagination",
-      clickable: true,
-      type: "bullets",
-    },
-    navigation: {
-      nextEl: ".swiper-button-next",
-      prevEl: ".swiper-button-prev",
-    },
-    speed: 1000,
-    autoplay: {
-      delay: 5000,
-    },
-    loop: true,
-  });
-  const wdlLeadMenuSmallSwiper = new Swiper(".wdl-lead-menu-small-swiper", {
-    slideClass: "menu-item",
-    slidesPerView: "auto",
-    spaceBetween: 16,
-    breakpoints: {
-      1200: {
-        slidesPerView: 5,
-      },
-    },
-  });
-  const wdlLeadMenuRevampedSwiper = new Swiper(
-    ".wdl-lead-menu-revamped-swiper",
-    {
-      slideClass: "menu-item",
-      slidesPerView: "auto",
-      spaceBetween: 8,
-      breakpoints: {
-        992: {
-          spaceBetween: 16,
-          slidesPerView: 5,
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
         },
-      },
-    }
-  );
-  const wdlCompareGroupRoomSwiper = new Swiper(
-    ".wdl-compare-group-room-swiper",
-    {
-      slidesPerView: "1",
-      spaceBetween: 24,
-      navigation: {
-        nextEl: ".swiper-navigation .swiper-button-next",
-        prevEl: ".swiper-navigation .swiper-button-prev",
-      },
-    }
-  );
-  const wdlCardGallerygSwiper = new Swiper(
-    ".wdl-card-gallery-swiper",
-    {
-      slidesPerView: 1,
-      navigation: {
-        nextEl: ".swiper-navigation .swiper-button-next",
-        prevEl: ".swiper-navigation .swiper-button-prev",
-      },
-    }
-  );
-  const wdlListingCardGallerygSwiper = new Swiper(
-    ".wdl-listing-card-gallery-swiper",
-    {
-      slidesPerView: 1,
-      /* autoplay: {
-        delay: 5000,
-      }, */
-      navigation: {
-        nextEl: ".swiper-navigation .swiper-button-next",
-        prevEl: ".swiper-navigation .swiper-button-prev",
-      },
-    }
-  );
-  const wdlListingCardDetailPricingSwiper = new Swiper(
-    ".wdl-listing-card-detail-pricing-swiper",
-    {
-      slidesPerView: "auto",
-      spaceBetween: 6,
-    }
-  );
-  const wdlListingCardDetailFeaturesSwiper = new Swiper(
-    ".wdl-listing-card-detail-features-swiper",
-    {
-      slidesPerView: "auto",
-      spaceBetween: 24,
-    }
-  );
-  const wdlListingCardDetailRoomSwiper = new Swiper(
-    ".wdl-listing-card-detail-room-swiper",
-    {
-      slidesPerView: "auto",
-      spaceBetween: 16,
-    }
-  );
+        pagination: {
+          el: ".swiper-pagination",
+          clickable: true,
+        },
+      }
+    );
+    const wdlArchiveExtendedSwiper = new Swiper(
+      ".wdl-archive-extended .wdl-archive-swiper",
+      {
+        slidesPerView: 1,
+        spaceBetween: 16,
+        speed: 1000,
+        autoplay: false,
+        breakpoints: {
+          768: {
+            slidesPerView: 2,
+            spaceBetween: 16,
+            autoplay: false,
+          },
+          1200: {
+            slidesPerView: 3,
+            spaceBetween: 24,
+            autoplay: {
+              delay: 5000,
+            },
+          },
+        },
+        pagination: {
+          el: ".swiper-pagination",
+          clickable: true,
+        },
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
+        },
+      }
+    );
+    let compareSlide = $(".wdl-compare-swiper .wdl-compare-card").length
 
-  const wdlAdPopupSwiper = new Swiper(".wdl-ad-popup-swiper", {
-    slidesPerView: 1,
-    spaceBetween: 16,
-    speed: 1000,
-    autoplay: {
-      delay: 5000,
-    },
-    navigation: {
-      nextEl: ".swiper-navigation .swiper-button-next",
-      prevEl: ".swiper-navigation .swiper-button-prev",
-    },
-  });
-
-  const wdlArchivePricingSwiper = new Swiper(
-    ".wdl-archive-pricing-swiper",
-    {
-      slidesPerView: 1,
-      spaceBetween: 16,
+    const wdlCompareSwiper = new Swiper(".wdl-compare-swiper", {
+      slidesPerView: "auto",
+      spaceBetween: 12,
+      centerInsufficientSlides: true,
       breakpoints: {
         768: {
-          slidesPerView: 2,
+          slidesPerView: "auto",
           spaceBetween: 16,
+          centerInsufficientSlides: true,
         },
         1200: {
-          slidesPerView: 3,
-          spaceBetween: 24,
+          slidesPerView: compareSlide,
+          spaceBetween: 55 - (8 * compareSlide),
+          centerInsufficientSlides: true,
         },
       },
       pagination: {
         el: ".swiper-pagination",
         clickable: true,
       },
-      speed: 1000,
-    }
-  );
-
-  const wdlHeroGallerySwiper = new Swiper(".wdl-archive-pricing-gallery-swiper", {
-    enableTouchSwipe: false,
-    slidesPerView: "auto",
-    spaceBetween: 16,
-    navigation: {
-      prevEl: ".swiper-button-prev",
-      nextEl: ".swiper-button-next",
-    },
-    centerInsufficientSlides: true,
-    speed: 1000,
-    loop: true,
-  });
-});
-
-const wdlStickyBar = () => {
-  const mainContent = document.querySelector(".wdl-main-bar");
-  window.addEventListener("scroll", () => {
-    window.scrollY > mainContent.offsetTop + mainContent.clientHeight
-      ? document.querySelector(".wdl-sticky-bar").classList.add("active")
-      : document.querySelector(".wdl-sticky-bar").classList.remove("active");
-  });
-  window.addEventListener("load", () => {
-    window.scrollY > mainContent.offsetTop + mainContent.clientHeight
-      ? document.querySelector(".wdl-sticky-bar").classList.add("active")
-      : document.querySelector(".wdl-sticky-bar").classList.remove("active");
-  });
-
-  const positioning = () => {
-    document.querySelector(".wdl-sticky-bar").style.top =
-      document.querySelector("#main-header").offsetTop +
-      document.querySelector("#main-header").clientHeight +
-      "px";
-  };
-
-  positioning();
-
-  window.addEventListener("load", () => {
-    positioning();
-  });
-  window.addEventListener("resize", () => {
-    positioning();
-  });
-};
-
-document.querySelector(".wdl-sticky-bar") ? wdlStickyBar() : false;
-
-const wdlGallery = () => {
-  const galleryItems = document.querySelectorAll(
-    ".wdl-gallery .wdl-gallery-item"
-  );
-
-  const galleryModalSwiper = new Swiper(".wdl-gallery-modal-swiper", {
-    sldiesPerView: 1,
-    pagination: {
-      el: ".swiper-pagination",
-      type: "bullets",
-      clickable: true,
-    },
-    navigation: {
-      prevEl: ".swiper-button-prev",
-      nextEl: ".swiper-button-next",
-    },
-    loop: true,
-  });
-
-  galleryItems.forEach((e, i) => {
-    e.addEventListener("click", (element) => {
-      galleryModalSwiper.slideTo(i, 0);
-    });
-    e.addEventListener("drag", (element) => {
-      e.preventDefault();
-    });
-  });
-};
-
-document.querySelector(".wdl-gallery") ? wdlGallery() : false;
-
-const wdlHeroGallery = () => {
-  if($('.wdl-hero-gallery-swiper').hasClass('wdl-hero-gallery-video-swiper')) {
-    const wdlHeroGalleryVideoSwiper = new Swiper(".wdl-hero-gallery-video-swiper", {
-      slidesPerView: "auto",
-      spaceBetween: 16,
-      navigation: {
-        prevEl: ".swiper-button-prev",
-        nextEl: ".swiper-button-next",
+      on: {
+        init: (swiper) => {
+          swiper.el.classList.add("wdl-compare-swiper-" + compareSlide);
+        },
       },
-      centerInsufficientSlides: true,
-      loop: true,
     });
-  } else {
-    const wdlHeroGallerySwiper = new Swiper(".wdl-hero-gallery-swiper", {
+    const wdlBadgeSwiper = new Swiper(".wdl-badge-container.swiper", {
       slidesPerView: "auto",
-      spaceBetween: 16,
-      navigation: {
-        prevEl: ".swiper-button-prev",
-        nextEl: ".swiper-button-next",
+      spaceBetween: 8,
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
       },
-      centerInsufficientSlides: true,
+    });
+    const wdlHeroSwiper = new Swiper(".wdl-hero-swiper", {
+      slidesPerView: 1,
+      spaceBetween: 40,
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+        type: "bullets",
+      },
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+      },
       speed: 1000,
       autoplay: {
         delay: 5000,
       },
       loop: true,
     });
-  }
-};
+    const wdlHero2Swiper = new Swiper(".wdl-hero-2-swiper", {
+      slidesPerView: 1,
+      spaceBetween: 40,
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+        type: "bullets",
+      },
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+      },
+      speed: 1000,
+      autoplay: {
+        delay: 5000,
+      },
+      loop: true,
+    });
+    const wdlLeadMenuSmallSwiper = new Swiper(".wdl-lead-menu-small-swiper", {
+      slideClass: "menu-item",
+      slidesPerView: "auto",
+      spaceBetween: 16,
+      breakpoints: {
+        1200: {
+          slidesPerView: 5,
+        },
+      },
+    });
+    const wdlLeadMenuRevampedSwiper = new Swiper(
+      ".wdl-lead-menu-revamped-swiper",
+      {
+        slideClass: "menu-item",
+        slidesPerView: "auto",
+        spaceBetween: 8,
+        breakpoints: {
+          992: {
+            spaceBetween: 16,
+            slidesPerView: 5,
+          },
+        },
+      }
+    );
+    const wdlCompareGroupRoomSwiper = new Swiper(
+      ".wdl-compare-group-room-swiper",
+      {
+        slidesPerView: "1",
+        spaceBetween: 24,
+        navigation: {
+          nextEl: ".swiper-navigation .swiper-button-next",
+          prevEl: ".swiper-navigation .swiper-button-prev",
+        },
+      }
+    );
+    const wdlCardGallerygSwiper = new Swiper(
+      ".wdl-card-gallery-swiper",
+      {
+        slidesPerView: 1,
+        navigation: {
+          nextEl: ".swiper-navigation .swiper-button-next",
+          prevEl: ".swiper-navigation .swiper-button-prev",
+        },
+      }
+    );
+    const wdlListingCardGallerygSwiper = new Swiper(
+      ".wdl-listing-card-gallery-swiper",
+      {
+        slidesPerView: 1,
+        /* autoplay: {
+          delay: 5000,
+        }, */
+        navigation: {
+          nextEl: ".swiper-navigation .swiper-button-next",
+          prevEl: ".swiper-navigation .swiper-button-prev",
+        },
+      }
+    );
+    const wdlListingCardDetailPricingSwiper = new Swiper(
+      ".wdl-listing-card-detail-pricing-swiper",
+      {
+        slidesPerView: "auto",
+        spaceBetween: 6,
+      }
+    );
+    const wdlListingCardDetailFeaturesSwiper = new Swiper(
+      ".wdl-listing-card-detail-features-swiper",
+      {
+        slidesPerView: "auto",
+        spaceBetween: 24,
+      }
+    );
+    const wdlListingCardDetailRoomSwiper = new Swiper(
+      ".wdl-listing-card-detail-room-swiper",
+      {
+        slidesPerView: "auto",
+        spaceBetween: 16,
+      }
+    );
 
-document.querySelector(".wdl-hero-gallery") ? wdlHeroGallery() : false;
+    const wdlAdPopupSwiper = new Swiper(".wdl-ad-popup-swiper", {
+      slidesPerView: 1,
+      spaceBetween: 16,
+      speed: 1000,
+      autoplay: {
+        delay: 5000,
+      },
+      navigation: {
+        nextEl: ".swiper-navigation .swiper-button-next",
+        prevEl: ".swiper-navigation .swiper-button-prev",
+      },
+    });
 
-const leadMenuSmallSwiper = new Swiper(".lead-menu-small-swiper", {
-  slidesPerView: 2.3,
-  spaceBetween: 16,
-  breakpoints: {
-    575: {
-      slidesPerView: 3.7,
+    const wdlArchivePricingSwiper = new Swiper(
+      ".wdl-archive-pricing-swiper",
+      {
+        slidesPerView: 1,
+        spaceBetween: 16,
+        breakpoints: {
+          768: {
+            slidesPerView: 2,
+            spaceBetween: 16,
+          },
+          1200: {
+            slidesPerView: 3,
+            spaceBetween: 24,
+          },
+        },
+        pagination: {
+          el: ".swiper-pagination",
+          clickable: true,
+        },
+        speed: 1000,
+      }
+    );
+
+    const wdlHeroGallerySwiper = new Swiper(".wdl-archive-pricing-gallery-swiper", {
+      enableTouchSwipe: false,
+      slidesPerView: "auto",
+      spaceBetween: 16,
+      navigation: {
+        prevEl: ".swiper-button-prev",
+        nextEl: ".swiper-button-next",
+      },
+      centerInsufficientSlides: true,
+      speed: 1000,
+      loop: true,
+    });
+  });
+
+  
+// Stickybar
+  const wdlStickyBar = () => {
+    const mainContent = document.querySelector(".wdl-main-bar");
+    window.addEventListener("scroll", () => {
+      window.scrollY > mainContent.offsetTop + mainContent.clientHeight
+        ? document.querySelector(".wdl-sticky-bar").classList.add("active")
+        : document.querySelector(".wdl-sticky-bar").classList.remove("active");
+    });
+    window.addEventListener("load", () => {
+      window.scrollY > mainContent.offsetTop + mainContent.clientHeight
+        ? document.querySelector(".wdl-sticky-bar").classList.add("active")
+        : document.querySelector(".wdl-sticky-bar").classList.remove("active");
+    });
+
+    const positioning = () => {
+      document.querySelector(".wdl-sticky-bar").style.top =
+        document.querySelector("#main-header").offsetTop +
+        document.querySelector("#main-header").clientHeight +
+        "px";
+    };
+
+    positioning();
+
+    window.addEventListener("load", () => {
+      positioning();
+    });
+    window.addEventListener("resize", () => {
+      positioning();
+    });
+  };
+
+  document.querySelector(".wdl-sticky-bar") ? wdlStickyBar() : false;
+
+  const wdlGallery = () => {
+    const galleryItems = document.querySelectorAll(
+      ".wdl-gallery .wdl-gallery-item"
+    );
+
+    const galleryModalSwiper = new Swiper(".wdl-gallery-modal-swiper", {
+      sldiesPerView: 1,
+      pagination: {
+        el: ".swiper-pagination",
+        type: "bullets",
+        clickable: true,
+      },
+      navigation: {
+        prevEl: ".swiper-button-prev",
+        nextEl: ".swiper-button-next",
+      },
+      loop: true,
+    });
+
+    galleryItems.forEach((e, i) => {
+      e.addEventListener("click", (element) => {
+        galleryModalSwiper.slideTo(i, 0);
+      });
+      e.addEventListener("drag", (element) => {
+        e.preventDefault();
+      });
+    });
+  };
+  
+// Gallery
+  document.querySelector(".wdl-gallery") ? wdlGallery() : false;
+
+  const wdlHeroGallery = () => {
+    if($('.wdl-hero-gallery-swiper').hasClass('wdl-hero-gallery-video-swiper')) {
+      const wdlHeroGalleryVideoSwiper = new Swiper(".wdl-hero-gallery-video-swiper", {
+        slidesPerView: "auto",
+        spaceBetween: 16,
+        navigation: {
+          prevEl: ".swiper-button-prev",
+          nextEl: ".swiper-button-next",
+        },
+        centerInsufficientSlides: true,
+        loop: true,
+      });
+    } else {
+      const wdlHeroGallerySwiper = new Swiper(".wdl-hero-gallery-swiper", {
+        slidesPerView: "auto",
+        spaceBetween: 16,
+        navigation: {
+          prevEl: ".swiper-button-prev",
+          nextEl: ".swiper-button-next",
+        },
+        centerInsufficientSlides: true,
+        speed: 1000,
+        autoplay: {
+          delay: 5000,
+        },
+        loop: true,
+      });
+    }
+  };
+
+// Hero Gallery
+
+  document.querySelector(".wdl-hero-gallery") ? wdlHeroGallery() : false;
+
+  const leadMenuSmallSwiper = new Swiper(".lead-menu-small-swiper", {
+    slidesPerView: 2.3,
+    spaceBetween: 16,
+    breakpoints: {
+      575: {
+        slidesPerView: 3.7,
+      },
+      992: {
+        slidesPerView: 5,
+      },
     },
-    992: {
-      slidesPerView: 5,
-    },
-  },
-});
+  });
 
 // Search floating label
-const etSearchFloatingLabel = () => {
+  const etSearchFloatingLabel = () => {
+    document
+      .querySelectorAll(".et_pb_searchform > div")
+      .forEach((element, index) => {
+        element.classList.add("form-floating");
+        element.querySelector("input.et_pb_s").classList.add("form-control");
+
+        if (element.querySelector("input.et_pb_s").placeholder) {
+          let placeholderText =
+            element.querySelector("input.et_pb_s").placeholder;
+          let inputId = "search-" + (index + 1);
+          let floatingLabel = document.createElement("label");
+          floatingLabel.setAttribute("for", inputId);
+          floatingLabel.innerText = placeholderText;
+
+          element.querySelector("input.et_pb_s").id = inputId;
+          element.querySelector("input.et_pb_s").after(floatingLabel);
+        }
+      });
+  };
+
+  document.querySelector(".et_pb_searchform") &&
+  document.querySelector("input.et_pb_s")
+    ? etSearchFloatingLabel()
+    : false;
+// WPCF7 floating label
+  const cf7FloatingLabel = () => {
+    document
+      .querySelectorAll(".wpcf7-form-control-wrap")
+      .forEach((element, index) => {
+        element.classList.add("form-floating");
+        element.querySelector("input.wpcf7-form-control")
+          ? element
+              .querySelector("input.wpcf7-form-control")
+              .classList.add("form-control")
+          : false;
+        element.querySelector("textarea.wpcf7-form-control")
+          ? element
+              .querySelector("textarea.wpcf7-form-control")
+              .classList.add("form-control")
+          : false;
+
+        if (element.querySelector(".wpcf7-form-control").placeholder) {
+          let placeholderText = element.querySelector(
+            ".wpcf7-form-control"
+          ).placeholder;
+          let inputId = element.querySelector(".wpcf7-form-control").id;
+          let floatingLabel = document.createElement("label");
+
+          floatingLabel.setAttribute("for", inputId);
+          floatingLabel.innerText = placeholderText;
+
+          element.querySelector(".wpcf7-form-control").after(floatingLabel);
+        }
+      });
+  };
+
+  document.querySelector(".wpcf7-form-control-wrap") ? cf7FloatingLabel() : false;
+
+// Search page default value
+  const wdlSearchQuery = () => {
+    document
+      .querySelector(".wdl-search input[name=s]")
+      .setAttribute(
+        "value",
+        document.querySelector(".wdl-search-query").textContent.trim()
+      );
+  };
+
+  document.querySelector(".wdl-search-query") ? wdlSearchQuery() : false;
+
+// Search floating label
   document
-    .querySelectorAll(".et_pb_searchform > div")
+    .querySelectorAll(".wpc-search-field-wrapper")
     .forEach((element, index) => {
       element.classList.add("form-floating");
-      element.querySelector("input.et_pb_s").classList.add("form-control");
+      element.querySelector(".wpc-search-field").classList.add("form-control");
 
-      if (element.querySelector("input.et_pb_s").placeholder) {
+      if (element.querySelector(".wpc-search-field").placeholder) {
         let placeholderText =
-          element.querySelector("input.et_pb_s").placeholder;
+          element.querySelector(".wpc-search-field").placeholder;
         let inputId = "search-" + (index + 1);
         let floatingLabel = document.createElement("label");
         floatingLabel.setAttribute("for", inputId);
         floatingLabel.innerText = placeholderText;
 
-        element.querySelector("input.et_pb_s").id = inputId;
-        element.querySelector("input.et_pb_s").after(floatingLabel);
+        element.querySelector(".wpc-search-field").id = inputId;
+        element.querySelector(".wpc-search-field").after(floatingLabel);
       }
     });
-};
 
-document.querySelector(".et_pb_searchform") &&
-document.querySelector("input.et_pb_s")
-  ? etSearchFloatingLabel()
-  : false;
-// WPCF7 floating label
-const cf7FloatingLabel = () => {
-  document
-    .querySelectorAll(".wpcf7-form-control-wrap")
-    .forEach((element, index) => {
-      element.classList.add("form-floating");
-      element.querySelector("input.wpcf7-form-control")
-        ? element
-            .querySelector("input.wpcf7-form-control")
-            .classList.add("form-control")
-        : false;
-      element.querySelector("textarea.wpcf7-form-control")
-        ? element
-            .querySelector("textarea.wpcf7-form-control")
-            .classList.add("form-control")
-        : false;
-
-      if (element.querySelector(".wpcf7-form-control").placeholder) {
-        let placeholderText = element.querySelector(
-          ".wpcf7-form-control"
-        ).placeholder;
-        let inputId = element.querySelector(".wpcf7-form-control").id;
-        let floatingLabel = document.createElement("label");
-
-        floatingLabel.setAttribute("for", inputId);
-        floatingLabel.innerText = placeholderText;
-
-        element.querySelector(".wpcf7-form-control").after(floatingLabel);
-      }
+  const selectAll = () => {
+    document.querySelectorAll(".select-all").forEach((e) => {
+      e.addEventListener("change", () => {
+        e.parentElement.parentElement
+          .querySelectorAll("input[type=checkbox]")
+          .forEach((checkbox) => {
+            checkbox.checked = e.checked;
+          });
+      });
     });
-};
+  };
 
-document.querySelector(".wpcf7-form-control-wrap") ? cf7FloatingLabel() : false;
-
-// Search page default value
-const wdlSearchQuery = () => {
-  document
-    .querySelector(".wdl-search input[name=s]")
-    .setAttribute(
-      "value",
-      document.querySelector(".wdl-search-query").textContent.trim()
-    );
-};
-
-document.querySelector(".wdl-search-query") ? wdlSearchQuery() : false;
-
-// Search floating label
-document
-  .querySelectorAll(".wpc-search-field-wrapper")
-  .forEach((element, index) => {
-    element.classList.add("form-floating");
-    element.querySelector(".wpc-search-field").classList.add("form-control");
-
-    if (element.querySelector(".wpc-search-field").placeholder) {
-      let placeholderText =
-        element.querySelector(".wpc-search-field").placeholder;
-      let inputId = "search-" + (index + 1);
-      let floatingLabel = document.createElement("label");
-      floatingLabel.setAttribute("for", inputId);
-      floatingLabel.innerText = placeholderText;
-
-      element.querySelector(".wpc-search-field").id = inputId;
-      element.querySelector(".wpc-search-field").after(floatingLabel);
-    }
-  });
-
-const selectAll = () => {
-  document.querySelectorAll(".select-all").forEach((e) => {
-    e.addEventListener("change", () => {
-      e.parentElement.parentElement
-        .querySelectorAll("input[type=checkbox]")
-        .forEach((checkbox) => {
-          checkbox.checked = e.checked;
-        });
-    });
-  });
-};
-
-document.querySelector(".select-all") ? selectAll() : false;
+  document.querySelector(".select-all") ? selectAll() : false;
 
 // Set Default Form Venue Data
-const dataVenue = () => {
-  if (
-    document.querySelector(".wdl-data-venue") &&
-    document.querySelector(".wdl-set-venue")
-  ) {
-    setTimeout(() => {
-      document.querySelector(".wdl-set-venue").value =
-        document.querySelector(".wdl-data-venue").innerText;
-    }, 2000);
-  }
-};
+  const dataVenue = () => {
+    if (
+      document.querySelector(".wdl-data-venue") &&
+      document.querySelector(".wdl-set-venue")
+    ) {
+      setTimeout(() => {
+        document.querySelector(".wdl-set-venue").value =
+          document.querySelector(".wdl-data-venue").innerText;
+      }, 2000);
+    }
+  };
 
-document.querySelector(".wdl-data-venue") &&
-document.querySelector(".wdl-set-venue")
-  ? dataVenue()
-  : false;
+  document.querySelector(".wdl-data-venue") &&
+  document.querySelector(".wdl-set-venue")
+    ? dataVenue()
+    : false;
 
-$("#apply-cta").click(dataVenue());
-$(".wdl-apply-btn").on("click", (event) => {
-  $(event.target).closest(".wdl-archive-title");
-});
+  $("#apply-cta").click(dataVenue());
+  $(".wdl-apply-btn").on("click", (event) => {
+    $(event.target).closest(".wdl-archive-title");
+  });
 
 // Set Collected Checkbox Data from General Form
 
-const collectCheckbox = () => {
-  document
-    .querySelector("input[type=submit]")
-    .addEventListener("mouseover", () => {
+  const collectCheckbox = () => {
+    document
+      .querySelector("input[type=submit]")
+      .addEventListener("mouseover", () => {
+        let selected = [];
+
+        document
+          .querySelectorAll(
+            '.wdl-checkbox-convert input[type="checkbox"]:not(.select-all):checked ~ label'
+          )
+          .forEach((element) => {
+            selected.push(element.innerText);
+          });
+
+        document.querySelector(".wdl-checkbox-summary").value =
+          selected.join(", ");
+      });
+    document.querySelector("input[type=submit]").addEventListener("click", () => {
       let selected = [];
 
       document
@@ -646,359 +668,324 @@ const collectCheckbox = () => {
           selected.push(element.innerText);
         });
 
-      document.querySelector(".wdl-checkbox-summary").value =
-        selected.join(", ");
+      document.querySelector(".wdl-checkbox-summary").value = selected.join(", ");
     });
-  document.querySelector("input[type=submit]").addEventListener("click", () => {
-    let selected = [];
+  };
 
-    document
-      .querySelectorAll(
-        '.wdl-checkbox-convert input[type="checkbox"]:not(.select-all):checked ~ label'
-      )
-      .forEach((element) => {
-        selected.push(element.innerText);
-      });
+  document.querySelector(".wdl-checkbox-convert") ? collectCheckbox() : false;
 
-    document.querySelector(".wdl-checkbox-summary").value = selected.join(", ");
+  /* Prefill form */
+  $(".wpcf7-submit").click(() => {
+    localStorage.setItem("wdl-name-lastname", $("#name-lastname").val());
+    localStorage.setItem("wdl-tel", $("#tel").val());
+    localStorage.setItem("wdl-email", $("#email").val());
+    localStorage.setItem("wdl-lineid", $("#lineid").val());
+    localStorage.setItem("wdl-guest", $("#guest").val());
+    localStorage.setItem("wdl-budget", $("#budget").val());
+    localStorage.setItem("wdl-date", $("#date").val());
+    localStorage.setItem("wdl-message", $("#message").val());
   });
-};
-
-document.querySelector(".wdl-checkbox-convert") ? collectCheckbox() : false;
-
-/* Prefill form */
-$(".wpcf7-submit").click(() => {
-  localStorage.setItem("wdl-name-lastname", $("#name-lastname").val());
-  localStorage.setItem("wdl-tel", $("#tel").val());
-  localStorage.setItem("wdl-email", $("#email").val());
-  localStorage.setItem("wdl-lineid", $("#lineid").val());
-  localStorage.setItem("wdl-guest", $("#guest").val());
-  localStorage.setItem("wdl-budget", $("#budget").val());
-  localStorage.setItem("wdl-date", $("#date").val());
-  localStorage.setItem("wdl-message", $("#message").val());
-});
-$(".wdl-form-submit").click(() => {
-  localStorage.setItem("wdl-name-lastname", $("#name-lastname").val());
-  localStorage.setItem("wdl-tel", $("#tel").val());
-  localStorage.setItem("wdl-email", $("#email").val());
-  localStorage.setItem("wdl-lineid", $("#lineid").val());
-  localStorage.setItem("wdl-guest", $("#guest").val());
-  localStorage.setItem("wdl-budget", $("#budget").val());
-  localStorage.setItem("wdl-date", $("#date").val());
-  localStorage.setItem("wdl-message", $("#message").val());
-});
-
-$(document).ready(() => {
-  setTimeout(() => {
-    $("#name-lastname").val(localStorage.getItem("wdl-name-lastname"));
-    $("#tel").val(localStorage.getItem("wdl-tel"));
-    $("#email").val(localStorage.getItem("wdl-email"));
-    $("#lineid").val(localStorage.getItem("wdl-lineid"));
-    $("#guest").val(localStorage.getItem("wdl-guest"));
-    $("#budget").val(localStorage.getItem("wdl-budget"));
-    $("#date").val(localStorage.getItem("wdl-date"));
-    $("#message").val(localStorage.getItem("wdl-message"));
-  }, 2000);
-});
-
-// Find and force word wrapping
-
-$(document).ready(() => {
-  let replaceWords = [
-    "สถานที่",
-    "จะเป็น",
-    "โรงแรม",
-    "ย่านใจกลางเมือง",
-    "ใจกลางเมือง",
-    "ขอบคุณ",
-    "จริง ๆ ค่ะ",
-    "ข้อผิดพลาด",
-    "ความทรงจำ",
-    "บ่าว-สาว",
-    "บ่าวสาว",
-    "แบบนั้น",
-    "ของเรา",
-    "แต่งงาน",
-    "แกรนด์",
-    "กรุงเทพ",
-    "กรุงเทพฯ",
-  ];
-  let replaceElement = [
-    "p",
-    "h1",
-    "h2",
-    "h3",
-    "h4",
-    "h5",
-    "h6",
-    "a",
-    "span",
-    "td",
-    "th",
-  ];
-  $(replaceWords).each((index, word) => {
-    $(".wdl-main-content p").html(function (_, html) {
-      return html.replaceAll(word, "<word>" + word + "</word>");
-    });
-    $(".wdl-main-content h1").html(function (_, html) {
-      return html.replaceAll(word, "<word>" + word + "</word>");
-    });
-    $(".wdl-main-content h2").html(function (_, html) {
-      return html.replaceAll(word, "<word>" + word + "</word>");
-    });
-    $(".wdl-main-content h3").html(function (_, html) {
-      return html.replaceAll(word, "<word>" + word + "</word>");
-    });
-    $(".wdl-main-content h4").html(function (_, html) {
-      return html.replaceAll(word, "<word>" + word + "</word>");
-    });
-    $(".wdl-main-content h5").html(function (_, html) {
-      return html.replaceAll(word, "<word>" + word + "</word>");
-    });
-    $(".wdl-main-content h6").html(function (_, html) {
-      return html.replaceAll(word, "<word>" + word + "</word>");
-    });
+  $(".wdl-form-submit").click(() => {
+    localStorage.setItem("wdl-name-lastname", $("#name-lastname").val());
+    localStorage.setItem("wdl-tel", $("#tel").val());
+    localStorage.setItem("wdl-email", $("#email").val());
+    localStorage.setItem("wdl-lineid", $("#lineid").val());
+    localStorage.setItem("wdl-guest", $("#guest").val());
+    localStorage.setItem("wdl-budget", $("#budget").val());
+    localStorage.setItem("wdl-date", $("#date").val());
+    localStorage.setItem("wdl-message", $("#message").val());
   });
-});
-
-// Compare
-/* $(function() {
-
-  $('.wdl-compare-group')[0].matchHeight({
-    property: 'height',
-    remove: true
-  })
-}) */
-
-$(".wdl-link-print").click(() => {
-  window.print();
-});
-
-let selectedCard = [];
-
-const compareBarActive = () => {
-  // Compare : disable if selected card is not venue and more than 3
-  if (
-    selectedCard.findIndex((item) => item.postType !== "venue") === -1 &&
-    selectedCard.length > 1
-  ) {
-    $("#compare-selected").removeClass("disabled");
-    $("#compare-selected").attr(
-      "href",
-      "/compare/?compare_id=" +
-        selectedCard
-          .map((card) => {
-            return card.id;
-          })
-          .join(",")
-    );
-  } else {
-    $("#compare-selected").addClass("disabled");
-    $("#compare-selected").attr("href", "javascript:void(0);");
-  }
-
-  // Compare : update compare bar label
-  $(".wdl-compare-bar-selection-label p span").text(
-    selectedCard.length > 0 ? selectedCard.length : 1
-  );
-
-  // Compare : switch compare bar active status
-  if (selectedCard.length > 0) {
-    $(".wdl-compare-bar").addClass("active");
-
-    setTimeout(() => {
-      bootstrap.Tooltip.getInstance("#compare-selected").show();
-    }, 350);
-  } else {
-    $(".wdl-compare-bar").removeClass("active");
-
-    //bootstrap.Tooltip.getInstance("#compare-selected").hide();
-  }
-};
-
-// Compare : add item
-const compareBarAdd = (title) => {
-  $(".wdl-compare-bar .wdl-compare-bar-selection-card").each(
-    (index, element) => {
-      if ($(element).hasClass("empty")) {
-        $(element).removeClass("empty");
-        $(element).find("p").text(title);
-
-        return false;
-      }
-    }
-  );
-};
-
-// Compare : remove item
-const compareBarRemove = (title) => {
-  $(".wdl-compare-bar .wdl-compare-bar-selection-card").each(
-    (index, element) => {
-      let matchElement = $(element).find("p:contains(" + title + ")");
-
-      $(matchElement)
-        .closest(".wdl-compare-bar-selection-card")
-        .appendTo($(element).closest(".wdl-compare-bar-selection-group"));
-      $(matchElement)
-        .closest(".wdl-compare-bar-selection-card")
-        .addClass("empty");
-      $(matchElement).text("");
-    }
-  );
-};
-
-// Compare : register button
-/* $('.wdl-form-general-direct').each( (index, element) => {
-  $(element).click(()=> {
-    generalDirectData.push(JSON.parse($(element).closest('.wdl-archive-card').find('.wdl-checkbox input[type="checkbox"]').attr('data-select')))
-  })
-}) */
-
-let generalDirectData = []
-$(window).click((event)=>{
-  if($(event.target).hasClass('wdl-form-general-direct')) {
-    generalDirectData = [JSON.parse($(event.target).closest('.wdl-archive-card').find('.wdl-checkbox input[type="checkbox"]').attr('data-select'))]
-    $('.wdl-form-general-list').html($(`<li><span>${generalDirectData[0].title}</span></li>`))
-  }
-  if($(event.target).hasClass('card-select-input')) {
-    compareBarUpdate($(event.target));
-    // Compare : prevent over-selection
-    if (selectedCard.length < 5) {
-      $(".card-select input[type=checkbox]").prop(
-        "disabled",
-        false
-      );
-    } else {
-      $(".card-select input[type=checkbox]:not(:checked)").prop(
-        "disabled",
-        true
-      );
-    }
-    let formGeneralList = () => {
-      return selectedCard.map((card)=>`<li><span>${card.title}</span></li>`)
-    }
-    $('.wdl-form-general-list').html(formGeneralList())
-  }
-  /* if(generalDirectData) {
-  } else {
-    
-  } */
-})
-
-/* $('.wdl-form-general-modal').on('hidden.bs.modal', ()=> {
-  generalDirectData = []
-}) */
-
-// Compare : reset all selection after coming 'back'
-$(document).ready(() => {
-  setTimeout(() => {
-    $(".card-select input[type=checkbox]").prop("checked", false);
-  }, 50);
-});
-
-// Compare : add or remove selection
-const compareBarUpdate = (element) => {
-  if ($(element).is(":checked")) {
-    selectedCard.push(JSON.parse($(element).attr("data-select")));
-    compareBarAdd(JSON.parse($(element).attr("data-select")).title);
-    $(element).closest(".card").addClass("active");
-  } else {
-    selectedCard.pop(JSON.parse($(element).attr("data-select")));
-    compareBarRemove(JSON.parse($(element).attr("data-select")).title);
-    $(element).closest(".card").removeClass("active");
-  }
-
-  compareBarActive();
-};
-
-// Compare : checkbox trigger
-/* $(".card-select input[type=checkbox]").each((index, element) => {
-  $(element).change(() => {
-    compareBarUpdate(element);
-
-    // Compare : prevent over-selection
-    if (selectedCard.length < 5) {
-      $(".card-select input[type=checkbox]").prop(
-        "disabled",
-        false
-      );
-    } else {
-      $(".card-select input[type=checkbox]:not(:checked)").prop(
-        "disabled",
-        true
-      );
-    }
-  });
-});
- */
-// Compare : uncheck selected item from compare bar
-$(".wdl-compare-bar .wdl-compare-bar-selection-card").each((index, element) => {
-  $(element).click(() => {
-    let title = $(element).find("p").text();
-    let titleEl = $(".wdl-archive-title a:contains(" + title + ")");
-
-    compareBarRemove(title);
-
-    selectedCard.pop(
-      JSON.parse(
-        $(titleEl)
-          .closest(".card")
-          .find(".card-select input[type=checkbox]")
-          .attr("data-select")
-      )
-    );
-
-    $(titleEl)
-      .closest(".card")
-      .find(".card-select input[type=checkbox]")
-      .prop("checked", false);
-    $(titleEl).closest(".card").removeClass("active");
-
-    compareBarActive();
-
-    // Compare : prevent over-selection
-    if (selectedCard.length < 5) {
-      $(".card-select input[type=checkbox]").prop(
-        "disabled",
-        false
-      );
-    } else {
-      $(".card-select input[type=checkbox]:not(:checked)").prop(
-        "disabled",
-        true
-      );
-    }
-  });
-});
-
-// Enable tooltips
-const tooltipTriggerList = $('[data-bs-toggle="tooltip"]');
-const tooltipList = [...tooltipTriggerList].map(
-  (tooltipTriggerEl) => new bootstrap.Tooltip(tooltipTriggerEl)
-);
-
-$(".wdl-iframe").each((index, element) => {
-  setTimeout(() => {
-    $(element)
-      .find("iframe")
-      .css(
-        "height",
-        $(element).find("iframe").contents().find("body").height() + "px"
-      );
-  }, 10);
 
   $(document).ready(() => {
     setTimeout(() => {
-      $(element)
-        .find("iframe")
-        .css(
-          "height",
-          $(element).find("iframe").contents().find("body").height() + "px"
-        );
-    }, 250);
+      $("#name-lastname").val(localStorage.getItem("wdl-name-lastname"));
+      $("#tel").val(localStorage.getItem("wdl-tel"));
+      $("#email").val(localStorage.getItem("wdl-email"));
+      $("#lineid").val(localStorage.getItem("wdl-lineid"));
+      $("#guest").val(localStorage.getItem("wdl-guest"));
+      $("#budget").val(localStorage.getItem("wdl-budget"));
+      $("#date").val(localStorage.getItem("wdl-date"));
+      $("#message").val(localStorage.getItem("wdl-message"));
+    }, 2000);
   });
 
-  $(window).resize(() => {
+// Find and force word wrapping
+
+  $(document).ready(() => {
+    let replaceWords = [
+      "สถานที่",
+      "จะเป็น",
+      "โรงแรม",
+      "ย่านใจกลางเมือง",
+      "ใจกลางเมือง",
+      "ขอบคุณ",
+      "จริง ๆ ค่ะ",
+      "ข้อผิดพลาด",
+      "ความทรงจำ",
+      "บ่าว-สาว",
+      "บ่าวสาว",
+      "แบบนั้น",
+      "ของเรา",
+      "แต่งงาน",
+      "แกรนด์",
+      "กรุงเทพ",
+      "กรุงเทพฯ",
+    ];
+    let replaceElement = [
+      "p",
+      "h1",
+      "h2",
+      "h3",
+      "h4",
+      "h5",
+      "h6",
+      "a",
+      "span",
+      "td",
+      "th",
+    ];
+    $(replaceWords).each((index, word) => {
+      $(".wdl-main-content p").html(function (_, html) {
+        return html.replaceAll(word, "<word>" + word + "</word>");
+      });
+      $(".wdl-main-content h1").html(function (_, html) {
+        return html.replaceAll(word, "<word>" + word + "</word>");
+      });
+      $(".wdl-main-content h2").html(function (_, html) {
+        return html.replaceAll(word, "<word>" + word + "</word>");
+      });
+      $(".wdl-main-content h3").html(function (_, html) {
+        return html.replaceAll(word, "<word>" + word + "</word>");
+      });
+      $(".wdl-main-content h4").html(function (_, html) {
+        return html.replaceAll(word, "<word>" + word + "</word>");
+      });
+      $(".wdl-main-content h5").html(function (_, html) {
+        return html.replaceAll(word, "<word>" + word + "</word>");
+      });
+      $(".wdl-main-content h6").html(function (_, html) {
+        return html.replaceAll(word, "<word>" + word + "</word>");
+      });
+    });
+  });
+
+// Compare
+  /* $(function() {
+
+    $('.wdl-compare-group')[0].matchHeight({
+      property: 'height',
+      remove: true
+    })
+  }) */
+
+  $(".wdl-link-print").click(() => {
+    window.print();
+  });
+
+  let selectedCard = [];
+
+  const compareBarActive = () => {
+  // Compare : disable if selected card is not venue and more than 3
+    if (
+      selectedCard.findIndex((item) => item.postType !== "venue") === -1 &&
+      selectedCard.length > 1
+    ) {
+      $("#compare-selected").removeClass("disabled");
+      $("#compare-selected").attr(
+        "href",
+        "/compare/?compare_id=" +
+          selectedCard
+            .map((card) => {
+              return card.id;
+            })
+            .join(",")
+      );
+    } else {
+      $("#compare-selected").addClass("disabled");
+      $("#compare-selected").attr("href", "javascript:void(0);");
+    }
+
+  // Compare : update compare bar label
+    $(".wdl-compare-bar-selection-label p span").text(
+      selectedCard.length > 0 ? selectedCard.length : 1
+    );
+
+  // Compare : switch compare bar active status
+    if (selectedCard.length > 0) {
+      $(".wdl-compare-bar").addClass("active");
+
+      setTimeout(() => {
+        bootstrap.Tooltip.getInstance("#compare-selected").show();
+      }, 350);
+    } else {
+      $(".wdl-compare-bar").removeClass("active");
+
+      //bootstrap.Tooltip.getInstance("#compare-selected").hide();
+    }
+  };
+
+// Compare : add item
+  const compareBarAdd = (title) => {
+    $(".wdl-compare-bar .wdl-compare-bar-selection-card").each(
+      (index, element) => {
+        if ($(element).hasClass("empty")) {
+          $(element).removeClass("empty");
+          $(element).find("p").text(title);
+
+          return false;
+        }
+      }
+    );
+  };
+
+// Compare : remove item
+  const compareBarRemove = (title) => {
+    $(".wdl-compare-bar .wdl-compare-bar-selection-card").each(
+      (index, element) => {
+        let matchElement = $(element).find("p:contains(" + title + ")");
+
+        $(matchElement)
+          .closest(".wdl-compare-bar-selection-card")
+          .appendTo($(element).closest(".wdl-compare-bar-selection-group"));
+        $(matchElement)
+          .closest(".wdl-compare-bar-selection-card")
+          .addClass("empty");
+        $(matchElement).text("");
+      }
+    );
+  };
+
+// Compare : register button
+  /* $('.wdl-form-general-direct').each( (index, element) => {
+    $(element).click(()=> {
+      generalDirectData.push(JSON.parse($(element).closest('.wdl-archive-card').find('.wdl-checkbox input[type="checkbox"]').attr('data-select')))
+    })
+  }) */
+
+  let generalDirectData = []
+  $(window).click((event)=>{
+    if($(event.target).hasClass('wdl-form-general-direct')) {
+      generalDirectData = [JSON.parse($(event.target).closest('.wdl-archive-card').find('.wdl-checkbox input[type="checkbox"]').attr('data-select'))]
+      $('.wdl-form-general-list').html($(`<li><span>${generalDirectData[0].title}</span></li>`))
+    }
+    if($(event.target).hasClass('card-select-input')) {
+      compareBarUpdate($(event.target));
+    // Compare : prevent over-selection
+      if (selectedCard.length < 5) {
+        $(".card-select input[type=checkbox]").prop(
+          "disabled",
+          false
+        );
+      } else {
+        $(".card-select input[type=checkbox]:not(:checked)").prop(
+          "disabled",
+          true
+        );
+      }
+      let formGeneralList = () => {
+        return selectedCard.map((card)=>`<li><span>${card.title}</span></li>`)
+      }
+      $('.wdl-form-general-list').html(formGeneralList())
+    }
+    /* if(generalDirectData) {
+    } else {
+      
+    } */
+  })
+
+  /* $('.wdl-form-general-modal').on('hidden.bs.modal', ()=> {
+    generalDirectData = []
+  }) */
+
+// Compare : reset all selection after coming 'back'
+  $(document).ready(() => {
+    setTimeout(() => {
+      $(".card-select input[type=checkbox]").prop("checked", false);
+    }, 50);
+  });
+
+// Compare : add or remove selection
+  const compareBarUpdate = (element) => {
+    if ($(element).is(":checked")) {
+      selectedCard.push(JSON.parse($(element).attr("data-select")));
+      compareBarAdd(JSON.parse($(element).attr("data-select")).title);
+      $(element).closest(".card").addClass("active");
+    } else {
+      selectedCard.pop(JSON.parse($(element).attr("data-select")));
+      compareBarRemove(JSON.parse($(element).attr("data-select")).title);
+      $(element).closest(".card").removeClass("active");
+    }
+
+    compareBarActive();
+  };
+
+// Compare : checkbox trigger
+  /* $(".card-select input[type=checkbox]").each((index, element) => {
+    $(element).change(() => {
+      compareBarUpdate(element);
+
+    // Compare : prevent over-selection
+      if (selectedCard.length < 5) {
+        $(".card-select input[type=checkbox]").prop(
+          "disabled",
+          false
+        );
+      } else {
+        $(".card-select input[type=checkbox]:not(:checked)").prop(
+          "disabled",
+          true
+        );
+      }
+    });
+  });
+  */
+// Compare : uncheck selected item from compare bar
+  $(".wdl-compare-bar .wdl-compare-bar-selection-card").each((index, element) => {
+    $(element).click(() => {
+      let title = $(element).find("p").text();
+      let titleEl = $(".wdl-archive-title a:contains(" + title + ")");
+
+      compareBarRemove(title);
+
+      selectedCard.pop(
+        JSON.parse(
+          $(titleEl)
+            .closest(".card")
+            .find(".card-select input[type=checkbox]")
+            .attr("data-select")
+        )
+      );
+
+      $(titleEl)
+        .closest(".card")
+        .find(".card-select input[type=checkbox]")
+        .prop("checked", false);
+      $(titleEl).closest(".card").removeClass("active");
+
+      compareBarActive();
+
+    // Compare : prevent over-selection
+      if (selectedCard.length < 5) {
+        $(".card-select input[type=checkbox]").prop(
+          "disabled",
+          false
+        );
+      } else {
+        $(".card-select input[type=checkbox]:not(:checked)").prop(
+          "disabled",
+          true
+        );
+      }
+    });
+  });
+
+// Enable tooltips
+  const tooltipTriggerList = $('[data-bs-toggle="tooltip"]');
+  const tooltipList = [...tooltipTriggerList].map(
+    (tooltipTriggerEl) => new bootstrap.Tooltip(tooltipTriggerEl)
+  );
+
+  $(".wdl-iframe").each((index, element) => {
     setTimeout(() => {
       $(element)
         .find("iframe")
@@ -1007,12 +994,8 @@ $(".wdl-iframe").each((index, element) => {
           $(element).find("iframe").contents().find("body").height() + "px"
         );
     }, 10);
-  });
 
-  $(element)
-    .find("iframe")
-    .contents()
-    .click(() => {
+    $(document).ready(() => {
       setTimeout(() => {
         $(element)
           .find("iframe")
@@ -1020,45 +1003,93 @@ $(".wdl-iframe").each((index, element) => {
             "height",
             $(element).find("iframe").contents().find("body").height() + "px"
           );
-      }, 350);
+      }, 250);
     });
-});
+
+    $(window).resize(() => {
+      setTimeout(() => {
+        $(element)
+          .find("iframe")
+          .css(
+            "height",
+            $(element).find("iframe").contents().find("body").height() + "px"
+          );
+      }, 10);
+    });
+
+    $(element)
+      .find("iframe")
+      .contents()
+      .click(() => {
+        setTimeout(() => {
+          $(element)
+            .find("iframe")
+            .css(
+              "height",
+              $(element).find("iframe").contents().find("body").height() + "px"
+            );
+        }, 350);
+      });
+  });
 
 // Auto-trigger modal
-$(window).load(() => {
-  setTimeout(() => {
-    $(".wdl-modal-autotrigger").modal("show");
-  }, 50);
-});
+  $(window).load(() => {
+    setTimeout(() => {
+      $(".wdl-modal-autotrigger").modal("show");
+    }, 50);
+  });
 
 // Init Feather icons
-$(document).ready(()=> {
-  feather.replace()
-})
+  $(document).ready(()=> {
+    feather.replace()
+  })
 
 // Copy button
-$('.wdl-btn-copy').each((index, element) => {
-  $(element).click(()=> {
-    if($($(element).attr('data-copy')).val() !== '') {
-      navigator.clipboard.writeText($($(element).attr('data-copy')).val())
-    } else {
-      navigator.clipboard.writeText($($(element).attr('data-copy')).text())
-    }
+  $('.wdl-btn-copy').each((index, element) => {
+    $(element).click(()=> {
+      if($($(element).attr('data-copy')).val() !== '') {
+        navigator.clipboard.writeText($($(element).attr('data-copy')).val())
+      } else {
+        navigator.clipboard.writeText($($(element).attr('data-copy')).text())
+      }
 
-    $('body').append($(`
-      <div class="alert wdl-copy-alert" role="alert">
-        <span class="text-red"><svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" height="1.5em" width="1.5em" viewBox="0 0 512 512"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"/></svg></span>
-        คัดลอกข้อความเสร็จสมบูรณ์
-      </div>
-    `))
+      $('body').append($(`
+        <div class="alert wdl-copy-alert" role="alert">
+          <span class="text-red"><svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" height="1.5em" width="1.5em" viewBox="0 0 512 512"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"/></svg></span>
+          คัดลอกข้อความเสร็จสมบูรณ์
+        </div>
+      `))
 
-    setTimeout(()=> {
-      $('.wdl-copy-alert').remove()
-    }, 5000)
+      setTimeout(()=> {
+        $('.wdl-copy-alert').remove()
+      }, 5000)
+    })
   })
-})
 
-$(document).ready(()=>{
-  $($('.wdl-tab-related').find('.nav-link')[0]).addClass('active')
-  $($('.wdl-tab-related-content').find('.tab-pane')[0]).addClass(['show', 'active'])
-})
+  $(document).ready(()=>{
+    $($('.wdl-tab-related').find('.nav-link')[0]).addClass('active')
+    $($('.wdl-tab-related-content').find('.tab-pane')[0]).addClass(['show', 'active'])
+  })
+
+// General form : Conditional appointment
+  $('.wdl-checkbox #appoint').change(()=> {
+    if ($('.wdl-checkbox #appoint').is(':checked') === true) {
+      $('#appoint-date').attr('required', true)
+      $('#appoint-time').attr('required', true)
+
+      $('#appoint-field').removeClass('d-none')
+    } else {
+      $('#appoint-date').attr('required', false)
+      $('#appoint-time').attr('required', false)
+
+      $('#appoint-field').addClass('d-none')
+    }
+  })
+
+// Textarea : auto-scroll fix
+  /* $("textarea").each((index, element) => {
+    $(element).change(() => {
+      console.log($(element)[0].scrollHeight)
+      $(element).scrollTop($(element)[0].scrollHeight);
+    });
+  }) */
