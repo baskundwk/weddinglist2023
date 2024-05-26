@@ -35,6 +35,11 @@
     } else {
       $key = '';
     }
+
+    $current_url = explode("?", $_SERVER['REQUEST_URI'])[0];
+
+    $current_term_id = get_queried_object()->term_id;
+    $current_tax = get_queried_object()->taxonomy;
     
     query_posts(
       array(
@@ -44,8 +49,15 @@
         'orderby' => $orderby,
         'post_status' => $post_status,
         'paged' => $paged,
-        'posts_per_page' => 30,
+        'posts_per_page' => '16',
         'meta_query' => $has_field,
+        'tax_query' => array(
+          array(
+            'taxonomy' => $current_tax,
+            'field' => 'term_id',
+            'terms' => $current_term_id
+          )
+        )
       )
     );
   ?>
@@ -64,7 +76,7 @@
         </div>
         <div class="row mb-3">
           <div class="col-md-9">
-            <a href="<?php echo get_post_type_archive_link('vendor') ?>" class="wdl-badge-sm-primary">ทั้งหมด</a>
+            <a href="<?php echo get_post_type_archive_link('vendor') ?>" class="wdl-badge-sm-secondary">ทั้งหมด</a>
             <?php
             foreach (get_terms('vendor-type') as $term) {
               if($term->term_id == $current_term_id) {
@@ -145,10 +157,6 @@
                           <div class="swiper-button-next"></div>
                         </div>
                       </div>
-                      <?php $sponsored = get_field('Status');
-                      if ($sponsored && in_array('Sponsored', $sponsored)): ?>
-                        <span class="badge wdl-badge-sm">Most Popular</span>
-                      <?php endif; ?>
                     <?php endif; ?>
                   </a>
                 <?php endif; ?>
@@ -181,24 +189,9 @@
                       </div>
                     <?php endforeach; endif; ?>
 
-                    <h3 class="wdl-archive-title mb-0"><a href="<?php the_permalink(); ?>">
+                  <h3 class="wdl-archive-title mb-0"><a href="<?php the_permalink(); ?>">
                       <?php the_title(); ?>
                     </a></h3>
-
-
-                  <?php
-                  $locations = get_field('Location');
-                  if ($locations): ?>
-                    <div class="wdl-archive-neighborhood">
-                      <ul>
-                        <?php foreach ($locations as $location): ?>
-                          <li>
-                            <?php echo esc_html($location->name); ?>
-                          </li>
-                        <?php endforeach; ?>
-                      </ul>
-                    </div>
-                  <?php endif; ?>
 
                   <p class="lineclamp-3 mb-2 text-sm text-secondary">
                     <?php echo (get_the_excerpt()); ?>

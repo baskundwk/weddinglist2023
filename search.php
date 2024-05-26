@@ -281,7 +281,7 @@
                           </div>
   
                           <div class="card-body wdl-archive-card-body">
-                            <div class="wdl-badge-container mb-2">
+                            <div class="wdl-badge-container mb-1">
                               <?php
                               $date = get_field('Date');
                               if ($date): ?>
@@ -301,14 +301,14 @@
                               foreach ($relatedVenue as $venue):
                                 $venueType = get_field('VenueType', $venue->ID);
                                 ?>
-                                <div class="wdl-archive-pretitle mb-2">
+                                <div class="wdl-archive-pretitle mb-0">
                                   <small>
                                     <?php echo $venueType[0]->name ?>
                                   </small>
                                 </div>
                               <?php endforeach; endif; ?>
   
-                            <h3 class="wdl-archive-title"><a href="<?php the_permalink(); ?>">
+                            <h3 class="wdl-archive-title mb-0"><a href="<?php the_permalink(); ?>">
                                 <?php the_title(); ?>
                               </a></h3>
   
@@ -367,7 +367,7 @@
                           </div>
   
                           <div class="card-body wdl-archive-card-body">
-                            <div class="wdl-badge-container mb-2">
+                            <div class="wdl-badge-container mb-1">
                               <?php
                               $date = get_field('Date');
                               if ($date): ?>
@@ -387,14 +387,14 @@
                               foreach ($relatedVenue as $venue):
                                 $venueType = get_field('VenueType', $venue->ID);
                                 ?>
-                                <div class="wdl-archive-pretitle mb-2">
+                                <div class="wdl-archive-pretitle mb-0">
                                   <small>
                                     <?php echo $venueType[0]->name ?>
                                   </small>
                                 </div>
                               <?php endforeach; endif; ?>
   
-                            <h3 class="wdl-archive-title"><a href="<?php the_permalink(); ?>">
+                            <h3 class="wdl-archive-title mb-0"><a href="<?php the_permalink(); ?>">
                                 <?php the_title(); ?>
                               </a></h3>
   
@@ -500,12 +500,12 @@
                                   foreach ($vendorType as $type):
                                   $typeLink = get_term_link( $type->term_id);
                                   ?>
-                                  <div class="wdl-archive-pretitle mb-2">
+                                  <div class="wdl-archive-pretitle mb-0">
                                     <a href="<?php echo($typeLink) ?>" class="text-accent fw-normal"><?php echo $type->name ?></a>
                                   </div>
                                   <?php endforeach; endif; ?>
                   
-                                  <h3 class="wdl-archive-title"><a href="<?php the_permalink(); ?>">
+                                  <h3 class="wdl-archive-title mb-0"><a href="<?php the_permalink(); ?>">
                                     <?php the_title(); ?>
                                   </a></h3>
     

@@ -225,7 +225,7 @@
 											<?php endif; ?>
 
 											<div class="card-body wdl-archive-card-body">
-												<div class="wdl-badge-container mb-2">
+												<div class="wdl-badge-container mb-1">
 													<?php
 													$date = get_field('Date');
 													if ($date): ?>
@@ -239,7 +239,7 @@
 													<?php endif; ?>
 												</div>
 
-												<div class="wdl-archive-pretitle mb-2">
+												<div class="wdl-archive-pretitle mb-0">
 													<?php
 													$relatedVenue = get_field('RelatedVenue');
 													$relatedVenueType = get_field('VenueType', $relatedVenue->ID);
@@ -250,7 +250,7 @@
 													<?php endif; ?>
 												</div>
 
-												<h3 class="wdl-archive-title"><a href="<?php the_permalink(); ?>">
+												<h3 class="wdl-archive-title mb-0"><a href="<?php the_permalink(); ?>">
 														<?php the_title(); ?>
 													</a></h3>
 

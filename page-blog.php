@@ -9,13 +9,12 @@
     array(
       'post_type' => 'post',
       'post_status' => 'publish',
-      'posts_per_page' => '30',
+      'posts_per_page' => 12,
       'paged' => $paged,
       'orderby' => 'post_date',
       'order' => 'DESC'
     )
   ) ?>
-
   <section class="pb-4">
     <div class="container">
       <div class="row pb-3">
@@ -29,8 +28,8 @@
           <div class="wdl-badge-container">
             <a href="#" class="wdl-badge-sm-primary">ทั้งหมด</a>
             <a href="<?php echo esc_html(get_category_link(get_cat_ID('รีวิวแต่งงาน'))) ?>" class="wdl-badge-sm-secondary">รีวิวแต่งงาน</a>
-            <a href="<?php echo esc_html(get_category_link(get_cat_ID('สถานที่จัดงานแต่งงาน'))) ?>" class="wdl-badge-sm-secondary">สถานที่จัดงานแต่งงาน</a>
-            <a href="<?php echo esc_html(get_category_link(get_cat_ID('ฤกษ์แต่งงาน'))) ?>" class="wdl-badge-sm-secondary">ฤกษ์แต่งงาน</a>
+            <a href="<?php echo esc_html(get_category_link(get_cat_ID('เตรียมตัวแต่งงาน'))) ?>" class="wdl-badge-sm-secondary">เตรียมตัวแต่งงาน</a>
+            <a href="<?php echo esc_html(get_category_link(get_cat_ID('ไลฟ์สไตล์'))) ?>" class="wdl-badge-sm-secondary">ไลฟ์สไตล์</a>
           </div>
         </div>
       </div>
@@ -46,7 +45,7 @@
                 <?php endif; ?>
 
                 <div class="card-body wdl-archive-card-body pb-3">
-                  <div class="wdl-badge-container mb-2">
+                  <div class="wdl-badge-container mb-1">
                     <?php
                     $date = get_field('Date');
                     if ($date): ?>
@@ -127,7 +126,7 @@
                       <?php endif; ?>
 
                       <div class="card-body wdl-archive-card-body pb-3">
-                        <div class="wdl-badge-container mb-2">
+                        <div class="wdl-badge-container mb-1">
                           <?php
                           $date = get_field('Date');
                           if ($date): ?>
@@ -147,7 +146,7 @@
                           foreach ($relatedVenue as $venue):
                             $venueType = get_field('VenueType', $venue->ID);
                             ?>
-                            <div class="wdl-archive-pretitle mb-2">
+                            <div class="wdl-archive-pretitle mb-0">
                               <small>
                                 <?php echo $venueType[0]->name ?>
                               </small>
@@ -199,7 +198,7 @@
     array(
       'post_type' => 'post',
       'post_status' => 'publish',
-      'category_name' => 'สถานที่จัดงานแต่งงาน',
+      'category_name' => 'เตรียมตัวแต่งงาน',
       'posts_per_page' => '8',
       'paged' => $paged
     )
@@ -212,7 +211,7 @@
         <div class="row">
           <div class="col">
             <h2>
-              <?php echo _e('สถานที่จัดงานแต่งงาน', 'สถานที่จัดงานแต่งงาน') ?>
+              <?php echo _e('เตรียมตัวแต่งงาน', 'เตรียมตัวแต่งงาน') ?>
             </h2>
           </div>
         </div>
@@ -231,7 +230,7 @@
                       <?php endif; ?>
 
                       <div class="card-body wdl-archive-card-body pb-3">
-                        <div class="wdl-badge-container mb-2">
+                        <div class="wdl-badge-container mb-1">
                           <?php
                           $date = get_field('Date');
                           if ($date): ?>
@@ -251,7 +250,7 @@
                           foreach ($relatedVenue as $venue):
                             $venueType = get_field('VenueType', $venue->ID);
                             ?>
-                            <div class="wdl-archive-pretitle mb-2">
+                            <div class="wdl-archive-pretitle mb-0">
                               <small>
                                 <?php echo $venueType[0]->name ?>
                               </small>
@@ -304,7 +303,7 @@
     array(
       'post_type' => 'post',
       'post_status' => 'publish',
-      'category_name' => 'ฤกษ์แต่งงาน',
+      'category_name' => 'ไลฟ์สไตล์',
       'posts_per_page' => '8',
       'paged' => $paged
     )
@@ -317,7 +316,7 @@
         <div class="row">
           <div class="col">
             <h2>
-              <?php echo _e('ฤกษ์แต่งงาน', 'ฤกษ์แต่งงาน') ?>
+              <?php echo _e('ไลฟ์สไตล์', 'ไลฟ์สไตล์') ?>
             </h2>
           </div>
         </div>
@@ -336,7 +335,7 @@
                       <?php endif; ?>
 
                       <div class="card-body wdl-archive-card-body pb-3">
-                        <div class="wdl-badge-container mb-2">
+                        <div class="wdl-badge-container mb-1">
                           <?php
                           $date = get_field('Date');
                           if ($date): ?>
@@ -356,7 +355,7 @@
                           foreach ($relatedVenue as $venue):
                             $venueType = get_field('VenueType', $venue->ID);
                             ?>
-                            <div class="wdl-archive-pretitle mb-2">
+                            <div class="wdl-archive-pretitle mb-0">
                               <small>
                                 <?php echo $venueType[0]->name ?>
                               </small>

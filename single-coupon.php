@@ -91,7 +91,7 @@
 												<?php endif; ?>
 
 												<div class="card-body wdl-archive-card-body">
-													<div class="wdl-badge-container mb-2">
+													<div class="wdl-badge-container mb-1">
 														<?php
 														$date = get_field('Date');
 														if ($date): ?>
@@ -105,7 +105,7 @@
 														<?php endif; ?>
 													</div>
 
-													<div class="wdl-archive-pretitle mb-2">
+													<div class="wdl-archive-pretitle mb-0">
 														<?php
 														$relatedVenue = get_field('RelatedVenue');
 														$relatedVenueType = get_field('VenueType', $relatedVenue->ID);
@@ -116,7 +116,7 @@
 														<?php endif; ?>
 													</div>
 
-													<h3 class="wdl-archive-title"><a href="<?php the_permalink(); ?>">
+													<h3 class="wdl-archive-title mb-0"><a href="<?php the_permalink(); ?>">
 															<?php the_title(); ?>
 														</a></h3>
 
@@ -220,7 +220,7 @@
 														<?php endif ?>
 													</div>
 
-													<h3 class="wdl-archive-title"><a href="<?php the_permalink(); ?>">
+													<h3 class="wdl-archive-title mb-0"><a href="<?php the_permalink(); ?>">
 															<?php the_title(); ?>
 														</a></h3>
 
@@ -279,14 +279,6 @@
 																	<?php echo number_format(get_field('MaxGuest')) ?>
 																	<?php _e('คน', 'people') ?>
 																</strong>
-															</div>
-														<?php endif; ?>
-
-														<?php if (is_user_logged_in() === true && get_field('AcceptAppointment', $post->id)): ?>
-															<div class="wdl-archive-appointment">
-																<a href="<?php the_permalink(); ?>">
-																	<?php _e('รับนัดหมายเข้าชมสถานที่', 'Accept Appointment') ?>
-																</a>
 															</div>
 														<?php endif; ?>
 													</div>

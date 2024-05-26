@@ -17,7 +17,7 @@
         <div class="wdl-search">
           <form role="search" method="get" id="searchform" class="searchform" action="<?php echo esc_url(home_url('/')); ?>">
             <div class="input-group d-flex">
-              <input class="form-control p-2" type="text" name="s" id="s" placeholder="คุณกำลังมองหาอะไร">
+              <input class="form-control p-2" type="text" name="s" id="s" placeholder="คุณกำลังมองหาอะไร...">
               <input class="wdl-search-submit" type="submit" id="searchsubmit" value="Search">
             </div>
           </form>

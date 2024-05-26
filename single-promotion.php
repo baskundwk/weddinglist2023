@@ -1,5 +1,4 @@
 <?php include 'components/header.php' ?>
-
 <main>
 	<section>
 		<div class="container-xl">
@@ -96,10 +95,66 @@
 					<a id="apply-cta" href="#apply" class="wdl-btn-lg" data-bs-toggle="modal">
 						<?php _e('สนใจรับโปรโมชั่น', 'Apply for Promotion'); ?>
 					</a>
+					<a class="wdl-btn-line d-inline-flex d-lg-none" href="https://line.me/R/oaMessage/%40ety4154i/?สวัสดี%20สนใจรับโปรโมชั่น%20<?php the_title(); ?>%0A<?php the_permalink(); ?>">
+						<?php _e('ติดต่อแอดมินผ่าน LINE', 'ติดต่อแอดมินผ่าน LINE'); ?>
+					</a>
+					<a class="wdl-btn-line d-none d-lg-inline-flex" href="https://line.me/R/ti/p/%40ety4154i">
+						<?php _e('ติดต่อแอดมินผ่าน LINE', 'ติดต่อแอดมินผ่าน LINE'); ?>
+					</a>
 				</div>
 			</div>
 		</div>
 	</section>
+
+
+	<?php
+		$coupon = get_posts(
+			array(
+				'posts_per_page' => -1,
+				'post_type' => 'coupon',
+				'meta_query' => array(
+					array(
+						'key' => 'Promotion',
+						'value' => '"' . get_the_ID() . '"',
+						'compare' => 'LIKE'
+					)
+				)
+			)
+		);
+
+		if ($coupon): ?>
+			<section class="pt-3">
+				<div class="container">
+					<h2 class="h6 mb-1">คูปองที่ร่วมรายการ</h2>
+					<div class="d-flex flex-wrap gap-3 my-2 align-items-stretch">
+						<?php foreach ($coupon as $singleCoupon):
+							?>
+							<div class="wdl-coupon-picker">
+								<a href="#apply" data-bs-toggle="modal" class="wdl-coupon-picker-image">
+									<img src="<?php echo (get_field('Image', $singleCoupon->ID)['sizes']['medium']) ?>" />
+								</a>
+								<div class="wdl-coupon-picker-info">
+									<div class="wdl-coupon-picker-title">
+										<a href="#apply" data-bs-toggle="modal">
+											<?php echo (get_the_title($singleCoupon->ID)) ?>
+										</a>
+									</div>
+									<div class="d-flex flex-wrap justify-content-between align-items-center">
+										<div class="wdl-coupon-picker-action">
+											<a href="#apply" data-bs-toggle="modal">เก็บคูปอง</a>
+										</div>
+										<div class="wdl-coupon-picker-term">
+											<a class="wdl-coupon-popup-link" href="<?php echo (get_the_permalink($singleCoupon->ID)) ?>?popup=true" target="blank">เงื่อนไข</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						<?php
+						endforeach; ?>
+					</div>
+				</div>
+			</section>
+		<?php endif; ?>
 	<section>
 		<div class="container-xl">
 			<div class="row my-5">
@@ -229,7 +284,7 @@
 											<?php endif; ?>
 
 											<div class="card-body wdl-archive-card-body">
-												<div class="wdl-badge-container mb-2">
+												<div class="wdl-badge-container mb-1">
 													<?php
 													$date = get_field('Date');
 													if ($date): ?>
@@ -243,7 +298,7 @@
 													<?php endif; ?>
 												</div>
 
-												<div class="wdl-archive-pretitle mb-2">
+												<div class="wdl-archive-pretitle mb-0">
 													<?php
 													$relatedVenue = get_field('RelatedVenue');
 													$relatedVenueType = get_field('VenueType', $relatedVenue->ID);
@@ -254,7 +309,7 @@
 													<?php endif; ?>
 												</div>
 
-												<h3 class="wdl-archive-title"><a href="<?php the_permalink(); ?>">
+												<h3 class="wdl-archive-title mb-0"><a href="<?php the_permalink(); ?>">
 														<?php the_title(); ?>
 													</a></h3>
 

@@ -77,7 +77,38 @@
             </p>
           </div>
         </div>
-        <div class="row pb-4 g-2">
+        <div class="row mb-3">
+          <div class="col-md-9">
+            <a href="<?php echo get_post_type_archive_link('venue') ?>" class="wdl-badge-sm-secondary">ทั้งหมด</a>
+            <?php
+            foreach (get_terms('venue_type') as $term) {
+              echo '<a class="wdl-badge-sm-secondary m-1" href="' . get_term_link($term->slug, 'venue_type') . '">' . $term->name . '</a>';
+            } ?>
+          </div>
+          <div class="col text-end">
+            <div class="wdl-badge-container justify-content-end">
+              <div class="dropdown wdl-dropdown">
+                <button class="wdl-btn-link" data-bs-toggle="dropdown" aria-expanded="false">
+                <?php if($_GET['label']) {
+                  echo $_GET['label'];
+                } else {
+                  _e('จัดเรียงโดย', 'จัดเรียงโดย');
+                }?>  
+                <i data-feather="arrow-down"></i></button>
+                <ul class="dropdown-menu dropdown-menu-end">
+                  <li><a href="<?php echo($current_url)?>">สถานที่แนะนำ</a></li>
+                  <li><a href="<?php echo($current_url.'?'.'order=ASC&'.'orderby=title&'.'key=&'.'label=ตามต้วอักษร')?>">ตามต้วอักษร A-Z ก-ฮ</a></li>
+                  <li><a href="<?php echo($current_url.'?'.'order=DESC&'.'orderby=title&'.'key=&'.'label=ย้อนตัวอักษร')?>">ย้อนตัวอักษร ฮ-ก Z-A</a></li>
+                  <li><a href="<?php echo($current_url.'?'.'order=ASC&'.'orderby=meta_value_num&'.'key=MinPrice&'.'label=ราคาเริ่มต้นถูกที่สุด')?>">ราคาเริ่มต้นถูกที่สุด</a></li>
+                  <li><a href="<?php echo($current_url.'?'.'order=DESC&'.'orderby=meta_value_num&'.'key=MinPrice&'.'label=ราคาเริ่มต้นสูงที่สุด')?>">ราคาเริ่มต้นสูงที่สุด</a></li>
+                  <li><a href="<?php echo($current_url.'?'.'order=ASC&'.'orderby=meta_value_num&'.'key=MaxGuest&'.'label=จำนวนแขกน้อยไปมาก')?>">จำนวนแขกน้อยไปมาก</a></li>
+                  <li><a href="<?php echo($current_url.'?'.'order=DESC&'.'orderby=meta_value_num&'.'key=MaxGuest&'.'label=จำนวนแขกมากไปน้อย')?>">จำนวนแขกมากไปน้อย</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- <div class="row pb-4 g-2">
           <?php $filterLocations = wp_get_nav_menu_items('Filter : Location');
           $currentLocation = current(wp_filter_object_list($filterLocations, array('object_id' => get_queried_object_id())));
           if ($filterLocations): ?>
@@ -123,7 +154,7 @@
               </div>
             </div>
           </div>
-        </div>
+        </div> -->
       </div>
 
       <div class="container-xxl container-archive wdl-archive-infinite-scroll">
@@ -206,7 +237,7 @@
                       <?php //endforeach; ?>
                     <?php endif ?>
                   </div>
-                  <h3 class="wdl-archive-title"><a href="<?php the_permalink(); ?>">
+                  <h3 class="wdl-archive-title mb-0"><a href="<?php the_permalink(); ?>">
                       <?php the_title(); ?>
                     </a></h3>
 

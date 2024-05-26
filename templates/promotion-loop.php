@@ -24,7 +24,7 @@
 							<?php
 							$date = get_field('Date');
 							if ($date): ?>
-								<div class="wdl-badge-container mb-2">
+								<div class="wdl-badge-container mb-1">
 									<span class="badge wdl-badge-sm-primary">
 										<?php the_field('Date') ?>
 									</span>

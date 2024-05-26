@@ -61,77 +61,6 @@
               </div>
             </div>
             <div class="col-md-12">
-              <hr class="mt-0" />
-              <!-- <div class="wdl-checkbox">
-                <input id="appoint" type="checkbox">
-                <label for="appoint"><?php _e('สนใจนัดหมายเพื่อเข้าชมสถานที่','สนใจนัดหมายเพื่อเข้าชมสถานที่')?></label>
-              </div> -->
-              <p class="h6 mb-1">นัดหมายเข้าชมสถานที่</p>
-              <div id="appoint-field" class="row g-2 g-lg-3">
-                <div class="col-md-6">
-                  <div class="form-floating">
-                    <input class="form-control" id="appoint-date" type="date" placeholder="วันที่ต้องการนัดหมาย">
-                    <label class="text-sm" for="appoint-date">วันที่ต้องการนัดหมาย</label>
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="form-floating">
-                    <select class="form-select" id="appoint-time" placeholder="วันที่ต้องการนัดหมาย">
-                      <option value="" selected disabled><?php _e('กรุณาเลือกเวลานัดหมาย','กรุณาเลือกเวลานัดหมาย')?></option>
-                      <option value="ช่วงเช้า (09:00 - 12:00 น.)"><?php _e('ช่วงเช้า (09:00 - 12:00 น.)','ช่วงเช้า (09:00 - 12:00 น.)') ?></option>
-                      <option value="ช่วงบ่าย (12:00 - 16:00 น.)"><?php _e('ช่วงบ่าย (12:00 - 16:00 น.)','ช่วงบ่าย (12:00 - 16:00 น.)') ?></option>
-                      <option value="ช่วงเย็น (16:00 - 19:00 น.)"><?php _e('ช่วงเย็น (16:00 - 19:00 น.)','ช่วงเย็น (16:00 - 19:00 น.)') ?></option>
-                      <option value="ช่วงค่ำ (19:00 - 22:00 น.)"><?php _e('ช่วงค่ำ (19:00 - 22:00 น.)','ช่วงค่ำ (19:00 - 22:00 น.)') ?></option>
-                    </select>
-                    <label class="text-sm" for="appoint-time">ช่วงเวลาที่ต้องการ</label>
-                  </div>
-                </div>
-              </div>
-              <hr class="mb-0" />
-            </div>
-            <?php $coupon = get_posts(
-              array(
-                'posts_per_page' => -1,
-                'post_type' => 'coupon',
-                'meta_query' => array(
-                  array(
-                    'key' => 'Promotion',
-                    'value' => '"' . get_the_ID() . '"',
-                    'compare' => 'LIKE'
-                  )
-                )
-              )
-            );
-            if($coupon) : ?>
-            <div class="col-md-12 mt-3">
-              <p class="h6 mb-1">คูปองที่ร่วมรายการ</p>
-              <div class="d-flex flex-wrap gap-3 my-2 align-items-stretch">
-                <?php foreach ($coupon as $singleCoupon): ?>
-                  <div class="wdl-coupon-picker wdl-coupon-checkbox">
-                    <div class="wdl-coupon-picker-indicator"></div>
-                    <input class="d-none wdl-coupon-checkbox-target" type="checkbox" value="<?php echo $singleCoupon->ID?>" readonly />
-                    <div class="wdl-coupon-picker-image">
-                      <img src="<?php echo (get_field('Image', $singleCoupon->ID)['sizes']['medium']) ?>" />
-                    </div>
-                    <div class="wdl-coupon-picker-info">
-                      <div class="wdl-coupon-picker-title">
-                        <?php echo (get_the_title($singleCoupon->ID)) ?>
-                      </div>
-                      <div class="d-flex flex-wrap justify-content-between align-items-center">
-                        <div class="wdl-coupon-picker-action">
-                          <button type="button">เก็บคูปอง</button>
-                        </div>
-                        <div class="wdl-coupon-picker-term">
-                          <a class="wdl-coupon-popup-link" href="<?php echo (get_the_permalink($singleCoupon->ID)) ?>?popup=true" target="blank">เงื่อนไข</a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                <?php endforeach; ?>
-              </div>
-            </div>
-            <?php endif; ?>
-            <div class="col-md-12">
               <label class="text-sm" for="message">ข้อความเพิ่มเติม</label>
               <textarea rows="4" class="form-control" name="message" id="message" label="ข้อความเพิ่มเติม"></textarea>
             </div>
@@ -182,12 +111,10 @@
         budget: $('#budget').val(),
         date: $('#date').val(),
         daytime: selectedDaytime.join(', '),
-        //appoint: $('#appoint').is(':checked'),
-        appointDate: $('#appoint-date').val(),
-        appointTime: $('#appoint-time').val(),
         message: $('#message').val(),
+        cardTitle: '<?php echo get_the_title()?>',
         cardId: <?php echo get_the_id()?>,
-        leadType: 'Promotion',
+        leadType: 'Vendor'
       }, ()=> {
         $('#wdl-form-general').removeClass('failed')
         $('.wdl-form-general-modal').modal('hide')
@@ -198,29 +125,6 @@
       }).fail(()=> {
         $('.wdl-form-general-modal .modal-body').removeClass('submitting')
         $('#wdl-form-general').addClass('failed')
-      })
-
-      $('.wdl-coupon-checkbox-target:checked').each((i, e)=> {
-        const couponId = $(e).val()
-        $.post("<?php echo admin_url('admin-ajax.php'); ?>", {
-          toClient: true,
-          action: 'send_email',
-          name: $('#name-lastname').val(),
-          tel: $('#tel').val(),
-          email: $('#email').val(),
-          recepient: '<?php $recepient?>' ,
-          lineid: $('#lineid').val(),
-          guest: $('#guest').val(),
-          budget: $('#budget').val(),
-          date: $('#date').val(),
-          daytime: selectedDaytime.join(', '),
-          //appoint: $('#appoint').is(':checked'),
-          appointDate: $('#appoint-date').val(),
-          appointTime: $('#appoint-time').val(),
-          message: $('#message').val(),
-          cardId: couponId,
-          leadType: 'Coupon'
-        }, ()=> {}).fail(()=> {})
       })
     });
   })

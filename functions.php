@@ -398,12 +398,12 @@ function send_email(){
 		$message = $_REQUEST['message'];
 		$cardId = $_REQUEST['cardId'];
 
-		$appoint = $_REQUEST['appoint'];
+		//$appoint = $_REQUEST['appoint'];
 		$appointDate = $_REQUEST['appointDate'];
 		$appointTime = $_REQUEST['appointTime'];
 
 		$appointStatement = '';
-		if($appoint === 'true') { 
+		if($appointDate !== '' || $appointTime !== '') { 
 			$appointStatement = "<p style='text-decoration:underline;'><strong>ลูกค้าสนใจนัดหมายเพื่อเข้าชมสถานที่ วันที่ <span style='color: #FF2758'>" . date("d-M-Y", strtotime($appointDate)). " " . $appointTime . "</span> กรุณาติดต่อลูกค้าเพื่อนัดหมายเพิ่มเติม</strong></p>";
 		}
 
@@ -420,7 +420,7 @@ function send_email(){
 			}
 		}
 
-		$cardTitle = $_REQUEST['cardTitle'];
+		$cardTitle = get_the_title($cardId);
 		$microsite = get_field('Microsite', $cardId);
 		
 		$timestamp = wp_date("d M Y H:i:s", null );
@@ -488,7 +488,7 @@ function send_email(){
 			"		</div>".
 			"		<div style='background: #FFF; padding: 16px; font-family: Tahoma; color: #555; line-height: 1.7;'>".
 			"			<p>สวัสดีค่ะ</p>".
-			"			<p>ทาง Weddinglist ขอนำส่งคูปอง “<strong>".$cardTitle."</strong>” ค่ะ กรุณาตรวจสอบเงื่อนไข และวันที่การใช้งานคูปองก่อนวันหมดอายุ และ <strong>บันทึกรูปคูปอง</strong> หรือ <a href='$couponImage' download='ดาวน์โหลดคูปอง'>ดาวน์โหลดไฟล์คูปอง</a> เพื่อใช้ในการยืนยันสิทธิ์</p>".
+			"			<p>ทาง Weddinglist ขอนำส่งคูปอง “<strong>".$cardTitle."</strong>” ค่ะ <a href='".get_permalink($cardId)."'>กรุณาตรวจสอบเงื่อนไข</a> และวันที่การใช้งานคูปองก่อนวันหมดอายุ และ <strong>บันทึกรูปคูปอง</strong> หรือ <a href='$couponImage' download='ดาวน์โหลดคูปอง'>ดาวน์โหลดไฟล์คูปอง</a> เพื่อใช้ในการยืนยันสิทธิ์</p>".
 			"			<img src='". $couponImage ."' alt='".$cardTitle."' width='100%' />".
 			"			<p style='color: #999; font-weight: 700;'>ขอขอบพระคุณอย่างสูง<br>Weddinglist Support</p>".
 			"			<p style='font-size: 14px;'>แจ้งปัญหาการใช้งาน".
@@ -517,7 +517,7 @@ function send_email(){
 		if($post_type === 'venue' || $post_type === 'vendor') {
 			$venue = $cardTitle;
 		} else {
-			$venue = get_field('RelatedVenue', $cardId);
+			$venue = get_field('RelatedVenue', $cardId)[0]->post_title;
 		}
 		wp_insert_post( array(
 			'post_title' => $name,
@@ -539,3 +539,92 @@ function send_email(){
 			]
 		));
 }
+
+/* function send_email_coupon() {
+
+	$name = $_REQUEST['name'];
+	$tel = $_REQUEST['tel'];
+	$email = $_REQUEST['email'];
+	$cardId = $_REQUEST['cardId'];
+	$lineid = $_REQUEST['lineid'];
+	$guest = $_REQUEST['guest'];
+	$budget = $_REQUEST['budget'];
+	$date = $_REQUEST['date'];
+	$daytime = $_REQUEST['daytime'];
+	$message = $_REQUEST['message'];
+
+	$appointDate = $_REQUEST['appointDate'];
+	$appointTime = $_REQUEST['appointTime'];
+
+	$recepient = get_field('Email', $cardId);
+	if(get_post_type($cardId) === 'coupon') {
+		$recepient = "";
+		if(get_field('Venue', $cardId)){
+			$venue = get_field('Venue', $cardId);
+
+			foreach($venue as $item) {
+				$recepient != "" && $recepient .= ","; 
+				$recepient .= get_field('Email', $item->ID);
+			}
+		}
+	}
+
+	$file = get_theme_file_uri() . '/images/logo-w.png'; //phpmailer will load this file
+
+	$cardTitle = get_the_title($cardId);
+
+	$couponImage = get_site_url() . get_field('Image', $cardId)['sizes']['large'];
+
+	$headers  = "MIME-Version: 1.0" . "\r\n";
+	$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+	$headers .= "From: Weddinglist Team <support@weddinglist.co.th> \r\n";
+	$headers .= "Reply-To: support@weddinglist.co.th \r\n";
+	$headers .= "Bcc: support@weddinglist.co.th \r\n";
+
+	$email_body_client = 
+	"<div style='background: #EEE; padding: 32px;'>".
+	"	<div style='max-width: 600px; margin: auto;'>".
+	"		<div style='background: #FF2758; padding: 24px; text-align: center;'>".
+	"			<img src='$file' alt='Weddinglist' width='243' height='60'>".
+	"		</div>".
+	"		<div style='background: #FFF; padding: 16px; font-family: Tahoma; color: #555; line-height: 1.7;'>".
+	"			<p>สวัสดีค่ะ</p>".
+	"			<p>ทาง Weddinglist ขอนำส่งคูปอง “<strong>".$cardTitle."</strong>” ค่ะ กรุณาตรวจสอบเงื่อนไข และวันที่การใช้งานคูปองก่อนวันหมดอายุ และ <strong>บันทึกรูปคูปอง</strong> หรือ <a href='$couponImage' download='ดาวน์โหลดคูปอง'>ดาวน์โหลดไฟล์คูปอง</a> เพื่อใช้ในการยืนยันสิทธิ์</p>".
+	"			<img src='". $couponImage ."' alt='".$cardTitle."' width='100%' />".
+	"			<p style='color: #999; font-weight: 700;'>ขอขอบพระคุณอย่างสูง<br>Weddinglist Support</p>".
+	"			<p style='font-size: 14px;'>แจ้งปัญหาการใช้งาน".
+	"				<br>โทร. <a href='tel:0634748111'>063 474 8111</a>".
+	"				<br>อีเมล <a href='mailto:support@weddinglist.co.th'>support@weddinglist.co.th</a>".
+	"			</p>".
+	"		</div>".
+	"	</div>".
+	"</div>";
+
+	$mailClient = wp_mail($email, 'นำส่งคูปอง '.$cardTitle.' จากทาง Weddinglist', $email_body_client, $headers);
+	
+	if($mailClient){
+		echo "Email Sent Successfully";
+	};
+
+	wp_insert_post( array(
+		'post_title' => $name,
+		'post_type' => 'lead',
+		'post_status' => 'draft',
+		'meta_input' => [
+			'tel' => $tel,
+			'email' => $email,
+			'lineid' => $lineid,
+			'guest' => $guest,
+			'budget' => $budget,
+			'date' => $date,
+			'daytime' => $daytime,
+			'message' => $message,
+			'source' => $cardTitle,
+			'venue' => $venue,
+			'type' => 'Coupon',
+			'appointment' => $appointDate.' - '.$appointTime
+		]
+	));
+} */
+
+require_once('customizer.php');

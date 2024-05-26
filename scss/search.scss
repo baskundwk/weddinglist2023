@@ -21,7 +21,7 @@
     }
   }
   .form-floating, .input-group {
-    &:after {
+    &:before {
       content: "\55";
       font-family: ETmodules;
       font-size: 1.25rem !important;
@@ -40,6 +40,10 @@
 
   .forn-control {
     border-radius: 10px 0 0 10px;
+
+    &::placeholder {
+      color: #C1C1C1;
+    }
   }
 
   .wdl-search-submit {
@@ -47,6 +51,16 @@
     border-radius: 0 10px 10px 0;
     color: transparent;
     background: #f7f7f7;
+  }
+
+  .input-group {
+    input.form-control:first-child {
+      border-radius: 10px 0 0 10px;
+
+      &::placeholder {
+        color: #C1C1C1;
+      }
+    }
   }
 }
 

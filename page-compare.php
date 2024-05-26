@@ -61,7 +61,7 @@
                         }?>
                     </small>
                   </div>
-                  <h3 class="wdl-archive-title">
+                  <h3 class="wdl-archive-title mb-0">
                     <a href="<?php the_permalink(); ?>">
                       <?php the_title(); ?>
                     </a>

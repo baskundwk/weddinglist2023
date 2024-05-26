@@ -1,5 +1,5 @@
 <div class="wdl-form-general-modal modal fade">
-  <div class="modal-dialog modal-dialog-centered">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
     <div class="modal-content m-1 mb-0">
       <button class="btn-close" data-bs-dismiss="modal"></button>
       <div class="modal-body p-3 p-lg-3">
@@ -53,10 +53,6 @@
               </div>
             </div>
             <div class="col-md-12">
-              <label class="text-sm" for="message">ข้อความเพิ่มเติม</label>
-              <textarea rows="4" class="form-control" name="message" id="message" label="ข้อความเพิ่มเติม"></textarea>
-            </div>
-            <div class="col-md-12">
               <div class="d-block"><label>ช่วงเวลาจัดงาน</label></div>
               <div class="wdl-checkbox-button">
                 <input type="checkbox" name="daytime" id="daytime-1" value="งานเลี้ยงเช้า"/><label for="daytime-1">งานเลี้ยงเช้า</label>
@@ -64,20 +60,17 @@
                 <input type="checkbox" name="daytime" id="daytime-3" value="งานเลี้ยงเย็น"/><label for="daytime-3">งานเลี้ยงเย็น</label>
               </div>
             </div>
-            <?php if(is_user_logged_in() === true && get_field('AcceptAppointment') === true) : ?>
-            <div class="col-md-12 mt-3">
-              <div class="wdl-checkbox">
-                <input id="appoint" type="checkbox">
-                <label for="appoint"><?php _e('สนใจนัดหมายเพื่อเข้าชมสถานที่','สนใจนัดหมายเพื่อเข้าชมสถานที่')?></label>
-              </div>
-              <div id="appoint-field" class="d-none row">
-                <div class="col-md-6 mt-3">
+            <div class="col-md-12">
+              <hr class="mt-0" />
+              <p class="h6 mb-1">นัดหมายเข้าชมสถานที่</p>
+              <div id="appoint-field" class="row g-2 g-lg-3">
+                <div class="col-md-6">
                   <div class="form-floating">
                     <input class="form-control" id="appoint-date" type="date" placeholder="วันที่ต้องการนัดหมาย">
                     <label class="text-sm" for="appoint-date">วันที่ต้องการนัดหมาย</label>
                   </div>
                 </div>
-                <div class="col-md-6 mt-3">
+                <div class="col-md-6">
                   <div class="form-floating">
                     <select class="form-select" id="appoint-time" placeholder="วันที่ต้องการนัดหมาย">
                       <option value="" selected disabled><?php _e('กรุณาเลือกเวลานัดหมาย','กรุณาเลือกเวลานัดหมาย')?></option>
@@ -90,8 +83,12 @@
                   </div>
                 </div>
               </div>
+              <hr class="mb-0" />
             </div>
-            <?php endif; ?>
+            <div class="col-md-12">
+              <label class="text-sm" for="message">ข้อความเพิ่มเติม</label>
+              <textarea rows="4" class="form-control" name="message" id="message" label="ข้อความเพิ่มเติม"></textarea>
+            </div>
             <hr class="my-1 opacity-0">
             <button id="wdl-form-general-submit" type="submit" name="submit" class="wdl-btn-lg wdl-form-submit">ลงทะเบียน</button>
             <p class="fail-message text-red"><?php _e('ขออภัยค่ะ ไม่สามารถส่งข้อมูลได้ กรุณาลองใหม่','ขออภัยค่ะ ไม่สามารถส่งข้อมูลได้ กรุณาลองใหม่') ?></p>
@@ -102,7 +99,7 @@
   </div>
 </div>
 <div class="wdl-form-general-succeed-modal modal fade">
-  <div class="modal-dialog modal-dialog-centered">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
     <div class="modal-content m-3 mb-0">
       <button class="btn-close" data-bs-dismiss="modal"></button>
       <div class="modal-body text-center">
@@ -142,7 +139,7 @@
           budget: $('#budget').val(),
           date: $('#date').val(),
           daytime: selectedDaytime.join(', '),
-          appoint: $('#appoint').is(':checked'),
+          //appoint: $('#appoint').is(':checked'),
           appointDate: $('#appoint-date').val(),
           appointTime: $('#appoint-time').val(),
           message: $('#message').val(),

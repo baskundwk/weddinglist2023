@@ -27,7 +27,7 @@
                 <?php endif; ?>
   
                 <div class="card-body wdl-archive-card-body pb-3">
-                  <div class="wdl-badge-container mb-2">
+                  <div class="wdl-badge-container mb-1">
                     <?php
                     $date = get_field('Date');
                     if ($date): ?>
@@ -47,7 +47,7 @@
                     foreach ($relatedVenue as $venue):
                       $venueType = get_field('VenueType', $venue->ID);
                       ?>
-                      <div class="wdl-archive-pretitle mb-2">
+                      <div class="wdl-archive-pretitle mb-0">
                         <small>
                           <?php echo $venueType[0]->name ?>
                         </small>

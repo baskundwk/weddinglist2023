@@ -11,9 +11,9 @@
       $(element).append(
         $(element)
           .find(".wdl-archive-default")
-          .sort(function () {
+          /* .sort(function () {
             return Math.round(Math.random()) - 0.5;
-          })
+          }) */
       );
       $(element).addClass("opacity-1");
     });
@@ -84,6 +84,7 @@
   $(document).ready(initLocalnav())
 
   $("html").css("--header-height", $("#main-header").height() + "px");
+  $("html").css("--footer-height", $(".wdl-footer").height() + "px");
 
 // Form progress
   const wdlMultistepProgressBar = () => {
@@ -394,6 +395,11 @@
       speed: 1000,
       loop: true,
     });
+
+    const wdlCouponCardSwiper = new Swiper('.wdl-coupon-card-swiper', {
+      spaceBetween: 8,
+      slidesPerView: "auto",
+    })
   });
 
   
@@ -1086,10 +1092,27 @@
     }
   })
 
-// Textarea : auto-scroll fix
-  /* $("textarea").each((index, element) => {
-    $(element).change(() => {
-      console.log($(element)[0].scrollHeight)
-      $(element).scrollTop($(element)[0].scrollHeight);
-    });
-  }) */
+// Coupon Popup Link
+  $('.wdl-coupon-popup-link').each((i, e)=>{
+    $(e).click(()=> {
+
+      const feature = ' width=744, height=1024 ,location=0, resizable=0, scrollbars=1, toolbar=0, menubar=0'
+      couponPopup = window.open($(e).attr('href'), 'couponPopup', feature) ;
+
+      if (window.focus) {
+        couponPopup.focus()
+      }
+      
+      return false;
+    })
+  })
+
+  $('.wdl-coupon-checkbox').each((i, e)=> {
+    $(e).click(()=>{
+      $(e).addClass('active')
+      $(e).find('.wdl-coupon-checkbox-target').prop('checked', true)
+      $(e).find('.wdl-coupon-picker-action button').text('เก็บคูปองแล้ว')
+      $(e).find('.wdl-coupon-picker-indicator').addClass('active')
+      setTimeout(()=>{$(e).find('.wdl-coupon-picker-indicator').removeClass('active')},3000)
+    })
+  })
