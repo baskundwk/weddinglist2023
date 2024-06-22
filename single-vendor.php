@@ -9,14 +9,16 @@
 				?>
 				<div class="row g-3 wdl-gallery wdl-hero-gallery">
 					<div class="col position-relative">
-						<div id="hero-gallery" class="swiper wdl-hero-gallery-swiper overflow-visible <?php if($videos) { echo 'wdl-hero-gallery-video-swiper';} ?>">
+						<div id="hero-gallery" class="swiper wdl-hero-gallery-swiper <?php if ($videos) {
+							echo 'wdl-hero-gallery-video-swiper';
+						} ?>">
 							<div class="swiper-wrapper">
 								<?php
 								foreach ($videos as $video):
 									?>
 									<div class="swiper-slide">
 										<a href="#" class="wdl-gallery-item" data-bs-toggle="modal" data-bs-target="#gallery">
-											<?php echo($video['iframe_code']) ?>
+											<?php echo ($video['iframe_code']) ?>
 										</a>
 									</div>
 									<?php
@@ -37,13 +39,13 @@
 								endforeach;
 								?>
 							</div>
+						</div>
 							<div class="swiper-navigation container">
 								<div class="swiper-button-prev"></div>
 								<div class="swiper-button-next"></div>
 							</div>
 						</div>
 					</div>
-				</div>
 			<?php endif; ?>
 		</div>
 	</section>
@@ -102,7 +104,7 @@
 								<div class="modal-content m-3 mb-0">
 									<button class="btn-close"></button>
 									<div class="modal-body">
-										<iframe class="wdl-iframe wdl-iframe-80vh" src="<?php echo($brochure) ?>" width="100%" height="560"></iframe>
+										<iframe class="wdl-iframe wdl-iframe-80vh" src="<?php echo ($brochure) ?>" width="100%" height="560"></iframe>
 										<div class="d-flex flex-column flex-sm-row align-items-center justify-content-center gap-3 mt-3">
 											<a id="apply-cta" href="#apply" class="wdl-btn d-inline-block" data-bs-toggle="modal">
 												<?php _e('คลิกขอแพ็กเกจ', 'คลิกขอแพ็กเกจ'); ?>
@@ -122,16 +124,49 @@
 					<?php endif; ?>
 				</div>
 				<div class="col-lg mb-3 mb-lg-0 pt-lg-3">
-					<?php $vendorTypes = get_field('VendorType');
-					if ($vendorTypes): ?>
-						<p class="text-accent mb-0 d-flex gap-3">
-							<?php foreach ($vendorTypes as $venueType): ?>
+					<?php
+					$vendorTypes = get_field('VendorType');
+					$vendorCharacter = get_field('Character');
+					if ($vendorCharacter || $vendorTypes): ?>
+						<p class="mb-0 d-flex gap-3">
+							<?php if ($vendorCharacter): ?>
+								<?php //foreach ($vendorCharacter as $character):
+										$characterBackground = get_field('CharacterBackground', $vendorCharacter);
+										$characterBorder = get_field('CharacterBorder', $vendorCharacter);
+										$characterColor = get_field('CharacterColor', $vendorCharacter);
+										$characterEffect = get_field('CharacterEffect', $vendorCharacter);
+										?>
+							<div class="wdl-character
+							<?php if ($characterBorder) {
+								echo ('wdl-character-border');
+							} ?>
+							<?php if ($characterEffect) {
+								echo ('wdl-character-animation-' . $characterEffect);
+							} ?>"
+								<?php
+								if ($characterColor || $characterBackground): ?>
+									style="
+							--background-image: url(<?php echo ($characterBackground['url']) ?>);
+							--box-shadow: none;
+							--color: rgba(<?php echo ($characterColor['red']) ?>,<?php echo ($characterColor['green']) ?>,<?php echo ($characterColor['blue']) ?>,<?php echo ($characterColor['alpha']) ?>);
+							--color-50: rgba(<?php echo ($characterColor['red']) ?>,<?php echo ($characterColor['green']) ?>,<?php echo ($characterColor['blue']) ?>, 50%);
+							--color-0: rgba(<?php echo ($characterColor['red']) ?>,<?php echo ($characterColor['green']) ?>,<?php echo ($characterColor['blue']) ?>, 0);
+						"
+								<?php endif ?>>
 								<span>
-									<?php echo esc_html($venueType->name); ?>
+									<?php echo esc_html($vendorCharacter->name); ?>
+								</span>
+							</div>
+							<?php //endforeach;  ?>
+						<?php endif ?>
+						<?php if ($vendorTypes): ?>
+							<?php foreach ($vendorTypes as $vendorType): ?>
+								<span class="text-accent">
+									<?php echo esc_html($vendorType->name); ?>
 								</span>
 							<?php endforeach; ?>
+								<?php endif ?>
 						</p>
-
 					<?php endif ?>
 					<h1 class="wdl-single-title">
 						<?php the_title(); ?>
@@ -184,8 +219,7 @@
 						</p>
 					<?php endif; ?>
 				</div>
-				<div class="col-lg-auto text-center">
-					<div class="wdl-pricing-row-- p-3">
+				<div class="col-lg-auto text-center py-3 d-flex flex-column">
 						<a id="apply-cta" href="#apply" class="wdl-btn-lg d-block mb-3" data-bs-toggle="modal">
 							<?php _e('คลิกขอแพ็กเกจ', 'คลิกขอแพ็กเกจ'); ?>
 						</a>
@@ -195,7 +229,6 @@
 						<a class="wdl-btn-line-lg d-none d-lg-inline-flex" href="https://line.me/R/ti/p/%40ety4154i">
 							<?php _e('ติดต่อแอดมินผ่าน LINE', 'ติดต่อแอดมินผ่าน LINE'); ?>
 						</a>
-					</div>
 				</div>
 			</div>
 		</div>

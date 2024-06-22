@@ -21,10 +21,10 @@
         <div class="row">
           <div class="col">
             <h1>
-              <?php echo _e('Wedding Fair & Event', 'Wedding Fair & Event') ?>
+              <?php echo(get_option('wdl_options', 'โปรโมชั่นแต่งงาน & แพ็กเกจแต่งงาน')['word-wedding-fair-title']); ?>
             </h1>
             <p class="text-secondary mb-2">
-              <?php echo _e('รวบรวมงานแฟร์ และ อีเว้นท์ให้คุณไว้ที่เดียว', 'รวบรวมงานแฟร์ และ อีเว้นท์ให้คุณไว้ที่เดียว') ?>
+              <?php echo(get_option('wdl_options', 'รวมโปรโมชั่น และ แพ็กเกจแต่งงาน จากสถานที่จัดงานแต่งงานชั้นนำทุกรูปแบบ อัพเดทล่าสุด 2024')['word-wedding-fair-desc']); ?>
             </p>
           </div>
         </div>

@@ -6,10 +6,15 @@
 			<div class="row justify-content-center">
 				<div class="col-lg-8">
 					<div class="card wdl-coupon-card">
+						<?php if(get_field('Banner')) :?>
 						<figure>
-							<img class="wdl-coupon-card-image" src="<?php echo get_field('Image')['sizes']['large'] ?>" alt="<?php the_title(); ?>">
+							<img class="wdl-coupon-card-image" src="<?php echo get_field('Banner')['sizes']['large'] ?>" alt="<?php the_title(); ?>">
 						</figure>
+						<?php endif; ?>
 						<div class="row">
+							<div class="col-md-4 col-xl-3">
+								<img class="wdl-coupon-card-image" src="<?php echo get_field('Image')['sizes']['medium'] ?>" alt="<?php the_title(); ?>">
+							</div>
 							<div class="col">
 								<h1 class="wdl-coupon-card-title">
 									<?php the_title(); ?>
@@ -87,7 +92,9 @@
 											<div id="wdl-post-<?php the_ID(); ?>" class="swiper-slide card wdl-archive-card <?php echo esc_attr($atts['class_single']); ?>">
 
 												<?php if (has_post_thumbnail(get_the_ID())): ?>
-													<a class="card-img-top wdl-archive-card-img-top" href="<?php the_permalink(); ?>"><img loading="lazy" class="" src="<?php echo esc_html(get_the_post_thumbnail_url($post, 'medium_large')) ?>" width="100%"></a>
+													<a class="card-img-top wdl-archive-card-img-top" href="<?php the_permalink(); ?>">
+														<img loading="lazy" class="" src="<?php echo esc_html(get_the_post_thumbnail_url($post, 'medium_large')) ?>" width="100%">
+													</a>
 												<?php endif; ?>
 
 												<div class="card-body wdl-archive-card-body">

@@ -1,6 +1,10 @@
 .wdl-dropdown {
   position: relative;
   
+  > button {
+    white-space: nowrap;
+  }
+
   .dropdown-menu {
     margin-top: 0;
     border-radius: 8px;
@@ -13,12 +17,26 @@
     background: #fff;
     border-radius: 8px;
     right: 0;
-    transition: 0.25s opacity;
+    transition: 0.35s cubic-bezier(0,0,0,1);
+    transition-property: opacity, transform;
     list-style: none;
+    max-height: 40vh;
+    overflow: auto;
+    opacity: 0;
+    display: block;
+    transform: translateY(-10px);
+    transform-origin: top right;
+    visibility: hidden;
+    &.show {
+      opacity: 1;
+      transform: translateY(0);
+      visibility: visible;
+    }
 
     li {
       padding: 0;
       a {
+        display: block;
         border-radius: 0;
         border: none;
         padding: 6px 24px;

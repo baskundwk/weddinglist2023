@@ -53,7 +53,7 @@
         'orderby' => $orderby,
         'post_status' => $post_status,
         'paged' => $paged,
-        'posts_per_page' => '16',
+        'posts_per_page' => 16,
         'meta_query' => $has_field,
         'tax_query' => array(
           array(
@@ -160,6 +160,7 @@
                     </a></h3>
 
                   <?php if (get_the_excerpt() != '' && is_user_logged_in()): ?>
+                    <?php print_r(get_queried_object()->term_id)?>
                     <p class="lineclamp-3 mb-2 text-sm text-secondary">
                       <?php echo (get_the_excerpt()); ?>
                     </p>

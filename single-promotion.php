@@ -48,6 +48,13 @@
 						<button class="wdl-btn">
 							<?php _e('สนใจรับโปรโมชั่น', 'สนใจรับโปรโมชั่น'); ?>
 						</button>
+
+						<a class="wdl-btn-line d-inline-flex d-lg-none" href="https://line.me/R/oaMessage/%40ety4154i/?สวัสดี%20ต้องการรับโปรโมชั่น%20<?php the_title(); ?>%0A<?php the_permalink(); ?>">
+							<?php _e('ติดต่อแอดมินผ่าน LINE', 'ติดต่อแอดมินผ่าน LINE'); ?>
+						</a>
+						<a class="wdl-btn-line d-none d-lg-inline-flex" href="https://line.me/R/ti/p/%40ety4154i">
+							<?php _e('ติดต่อแอดมินผ่าน LINE', 'ติดต่อแอดมินผ่าน LINE'); ?>
+						</a>
 					</div>
 				</div>
 			</div>
@@ -55,6 +62,10 @@
 	</section>
 	<section class="wdl-main-bar">
 		<div class="container-xl">
+
+			<?php if(is_user_logged_in()){
+					print_r(RankMath\Post::get_meta( 'title' ));
+			} ?>
 			<div class="row align-items-center">
 				<div class="col-sm-2 mb-4 mb-xl-0 d-none d-lg-block">
 					<?php $logo = get_field('Logo');
@@ -65,9 +76,20 @@
 					<?php endif; ?>
 				</div>
 				<div class="col-sm mb-3 mb-sm-0">
-					<p class="mb-0"><a class="text-accent" href="/promotion">
-							<?php _e('Promotion', 'Promotion') ?>
-						</a></p>
+					<div class="wdl-archive-pretitle mb-0">
+						<?php $promotionCategory = wp_get_post_terms(get_the_ID(), 'promotion-category');
+						if ($promotionCategory) {
+							$count = 1;
+							foreach($promotionCategory as $item) {
+								if ($count > 1) {
+									echo ', ';
+								}
+								echo $item->name ;
+								$count = $count + 1;
+							}
+						}
+						?>
+					</div>
 					<h1 class="wdl-single-title">
 						<?php the_title(); ?>
 					</h1>
@@ -91,14 +113,14 @@
 							</p>
 						<?php endforeach; endif; ?>
 				</div>
-				<div class="col-sm-auto text-center text-sm-end">
-					<a id="apply-cta" href="#apply" class="wdl-btn-lg" data-bs-toggle="modal">
+				<div class="col-lg-auto text-center py-3 d-flex flex-column">
+					<a id="apply-cta" href="#apply" class="wdl-btn-lg d-block mb-3" data-bs-toggle="modal">
 						<?php _e('สนใจรับโปรโมชั่น', 'Apply for Promotion'); ?>
 					</a>
-					<a class="wdl-btn-line d-inline-flex d-lg-none" href="https://line.me/R/oaMessage/%40ety4154i/?สวัสดี%20สนใจรับโปรโมชั่น%20<?php the_title(); ?>%0A<?php the_permalink(); ?>">
+					<a class="wdl-btn-line-lg d-flex d-lg-none" href="https://line.me/R/oaMessage/%40ety4154i/?สวัสดี%20ต้องการรับโปรโมชั่น%20<?php the_title(); ?>%0A<?php the_permalink(); ?>">
 						<?php _e('ติดต่อแอดมินผ่าน LINE', 'ติดต่อแอดมินผ่าน LINE'); ?>
 					</a>
-					<a class="wdl-btn-line d-none d-lg-inline-flex" href="https://line.me/R/ti/p/%40ety4154i">
+						<a class="wdl-btn-line-lg d-none d-lg-inline-flex" href="https://line.me/R/ti/p/%40ety4154i">
 						<?php _e('ติดต่อแอดมินผ่าน LINE', 'ติดต่อแอดมินผ่าน LINE'); ?>
 					</a>
 				</div>
@@ -299,14 +321,18 @@
 												</div>
 
 												<div class="wdl-archive-pretitle mb-0">
-													<?php
-													$relatedVenue = get_field('RelatedVenue');
-													$relatedVenueType = get_field('VenueType', $relatedVenue->ID);
-													if ($relatedVenue): ?>
-														<small>
-															<?php echo $relatedVenueType->name ?>
-														</small>
-													<?php endif; ?>
+													<?php $promotionCategory = wp_get_post_terms(get_the_ID(), 'promotion-category');
+													if ($promotionCategory) {
+														$count = 1;
+														foreach($promotionCategory as $item) {
+															if ($count > 1) {
+																echo ', ';
+															}
+															echo $item->name ;
+															$count = $count + 1;
+														}
+													}
+													?>
 												</div>
 
 												<h3 class="wdl-archive-title mb-0"><a href="<?php the_permalink(); ?>">

@@ -4,152 +4,20 @@
   <?php include 'components/lead-menu-revamped.php' ?>
   <section class="wdl-archive wdl-archive-extended pb-5">
 
-    <?php
-    if(is_user_logged_in()) {
-      $post_status = 'any';
-    } else {
-      $post_status = 'publish';
-    }
-
-    $paged = get_query_var('paged', 1);
-    if($_GET['order'] ) {
-      $order = $_GET['order'];
-    } else {
-      $order = 'DESC';
-    }
-    if($_GET['orderby'] ) {
-      $orderby = $_GET['orderby'];
-      if($_GET['orderby'] === 'meta_value_num') {
-        $has_field =  array(
-          'key' => $_GET['key'],
-          'value' => '0',
-          'compare' => '>',
-        );
-      } else {
-        $has_field = array();
-      }
-    } else {
-      $orderby = 'meta_value';
-      $has_field = array();
-    }
-    if($_GET['key'] ) {
-      $key = $_GET['key'];
-      
-    } else {
-      $key = 'Sponsor';
-    }
-
-    $current_url = explode("?", $_SERVER['REQUEST_URI'])[0];
-    query_posts(
-      array(
-        'post_type' => 'venue',
-        'order' => $order,
-        'meta_key' => $key,
-        'orderby' => $orderby,
-        'post_status' => $post_status,
-        'paged' => $paged,
-        'posts_per_page' => 30,
-        'meta_query' => $has_field,
-      )
-    );
-    ?>
+    <?php include 'queries/query-venue.php' ?>
     <?php if (have_posts()): ?>
       <div class="container-xl">
         <div class="row">
           <div class="col">
             <h1>
-              <?php echo _e('Weddinglist รวมสถานที่จัดงานแต่งงาน ยอดนิยม ทั่วประเทศ') ?>
+              <?php echo(get_option('wdl_options', 'โปรโมชั่นแต่งงาน & แพ็กเกจแต่งงาน')['word-venue-title']); ?>
             </h1>
             <p class="text-secondary mb-2">
-              <?php echo _e('Platform ที่รวบรวมสถานที่จัดงานแต่งงาน โรงแรม เวนิว ร้านอาหาร สถานที่จัดเลี้ยง ตอบทุกโจทย์ความต้องการแต่งงานของเจ้าบ่าวเจ้าสาว พร้อมเช็คราคาฟรี') ?>
+              <?php echo(get_option('wdl_options', 'รวมโปรโมชั่น และ แพ็กเกจแต่งงาน จากสถานที่จัดงานแต่งงานชั้นนำทุกรูปแบบ อัพเดทล่าสุด 2024')['word-venue-desc']); ?>
             </p>
           </div>
         </div>
-        <div class="row mb-3">
-          <div class="col-md-9">
-            <a href="<?php echo get_post_type_archive_link('venue') ?>" class="wdl-badge-sm-primary">ทั้งหมด</a>
-            <?php
-            foreach (get_terms('venue_type') as $term) {
-              if($term->term_id == $current_term_id) {
-                echo '<a class="wdl-badge-sm-primary m-1" href="' . get_term_link($term->slug, 'venue_type') . '">' . $term->name . '</a>';
-              } else {
-                echo '<a class="wdl-badge-sm-secondary m-1" href="' . get_term_link($term->slug, 'venue_type') . '">' . $term->name . '</a>';
-              }
-            } ?>
-          </div>
-          <div class="col text-end">
-            <div class="wdl-badge-container justify-content-end">
-              <div class="dropdown wdl-dropdown">
-                <button class="wdl-btn-link" data-bs-toggle="dropdown" aria-expanded="false">
-                <?php if($_GET['label']) {
-                  echo $_GET['label'];
-                } else {
-                  _e('จัดเรียงโดย', 'จัดเรียงโดย');
-                }?>  
-                <i data-feather="arrow-down"></i></button>
-                <ul class="dropdown-menu dropdown-menu-end">
-                  <li><a href="<?php echo($current_url)?>">สถานที่แนะนำ</a></li>
-                  <li><a href="<?php echo($current_url.'?'.'order=ASC&'.'orderby=title&'.'key=&'.'label=ตามต้วอักษร')?>">ตามต้วอักษร A-Z ก-ฮ</a></li>
-                  <li><a href="<?php echo($current_url.'?'.'order=DESC&'.'orderby=title&'.'key=&'.'label=ย้อนตัวอักษร')?>">ย้อนตัวอักษร ฮ-ก Z-A</a></li>
-                  <li><a href="<?php echo($current_url.'?'.'order=ASC&'.'orderby=meta_value_num&'.'key=MinPrice&'.'label=ราคาเริ่มต้นถูกที่สุด')?>">ราคาเริ่มต้นถูกที่สุด</a></li>
-                  <li><a href="<?php echo($current_url.'?'.'order=DESC&'.'orderby=meta_value_num&'.'key=MinPrice&'.'label=ราคาเริ่มต้นสูงที่สุด')?>">ราคาเริ่มต้นสูงที่สุด</a></li>
-                  <li><a href="<?php echo($current_url.'?'.'order=ASC&'.'orderby=meta_value_num&'.'key=MaxGuest&'.'label=จำนวนแขกน้อยไปมาก')?>">จำนวนแขกน้อยไปมาก</a></li>
-                  <li><a href="<?php echo($current_url.'?'.'order=DESC&'.'orderby=meta_value_num&'.'key=MaxGuest&'.'label=จำนวนแขกมากไปน้อย')?>">จำนวนแขกมากไปน้อย</a></li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- <div class="row pb-2 g-2">
-          <?php $filterLocations = wp_get_nav_menu_items('Filter : Venue Type');
-          $currentLocation = current(wp_filter_object_list($filterLocations, array('object_id' => get_queried_object_id())));
-          if ($filterLocations): ?>
-            <div class="col-md-9">
-              <div class="d-flex">
-                <div class="wdl-badge-container swiper ms-0" style="max-width: 100%;">
-                  <div class="swiper-wrapper">
-                    <?php foreach ($filterLocations as $filterLocation): ?>
-                      <div class="swiper-slide">
-                        <div class="<?php
-                        if ($filterLocation->ID == $currentLocation->ID) {
-                          echo 'wdl-badge-sm-primary';
-                        } else {
-                          echo 'wdl-badge-sm-secondary';
-                        }
-                        ?>"><a href="<?php echo esc_html($filterLocation->url) ?>">
-                            <?php echo $filterLocation->title ?>
-                          </a>
-                        </div>
-                      </div>
-                    <?php endforeach; ?>
-                  </div>
-                </div>
-              </div>
-            </div>
-          <?php endif; ?>
-          <div class="col text-end">
-            <div class="wdl-badge-container justify-content-end">
-              <div class="dropdown wdl-dropdown">
-                <button class="wdl-btn-link" data-bs-toggle="dropdown" aria-expanded="false">
-                <?php if($_GET['label']) {
-                  echo $_GET['label'];
-                } else {
-                  _e('จัดเรียงโดย', 'จัดเรียงโดย');
-                }?>  
-                <i data-feather="arrow-down"></i></button>
-                <ul class="dropdown-menu dropdown-menu-end">
-                  <li><a href="<?php echo($current_url)?>">สถานที่แนะนำ</a></li>
-                  <li><a href="<?php echo($current_url.'?'.'order=ASC&'.'orderby=title&'.'key=&'.'label=ตามต้วอักษร')?>">ตามต้วอักษร A-Z ก-ฮ</a></li>
-                  <li><a href="<?php echo($current_url.'?'.'order=DESC&'.'orderby=title&'.'key=&'.'label=ย้อนตัวอักษร')?>">ย้อนตัวอักษร ฮ-ก Z-A</a></li>
-                  <li><a href="<?php echo($current_url.'?'.'order=ASC&'.'orderby=meta_value_num&'.'key=MinPrice&'.'label=ราคาเริ่มต้นถูกที่สุด')?>">ราคาเริ่มต้นถูกที่สุด</a></li>
-                  <li><a href="<?php echo($current_url.'?'.'order=DESC&'.'orderby=meta_value_num&'.'key=MinPrice&'.'label=ราคาเริ่มต้นสูงที่สุด')?>">ราคาเริ่มต้นสูงที่สุด</a></li>
-                  <li><a href="<?php echo($current_url.'?'.'order=ASC&'.'orderby=meta_value_num&'.'key=MaxGuest&'.'label=จำนวนแขกน้อยไปมาก')?>">จำนวนแขกน้อยไปมาก</a></li>
-                  <li><a href="<?php echo($current_url.'?'.'order=DESC&'.'orderby=meta_value_num&'.'key=MaxGuest&'.'label=จำนวนแขกมากไปน้อย')?>">จำนวนแขกมากไปน้อย</a></li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div> -->
+        <?php include 'components/filter-venue.php' ?>
       </div>
 
       <div class="container-xxl container-archive wdl-archive-infinite-scroll">

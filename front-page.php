@@ -1,7 +1,7 @@
 <?php $localnav = true; ?>
 <?php include 'components/header.php' ?>
 <main>
-  <section class="overflow-x-hidden pt-3">
+  <section class="xl:pt-3">
     <?php $heroArgs = array(
       'post_type' => 'any',
       'post_status' => 'publish',
@@ -73,7 +73,7 @@
     'post_status' => 'publish',
     'orderby' => 'meta_value',
     'order' => 'DESC',
-    'posts_per_page' => '8',
+    'posts_per_page' => '40',
     'meta_key' => 'HotDeal',
   );
 
@@ -85,8 +85,12 @@
       <div class="container">
         <div class="row">
           <div class="col">
-            <h2 class="h1 wdl-localnav-heading">โปรโมชั่นงานแต่งงาน</h2>
-            <p class="mb-2">รวบรวมโปรโมชั่นแต่งงานให้คุณไว้ที่เดียว</p>
+            <h2 class="h1 wdl-localnav-heading">
+              <?php echo(get_option('wdl_options', 'โปรโมชั่นงานแต่งงาน')['word-frontpage-promotion-title']); ?>
+            </h2>
+            <p class="mb-2">
+              <?php echo(get_option('wdl_options', 'รวบรวมโปรโมชั่นแต่งงานให้คุณไว้ที่เดียว')['word-frontpage-promotion-desc']); ?>
+            </p>
           </div>
         </div>
         <div class="row">
@@ -145,17 +149,22 @@
                           <?php endif; ?>
                         </div>
 
-                        <?php
-                        $relatedVenue = get_field('RelatedVenue');
-                        if ($relatedVenue):
-                          foreach ($relatedVenue as $venue):
-                            $venueType = get_field('VenueType', $venue->ID);
-                            ?>
-                            <div class="wdl-archive-pretitle mb-0">
-                              <?php echo $venueType[0]->name ?>
-                            </div>
-                          <?php endforeach; endif; ?>
 
+                        <div class="wdl-archive-pretitle mb-0">
+                          <?php $promotionCategory = wp_get_post_terms(get_the_ID(), 'promotion-category');
+                          if ($promotionCategory) {
+                            $count = 1;
+                            foreach($promotionCategory as $item) {
+                              if ($count > 1) {
+                                echo ', ';
+                              }
+                              echo $item->name ;
+                              $count = $count + 1;
+                            }
+                          }
+                          ?>
+                        </div>
+                        
                         <h3 class="wdl-archive-title mb-0"><a href="<?php the_permalink(); ?>">
                             <?php the_title(); ?>
                           </a></h3>
@@ -192,7 +201,7 @@
                               <?php foreach ($coupon as $singleCoupon): ?>
                                   <div class="wdl-coupon-picker wdl-coupon-picker-small">
                                     <div class="wdl-coupon-picker-image">
-                                      <img src="<?php echo (get_field('Image', $singleCoupon->ID)['sizes']['medium']) ?>" />
+                                      <img loading="lazy" src="<?php echo (get_field('Image', $singleCoupon->ID)['sizes']['medium']) ?>" />
                                     </div>
                                     <!-- <div class="wdl-coupon-picker-info">
                                       <div class="wdl-coupon-picker-title">
@@ -241,7 +250,7 @@
     'post_status' => 'publish',
     'orderby' => 'meta_value',
     'order' => 'DESC',
-    'posts_per_page' => '8',
+    'posts_per_page' => '40',
     'meta_key' => 'HotDeal',
   );
 
@@ -254,9 +263,11 @@
         <div class="row">
           <div class="col">
             <h2 class="h1 wdl-localnav-heading">
-              <?php echo _e('Wedding Fair & Event', 'Wedding Fair & Event') ?>
+              <?php echo(get_option('wdl_options', 'Wedding Fair & Event')['word-frontpage-wedding-fair-title']); ?>
             </h2>
-            <p class="mb-2">รวบรวมงานแฟร์ และ อีเว้นท์ให้คุณไว้ที่เดียว</p>
+            <p class="mb-2">
+              <?php echo(get_option('wdl_options', 'รวบรวมงานแฟร์ และ อีเว้นท์ให้คุณไว้ที่เดียว')['word-frontpage-wedding-fair-desc']); ?>
+            </p>
           </div>
         </div>
         <div class="row">
@@ -367,7 +378,7 @@
     'post_status' => 'publish',
     'orderby' => 'meta_value',
     'order' => 'DESC',
-    'posts_per_page' => '9',
+    'posts_per_page' => '40',
     'meta_key' => 'Sponsor',
   );
 
@@ -379,8 +390,12 @@
       <div class="container">
         <div class="row">
           <div class="col-md-6">
-            <h2 class="h1 wdl-localnav-heading">สถานที่จัดงานแต่งงาน</h2>
-            <p class="mb-2">รวบรวมสถานที่จัดงานแต่งงานให้คุณไว้ที่เดียว</p>
+            <h2 class="h1 wdl-localnav-heading">
+              <?php echo(get_option('wdl_options', 'สถานที่จัดงานแต่งงาน')['word-frontpage-venue-title']); ?>
+            </h2>
+            <p class="mb-2">
+              <?php echo(get_option('wdl_options', 'รวบรวมสถานที่จัดงานแต่งงานให้คุณไว้ที่เดียว')['word-frontpage-venue-desc']); ?>
+            </p>
           </div>
           <div class="col-md-6 pb-3 py-lg-3 text-start text-lg-end">
             <?php foreach (get_terms('venue_type') as $term) {
@@ -548,6 +563,10 @@
   <?php endif; ?>
 
   <?php
+  $vendor_type = get_terms( array(
+    'taxonomy'   => 'vendor-type',
+    'hide_empty' => true,
+  ) );
 
   if (is_user_logged_in() === true) {
     $post_status = 'any';
@@ -558,123 +577,183 @@
     'post_type' => 'vendor',
     'post_status' => $post_status,
     'order' => 'DESC',
-    'posts_per_page' => '8',
+    'posts_per_page' => '40',
   );
 
   $vendor = new WP_Query($vendorArgs);
   ?>
 
   <?php if ($vendor->have_posts()): ?>
-    <section class="overflow-x-hidden">
+    <section class="overflow-hidden">
       <div class="container">
         <div class="row">
           <div class="col-md-6">
-            <h2 class="h1 wdl-localnav-heading">ผู้ให้บริการงานแต่งงาน</h2>
-            <p class="mb-2">รวบรวมผู้ให้บริการงานแต่งงานให้คุณไว้ที่เดียว</p>
+            <h2 class="h1 wdl-localnav-heading">
+              <?php echo(get_option('wdl_options', 'ผู้ให้บริการงานแต่งงาน')['word-frontpage-vendor-title']); ?>
+            </h2>
+            <p class="mb-2">
+              <?php echo(get_option('wdl_options', 'รวบรวมผู้ให้บริการงานแต่งงานให้คุณไว้ที่เดียว')['word-frontpage-vendor-desc']); ?>
+            </p>
           </div>
-          <div class="col-md-6 pb-3 text-start text-lg-end">
+          <!-- <div class="col-md-6 pb-3 text-start text-lg-end">
             <?php foreach (get_terms('vendor-type') as $term) {
               echo '<a class="wdl-badge-sm-secondary m-1" href="' . get_term_link($term->slug, 'vendor-type') . '">' . $term->name . '</a>';
             } ?>
+          </div> -->
+        </div>
+        <div class="row">
+          <div class="col">
+            <ul class="wdl-tab nav mb-3 wdl-tab-related">
+              <?php foreach($vendor_type as $type) { ?>
+                <li class="nav-item">
+                  <a role="tab" aria-control="tab-vendor-<?php echo $type->slug?>" data-bs-toggle="tab" data-bs-target="#tab-<?php echo $type->slug?>" class="nav-link" aria-current="tab" href="#"><?php echo $type->name ?></a>
+                </li>
+              <?php } ?>
+            </ul>
           </div>
         </div>
         <div class="row">
           <div class="col">
-            <div class="wdl-archive wdl-archive-extended <?php echo esc_attr($atts['class']); ?>">
-
-              <div class="swiper wdl-archive-swiper">
-                <div class="swiper-wrapper 
-        <?php if ($_GET['order'] || $_GET['orderby'] || $_GET['key']) {
-
-        } else {
-          echo 'row-cols-archive-randomized';
-        } ?> ">
-                  <?php while ($vendor->have_posts()): ?>
-                    <?php $vendor->the_post(); ?>
-
-                    <div id="wdl-post-<?php the_ID(); ?>" class="swiper-slide h-auto card wdl-archive-card <?php echo esc_attr($atts['class_single']); ?> <?php if (get_field('HotDeal')) {
-                        echo esc_html('wdl-archive-primary');
-                      } else {
-                        echo esc_html('wdl-archive-default');
-                      } ?>">
-
-                      <?php if (has_post_thumbnail(get_the_ID())): ?>
-                        <a class="card-img-top wdl-archive-card-img-top" href="<?php the_permalink(); ?>" title="<?php get_the_title() ?>">
-                          <?php if (get_field('Gallery')): ?>
+            <div class="tab-content wdl-tab-related-content">
+              <?php 
+              foreach($vendor_type as $type) {
+                $type_query = get_posts(
+                  array(
+                    'post_type' => 'vendor',
+                    'posts_per_page' => 40,
+                    'orderby' => 'date',
+                    'order' => 'DESC',
+                    'tax_query' => array(
+                      array(
+                        'taxonomy' => 'vendor-type',
+                        'field' => 'term_id',
+                        'terms' => $type->term_id,
+                      )
+                    )
+                  )
+                );
+  
+              if ($type_query): ?>
+              <div id="tab-<?php echo $type->slug?>" class="tab-pane fade">
+                <div class="wdl-archive wdl-archive-extended <?php echo esc_attr($atts['class']); ?>">
+                  <div id="promotion-swiper" class="swiper wdl-archive-swiper">
+                    <div class="swiper-wrapper row-cols-archive-randomized opacity-1">
+                      <?php foreach ($type_query as $post): ?>
+                        <div id="wdl-post-<?php the_ID(); ?>" class="<?php echo esc_attr($atts['class_single']); ?> swiper-slide h-auto card wdl-archive-card">
                             <?php if (has_post_thumbnail(get_the_ID())): ?>
-                              <img loading="lazy" class="" src="<?php echo esc_html(get_the_post_thumbnail_url($post, 'medium_large')) ?>" width="100%">
-                            <?php endif; ?>
-                          <?php endif; ?>
-                        </a>
-                      <?php endif; ?>
-
-                      <div class="card-select">
-                        <div class="wdl-checkbox">
-                          <input class="card-select-input" id="card-select-<?php the_ID() ?>" type="checkbox" data-select='
-                            {
-                              "title": "<?php the_title() ?>",
-                              "postType": "<?php echo get_post_type() ?>",
-                              "id": "<?php the_ID() ?>"
-                            }'>
-                          <label for="card-select-<?php the_ID() ?>">
-                            <?php _e('เลือก', 'เลือก') ?>
-                          </label>
-                        </div>
-                      </div>
-
-                      <div class="card-body wdl-archive-card-body">
-                        <?php
-                        $vendorType = get_field('VendorType');
-                        if ($vendorType):
-                          foreach ($vendorType as $type):
-                            $typeLink = get_term_link($type->term_id);
-                            ?>
-                            <div class="wdl-archive-pretitle mb-0">
-                              <a href="<?php echo ($typeLink) ?>" class="text-accent fw-normal">
-                                <?php echo $type->name ?>
+                              <a class="card-img-top wdl-archive-card-img-top" href="<?php the_permalink(); ?>">
+                                <img loading="lazy" class="" src="<?php echo esc_html(get_the_post_thumbnail_url($post, 'medium_large')) ?>" width="100%">
                               </a>
+                            <?php endif; ?>
+  
+                            <div class="card-select">
+                              <div class="wdl-checkbox">
+                                <input class="card-select-input" id="card-select-<?php the_ID() ?>" type="checkbox" data-select='
+                                {
+                                  "title": "<?php the_title() ?>",
+                                  "postType": "<?php echo get_post_type() ?>",
+                                  "id": "<?php the_ID() ?>"
+                                }'>
+                                <label for="card-select-<?php the_ID() ?>">
+                                  <?php _e('เลือก', 'เลือก') ?>
+                                </label>
+                              </div>
                             </div>
-                          <?php endforeach; endif; ?>
-
-                        <h3 class="wdl-archive-title mb-0"><a href="<?php the_permalink(); ?>">
-                            <?php the_title(); ?>
-                          </a></h3>
-
-                        <div class="lineclamp-3 mb-2 text-sm">
-                          <?php echo (get_the_excerpt()); ?>
+  
+                            <div class="card-body wdl-archive-card-body">
+                              <div class="wdl-archive-pretitle mb-0">
+                                <?php $vendorType = get_field('VendorType');
+                                if ($vendorType) {
+                                  foreach($vendorType as $item) {
+                                    echo $item->name;
+                                  }
+                                }
+                                ?>
+                                
+                                <?php $vendorCharacter = get_field('Character');
+                                if ($vendorCharacter): ?>
+                                <?php //foreach ($vendorCharacter as $character):
+                                $characterBackground = get_field('CharacterBackground', $vendorCharacter);
+                                $characterBorder = get_field('CharacterBorder', $vendorCharacter);
+                                $characterColor = get_field('CharacterColor', $vendorCharacter);
+                                $characterEffect = get_field('CharacterEffect', $vendorCharacter);
+                                ?>
+                                <div class="wdl-character
+                                  <?php if($characterBorder) {echo('wdl-character-border');} ?>
+                                  <?php if($characterEffect) {echo('wdl-character-animation-' . $characterEffect);} ?>"
+                                <?php 
+                                if($characterColor || $characterBackground) :?>
+                                style="
+                                  --background-image: url(<?php echo( $characterBackground['url'] )?>);
+                                  --box-shadow: none;
+                                  --color: rgba(<?php echo( $characterColor['red']) ?>,<?php echo( $characterColor['green']) ?>,<?php echo( $characterColor['blue']) ?>,<?php echo( $characterColor['alpha'])?>);
+                                  --color-50: rgba(<?php echo( $characterColor['red']) ?>,<?php echo( $characterColor['green']) ?>,<?php echo( $characterColor['blue']) ?>, 50%);
+                                  --color-0: rgba(<?php echo( $characterColor['red']) ?>,<?php echo( $characterColor['green']) ?>,<?php echo( $characterColor['blue']) ?>, 0);
+                                "
+                                <?php endif ?>
+                                >
+                                  <span><?php echo esc_html($vendorCharacter->name); ?></span>
+                                </div>
+                                <?php //endforeach; ?>
+                                <?php endif ?>
+                              </div>
+                              
+                              <h3 class="wdl-archive-title mb-0"><a href="<?php the_permalink(); ?>">
+                                <?php the_title(); ?>
+                              </a></h3>
+  
+                              <?php
+                              $locations = get_field('Location');
+                              if ($locations): ?>
+                                <div class="wdl-archive-neighborhood">
+                                  <ul>
+                                    <?php foreach ($locations as $location): ?>
+                                      <li>
+                                        <?php echo esc_html($location->name); ?>
+                                      </li>
+                                    <?php endforeach; ?>
+                                  </ul>
+                                </div>
+                              <?php endif; ?>
+  
+                              <p class="lineclamp-3 mb-2 text-sm text-secondary">
+                                <?php echo (get_the_excerpt()); ?>
+                              </p>
+  
+                              <?php if(get_field('MinPrice')) : ?>
+                              <div class="text-red fw-semibold mb-2">เริ่มต้น
+                                <?php echo number_format(get_field('MinPrice')); ?> บาท
+                              </div>
+                              <?php endif; ?>
+                            </div>
+  
+                            <div class="card-footer">
+                              <a href="#" class="wdl-btn-cta wdl-form-general-direct" data-bs-toggle="modal" data-bs-target=".wdl-form-general-modal">คลิกขอแพ็กเกจ</a>
+                              <a href="<?php the_permalink() ?>" class="wdl-btn-more">ดูรายละเอียด</a>
+                            </div>
                         </div>
-
-                        <?php if (get_field('MinPrice')): ?>
-                          <div class="text-red fw-semibold mb-2">เริ่มต้น
-                            <?php echo number_format(get_field('MinPrice')); ?> บาท
-                          </div>
-                        <?php endif; ?>
-                      </div>
-
-                      <div class="card-footer">
-                        <a href="#" class="wdl-btn-cta wdl-form-general-direct" data-bs-toggle="modal" data-bs-target=".wdl-form-general-modal">คลิกขอแพ็กเกจ</a>
-                        <a href="<?php the_permalink() ?>" class="wdl-btn-more">ดูรายละเอียด</a>
-                      </div>
-
+                      <?php endforeach; ?>
                     </div>
-
-                  <?php endwhile; ?>
-                </div>
-                <div class="swiper-pagination"></div>
-                <div class="swiper-navigation swiper-navigation-small">
-                  <div class="swiper-button-prev"></div>
-                  <div class="swiper-button-next"></div>
+                    <div class="swiper-navigation swiper-navigation-small">
+                      <div class="swiper-button-prev"></div>
+                      <div class="swiper-button-next"></div>
+                    </div>
+                    <div class="swiper-pagination"></div>
+                  </div>
+  
+  
+  
+                  <div class="row">
+                    <div class="col text-center mt-4 mb-5">
+                      <a href="<?php echo esc_html(get_term_link($type)) ?>" class="wdl-btn-secondary py-2 px-3">
+                        <?php _e('ดู '.$type->name.' ทั้งหมด', 'ดู '.$type->name.' ทั้งหมด') ?>
+                      </a>
+                    </div>
+                  </div>
                 </div>
               </div>
-
+              <?php endif; } ?>
             </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col text-center mt-3 mb-5">
-            <a href="<?php echo esc_html(get_post_type_archive_link('vendor')) ?>" class="wdl-btn-secondary py-2 px-3">
-              <?php _e('ดูผู้ให้บริการทั้งหมด', 'ดูผู้ให้บริการทั้งหมด') ?>
-            </a>
           </div>
         </div>
       </div>
@@ -699,10 +778,10 @@
       <div class="row pb-3">
         <div class="col">
           <h2 class="h1 wdl-localnav-heading">
-            <?php _e('บทความล่าสุด', 'บทความล่าสุด') ?>
+            <?php echo(get_option('wdl_options', 'บทความล่าสุด')['word-frontpage-post-title']); ?>
           </h2>
           <p class="text-secondary">
-            <?php _e('รวบรวมบทความให้คุณไว้ที่เดียว', 'รวบรวมบทความให้คุณไว้ที่เดียว') ?>
+            <?php echo(get_option('wdl_options', 'รวบรวมบทความให้คุณไว้ที่เดียว')['word-frontpage-post-desc']); ?>
           </p>
           <div class="wdl-badge-container">
             <a href="#" class="wdl-badge-sm-primary">ทั้งหมด</a>

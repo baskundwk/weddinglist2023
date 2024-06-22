@@ -24,33 +24,42 @@
 		</div>
 	</section>
 	<section class="wdl-sticky-bar">
-		<div class="container-xl">
-			<div class="row align-items-center g-3">
-				<div class="col-12 col-sm col-lg-9">
-					<div class="row g-4 align-items-center">
-						<div class="col-auto">
-							<?php $logo = get_field('Logo');
-							if ($logo): ?>
-								<div class="wdl-metadata-logo">
-									<img loading="lazy" src="<?php echo esc_url($logo['sizes']['medium']); ?>" alt="<?php echo esc_attr($logo['alt']); ?>" height="40" />
-								</div>
-							<?php endif; ?>
-						</div>
-						<div class="col">
-							<h1 class="h6 text-secondary mb-0 wdl-sticky-bar-title">
-								<?php the_title() ?>
-							</h1>
+		<a id="apply-cta" href="#apply" data-bs-toggle="modal">
+			<div class="container-xl">
+				<div class="row align-items-center g-3">
+					<div class="col-12 col-sm col-lg-9">
+						<div class="row g-4 align-items-center">
+							<div class="col-auto">
+								<?php $logo = get_field('Logo');
+								if ($logo): ?>
+									<div class="wdl-metadata-logo">
+										<img loading="lazy" src="<?php echo esc_url($logo['sizes']['medium']); ?>" alt="<?php echo esc_attr($logo['alt']); ?>" height="40" />
+									</div>
+								<?php endif; ?>
+							</div>
+							<div class="col">
+								<h1 class="h6 text-secondary mb-0 wdl-sticky-bar-title">
+									<?php the_title() ?>
+								</h1>
+							</div>
 						</div>
 					</div>
-				</div>
-				<?php $sponsored = get_field('Sponsor', $relatedPost->ID); ?>
-				<div class="col-12 col-sm-auto col-lg-3 text-center text-lg-end mb-2 mb-sm-0">
-					<a id="apply-cta" href="#apply" class="wdl-btn" data-bs-toggle="modal">
-						<?php _e('ลงทะเบียนร่วมงาน', 'ลงทะเบียนร่วมงาน'); ?>
-					</a>
+					<?php $sponsored = get_field('Sponsor', $relatedPost->ID); ?>
+					<div class="col-12 col-sm-auto col-lg-3 text-center text-lg-end mb-2 mb-sm-0">
+						<button class="wdl-btn">
+							<?php _e('ลงทะเบียนเข้าร่วมงาน', 'ลงทะเบียนเข้าร่วมงาน'); ?>
+						</button>
+
+						<a class="wdl-btn-line d-inline-flex d-lg-none" href="https://line.me/R/oaMessage/%40ety4154i/?สวัสดี%20ต้องการลงทะเบียนเข้าร่วมงาน%20<?php the_title(); ?>%0A<?php the_permalink(); ?>">
+							<?php _e('ติดต่อแอดมินผ่าน LINE', 'ติดต่อแอดมินผ่าน LINE'); ?>
+						</a>
+						<a class="wdl-btn-line d-none d-lg-inline-flex" href="https://line.me/R/ti/p/%40ety4154i">
+							<?php _e('ติดต่อแอดมินผ่าน LINE', 'ติดต่อแอดมินผ่าน LINE'); ?>
+						</a>
+					</div>
 				</div>
 			</div>
-		</div>
+		</a>
 	</section>
 	<section class="wdl-main-bar">
 		<div class="container-xl">
@@ -83,14 +92,22 @@
 						foreach ($relatedVenue as $venue):
 							$venuePermalink = get_permalink($venue->ID);
 							$venueTitle = get_the_title($venue->ID); ?>
-							<p class="wdl-archive-location mb-0"><a class="wdl-data-venue" href="<?php echo esc_html($venuePermalink) ?>">
+							<p class="wdl-archive-location mb-0">
+								<a class="wdl-data-venue" href="<?php echo esc_html($venuePermalink) ?>">
 									<?php echo esc_html($venueTitle); ?>
-								</a></p>
+								</a>
+							</p>
 						<?php endforeach; endif; ?>
 				</div>
-				<div class="col-sm-auto text-center text-sm-end">
-					<a id="apply-cta" href="#apply" class="wdl-btn-lg" data-bs-toggle="modal">
+				<div class="col-lg-auto text-center py-3 d-flex flex-column">
+					<a id="apply-cta" href="#apply" class="wdl-btn-lg d-block mb-3" data-bs-toggle="modal">
 						<?php _e('ลงทะเบียนเข้าร่วมงาน', 'ลงทะเบียนเข้าร่วมงาน'); ?>
+					</a>
+					<a class="wdl-btn-line-lg d-flex d-lg-none" href="https://line.me/R/oaMessage/%40ety4154i/?สวัสดี%20ต้องการลงทะเบียนเข้าร่วมงาน%20<?php the_title(); ?>%0A<?php the_permalink(); ?>">
+						<?php _e('ติดต่อแอดมินผ่าน LINE', 'ติดต่อแอดมินผ่าน LINE'); ?>
+					</a>
+					<a class="wdl-btn-line-lg d-none d-lg-inline-flex" href="https://line.me/R/ti/p/%40ety4154i">
+						<?php _e('ติดต่อแอดมินผ่าน LINE', 'ติดต่อแอดมินผ่าน LINE'); ?>
 					</a>
 				</div>
 			</div>

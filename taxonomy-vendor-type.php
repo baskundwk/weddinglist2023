@@ -67,16 +67,16 @@
         <div class="row">
           <div class="col">
             <h1>
-              <?php echo _e('Weddinglist รวมผู้ให้บริการงานแต่งงาน ยอดนิยม ทั่วประเทศ') ?>
+              <?php echo do_shortcode('[seo_title]') ?>
             </h1>
             <p class="text-secondary mb-2">
-              <?php echo _e('Platform ที่รวบรวมผู้ให้บริการงานแต่งงาน ตากล้อง เช่าชุดแต่งงาน พิธีกร ตอบทุกโจทย์ความต้องการแต่งงานของเจ้าบ่าวเจ้าสาว พร้อมเช็คราคาฟรี') ?>
+              <?php echo do_shortcode('[seo_description]') ?>
             </p>
           </div>
         </div>
         <div class="row mb-3">
           <div class="col-md-9">
-            <a href="<?php echo get_post_type_archive_link('vendor') ?>" class="wdl-badge-sm-secondary">ทั้งหมด</a>
+            <!-- <a href="<?php echo get_post_type_archive_link('vendor') ?>" class="wdl-badge-sm-secondary">ทั้งหมด</a> -->
             <?php
             foreach (get_terms('vendor-type') as $term) {
               if($term->term_id == $current_term_id) {
@@ -221,7 +221,111 @@
         </div>
       </div>
     </section>
-  <?php endif; ?>
+  <?php
+    $relatedPosts = new WP_Query(
+    array(
+      'post_type' => 'post',
+      'post_status' => 'publish',
+      'posts_per_page' => '40',
+      'orderby' => 'post_date',
+      'order' => 'DESC',
+      'tax_query' => array(
+        array(
+          'taxonomy' => 'post_tag',
+          'field' => 'name',
+          'terms' => get_queried_object()->name
+        )
+      )
+    )
+  ) ?>
+  <?php if ($relatedPosts->have_posts()) : ?>
+    <section class="wdl-archive wdl-archive-extended pb-5">
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <h2 class="h1 wdl-localnav-heading">
+              <?php _e('บทความที่เกี่ยวข้อง', 'บทความที่เกี่ยวข้อง') ?>
+            </h2>
+            <p class="text-secondary">
+              <?php _e('รวบรวมบทความเกี่ยวกับผู้ให้บริการ '. get_queried_object()->name .' ให้คุณไว้ที่เดียว', 'รวบรวมบทความเกี่ยวกับผู้ให้บริการ '. get_queried_object()->name .' ให้คุณไว้ที่เดียว') ?>
+            </p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <div class="swiper wdl-archive-swiper">
+              <div class="swiper-wrapper">
+                <?php while ($relatedPosts->have_posts()): ?>
+                  <?php $relatedPosts->the_post(); ?>
+
+                  <div class="swiper-slide h-auto">
+                    <div id="wdl-post-<?php the_ID(); ?>" class="card wdl-archive-card h-100 <?php echo esc_attr($atts['class_single']); ?> wdl-archive-card-blog">
+
+                      <?php if (has_post_thumbnail(get_the_ID())): ?>
+                        <a class="card-img-top wdl-archive-card-img-top" href="<?php the_permalink(); ?>"><img loading="lazy" class="" src="<?php echo esc_html(get_the_post_thumbnail_url($post, 'medium_large')) ?>" width="100%"></a>
+                      <?php endif; ?>
+
+                      <div class="card-body wdl-archive-card-body pb-3">
+                        <div class="wdl-badge-container mb-1">
+                          <?php
+                          $date = get_field('Date');
+                          if ($date): ?>
+                            <span class="badge wdl-badge-sm-primary">
+                              <?php the_field('Date') ?>
+                            </span>
+                          <?php endif; ?>
+                          <?php $hotDeal = get_field('HotDeal');
+                          if ($hotDeal && in_array('Hot Deal', $hotDeal)): ?>
+                            <span class="badge wdl-badge-sm">Hot Deal</span>
+                          <?php endif; ?>
+                        </div>
+
+                        <!-- <?php
+                        $relatedVenue = get_field('RelatedVenue');
+                        if ($relatedVenue):
+                          foreach ($relatedVenue as $venue):
+                            $venueType = get_field('VenueType', $venue->ID);
+                            ?>
+                            <div class="wdl-archive-pretitle mb-0">
+                              <small>
+                                <?php echo $venueType[0]->name ?>
+                              </small>
+                            </div>
+                          <?php endforeach; endif; ?> -->
+
+                        <h3 class="wdl-archive-title mb-1"><a href="<?php the_permalink(); ?>">
+                            <?php the_title(); ?>
+                          </a></h3>
+
+                        <?php
+                        $relatedVenue = get_field('RelatedVenue');
+                        if ($relatedVenue):
+                          foreach ($relatedVenue as $venue):
+                            $venuePermalink = get_permalink($venue->ID);
+                            $venueTitle = get_the_title($venue->ID); ?>
+                            <p class="wdl-archive-location mb-0"><a href="<?php echo esc_html($venuePermalink) ?>">
+                                <?php echo esc_html($venueTitle); ?>
+                              </a></p>
+                          <?php endforeach; endif; ?>
+                      </div>
+
+                    </div>
+                  </div>
+
+                <?php endwhile;
+                wp_reset_postdata(); ?>
+              </div>
+              <div class="swiper-pagination"></div>
+              <div class="swiper-navigation swiper-navigation-small">
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  <?php endif; endif; ?>
 
   <?php include 'components/compare-bar.php' ?>
 </main>

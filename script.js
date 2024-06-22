@@ -141,7 +141,7 @@
 
 // Swipers
   $(() => {
-    const wdlArchiveSwiper = new Swiper(
+    /* const wdlArchiveSwiper = new Swiper(
       ".wdl-archive:not(.wdl-archive-swiper-extended) .wdl-archive-swiper",
       {
         slidesPerView: 1,
@@ -160,39 +160,54 @@
         },
         pagination: {
           el: ".swiper-pagination",
+          dynamicBullets: true,
+          dynamicMainBullets: 5,
           clickable: true,
         },
       }
-    );
+    ); */
     const wdlArchiveExtendedSwiper = new Swiper(
-      ".wdl-archive-extended .wdl-archive-swiper",
+      ".wdl-archive .wdl-archive-swiper",
       {
         slidesPerView: 1,
         spaceBetween: 16,
         speed: 1000,
-        autoplay: false,
+        autoplay: {
+          delay: 7000,
+          pauseOnMouseEnter: true,
+          disableOnInteraction: true
+        },
         breakpoints: {
           768: {
             slidesPerView: 2,
             spaceBetween: 16,
-            autoplay: false,
+            autoplay: {
+              delay: 7000,
+              pauseOnMouseEnter: true,
+              disableOnInteraction: true
+            },
           },
           1200: {
             slidesPerView: 3,
             spaceBetween: 24,
             autoplay: {
-              delay: 5000,
+              delay: 7000,
+              pauseOnMouseEnter: true,
+              disableOnInteraction: true
             },
           },
         },
         pagination: {
           el: ".swiper-pagination",
           clickable: true,
+          dynamicBullets: true,
+          dynamicMainBullets: 5,
         },
         navigation: {
           nextEl: ".swiper-button-next",
           prevEl: ".swiper-button-prev",
         },
+        
       }
     );
     let compareSlide = $(".wdl-compare-swiper .wdl-compare-card").length
@@ -243,7 +258,7 @@
         nextEl: ".swiper-button-next",
         prevEl: ".swiper-button-prev",
       },
-      speed: 1000,
+      speed: 1500,
       autoplay: {
         delay: 5000,
       },
@@ -261,13 +276,13 @@
         nextEl: ".swiper-button-next",
         prevEl: ".swiper-button-prev",
       },
-      speed: 1000,
+      speed: 1500,
       autoplay: {
         delay: 5000,
       },
       loop: true,
     });
-    const wdlLeadMenuSmallSwiper = new Swiper(".wdl-lead-menu-small-swiper", {
+    /* const wdlLeadMenuSmallSwiper = new Swiper(".wdl-lead-menu-small-swiper", {
       slideClass: "menu-item",
       slidesPerView: "auto",
       spaceBetween: 16,
@@ -276,17 +291,25 @@
           slidesPerView: 5,
         },
       },
-    });
+    }); */
     const wdlLeadMenuRevampedSwiper = new Swiper(
       ".wdl-lead-menu-revamped-swiper",
       {
         slideClass: "menu-item",
-        slidesPerView: "auto",
+        slidesPerView: 'auto',
         spaceBetween: 8,
+        grid: {
+          rows: 2,
+          fill: 'row'
+        },
         breakpoints: {
-          992: {
-            spaceBetween: 16,
-            slidesPerView: 5,
+          576: {
+            spaceBetween: 8,
+            slidesPerView: 3,
+            grid: {
+              rows: 2,
+              fill: 'row'
+            },
           },
         },
       }

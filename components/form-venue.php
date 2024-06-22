@@ -105,7 +105,7 @@
             if($coupon) : ?>
             <div class="col-md-12 mt-3">
               <h2 class="h6 mb-1">คูปองที่ร่วมรายการ</h2>
-              <div class="flex flex-wrap gap-x-4 gap-y-3">
+              <div class="d-flex flex-wrap gap-2">
                 <?php foreach ($coupon as $singleCoupon): ?>
                   <div class="wdl-coupon-picker wdl-coupon-checkbox">
                     <div class="wdl-coupon-picker-indicator"></div>

@@ -1,18 +1,18 @@
-<section class="pt-3">
+<section class="pt-2 overflow-hidden">
   <div class="container">
-    <div class="row overflow-hidden mb-3">
+    <div class="row mb-3">
       <?php
       wp_nav_menu(
         array(
           'menu' => 'Lead menu',
-          'container_class' => 'wdl-lead-menu-revamped-swiper',
+          'container_class' => 'wdl-lead-menu-revamped-swiper overflow-visible',
           'menu_class' => 'swiper-wrapper',
           'menu_id' => 'lead-menu'
         )
       );
       ?>
     </div>
-    <div class="row mb-3 g-3 align-items-center">
+    <div class="row mb-4 g-2 align-items-center">
       <div class="col-xl-4">
         <div class="wdl-search">
           <form role="search" method="get" id="searchform" class="searchform" action="<?php echo esc_url(home_url('/')); ?>">

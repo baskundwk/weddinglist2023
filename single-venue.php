@@ -125,31 +125,10 @@
 				</div>
 				<div class="col-lg mb-3 mb-lg-0 pt-lg-3">
 					<?php
-					if (get_the_id() === 204937):
-						?>
-						<div>
-							<div class="wdl-character wdl-character-border wdl-character-animation-bounce" style=" --background-image: url(/wp-content/uploads/2023/12/gold-gradient.png); --box-shadow: none; --color: rgba(191,149,63,1); --color-50: rgba(191,149,63, 50%); --color-0: rgba(191,149,63, 0);">
-								<span>Bounce</span>
-							</div>
-							<div class="wdl-character wdl-character-border wdl-character-animation-fade" style=" --background-image: url(/wp-content/uploads/2023/12/gold-gradient.png); --box-shadow: none; --color: rgba(191,149,63,1); --color-50: rgba(191,149,63, 50%); --color-0: rgba(191,149,63, 0);">
-								<span>Fade</span>
-							</div>
-							<div class="wdl-character wdl-character-border wdl-character-animation-glow" style=" --background-image: url(/wp-content/uploads/2023/12/gold-gradient.png); --box-shadow: none; --color: rgba(191,149,63,1); --color-50: rgba(191,149,63, 50%); --color-0: rgba(191,149,63, 0);">
-								<span>Glow</span>
-							</div>
-							<div class="wdl-character wdl-character-border wdl-character-animation-radiate" style=" --background-image: url(/wp-content/uploads/2023/12/gold-gradient.png); --box-shadow: none; --color: rgba(191,149,63,1); --color-50: rgba(191,149,63, 50%); --color-0: rgba(191,149,63, 0);">
-								<span>Radiate</span>
-							</div>
-							<div class="wdl-character wdl-character-border wdl-character-animation-shimmer" style=" --background-image: url(/wp-content/uploads/2023/12/gold-gradient.png); --box-shadow: none; --color: rgba(191,149,63,1); --color-50: rgba(191,149,63, 50%); --color-0: rgba(191,149,63, 0);">
-								<span>Shimmer</span>
-							</div>
-						</div>
-					<?php endif; ?>
-					<?php
 					$venueTypes = get_field('VenueType');
 					$venueCharacter = get_field('Character');
 					if ($venueCharacter || $venueTypes): ?>
-						<p class="mb-0 d-flex gap-3">
+						<div class="mb-0 d-flex gap-3">
 							<?php if ($venueCharacter): ?>
 								<?php //foreach ($venueCharacter as $character):
 										$characterBackground = get_field('CharacterBackground', $venueCharacter);
@@ -187,8 +166,7 @@
 								</span>
 							<?php endforeach; ?>
 						<?php endif ?>
-						</p>
-
+						</div>
 					<?php endif ?>
 					<h1 class="wdl-single-title">
 						<?php the_title(); ?>
@@ -257,8 +235,7 @@
 						</p>
 					<?php endif; ?>
 				</div>
-				<div class="col-lg-auto text-center">
-					<div class="wdl-pricing-row-- p-3">
+				<div class="col-lg-auto text-center py-3 d-flex flex-column">
 						<a id="apply-cta" href="#apply" class="wdl-btn-lg d-block mb-3" data-bs-toggle="modal">
 							<?php _e('คลิกขอแพ็กเกจ', 'คลิกขอแพ็กเกจ'); ?>
 						</a>
@@ -268,7 +245,6 @@
 						<a class="wdl-btn-line-lg d-none d-lg-inline-flex" href="https://line.me/R/ti/p/%40ety4154i">
 							<?php _e('ติดต่อแอดมินผ่าน LINE', 'ติดต่อแอดมินผ่าน LINE'); ?>
 						</a>
-					</div>
 				</div>
 			</div>
 		</div>
@@ -356,7 +332,7 @@
 						<div id="tab-promotion" class="tab-pane fade">
 							<div class="row align-items-center">
 								<div class="col-12">
-									<div class="wdl-archive <?php echo esc_attr($atts['class']); ?>">
+									<div class="wdl-archive wdl-archive-extended <?php echo esc_attr($atts['class']); ?>">
 										<div id="promotion-swiper" class="swiper wdl-archive-swiper">
 											<div class="swiper-wrapper">
 												<?php foreach ($relatedPromotions as $relatedPromotion): ?>

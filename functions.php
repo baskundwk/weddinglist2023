@@ -420,7 +420,7 @@ function send_email(){
 			}
 		}
 
-		$cardTitle = get_the_title($cardId);
+		$cardTitle = str_replace("&#038;","&",get_the_title($cardId));
 		$microsite = get_field('Microsite', $cardId);
 		
 		$timestamp = wp_date("d M Y H:i:s", null );
@@ -435,11 +435,15 @@ function send_email(){
 
 		$file = get_theme_file_uri() . '/images/logo-w.png'; //phpmailer will load this file
 
+		$emailMasked = $email;
 		$telMasked = $tel;
 		$lineidMasked = $lineid;
+		$footer = '';
 		if ($microsite && in_array('Free Microsite', $microsite)) {
+			$emailMasked = 'xxxxxxxxxxxx';
 			$telMasked = 'xxxxxxxxxxxx';
 			$lineidMasked = 'xxxxxxxxxxxx';
+			$footer = '<p>ข้อมูลบางส่วนของบ่าวสาว Weddinglist ขอสงวนสิทธิ์สำหรับ Membership Partners Weddinglist เท่านั้น ต้อง ขออภัยในความไม่สะดวก และหากต้องการเป็น Membership Partners Weddinglist สามารถติดต่อได้ที่ <a href="tel:+66634748111">063 474 8111</a> หรือ E-mail <a href="mailto:Sales@weddinglist.co.th">Sales@weddinglist.co.th</a></p>';
 		}
 
 		$email_body = 
@@ -454,7 +458,7 @@ function send_email(){
 		"			<ul style='list-style: none; padding: 0;'>".
 		"				<li>เวลาลงทะเบียน : <strong>$timestamp</strong></li>".
 		"				<li>ลูกค้าชื่อ : <strong>$name</strong></li>".
-		"				<li>อีเมล : <strong>$email</strong></li>".
+		"				<li>อีเมล : <strong>$emailMasked</strong></li>".
 		"				<li>เบอร์โทร​ : <strong>$telMasked</strong></li>".
 		"				<li>LINE ID : <strong>$lineidMasked</strong></li>".
 		"				<li>จำนวนแขก : <strong>$guest</strong></li>".
@@ -465,6 +469,7 @@ function send_email(){
 		$appointStatement.
 		"			<p>ข้อความเพิ่มเติม :</p>".
 		"			<p><strong>$message</strong></p>".
+		$footer.
 		"			<p style='color: #999; font-weight: 700;'>ขอขอบพระคุณอย่างสูง<br>Weddinglist Support</p>".
 		"			<p style='font-size: 14px;'>แจ้งปัญหาการใช้งาน".
 		"				<br>โทร. <a href='tel:0634748111'>063 474 8111</a>".
@@ -627,4 +632,50 @@ function send_email(){
 	));
 } */
 
-require_once('customizer.php');
+//require_once('customizer.php');
+require_once('custom-setting.php');
+
+add_shortcode('seo_title', function(){
+	if(class_exists('RankMath\Helper') && RankMath\Helper::replace_vars("%seo_title%") !== '' && is_archive()) {
+		return RankMath\Helper::replace_vars("%seo_title%");
+	} else {
+		return 'Weddinglist รวมสถานที่จัดงานแต่งงาน ยอดนิยม ทั่วประเทศ';
+	}
+});
+add_shortcode('seo_description', function(){
+	if(class_exists('RankMath\Helper') && RankMath\Helper::replace_vars("%seo_description%") !== '') {
+		return RankMath\Helper::replace_vars("%seo_description%");
+	} else {
+		return 'Platform ที่รวบรวมสถานที่จัดงานแต่งงาน โรงแรม เวนิว ร้านอาหาร สถานที่จัดเลี้ยง ตอบทุกโจทย์ความต้องการแต่งงานของเจ้าบ่าวเจ้าสาว พร้อมเช็คราคาฟรี';
+	}
+});
+
+
+function updateParam($newParams) {
+		// Function to get the current URL
+		$protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
+		$currentUrl = $protocol . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+
+		// Parse the URL and get its query parameters
+		$urlParts = parse_url($currentUrl);
+		parse_str($urlParts['query'] ?? '', $currentParams);
+
+		// New parameters to intersect
+		/* $newParams = [
+				'param1' => 'value1',
+				'param2' => 'value2',
+		]; */
+
+		// Intersect current parameters with new parameters
+		$updatedParams = array_merge($currentParams, $newParams);
+
+		// Reconstruct the query string
+		$newQueryString = http_build_query($updatedParams);
+
+		// Reconstruct the new URL
+		$newUrl = $urlParts['scheme'] . '://' . $urlParts['host'] . $urlParts['path'] . '?' . $newQueryString;
+
+		// Generate the link with the new URL
+		echo $newUrl;
+
+}

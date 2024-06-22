@@ -579,7 +579,6 @@ body .et_pb_button {
 }
 .wdl-archive-swiper .swiper-wrapper .card {
   align-items: stretch;
-  width: 350px;
   height: auto;
   border: 0;
   box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1) inset, 0 0 0 rgba(0, 0, 0, 0.05);
@@ -1996,6 +1995,9 @@ body .et_pb_button {
 .wdl-dropdown {
   position: relative;
 }
+.wdl-dropdown > button {
+  white-space: nowrap;
+}
 .wdl-dropdown .dropdown-menu {
   margin-top: 0;
   border-radius: 8px;
@@ -2008,13 +2010,27 @@ body .et_pb_button {
   background: #fff;
   border-radius: 8px;
   right: 0;
-  transition: 0.25s opacity;
+  transition: 0.35s cubic-bezier(0, 0, 0, 1);
+  transition-property: opacity, transform;
   list-style: none;
+  max-height: 40vh;
+  overflow: auto;
+  opacity: 0;
+  display: block;
+  transform: translateY(-10px);
+  transform-origin: top right;
+  visibility: hidden;
+}
+.wdl-dropdown .dropdown-menu.show {
+  opacity: 1;
+  transform: translateY(0);
+  visibility: visible;
 }
 .wdl-dropdown .dropdown-menu li {
   padding: 0;
 }
 .wdl-dropdown .dropdown-menu li a {
+  display: block;
   border-radius: 0;
   border: none;
   padding: 6px 24px;
@@ -2026,6 +2042,43 @@ body .et_pb_button {
 }
 .wdl-dropdown .dropdown-menu li a:hover {
   color: #ff2758 !important;
+}
+
+.wdl-filter {
+  display: flex;
+  gap: 8px;
+  flex-direction: row;
+  justify-content: space-between;
+}
+@media (max-width: 1199.98px) {
+  .wdl-filter {
+    justify-content: flex-start;
+    flex-direction: column;
+  }
+}
+
+.wdl-btn-filter {
+  padding: 6px 16px;
+  padding-right: 12px;
+  white-space: nowrap;
+  background: #FFFFFF;
+  box-shadow: 0 0 0 1px #C7C7C7 inset;
+  border: none;
+  color: #777777 !important;
+  border-radius: 4px;
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.5;
+  transition: 0.35s cubic-bezier(0, 0, 0, 1);
+  display: inline-block;
+}
+.wdl-btn-filter:hover {
+  color: #ff2758 !important;
+  box-shadow: 0 0 0 1px #ff2758 inset;
+}
+.wdl-btn-filter svg {
+  width: 16px;
+  height: 16px;
 }
 
 .et-db #et-boc footer.et-l .et_pb_section,
@@ -4168,7 +4221,7 @@ body.admin-bar.et_fixed_nav .wdl-sticky-bar {
 
 .wdl-tab {
   display: flex;
-  gap: 1.5em;
+  gap: 0.5rem 1.5rem;
 }
 .wdl-tab > li > a {
   padding: 1rem 0;
@@ -4189,6 +4242,7 @@ body.admin-bar.et_fixed_nav .wdl-sticky-bar {
 @media (max-width: 1199.98px) {
   .wdl-tab > li > a {
     flex-direction: row;
+    padding: 0.5rem 0 0.75rem;
   }
 }
 .wdl-tab > li > a.active {

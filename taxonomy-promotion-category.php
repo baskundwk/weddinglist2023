@@ -36,7 +36,11 @@
     $key = 'HotDeal';
   }
   $paged = get_query_var('paged', 1);
+
   $current_url = explode("?", $_SERVER['REQUEST_URI'])[0];
+
+  $current_term_id = get_queried_object()->term_id;
+  $current_tax = get_queried_object()->taxonomy;
 
   query_posts(
     array(
@@ -48,6 +52,13 @@
       'paged' => $paged,
       'posts_per_page' => 60,
       'meta_query' => $has_field,
+      'tax_query' => array(
+          array(
+            'taxonomy' => $current_tax,
+            'field' => 'term_id',
+            'terms' => $current_term_id
+        )
+      )
     )
   );?>
   <?php if (have_posts()): ?>
@@ -56,10 +67,10 @@
       <div class="row">
         <div class="col">
           <h1>
-            <?php echo(get_option('wdl_options', 'โปรโมชั่นแต่งงาน & แพ็กเกจแต่งงาน')['word-promotion-title']); ?>
+            <?php echo do_shortcode('[seo_title]') ?>
           </h1>
           <p class="text-secondary mb-2">
-            <?php echo(get_option('wdl_options', 'รวมโปรโมชั่น และ แพ็กเกจแต่งงาน จากสถานที่จัดงานแต่งงานชั้นนำทุกรูปแบบ อัพเดทล่าสุด 2024')['word-promotion-desc']); ?>
+              <?php echo do_shortcode('[seo_description]') ?>
           </p>
         </div>
       </div>
