@@ -77,7 +77,7 @@
         </div>
         <div class="row">
           <div class="col">
-            <?php wp_pagenavi(); ?>
+            <?php pagination(); ?>
           </div>
         </div>
       <?php else: ?>

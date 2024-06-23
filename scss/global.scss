@@ -7,6 +7,12 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-smooth: always;
+  font-size: 1rem;
+  line-height: 1.5;
+
+  @include max-width-md {
+    font-size: 0.875em;
+  }
 
   --bs-tooltip-bg: #333333;
   --bs-tooltip-color: #FFFFFF;
@@ -84,6 +90,12 @@ a {
 
 p {
   padding-bottom: 0;
+  font-size: 1rem;
+  line-height: 1.5;
+
+  @include max-width-md {
+    font-size: 0.875em;
+  }
 }
 
 .text-primary {
@@ -106,22 +118,43 @@ p {
   padding: 0;
   color: #333333;
   font-weight: 600;
+  line-height: 1.5;
 }
 
 h1,.h1 {
   font-size: 24px;
+  
+  @include max-width-md {
+    font-size: 20px;
+  }
 }
 h2,.h2 {
   font-size: 20px;
+  
+  @include max-width-md {
+    font-size: 18px;
+  }
 }
 h3,.h3 {
   font-size: 18px;
+  
+  @include max-width-md {
+    font-size: 16px;
+  }
 }
 h4,.h4 {
   font-size: 16px;
+  
+  @include max-width-md {
+    font-size: 16px;
+  }
 }
 h5,.h5 {
   font-size: 16px;
+  
+  @include max-width-md {
+    font-size: 16px;
+  }
 }
 h6,.h6 {
   font-size: 16px;
@@ -175,6 +208,10 @@ body .et_pb_button {
 
 /* General Swiper */
 .swiper {
+  &.wdl-swiper-auto {
+    width: 100%;
+    margin: 0;
+  }
   .swiper-pagination {
     bottom: 0;
     .swiper-pagination-bullet {

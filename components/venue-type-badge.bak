@@ -1,0 +1,16 @@
+<div class="wdl-filter-type swiper wdl-swiper-auto">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide w-auto">
+        <a href="<?php echo get_post_type_archive_link('venue') ?>" class="wdl-badge-sm-secondary">ทั้งหมด</a>
+      </div>
+      <?php foreach (get_terms('venue_type') as $term) { ?>
+      <div class="swiper-slide w-auto">
+      <?php if ($term->term_id == $current_term_id) {
+          echo '<a class="wdl-badge-sm-primary" href="' . get_term_link($term->slug, 'venue_type') . '">' . $term->name . '</a>';
+        } else {
+          echo '<a class="wdl-badge-sm-secondary" href="' . get_term_link($term->slug, 'venue_type') . '">' . $term->name . '</a>';
+        } ?>
+      </div>
+      <?php } ?>
+    </div>
+  </div>

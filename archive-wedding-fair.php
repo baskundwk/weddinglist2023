@@ -2,33 +2,24 @@
 
 <main>
   <?php include 'components/lead-menu-revamped.php' ?>
-  <?php
-  $paged = get_query_var('paged', 1);
-  query_posts(
-    array(
-      'post_type' => 'wedding-fair',
-      'metakey' => 'HotDeal',
-      'orderby' => 'meta_value',
-      'order' => 'DESC',
-      'posts_per_page' => 30,
-      'post_status' => 'publish',
-      'paged' => $paged,
-    )
-  ) ?>
-  <?php if (have_posts()): ?>
-    <section class="wdl-archive wdl-archive-extended pb-5">
-      <div class="container-xl">
-        <div class="row">
-          <div class="col">
-            <h1>
-              <?php echo(get_option('wdl_options', 'โปรโมชั่นแต่งงาน & แพ็กเกจแต่งงาน')['word-wedding-fair-title']); ?>
-            </h1>
-            <p class="text-secondary mb-2">
-              <?php echo(get_option('wdl_options', 'รวมโปรโมชั่น และ แพ็กเกจแต่งงาน จากสถานที่จัดงานแต่งงานชั้นนำทุกรูปแบบ อัพเดทล่าสุด 2024')['word-wedding-fair-desc']); ?>
-            </p>
-          </div>
+  <?php include 'queries/query-wedding-fair.php' ?>
+  <section>
+    <div class="container-xl">
+      <div class="row">
+        <div class="col">
+          <h1>
+            <?php echo(get_option('wdl_options', 'โปรโมชั่นแต่งงาน & แพ็กเกจแต่งงาน')['word-wedding-fair-title']); ?>
+          </h1>
+          <p class="text-secondary mb-2">
+            <?php echo(get_option('wdl_options', 'รวมโปรโมชั่น และ แพ็กเกจแต่งงาน จากสถานที่จัดงานแต่งงานชั้นนำทุกรูปแบบ อัพเดทล่าสุด 2024')['word-wedding-fair-desc']); ?>
+          </p>
         </div>
       </div>
+      <?php include 'components/filters/filter-wedding-fair.php' ?>
+    </div>
+  </section>
+  <?php if (have_posts()): ?>
+    <section class="wdl-archive wdl-archive-extended pb-5">
       <div class="container-xxl container-archive wdl-archive-infinite-scroll">
         <div id="wdl-post-<?php the_ID(); ?>" class="row row-cols-archive 
         <?php if ($_GET['order'] || $_GET['orderby'] || $_GET['key']) {
@@ -127,13 +118,19 @@
         </div>
         <div class="row">
           <div class="col">
-            <?php wp_pagenavi(); ?>
+            <?php pagination(); ?>
           </div>
         </div>
 
       </div>
     </section>
+  <?php else: ?>
+  <?php 
+    $empty_type = 'promotion';
+    include 'components/result-empty.php';
+  ?>
   <?php endif; ?>
+
   <?php include 'components/compare-bar.php' ?>
 
 </main>

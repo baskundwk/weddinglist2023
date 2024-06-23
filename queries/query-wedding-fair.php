@@ -31,14 +31,14 @@
   if($_GET['key'] ) {
     $key = $_GET['key'];
   } else {
-    $key = 'Sponsor';
+    $key = 'HotDeal';
   }
 
 
   $current_url = explode("?", $_SERVER['REQUEST_URI'])[0];
     
   $arg = [
-      'post_type' => 'venue',
+      'post_type' => 'wedding-fair',
       'order' => $order,
       'meta_key' => $key,
       'orderby' => $orderby,
@@ -47,28 +47,6 @@
       'posts_per_page' => 30,
       'meta_query' => $has_field,
   ];
-  
-  if($_GET['character']) {
-    $arg['tax_query'][] = array(
-      'taxonomy' => 'venue_character',
-      'field' => 'slug',
-      'terms' => $_GET['character'],
-    );
-  }
-  if($_GET['location']) {
-    $arg['tax_query'][] = array(
-      'taxonomy' => 'location',
-      'field' => 'slug',
-      'terms' => $_GET['location'],
-    );
-  }
-  if($_GET['type']) {
-    $arg['tax_query'][] = array(
-      'taxonomy' => 'venue_type',
-      'field' => 'slug',
-      'terms' => $_GET['type'],
-    );
-  }
 
   if(get_queried_object()->taxonomy) {
     $current_term_id = get_queried_object()->term_id;

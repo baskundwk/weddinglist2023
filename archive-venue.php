@@ -5,172 +5,57 @@
   <section class="wdl-archive wdl-archive-extended pb-5">
 
     <?php include 'queries/query-venue.php' ?>
-    <?php if (have_posts()): ?>
-      <div class="container-xl">
-        <div class="row">
-          <div class="col">
-            <h1>
-              <?php echo(get_option('wdl_options', 'โปรโมชั่นแต่งงาน & แพ็กเกจแต่งงาน')['word-venue-title']); ?>
-            </h1>
-            <p class="text-secondary mb-2">
-              <?php echo(get_option('wdl_options', 'รวมโปรโมชั่น และ แพ็กเกจแต่งงาน จากสถานที่จัดงานแต่งงานชั้นนำทุกรูปแบบ อัพเดทล่าสุด 2024')['word-venue-desc']); ?>
-            </p>
-          </div>
+    <div class="container-xl">
+      <div class="row">
+        <div class="col">
+          <h1>
+            <?php echo(get_option('wdl_options', 'โปรโมชั่นแต่งงาน & แพ็กเกจแต่งงาน')['word-venue-title']); ?>
+          </h1>
+          <p class="text-secondary mb-2">
+            <?php echo(get_option('wdl_options', 'รวมโปรโมชั่น และ แพ็กเกจแต่งงาน จากสถานที่จัดงานแต่งงานชั้นนำทุกรูปแบบ อัพเดทล่าสุด 2024')['word-venue-desc']); ?>
+          </p>
         </div>
-        <?php include 'components/filter-venue.php' ?>
       </div>
+      <?php include 'components/filters/filter-venue.php' ?>
+    </div>
+    <?php if (have_posts()): ?>
 
-      <div class="container-xxl container-archive wdl-archive-infinite-scroll">
-        <div class="row row-cols-archive
+    <div class="container-xxl container-archive wdl-archive-infinite-scroll">
+      <div class="row row-cols-archive
         <?php if($_GET['order'] || $_GET['orderby'] || $_GET['key']) {
 
         } else {
           echo 'row-cols-archive-randomized';
         } ?> g-4 wdl-archive-infinite-scroll-wrapper" id="wdl-archive-infinite-scroll-wrapper">
-          <?php while (have_posts()): ?>
-            <?php the_post(); ?>
-            <div id="wdl-post-<?php the_ID(); ?>" class="col wdl-archive-infinite-scroll-post <?php echo esc_attr($atts['class_single']); ?> 
+        <?php while (have_posts()): ?>
+        <?php the_post(); ?>
+        <div id="wdl-post-<?php the_ID(); ?>" class="col wdl-archive-infinite-scroll-post <?php echo esc_attr($atts['class_single']); ?> 
             <?php if($_GET['order'] || $_GET['orderby'] || $_GET['key']) {
 
-          } else {
-            if (get_field('Sponsor')) {
-              echo esc_html('wdl-archive-primary');
             } else {
-              echo esc_html('wdl-archive-default');
-            }
-          } ?>
+              if (get_field('Sponsor')) {
+                echo esc_html('wdl-archive-primary');
+              } else {
+                echo esc_html('wdl-archive-default');
+              }
+            } ?>
             ">
-
-              <div class="card wdl-archive-card h-100">
-                <?php if (has_post_thumbnail(get_the_ID())): ?>
-                  <a class="card-img-top wdl-archive-card-img-top" href="<?php the_permalink(); ?>">
-                    <img loading="lazy" class="" src="<?php echo esc_html(get_the_post_thumbnail_url($post)) ?>" width="100%">
-  
-                    <?php $sponsored = get_field('Sponsor');
-                    if ($sponsored && in_array('Sponsored', $sponsored)): ?>
-                      <span class="badge wdl-badge-sm">Most Popular</span>
-                    <?php endif; ?>
-                  </a>
-                <?php endif; ?>
-
-                <div class="card-select">
-                  <div class="wdl-checkbox">
-                    <input class="card-select-input" id="card-select-<?php the_ID() ?>" type="checkbox" data-select='
-                      {
-                        "title": "<?php the_title() ?>",
-                        "postType": "<?php echo get_post_type() ?>",
-                        "id": "<?php the_ID() ?>"
-                      }'>
-                    <label for="card-select-<?php the_ID() ?>"><small><?php _e('เลือก/เปรียบเทียบ','เลือก/เปรียบเทียบ')?></small></label>
-                  </div>
-                </div>
-  
-                <div class="card-body wdl-archive-card-body">
-                  <div class="wdl-archive-pretitle">
-                    <?php $venueType = get_field('VenueType');
-                    if ($venueType) {
-                      foreach($venueType as $item) {
-                        echo $item->name;
-                      }
-                    }
-                    ?>
-                    <?php $venueCharacter = get_field('Character');
-                    if ($venueCharacter): ?>
-                    <?php //foreach ($venueCharacter as $character):
-                    $characterBackground = get_field('CharacterBackground', $venueCharacter);
-                    $characterBorder = get_field('CharacterBorder', $venueCharacter);
-                    $characterColor = get_field('CharacterColor', $venueCharacter);
-                    $characterEffect = get_field('CharacterEffect', $venueCharacter);
-                    ?>
-                    <div class="wdl-character
-                      <?php if($characterBorder) {echo('wdl-character-border');} ?>
-                      <?php if($characterEffect) {echo('wdl-character-animation-' . $characterEffect);} ?>"
-                    <?php 
-                    if($characterColor || $characterBackground) :?>
-                    style="
-                      --background-image: url(<?php echo( $characterBackground['url'] )?>);
-                      --box-shadow: none;
-                      --color: rgba(<?php echo( $characterColor['red']) ?>,<?php echo( $characterColor['green']) ?>,<?php echo( $characterColor['blue']) ?>,<?php echo( $characterColor['alpha'])?>);
-                      --color-50: rgba(<?php echo( $characterColor['red']) ?>,<?php echo( $characterColor['green']) ?>,<?php echo( $characterColor['blue']) ?>, 50%);
-                      --color-0: rgba(<?php echo( $characterColor['red']) ?>,<?php echo( $characterColor['green']) ?>,<?php echo( $characterColor['blue']) ?>, 0);
-                    "
-                    <?php endif ?>
-                    >
-                      <span><?php echo esc_html($venueCharacter->name); ?></span>
-                    </div>
-                    <?php //endforeach; ?>
-                    <?php endif ?>
-                  </div>
-                  <h3 class="wdl-archive-title mb-0"><a href="<?php the_permalink(); ?>">
-                    <?php the_title(); ?>
-                  </a></h3>
-
-                  <?php
-                  if(get_the_excerpt() != '' && is_user_logged_in()) :
-                  ?>
-                    <p class="lineclamp-3 mb-2 text-sm text-secondary"><?php echo get_the_excerpt(); ?></p>
-                  <?php endif; ?>
-                      
-                  <div class="wdl-metadata">
-                    <?php
-                    $locations = get_field('Location');
-                    if ($locations): ?>
-                      <div class="wdl-archive-neighborhood">
-                        <ul>
-                          <?php foreach ($locations as $location): ?>
-                            <li>
-                              <?php echo esc_html($location->name); ?>
-                            </li>
-                          <?php endforeach; ?>
-                        </ul>
-                      </div>
-                    <?php endif; ?>
-  
-                    <?php
-                    $minPrice = get_field('MinPrice');
-                    if ($minPrice): ?>
-                      <div class="wdl-archive-min-price">
-                        <?php _e('ราคาเริ่มต้น', 'Starting price') ?>&nbsp;<strong>
-                          <?php echo number_format(get_field('MinPrice')) ?>+
-                          <?php _e('บาท', 'THB') ?>
-                        </strong>
-                      </div>
-                    <?php endif; ?>
-  
-                    <?php
-                    $maxGuest = get_field('MaxGuest');
-                    if ($maxGuest): ?>
-                      <div class="wdl-archive-max-guest">
-                        <?php _e('รองรับแขกสูงสุด', 'Max guest') ?>&nbsp;<strong>
-                          <?php echo number_format(get_field('MaxGuest')) ?>
-                          <?php _e('คน', 'people') ?>
-                        </strong>
-                      </div>
-                    <?php endif; ?>
-
-                    <!-- <?php if(is_user_logged_in() === true && get_field('AcceptAppointment')) : ?>
-                      <div class="wdl-archive-appointment">
-                        <a href="<?php the_permalink(); ?>"><?php _e('รับนัดหมายเข้าชมสถานที่', 'Accept Appointment') ?></a>
-                      </div>
-                    <?php endif; ?> -->
-                  </div>
-                </div>
-
-                <div class="card-footer">
-                  <a href="#" class="wdl-btn-cta wdl-form-general-direct" data-bs-toggle="modal" data-bs-target=".wdl-form-general-modal">คลิกขอแพ็กเกจ</a>
-                  <a href="<?php the_permalink() ?>" class="wdl-btn-more">ดูรายละเอียด</a>
-                </div>
-              </div>
-            </div>
-          <?php endwhile;
-          wp_reset_postdata(); ?>
+          <?php include 'components/cards/card-venue.php' ?>
         </div>
-        <div class="row">
-          <div class="col">
-            <?php wp_pagenavi(); ?>
-          </div>
+        <?php endwhile;
+          wp_reset_postdata(); ?>
+      </div>
+      <div class="row">
+        <div class="col">
+          <?php pagination(); ?>
         </div>
       </div>
+    </div>
+    <?php else: ?>
+    <?php 
+      $empty_type = 'venue';
+      include 'components/result-empty.php';
+    ?>
     <?php endif; ?>
 
   </section>

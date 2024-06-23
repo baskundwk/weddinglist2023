@@ -677,5 +677,43 @@ function updateParam($newParams) {
 
 		// Generate the link with the new URL
 		echo $newUrl;
+}
 
+function removeParam($param) {
+	// Parse the URL into components
+	$protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
+	$currentUrl = $protocol . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+
+	$parsed_url = parse_url($currentUrl);
+
+	// Parse query string into an associative array
+	if (isset($parsed_url['query'])) {
+			parse_str($parsed_url['query'], $query_params);
+
+			// Remove the parameter if it exists
+			if (isset($query_params[$param])) {
+					unset($query_params[$param]);
+			}
+
+			// Build the new query string
+			$parsed_url['query'] = http_build_query($query_params);
+	}
+
+	// Rebuild the URL without the specified parameter
+	$new_url = (isset($parsed_url['scheme']) ? $parsed_url['scheme'] . '://' : '') .
+						 (isset($parsed_url['user']) ? $parsed_url['user'] . (isset($parsed_url['pass']) ? ':' . $parsed_url['pass'] : '') . '@' : '') .
+						 (isset($parsed_url['host']) ? $parsed_url['host'] : '') .
+						 (isset($parsed_url['port']) ? ':' . $parsed_url['port'] : '') .
+						 (isset($parsed_url['path']) ? $parsed_url['path'] : '') .
+						 (isset($parsed_url['query']) && $parsed_url['query'] ? '?' . $parsed_url['query'] : '') .
+						 (isset($parsed_url['fragment']) ? '#' . $parsed_url['fragment'] : '');
+
+	echo $new_url;
+}
+
+
+function pagination() {
+	if( wp_pagenavi()) { wp_pagenavi();} else {
+		//posts_nav_link();
+	}
 }

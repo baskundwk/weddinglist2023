@@ -21,6 +21,36 @@ class wdl_settings
 	 */
 	private $fields = [
 		[
+			'id' => 'word-promotion',
+			'label' => 'Promotion',
+			'description' => '',
+			'type' => 'text',
+		],
+		[
+			'id' => 'word-wedding-fair',
+			'label' => 'Wedding Fair',
+			'description' => '',
+			'type' => 'text',
+		],
+		[
+			'id' => 'word-venue',
+			'label' => 'Venue',
+			'description' => '',
+			'type' => 'text',
+		],
+		[
+			'id' => 'word-vendor',
+			'label' => 'Vendor',
+			'description' => '',
+			'type' => 'text',
+		],
+		[
+			'id' => 'word-post',
+			'label' => 'Article',
+			'description' => '',
+			'type' => 'text',
+		],
+		[
 			'id' => 'word-frontpage-promotion-title',
 			'label' => 'Front Page - Promotion Title',
 			'description' => '',

@@ -238,6 +238,10 @@
         },
       },
     });
+    const wdlSwiperAuto = new Swiper(".wdl-swiper-auto", {
+      slidesPerView: "auto",
+      spaceBetween: 8,
+    });
     const wdlBadgeSwiper = new Swiper(".wdl-badge-container.swiper", {
       slidesPerView: "auto",
       spaceBetween: 8,
@@ -296,10 +300,10 @@
       ".wdl-lead-menu-revamped-swiper",
       {
         slideClass: "menu-item",
-        slidesPerView: 'auto',
+        slidesPerView: 2,
         spaceBetween: 8,
         grid: {
-          rows: 2,
+          rows: 3,
           fill: 'row'
         },
         breakpoints: {

@@ -70,7 +70,7 @@
       </div>
       <div class="row">
         <div class="col text-center">
-          <?php wp_pagenavi(); ?>
+          <?php pagination(); ?>
         </div>
       </div>
       <?php endif; ?>
@@ -174,7 +174,7 @@
         </div>
         <!-- <div class="row">
           <div class="col">
-            <?php wp_pagenavi(); ?>
+            <?php pagination(); ?>
           </div>
         </div> -->
       </div>
@@ -279,7 +279,7 @@
         </div>
         <!-- <div class="row">
           <div class="col">
-            <?php wp_pagenavi(); ?>
+            <?php pagination(); ?>
           </div>
         </div> -->
       </div>
@@ -383,7 +383,7 @@
         </div>
         <!-- <div class="row">
           <div class="col">
-            <?php wp_pagenavi(); ?>
+            <?php pagination(); ?>
           </div>
         </div> -->
       </div>

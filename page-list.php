@@ -216,7 +216,7 @@
       <?php endwhile;
       wp_reset_postdata();?>
       <div class="pt-3">
-        <?php wp_pagenavi(array( 'query' => $listingQuery )); ?>
+        <?php pagination(array( 'query' => $listingQuery )); ?>
       </div>
       <?php endif; ?>
     </div>

@@ -41,76 +41,51 @@
     $current_term_id = get_queried_object()->term_id;
     $current_tax = get_queried_object()->taxonomy;
     
-    query_posts(
-      array(
-        'post_type' => 'vendor',
-        'order' => $order,
-        'meta_key' => $key,
-        'orderby' => $orderby,
-        'post_status' => $post_status,
-        'paged' => $paged,
-        'posts_per_page' => '16',
-        'meta_query' => $has_field,
-        'tax_query' => array(
-          array(
-            'taxonomy' => $current_tax,
-            'field' => 'term_id',
-            'terms' => $current_term_id
-          )
+    $arg = array(
+      'post_type' => 'vendor',
+      'order' => $order,
+      'meta_key' => $key,
+      'orderby' => $orderby,
+      'post_status' => $post_status,
+      'paged' => $paged,
+      'posts_per_page' => '16',
+      'meta_query' => $has_field,
+      'tax_query' => array(
+        array(
+          'taxonomy' => $current_tax,
+          'field' => 'term_id',
+          'terms' => $current_term_id
         )
       )
     );
+  
+    if($_GET['character']) {
+      $arg['tax_query'][] = array(
+        'taxonomy' => 'vendor_character',
+        'field' => 'slug',
+        'terms' => $_GET['character'],
+      );
+    }
+    
+    query_posts($arg);
   ?>
-  <?php if (have_posts()): ?>
-    <section class="wdl-archive wdl-archive-extended pb-5">
-      <div class="container-xl">
-        <div class="row">
-          <div class="col">
-            <h1>
-              <?php echo do_shortcode('[seo_title]') ?>
-            </h1>
-            <p class="text-secondary mb-2">
-              <?php echo do_shortcode('[seo_description]') ?>
-            </p>
-          </div>
-        </div>
-        <div class="row mb-3">
-          <div class="col-md-9">
-            <!-- <a href="<?php echo get_post_type_archive_link('vendor') ?>" class="wdl-badge-sm-secondary">ทั้งหมด</a> -->
-            <?php
-            foreach (get_terms('vendor-type') as $term) {
-              if($term->term_id == $current_term_id) {
-                echo '<a class="wdl-badge-sm-primary m-1" href="' . get_term_link($term->slug, 'vendor-type') . '">' . $term->name . '</a>';
-              } else {
-                echo '<a class="wdl-badge-sm-secondary m-1" href="' . get_term_link($term->slug, 'vendor-type') . '">' . $term->name . '</a>';
-              }
-            } ?>
-          </div>
-
-          <div class="col text-end">
-            <div class="wdl-badge-container justify-content-end">
-              <div class="dropdown wdl-dropdown">
-                <button class="wdl-btn-link" data-bs-toggle="dropdown" aria-expanded="false">
-                <?php if($_GET['label']) {
-                  echo $_GET['label'];
-                } else {
-                  _e('จัดเรียงโดย', 'จัดเรียงโดย');
-                }?>  
-                <i data-feather="arrow-down"></i></button>
-                <ul class="dropdown-menu dropdown-menu-end">
-                  <li><a href="<?php echo($current_url)?>">สถานที่แนะนำ</a></li>
-                  <li><a href="<?php echo($current_url.'?'.'order=ASC&'.'orderby=title&'.'key=&'.'label=ตามต้วอักษร')?>">ตามต้วอักษร A-Z ก-ฮ</a></li>
-                  <li><a href="<?php echo($current_url.'?'.'order=DESC&'.'orderby=title&'.'key=&'.'label=ย้อนตัวอักษร')?>">ย้อนตัวอักษร ฮ-ก Z-A</a></li>
-                  <li><a href="<?php echo($current_url.'?'.'order=ASC&'.'orderby=meta_value_num&'.'key=MinPrice&'.'label=ราคาเริ่มต้นถูกที่สุด')?>">ราคาเริ่มต้นถูกที่สุด</a></li>
-                  <li><a href="<?php echo($current_url.'?'.'order=DESC&'.'orderby=meta_value_num&'.'key=MinPrice&'.'label=ราคาเริ่มต้นสูงที่สุด')?>">ราคาเริ่มต้นสูงที่สุด</a></li>
-                  <li><a href="<?php echo($current_url.'?'.'order=ASC&'.'orderby=meta_value_num&'.'key=MaxGuest&'.'label=จำนวนแขกน้อยไปมาก')?>">จำนวนแขกน้อยไปมาก</a></li>
-                  <li><a href="<?php echo($current_url.'?'.'order=DESC&'.'orderby=meta_value_num&'.'key=MaxGuest&'.'label=จำนวนแขกมากไปน้อย')?>">จำนวนแขกมากไปน้อย</a></li>
-                </ul>
-              </div>
-            </div>
-          </div>
+  <section>
+    <div class="container-xl">
+      <div class="row">
+        <div class="col">
+          <h1>
+            <?php echo do_shortcode('[seo_title]') ?>
+          </h1>
+          <p class="text-secondary mb-2">
+            <?php echo do_shortcode('[seo_description]') ?>
+          </p>
         </div>
       </div>
+      <?php include 'components/filters/filter-vendor.php' ?>
+    </div>
+  </section>
+  <?php if (have_posts()): ?>
+    <section class="wdl-archive wdl-archive-extended pb-5">
       <div class="container-xxl container-archive wdl-archive-infinite-scroll">
         <div class="row row-cols-archive g-4 wdl-archive-infinite-scroll-wrapper" id="wdl-archive-infinite-scroll-wrapper">
           <?php while (have_posts()): ?>
@@ -216,11 +191,18 @@
         </div>
         <div class="row">
           <div class="col">
-            <?php wp_pagenavi(); ?>
+            <?php pagination(); ?>
           </div>
         </div>
       </div>
     </section>
+  <?php else: ?>
+  <?php 
+    $empty_type = 'vendor';
+    include 'components/result-empty.php';
+  ?>
+  <?php endif; ?>
+
   <?php
     $relatedPosts = new WP_Query(
     array(
@@ -325,7 +307,9 @@
         </div>
       </div>
     </section>
-  <?php endif; endif; ?>
+  <?php endif; ?>
+
+
 
   <?php include 'components/compare-bar.php' ?>
 </main>

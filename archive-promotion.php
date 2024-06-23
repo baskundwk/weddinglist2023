@@ -2,56 +2,8 @@
 
 <main>
   <?php include 'components/lead-menu-revamped.php' ?>
-  <?php
-  if(is_user_logged_in()) {
-    $post_status = 'any';
-  } else {
-    $post_status = 'publish';
-  }
-
-  if($_GET['order'] ) {
-    $order = $_GET['order'];
-  } else {
-    $order = 'DESC';
-  }
-  if($_GET['orderby'] ) {
-    $orderby = $_GET['orderby'];
-    if($_GET['orderby'] === 'HotDeal') {
-      $has_field =  array(
-        'key' => $_GET['key'],
-        'value' => '0',
-        'compare' => '>',
-      );
-    } else {
-      $has_field = array();
-    }
-  } else {
-    $orderby = 'meta_value';
-    $has_field = array();
-  }
-  if($_GET['key'] ) {
-    $key = $_GET['key'];
-    
-  } else {
-    $key = 'HotDeal';
-  }
-  $paged = get_query_var('paged', 1);
-  $current_url = explode("?", $_SERVER['REQUEST_URI'])[0];
-
-  query_posts(
-    array(
-      'post_type' => 'promotion',
-      'order' => $order,
-      'meta_key' => $key,
-      'orderby' => $orderby,
-      'post_status' => $post_status,
-      'paged' => $paged,
-      'posts_per_page' => 60,
-      'meta_query' => $has_field,
-    )
-  );?>
-  <?php if (have_posts()): ?>
-  <section class="wdl-archive wdl-archive-extended pb-5">
+  <?php include 'queries/query-promotion.php' ?>
+  <section>
     <div class="container-xl">
       <div class="row">
         <div class="col">
@@ -63,39 +15,11 @@
           </p>
         </div>
       </div>
-
-      <div class="row mb-3">
-          <div class="col-md-9">
-            <!-- <a href="<?php echo get_post_type_archive_link('venue') ?>" class="wdl-badge-sm-primary">ทั้งหมด</a>
-            <?php
-            foreach (get_terms('venue_type') as $term) {
-              if($term->term_id == $current_term_id) {
-                echo '<a class="wdl-badge-sm-primary m-1" href="' . get_term_link($term->slug, 'venue_type') . '">' . $term->name . '</a>';
-              } else {
-                echo '<a class="wdl-badge-sm-secondary m-1" href="' . get_term_link($term->slug, 'venue_type') . '">' . $term->name . '</a>';
-              }
-            } ?> -->
-          </div>
-          <div class="col text-end">
-            <div class="wdl-badge-container justify-content-end">
-              <div class="dropdown wdl-dropdown">
-                <button class="wdl-btn-link" data-bs-toggle="dropdown" aria-expanded="false">
-                <?php if($_GET['label']) {
-                  echo $_GET['label'];
-                } else {
-                  _e('จัดเรียงโดย', 'จัดเรียงโดย');
-                }?>  
-                <i data-feather="arrow-down"></i></button>
-                <ul class="dropdown-menu dropdown-menu-end">
-                  <li><a href="<?php echo($current_url)?>">สถานที่แนะนำ</a></li>
-                  <li><a href="<?php echo($current_url.'?'.'order=ASC&'.'orderby=title&'.'key=&'.'label=ตามต้วอักษร')?>">ตามต้วอักษร A-Z ก-ฮ</a></li>
-                  <li><a href="<?php echo($current_url.'?'.'order=DESC&'.'orderby=title&'.'key=&'.'label=ย้อนตัวอักษร')?>">ย้อนตัวอักษร ฮ-ก Z-A</a></li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
+      <?php include 'components/filters/filter-promotion.php' ?>
     </div>
+  </section>
+  <?php if (have_posts()): ?>
+  <section class="wdl-archive wdl-archive-extended pb-5">
     <div class="container-xxl container-archive wdl-archive-infinite-scroll">
       <div id="wdl-post-<?php the_ID(); ?>" class="row row-cols-archive 
         <?php if($_GET['order'] || $_GET['orderby'] || $_GET['key']) {
@@ -224,11 +148,16 @@
       </div>
       <div class="row">
         <div class="col">
-          <?php wp_pagenavi(); ?>
+          <?php pagination(); ?>
         </div>
       </div>
     </div>
   </section>
+  <?php else: ?>
+  <?php 
+    $empty_type = 'promotion';
+    include 'components/result-empty.php';
+  ?>
   <?php endif; ?>
   <?php include 'components/compare-bar.php' ?>
   
