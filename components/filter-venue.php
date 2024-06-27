@@ -4,8 +4,8 @@
       <div class="swiper-slide w-auto">
         <div class="dropdown wdl-dropdown">
           <div class="wdl-btn-filter" data-bs-toggle="dropdown" aria-expanded="false">
-            <?php if ($_GET['type']): ?>
-              <i data-feather="home"></i><?php echo(get_term_by('slug', $_GET['type'], 'venue_type')->name); ?>
+            <?php if ($_GET['location']): ?>
+              <i data-feather="home"></i><?php echo($_GET['type']); ?>
             <?php else: ?>
               <i data-feather="home"></i><?php _e('ประเภทสถานที่', 'ประเภทสถานที่'); ?>
             <?php endif; ?>
@@ -38,7 +38,7 @@
         <div class="dropdown wdl-dropdown">
           <div class="wdl-btn-filter" data-bs-toggle="dropdown" aria-expanded="false">
             <?php if ($_GET['location']): ?>
-              <i data-feather="map-pin"></i><?php echo(get_term_by('slug', $_GET['location'], 'location')->name); ?>
+              <i data-feather="map-pin"></i><?php echo($_GET['location']); ?>
             <?php else: ?>
               <i data-feather="map-pin"></i><?php _e('ที่ตั้งสถานที่', 'ที่ตั้งสถานที่'); ?>
             <?php endif; ?>

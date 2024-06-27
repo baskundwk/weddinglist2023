@@ -70,6 +70,10 @@
     );
   }
 
+  if($_GET['character'] || $_GET['location'] || $_GET['type']) {
+    $arg['tax_query']['relation'] = 'AND';
+  }
+
   if(get_queried_object()->taxonomy) {
     $current_term_id = get_queried_object()->term_id;
     $current_tax = get_queried_object()->taxonomy;

@@ -129,6 +129,13 @@
 					$vendorCharacter = get_field('Character');
 					if ($vendorCharacter || $vendorTypes): ?>
 						<p class="mb-0 d-flex gap-3">
+							<?php if ($vendorTypes): ?>
+								<?php foreach ($vendorTypes as $vendorType): ?>
+									<span class="text-accent">
+										<?php echo esc_html($vendorType->name); ?>
+									</span>
+								<?php endforeach; ?>
+							<?php endif ?>
 							<?php if ($vendorCharacter): ?>
 								<?php //foreach ($vendorCharacter as $character):
 										$characterBackground = get_field('CharacterBackground', $vendorCharacter);
@@ -146,12 +153,12 @@
 								<?php
 								if ($characterColor || $characterBackground): ?>
 									style="
-							--background-image: url(<?php echo ($characterBackground['url']) ?>);
-							--box-shadow: none;
-							--color: rgba(<?php echo ($characterColor['red']) ?>,<?php echo ($characterColor['green']) ?>,<?php echo ($characterColor['blue']) ?>,<?php echo ($characterColor['alpha']) ?>);
-							--color-50: rgba(<?php echo ($characterColor['red']) ?>,<?php echo ($characterColor['green']) ?>,<?php echo ($characterColor['blue']) ?>, 50%);
-							--color-0: rgba(<?php echo ($characterColor['red']) ?>,<?php echo ($characterColor['green']) ?>,<?php echo ($characterColor['blue']) ?>, 0);
-						"
+										--background-image: url(<?php echo ($characterBackground['url']) ?>);
+										--box-shadow: none;
+										--color: rgba(<?php echo ($characterColor['red']) ?>,<?php echo ($characterColor['green']) ?>,<?php echo ($characterColor['blue']) ?>,<?php echo ($characterColor['alpha']) ?>);
+										--color-50: rgba(<?php echo ($characterColor['red']) ?>,<?php echo ($characterColor['green']) ?>,<?php echo ($characterColor['blue']) ?>, 50%);
+										--color-0: rgba(<?php echo ($characterColor['red']) ?>,<?php echo ($characterColor['green']) ?>,<?php echo ($characterColor['blue']) ?>, 0);
+									"
 								<?php endif ?>>
 								<span>
 									<?php echo esc_html($vendorCharacter->name); ?>
@@ -159,13 +166,6 @@
 							</div>
 							<?php //endforeach;  ?>
 						<?php endif ?>
-						<?php if ($vendorTypes): ?>
-							<?php foreach ($vendorTypes as $vendorType): ?>
-								<span class="text-accent">
-									<?php echo esc_html($vendorType->name); ?>
-								</span>
-							<?php endforeach; ?>
-								<?php endif ?>
 						</p>
 					<?php endif ?>
 					<h1 class="wdl-single-title">
@@ -268,18 +268,17 @@
 		$relatedPosts = get_posts(
 			array(
 				'post_type' => 'post',
-				'posts_per_page' => 8,
-				'orderby' => 'date',
-				'order' => 'DESC',
-				'tax_query' => array(
+				'post_status' => 'any',
+				'meta_query' => array(
 					array(
-						'taxonomy' => 'post_tag',
-						'field' => 'term_id',
-						'terms' => $tags,
+						'key' => 'RelatedVendor',
+						'value' => '"' . get_the_ID() . '"',
+						'compare' => 'LIKE'
 					)
 				)
 			)
 		);
+
 	?>
 		<?php if ($relatedPromotions || $relatedWeddingFairs || $relatedPosts): ?>
 		<section class="pb-3 overflow-hidden">
@@ -453,12 +452,12 @@
 	<?php if(get_the_excerpt() != '' && is_user_logged_in()) : ?>
 	<section class="pb-3">
 		<div class="container-xl">
-				<div class="alert alert-secondary"><p class="mb-0"><?php echo(get_the_excerpt()); ?></p></div>
-			</div>
-		</section>
+			<div class="alert alert-secondary"><p class="mb-0"><?php echo(get_the_excerpt()); ?></p></div>
+		</div>
+	</section>
 	<?php endif; ?>
 	<section>
-		<div class="container">
+	<div class="container">
       <div class="row">
         <div class="col text-secondary">
           <?php the_content(); ?>
