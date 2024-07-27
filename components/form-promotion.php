@@ -1,9 +1,9 @@
 <div id="apply" class="wdl-form-general-modal modal fade">
-  <div class="modal-dialog modal-dialog-centered modal-lg">
+  <div class="modal-dialog modal-dialog-centered modal-lg modal-fullscreen-md-down">
     <div class="modal-content m-1 mb-0">
       <button class="btn-close" data-bs-dismiss="modal"></button>
       <div class="modal-body p-3 p-lg-3">
-        <h2><?php _e('กรุณากรอกข้อมูลผู้ติดต่อ', 'กรุณากรอกข้อมูลผู้ติดต่อ') ?></h2>
+        <p class="h2"><?php _e('กรุณากรอกข้อมูลผู้ติดต่อ', 'กรุณากรอกข้อมูลผู้ติดต่อ') ?></p>
         <hr class="mb-2">
         <ul class="wdl-form-general-list">
           
@@ -36,13 +36,13 @@
             </div>
             <div class="col-6">
               <div class="form-floating">
-                <input class="form-control" name="guest" id="guest" type="number" placeholder="จำนวนแขก*" />
+                <input class="form-control" name="guest" id="guest" type="number" placeholder="จำนวนแขก*" required />
                 <label for="guest">จำนวนแขก*</label>
               </div>
             </div>
             <div class="col-6">
               <div class="form-floating">
-                <input class="form-control" name="budget" id="budget" type="number" placeholder="งบประมาณ" />
+                <input class="form-control" name="budget" id="budget" type="number" placeholder="งบประมาณ" required />
                 <label for="budget">งบประมาณ*</label>
               </div>
             </div>
@@ -104,10 +104,10 @@
             );
             if($coupon) : ?>
             <div class="col-md-12 mt-3">
-              <p class="h6 mb-1">คูปองที่ร่วมรายการ</p>
+              <p class="h6 mb-1">คูปองที่ร่วมรายการ<br/><small class="fw-normal">กรุณากรอกข้อมูลผู้ติดต่อให้ครบถ้วนเพื่อเก็บรับคูปอง และท่านจะสามารถใช้คูปองได้หลังจากยืนยันตัวตนผ่านอีเมลในขั้นตอนถัดไป</small></p>
               <div class="d-flex flex-wrap gap-3 my-2 align-items-stretch">
                 <?php foreach ($coupon as $singleCoupon): ?>
-                  <div class="wdl-coupon-picker wdl-coupon-checkbox">
+                  <div class="wdl-coupon-picker wdl-coupon-checkbox disabled">
                     <div class="wdl-coupon-picker-indicator"></div>
                     <input class="d-none wdl-coupon-checkbox-target" type="checkbox" value="<?php echo $singleCoupon->ID?>" readonly />
                     <div class="wdl-coupon-picker-image">
@@ -135,30 +135,48 @@
               <label class="text-sm" for="message">ข้อความเพิ่มเติม</label>
               <textarea rows="4" class="form-control" name="message" id="message" label="ข้อความเพิ่มเติม"></textarea>
             </div>
-
-            <hr class="my-1 opacity-0">
-            <button id="wdl-form-general-submit" type="submit" name="submit" class="wdl-btn-lg wdl-form-submit">ลงทะเบียน</button>
-            <p class="fail-message text-red"><?php _e('ขออภัยค่ะ ไม่สามารถส่งข้อมูลได้ กรุณาลองใหม่','ขออภัยค่ะ ไม่สามารถส่งข้อมูลได้ กรุณาลองใหม่') ?></p>
+            <div class="col-md-12">
+              <hr class="my-1 opacity-0">
+              <button id="wdl-form-general-submit" type="submit" name="submit" class="wdl-btn-lg wdl-form-submit w-100">ลงทะเบียน</button>
+              <p class="fail-message text-red"><?php _e('ขออภัยค่ะ ไม่สามารถส่งข้อมูลได้ กรุณาลองใหม่','ขออภัยค่ะ ไม่สามารถส่งข้อมูลได้ กรุณาลองใหม่') ?></p>
+            </div>
           </div>
         </form>
       </div>
     </div>
   </div>
 </div>
-<div class="wdl-form-general-succeed-modal modal fade">
-  <div class="modal-dialog modal-dialog-centered modal-lg">
-    <div class="modal-content m-3 mb-0">
+<div class="wdl-form-general-coupon-verify modal fade">
+  <div class="modal-dialog modal-dialog-centered modal-lg modal-fullscreen-md-down">
+    <div class="modal-content mb-0">
       <button class="btn-close" data-bs-dismiss="modal"></button>
       <div class="modal-body text-center">
         <div class="py-4">
           <img class="mb-4" src="<?php echo(get_theme_file_uri() . '/images/logo.png') ?>" alt="Weddinglist" width="180" height="43">
-          <h2 class="text-red"><?php _e('ลงทะเบียนสำเร็จ','ลงทะเบียนสำเร็จ') ?></h2>
+          <p class="h2 text-red"><?php _e('ลงทะเบียนสำเร็จ กรุณายืนยันตัวตนเพื่อรับคูปอง','ลงทะเบียนสำเร็จ กรุณายืนยันตัวตนเพื่อรับคูปอง') ?></p>
+          <p><?php _e('ระบบได้ส่งลิงค์ยืนยันตัวตนไปยังอีเมล<br/>หากไม่พบอีเมลดังกล่าวกรุณาตรวจสอบในกล่องเมลขยะของบัญชีคุณ', 'ระบบได้ส่งลิงค์ยืนยันตัวตนไปยังอีเมล<br/>หากไม่พบอีเมลดังกล่าวกรุณาตรวจสอบในกล่องเมลขยะของบัญชีคุณ') ?></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="wdl-form-general-succeed-modal modal fade">
+  <div class="modal-dialog modal-dialog-centered modal-lg modal-fullscreen-md-down">
+    <div class="modal-content mb-0">
+      <button class="btn-close" data-bs-dismiss="modal"></button>
+      <div class="modal-body text-center">
+        <div class="py-4">
+          <img class="mb-4" src="<?php echo(get_theme_file_uri() . '/images/logo.png') ?>" alt="Weddinglist" width="180" height="43">
+          <p class="h2  text-red"><?php _e('ลงทะเบียนสำเร็จ','ลงทะเบียนสำเร็จ') ?></p>
           <p><?php _e('ทางโรงแรมที่ท่านได้เลือกไว้จะติดต่อกลับมาในไม่ช้า ขอบคุณค่ะ', 'ทางโรงแรมที่ท่านได้เลือกไว้จะติดต่อกลับมาในไม่ช้า ขอบคุณค่ะ') ?></p>
         </div>
       </div>
     </div>
   </div>
 </div>
+<?php if(is_user_logged_in()) {
+  print_r(explode(',', '350838,346612'));
+}?>
 <script>
   $(document).ready(() => {
     $('#wdl-form-general').submit(function (e) {
@@ -167,6 +185,11 @@
       $('.wdl-form-general-modal .modal-body').addClass('submitting')
 
       let selectedDaytime = []
+      let selectedCoupon = []
+
+      $('.wdl-coupon-checkbox-target:checked').each((i, e) => {
+        selectedCoupon.push($(e).val())
+      })
 
       $('input[name=daytime]:checked').each((index, element)=> {
         selectedDaytime.push(element.value)
@@ -188,10 +211,17 @@
         message: $('#message').val(),
         cardId: <?php echo get_the_id()?>,
         leadType: 'Promotion',
+        selectedCoupon: selectedCoupon.join(',')
       }, ()=> {
         $('#wdl-form-general').removeClass('failed')
         $('.wdl-form-general-modal').modal('hide')
-        $('.wdl-form-general-succeed-modal').modal('show')
+        //$('.wdl-form-general-succeed-modal').modal('show')
+
+        if(selectedCoupon.length > 0) {
+          $('.wdl-form-general-coupon-verify').modal('show')
+        } else {
+          $('.wdl-form-general-succeed-modal').modal('show')
+        }
 
         $('.wdl-form-general-modal .modal-body').removeClass('submitting')
         generalDirectData = {}
@@ -200,7 +230,7 @@
         $('#wdl-form-general').addClass('failed')
       })
 
-      $('.wdl-coupon-checkbox-target:checked').each((i, e)=> {
+      /* $('.wdl-coupon-checkbox-target:checked').each((i, e)=> {
         const couponId = $(e).val()
         $.post("<?php echo admin_url('admin-ajax.php'); ?>", {
           toClient: true,
@@ -221,7 +251,7 @@
           cardId: couponId,
           leadType: 'Coupon'
         }, ()=> {}).fail(()=> {})
-      })
+      }) */
     });
   })
 </script>

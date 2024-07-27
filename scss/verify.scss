@@ -1,0 +1,35 @@
+.wdl-verify-page {
+  background: #fafafa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .wdl-verify-message {
+    padding: 24px;
+    background: #FFFFFF;
+    box-shadow: 0px 4px 15px -5px rgba(0, 0, 0, 0.15);
+    border-radius: 12px;
+    margin: auto;
+    width: 600px;
+    max-width: 90%;
+    text-align: center;
+    
+    p {
+      font-weight: 500;
+      font-size: 18px;
+      line-height: 28px;
+    }
+
+    .wdl-verify-otp-input {
+      padding: 12px;
+      border-radius: 8px;
+      font-size: 64px;
+      line-height: 1;
+      font-weight: 700;
+      color: #ff2758;
+      box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1) inset, 0 0 0 rgba(0, 0, 0, 0.05);
+      text-align: center;
+      background: #FFFFFF !important;
+    }
+  }
+}

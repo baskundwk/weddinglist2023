@@ -233,98 +233,6 @@ function venue_list_by_location($tag)
 	return $output;
 }
 
-/* add_action('wp_print_scripts', function () {
-	if (is_singular(array('venue', 'promotion', 'wedding-fair', 'vendor')) || is_page('register') || is_front_page()) {
-
-	} else {
-		wp_dequeue_script('google-recaptcha');
-		wp_dequeue_script('wpcf7-recaptcha');
-	}
-}); */
-
-
-/* function myprefix_register_options_page() {
-	add_menu_page(
-			'My Options',
-			'My Options',
-			'manage_options',
-			'my_options',
-			'my_options_page_html'
-	);
-}
-add_action( 'admin_menu', 'myprefix_register_options_page' );
-
-function my_options_page_html() {
-	if ( ! current_user_can( 'manage_options' ) ) {
-			return;
-	}
-
-	if ( isset( $_GET['settings-updated'] ) ) {
-			add_settings_error(
-					'my_options_mesages',
-					'my_options_message',
-					esc_html__( 'Settings Saved', 'text_domain' ),
-					'updated'
-			);
-	}
-
-	settings_errors( 'my_options_mesages' );
-
-	?>
-	<div class="wrap">
-			<h1><?php echo esc_html( get_admin_page_title() ); ?></h1>
-			<form action="options.php" method="post">
-					<?php
-							settings_fields( 'my_options_group' );
-							do_settings_sections( 'my_options' );
-							submit_button( 'Save Settings' );
-					?>
-			</form>
-	</div>
-	<?php
-} */
-
-/**
- * Register our settings.
- */
-/* function myprefix_register_settings() {
-	register_setting( 'my_options', 'my_options' );
-
-	add_settings_section(
-			'my_options_sections',
-			false,
-			false,
-			'my_options'
-	);
-
-	add_settings_field(
-			'my_option_1',
-			esc_html__( 'My Option 1', 'text_domain' ),
-			'render_my_option_1_field',
-			'my_options',
-			'my_options_sections',
-			[
-					'label_for' => 'my_option_1',
-			]
-	);
-}
-add_action( 'admin_init', 'myprefix_register_settings' );
- */
-/**
- * Render the "my_option_1" field.
- */
-/* function render_my_option_1_field( $args ) {
-	$value = get_option( 'my_options' )[$args['label_for']] ?? '';
-	?>
-	<input
-			type="text"
-			id="<?php echo esc_attr( $args['label_for'] ); ?>"
-			name="my_options[<?php echo esc_attr( $args['label_for'] ); ?>]"
-			value="<?php echo esc_attr( $value ); ?>">
-	<p class="description"><?php esc_html_e( 'This is a description for our field.', 'text_domain' ); ?></p>
-	<?php
-} */
-
 /* * Customize plugin WP Search Suggest */
 function wp_search_suggest_custom($query_args)
 {
@@ -397,6 +305,20 @@ function send_email(){
 		$daytime = $_REQUEST['daytime'];
 		$message = $_REQUEST['message'];
 		$cardId = $_REQUEST['cardId'];
+		$selectedCoupon = $_REQUEST['selectedCoupon'];
+		$selectedCouponArray = explode(',',$selectedCoupon);
+
+		$selectedCouponTitle = [];
+
+		foreach($selectedCouponArray as $id) {
+			$selectedCouponTitle[] = '"'.get_the_title($id).'"';
+		}
+
+		$selectedCouponBody = '';
+
+		if($selectedCoupon !== '') {
+			$selectedCouponBody = '<li>คูปองที่เลือก : <strong>'.implode(", ", $selectedCouponTitle).'</strong></li>';
+		}
 
 		//$appoint = $_REQUEST['appoint'];
 		$appointDate = $_REQUEST['appointDate'];
@@ -465,11 +387,10 @@ function send_email(){
 		"				<li>งบประมาณ : <strong>$budget</strong></li>".
 		"				<li>วันที่จัดงาน : <strong>$date</strong></li>".
 		"				<li>ช่วงเวลาจัดงาน : <strong>$daytime</strong></li>".
-		"			</ul>".
-		$appointStatement.
+		$selectedCouponBody.
+		"			</ul>".$appointStatement.
 		"			<p>ข้อความเพิ่มเติม :</p>".
-		"			<p><strong>$message</strong></p>".
-		$footer.
+		"			<p><strong>$message</strong></p>".$footer.
 		"			<p style='color: #999; font-weight: 700;'>ขอขอบพระคุณอย่างสูง<br>Weddinglist Support</p>".
 		"			<p style='font-size: 14px;'>แจ้งปัญหาการใช้งาน".
 		"				<br>โทร. <a href='tel:0634748111'>063 474 8111</a>".
@@ -481,8 +402,8 @@ function send_email(){
 		
 		$mail = wp_mail($to, $subject, $email_body, $headers);
 
-		if($toClient === 'true') {
-			$couponImage = get_site_url() . get_field('Image', $cardId)['sizes']['large'];
+		/* if($toClient === 'true') {
+			$couponImage = get_site_url() . get_field('Banner', $cardId)['sizes']['large'];
 
 
 			$email_body_client = 
@@ -509,7 +430,7 @@ function send_email(){
 		
 		if($mail){
 			echo "Email Sent Successfully";
-		};
+		}; */
 
 		// Store lead in database
 
@@ -524,7 +445,10 @@ function send_email(){
 		} else {
 			$venue = get_field('RelatedVenue', $cardId)[0]->post_title;
 		}
-		wp_insert_post( array(
+
+		$otp = rand(100000, 999999);
+
+		$new_post_id = wp_insert_post( array(
 			'post_title' => $name,
 			'post_type' => 'lead',
 			'post_status' => 'draft',
@@ -540,45 +464,40 @@ function send_email(){
 				'source' => $cardTitle,
 				'venue' => $venue,
 				'type' => $lead_type,
-				'appointment' => $appointDate.' - '.$appointTime
+				'appointment' => $appointDate.' - '.$appointTime,
+				'coupon' => implode(', ', $selectedCouponTitle),
+				'otp' => $otp,
+				'verified' => false,
 			]
 		));
+
+		if($selectedCoupon !== '') {
+			$email_body_client = 
+			"<div style='background:#EEE; padding:32px;'>".
+			"	<div style='max-width:600px; margin:auto;'>".
+			"		<div style='background:#FF2758; padding:24px; text-align:center;'>".
+			"			<img src='$file' alt='Weddinglist' width='243' height='60'>".
+			"		</div>".
+			"		<div style='background:#FFF; padding:16px; font-family:Tahoma; color:#555; line-height:1.7;'>".
+			"			<p>สวัสดีค่ะ</p>".
+			"			<p>รหัส OTP ของคุณคือ <br/><strong style='font-size:2em; color:#FF2758;'>".$otp."</strong></p>".
+			"			<p><strong>กรุณายืนยันตัวตนด้วยลิงค์ภายในอีเมลฉบับนี้เพื่อยืนยันการรับสิทธิ์คูปอง</strong> โดยทาง Weddinglist จะนำส่งคูปองให้คุณในอีเมลฉบับถัดไปหลังจากการยืนยันตัวตน</p>".
+			"			<a style='display:block; margin:auto; width:fit-content; text-decoration:none; background:#FF2758; padding:12px 24px; border-radius:8px; color:#FFF; font-weight:700;' href='https://www.weddinglist.co.th/verify?pid=".$new_post_id."&otp=".$otp."&t=".$selectedCoupon."'>คลิกที่นี่ เพื่อยืนยันตัวตนอัตโนมัติ</a>".
+			"			<p style='color:#999;'><em>ลิงค์ยืนยันตัวตนจะหมดอายุภายใน 24 ชม. หากยืนยันตัวตนเกินกำหนด กรุณาติดต่อแอดมินโดยแจ้งข้อมูลการลงทะเบียน และเลข OTP ".$otp." เพื่อยืนยันตัวตน</em></p>".
+			"			<p style='color:#999; font-weight:700;'>ขอขอบพระคุณอย่างสูง<br>Weddinglist Support</p>".
+			"			<p style='font-size:14px;'>แจ้งปัญหาการใช้งาน".
+			"				<br>โทร. <a href='tel:0634748111'>063 474 8111</a>".
+			"				<br>อีเมล <a href='mailto:support@weddinglist.co.th'>support@weddinglist.co.th</a>".
+			"			</p>".
+			"		</div>".
+			"	</div>".
+			"</div>";
+
+			$mailClient = wp_mail($email, 'กรุณายืนยันตัวตนเพื่อรับสิทธิ์จากคูปอง', $email_body_client, $headers);
+		}
 }
 
-/* function send_email_coupon() {
-
-	$name = $_REQUEST['name'];
-	$tel = $_REQUEST['tel'];
-	$email = $_REQUEST['email'];
-	$cardId = $_REQUEST['cardId'];
-	$lineid = $_REQUEST['lineid'];
-	$guest = $_REQUEST['guest'];
-	$budget = $_REQUEST['budget'];
-	$date = $_REQUEST['date'];
-	$daytime = $_REQUEST['daytime'];
-	$message = $_REQUEST['message'];
-
-	$appointDate = $_REQUEST['appointDate'];
-	$appointTime = $_REQUEST['appointTime'];
-
-	$recepient = get_field('Email', $cardId);
-	if(get_post_type($cardId) === 'coupon') {
-		$recepient = "";
-		if(get_field('Venue', $cardId)){
-			$venue = get_field('Venue', $cardId);
-
-			foreach($venue as $item) {
-				$recepient != "" && $recepient .= ","; 
-				$recepient .= get_field('Email', $item->ID);
-			}
-		}
-	}
-
-	$file = get_theme_file_uri() . '/images/logo-w.png'; //phpmailer will load this file
-
-	$cardTitle = get_the_title($cardId);
-
-	$couponImage = get_site_url() . get_field('Image', $cardId)['sizes']['large'];
+function send_mail_coupon($email, $name, $banners, $couponNames) {
 
 	$headers  = "MIME-Version: 1.0" . "\r\n";
 	$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
@@ -586,51 +505,42 @@ function send_email(){
 	$headers .= "Reply-To: support@weddinglist.co.th \r\n";
 	$headers .= "Bcc: support@weddinglist.co.th \r\n";
 
-	$email_body_client = 
-	"<div style='background: #EEE; padding: 32px;'>".
-	"	<div style='max-width: 600px; margin: auto;'>".
-	"		<div style='background: #FF2758; padding: 24px; text-align: center;'>".
-	"			<img src='$file' alt='Weddinglist' width='243' height='60'>".
-	"		</div>".
-	"		<div style='background: #FFF; padding: 16px; font-family: Tahoma; color: #555; line-height: 1.7;'>".
-	"			<p>สวัสดีค่ะ</p>".
-	"			<p>ทาง Weddinglist ขอนำส่งคูปอง “<strong>".$cardTitle."</strong>” ค่ะ กรุณาตรวจสอบเงื่อนไข และวันที่การใช้งานคูปองก่อนวันหมดอายุ และ <strong>บันทึกรูปคูปอง</strong> หรือ <a href='$couponImage' download='ดาวน์โหลดคูปอง'>ดาวน์โหลดไฟล์คูปอง</a> เพื่อใช้ในการยืนยันสิทธิ์</p>".
-	"			<img src='". $couponImage ."' alt='".$cardTitle."' width='100%' />".
-	"			<p style='color: #999; font-weight: 700;'>ขอขอบพระคุณอย่างสูง<br>Weddinglist Support</p>".
-	"			<p style='font-size: 14px;'>แจ้งปัญหาการใช้งาน".
-	"				<br>โทร. <a href='tel:0634748111'>063 474 8111</a>".
-	"				<br>อีเมล <a href='mailto:support@weddinglist.co.th'>support@weddinglist.co.th</a>".
-	"			</p>".
-	"		</div>".
-	"	</div>".
-	"</div>";
+	$file = get_theme_file_uri() . '/images/logo-w.png'; //phpmailer will load this file
 
-	$mailClient = wp_mail($email, 'นำส่งคูปอง '.$cardTitle.' จากทาง Weddinglist', $email_body_client, $headers);
+	$bannersLoad = [];
+	$bannersBody = "";
+
+	foreach($banners as $banner) {
+		$bannersLoad[] = $banner;
+	}
 	
-	if($mailClient){
-		echo "Email Sent Successfully";
-	};
+	foreach($bannersLoad as $banner) {
+		$bannersBody .= "<img style='display:block; width:100%;' src='".get_site_url().$banner."' />";
+	}
 
-	wp_insert_post( array(
-		'post_title' => $name,
-		'post_type' => 'lead',
-		'post_status' => 'draft',
-		'meta_input' => [
-			'tel' => $tel,
-			'email' => $email,
-			'lineid' => $lineid,
-			'guest' => $guest,
-			'budget' => $budget,
-			'date' => $date,
-			'daytime' => $daytime,
-			'message' => $message,
-			'source' => $cardTitle,
-			'venue' => $venue,
-			'type' => 'Coupon',
-			'appointment' => $appointDate.' - '.$appointTime
-		]
-	));
-} */
+
+	$email_body_client = 
+		"<div style='background:#EEE; padding:32px;'>".
+		"	<div style='max-width:600px; margin:auto;'>".
+		"		<div style='background:#FF2758; padding:24px; text-align:center;'>".
+		"			<img src='$file' alt='Weddinglist' width='243' height='60'>".
+		"		</div>".
+		"		<div style='background:#FFF; padding:16px; font-family:Tahoma; color:#555; line-height:1.7;'>".
+		"			<p>สวัสดีค่ะ</p>".
+		"			<p>ขอบคุณสำหรับการยืนยันตัวตน ทาง Weddinglist ขอนำส่งคูปองที่ท่านเลือกไว้</p>".
+		$bannersBody.
+		"			<p style='color:#FF2758;'><strong>กรุณาแสดงอีเมลนี้เพื่อใช้เป็นหลักฐานในการรับสิทธิ์ในชื่อ".$name."</strong></p>".
+		"			<p style='color:#999; font-weight:700;'>ขอขอบพระคุณอย่างสูง<br>Weddinglist Support</p>".
+		"			<p style='font-size:14px;'>แจ้งปัญหาการใช้งาน".
+		"				<br>โทร. <a href='tel:0634748111'>063 474 8111</a>".
+		"				<br>อีเมล <a href='mailto:support@weddinglist.co.th'>support@weddinglist.co.th</a>".
+		"			</p>".
+		"		</div>".
+		"	</div>".
+		"</div>";
+
+	$mailClient = wp_mail($email, 'นำส่งคูปอง '.$couponNames.' จากทาง Weddinglist', $email_body_client, $headers);
+}
 
 //require_once('customizer.php');
 require_once('custom-setting.php');

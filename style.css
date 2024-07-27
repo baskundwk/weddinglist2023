@@ -750,8 +750,8 @@ body .et_pb_button {
 }
 
 .wdl-archive-extended, .wdl-archive-extended .wdl-archive-swiper {
-  padding: 2px 24px 24px;
-  margin: -2px -24px -2px -24px;
+  padding: 2px 23px 23px;
+  margin: -2px -23px -2px -23px;
 }
 .wdl-archive-extended .swiper-wrapper, .wdl-archive-extended .wdl-archive-swiper .swiper-wrapper {
   align-items: stretch;
@@ -2040,6 +2040,15 @@ body .et_pb_button {
 }
 .wdl-coupon-picker.wdl-coupon-picker-small {
   box-shadow: none;
+}
+.wdl-coupon-picker.wdl-coupon-checkbox {
+  transition: 0.35s cubic-bezier(0, 0, 0, 1);
+  transition-property: filter, opacity;
+}
+.wdl-coupon-picker.wdl-coupon-checkbox.disabled {
+  cursor: not-allowed;
+  filter: grayscale(1);
+  opacity: 0.5;
 }
 
 .wdl-dropdown {
@@ -4335,12 +4344,8 @@ body.admin-bar.et_fixed_nav .wdl-sticky-bar {
   height: 40px;
 }
 
-.wdl-tab {
-  display: flex;
-  gap: 0.5rem 1.5rem;
-}
-.wdl-tab > li > a {
-  padding: 1rem 0;
+.wdl-tab li > a {
+  padding: 1rem;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
@@ -4351,25 +4356,58 @@ body.admin-bar.et_fixed_nav .wdl-sticky-bar {
   transition: 0.35s cubic-bezier(0, 0, 0, 1);
   font-size: 14px;
 }
-.wdl-tab > li > a > .wdl-tab-icon {
+.wdl-tab li > a > .wdl-tab-icon {
   width: 1rem;
   height: 1rem;
 }
 @media (max-width: 1199.98px) {
-  .wdl-tab > li > a {
+  .wdl-tab li > a {
     flex-direction: row;
     padding: 0.5rem 0 0.75rem;
   }
 }
-.wdl-tab > li > a.active {
+.wdl-tab li > a.active {
   color: #ff2758 !important;
-  box-shadow: 0 -3px 0 #ff2758 inset;
+  box-shadow: 0 -3px 0 -0.5px #ff2758 inset;
 }
-.wdl-tab > li:hover > a {
+.wdl-tab li:hover > a {
   color: #ff2758 !important;
 }
-.wdl-tab > li:active > a, .wdl-tab > li:focus > a {
+.wdl-tab li:active > a, .wdl-tab li:focus > a {
   color: #ff2758 !important;
+}
+
+.wdl-verify-page {
+  background: #fafafa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.wdl-verify-page .wdl-verify-message {
+  padding: 24px;
+  background: #FFFFFF;
+  box-shadow: 0px 4px 15px -5px rgba(0, 0, 0, 0.15);
+  border-radius: 12px;
+  margin: auto;
+  width: 600px;
+  max-width: 90%;
+  text-align: center;
+}
+.wdl-verify-page .wdl-verify-message p {
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 28px;
+}
+.wdl-verify-page .wdl-verify-message .wdl-verify-otp-input {
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 64px;
+  line-height: 1;
+  font-weight: 700;
+  color: #ff2758;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1) inset, 0 0 0 rgba(0, 0, 0, 0.05);
+  text-align: center;
+  background: #FFFFFF !important;
 }
 
 /*# sourceMappingURL=style.css.map */

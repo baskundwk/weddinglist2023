@@ -234,7 +234,7 @@
 
   <div class="modal fade modal-lg" id="apply">
     <div class="modal-dialog modal-dialog-centered m-auto">
-      <div class="modal-content m-3 mb-0">
+      <div class="modal-content mb-0">
         <div class="modal-header">
           <h3 class="m-0">ตอบคำถามสั้น ๆ เพื่อรับสิทธิพิเศษสำหรับคุณ!</h3>
           

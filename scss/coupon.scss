@@ -196,4 +196,14 @@
   &.wdl-coupon-picker-small {
     box-shadow: none;
   }
+
+  &.wdl-coupon-checkbox {
+    transition: .35s cubic-bezier(0,0,0,1);
+    transition-property: filter, opacity;
+    &.disabled {
+      cursor: not-allowed;
+      filter: grayscale(1);
+      opacity: 0.5;
+    }
+  }
 }

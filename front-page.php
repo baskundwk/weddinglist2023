@@ -1,7 +1,7 @@
 <?php $localnav = true; ?>
 <?php include 'components/header.php' ?>
 <main>
-  <section class="xl:pt-3">
+  <section class="pt-xl-3">
     <?php $heroArgs = array(
       'post_type' => 'any',
       'post_status' => 'publish',
@@ -492,13 +492,15 @@
         </div>
         <div class="row">
           <div class="col">
-            <ul class="wdl-tab nav mb-3 wdl-tab-related">
-              <?php foreach($vendor_type as $type) { ?>
-                <li class="nav-item">
-                  <a role="tab" aria-control="tab-vendor-<?php echo $type->slug?>" data-bs-toggle="tab" data-bs-target="#tab-<?php echo $type->slug?>" class="nav-link" aria-current="tab" href="#"><?php echo $type->name ?></a>
-                </li>
-              <?php } ?>
-            </ul>
+            <div class="swiper wdl-swiper-auto">
+              <ul class="swiper-wrapper nav flex-nowrap p-0 wdl-tab mb-3 wdl-tab-related">
+                <?php foreach($vendor_type as $type) { ?>
+                  <li class="swiper-slide w-auto nav-item">
+                    <a role="tab" aria-control="tab-vendor-<?php echo $type->slug?>" data-bs-toggle="tab" data-bs-target="#tab-<?php echo $type->slug?>" class="nav-link" aria-current="tab" href="#"><?php echo $type->name ?></a>
+                  </li>
+                <?php } ?>
+              </ul>
+            </div>
           </div>
         </div>
         <div class="row">

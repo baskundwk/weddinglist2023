@@ -100,7 +100,7 @@
 </div>
 <div class="wdl-form-general-succeed-modal modal fade">
   <div class="modal-dialog modal-dialog-centered modal-lg">
-    <div class="modal-content m-3 mb-0">
+    <div class="modal-content mb-0">
       <button class="btn-close" data-bs-dismiss="modal"></button>
       <div class="modal-body text-center">
         <div class="py-4">

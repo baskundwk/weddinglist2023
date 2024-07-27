@@ -12,7 +12,7 @@
 						</figure>
 						<?php endif; ?>
 						<div class="row">
-							<div class="col-md-4 col-xl-3">
+							<div class="col-4 col-xl-3">
 								<img class="wdl-coupon-card-image" src="<?php echo get_field('Image')['sizes']['medium'] ?>" alt="<?php the_title(); ?>">
 							</div>
 							<div class="col">

@@ -101,7 +101,7 @@
 						</div>
 						<div class="modal fade modal-xl" id="brochure">
 							<div class="modal-dialog modal-dialog-centered m-auto">
-								<div class="modal-content m-3 mb-0">
+								<div class="modal-content mb-0">
 									<button class="btn-close"></button>
 									<div class="modal-body">
 										<iframe class="wdl-iframe wdl-iframe-80vh" src="<?php echo ($brochure) ?>" width="100%" height="560"></iframe>
@@ -524,7 +524,7 @@
 
 	<div class="modal fade wdl-gallery-modal" id="gallery">
 		<div class="modal-dialog modal-dialog-centered modal-xl">
-			<div class="modal-content m-3 mb-0">
+			<div class="modal-content mb-0">
 				<div class="modal-body">
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 

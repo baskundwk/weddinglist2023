@@ -250,7 +250,7 @@
 
 	<div class="modal fade wdl-gallery-modal" id="gallery">
 		<div class="modal-dialog modal-dialog-centered modal-xl">
-			<div class="modal-content m-3 mb-0">
+			<div class="modal-content mb-0">
 				<div class="modal-body">
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 

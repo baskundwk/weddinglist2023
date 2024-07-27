@@ -739,6 +739,8 @@
       $("#budget").val(localStorage.getItem("wdl-budget"));
       $("#date").val(localStorage.getItem("wdl-date"));
       $("#message").val(localStorage.getItem("wdl-message"));
+
+      checkAllGeneralFields()
     }, 2000);
   });
 
@@ -1134,12 +1136,40 @@
     })
   })
 
+  const checkAllGeneralFields = () => {
+    let incompleteInput = []
+    
+    $('.wdl-form-general input[required]').each((index, input) => {
+      if($(input).val() === '') {
+        incompleteInput.push(input)
+      }
+    })
+
+    if(incompleteInput.length === 0) {
+      $('.wdl-coupon-checkbox').each((index, coupon)=> {
+        $(coupon).removeClass('disabled')
+      })
+    } else {
+      $('.wdl-coupon-checkbox').each((index, coupon)=> {
+        $(coupon).addClass('disabled')
+      })
+    }
+  }
+  $('.wdl-form-general input[required]').each((i, e)=>{
+    $(e).on('keyup', checkAllGeneralFields)
+    $(e).on('change', checkAllGeneralFields)
+  })
+
   $('.wdl-coupon-checkbox').each((i, e)=> {
     $(e).click(()=>{
-      $(e).addClass('active')
-      $(e).find('.wdl-coupon-checkbox-target').prop('checked', true)
-      $(e).find('.wdl-coupon-picker-action button').text('เก็บคูปองแล้ว')
-      $(e).find('.wdl-coupon-picker-indicator').addClass('active')
-      setTimeout(()=>{$(e).find('.wdl-coupon-picker-indicator').removeClass('active')},3000)
+      if(e.classList.contains('disabled')) {
+
+      } else {
+        $(e).addClass('active')
+        $(e).find('.wdl-coupon-checkbox-target').prop('checked', true)
+        $(e).find('.wdl-coupon-picker-action button').text('เก็บคูปองแล้ว')
+        $(e).find('.wdl-coupon-picker-indicator').addClass('active')
+        setTimeout(()=>{$(e).find('.wdl-coupon-picker-indicator').removeClass('active')},3000)
+      }
     })
   })

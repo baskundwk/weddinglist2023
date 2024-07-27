@@ -14,7 +14,7 @@
 
 <div class="modal fade modal-lg" id="filter">
   <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content m-3 mb-0">
+    <div class="modal-content mb-0">
       <div class="modal-header">
         <h3 class="m-0">กรองการค้นหา</h3>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
