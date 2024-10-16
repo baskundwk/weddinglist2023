@@ -34,14 +34,12 @@
 								<?php
 								$locations = get_field('Location');
 								if ($locations): ?>
-									<div class="wdl-archive-neighborhood">
-										<ul>
-											<?php foreach ($locations as $location): ?>
-												<li>
-													<?php echo esc_html($location->name); ?>
-												</li>
-											<?php endforeach; ?>
-										</ul>
+									<div class="wdl-archive-neighborhood wdl-metadata">
+										<?php
+										echo implode(' / ', array_map(function ($location) {
+											return $location->name;
+										}, $locations));
+										?>
 									</div>
 								<?php endif; ?>
 

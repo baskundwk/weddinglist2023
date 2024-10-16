@@ -1,6 +1,6 @@
 .wdl-dropdown {
   position: relative;
-  
+
   > button {
     white-space: nowrap;
   }
@@ -11,16 +11,17 @@
     padding: 8px 0;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
     border: none;
-    width: fit-content;
+    width: max-content;
     position: absolute;
     top: 100%;
     background: #fff;
     border-radius: 8px;
     right: 0;
-    transition: 0.35s cubic-bezier(0,0,0,1);
+    transition: 0.35s cubic-bezier(0, 0, 0, 1);
     transition-property: opacity, transform;
     list-style: none;
     max-height: 40vh;
+    max-width: 300px;
     overflow: auto;
     opacity: 0;
     display: block;
@@ -45,6 +46,7 @@
         font-size: 14px;
         color: #333333 !important;
         box-shadow: none;
+        line-height: 1.25;
 
         &:hover {
           color: #ff2758 !important;

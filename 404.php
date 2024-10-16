@@ -1,7 +1,7 @@
-<?php include 'components/header.php' ?>
+<?php include get_stylesheet_directory().'/components/header.php' ?>
 
 <main>
-  <?php include 'components/lead-menu-revamped.php' ?>
+  <?php include get_stylesheet_directory().'/components/lead-menu-revamped.php' ?>
 
   <section class="pb-5">
     <div class="container">
@@ -20,4 +20,4 @@
   </section>
 </main>
 
-<?php include 'components/footer.php' ?>
+<?php include get_stylesheet_directory().'/components/footer.php' ?>

@@ -2,8 +2,8 @@
   header( "location: /" );
   exit(0);
 } else {
-  include 'components/header.php';
-  include 'queries/venue-query.php';
+  include get_stylesheet_directory().'/components/header.php';
+  include get_stylesheet_directory().'/queries/venue-query.php';
 ?>
 <main class="py-4">
   <div class="container">
@@ -21,6 +21,6 @@
   </pre>
 </main>
 <?php
-  include 'components/footer.php';
+  include get_stylesheet_directory().'/components/footer.php';
 }
 

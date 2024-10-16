@@ -1,7 +1,7 @@
-<div class="wdl-form-general-modal modal fade">
+<div class="wdl-form-general-modal modal fade html-lazy">
   <div class="modal-dialog modal-dialog-centered modal-lg">
     <div class="modal-content m-1 mb-0">
-      <button class="btn-close" data-bs-dismiss="modal"></button>
+      <button class="btn-close" data-bs-dismiss="modal" aria-label="Close modal"></button>
       <div class="modal-body p-3 p-lg-3">
         <h2><?php _e('กรุณากรอกข้อมูลผู้ติดต่อ', 'กรุณากรอกข้อมูลผู้ติดต่อ') ?></h2>
         <hr class="mb-2">
@@ -101,7 +101,7 @@
 <div class="wdl-form-general-succeed-modal modal fade">
   <div class="modal-dialog modal-dialog-centered modal-lg">
     <div class="modal-content mb-0">
-      <button class="btn-close" data-bs-dismiss="modal"></button>
+      <button class="btn-close" data-bs-dismiss="modal" aria-label="Close modal"></button>
       <div class="modal-body text-center">
         <div class="py-4">
           <img class="mb-4" src="<?php echo(get_theme_file_uri() . '/images/logo.png') ?>" alt="Weddinglist" width="180" height="43">

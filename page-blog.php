@@ -1,7 +1,7 @@
-<?php include 'components/header.php' ?>
+<?php include get_stylesheet_directory() . '/components/header.php' ?>
 
 <main>
-  <?php include 'components/lead-menu-revamped.php' ?>
+  <?php include get_stylesheet_directory() . '/components/lead-menu-revamped.php' ?>
 
   <?php
   $paged = get_query_var('paged', 1);
@@ -20,10 +20,10 @@
       <div class="row pb-3">
         <div class="col">
           <h1>
-            <?php echo(get_option('wdl_options', 'โปรโมชั่นแต่งงาน & แพ็กเกจแต่งงาน')['word-post-title']); ?>
+            <?php echo (get_option('wdl_options', 'โปรโมชั่นแต่งงาน & แพ็กเกจแต่งงาน')['word-post-title']); ?>
           </h1>
           <p class="text-secondary">
-            <?php echo(get_option('wdl_options', 'รวมโปรโมชั่น และ แพ็กเกจแต่งงาน จากสถานที่จัดงานแต่งงานชั้นนำทุกรูปแบบ อัพเดทล่าสุด 2024')['word-post-desc']); ?>
+            <?php echo (get_option('wdl_options', 'รวมโปรโมชั่น และ แพ็กเกจแต่งงาน จากสถานที่จัดงานแต่งงานชั้นนำทุกรูปแบบ อัพเดทล่าสุด 2024')['word-post-desc']); ?>
           </p>
           <div class="wdl-badge-container">
             <a href="#" class="wdl-badge-sm-primary">ทั้งหมด</a>
@@ -34,47 +34,11 @@
         </div>
       </div>
       <?php if ($postAll->have_posts()): ?>
-        <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-3 wdl-archive wdl-archive-extended opacity-1">
+        <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-2 wdl-archive wdl-archive-extended opacity-1">
           <?php while ($postAll->have_posts()): ?>
             <?php $postAll->the_post(); ?>
             <div class="col">
-              <div id="wdl-post-<?php the_ID(); ?>" class="card wdl-archive-card h-100 <?php echo esc_attr($atts['class_single']); ?> wdl-archive-card-blog">
-
-                <?php if (has_post_thumbnail(get_the_ID())): ?>
-                  <a class="card-img-top wdl-archive-card-img-top" href="<?php the_permalink(); ?>"><img loading="lazy" class="" src="<?php echo esc_html(get_the_post_thumbnail_url($post, 'medium_large')) ?>" width="100%"></a>
-                <?php endif; ?>
-
-                <div class="card-body wdl-archive-card-body pb-3">
-                  <div class="wdl-badge-container mb-1">
-                    <?php
-                    $date = get_field('Date');
-                    if ($date): ?>
-                      <span class="badge wdl-badge-sm-primary">
-                        <?php the_field('Date') ?>
-                      </span>
-                    <?php endif; ?>
-                    <?php $hotDeal = get_field('HotDeal');
-                    if ($hotDeal && in_array('Hot Deal', $hotDeal)): ?>
-                      <span class="badge wdl-badge-sm">Hot Deal</span>
-                    <?php endif; ?>
-                  </div>
-
-                  <h3 class="wdl-archive-title mb-1"><a href="<?php the_permalink(); ?>">
-                      <?php the_title(); ?>
-                    </a></h3>
-
-                  <?php
-                  $relatedVenue = get_field('RelatedVenue');
-                  if ($relatedVenue):
-                    foreach ($relatedVenue as $venue):
-                      $venuePermalink = get_permalink($venue->ID);
-                      $venueTitle = get_the_title($venue->ID); ?>
-                      <p class="wdl-archive-location mb-0"><a href="<?php echo esc_html($venuePermalink) ?>">
-                          <?php echo esc_html($venueTitle); ?>
-                        </a></p>
-                    <?php endforeach; endif; ?>
-                </div>
-              </div>
+              <?php include get_stylesheet_directory() . '/components/cards/card-post.php' ?>
             </div>
           <?php endwhile;
           wp_reset_postdata(); ?>
@@ -119,57 +83,7 @@
                   <?php $postCat1->the_post(); ?>
 
                   <div class="swiper-slide h-auto">
-                    <div id="wdl-post-<?php the_ID(); ?>" class="card wdl-archive-card h-100 <?php echo esc_attr($atts['class_single']); ?> wdl-archive-card-blog">
-
-                      <?php if (has_post_thumbnail(get_the_ID())): ?>
-                        <a class="card-img-top wdl-archive-card-img-top" href="<?php the_permalink(); ?>"><img loading="lazy" class="" src="<?php echo esc_html(get_the_post_thumbnail_url($post, 'medium_large')) ?>" width="100%"></a>
-                      <?php endif; ?>
-
-                      <div class="card-body wdl-archive-card-body pb-3">
-                        <div class="wdl-badge-container mb-1">
-                          <?php
-                          $date = get_field('Date');
-                          if ($date): ?>
-                            <span class="badge wdl-badge-sm-primary">
-                              <?php the_field('Date') ?>
-                            </span>
-                          <?php endif; ?>
-                          <?php $hotDeal = get_field('HotDeal');
-                          if ($hotDeal && in_array('Hot Deal', $hotDeal)): ?>
-                            <span class="badge wdl-badge-sm">Hot Deal</span>
-                          <?php endif; ?>
-                        </div>
-
-                        <!-- <?php
-                        $relatedVenue = get_field('RelatedVenue');
-                        if ($relatedVenue):
-                          foreach ($relatedVenue as $venue):
-                            $venueType = get_field('VenueType', $venue->ID);
-                            ?>
-                            <div class="wdl-archive-pretitle mb-0">
-                              <small>
-                                <?php echo $venueType[0]->name ?>
-                              </small>
-                            </div>
-                          <?php endforeach; endif; ?> -->
-
-                        <h3 class="wdl-archive-title mb-1"><a href="<?php the_permalink(); ?>">
-                            <?php the_title(); ?>
-                          </a></h3>
-
-                        <?php
-                        $relatedVenue = get_field('RelatedVenue');
-                        if ($relatedVenue):
-                          foreach ($relatedVenue as $venue):
-                            $venuePermalink = get_permalink($venue->ID);
-                            $venueTitle = get_the_title($venue->ID); ?>
-                            <p class="wdl-archive-location mb-0"><a href="<?php echo esc_html($venuePermalink) ?>">
-                                <?php echo esc_html($venueTitle); ?>
-                              </a></p>
-                          <?php endforeach; endif; ?>
-                      </div>
-
-                    </div>
+                    <?php include get_stylesheet_directory() . '/components/cards/card-post.php' ?>
                   </div>
 
                 <?php endwhile;
@@ -223,58 +137,7 @@
                   <?php $postCat2->the_post(); ?>
 
                   <div class="swiper-slide h-auto">
-                    <div id="wdl-post-<?php the_ID(); ?>" class="card wdl-archive-card h-100 <?php echo esc_attr($atts['class_single']); ?> wdl-archive-card-blog">
-
-                      <?php if (has_post_thumbnail(get_the_ID())): ?>
-                        <a class="card-img-top wdl-archive-card-img-top" href="<?php the_permalink(); ?>"><img loading="lazy" class="" src="<?php echo esc_html(get_the_post_thumbnail_url($post, 'medium_large')) ?>" width="100%"></a>
-                      <?php endif; ?>
-
-                      <div class="card-body wdl-archive-card-body pb-3">
-                        <div class="wdl-badge-container mb-1">
-                          <?php
-                          $date = get_field('Date');
-                          if ($date): ?>
-                            <span class="badge wdl-badge-sm-primary">
-                              <?php the_field('Date') ?>
-                            </span>
-                          <?php endif; ?>
-                          <?php $hotDeal = get_field('HotDeal');
-                          if ($hotDeal && in_array('Hot Deal', $hotDeal)): ?>
-                            <span class="badge wdl-badge-sm">Hot Deal</span>
-                          <?php endif; ?>
-                        </div>
-
-                        <!-- <?php
-                        $relatedVenue = get_field('RelatedVenue');
-                        if ($relatedVenue):
-                          foreach ($relatedVenue as $venue):
-                            $venueType = get_field('VenueType', $venue->ID);
-                            ?>
-                            <div class="wdl-archive-pretitle mb-0">
-                              <small>
-                                <?php echo $venueType[0]->name ?>
-                              </small>
-                            </div>
-                          <?php endforeach; endif; ?> -->
-
-                        <h3 class="wdl-archive-title mb-1"><a href="<?php the_permalink(); ?>">
-                            <?php the_title(); ?>
-                          </a></h3>
-
-                        <?php
-                        $relatedVenue = get_field('RelatedVenue');
-                        if ($relatedVenue):
-                          foreach ($relatedVenue as $venue):
-                            $venuePermalink = get_permalink($venue->ID);
-                            $venueTitle = get_the_title($venue->ID); ?>
-                            <p class="wdl-archive-location mb-0"><a href="<?php echo esc_html($venuePermalink) ?>">
-                                <?php echo esc_html($venueTitle); ?>
-                              </a></p>
-                          <?php endforeach; endif; ?>
-
-                      </div>
-
-                    </div>
+                    <?php include get_stylesheet_directory() . '/components/cards/card-post.php' ?>
                   </div>
 
                 <?php endwhile;
@@ -328,57 +191,7 @@
                   <?php $postCat3->the_post(); ?>
 
                   <div class="swiper-slide h-auto">
-                    <div id="wdl-post-<?php the_ID(); ?>" class="card wdl-archive-card h-100 <?php echo esc_attr($atts['class_single']); ?> wdl-archive-card-blog">
-
-                      <?php if (has_post_thumbnail(get_the_ID())): ?>
-                        <a class="card-img-top wdl-archive-card-img-top" href="<?php the_permalink(); ?>"><img loading="lazy" class="" src="<?php echo esc_html(get_the_post_thumbnail_url($post, 'medium_large')) ?>" width="100%"></a>
-                      <?php endif; ?>
-
-                      <div class="card-body wdl-archive-card-body pb-3">
-                        <div class="wdl-badge-container mb-1">
-                          <?php
-                          $date = get_field('Date');
-                          if ($date): ?>
-                            <span class="badge wdl-badge-sm-primary">
-                              <?php the_field('Date') ?>
-                            </span>
-                          <?php endif; ?>
-                          <?php $hotDeal = get_field('HotDeal');
-                          if ($hotDeal && in_array('Hot Deal', $hotDeal)): ?>
-                            <span class="badge wdl-badge-sm">Hot Deal</span>
-                          <?php endif; ?>
-                        </div>
-
-                        <!-- <?php
-                        $relatedVenue = get_field('RelatedVenue');
-                        if ($relatedVenue):
-                          foreach ($relatedVenue as $venue):
-                            $venueType = get_field('VenueType', $venue->ID);
-                            ?>
-                            <div class="wdl-archive-pretitle mb-0">
-                              <small>
-                                <?php echo $venueType[0]->name ?>
-                              </small>
-                            </div>
-                          <?php endforeach; endif; ?> -->
-
-                        <h3 class="wdl-archive-title mb-1"><a href="<?php the_permalink(); ?>">
-                            <?php the_title(); ?>
-                          </a></h3>
-
-                        <?php
-                        $relatedVenue = get_field('RelatedVenue');
-                        if ($relatedVenue):
-                          foreach ($relatedVenue as $venue):
-                            $venuePermalink = get_permalink($venue->ID);
-                            $venueTitle = get_the_title($venue->ID); ?>
-                            <p class="wdl-archive-location mb-0"><a href="<?php echo esc_html($venuePermalink) ?>">
-                                <?php echo esc_html($venueTitle); ?>
-                              </a></p>
-                          <?php endforeach; endif; ?>
-                      </div>
-
-                    </div>
+                    <?php include get_stylesheet_directory() . '/components/cards/card-post.php' ?>
                   </div>
 
                 <?php endwhile;
@@ -402,4 +215,4 @@
   <?php endif; ?>
 </main>
 
-<?php include 'components/footer.php' ?>
+<?php include get_stylesheet_directory() . '/components/footer.php' ?>

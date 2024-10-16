@@ -1,0 +1,67 @@
+<?php include 'components/header.php' ?>
+
+<?php $currentPostID = get_the_ID() ?>
+<main>
+	<div class="container-xl overflow-hidden">
+		<div class="row">
+			<div class="col-12 order-xl-1 py-2">
+				<?php if (function_exists('rank_math_the_breadcrumbs')): ?>
+					<div class="wdl-breadcrumb">
+						<?php rank_math_the_breadcrumbs(); ?>
+					</div>
+				<?php endif; ?>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12 col-lg-9">
+				<div class="col-12">
+					<?php include 'components/all-page-ads.php' ?>
+					<?php $postArgs = array(
+						'ID' => $currentPostID
+					);
+
+					$post = new WP_Query($postArgs);
+					?>
+					<!-- <div class="row justify-content-center mb-4">
+						<div class="col-12 wdl-metadata-banner">
+							<?php echo do_shortcode('[su_posts template="templates/ad-allpage-loop.php" post_type="promotion,wedding-fair" orderby="rand"]') ?>
+						</div>
+					</div> -->
+				</div>
+					<div class="wdl-single-thumbnail mb-3">
+						<?php the_post_thumbnail('large') ?>
+					</div>
+					<h1 class="wdl-single-title display-6 mb-3 mb-sm-0">
+						<?php the_title(); ?>
+					</h1>
+					<hr>
+					<div class="d-flex gap-3 mb-3">
+						<?php echo do_shortcode('[et_social_follow icon_style="flip" icon_shape="rounded" icons_location="left" col_number="auto" outer_color="dark"]') ?>
+						<div class="wdl-line-share-icon">
+							<a href="https://social-plugins.line.me/lineit/share?url=<?php echo esc_html(get_post_permalink()) ?>">
+								<img width="40" height="40" loading="eager" src="/wp-content/uploads/line-share.png" alt="Share to LINE">
+							</a>
+						</div>
+					</div>
+					<div class="wdl-main-content my-5">
+						<?php the_content(); ?>
+					</div>
+					<div class="d-flex gap-3 mb-3">
+						<?php echo do_shortcode('[et_social_follow icon_style="flip" icon_shape="rounded" icons_location="left" col_number="auto" outer_color="dark"]') ?>
+						<div class="wdl-line-share-icon">
+							<a href="https://social-plugins.line.me/lineit/share?url=<?php echo esc_html(get_post_permalink()) ?>">
+								<img width="40" height="40" loading="eager" src="/wp-content/uploads/line-share.png" alt="Share to LINE">
+							</a>
+						</div>
+					</div>
+			</div>
+			<aside class="col-12 col-lg-3">
+				<?php get_sidebar('Sidebar') ?>
+			</aside>
+		</div>
+	</div>
+</main>
+
+<?php include 'components/popup-ads.php' ?>
+
+<?php include 'components/footer.php' ?> 

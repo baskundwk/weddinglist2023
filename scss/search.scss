@@ -19,7 +19,8 @@
       border-radius: 0 10px 10px 0 !important;
     }
   }
-  .form-floating, .input-group {
+  .form-floating,
+  .input-group {
     &:before {
       content: "\55";
       font-family: ETmodules;
@@ -41,7 +42,7 @@
     border-radius: 10px 0 0 10px;
 
     &::placeholder {
-      color: #C1C1C1;
+      color: #c1c1c1;
     }
   }
 
@@ -50,6 +51,7 @@
     border-radius: 0 10px 10px 0;
     color: transparent;
     background: #f7f7f7;
+    padding: 0;
   }
 
   .input-group {
@@ -57,8 +59,17 @@
       border-radius: 10px 0 0 10px;
 
       &::placeholder {
-        color: #C1C1C1;
+        color: #c1c1c1;
       }
+    }
+  }
+  .wdl-dropdown {
+    display: flex;
+    align-items: center;
+    background: #f7f7f7 !important;
+
+    .wdl-btn-filter {
+      background: transparent;
     }
   }
 }

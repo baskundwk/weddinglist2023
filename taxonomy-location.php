@@ -1,1 +1,1 @@
-<?php include 'archive-venue.php';
+<?php include get_stylesheet_directory().'/archive-venue.php';

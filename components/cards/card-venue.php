@@ -1,34 +1,40 @@
-<div class="card wdl-archive-card">
+<div id="wdl-post-<?php the_ID(); ?>" class="card swiper-slide wdl-archive-card wdl-archive-infinite-scroll-post">
   <?php if (has_post_thumbnail(get_the_ID())): ?>
-    <a class="card-img-top wdl-archive-card-img-top" href="<?php the_permalink(); ?>">
-      <img loading="lazy" class="" src="<?php echo esc_html(get_the_post_thumbnail_url($post)) ?>" width="100%">
+    <a
+      aria-label="<?php echo get_the_title(); ?>"
+      class="card-img-top wdl-archive-card-img-top"
+      title="<?php echo get_the_title(); ?>"
+      href="<?php the_permalink(); ?>">
+      <img
+        loading="lazy"
+        src="<?php echo esc_html(get_the_post_thumbnail_url($post)) ?>"
+        alt="<?php echo get_the_title(); ?>" />
 
       <?php $sponsored = get_field('Sponsor');
       if ($sponsored && in_array('Sponsored', $sponsored)): ?>
         <span class="badge wdl-badge-sm">Most Popular</span>
       <?php endif; ?>
+      <div class="swiper-lazy-preloader"></div>
     </a>
   <?php endif; ?>
 
-  <div class="card-select">
-    <div class="wdl-checkbox">
-      <input class="card-select-input" id="card-select-<?php the_ID() ?>" type="checkbox" data-select='
-        {
-          "title": "<?php the_title() ?>",
-          "postType": "<?php echo get_post_type() ?>",
-          "id": "<?php the_ID() ?>"
-        }'>
-      <label for="card-select-<?php the_ID() ?>"><small><?php _e('เลือก/เปรียบเทียบ', 'เลือก/เปรียบเทียบ') ?></small></label>
-    </div>
+  <div class="card-select wdl-checkbox">
+    <input class="card-select-input" id="card-select-<?php the_ID() ?>" type="checkbox" data-select='
+      {
+        "title": "<?php the_title() ?>",
+        "postType": "<?php echo get_post_type() ?>",
+        "id": "<?php the_ID() ?>"
+      }'>
+    <label for="card-select-<?php the_ID() ?>">
+      <?php _e('เลือก/เปรียบเทียบ', 'เลือก/เปรียบเทียบ') ?>
+    </label>
   </div>
 
   <div class="card-body wdl-archive-card-body">
     <div class="wdl-archive-pretitle">
       <?php $venueType = get_field('VenueType');
       if ($venueType) {
-        foreach ($venueType as $item) {
-          echo $item->name;
-        }
+        echo implode(' / ', array_map(function ($venueType) { return $venueType->name;}, $venueType));
       }
       ?>
       <?php $venueCharacter = get_field('Character');
@@ -63,7 +69,8 @@
     </div>
     <h3 class="wdl-archive-title mb-0"><a href="<?php the_permalink(); ?>">
         <?php the_title(); ?>
-      </a></h3>
+      </a>
+    </h3>
 
     <?php
     if (get_the_excerpt() != ''):
@@ -75,44 +82,20 @@
       <?php
       $locations = get_field('Location');
       if ($locations): ?>
-        <div class="wdl-archive-neighborhood">
-          <ul>
-            <?php foreach ($locations as $location): ?>
-              <li>
-                <?php echo esc_html($location->name); ?>
-              </li>
-            <?php endforeach; ?>
-          </ul>
-        </div>
+        <div class="wdl-archive-neighborhood"><?php echo implode(' / ', array_map(function ($location) { return $location->name;}, $locations));?></div>
       <?php endif; ?>
 
       <?php
       $minPrice = get_field('MinPrice');
       if ($minPrice): ?>
-        <div class="wdl-archive-min-price">
-          <?php _e('ราคาเริ่มต้น', 'Starting price') ?>&nbsp;<strong>
-            <?php echo number_format(get_field('MinPrice')) ?>+
-            <?php _e('บาท', 'THB') ?>
-          </strong>
-        </div>
+        <div class="wdl-archive-min-price"><?php _e('ราคาเริ่มต้น', 'Starting price') ?>&nbsp;<strong> <?php echo number_format(get_field('MinPrice')) ?>+ <?php _e('บาท', 'THB') ?></strong></div>
       <?php endif; ?>
 
       <?php
       $maxGuest = get_field('MaxGuest');
       if ($maxGuest): ?>
-        <div class="wdl-archive-max-guest">
-          <?php _e('รองรับแขกสูงสุด', 'Max guest') ?>&nbsp;<strong>
-            <?php echo number_format(get_field('MaxGuest')) ?>
-            <?php _e('คน', 'people') ?>
-          </strong>
-        </div>
+        <div class="wdl-archive-max-guest"><?php _e('รองรับแขกสูงสุด', 'Max guest') ?>&nbsp;<strong><?php echo number_format(get_field('MaxGuest')) ?> <?php _e('คน', 'people') ?></strong></div>
       <?php endif; ?>
-
-      <!-- <?php if (is_user_logged_in() === true && get_field('AcceptAppointment')): ?>
-                      <div class="wdl-archive-appointment">
-                        <a href="<?php the_permalink(); ?>"><?php _e('รับนัดหมายเข้าชมสถานที่', 'Accept Appointment') ?></a>
-                      </div>
-                    <?php endif; ?> -->
     </div>
   </div>
 

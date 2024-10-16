@@ -44,7 +44,7 @@
       'orderby' => $orderby,
       'post_status' => $post_status,
       'paged' => $paged,
-      'posts_per_page' => 30,
+      'posts_per_page' => 12,
       'meta_query' => $has_field,
   ];
 
@@ -59,7 +59,7 @@
       'orderby' => $orderby,
       'post_status' => $post_status,
       'paged' => $paged,
-      'posts_per_page' => 30,
+      'posts_per_page' => 12,
       'meta_query' => $has_field,
       'tax_query' => array(
         array(

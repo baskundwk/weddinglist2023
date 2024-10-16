@@ -111,7 +111,6 @@
       a {
         display: block;
         color: #333333;
-
         display: -webkit-box;
         -webkit-line-clamp: 2;
         -webkit-box-orient: vertical;  
@@ -195,6 +194,25 @@
 
   &.wdl-coupon-picker-small {
     box-shadow: none;
+    width: auto;
+    height: 40px;
+    max-width: 50%;
+    flex-direction: row;
+
+    .wdl-coupon-picker-image {
+      img {
+        width: auto;
+        height: 40px;
+      }
+    }
+
+    .wdl-coupon-picker-info {
+      padding: 4px;
+      .wdl-coupon-picker-title {
+        margin-bottom: 0;
+        font-weight: 500;
+      }
+    }
   }
 
   &.wdl-coupon-checkbox {

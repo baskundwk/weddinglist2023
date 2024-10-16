@@ -5,7 +5,7 @@
   <meta charset="<?php bloginfo('charset'); ?>" />
   <link rel="pingback" href="<?php bloginfo('pingback_url'); ?>" />
   <script type="text/javascript">
-    document.documentElement.className = 'js';
+  document.documentElement.className = 'js';
   </script>
 
   <?php wp_head(); ?>
@@ -18,7 +18,7 @@
   $popup = $_GET['popup'];
   if($popup != true || $post_type != 'coupon') :
   ?>
-  
+
   <header id="main-header" class="fixed-top">
     <div class="navbar navbar-expand-xl">
       <div class="container-xl">
@@ -33,9 +33,9 @@
         </div>
         <nav class="navbar-social">
           <ul class="navbar-nav">
-            <li><a href="https://www.facebook.com/weddinglist.th/" target="_blank"><i class="wdl-icon-facebook"></i></a></li>
-            <li><a href="https://line.me/R/ti/p/%40ety4154i" target="_blank"><i class="wdl-icon-line"></i></a></li>
-            <li><a href="mailto:sales@weddinglist.co.th"><i class="wdl-icon-email"></i></a></li>
+            <li><a aria-label="Weddinglist Facebook Page" title="Weddinglist Facebook Page" href="https://www.facebook.com/weddinglist.th/" target="_blank"><i class="wdl-icon-facebook"></i></a></li>
+            <li><a aria-label="Weddinglist Line Official" title="Weddinglist Line Official" href="https://line.me/R/ti/p/%40ety4154i" target="_blank"><i class="wdl-icon-line"></i></a></li>
+            <li><a aria-label="Weddinglist Email Address" title="Weddinglist Email Address" href="mailto:sales@weddinglist.co.th"><i class="wdl-icon-email"></i></a></li>
           </ul>
         </nav>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#top-menu-collapse" aria-controls="wdlNavbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -54,16 +54,6 @@
         ?>
       </div>
     </div>
-    <?php if($localnav === true) : ?>
-      <div class="wdl-localnav">
-        <div class="container-xl">
-          <nav class="wdl-localnav-swiper">
-            <ul class="swiper-wrapper">
-            </ul>
-          </nav>
-        </div>
-      </div>
-    <?php endif; ?>
   </header>
 
   <?php endif; ?>

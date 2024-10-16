@@ -1,15 +1,15 @@
 <?php $allPageArgs = array(
-  'post_type' => array('promotion', 'wedding-fair', 'venue'),
+  'post_type' => array('promotion', 'wedding-fair', 'venue', 'post', 'vendor'),
   'post_status' => 'publish',
   'orderby' => 'rand',
-  'posts_per_page' => '8',
+  'posts_per_page' => '1',
   'meta_key' => 'AllPageActivate',
   'meta_value' => true,
 );
 
 $allPage = new WP_Query($allPageArgs);
 ?>
-<div class="row justify-content-center mb-4">
+<div class="row justify-content-center mb-2">
   <div class="col-12 wdl-metadata-banner">
     <?php if ($allPage->have_posts()): ?>
       <div class="wdl-ad-allpage-loop <?php echo esc_attr($atts['class']); ?>">
@@ -23,9 +23,11 @@ $allPage = new WP_Query($allPageArgs);
                 } else {
                   the_permalink();
                 }
-                ?>">
+                ?>"
+                aria-label="Go to page: <?php echo get_the_title();?>"
+                title="Go to page: <?php echo get_the_title();?>">
                   <figure>
-                    <img src="<?php echo esc_html(get_field('AllPageAdImage')['url']) ?>" width="100%" height="187" alt="<?php get_field('AllPageAdImage')['alt'] ?>">
+                    <img loading="eager" src="<?php echo esc_html(get_field('AllPageAdImage')['url']) ?>" width="100%" height="187" alt="<?php get_field('AllPageAdImage')['alt'] ?>">
                   </figure>
                 </a>
             </div>

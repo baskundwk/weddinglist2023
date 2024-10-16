@@ -1,4 +1,4 @@
-<?php include 'components/header.php' ?>
+<?php include get_stylesheet_directory().'/components/header.php' ?>
 
 <main>
 	<div class="container-xl overflow-hidden">
@@ -75,6 +75,6 @@
 	</div>
 </main>
 
-<?php include 'components/popup-ads.php' ?>
+<?php include get_stylesheet_directory().'/components/popup-ads.php' ?>
 
-<?php include 'components/footer.php' ?>
+<?php include get_stylesheet_directory().'/components/footer.php' ?>

@@ -2,9 +2,10 @@
 
 .wdl-badge-container {
   display: flex;
-  gap: 12px;
+  gap: 4px;
   padding: 0;
   flex-wrap: wrap;
+  align-items: baseline;
 
   .mobile_menu_bar {
     display: none !important;
@@ -63,12 +64,12 @@
     a:active {
       display: block;
       padding: 8px 15px !important;
-      box-shadow: 0 0 0 1px #c1c1c1;
+      box-shadow: 0 0 0 1px #777777;
       border-radius: 5rem;
       font-size: 14px;
       font-weight: 400;
       line-height: 1;
-      color: #c1c1c1 !important;
+      color: #777777 !important;
     }
   }
 
@@ -87,7 +88,7 @@
   font-weight: 400;
   line-height: 1.5;
   display: inline-block;
-  
+
   a {
     color: #777777 !important;
   }
@@ -98,11 +99,11 @@
   background: #ff2758;
   color: #ffffff !important;
   border-radius: 5rem;
-  font-size: 0.875rem;
+  font-size: 0.75rem;
   font-weight: 400;
   line-height: 1.5;
   display: inline;
-  
+
   a {
     color: #ffffff !important;
   }
@@ -113,11 +114,11 @@
   background: #ff2758;
   color: #ffffff !important;
   border-radius: 5rem;
-  font-size: 0.875rem;
+  font-size: 0.75rem;
   font-weight: 400;
   line-height: 1.5;
   display: inline-block;
-  
+
   a {
     color: #ffffff !important;
   }
@@ -129,12 +130,12 @@
   background: #ffffff;
   color: #ff2758 !important;
   border-radius: 5rem;
-  font-size: 0.875rem;
+  font-size: 0.75rem;
   font-weight: 400;
-  line-height: 1.5;
+  line-height: 1;
   display: inline-block;
-  transition: .35s cubic-bezier(0,0,0,1);
-  
+  transition: 0.35s cubic-bezier(0, 0, 0, 1);
+
   a {
     color: #ff2758 !important;
   }
@@ -142,36 +143,35 @@
   &:hover {
     background: #ff2758;
     box-shadow: 0 0 0 1px #ff2758 inset;
-    color: #FFFFFF !important;  
+    color: #ffffff !important;
 
     a {
-      color: #FFFFFF !important;  
+      color: #ffffff !important;
     }
   }
-
 }
 .wdl-badge-sm-secondary {
   padding: 4px 12px;
   white-space: nowrap;
   box-shadow: 0 0 0 1px #777777 inset;
   color: #777777 !important;
+  border-radius: 5rem;
+  font-size: 0.75rem;
+  font-weight: 400;
+  line-height: 1;
+  transition: 0.35s cubic-bezier(0, 0, 0, 1);
+  display: inline-block;
 
   a {
     color: #777777 !important;
   }
-  border-radius: 5rem;
-  font-size: 0.875rem;
-  font-weight: 400;
-  line-height: 1.5;
-  transition: .35s cubic-bezier(0,0,0,1);
-  display: inline-block;
 
   &:hover {
     box-shadow: 0 0 0 1px #ff2758 inset;
-    color: #ff2758 !important;  
+    color: #ff2758 !important;
 
     a {
-      color: #ff2758 !important;  
+      color: #ff2758 !important;
     }
   }
 
@@ -186,11 +186,17 @@
   background: #ffffff;
   color: #ff2758 !important;
   border-radius: 5rem;
-  font-size: 0.875rem;
+  font-size: 0.75rem;
   font-weight: 700;
   line-height: 1;
   display: inline-block;
   a {
     color: #ff2758 !important;
   }
+}
+
+.wdl-badge-sm-subtle {
+  color: #888888;
+  font-weight: 600;
+  padding: 0;
 }

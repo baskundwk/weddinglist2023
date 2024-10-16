@@ -1,4 +1,4 @@
-<?php include 'components/header.php' ?>
+<?php include get_stylesheet_directory() . '/components/header.php' ?>
 <main>
 	<section class="py-3 overflow-hidden">
 		<div class="container-fluid">
@@ -40,51 +40,49 @@
 								?>
 							</div>
 						</div>
-							<div class="swiper-navigation container">
-								<div class="swiper-button-prev"></div>
-								<div class="swiper-button-next"></div>
-							</div>
+						<div class="swiper-navigation container">
+							<div class="swiper-button-prev"></div>
+							<div class="swiper-button-next"></div>
 						</div>
 					</div>
+				</div>
 			<?php endif; ?>
 		</div>
 	</section>
 	<section class="wdl-sticky-bar">
 		<div class="container-xl">
 			<div class="row align-items-center g-3">
-				<div class="col col-lg-6 d-none d-lg-block">
-					<div class="row g-4 align-items-center">
-						<div class="col-auto">
-							<?php $logo = get_field('Logo');
-							if ($logo): ?>
-								<div class="wdl-metadata-logo">
-									<img loading="lazy" src="<?php echo esc_url($logo['sizes']['medium']); ?>" alt="<?php echo esc_attr($logo['alt']); ?>" height="40" />
-								</div>
-							<?php endif; ?>
+				<div class="col-12 col-lg-9 d-flex gap-2 align-items-center">
+					<?php $logo = get_field('Logo');
+					if ($logo): ?>
+						<div class="wdl-metadata-logo">
+							<img loading="lazy" src="<?php echo esc_url($logo['sizes']['medium']); ?>" alt="<?php echo esc_attr($logo['alt']); ?>" height="40" />
 						</div>
-						<div class="col col-lg-auto">
-							<h1 class="h6 text-secondary mb-0 wdl-sticky-bar-title">
-								<?php the_title() ?>
-							</h1>
-						</div>
-					</div>
+					<?php endif; ?>
+					<p class="h6 mb-0 wdl-sticky-bar-title lineclamp-1">
+						<?php the_title() ?>
+					</p>
 				</div>
 				<?php $sponsored = get_field('Sponsor', $relatedPost->ID); ?>
-				<div class="col col-lg-6 d-flex align-items-center justify-content-center justify-content-lg-end gap-3">
-					<a class="wdl-btn" id="apply-cta" href="#apply" data-bs-toggle="modal">
+				<div class="col-12 d-flex flex-row gap-2 col-lg-3 text-center text-lg-end mb-2 mb-sm-0">
+					<a href="#apply" data-bs-target="#apply" data-bs-toggle="modal" class="flex-fill wdl-btn">
 						<?php _e('คลิกขอแพ็กเกจ', 'คลิกขอแพ็กเกจ'); ?>
 					</a>
+
 					<a class="wdl-btn-line d-inline-flex d-lg-none" href="https://line.me/R/oaMessage/%40ety4154i/?สวัสดี%20ต้องการขอแพ็กเกจ%20<?php the_title(); ?>%0A<?php the_permalink(); ?>">
-						<?php _e('ติดต่อแอดมินผ่าน LINE', 'ติดต่อแอดมินผ่าน LINE'); ?>
+						<!-- <?php _e('ติดต่อแอดมินผ่าน LINE', 'ติดต่อแอดมินผ่าน LINE'); ?> -->
 					</a>
 					<a class="wdl-btn-line d-none d-lg-inline-flex" href="https://line.me/R/ti/p/%40ety4154i">
-						<?php _e('ติดต่อแอดมินผ่าน LINE', 'ติดต่อแอดมินผ่าน LINE'); ?>
+						<!-- <?php _e('ติดต่อแอดมินผ่าน LINE', 'ติดต่อแอดมินผ่าน LINE'); ?> -->
 					</a>
+
+					<!-- <a class="wdl-btn-tertiary" href="tel:+66-63-474-8111" aria-label="โทรหา Weddinglist"><i width="16" data-feather="phone"></i></a> -->
 				</div>
+
 			</div>
 		</div>
 	</section>
-	<section class="wdl-main-bar pb-3">
+	<section class="wdl-main-bar">
 		<div class="container-xl">
 			<div class="row">
 				<div class="col-lg-2 mb-4 mb-lg-0">
@@ -149,17 +147,14 @@
 							} ?>
 							<?php if ($characterEffect) {
 								echo ('wdl-character-animation-' . $characterEffect);
-							} ?>"
-								<?php
-								if ($characterColor || $characterBackground): ?>
-									style="
+							} ?>" <?php
+							 if ($characterColor || $characterBackground): ?> style="
 										--background-image: url(<?php echo ($characterBackground['url']) ?>);
 										--box-shadow: none;
 										--color: rgba(<?php echo ($characterColor['red']) ?>,<?php echo ($characterColor['green']) ?>,<?php echo ($characterColor['blue']) ?>,<?php echo ($characterColor['alpha']) ?>);
 										--color-50: rgba(<?php echo ($characterColor['red']) ?>,<?php echo ($characterColor['green']) ?>,<?php echo ($characterColor['blue']) ?>, 50%);
 										--color-0: rgba(<?php echo ($characterColor['red']) ?>,<?php echo ($characterColor['green']) ?>,<?php echo ($characterColor['blue']) ?>, 0);
-									"
-								<?php endif ?>>
+									" <?php endif ?>>
 								<span>
 									<?php echo esc_html($vendorCharacter->name); ?>
 								</span>
@@ -204,7 +199,7 @@
 					<?php
 					if (get_field('Facebook') && get_field('FacebookLink')): ?>
 						<p class="wdl-metadata wdl-archive-facebook mb-0">
-							<a href="<?php echo get_field('FacebookLink')?>" target="_blank">
+							<a href="<?php echo get_field('FacebookLink') ?>" target="_blank">
 								<?php echo get_field('Facebook') ?>
 							</a>
 						</p>
@@ -213,74 +208,105 @@
 					<?php
 					if (get_field('Instagram') && get_field('InstagramLink')): ?>
 						<p class="wdl-metadata wdl-archive-instagram mb-0">
-							<a href="<?php echo get_field('InstagramLink')?>" target="_blank">
+							<a href="<?php echo get_field('InstagramLink') ?>" target="_blank">
 								<?php echo get_field('Instagram') ?>
 							</a>
 						</p>
 					<?php endif; ?>
 				</div>
 				<div class="col-lg-auto text-center py-3 d-flex flex-column">
-						<a id="apply-cta" href="#apply" class="wdl-btn-lg d-block mb-3" data-bs-toggle="modal">
-							<?php _e('คลิกขอแพ็กเกจ', 'คลิกขอแพ็กเกจ'); ?>
-						</a>
-						<a class="wdl-btn-line-lg d-flex d-lg-none" href="https://line.me/R/oaMessage/%40ety4154i/?สวัสดี%20ต้องการขอแพ็กเกจ%20<?php the_title(); ?>%0A<?php the_permalink(); ?>">
-							<?php _e('ติดต่อแอดมินผ่าน LINE', 'ติดต่อแอดมินผ่าน LINE'); ?>
-						</a>
-						<a class="wdl-btn-line-lg d-none d-lg-inline-flex" href="https://line.me/R/ti/p/%40ety4154i">
-							<?php _e('ติดต่อแอดมินผ่าน LINE', 'ติดต่อแอดมินผ่าน LINE'); ?>
-						</a>
+					<a id="apply-cta" href="#apply" class="wdl-btn-lg d-block mb-3" data-bs-toggle="modal">
+						<?php _e('คลิกขอแพ็กเกจ', 'คลิกขอแพ็กเกจ'); ?>
+					</a>
+					<a class="wdl-btn-line-lg d-flex d-lg-none" href="https://line.me/R/oaMessage/%40ety4154i/?สวัสดี%20ต้องการขอแพ็กเกจ%20<?php the_title(); ?>%0A<?php the_permalink(); ?>">
+						<?php _e('ติดต่อแอดมินผ่าน LINE', 'ติดต่อแอดมินผ่าน LINE'); ?>
+					</a>
+					<a class="wdl-btn-line-lg d-none d-lg-inline-flex" href="https://line.me/R/ti/p/%40ety4154i">
+						<?php _e('ติดต่อแอดมินผ่าน LINE', 'ติดต่อแอดมินผ่าน LINE'); ?>
+					</a>
+
+					<!-- <a class="mt-3 wdl-btn-tertiary-lg" href="tel:+66-63-474-8111"><i width="20" data-feather="phone"></i> โทรหา Weddinglist</a> -->
 				</div>
 			</div>
 		</div>
 	</section>
-
-	<?php 
-		$relatedPromotions = get_posts(
-			array(
-				'post_type' => 'promotion',
-				'post_status' => 'any',
-				'meta_query' => array(
-					array(
-						'key' => 'RelatedVendor',
-						'value' => '"' . get_the_ID() . '"',
-						'compare' => 'LIKE'
-					)
+	<?php
+	$coupon = get_posts(
+		array(
+			'posts_per_page' => -1,
+			'post_type' => 'coupon',
+			'meta_query' => array(
+				array(
+					'key' => 'Vendor',
+					'value' => '"' . get_the_ID() . '"',
+					'compare' => 'LIKE'
 				)
 			)
-		);
-		$relatedWeddingFairs = get_posts(
-			array(
-				'post_type' => 'wedding-fair',
-				'post_status' => 'any',
-				'meta_query' => array(
-					array(
-						'key' => 'RelatedVendor',
-						'value' => '"' . get_the_ID() . '"',
-						'compare' => 'LIKE'
-					)
+		)
+	);
+
+	if ($coupon): ?>
+		<section class="py-3">
+			<div class="container">
+				<h2 class="h6 mb-1">คูปองที่ร่วมรายการ</h2>
+				<div class="d-flex flex-wrap gap-3 my-2 align-items-stretch">
+					<?php foreach ($coupon as $singleCoupon):
+						?>
+						<?php include get_stylesheet_directory() . '/components/cards/card-coupon.php' ?>
+						<?php
+					endforeach; ?>
+				</div>
+			</div>
+		</section>
+	<?php endif; ?>
+
+	<?php
+	$relatedPromotions = get_posts(
+		array(
+			'post_type' => 'promotion',
+			'post_status' => 'any',
+			'meta_query' => array(
+				array(
+					'key' => 'RelatedVendor',
+					'value' => '"' . get_the_ID() . '"',
+					'compare' => 'LIKE'
 				)
 			)
-		);
-
-		$tags = wp_get_post_tags(get_the_ID(), array('fields' => 'ids'));
-		$tagsArray = wp_get_post_tags(get_the_ID());
-
-		$relatedPosts = get_posts(
-			array(
-				'post_type' => 'post',
-				'post_status' => 'any',
-				'meta_query' => array(
-					array(
-						'key' => 'RelatedVendor',
-						'value' => '"' . get_the_ID() . '"',
-						'compare' => 'LIKE'
-					)
+		)
+	);
+	$relatedWeddingFairs = get_posts(
+		array(
+			'post_type' => 'wedding-fair',
+			'post_status' => 'any',
+			'meta_query' => array(
+				array(
+					'key' => 'RelatedVendor',
+					'value' => '"' . get_the_ID() . '"',
+					'compare' => 'LIKE'
 				)
 			)
-		);
+		)
+	);
+
+	$tags = wp_get_post_tags(get_the_ID(), array('fields' => 'ids'));
+	$tagsArray = wp_get_post_tags(get_the_ID());
+
+	$relatedPosts = get_posts(
+		array(
+			'post_type' => 'post',
+			'post_status' => 'any',
+			'meta_query' => array(
+				array(
+					'key' => 'RelatedVendor',
+					'value' => '"' . get_the_ID() . '"',
+					'compare' => 'LIKE'
+				)
+			)
+		)
+	);
 
 	?>
-		<?php if ($relatedPromotions || $relatedWeddingFairs || $relatedPosts): ?>
+	<?php if ($relatedPromotions || $relatedWeddingFairs || $relatedPosts): ?>
 		<section class="pb-3 overflow-hidden">
 			<div class="container-xl">
 				<ul class="wdl-tab nav mb-3 wdl-tab-related">
@@ -449,20 +475,22 @@
 		</section>
 	<?php endif; ?>
 
-	<?php if(get_the_excerpt() != '' && is_user_logged_in()) : ?>
-	<section class="pb-3">
-		<div class="container-xl">
-			<div class="alert alert-secondary"><p class="mb-0"><?php echo(get_the_excerpt()); ?></p></div>
-		</div>
-	</section>
+	<?php if (get_the_excerpt() != '' && is_user_logged_in()): ?>
+		<section class="pb-3">
+			<div class="container-xl">
+				<div class="alert alert-secondary">
+					<p class="mb-0"><?php echo (get_the_excerpt()); ?></p>
+				</div>
+			</div>
+		</section>
 	<?php endif; ?>
 	<section>
-	<div class="container">
-      <div class="row">
-        <div class="col text-secondary">
-          <?php the_content(); ?>
+		<div class="container">
+			<div class="row">
+				<div class="col text-secondary">
+					<?php the_content(); ?>
 
-          <?php if (have_rows('Pricing')): ?>
+					<?php if (have_rows('Pricing')): ?>
 						<div class="wdl-main-content wdl-archive wdl-archive-extended">
 							<h2>
 								<?php _e('ข้อมูลค่าใช้จ่าย', 'Pricing') ?>
@@ -470,44 +498,45 @@
 							<div class="swiper wdl-archive-pricing-swiper px-2">
 								<div class="swiper-wrapper">
 									<?php while (have_rows('Pricing')):
-									the_row(); ?>
+										the_row(); ?>
 										<div class="swiper-slide h-auto">
 											<div class="card wdl-archive-card h-100">
 												<?php if (get_sub_field('PricingName')): ?>
-												<?php
-												$pricingImages = get_sub_field('PricingGallery');
-												if ($pricingImages):
-													?>
-												<div class="card-img-top wdl-archive-card-img-top">
-													<div id="hero-gallery" class="swiper wdl-archive-pricing-gallery-swiper">
-														<div class="swiper-wrapper">
-															<?php
-															// Grab each image.
-															foreach ($pricingImages as $image):
-																$image_id = $image['ID'];
-																$image_src = $image['ursl'];
-																$image_caption = $image['caption'];
-																?>
-																<div class="swiper-slide">
-																	<?php echo wp_get_attachment_image($image_id, 'w425'); ?>
+													<?php
+													$pricingImages = get_sub_field('PricingGallery');
+													if ($pricingImages):
+														?>
+														<div class="card-img-top wdl-archive-card-img-top">
+															<div id="hero-gallery" class="swiper wdl-archive-pricing-gallery-swiper">
+																<div class="swiper-wrapper">
+																	<?php
+																	// Grab each image.
+																	foreach ($pricingImages as $image):
+																		$image_id = $image['ID'];
+																		$image_src = $image['ursl'];
+																		$image_caption = $image['caption'];
+																		?>
+																		<div class="swiper-slide">
+																			<?php echo wp_get_attachment_image($image_id, 'w425'); ?>
+																		</div>
+																		<?php
+																	endforeach;
+																	?>
 																</div>
-																<?php
-															endforeach;
-															?>
+																<div class="swiper-navigation swiper-navigation-small">
+																	<div class="swiper-button-prev"></div>
+																	<div class="swiper-button-next"></div>
+																</div>
+															</div>
 														</div>
-														<div class="swiper-navigation swiper-navigation-small">
-															<div class="swiper-button-prev"></div>
-															<div class="swiper-button-next"></div>
-														</div>
+													<?php endif; ?>
+													<div class="card-body">
+														<?php $pricingName = get_sub_field('PricingName'); ?>
+														<h3 class="h5"><?php echo esc_html(get_sub_field('PricingName')); ?></h3>
+														<p class="text-sm"><?php echo esc_html(get_sub_field('PricingDescription')); ?></p>
+														<p class="text-sm text-accent fw-semibold"><?php _e('ราคา', 'ราคา') ?> : <?php echo esc_html(number_format(get_sub_field('PricingStart'))) ?> 			<?php if (get_sub_field('PricingEnd')) { ?> - <?php echo esc_html(number_format(get_sub_field('PricingEnd')));
+																					} ?></p>
 													</div>
-												</div>
-												<?php endif; ?>
-												<div class="card-body">
-													<?php $pricingName = get_sub_field('PricingName'); ?>
-													<h3 class="h5"><?php echo esc_html(get_sub_field('PricingName')); ?></h3>
-													<p class="text-sm"><?php echo esc_html(get_sub_field('PricingDescription')); ?></p>
-													<p class="text-sm text-accent fw-semibold"><?php _e('ราคา','ราคา')?> : <?php echo esc_html(number_format(get_sub_field('PricingStart')))?> <?php if(get_sub_field('PricingEnd')) {?> - <?php echo esc_html(number_format(get_sub_field('PricingEnd'))); }?></p>
-												</div>
 												<?php endif; ?>
 											</div>
 										</div>
@@ -516,9 +545,9 @@
 								<div class="swiper-pagination position-relative"></div>
 							</div>
 						</div>
-          <?php endif; ?>
-        </div>
-      </div>
+					<?php endif; ?>
+				</div>
+			</div>
 		</div>
 	</section>
 
@@ -537,7 +566,7 @@
 								foreach ($videos as $video):
 									?>
 									<div class="swiper-slide wdl-gallery-modal-item">
-										<?php echo($video['iframe_code']) ?>
+										<?php echo ($video['iframe_code']) ?>
 									</div>
 									<?php
 								endforeach;
@@ -565,5 +594,5 @@
 	</div>
 </main>
 
-<?php include 'components/form-vendor.php' ?>
-<?php include 'components/footer.php' ?>
+<?php include get_stylesheet_directory() . '/components/form-vendor.php' ?>
+<?php include get_stylesheet_directory() . '/components/footer.php' ?>

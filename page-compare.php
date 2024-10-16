@@ -1,6 +1,6 @@
-<?php include 'components/header.php' ?>
+<?php include get_stylesheet_directory().'/components/header.php' ?>
 <main>
-  <?php include 'components/lead-menu-revamped.php' ?>
+  <?php include get_stylesheet_directory().'/components/lead-menu-revamped.php' ?>
 
   <?php
   $comparePosts = new WP_Query(
@@ -62,7 +62,9 @@
                     </small>
                   </div>
                   <h3 class="wdl-archive-title mb-0">
-                    <a href="<?php the_permalink(); ?>">
+                    <a href="<?php the_permalink(); ?>"
+                    title="<?php echo get_the_title() ?>"
+                    data-label="<?php echo get_the_title() ?>">
                       <?php the_title(); ?>
                     </a>
                   </h3>
@@ -77,14 +79,12 @@
                       <?php
                       $locations = get_field('Location');
                       if ($locations) : ?>
-                        <div class="wdl-archive-neighborhood">
-                          <ul>
-                            <?php foreach ($locations as $location) : ?>
-                              <li>
-                                <?php echo esc_html($location->name); ?>
-                              </li>
-                            <?php endforeach; ?>
-                          </ul>
+                        <div class="wdl-archive-neighborhood wdl-metadata">
+                          <?php
+                          echo implode(' / ', array_map(function ($location) {
+                            return $location->name;
+                          }, $locations));
+                          ?>
                         </div>
                       <?php endif; ?>
 
@@ -255,6 +255,6 @@
   </div>
 </main>
 
-<?php include 'components/form-general.php' ?>
-<?php include 'components/share-modal.php' ?>
-<?php include 'components/footer.php' ?>
+<?php include get_stylesheet_directory().'/components/form-general.php' ?>
+<?php include get_stylesheet_directory().'/components/share-modal.php' ?>
+<?php include get_stylesheet_directory().'/components/footer.php' ?>

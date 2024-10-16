@@ -1,4 +1,4 @@
-<?php include 'components/header.php' ?>
+<?php include get_stylesheet_directory().'/components/header.php' ?>
 
 <main>
   <section class="wdl-page-register py-4 py-xl-5">
@@ -8,4 +8,4 @@
   </section>
 </main>
 
-<?php include 'components/footer.php' ?>
+<?php include get_stylesheet_directory().'/components/footer.php' ?>

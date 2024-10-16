@@ -4,7 +4,7 @@
   if($popup != true || $post_type != 'coupon') :
 ?>
 
-<footer class="wdl-footer">
+<footer class="wdl-footer html-lazy">
 
   <div class="wdl-footer-nav">
     <div class="container">

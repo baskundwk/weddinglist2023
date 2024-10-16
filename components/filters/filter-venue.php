@@ -45,7 +45,7 @@
             <i data-feather="chevron-down"></i>
           </div>
           <ul class="dropdown-menu dropdown-menu-end">
-            <li><a href="<?php removeParam('location')?>"><?php _e('ที่ตั้งทั้งหมด', 'ที่ตั้งทั้งหมด'); ?></a></li>
+            <li><a href="<?php removeParam('loc')?>"><?php _e('ที่ตั้งทั้งหมด', 'ที่ตั้งทั้งหมด'); ?></a></li>
             <?php
             $venue_location = get_terms(
               array(
@@ -58,9 +58,8 @@
               ?>
               <li>
                 <a href="<?php
-                //echo get_term_link($location->term_id, 'location')
                 updateParam([
-                  'location' => $location->slug
+                  'loc' => $location->term_id
                 ])
                   ?>"><?php echo $location->name ?></a>
               </li>

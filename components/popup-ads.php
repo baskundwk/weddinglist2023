@@ -1,5 +1,5 @@
 <?php $popupArgs = array(
-  'post_type' => array('promotion', 'wedding-fair', 'venue'),
+  'post_type' => array('promotion', 'wedding-fair', 'venue', 'post', 'vendor'),
   'post_status' => 'publish',
   'orderby' => 'rand',
   'posts_per_page' => '8',
@@ -11,7 +11,7 @@ $popup = new WP_Query($popupArgs);
 ?>
 <?php if($popup->have_posts()): ?>
   <div class="modal fade wdl-ad-popup-extended wdl-modal-autotrigger" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-dialog modal-dialog-centered modal-lg justify-content-center">
       <div class="modal-content mb-0">
         <button class="btn-close" data-bs-dismiss="modal" aria-label="Close" type="button" ่></button>
         <div class="swiper wdl-ad-popup-swiper p-lg-3">

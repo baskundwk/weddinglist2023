@@ -1,7 +1,7 @@
 .wdl-tab {
   li {
     > a {
-      padding: 1rem;
+      padding: .5rem;
       display: flex;
       flex-direction: column;
       gap: .5rem;
@@ -19,7 +19,6 @@
 
       @include max-width-xl {
         flex-direction: row;
-        padding: .5rem 0 .75rem;
       }
 
       &.active {

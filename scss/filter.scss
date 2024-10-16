@@ -3,7 +3,7 @@
   gap: 8px;
   flex-direction: row;
   justify-content: space-between;
-  
+
   @include max-width-xl {
     justify-content: flex-start;
     flex-direction: column;
@@ -18,7 +18,6 @@
   overflow: visible;
   z-index: 5;
 
-
   .swiper-wrapper {
     @include min-width-md {
       justify-content: flex-end;
@@ -29,7 +28,7 @@
     position: relative;
 
     &:after {
-      content: '';
+      content: "";
       position: absolute;
       right: -4px;
       top: 50%;
@@ -37,10 +36,10 @@
       display: block;
       width: 1px;
       height: 20px;
-      background: #EEE;
+      background: #eee;
       margin-left: 4px;
     }
-  
+
     &:last-child {
       &::after {
         content: none;
@@ -53,7 +52,7 @@
   padding: 6px 12px;
   padding-right: 8px;
   white-space: nowrap;
-  background: #FFFFFF;
+  background: #ffffff;
   //box-shadow: 0 0 0 1px #C7C7C7 inset;
   border: none;
   color: #777777 !important;
@@ -67,8 +66,8 @@
   display: flex;
   gap: 4px;
   align-items: center;
+  max-width: 170px;
 
-  
   &:hover {
     color: #ff2758 !important;
     //box-shadow: 0 0 0 1px #ff2758 inset;
@@ -77,5 +76,6 @@
   svg {
     width: 16px;
     height: 16px;
+    flex: 0 0 auto;
   }
 }

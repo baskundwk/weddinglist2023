@@ -1,0 +1,65 @@
+.ez-toc-custom {
+  max-width: 250px;
+  background: #ffffff;
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.1) inset,
+    0 0 0 rgba(0, 0, 0, 0.05);
+  padding: 12px;
+  border-radius: 6px;
+  margin-bottom: 16px;
+
+  .ez-toc-title {
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
+
+  ul {
+    margin-bottom: 0;
+    padding-left: 1.3rem;
+    max-height: 50vh;
+    overflow: auto;
+    padding-right: 0.5rem;
+
+    @include max-width-xl {
+      max-height: 75vh;
+    }
+
+    &::-webkit-scrollbar {
+      height: 3px;
+      width: 3px;
+    }
+    &::-webkit-scrollbar-track {
+      border-radius: 5px;
+      background-color: #dfe9eb;
+    }
+
+    &::-webkit-scrollbar-track:hover {
+      background-color: #dfe9eb;
+    }
+
+    &::-webkit-scrollbar-track:active {
+      background-color: #dfe9eb;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      border-radius: 5px;
+      background-color: #999999;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+      background-color: #999999;
+    }
+
+    &::-webkit-scrollbar-thumb:active {
+      background-color: #999999;
+    }
+
+    li {
+      font-size: 0.875rem;
+      line-height: 1.5;
+      a {
+        font-weight: 400;
+      }
+    }
+  }
+}
