@@ -32,7 +32,7 @@
         <?php if($_GET['label']) {
           echo $_GET['label'];
         } else {
-          _e('จัดเรียงโดย', 'จัดเรียงโดย');
+          _e('จัดเรียงโดย', 'wdl');
         }?>  
         <i data-feather="arrow-down"></i></button>
         <ul class="dropdown-menu dropdown-menu-end">

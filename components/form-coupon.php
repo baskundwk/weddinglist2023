@@ -3,7 +3,7 @@
     <div class="modal-content m-1 mb-0">
       <button class="btn-close" data-bs-dismiss="modal"></button>
       <div class="modal-body p-3 p-lg-3">
-        <h2><?php _e('กรุณากรอกข้อมูลผู้ติดต่อ', 'กรุณากรอกข้อมูลผู้ติดต่อ') ?></h2>
+        <h2><?php _e('กรุณากรอกข้อมูลผู้ติดต่อ', 'wdl') ?></h2>
         <hr class="mb-2">
         <ul class="wdl-form-general-list">
           
@@ -42,7 +42,7 @@
             </div>
             <div class="col-6">
               <div class="form-floating">
-                <input class="form-control" name="budget" id="budget" type="number" placeholder="งบประมาณ" />
+                <input class="form-control" name="budget" id="budget" type="number" placeholder="งบประมาณ*" />
                 <label for="budget">งบประมาณ*</label>
               </div>
             </div>
@@ -66,7 +66,7 @@
             </div>
             <hr class="my-1 opacity-0">
             <button id="wdl-form-general-submit" type="submit" name="submit" class="wdl-btn-lg wdl-form-submit">ลงทะเบียน</button>
-            <p class="fail-message text-red"><?php _e('ขออภัยค่ะ ไม่สามารถส่งข้อมูลได้ กรุณาลองใหม่','ขออภัยค่ะ ไม่สามารถส่งข้อมูลได้ กรุณาลองใหม่') ?></p>
+            <p class="fail-message text-red"><?php _e('ขออภัยค่ะ ไม่สามารถส่งข้อมูลได้ กรุณาลองใหม่','wdl') ?></p>
           </div>
         </form>
       </div>
@@ -80,8 +80,8 @@
       <div class="modal-body text-center">
         <div class="py-4">
           <img class="mb-4" src="<?php echo(get_theme_file_uri() . '/images/logo.png') ?>" alt="Weddinglist" width="180" height="43">
-          <h2 class="text-red"><?php _e('ลงทะเบียนสำเร็จ','ลงทะเบียนสำเร็จ') ?></h2>
-          <p><?php _e('ทางโรงแรมที่ท่านได้เลือกไว้จะติดต่อกลับมาในไม่ช้า ขอบคุณค่ะ', 'ทางโรงแรมที่ท่านได้เลือกไว้จะติดต่อกลับมาในไม่ช้า ขอบคุณค่ะ') ?></p>
+          <h2 class="text-red"><?php _e('ลงทะเบียนสำเร็จ','wdl') ?></h2>
+          <p><?php _e('ทางโรงแรมที่ท่านได้เลือกไว้จะติดต่อกลับมาในไม่ช้า ขอบคุณค่ะ', 'wdl') ?></p>
         </div>
       </div>
     </div>

@@ -100,12 +100,12 @@ textarea {
     padding: 8px;
   }
 
-  >.form-control-plaintext~label,
+ /*  >.form-control-plaintext~label,
   >.form-control:focus~label,
   >.form-control:not(:placeholder-shown)~label,
   >.form-select~label {
     
-  }
+  } */
   > .form-control:not(:placeholder-shown) ~ label::after {
     background: none;
   }

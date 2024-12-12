@@ -1,0 +1,168 @@
+#adminmenu {
+  .menu-top[class*="toplevel_page_text-title-"] {
+    pointer-events: none;
+    color: #999;
+    font-size: 13px;
+    min-height: 0;
+    .wp-menu-image {
+      display: none;
+    }
+    .wp-menu-name {
+      padding: 16px 8px 4px;
+    }
+  }
+  li.wp-menu-separator {
+    height: 0;
+    margin-bottom: 16px;
+  }
+
+  .wp-has-submenu {
+    .wp-submenu {
+      max-height: 50vh;
+      overflow-y: auto;
+      transform-origin: left center;
+
+      &::-webkit-scrollbar {
+        height: 5px;
+        width: 5px;
+      }
+      &::-webkit-scrollbar-track {
+        border-radius: 5px;
+        background-color: #0c0c0c;
+      }
+
+      &::-webkit-scrollbar-track:hover {
+        background-color: #0c0c0c;
+      }
+
+      &::-webkit-scrollbar-track:active {
+        background-color: #0c0c0c;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        border-radius: 5px;
+        background-color: #cccccc;
+      }
+
+      &::-webkit-scrollbar-thumb:hover {
+        background-color: #cccccc;
+      }
+
+      &::-webkit-scrollbar-thumb:active {
+        background-color: #cccccc;
+      }
+    }
+    &:after {
+      content: "";
+      opacity: 0;
+      transition: 0.35s cubic-bezier(0, 0, 0, 1);
+    }
+
+    &.opensub {
+      .wp-submenu {
+        animation: wp-submenu 0.35s cubic-bezier(0, 0, 0, 1) both;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15), 0 2px 4px rgba(0, 0, 0, 0.5);
+        background: rgb(12 12 12 / 90%);
+        backdrop-filter: blur(3px);;
+      }
+
+      &:after {
+        opacity: 1;
+      }
+    }
+
+    @keyframes wp-submenu {
+      0% {
+        scale: 0.8;
+        opacity: 0;
+      }
+      100% {
+        scale: 1;
+        opacity: 1;
+      }
+    }
+  }
+
+  li.current a.menu-top,
+  li.wp-has-current-submenu .wp-submenu .wp-submenu-head,
+  li.wp-has-current-submenu a.wp-has-current-submenu,
+  li.current.menu-top {
+    background: #ff2758;
+  }
+
+  a,
+  li.menu-top,
+  li.opensub > a.menu-top,
+  li > a.menu-top,
+  .wp-has-current-submenu .wp-submenu a,
+  .wp-has-current-submenu.opensub .wp-submenu a,
+  .wp-submenu a,
+  a.wp-has-current-submenu + .wp-submenu a {
+    transition: 0.35s cubic-bezier(0, 0, 0, 1);
+  }
+
+  a:hover,
+  li.menu-top:hover,
+  li.opensub > a.menu-top,
+  li > a.menu-top:focus {
+    background: #ff2758;
+  }
+
+  .wp-has-current-submenu .wp-submenu a:focus,
+  .wp-has-current-submenu .wp-submenu a:hover,
+  .wp-has-current-submenu.opensub .wp-submenu a:focus,
+  .wp-has-current-submenu.opensub .wp-submenu a:hover,
+  .wp-submenu a:focus,
+  .wp-submenu a:hover,
+  a.wp-has-current-submenu:focus + .wp-submenu a:focus,
+  a.wp-has-current-submenu:focus + .wp-submenu a:hover {
+    color: #ff2758;
+    box-shadow: inset 4px 0 0 0 currentColor;
+  }
+}
+
+#wpadminbar {
+  .ab-top-menu > li.menupop.hover > .ab-item,
+  &.nojq .quicklinks .ab-top-menu > li > .ab-item:focus,
+  &.nojs .ab-top-menu > li.menupop:hover > .ab-item,
+  &:not(.mobile) .ab-top-menu > li:hover > .ab-item,
+  &:not(.mobile) .ab-top-menu > li > .ab-item:focus {
+    color: #ff2758;
+    background: transparent;
+  }
+
+  &:not(.mobile) > #wp-toolbar a:focus span.ab-label,
+  &:not(.mobile) > #wp-toolbar li.hover span.ab-label,
+  &:not(.mobile) > #wp-toolbar li:hover span.ab-label {
+    color: #ff2758;
+    background: transparent;
+  }
+
+  &:not(.mobile) li:hover #adminbarsearch:before,
+  &:not(.mobile) li:hover .ab-icon:before,
+  &:not(.mobile) li:hover .ab-item:after,
+  &:not(.mobile) li:hover .ab-item:before {
+    color: #ff2758;
+  }
+
+   .quicklinks .ab-sub-wrapper .menupop.hover > a,
+   .quicklinks .menupop ul li a:focus,
+   .quicklinks .menupop ul li a:focus strong,
+   .quicklinks .menupop ul li a:hover,
+   .quicklinks .menupop ul li a:hover strong,
+   .quicklinks .menupop.hover ul li a:focus,
+   .quicklinks .menupop.hover ul li a:hover,
+   li #adminbarsearch.adminbar-focused:before,
+   li .ab-item:focus .ab-icon:before,
+   li .ab-item:focus:before,
+   li a:focus .ab-icon:before,
+   li.hover .ab-icon:before,
+   li.hover .ab-item:before,
+   li:hover #adminbarsearch:before,
+   li:hover .ab-icon:before,
+   li:hover .ab-item:before,
+  &.nojs .quicklinks .menupop:hover ul li a:focus,
+  &.nojs .quicklinks .menupop:hover ul li a:hover {
+    color: #ff2758;
+  }
+}

@@ -19,17 +19,24 @@
             "id": "<?php the_ID() ?>"
           }'>
     <label for="card-select-<?php the_ID() ?>">
-      <?php _e('เลือก', 'เลือก') ?>
+      <?php _e('เลือก', 'wdl') ?>
     </label>
   </div>
 
   <div class="card-body wdl-archive-card-body">
     <div class="wdl-badge-container mb-1">
       <?php
-      $date = get_field('Date');
+      $date = get_field('DateStart');
       if ($date): ?>
-        <span class="badge wdl-badge-sm-primary">
-          <?php the_field('Date') ?>
+        <span class="badge wdl-badge-sm-subtle">
+          <?php
+          if (get_field('DateStart')) {
+            echo promotionDate(get_field('DateStart'), 'DateStart');
+          }
+          if (get_field('DateEnd')) {
+            echo promotionDate(get_field('DateEnd'), 'DateEnd');
+          }
+          ?>
         </span>
       <?php endif; ?>
       <?php $hotDeal = get_field('HotDeal');
@@ -93,6 +100,6 @@
 
   <div class="card-footer">
     <a href="#" class="wdl-btn-cta wdl-form-general-direct" data-bs-toggle="modal" data-bs-target=".wdl-form-general-modal">ลงทะเบียนร่วมงาน</a>
-    <a href="<?php the_permalink() ?>" class="wdl-btn-more">ดูรายละเอียด</a>
+    <a href="<?php the_permalink() ?>" class="wdl-btn-more"><?php _e('ดูรายละเอียด', 'wdl') ?></a>
   </div>
 </div>

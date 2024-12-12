@@ -4,8 +4,7 @@
  *
  * Configure the plugin settings page.
  */
-class wdl_settings
-{
+class wdl_settings {
 
 	/**
 	 * Capability required by the user to access the My Plugin menu entry.
@@ -99,6 +98,18 @@ class wdl_settings
 			'type' => 'text',
 		],
 		[
+			'id' => 'word-frontpage-listing-title',
+			'label' => 'Front Page - Listing Title',
+			'description' => '',
+			'type' => 'text',
+		],
+		[
+			'id' => 'word-frontpage-listing-desc',
+			'label' => 'Front Page - Listing Description',
+			'description' => '',
+			'type' => 'text',
+		],
+		[
 			'id' => 'word-frontpage-post-title',
 			'label' => 'Front Page - Post Title',
 			'description' => '',
@@ -184,8 +195,7 @@ class wdl_settings
 	/**
 	 * Register the settings and all fields.
 	 */
-	function settings_init(): void
-	{
+	function settings_init() {
 
 		// Register a new setting this page.
 		register_setting('weddinglist-setting', 'wdl_options');
@@ -194,7 +204,7 @@ class wdl_settings
 		// Register a new section.
 		add_settings_section(
 			'weddinglist-setting-section',
-			__('', 'weddinglist-setting'),
+			__('', 'wdl'),
 			[$this, 'render_section'],
 			'weddinglist-setting'
 		);
@@ -205,7 +215,7 @@ class wdl_settings
 			// Register a new field in the main section.
 			add_settings_field(
 				$field['id'], /* ID for the field. Only used internally. To set the HTML ID attribute, use $args['label_for']. */
-				__($field['label'], 'weddinglist-setting'), /* Label for the field. */
+				__($field['label'], 'wdl'), /* Label for the field. */
 				[$this, 'render_field'], /* The name of the callback function. */
 				'weddinglist-setting', /* The menu page on which to display this field. */
 				'weddinglist-setting-section', /* The section of the settings page in which to show the box. */
@@ -221,22 +231,21 @@ class wdl_settings
 	/**
 	 * Add a subpage to the WordPress Settings menu.
 	 */
-	function options_page(): void
-	{
-		add_submenu_page(
-			'options-general.php', /* Parent Menu Slug */
+	function options_page()	{
+		add_menu_page(
 			'Weddinglist Settings', /* Page Title */
 			'Weddinglist Settings', /* Menu Title */
 			$this->capability, /* Capability */
 			'weddinglist-setting', /* Menu Slug */
 			[$this, 'render_options_page'], /* Callback */
+			'dashicons-carrot'
 		);
 	}
 
 	/**
 	 * Render the settings page.
 	 */
-	function render_options_page(): void
+	function render_options_page()
 	{
 
 		// check user capabilities
@@ -279,7 +288,7 @@ class wdl_settings
 	 *
 	 * @param array $args Args to configure the field.
 	 */
-	function render_field(array $args): void
+	function render_field(array $args)
 	{
 
 		$field = $args['field'];
@@ -446,8 +455,7 @@ class wdl_settings
 	 *     @type string $id The ID of the section.
 	 * }
 	 */
-	function render_section(array $args): void
-	{
+	function render_section(array $args){
 		?>
 		<h2 id="<?php echo esc_attr($args['id']); ?>"><?php esc_html_e('Wording', 'weddinglist-setting'); ?></h2>
 		<?php

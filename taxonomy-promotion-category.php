@@ -51,7 +51,7 @@
                       "postType": "<?php echo get_post_type() ?>",
                       "id": "<?php the_ID() ?>"
                     }'>
-                <label for="card-select-<?php the_ID() ?>"><?php _e('เลือก','เลือก')?></label>
+                <label for="card-select-<?php the_ID() ?>"><?php _e('เลือก','wdl')?></label>
               </div>
             </div>
 
@@ -116,7 +116,7 @@
 
                   if ($coupon): ?>
               <div class="mt-1">
-                <p class="text-sm mb-1 text-secondary">คูปองที่ร่วมรายการ</p>
+                <p class="text-sm mb-1 text-secondary"><?php _e('คูปองที่ร่วมรายการ', 'wdl') ?></p>
                 <div class="d-flex flex-wrap gap-2 align-items-stretch">
                   <?php foreach ($coupon as $singleCoupon): ?>
                   <div class="wdl-coupon-picker wdl-coupon-picker-small">
@@ -138,8 +138,8 @@
             </div>
 
             <div class="card-footer">
-              <a href="#" class="wdl-btn-cta wdl-form-general-direct" data-bs-toggle="modal" data-bs-target=".wdl-form-general-modal">คลิกขอแพ็กเกจ</a>
-              <a href="<?php the_permalink() ?>" class="wdl-btn-more">ดูรายละเอียด</a>
+              <a href="#" class="wdl-btn-cta wdl-form-general-direct" data-bs-toggle="modal" data-bs-target=".wdl-form-general-modal"><?php _e('คลิกขอแพ็กเกจ', 'wdl') ?></a>
+              <a href="<?php the_permalink() ?>" class="wdl-btn-more"><?php _e('ดูรายละเอียด', 'wdl') ?></a>
             </div>
           </div>
         </div>

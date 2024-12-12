@@ -11,19 +11,19 @@
           <?php the_title(); ?>
         </h1>
         <?php if(get_the_excerpt()) {?>
-          <p class="mt-3 mb-0 text-secondary text-sm text-center">
-            <?php echo (get_the_excerpt()); ?>
-          </p>
+        <p class="mt-3 mb-0 text-secondary text-sm text-center">
+          <?php echo (get_the_excerpt()); ?>
+        </p>
         <?php } ?>
       </div>
     </div>
   </section>
   <section class="wdl-listing-section wdl-archive-infinite-scroll">
-    <div class="container gap-3 wdl-archive-infinite-scroll-wrapper" id="wdl-archive-infinite-scroll-wrapper">
+    <div class="container gap-2 wdl-archive-infinite-scroll-wrapper" id="wdl-archive-infinite-scroll-wrapper">
       <?php foreach (get_field('List') as $item): 
         $listID =  $item['ListVenue']->ID;
         ?>
-        <?php include get_stylesheet_directory().'/components/cards/card-listing.php' ?>
+      <?php include get_stylesheet_directory().'/components/cards/card-listing.php' ?>
       <?php endforeach; ?>
     </div>
   </section>

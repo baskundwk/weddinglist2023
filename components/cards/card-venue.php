@@ -26,7 +26,7 @@
         "id": "<?php the_ID() ?>"
       }'>
     <label for="card-select-<?php the_ID() ?>">
-      <?php _e('เลือก/เปรียบเทียบ', 'เลือก/เปรียบเทียบ') ?>
+      <?php _e('เลือก/เปรียบเทียบ', 'wdl') ?>
     </label>
   </div>
 
@@ -88,19 +88,19 @@
       <?php
       $minPrice = get_field('MinPrice');
       if ($minPrice): ?>
-        <div class="wdl-archive-min-price"><?php _e('ราคาเริ่มต้น', 'Starting price') ?>&nbsp;<strong> <?php echo number_format(get_field('MinPrice')) ?>+ <?php _e('บาท', 'THB') ?></strong></div>
+        <div class="wdl-archive-min-price"><?php _e('ราคาเริ่มต้น', 'wdl') ?>&nbsp;<strong> <?php echo number_format(get_field('MinPrice')) ?>+ <?php _e('บาท', 'wdl') ?></strong></div>
       <?php endif; ?>
 
       <?php
       $maxGuest = get_field('MaxGuest');
       if ($maxGuest): ?>
-        <div class="wdl-archive-max-guest"><?php _e('รองรับแขกสูงสุด', 'Max guest') ?>&nbsp;<strong><?php echo number_format(get_field('MaxGuest')) ?> <?php _e('คน', 'people') ?></strong></div>
+        <div class="wdl-archive-max-guest"><?php _e('รองรับแขกสูงสุด', 'wdl') ?>&nbsp;<strong><?php echo number_format(get_field('MaxGuest')) ?> <?php _e('คน', 'wdl') ?></strong></div>
       <?php endif; ?>
     </div>
   </div>
 
   <div class="card-footer">
-    <a href="#" class="wdl-btn-cta wdl-form-general-direct" data-bs-toggle="modal" data-bs-target=".wdl-form-general-modal">คลิกขอแพ็กเกจ</a>
-    <a href="<?php the_permalink() ?>" class="wdl-btn-more">ดูรายละเอียด</a>
+    <a href="#" class="wdl-btn-cta wdl-form-general-direct" data-bs-toggle="modal" data-bs-target=".wdl-form-general-modal"><?php _e('คลิกขอแพ็กเกจ', 'wdl')?></a>
+    <a href="<?php the_permalink() ?>" class="wdl-btn-more"><?php _e('ดูรายละเอียด', 'wdl') ?></a>
   </div>
 </div>

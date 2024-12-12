@@ -1,10 +1,10 @@
-<?php 
+<?php /* 
 add_action('customize_register', 'wdl_customizer_register');
 
 function wdl_customizer_register($wp_customize) {
     // Add a new section if needed
     $wp_customize->add_section('my_custom_section', array(
-        'title' => __('Weddinglist Settings', 'text-domain'), // Replace 'text-domain' with your theme's text domain
+        'title' => __('Weddinglist Settings', 'wdl'), // Replace 'text-domain' with your theme's text domain
         'priority' => 30,
     ));
 
@@ -16,8 +16,8 @@ function wdl_customizer_register($wp_customize) {
     ));
 
     $wp_customize->add_control('my_custom_string_setting', array(
-        'label' => __('My Custom String Setting', 'text-domain'), // Replace 'text-domain' with your theme's text domain
+        'label' => __('My Custom String Setting', 'wdl'), // Replace 'text-domain' with your theme's text domain
         'section' => 'my_custom_section',
         'type' => 'text',
     ));
-}
+} */

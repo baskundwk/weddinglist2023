@@ -1,4 +1,14 @@
-.ez-toc-custom {
+.wdl-single-stickybar-toc {
+  .wdl-toc-inner {
+    transition: 0.35s cubic-bezier(0, 0, 0, 1);
+    &.disabled {
+      opacity: 0;
+    }
+  }
+}
+
+.ez-toc-custom,
+.wdl-toc-inner {
   max-width: 250px;
   background: #ffffff;
   box-shadow:

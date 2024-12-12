@@ -329,3 +329,14 @@ body.admin-bar.et_fixed_nav .wdl-sticky-bar {
 .et-db #et-boc .et_pb_widget {
   width: 100% !important;
 }
+
+.wdl-single-video-player {
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 10px;
+  iframe {
+    width: 100%;
+    max-height: 700px;
+    display: block;
+  }
+}

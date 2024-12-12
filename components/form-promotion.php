@@ -3,11 +3,8 @@
     <div class="modal-content m-1 mb-0">
       <button class="btn-close" data-bs-dismiss="modal"></button>
       <div class="modal-body p-3 p-lg-3">
-        <p class="h2"><?php _e('กรุณากรอกข้อมูลผู้ติดต่อ', 'กรุณากรอกข้อมูลผู้ติดต่อ') ?></p>
+        <p class="h2"><?php _e('กรุณากรอกข้อมูลผู้ติดต่อ', 'wdl') ?></p>
         <hr class="mb-2">
-        <ul class="wdl-form-general-list">
-          
-        </ul>
         <form id="wdl-form-general" class="wdl-form-general" action="" method="post" enctype="multipart/form-data">
           <div class="row g-2 g-lg-3">
             <div class="col-6">
@@ -42,7 +39,7 @@
             </div>
             <div class="col-6">
               <div class="form-floating">
-                <input class="form-control" name="budget" id="budget" type="number" placeholder="งบประมาณ" required />
+                <input class="form-control" name="budget" id="budget" type="number" placeholder="งบประมาณ*" required />
                 <label for="budget">งบประมาณ*</label>
               </div>
             </div>
@@ -55,9 +52,9 @@
             <div class="col-md-12">
               <div class="d-block"><label>ช่วงเวลาจัดงาน</label></div>
               <div class="wdl-checkbox-button">
-                <input type="checkbox" name="daytime" id="daytime-1" value="งานเลี้ยงเช้า"/><label for="daytime-1">งานเลี้ยงเช้า</label>
-                <input type="checkbox" name="daytime" id="daytime-2" value="งานเลี้ยงเที่ยง"/><label for="daytime-2">งานเลี้ยงเที่ยง</label>
-                <input type="checkbox" name="daytime" id="daytime-3" value="งานเลี้ยงเย็น"/><label for="daytime-3">งานเลี้ยงเย็น</label>
+                <input type="checkbox" name="daytime" id="daytime-1" value="งานเลี้ยงเช้า" /><label for="daytime-1">งานเลี้ยงเช้า</label>
+                <input type="checkbox" name="daytime" id="daytime-2" value="งานเลี้ยงเที่ยง" /><label for="daytime-2">งานเลี้ยงเที่ยง</label>
+                <input type="checkbox" name="daytime" id="daytime-3" value="งานเลี้ยงเย็น" /><label for="daytime-3">งานเลี้ยงเย็น</label>
               </div>
             </div>
             <div class="col-md-12">
@@ -104,29 +101,29 @@
             );
             if($coupon) : ?>
             <div class="col-md-12 mt-3">
-              <p class="h6 mb-1">คูปองที่ร่วมรายการ<br/><small class="fw-normal">กรุณากรอกข้อมูลผู้ติดต่อให้ครบถ้วนเพื่อเก็บรับคูปอง และท่านจะสามารถใช้คูปองได้หลังจากยืนยันตัวตนผ่านอีเมลในขั้นตอนถัดไป</small></p>
+              <p class="h6 mb-1"><?php _e('คูปองที่ร่วมรายการ', 'wdl') ?></p>
               <div class="d-flex flex-wrap gap-3 my-2 align-items-stretch">
                 <?php foreach ($coupon as $singleCoupon): ?>
-                  <div class="wdl-coupon-picker wdl-coupon-checkbox disabled">
-                    <div class="wdl-coupon-picker-indicator"></div>
-                    <input class="d-none wdl-coupon-checkbox-target" type="checkbox" value="<?php echo $singleCoupon->ID?>" readonly />
-                    <div class="wdl-coupon-picker-image">
-                      <img src="<?php echo (get_field('Image', $singleCoupon->ID)['sizes']['medium']) ?>" />
+                <div class="wdl-coupon-picker wdl-coupon-checkbox">
+                  <div class="wdl-coupon-picker-indicator"></div>
+                  <input class="d-none wdl-coupon-checkbox-target" type="checkbox" value="<?php echo $singleCoupon->ID?>" readonly />
+                  <div class="wdl-coupon-picker-image">
+                    <img src="<?php echo (get_field('Image', $singleCoupon->ID)['sizes']['medium']) ?>" />
+                  </div>
+                  <div class="wdl-coupon-picker-info">
+                    <div class="wdl-coupon-picker-title">
+                      <?php echo (get_the_title($singleCoupon->ID)) ?>
                     </div>
-                    <div class="wdl-coupon-picker-info">
-                      <div class="wdl-coupon-picker-title">
-                        <?php echo (get_the_title($singleCoupon->ID)) ?>
+                    <div class="d-flex flex-wrap justify-content-between align-items-center">
+                      <div class="wdl-coupon-picker-action">
+                        เก็บคูปอง
                       </div>
-                      <div class="d-flex flex-wrap justify-content-between align-items-center">
-                        <div class="wdl-coupon-picker-action">
-                          <button type="button">เก็บคูปอง</button>
-                        </div>
-                        <div class="wdl-coupon-picker-term">
-                          <a class="wdl-coupon-popup-link" href="<?php echo (get_the_permalink($singleCoupon->ID)) ?>?popup=true" target="blank">เงื่อนไข</a>
-                        </div>
+                      <div class="wdl-coupon-picker-term">
+                        <a class="wdl-coupon-popup-link" href="<?php echo (get_the_permalink($singleCoupon->ID)) ?>?popup=true" target="blank">เงื่อนไข</a>
                       </div>
                     </div>
                   </div>
+                </div>
                 <?php endforeach; ?>
               </div>
             </div>
@@ -175,80 +172,49 @@
   </div>
 </div>
 <script>
-  $(document).ready(() => {
-    $('#wdl-form-general').submit(function (e) {
-      e.preventDefault();
-
-      $('.wdl-form-general-modal .modal-body').addClass('submitting')
-
-      let selectedDaytime = []
-      let selectedCoupon = []
-
-      $('.wdl-coupon-checkbox-target:checked').each((i, e) => {
-        selectedCoupon.push($(e).val())
-      })
-
-      $('input[name=daytime]:checked').each((index, element)=> {
-        selectedDaytime.push(element.value)
-      })
-      
-      $.post("<?php echo admin_url('admin-ajax.php'); ?>", {
-        action: 'send_email',
-        name: $('#name-lastname').val(),
-        tel: $('#tel').val(),
-        email: $('#email').val(),
-        lineid: $('#lineid').val(),
-        guest: $('#guest').val(),
-        budget: $('#budget').val(),
-        date: $('#date').val(),
-        daytime: selectedDaytime.join(', '),
-        //appoint: $('#appoint').is(':checked'),
-        appointDate: $('#appoint-date').val(),
-        appointTime: $('#appoint-time').val(),
-        message: $('#message').val(),
-        cardId: <?php echo get_the_id()?>,
-        leadType: 'Promotion',
-        selectedCoupon: selectedCoupon.join(',')
-      }, ()=> {
-        $('#wdl-form-general').removeClass('failed')
-        $('.wdl-form-general-modal').modal('hide')
-        //$('.wdl-form-general-succeed-modal').modal('show')
-
-        if(selectedCoupon.length > 0) {
-          $('.wdl-form-general-coupon-verify').modal('show')
-        } else {
-          $('.wdl-form-general-succeed-modal').modal('show')
-        }
-
-        $('.wdl-form-general-modal .modal-body').removeClass('submitting')
-        generalDirectData = {}
-      }).fail(()=> {
-        $('.wdl-form-general-modal .modal-body').removeClass('submitting')
-        $('#wdl-form-general').addClass('failed')
-      })
-
-      /* $('.wdl-coupon-checkbox-target:checked').each((i, e)=> {
-        const couponId = $(e).val()
-        $.post("<?php echo admin_url('admin-ajax.php'); ?>", {
-          toClient: true,
-          action: 'send_email',
-          name: $('#name-lastname').val(),
-          tel: $('#tel').val(),
-          email: $('#email').val(),
-          recepient: '<?php $recepient?>' ,
-          lineid: $('#lineid').val(),
-          guest: $('#guest').val(),
-          budget: $('#budget').val(),
-          date: $('#date').val(),
-          daytime: selectedDaytime.join(', '),
-          //appoint: $('#appoint').is(':checked'),
-          appointDate: $('#appoint-date').val(),
-          appointTime: $('#appoint-time').val(),
-          message: $('#message').val(),
-          cardId: couponId,
-          leadType: 'Coupon'
-        }, ()=> {}).fail(()=> {})
-      }) */
-    });
-  })
+$(document).ready(() => {
+  $('#wdl-form-general').submit(function(e) {
+    e.preventDefault();
+    $('.wdl-form-general-modal .modal-body').addClass('submitting')
+    let selectedDaytime = []
+    let selectedCoupon = []
+    $('.wdl-coupon-checkbox-target:checked').each((i, e) => {
+      selectedCoupon.push($(e).val())
+    })
+    $('input[name=daytime]:checked').each((index, element) => {
+      selectedDaytime.push(element.value)
+    })
+    $.post("<?php echo admin_url('admin-ajax.php'); ?>", {
+      action: 'send_email',
+      name: $('#name-lastname').val(),
+      tel: $('#tel').val(),
+      email: $('#email').val(),
+      lineid: $('#lineid').val(),
+      guest: $('#guest').val(),
+      budget: $('#budget').val(),
+      date: $('#date').val(),
+      daytime: selectedDaytime.join(', '),
+      //appoint: $('#appoint').is(':checked'),
+      appointDate: $('#appoint-date').val(),
+      appointTime: $('#appoint-time').val(),
+      message: $('#message').val(),
+      cardId: <?php echo get_the_id()?>,
+      leadType: 'Promotion',
+      selectedCoupon: selectedCoupon.join(',')
+    }, () => {
+      $('#wdl-form-general').removeClass('failed')
+      $('.wdl-form-general-modal').modal('hide')
+      if (selectedCoupon.length > 0) {
+        $('.wdl-form-general-coupon-verify').modal('show')
+      } else {
+        $('.wdl-form-general-succeed-modal').modal('show')
+      }
+      $('.wdl-form-general-modal .modal-body').removeClass('submitting')
+      generalDirectData = {}
+    }).fail(() => {
+      $('.wdl-form-general-modal .modal-body').removeClass('submitting')
+      $('#wdl-form-general').addClass('failed')
+    })
+  });
+})
 </script>

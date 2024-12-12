@@ -1,10 +1,9 @@
-
-
 <?php include get_stylesheet_directory().'/components/header.php' ?>
 <main class="wdl-verify-page py-4">
   <div class="wdl-verify-message">
     <?php 
       $pid = $_GET['pid'];
+      $cid = $_GET['cid'];
       $otp = $_GET['otp'];
       $t = $_GET['t'];
       $lead = get_post( $pid );
@@ -42,50 +41,50 @@
       if($pid && $t && $lead->post_type === 'lead' && is_post_within_last_24_hours($pid)) {
         if(get_field('verified', $pid)) {
           ?>
-          <h1>คุณได้ยืนยันตัวตนไปเรียบร้อยแล้ว</h1>
-          <a href="/" class="wdl-btn-lg mt-3">กลับไปหน้าแรก</a>
-          <?php
-          header('Refresh: 5; URL=/');
-        } else {
-          if(verifyOtp($otp, $pid) === true) {
-            update_field('verified', true, $pid);
+    <h1><?php _e('คุณได้ยืนยันตัวตนไปเรียบร้อยแล้ว', 'wdl') ?></h1>
+    <a href="/" class="wdl-btn-lg mt-3"><?php _e('กลับไปหน้าแรก', 'wdl') ?></a>
+    <?php
+      header('Refresh: 5; URL=/');
+    } else {
+      if(verifyOtp($otp, $pid) === true) {
+        update_field('verified', true, $pid);
 
-            $email = get_field('email', $pid);
-            $name = get_the_title($pid);
+        $email = get_field('email', $pid);
+        $name = get_the_title($pid);
 
-            $coupons = explode(',', $t);
-            $banners = [];
-            $titles = [];
+        $coupons = explode(',', $t);
+        $banners = [];
+        $titles = [];
 
-            foreach( $coupons as $coupon ) {
-              if(get_field('Banner', $coupon)['sizes']['large']) {
-                $banners[] = get_field('Banner', $coupon)['sizes']['large'];
-              }
-              $titles[] = '"'.get_the_title($coupon).'"';
-            }
+        foreach( $coupons as $coupon ) {
+          if(get_field('Banner', $coupon)['sizes']['large']) {
+            $banners[] = get_field('Banner', $coupon)['sizes']['large'];
+          }
+          $titles[] = '"'.get_the_title($coupon).'"';
+        }
 
-            $couponNames = implode(', ', $titles);
-            
-            send_mail_coupon($email, $name, $banners, $couponNames);
-            ?>
-            <h1 class="text-red">ขอบคุณสำหรับการยืนยันตัวตน</h1>
-            <p>โปรดตรวจสอบอีเมลเพื่อรับสิทธิ์การใช้คูปอง</p>
-            <a href="/" class="wdl-btn-lg mt-3">กลับไปหน้าแรก</a>
-            <?php
-          } else {
-            ?>
-            <form id="wdl-form-verify">
-              <?php if(verifyOtp($otp, $pid) === null) {
-                echo '<p>กรุณากรอกรหัส OTP เพื่อยืนยันตัวตน</p>';
-              } else {
-                echo '<p class="text-red">รหัส OTP ไม่ถูกต้อง กรุณาลองใหม่</p>';
-              }?>
-              <input class="wdl-verify-otp-input" type="text" maxlength="6">
-              <button type="submit" class="wdl-btn-lg mt-3">
-                ยืนยัน
-              </button>
-            </form>
-            <?php
+        $couponNames = implode(', ', $titles);
+        
+      send_mail_coupon($email, $name, $banners, $couponNames, $coupons, $pid, $cid);
+    ?>
+    <h1 class="text-red"><?php _e('ขอบคุณสำหรับการยืนยันตัวตน', 'wdl') ?></h1>
+    <p><?php _e('โปรดตรวจสอบอีเมลเพื่อรับสิทธิ์การใช้คูปอง', 'wdl') ?></p>
+    <a href="/" class="wdl-btn-lg mt-3"><?php _e('กลับไปหน้าแรก', 'wdl') ?></a>
+    <?php
+    } else {
+    ?>
+    <form id="wdl-form-verify">
+      <?php if(verifyOtp($otp, $pid) === null) {
+        echo '<p>กรุณากรอกรหัส OTP เพื่อยืนยันตัวตน</p>';
+      } else {
+        echo '<p class="text-red">รหัส OTP ไม่ถูกต้อง กรุณาลองใหม่</p>';
+      }?>
+      <input class="wdl-verify-otp-input" type="text" maxlength="6">
+      <button type="submit" class="wdl-btn-lg mt-3">
+        ยืนยัน
+      </button>
+    </form>
+    <?php
           }
         }
       } else {
@@ -96,15 +95,15 @@
     ?>
   </div>
   <script>
-    $(document).ready(() => {
-      $('#wdl-form-verify').submit((e)=>{
-        e.preventDefault();
-        const url = new URL(window.location)
-        url.searchParams.set('otp', $('#wdl-form-verify .wdl-verify-otp-input').val());
-        console.log(url)
-        window.location = url;
-      })
+  $(document).ready(() => {
+    $('#wdl-form-verify').submit((e) => {
+      e.preventDefault();
+      const url = new URL(window.location)
+      url.searchParams.set('otp', $('#wdl-form-verify .wdl-verify-otp-input').val());
+      console.log(url)
+      window.location = url;
     })
+  })
   </script>
 </main>
 <?php include get_stylesheet_directory().'/components/footer.php' ?>

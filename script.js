@@ -158,23 +158,17 @@ const wdlArchiveExtendedSwiper = new Swiper(
       disableOnInteraction: true,
     },
     breakpoints: {
-      768: {
+      576: {
         slidesPerView: 2,
         spaceBetween: 8,
-        autoplay: {
-          delay: 7000,
-          pauseOnMouseEnter: true,
-          disableOnInteraction: true,
-        },
       },
-      1200: {
+      768: {
         slidesPerView: 3,
         spaceBetween: 8,
-        autoplay: {
-          delay: 7000,
-          pauseOnMouseEnter: true,
-          disableOnInteraction: true,
-        },
+      },
+      1024: {
+        slidesPerView: 4,
+        spaceBetween: 8,
       },
     },
     pagination: {
@@ -264,28 +258,6 @@ const wdlHero2Swiper = new Swiper(".wdl-hero-2-swiper", {
   },
   loop: true,
 });
-/* const wdlLeadMenuRevampedSwiper = new Swiper(
-    ".wdl-lead-menu-revamped-swiper",
-    {
-      slideClass: "menu-item",
-      slidesPerView: 2,
-      spaceBetween: 8,
-      grid: {
-        rows: 3,
-        fill: 'row'
-      },
-      breakpoints: {
-        576: {
-          spaceBetween: 8,
-          slidesPerView: 3,
-          grid: {
-            rows: 2,
-            fill: 'row'
-          },
-        },
-      },
-    }
-  ); */
 const wdlCompareGroupRoomSwiper = new Swiper(".wdl-compare-group-room-swiper", {
   slidesPerView: "1",
   spaceBetween: 24,
@@ -351,13 +323,17 @@ const wdlArchivePricingSwiper = new Swiper(".wdl-archive-pricing-swiper", {
   slidesPerView: 1,
   spaceBetween: 16,
   breakpoints: {
-    768: {
+    576: {
       slidesPerView: 2,
-      spaceBetween: 16,
+      spaceBetween: 8,
     },
-    1200: {
+    768: {
       slidesPerView: 3,
-      spaceBetween: 24,
+      spaceBetween: 8,
+    },
+    1024: {
+      slidesPerView: 4,
+      spaceBetween: 8,
     },
   },
   pagination: {
@@ -700,20 +676,22 @@ $(".wdl-form-submit").click(() => {
   localStorage.setItem("wdl-message", $("#message").val());
 });
 
-$(document).ready(() => {
-  setTimeout(() => {
-    $("#name-lastname").val(localStorage.getItem("wdl-name-lastname"));
-    $("#tel").val(localStorage.getItem("wdl-tel"));
-    $("#email").val(localStorage.getItem("wdl-email"));
-    $("#lineid").val(localStorage.getItem("wdl-lineid"));
-    $("#guest").val(localStorage.getItem("wdl-guest"));
-    $("#budget").val(localStorage.getItem("wdl-budget"));
-    $("#date").val(localStorage.getItem("wdl-date"));
-    $("#message").val(localStorage.getItem("wdl-message"));
-
-    checkAllGeneralFields();
-  }, 2000);
-});
+if($('#wdl-form-general').length > 0) {
+  $(document).ready(() => {
+    setTimeout(() => {
+      $("#name-lastname").val(localStorage.getItem("wdl-name-lastname"));
+      $("#tel").val(localStorage.getItem("wdl-tel"));
+      $("#email").val(localStorage.getItem("wdl-email"));
+      $("#lineid").val(localStorage.getItem("wdl-lineid"));
+      $("#guest").val(localStorage.getItem("wdl-guest"));
+      $("#budget").val(localStorage.getItem("wdl-budget"));
+      $("#date").val(localStorage.getItem("wdl-date"));
+      $("#message").val(localStorage.getItem("wdl-message"));
+  
+      //checkAllGeneralFields();
+    }, 2000);
+  });
+} 
 
 // Find and force word wrapping
 
@@ -1115,7 +1093,7 @@ $(".wdl-coupon-popup-link").each((i, e) => {
   });
 });
 
-const checkAllGeneralFields = () => {
+/* const checkAllGeneralFields = () => {
   let incompleteInput = [];
 
   $(".wdl-form-general input[required]").each((index, input) => {
@@ -1133,13 +1111,32 @@ const checkAllGeneralFields = () => {
       $(coupon).addClass("disabled");
     });
   }
-};
-$(".wdl-form-general input[required]").each((i, e) => {
+}; */
+/* $(".wdl-form-general input[required]").each((i, e) => {
   $(e).on("keyup", checkAllGeneralFields);
   $(e).on("change", checkAllGeneralFields);
-});
+}); */
 
+$(".wdl-coupon-proxy").each((i, e) => {
+  $(e).click(() => {
+    const applyModal = new bootstrap.Modal(document.querySelector("#apply"));
+    const origin = $("#coupon-" + (i + 1));
+    applyModal.show();
+    console.log($(origin));
+    if (e.classList.contains("disabled")) {
+    } else {
+      $(origin).addClass("active");
+      $(origin).find(".wdl-coupon-checkbox-target").prop("checked", true);
+      $(origin).find(".wdl-coupon-picker-action button").text("เก็บคูปองแล้ว");
+      $(origin).find(".wdl-coupon-picker-indicator").addClass("active");
+      setTimeout(() => {
+        $(origin).find(".wdl-coupon-picker-indicator").removeClass("active");
+      }, 3000);
+    }
+  });
+});
 $(".wdl-coupon-checkbox").each((i, e) => {
+  $(e).attr("id", "coupon-" + (i + 1));
   $(e).click(() => {
     if (e.classList.contains("disabled")) {
     } else {
@@ -1180,3 +1177,25 @@ $(".wdl-single-stickybar-toggle").click(() => {
 $(".wdl-single-stickybar-toggle a").click(() => {
   $(".wdl-single-stickybar").removeClass("expanded");
 });
+
+$(document).ready(() => {
+  if ($("#s-type").length > 0 && $("#s-type").attr("value")) {
+    $("#s-type").val($("#s-type").attr("value"));
+  }
+});
+
+function searchRedirect(event) {
+  event.preventDefault(); // Prevent form from submitting the traditional way
+
+  // Get the input and select values
+  const sParam = $("#search").val();
+  const typeParam = $("#s-type").val();
+
+  // Construct the URL with query parameters
+  const url = `/?s=${encodeURIComponent(sParam)}&type=${encodeURIComponent(
+    typeParam
+  )}`;
+
+  // Redirect to the constructed URL
+  window.location.href = url;
+}

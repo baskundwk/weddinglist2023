@@ -6,7 +6,6 @@
  Author URI:     https://www.studiomo.biz/
  Template:       Divi
  Version:        1.0.0
- Text Domain:    wdl
 */
 /* @import "../fonts/fonts.scss"; */
 @font-face {
@@ -134,10 +133,6 @@ main {
   main {
     overflow: hidden;
   }
-}
-
-.wdl-lead-menu + main {
-  margin-top: calc(var(--header-height, 110px) + 70px);
 }
 
 .cky-notice-des {
@@ -1403,18 +1398,14 @@ body .et_pb_button {
 
 .wdl-breadcrumb p {
   margin: 0;
-  margin-bottom: 10px;
   font-size: 0.8125rem;
-  display: flex;
-  gap: 10px;
 }
-.wdl-breadcrumb p a,
+.wdl-breadcrumb p > a,
 .wdl-breadcrumb p a:hover,
 .wdl-breadcrumb p a:focus,
 .wdl-breadcrumb p a:active {
-  color: #37BAD6;
+  color: #777777;
   font-weight: 400;
-  font-size: 14px;
 }
 .wdl-breadcrumb p .last {
   color: #333333;
@@ -3467,7 +3458,7 @@ nav.et-menu-nav,
 .wdl-lead-menu {
   position: fixed;
   left: 0;
-  top: var(--header-height, 70px);
+  top: var(--header-height, 110px);
   width: 100%;
   position: absolute;
   height: 70px;
@@ -3502,24 +3493,15 @@ nav.et-menu-nav,
   font-size: 12px;
   line-height: 1.5;
   font-weight: 600;
-  transition: 0.35s cubic-bezier(0, 0, 0, 1);
 }
 .wdl-lead-menu ul.wdl-lead-menu-wrapper > li > a img {
   width: 24px;
   height: 24px;
   margin: 0;
   display: block;
-  transition: 0.35s cubic-bezier(0, 0, 0, 1);
 }
 .wdl-lead-menu ul.wdl-lead-menu-wrapper > li > a:hover, .wdl-lead-menu ul.wdl-lead-menu-wrapper > li > a.current-menu-parent {
   color: #ff2758;
-}
-.wdl-lead-menu ul.wdl-lead-menu-wrapper > li > a:hover img, .wdl-lead-menu ul.wdl-lead-menu-wrapper > li > a.current-menu-parent img {
-  filter: brightness(1.4) sepia(1) saturate(7) hue-rotate(313deg);
-}
-
-.admin-bar .wdl-lead-menu {
-  top: calc(var(--header-height, 70px) + 32px);
 }
 
 .wdl-lead-menu-revamped-container {
@@ -3924,21 +3906,26 @@ nav.et-menu-nav,
 .wdl-listing-grid {
   display: grid;
   gap: 8px;
-  grid-template-columns: repeat(1, 1fr);
+  grid-template-columns: repeat(2, 1fr);
 }
 @media (min-width: 576px) {
-  .wdl-listing-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-@media (min-width: 768px) {
   .wdl-listing-grid {
     grid-template-columns: repeat(3, 1fr);
   }
 }
-@media (min-width: 1024px) {
+@media (min-width: 768px) {
   .wdl-listing-grid {
     grid-template-columns: repeat(4, 1fr);
+  }
+}
+@media (min-width: 1024px) {
+  .wdl-listing-grid {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+@media (min-width: 1200px) {
+  .wdl-listing-grid {
+    grid-template-columns: repeat(6, 1fr);
   }
 }
 
@@ -3946,7 +3933,6 @@ nav.et-menu-nav,
   border-radius: 6px;
   overflow: hidden;
   aspect-ratio: 3/2;
-  position: relative;
 }
 .wdl-card-listing-thumbnail .wdl-card-listing-thumbnail-image {
   position: absolute;
@@ -3970,15 +3956,9 @@ nav.et-menu-nav,
   background: rgba(0, 0, 0, 0.2);
   z-index: 1;
   position: relative;
-  color: #FFF;
-  font-weight: 600;
-  text-align: center;
-  padding: 16px;
-  font-size: 14px;
-  line-height: 1.25;
 }
 .wdl-card-listing-thumbnail:hover .wdl-card-listing-thumbnail-image {
-  scale: 1.3;
+  scale: 1.1;
 }
 
 .wdl-localnav {
@@ -4822,17 +4802,6 @@ body.admin-bar.et_fixed_nav .wdl-sticky-bar {
 
 .et-db #et-boc .et_pb_widget {
   width: 100% !important;
-}
-
-.wdl-single-video-player {
-  border-radius: 8px;
-  overflow: hidden;
-  margin-bottom: 10px;
-}
-.wdl-single-video-player iframe {
-  width: 100%;
-  max-height: 700px;
-  display: block;
 }
 
 /* Monarch social plugin */

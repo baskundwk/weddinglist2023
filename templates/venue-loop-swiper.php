@@ -47,9 +47,9 @@
 								$minPrice = get_field('MinPrice');
 								if ($minPrice): ?>
 									<div class="wdl-archive-min-price">
-										<?php _e('ราคาเริ่มต้น', 'Starting price') ?>&nbsp;<strong>
+										<?php _e('ราคาเริ่มต้น', 'wdl') ?>&nbsp;<strong>
 											<?php echo number_format(get_field('MinPrice')) ?>+
-											<?php _e('บาท', 'THB') ?>
+											<?php _e('บาท', 'wdl') ?>
 										</strong>
 									</div>
 								<?php endif; ?>
@@ -58,9 +58,9 @@
 								$maxGuest = get_field('MaxGuest');
 								if ($maxGuest): ?>
 									<div class="wdl-archive-max-guest">
-										<?php _e('รองรับแขกสูงสุด', 'Max guest') ?>&nbsp;<strong>
+										<?php _e('รองรับแขกสูงสุด', 'wdl') ?>&nbsp;<strong>
 											<?php echo number_format(get_field('MaxGuest')) ?>
-											<?php _e('คน', 'people') ?>
+											<?php _e('คน', 'wdl') ?>
 										</strong>
 									</div>
 								<?php endif; ?>

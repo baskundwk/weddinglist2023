@@ -105,7 +105,7 @@
 
       display: -webkit-box;
       -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;  
+      -webkit-box-orient: vertical;
       overflow: hidden;
       p,
       a {
@@ -113,7 +113,7 @@
         color: #333333;
         display: -webkit-box;
         -webkit-line-clamp: 2;
-        -webkit-box-orient: vertical;  
+        -webkit-box-orient: vertical;
         overflow: hidden;
       }
     }
@@ -126,7 +126,10 @@
       line-height: 18px;
       margin-top: 4px;
 
-      p, a, button{
+      &,
+      p,
+      a,
+      button {
         display: block;
         margin-bottom: 0;
         border: 1px solid #ff2758;
@@ -182,13 +185,19 @@
     background-position: center center;
     display: none;
     &.active {
-      animation: wdl-coupon-picker-indicator 3s both cubic-bezier(0,0,0,1);
+      animation: wdl-coupon-picker-indicator 3s both cubic-bezier(0, 0, 0, 1);
       display: block;
     }
 
     @keyframes wdl-coupon-picker-indicator {
-      0% {transform: translateX(-50%) translateY(-10px); opacity: 1;}
-      100% {transform: translateX(-50%) translateY(-40px); opacity: 0;}
+      0% {
+        transform: translateX(-50%) translateY(-10px);
+        opacity: 1;
+      }
+      100% {
+        transform: translateX(-50%) translateY(-40px);
+        opacity: 0;
+      }
     }
   }
 
@@ -216,7 +225,7 @@
   }
 
   &.wdl-coupon-checkbox {
-    transition: .35s cubic-bezier(0,0,0,1);
+    transition: 0.35s cubic-bezier(0, 0, 0, 1);
     transition-property: filter, opacity;
     &.disabled {
       cursor: not-allowed;

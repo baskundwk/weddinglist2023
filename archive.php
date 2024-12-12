@@ -11,7 +11,7 @@
             <?php single_term_title(); ?>
           </h1>
           <p class="text-secondary">
-            <?php echo _e('รวบรวมบทความให้คุณไว้ที่เดียว', 'รวบรวมบทความให้คุณไว้ที่เดียว') ?>
+            <?php _e('รวบรวมบทความให้คุณไว้ที่เดียว', 'wdl') ?>
           </p>
         </div>
       </div>
@@ -19,9 +19,7 @@
         <?php while (have_posts()): ?>
         <?php the_post(); ?>
 
-        <div class="col wdl-archive-infinite-scroll-post">
-          <?php include get_stylesheet_directory().'/components/cards/card-post.php' ?>
-        </div>
+        <?php include get_stylesheet_directory().'/components/cards/card-post.php' ?>
 
         <?php endwhile; ?>
       </div>

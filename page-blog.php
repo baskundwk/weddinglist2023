@@ -34,7 +34,7 @@
         </div>
       </div>
       <?php if ($postAll->have_posts()): ?>
-        <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-2 wdl-archive wdl-archive-extended opacity-1">
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-2 wdl-archive wdl-archive-extended opacity-1">
           <?php while ($postAll->have_posts()): ?>
             <?php $postAll->the_post(); ?>
             <div class="col">
@@ -71,7 +71,7 @@
         <div class="row">
           <div class="col">
             <h2>
-              <?php echo _e('รีวิวแต่งงาน', 'รีวิวแต่งงาน') ?>
+              <?php _e('รีวิวแต่งงาน', 'wdl') ?>
             </h2>
           </div>
         </div>
@@ -125,7 +125,7 @@
         <div class="row">
           <div class="col">
             <h2>
-              <?php echo _e('เตรียมตัวแต่งงาน', 'เตรียมตัวแต่งงาน') ?>
+              <?php _e('เตรียมตัวแต่งงาน', 'wdl') ?>
             </h2>
           </div>
         </div>
@@ -179,7 +179,7 @@
         <div class="row">
           <div class="col">
             <h2>
-              <?php echo _e('ไลฟ์สไตล์', 'ไลฟ์สไตล์') ?>
+              <?php _e('ไลฟ์สไตล์', 'wdl') ?>
             </h2>
           </div>
         </div>

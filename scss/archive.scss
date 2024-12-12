@@ -1,12 +1,8 @@
 .container-archive {
   @media (min-width: 1200px) {
-    max-width: 1160px !important;
-  }
-  @media (min-width: 1400px) {
-    max-width: 1360px !important;
-  }
-  @media (min-width: 1900px) {
     max-width: 2100px !important;
+    padding-left: 16px !important;
+    padding-right: 16px !important;
   }
 }
 
@@ -15,23 +11,23 @@
   gap: 8px;
   grid-template-columns: repeat(1, 1fr);
 
-  @include min-width-md {
+  @include min-width-sm {
     grid-template-columns: repeat(2, 1fr);
   }
 
-  @include min-width-lg {
+  @include min-width-md {
     grid-template-columns: repeat(3, 1fr);
   }
 
-  @include min-width-xl {
+  @include min-width-lg {
     grid-template-columns: repeat(4, 1fr);
   }
 
-  @include min-width-xxl {
+  @include min-width-xl {
     grid-template-columns: repeat(5, 1fr);
   }
 
-  @include min-width-xxxl {
+  @include min-width-xxl {
     grid-template-columns: repeat(6, 1fr);
   }
 }
@@ -631,6 +627,7 @@
     object-fit: cover;
     border-radius: 8px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.16);
+    width: 100%;
   }
 
   @media (max-width: 1199px) {

@@ -52,7 +52,7 @@
               <div class="row">
                 <div class="col text-center mt-4 mb-5">
                   <a href="<?php echo esc_html(get_term_link($type)) ?>" class="wdl-btn-secondary py-2 px-3">
-                    <?php _e('ดู '.$type->name.' ทั้งหมด', 'ดู '.$type->name.' ทั้งหมด') ?>
+                    <?php _e('ดู '.$type->name.' ทั้งหมด', 'wdl') ?>
                   </a>
                 </div>
               </div>

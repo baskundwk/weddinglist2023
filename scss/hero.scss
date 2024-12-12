@@ -1,4 +1,3 @@
-
 /* Hero Banner */
 .wdl-hero {
   position: relative;
@@ -61,7 +60,7 @@
   position: relative;
 }
 .wdl-hero-2-swiper {
-  @media (min-width: 1160px) {
+  @media (min-width: 1280px) {
     filter: drop-shadow(0 4px 15px rgba(0, 0, 0, 0.16));
     border-radius: 0.5rem;
   }
@@ -72,7 +71,7 @@
       margin: 0;
       overflow: hidden;
 
-      @media (min-width: 1160px) {
+      @media (min-width: 1280px) {
         border-radius: 0.5rem;
       }
 

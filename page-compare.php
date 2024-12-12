@@ -17,7 +17,7 @@
         <div class="col-md-6 text-center text-md-start">
           <a class="wdl-link-back" href="#" onclick="history.back()">ย้อนกลับ</a>
           <h1>
-            <?php echo _e('เปรียบเทียบสถานที่จัดงานแต่งงาน', 'เปรียบเทียบสถานที่จัดงานแต่งงาน') ?>
+            <?php _e('เปรียบเทียบสถานที่จัดงานแต่งงาน', 'wdl') ?>
           </h1>
         </div>
         <div class="col-md-6 pt-3 text-center text-md-end">
@@ -42,7 +42,7 @@
                       "postType": "<?php echo get_post_type() ?>",
                       "id": "<?php the_ID() ?>"
                     }'>
-                  <label for="card-select-<?php the_ID() ?>"><?php _e('เลือก','เลือก')?></label>
+                  <label for="card-select-<?php the_ID() ?>"><?php _e('เลือก','wdl')?></label>
                 </div>
               </div>
 
@@ -71,7 +71,7 @@
                 </div>
 
                 <div class="mb-4 wdl-compare-group" data-mh="wdl-compare-group-2">
-                  <a href="#" class="wdl-btn w-100 text-center wdl-apply-btn wdl-btn-cta wdl-form-general-direct" data-bs-toggle="modal" data-bs-target=".wdl-form-general-modal">คลิกขอแพ็กเกจ</a>
+                  <a href="#" class="wdl-btn w-100 text-center wdl-apply-btn wdl-btn-cta wdl-form-general-direct" data-bs-toggle="modal" data-bs-target=".wdl-form-general-modal"><?php _e('คลิกขอแพ็กเกจ', 'wdl')?></a>
                 </div>
 
                 <div class="mb-4 wdl-compare-group" data-mh="wdl-compare-group-3">
@@ -92,7 +92,7 @@
                       $minPrice = get_field('MinPrice');
                       if ($minPrice) : ?>
                         <div class="wdl-archive-min-price">
-                          <span><?php _e('ราคาเริ่มต้น', 'Starting price') ?>&nbsp;<strong><?php echo number_format(get_field('MinPrice')) ?>+ <?php _e('บาท', 'THB') ?></strong></span>
+                          <span><?php _e('ราคาเริ่มต้น', 'wdl') ?>&nbsp;<strong><?php echo number_format(get_field('MinPrice')) ?>+ <?php _e('บาท', 'wdl') ?></strong></span>
                         </div>
                       <?php endif; ?>
 
@@ -100,14 +100,14 @@
                       $maxGuest = get_field('MaxGuest');
                       if ($maxGuest) : ?>
                         <div class="wdl-archive-max-guest">
-                          <span><?php _e('รองรับแขกสูงสุด', 'Max guest') ?>&nbsp;<strong><?php echo number_format(get_field('MaxGuest')) ?> <?php _e('คน', 'people') ?></strong></span>
+                          <span><?php _e('รองรับแขกสูงสุด', 'wdl') ?>&nbsp;<strong><?php echo number_format(get_field('MaxGuest')) ?> <?php _e('คน', 'wdl') ?></strong></span>
                         </div>
                       <?php endif; ?>
                     </div>
                 </div>
 
                 <div class="mb-4 wdl-compare-group" data-mh="wdl-compare-group-4">
-                  <h4><?php _e('ข้อมูลค่าใช้จ่าย','ข้อมูลค่าใช้จ่าย')?></h4>
+                  <h4><?php _e('ข้อมูลค่าใช้จ่าย','wdl')?></h4>
                   <ul>
                   <?php $pricings = get_field('Pricing');
                     while (have_rows('Pricing')):
@@ -146,7 +146,7 @@
                 </div>
 
                 <div class="mb-4 wdl-compare-group" data-mh="wdl-compare-group-5">
-                  <h4><?php _e('รูปแบบการจัดงาน','รูปแบบการจัดงาน')?></h4>
+                  <h4><?php _e('รูปแบบการจัดงาน','wdl')?></h4>
                   <ul>
                   <?php $ceremonyTypes = get_field('CeremonyTypes');
                     foreach($ceremonyTypes as $ceremonyType) :	?>
@@ -158,7 +158,7 @@
                 </div>
                 
                 <div class="mb-4 wdl-compare-group" data-mh="wdl-compare-group-6">
-                  <h4><?php _e('สิ่งอำนวยความสะดวก','สิ่งอำนวยความสะดวก')?></h4>
+                  <h4><?php _e('สิ่งอำนวยความสะดวก','wdl')?></h4>
                   <ul>
                   <?php $amentities = get_field('Amentities');
                     foreach($amentities as $ceremonyType) :	?>
@@ -170,7 +170,7 @@
                 </div>
 
                 <div class="mb-4 wdl-compare-group position-relative">
-                  <h4><?php _e('ห้องจัดเลี้ยง', 'Banquet room')?></h4>
+                  <h4><?php _e('ห้องจัดเลี้ยง', 'wdl')?></h4>
                   <div class="swiper wdl-compare-group-room-swiper p-3">
                     <div class="swiper-wrapper">
                       <?php while( have_rows('BanquetRoom') ): the_row(); ?>
@@ -189,23 +189,23 @@
                             <?php endif; ?>
 
                             <?php if( get_sub_field('BanquetRoomArea')) : ?>
-                              <div class="wdl-metadata text-secondary"><?php _e('พื้นที่', 'Area')?> <?php the_sub_field('BanquetRoomArea')?></div>
+                              <div class="wdl-metadata text-secondary"><?php _e('พื้นที่', 'wdl')?> <?php the_sub_field('BanquetRoomArea')?></div>
                             <?php endif; ?>
 
                             <?php if( get_sub_field('BanquetRoomChineseDinner')) : ?>
-                              <div class="wdl-metadata text-secondary"><?php _e('โต๊ะจีน', 'Chinese dinner')?> <?php the_sub_field('BanquetRoomChineseDinner')?></div>
+                              <div class="wdl-metadata text-secondary"><?php _e('โต๊ะจีน', 'wdl')?> <?php the_sub_field('BanquetRoomChineseDinner')?></div>
                             <?php endif; ?>
 
                             <?php if( get_sub_field('BanquetRoomCocktailDinner')) : ?>                                
-                              <div class="wdl-metadata text-secondary"><?php _e('ค็อกเทล', 'Cocktail dinner')?> <?php the_sub_field('BanquetRoomCocktailDinner')?></div>
+                              <div class="wdl-metadata text-secondary"><?php _e('ค็อกเทล', 'wdl')?> <?php the_sub_field('BanquetRoomCocktailDinner')?></div>
                             <?php endif; ?>
 
                             <?php if( get_sub_field('BanquetRoomBuffetDinner')) : ?>                                
-                              <div class="wdl-metadata text-secondary"><?php _e('บุฟเฟ่ต์', 'Buffet dinner')?> <?php the_sub_field('BanquetRoomBuffetDinner')?></div>
+                              <div class="wdl-metadata text-secondary"><?php _e('บุฟเฟ่ต์', 'wdl')?> <?php the_sub_field('BanquetRoomBuffetDinner')?></div>
                             <?php endif; ?>
                               
                             <?php if( get_sub_field('BanquetRoomSitdownDinner')) : ?>                                
-                              <div class="wdl-metadata text-secondary"><?php _e('ซิทดาวน์', 'Sitdown dinner')?> <?php the_sub_field('BanquetRoomSitdownDinner')?></div>
+                              <div class="wdl-metadata text-secondary"><?php _e('ซิทดาวน์', 'wdl')?> <?php the_sub_field('BanquetRoomSitdownDinner')?></div>
                             <?php endif; ?>
                           </div>
                         </div>

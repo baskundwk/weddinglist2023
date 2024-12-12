@@ -20,65 +20,63 @@ if ($type && $searchTerm):
     <div class="overflow-hidden mt-4">
       <div class="container-xl">
         <h1><?php echo (_e('ผลการค้นหา', 'ผลการค้นหา') . ' "' . $searchTerm . '"') ?></h1>
-        <nav class="wdl-swiper-auto">
-          <ul class="wdl-tab swiper-wrapper mb-3 p-0">
-            <li class="swiper-slide w-auto">
-              <a role="tab" aria-controls="tab-venue" class="nav-link <?php if ($type === "venue") {
-                  echo 'active';
-                } ?>" aria-current="<?php if ($type === "venue") {
-                   echo 'page';
-                 } ?>" href="<?php if ($type === 'venue') {
-                    echo '#';
-                  } else {
-                    echo updateParam(['type' => 'venue']);
-                  } ?>"><i class="wdl-tab-icon" data-feather="map-pin"></i> สถานที่จัดงาน</a>
-            </li>
-            <li class="swiper-slide w-auto">
-              <a role="tab" aria-controls="tab-promotion" class="nav-link <?php if ($type === "promotion") {
-                  echo 'active';
-                } ?>" aria-current="<?php if ($type === "promotion") {
-                   echo 'page';
-                 } ?>" href="<?php if ($type === 'promotion') {
-                    echo '#';
-                  } else {
-                    echo updateParam(['type' => 'promotion']);
-                  } ?>"><i class="wdl-tab-icon" data-feather="tag"></i> โปรโมชั่น</a>
-            </li>
-            <li class="swiper-slide w-auto">
-              <a role="tab" aria-controls="tab-wedding-fair" class="nav-link <?php if ($type === "wedding-fair") {
-                  echo 'active';
-                } ?>" aria-current="<?php if ($type === "wedding-fair") {
-                   echo 'page';
-                 } ?>" href="<?php if ($type === 'wedding-fair') {
-                    echo '#';
-                  } else {
-                    echo updateParam(['type' => 'wedding-fair']);
-                  } ?>"><i class="wdl-tab-icon" data-feather="calendar"></i> Wedding Fair & Event</a>
-            </li>
-            <li class="swiper-slide w-auto">
-              <a role="tab" aria-controls="tab-vendor" class="nav-link <?php if ($type === "vendor") {
-                  echo 'active';
-                } ?>" aria-current="<?php if ($type === "vendor") {
-                   echo 'page';
-                 } ?>" href="<?php if ($type === 'vendor') {
-                    echo '#';
-                  } else {
-                    echo updateParam(['type' => 'vendor']);
-                  } ?>"><i class="wdl-tab-icon" data-feather="users"></i> ผู้ให้บริการ</a>
-            </li>
-            <li class="swiper-slide w-auto">
-              <a role="tab" aria-controls="tab-post" class="nav-link <?php if ($type === "post") {
-                  echo 'active';
-                } ?>" aria-current="<?php if ($type === "post") {
-                   echo 'page';
-                 } ?>" href="<?php if ($type === 'post') {
-                    echo '#';
-                  } else {
-                    echo updateParam(['type' => 'post']);
-                  } ?>"><i class="wdl-tab-icon" data-feather="bookmark"></i> บทความ</a>
-            </li>
-          </ul>
-        </nav>
+        <ul class="wdl-tab nav mb-3">
+          <li class="nav-item">
+            <a role="tab" aria-controls="tab-venue" class="nav-link <?php if ($type === "venue") {
+                echo 'active';
+              } ?>" aria-current="<?php if ($type === "venue") {
+                 echo 'page';
+               } ?>" href="<?php if ($type === 'venue') {
+                  echo '#';
+                } else {
+                  echo updateParam(['type' => 'venue']);
+                } ?>"><i class="wdl-tab-icon" data-feather="map-pin"></i> สถานที่จัดงาน</a>
+          </li>
+          <li class="nav-item">
+            <a role="tab" aria-controls="tab-promotion" class="nav-link <?php if ($type === "promotion") {
+                echo 'active';
+              } ?>" aria-current="<?php if ($type === "promotion") {
+                 echo 'page';
+               } ?>" href="<?php if ($type === 'promotion') {
+                  echo '#';
+                } else {
+                  echo updateParam(['type' => 'promotion']);
+                } ?>"><i class="wdl-tab-icon" data-feather="tag"></i> โปรโมชั่น</a>
+          </li>
+          <li class="nav-item">
+            <a role="tab" aria-controls="tab-wedding-fair" class="nav-link <?php if ($type === "wedding-fair") {
+                echo 'active';
+              } ?>" aria-current="<?php if ($type === "wedding-fair") {
+                 echo 'page';
+               } ?>" href="<?php if ($type === 'wedding-fair') {
+                  echo '#';
+                } else {
+                  echo updateParam(['type' => 'wedding-fair']);
+                } ?>"><i class="wdl-tab-icon" data-feather="calendar"></i> Wedding Fair & Event</a>
+          </li>
+          <li class="nav-item">
+            <a role="tab" aria-controls="tab-vendor" class="nav-link <?php if ($type === "vendor") {
+                echo 'active';
+              } ?>" aria-current="<?php if ($type === "vendor") {
+                 echo 'page';
+               } ?>" href="<?php if ($type === 'vendor') {
+                  echo '#';
+                } else {
+                  echo updateParam(['type' => 'vendor']);
+                } ?>"><i class="wdl-tab-icon" data-feather="users"></i> ผู้ให้บริการ</a>
+          </li>
+          <li class="nav-item">
+            <a role="tab" aria-controls="tab-post" class="nav-link <?php if ($type === "post") {
+                echo 'active';
+              } ?>" aria-current="<?php if ($type === "post") {
+                 echo 'page';
+               } ?>" href="<?php if ($type === 'post') {
+                  echo '#';
+                } else {
+                  echo updateParam(['type' => 'post']);
+                } ?>"><i class="wdl-tab-icon" data-feather="bookmark"></i> บทความ</a>
+          </li>
+        </ul>
       </div>
     </div>
 

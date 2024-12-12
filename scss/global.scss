@@ -72,6 +72,13 @@ main {
     overflow: hidden;
   }
 }
+
+.wdl-lead-menu {
+  + main {
+    margin-top: calc(var(--header-height, 110px) + 70px);
+
+  }
+}
 .cky-notice-des {
   overflow-y: auto !important;
 }
@@ -229,24 +236,30 @@ body .et_pb_button {
   position: relative;
 }
 
-@media (min-width: 1400px) {
-  .container,
-  .container-lg,
-  .container-md,
-  .container-sm,
-  .container-xl,
-  .container-xxl {
-    max-width: 1160px;
+main {
+  @media (min-width: 1400px) {
+    .container,
+    .container-lg,
+    .container-md,
+    .container-sm,
+    .container-xl,
+    .container-xxl {
+      max-width: 1280px;
+      padding-left: 0;
+      padding-right: 0;
+    }
   }
-}
-@media (min-width: 1200px) {
-  .container,
-  .container-lg,
-  .container-md,
-  .container-sm,
-  .container-xl,
-  .container-xxl {
-    max-width: 1160px;
+  @media (min-width: 1280px) {
+    .container,
+    .container-lg,
+    .container-md,
+    .container-sm,
+    .container-xl,
+    .container-xxl {
+      max-width: 1280px;
+      padding-left: 0;
+      padding-right: 0;
+    }
   }
 }
 

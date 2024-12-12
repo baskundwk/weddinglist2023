@@ -1,7 +1,7 @@
 function loadTocIds() {
   /* Load TOC ID & Links */
-  let tocIds = [];
-  $("#ez-toc-container nav")
+  /* let tocIds = [];
+  $(".wdl-toc-inner")
     .find("a")
     .each((i, e) => {
       tocIds.push($(e).attr("href").replace("#", ""));
@@ -16,21 +16,21 @@ function loadTocIds() {
     });
   $(sortedHeaders).each((i, e) => {
     $(e).attr("id", tocIds[i]);
-  });
+  }); */
 
-  $("#ez-toc-container nav")
+  $(".wdl-toc-inner")
     .find("a")
     .each((i, e) => {
       $(e).click((event) => {
-        event.preventDefault();
+        //event.preventDefault();
 
         $(".wdl-single-content").addClass("expanded");
-        $("body, html").animate(
+        /* $("body, html").animate(
           {
             scrollTop: $($(e).attr("href")).offset().top - 130,
           },
           250
-        );
+        ); */
       });
     });
 }
@@ -72,6 +72,51 @@ function prepareContentSwiper() {
   );
 }
 
+const listToc = () => {
+  const toc = document.querySelector(
+    ".wdl-single-stickybar-toc .wdl-toc-inner"
+  );
+  const content = document.querySelector("#post-content-container");
+  const headers = content.querySelectorAll("h2, h3, h4, h5, h6");
+  const tocList = document.createElement("ul");
+
+  let lastLevel = 2;
+  let currentList = tocList;
+  const listsByLevel = { 2: tocList };
+
+  headers.forEach((header) => {
+    const level = parseInt(header.tagName.substring(1));
+    const item = document.createElement("li");
+    const link = document.createElement("a");
+
+    // Set up the anchor link
+    const id = header.textContent.replace(/\s+/g, "-").toLowerCase();
+    header.id = id;
+    link.href = `#${id}`;
+    link.textContent = header.textContent;
+    item.appendChild(link);
+
+    // Adjust list hierarchy based on level
+    if (level > lastLevel) {
+      const nestedList = document.createElement("ul");
+      listsByLevel[lastLevel].lastElementChild.appendChild(nestedList);
+      listsByLevel[level] = nestedList;
+    } else if (level < lastLevel) {
+      delete listsByLevel[lastLevel];
+    }
+
+    listsByLevel[level].appendChild(item);
+    lastLevel = level;
+  });
+
+  console.log("content", content);
+  console.log("tocList", tocList);
+
+  toc.appendChild(tocList);
+
+  toc.classList.remove("disabled");
+};
+
 if (document.querySelector("#post-content-container")) {
   $(document).ready(function ($) {
     $.ajax({
@@ -83,9 +128,10 @@ if (document.querySelector("#post-content-container")) {
       },
       success: function (response) {
         $("#post-content-container").html(response); // Insert post content into the container
-        loadTocIds();
         prepareContentSwiper();
         $("#post-content-container").removeClass("loading");
+        listToc();
+        loadTocIds();
       },
       error: function () {
         $("#post-content-container").html(

@@ -8,10 +8,10 @@
       <div class="row pb-3">
         <div class="col">
           <h1>
-            <?php _e('บทความล่าสุด', 'บทความล่าสุด') ?>
+            <?php _e('บทความล่าสุด', 'wdl') ?>
           </h1>
           <p class="text-secondary">
-            <?php _e('รวบรวมบทความให้คุณไว้ที่เดียว', 'รวบรวมบทความให้คุณไว้ที่เดียว') ?>
+            <?php _e('รวบรวมบทความให้คุณไว้ที่เดียว', 'wdl') ?>
           </p>
           <div class="wdl-badge-container">
             <a href="#" class="wdl-badge-sm-primary">ทั้งหมด</a>
@@ -23,7 +23,7 @@
       </div>
 
       <?php if (have_posts()): ?>
-      <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-2 wdl-archive wdl-archive-extended opacity-1">
+      <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-2 wdl-archive wdl-archive-extended opacity-1">
         <?php while (have_posts()): ?>
         <?php the_post(); ?>
         <div class="col"><?php include get_stylesheet_directory().'/components/cards/card-post.php' ?></div>
@@ -58,7 +58,7 @@
       <div class="row">
         <div class="col">
           <h2>
-            <?php echo _e('รีวิวแต่งงาน', 'รีวิวแต่งงาน') ?>
+            <?php _e('รีวิวแต่งงาน', 'wdl') ?>
           </h2>
         </div>
       </div>
@@ -108,7 +108,7 @@
       <div class="row">
         <div class="col">
           <h2>
-            <?php echo _e('เตรียมตัวแต่งงาน', 'เตรียมตัวแต่งงาน') ?>
+            <?php _e('เตรียมตัวแต่งงาน', 'wdl') ?>
           </h2>
         </div>
       </div>
@@ -158,7 +158,7 @@
       <div class="row">
         <div class="col">
           <h2>
-            <?php echo _e('ไลฟ์สไตล์', 'ไลฟ์สไตล์') ?>
+            <?php _e('ไลฟ์สไตล์', 'wdl') ?>
           </h2>
         </div>
       </div>

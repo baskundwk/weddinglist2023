@@ -3,16 +3,16 @@
     <div class="swiper-wrapper">
       <div class="swiper-slide w-auto">
         <div class="dropdown wdl-dropdown">
-          <div class="wdl-btn-filter" data-bs-toggle="dropdown" aria-expanded="false">
+          <div class="wdl-btn-filter <?php if ($_GET['type']) { echo 'active';}?>" data-bs-toggle="dropdown" aria-expanded="false">
             <?php if ($_GET['type']): ?>
-              <i data-feather="home"></i><?php echo(get_term_by('slug', $_GET['type'], 'venue_type')->name); ?>
+            <i data-feather="home"></i><?php echo(get_term_by('slug', $_GET['type'], 'venue_type')->name); ?>
             <?php else: ?>
-              <i data-feather="home"></i><?php _e('ประเภทสถานที่', 'ประเภทสถานที่'); ?>
+            <i data-feather="home"></i><?php _e('ประเภทสถานที่', 'wdl'); ?>
             <?php endif; ?>
             <i data-feather="chevron-down"></i>
           </div>
           <ul class="dropdown-menu dropdown-menu-end">
-            <li><a href="<?php removeParam('type')?>"><?php _e('ประเภททั้งหมด', 'ประเภททั้งหมด'); ?></a></li>
+            <li><a href="<?php removeParam('type')?>"><?php _e('ประเภททั้งหมด', 'wdl'); ?></a></li>
             <?php
             $venue_type = get_terms(
               array(
@@ -23,29 +23,29 @@
     
             foreach ($venue_type as $type):
               ?>
-              <li>
-                <a href="<?php
+            <li>
+              <a href="<?php
                 updateParam([
                   'type' => $type->slug
                 ])
                   ?>"><?php echo $type->name ?></a>
-              </li>
+            </li>
             <?php endforeach; ?>
           </ul>
         </div>
       </div>
       <div class="swiper-slide w-auto">
         <div class="dropdown wdl-dropdown">
-          <div class="wdl-btn-filter" data-bs-toggle="dropdown" aria-expanded="false">
-            <?php if ($_GET['location']): ?>
-              <i data-feather="map-pin"></i><?php echo(get_term_by('slug', $_GET['location'], 'location')->name); ?>
+          <div class="wdl-btn-filter <?php if ($_GET['loc']) { echo 'active'; }?>" data-bs-toggle="dropdown" aria-expanded="false">
+            <?php if ($_GET['loc']): ?>
+            <i data-feather="map-pin"></i><?php echo(get_term_by('term_id', $_GET['loc'], 'location')->name); ?>
             <?php else: ?>
-              <i data-feather="map-pin"></i><?php _e('ที่ตั้งสถานที่', 'ที่ตั้งสถานที่'); ?>
+            <i data-feather="map-pin"></i><?php _e('ที่ตั้งสถานที่', 'wdl'); ?>
             <?php endif; ?>
             <i data-feather="chevron-down"></i>
           </div>
           <ul class="dropdown-menu dropdown-menu-end">
-            <li><a href="<?php removeParam('loc')?>"><?php _e('ที่ตั้งทั้งหมด', 'ที่ตั้งทั้งหมด'); ?></a></li>
+            <li><a href="<?php removeParam('loc')?>"><?php _e('ที่ตั้งทั้งหมด', 'wdl'); ?></a></li>
             <?php
             $venue_location = get_terms(
               array(
@@ -56,29 +56,29 @@
     
             foreach ($venue_location as $location):
               ?>
-              <li>
-                <a href="<?php
+            <li>
+              <a href="<?php
                 updateParam([
                   'loc' => $location->term_id
                 ])
                   ?>"><?php echo $location->name ?></a>
-              </li>
+            </li>
             <?php endforeach; ?>
           </ul>
         </div>
       </div>
       <div class="swiper-slide w-auto">
         <div class="dropdown wdl-dropdown">
-          <div class="wdl-btn-filter" data-bs-toggle="dropdown" aria-expanded="false">
+          <div class="wdl-btn-filter <?php if ($_GET['character']) { echo 'active';}?>" data-bs-toggle="dropdown" aria-expanded="false">
             <?php if ($_GET['character']): ?>
-              <i data-feather="star"></i><?php echo(get_term_by('slug', $_GET['character'], 'venue_character')->name); ?>
+            <i data-feather="star"></i><?php echo(get_term_by('slug', $_GET['character'], 'venue_character')->name); ?>
             <?php else: ?>
-              <i data-feather="star"></i><?php _e('จุดเด่นสถานที่', 'จุดเด่นสถานที่'); ?>
+            <i data-feather="star"></i><?php _e('จุดเด่นสถานที่', 'wdl'); ?>
             <?php endif; ?>
             <i data-feather="chevron-down"></i>
           </div>
           <ul class="dropdown-menu dropdown-menu-end">
-            <li><a class="px-3" href="<?php removeParam('character')?>"><?php _e('จุดเด่นทั้งหมด', 'จุดเด่นทั้งหมด'); ?></a></li>
+            <li><a class="px-3" href="<?php removeParam('character')?>"><?php _e('จุดเด่นทั้งหมด', 'wdl'); ?></a></li>
             <?php
             $venue_character = get_terms(
               array(
@@ -89,51 +89,48 @@
     
             foreach ($venue_character as $character):
               ?>
-              <li>
-                <?php
+            <li>
+              <?php
                 $characterBackground = get_field('CharacterBackground', $character);
                 $characterBorder = get_field('CharacterBorder', $character);
                 $characterColor = get_field('CharacterColor', $character);
                 $characterEffect = get_field('CharacterEffect', $character);
                 ?>
-                <a class="px-3" href="<?php
+              <a class="px-3" href="<?php
                 //echo (get_term_link($character->slug, 'venue_character')) 
                 updateParam([
                   'character' => $character->slug
                 ])
                   ?>">
-                  <div class="wdl-character
+                <div class="wdl-character
                   <?php if ($characterBorder) {
                     echo ('wdl-character-border');
                   } ?>
                   <?php if ($characterEffect) {
                     echo ('wdl-character-animation-' . $characterEffect);
-                  } ?>"
-                    <?php
-                    if ($characterColor || $characterBackground): ?>
-                      style="
+                  } ?>" <?php
+                    if ($characterColor || $characterBackground): ?> style="
                         --background-image: url(<?php echo ($characterBackground['url']) ?>);
                         --box-shadow: none;
                         --color: rgba(<?php echo ($characterColor['red']) ?>,<?php echo ($characterColor['green']) ?>,<?php echo ($characterColor['blue']) ?>,<?php echo ($characterColor['alpha']) ?>);
                         --color-50: rgba(<?php echo ($characterColor['red']) ?>,<?php echo ($characterColor['green']) ?>,<?php echo ($characterColor['blue']) ?>, 50%);
                         --color-0: rgba(<?php echo ($characterColor['red']) ?>,<?php echo ($characterColor['green']) ?>,<?php echo ($characterColor['blue']) ?>, 0);
-                      "
-                    <?php endif ?>>
-                    <span><?php echo esc_html($character->name); ?></span>
-                  </div>
-                </a>
-              </li>
+                      " <?php endif ?>>
+                  <span><?php echo esc_html($character->name); ?></span>
+                </div>
+              </a>
+            </li>
             <?php endforeach; ?>
           </ul>
         </div>
       </div>
       <div class="swiper-slide w-auto">
         <div class="dropdown wdl-dropdown">
-          <div class="wdl-btn-filter" data-bs-toggle="dropdown" aria-expanded="false">
+          <div class="wdl-btn-filter <?php if ($_GET['label']) { echo 'active'; }?>" data-bs-toggle="dropdown" aria-expanded="false">
             <?php if ($_GET['label']) { ?>
-              <i data-feather="bar-chart"></i><?php echo $_GET['label']; ?>
+            <i data-feather="bar-chart"></i><?php echo $_GET['label']; ?>
             <?php } else { ?>
-              <i data-feather="bar-chart"></i><?php _e('จัดเรียงโดย', 'จัดเรียงโดย');
+            <i data-feather="bar-chart"></i><?php _e('จัดเรียงโดย', 'wdl');
             } ?>
             <i data-feather="chevron-down"></i>
           </div>

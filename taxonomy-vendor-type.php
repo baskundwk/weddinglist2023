@@ -132,7 +132,7 @@
       <div class="row">
         <div class="col">
           <h2 class="h1 wdl-localnav-heading">
-            <?php _e('บทความที่เกี่ยวข้อง', 'บทความที่เกี่ยวข้อง') ?>
+            <?php _e('บทความที่เกี่ยวข้อง', 'wdl') ?>
           </h2>
           <p class="text-secondary">
             <?php _e('รวบรวมบทความเกี่ยวกับผู้ให้บริการ '. get_queried_object()->name .' ให้คุณไว้ที่เดียว', 'รวบรวมบทความเกี่ยวกับผู้ให้บริการ '. get_queried_object()->name .' ให้คุณไว้ที่เดียว') ?>

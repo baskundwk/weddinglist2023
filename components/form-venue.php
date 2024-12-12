@@ -1,13 +1,10 @@
 <div id="apply" class="wdl-form-general-modal modal fade">
-  <div class="modal-dialog modal-dialog-centered modal-lg">
+  <div class="modal-dialog modal-dialog-centered modal-lg modal-fullscreen-md-down">
     <div class="modal-content m-1 mb-0">
       <button class="btn-close" data-bs-dismiss="modal"></button>
       <div class="modal-body p-3 p-lg-3">
-        <h2><?php _e('กรุณากรอกข้อมูลผู้ติดต่อ', 'กรุณากรอกข้อมูลผู้ติดต่อ') ?></h2>
+        <p class="h2"><?php _e('กรุณากรอกข้อมูลผู้ติดต่อ', 'กรุณากรอกข้อมูลผู้ติดต่อ') ?></p>
         <hr class="mb-2">
-        <ul class="wdl-form-general-list">
-          
-        </ul>
         <form id="wdl-form-general" class="wdl-form-general" action="" method="post" enctype="multipart/form-data">
           <div class="row g-2 g-lg-3">
             <div class="col-6">
@@ -36,13 +33,13 @@
             </div>
             <div class="col-6">
               <div class="form-floating">
-                <input class="form-control" name="guest" id="guest" type="number" placeholder="จำนวนแขก*" />
+                <input class="form-control" name="guest" id="guest" type="number" placeholder="จำนวนแขก*" required />
                 <label for="guest">จำนวนแขก*</label>
               </div>
             </div>
             <div class="col-6">
               <div class="form-floating">
-                <input class="form-control" name="budget" id="budget" type="number" placeholder="งบประมาณ" />
+                <input class="form-control" name="budget" id="budget" type="number" placeholder="งบประมาณ*" required />
                 <label for="budget">งบประมาณ*</label>
               </div>
             </div>
@@ -55,13 +52,13 @@
             <div class="col-md-12">
               <div class="d-block"><label>ช่วงเวลาจัดงาน</label></div>
               <div class="wdl-checkbox-button">
-                <input type="checkbox" name="daytime" id="daytime-1" value="งานเลี้ยงเช้า"/><label for="daytime-1">งานเลี้ยงเช้า</label>
-                <input type="checkbox" name="daytime" id="daytime-2" value="งานเลี้ยงเที่ยง"/><label for="daytime-2">งานเลี้ยงเที่ยง</label>
-                <input type="checkbox" name="daytime" id="daytime-3" value="งานเลี้ยงเย็น"/><label for="daytime-3">งานเลี้ยงเย็น</label>
+                <input type="checkbox" name="daytime" id="daytime-1" value="งานเลี้ยงเช้า" /><label for="daytime-1">งานเลี้ยงเช้า</label>
+                <input type="checkbox" name="daytime" id="daytime-2" value="งานเลี้ยงเที่ยง" /><label for="daytime-2">งานเลี้ยงเที่ยง</label>
+                <input type="checkbox" name="daytime" id="daytime-3" value="งานเลี้ยงเย็น" /><label for="daytime-3">งานเลี้ยงเย็น</label>
               </div>
             </div>
             <div class="col-md-12">
-              <hr class="mt-0"/>
+              <hr class="mt-0" />
               <!-- <div class="wdl-checkbox">
                 <input id="appoint" type="checkbox">
                 <label for="appoint"><?php _e('สนใจนัดหมายเพื่อเข้าชมสถานที่','สนใจนัดหมายเพื่อเข้าชมสถานที่')?></label>
@@ -104,29 +101,29 @@
             );
             if($coupon) : ?>
             <div class="col-md-12 mt-3">
-              <h2 class="h6 mb-1">คูปองที่ร่วมรายการ</h2>
-              <div class="d-flex flex-wrap gap-2">
+              <p class="h6 mb-1"><?php _e('คูปองที่ร่วมรายการ', 'wdl') ?></p>
+              <div class="d-flex flex-wrap gap-3 my-2 align-items-stretch">
                 <?php foreach ($coupon as $singleCoupon): ?>
-                  <div class="wdl-coupon-picker wdl-coupon-checkbox">
-                    <div class="wdl-coupon-picker-indicator"></div>
-                    <input class="d-none wdl-coupon-checkbox-target" type="checkbox" value="<?php echo $singleCoupon->ID?>" readonly />
-                    <div class="wdl-coupon-picker-image">
-                      <img src="<?php echo (get_field('Image', $singleCoupon->ID)['sizes']['medium']) ?>" />
+                <div class="wdl-coupon-picker wdl-coupon-checkbox">
+                  <div class="wdl-coupon-picker-indicator"></div>
+                  <input class="d-none wdl-coupon-checkbox-target" type="checkbox" value="<?php echo $singleCoupon->ID?>" readonly />
+                  <div class="wdl-coupon-picker-image">
+                    <img src="<?php echo (get_field('Image', $singleCoupon->ID)['sizes']['medium']) ?>" />
+                  </div>
+                  <div class="wdl-coupon-picker-info">
+                    <div class="wdl-coupon-picker-title">
+                      <?php echo (get_the_title($singleCoupon->ID)) ?>
                     </div>
-                    <div class="wdl-coupon-picker-info">
-                      <div class="wdl-coupon-picker-title">
-                        <?php echo (get_the_title($singleCoupon->ID)) ?>
+                    <div class="d-flex flex-wrap justify-content-between align-items-center">
+                      <div class="wdl-coupon-picker-action">
+                        เก็บคูปอง
                       </div>
-                      <div class="d-flex flex-wrap justify-content-between align-items-center">
-                        <div class="wdl-coupon-picker-action">
-                          <button type="button">เก็บคูปอง</button>
-                        </div>
-                        <div class="wdl-coupon-picker-term">
-                          <a class="wdl-coupon-popup-link" href="<?php echo (get_the_permalink($singleCoupon->ID)) ?>?popup=true" target="blank">เงื่อนไข</a>
-                        </div>
+                      <div class="wdl-coupon-picker-term">
+                        <a class="wdl-coupon-popup-link" href="<?php echo (get_the_permalink($singleCoupon->ID)) ?>?popup=true" target="blank">เงื่อนไข</a>
                       </div>
                     </div>
                   </div>
+                </div>
                 <?php endforeach; ?>
               </div>
             </div>
@@ -135,24 +132,39 @@
               <label class="text-sm" for="message">ข้อความเพิ่มเติม</label>
               <textarea rows="4" class="form-control" name="message" id="message" label="ข้อความเพิ่มเติม"></textarea>
             </div>
-
-            <hr class="my-1 opacity-0">
-            <button id="wdl-form-general-submit" type="submit" name="submit" class="wdl-btn-lg wdl-form-submit">ลงทะเบียน</button>
-            <p class="fail-message text-red"><?php _e('ขออภัยค่ะ ไม่สามารถส่งข้อมูลได้ กรุณาลองใหม่','ขออภัยค่ะ ไม่สามารถส่งข้อมูลได้ กรุณาลองใหม่') ?></p>
+            <div class="col-md-12">
+              <hr class="my-1 opacity-0">
+              <button id="wdl-form-general-submit" type="submit" name="submit" class="wdl-btn-lg wdl-form-submit w-100">ลงทะเบียน</button>
+              <p class="fail-message text-red"><?php _e('ขออภัยค่ะ ไม่สามารถส่งข้อมูลได้ กรุณาลองใหม่','ขออภัยค่ะ ไม่สามารถส่งข้อมูลได้ กรุณาลองใหม่') ?></p>
+            </div>
           </div>
         </form>
       </div>
     </div>
   </div>
 </div>
-<div class="wdl-form-general-succeed-modal modal fade">
-  <div class="modal-dialog modal-dialog-centered modal-lg">
+<div class="wdl-form-general-coupon-verify modal fade">
+  <div class="modal-dialog modal-dialog-centered modal-lg modal-fullscreen-md-down">
     <div class="modal-content mb-0">
       <button class="btn-close" data-bs-dismiss="modal"></button>
       <div class="modal-body text-center">
         <div class="py-4">
           <img class="mb-4" src="<?php echo(get_theme_file_uri() . '/images/logo.png') ?>" alt="Weddinglist" width="180" height="43">
-          <h2 class="text-red"><?php _e('ลงทะเบียนสำเร็จ','ลงทะเบียนสำเร็จ') ?></h2>
+          <p class="h2 text-red"><?php _e('ลงทะเบียนสำเร็จ กรุณายืนยันตัวตนเพื่อรับคูปอง','ลงทะเบียนสำเร็จ กรุณายืนยันตัวตนเพื่อรับคูปอง') ?></p>
+          <p><?php _e('ระบบได้ส่งลิงค์ยืนยันตัวตนไปยังอีเมล<br/>หากไม่พบอีเมลดังกล่าวกรุณาตรวจสอบในกล่องเมลขยะของบัญชีคุณ', 'ระบบได้ส่งลิงค์ยืนยันตัวตนไปยังอีเมล<br/>หากไม่พบอีเมลดังกล่าวกรุณาตรวจสอบในกล่องเมลขยะของบัญชีคุณ') ?></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="wdl-form-general-succeed-modal modal fade">
+  <div class="modal-dialog modal-dialog-centered modal-lg modal-fullscreen-md-down">
+    <div class="modal-content mb-0">
+      <button class="btn-close" data-bs-dismiss="modal"></button>
+      <div class="modal-body text-center">
+        <div class="py-4">
+          <img class="mb-4" src="<?php echo(get_theme_file_uri() . '/images/logo.png') ?>" alt="Weddinglist" width="180" height="43">
+          <p class="h2  text-red"><?php _e('ลงทะเบียนสำเร็จ','ลงทะเบียนสำเร็จ') ?></p>
           <p><?php _e('ทางโรงแรมที่ท่านได้เลือกไว้จะติดต่อกลับมาในไม่ช้า ขอบคุณค่ะ', 'ทางโรงแรมที่ท่านได้เลือกไว้จะติดต่อกลับมาในไม่ช้า ขอบคุณค่ะ') ?></p>
         </div>
       </div>
@@ -160,69 +172,50 @@
   </div>
 </div>
 <script>
-  $(document).ready(() => {
-    $('#wdl-form-general').submit(function (e) {
-      e.preventDefault();
-
-      $('.wdl-form-general-modal .modal-body').addClass('submitting')
-
-      let selectedDaytime = []
-
-      $('input[name=daytime]:checked').each((index, element)=> {
-        selectedDaytime.push(element.value)
-      })
-      
-      $.post("<?php echo admin_url('admin-ajax.php'); ?>", {
-        action: 'send_email',
-        name: $('#name-lastname').val(),
-        tel: $('#tel').val(),
-        email: $('#email').val(),
-        lineid: $('#lineid').val(),
-        guest: $('#guest').val(),
-        budget: $('#budget').val(),
-        date: $('#date').val(),
-        daytime: selectedDaytime.join(', '),
-        //appoint: $('#appoint').is(':checked'),
-        appointDate: $('#appoint-date').val(),
-        appointTime: $('#appoint-time').val(),
-        message: $('#message').val(),
-        cardTitle: '<?php echo get_the_title()?>',
-        cardId: <?php echo get_the_id()?>,
-        leadType: 'Venue'
-      }, ()=> {
-        $('#wdl-form-general').removeClass('failed')
-        $('.wdl-form-general-modal').modal('hide')
+$(document).ready(() => {
+  $('#wdl-form-general').submit(function(e) {
+    e.preventDefault();
+    $('.wdl-form-general-modal .modal-body').addClass('submitting')
+    let selectedDaytime = []
+    let selectedCoupon = []
+    $('.wdl-coupon-checkbox-target:checked').each((i, e) => {
+      selectedCoupon.push($(e).val())
+    })
+    $('input[name=daytime]:checked').each((index, element) => {
+      selectedDaytime.push(element.value)
+    })
+    $.post("<?php echo admin_url('admin-ajax.php'); ?>", {
+      action: 'send_email',
+      name: $('#name-lastname').val(),
+      tel: $('#tel').val(),
+      email: $('#email').val(),
+      lineid: $('#lineid').val(),
+      guest: $('#guest').val(),
+      budget: $('#budget').val(),
+      date: $('#date').val(),
+      daytime: selectedDaytime.join(', '),
+      //appoint: $('#appoint').is(':checked'),
+      appointDate: $('#appoint-date').val(),
+      appointTime: $('#appoint-time').val(),
+      message: $('#message').val(),
+      cardTitle: '<?php echo get_the_title()?>',
+      cardId: <?php echo get_the_id()?>,
+      leadType: 'Venue',
+      selectedCoupon: selectedCoupon.join(',')
+    }, () => {
+      $('#wdl-form-general').removeClass('failed')
+      $('.wdl-form-general-modal').modal('hide')
+      if (selectedCoupon.length > 0) {
+        $('.wdl-form-general-coupon-verify').modal('show')
+      } else {
         $('.wdl-form-general-succeed-modal').modal('show')
-
-        $('.wdl-form-general-modal .modal-body').removeClass('submitting')
-        generalDirectData = {}
-      }).fail(()=> {
-        $('.wdl-form-general-modal .modal-body').removeClass('submitting')
-        $('#wdl-form-general').addClass('failed')
-      })
-
-      $('.wdl-coupon-checkbox-target:checked').each((i, e)=> {
-        const couponId = $(e).val()
-        $.post("<?php echo admin_url('admin-ajax.php'); ?>", {
-          toClient: true,
-          action: 'send_email',
-          name: $('#name-lastname').val(),
-          tel: $('#tel').val(),
-          email: $('#email').val(),
-          recepient: '<?php $recepient?>' ,
-          lineid: $('#lineid').val(),
-          guest: $('#guest').val(),
-          budget: $('#budget').val(),
-          date: $('#date').val(),
-          daytime: selectedDaytime.join(', '),
-          //appoint: $('#appoint').is(':checked'),
-          appointDate: $('#appoint-date').val(),
-          appointTime: $('#appoint-time').val(),
-          message: $('#message').val(),
-          cardId: couponId,
-          leadType: 'Coupon'
-        }, ()=> {}).fail(()=> {})
-      })
-    });
-  })
+      }
+      $('.wdl-form-general-modal .modal-body').removeClass('submitting')
+      generalDirectData = {}
+    }).fail(() => {
+      $('.wdl-form-general-modal .modal-body').removeClass('submitting')
+      $('#wdl-form-general').addClass('failed')
+    })
+  });
+})
 </script>

@@ -3,16 +3,16 @@
     <div class="swiper-wrapper">
       <div class="swiper-slide w-auto">
         <div class="dropdown wdl-dropdown">
-          <div class="wdl-btn-filter" data-bs-toggle="dropdown" aria-expanded="false">
+          <div class="wdl-btn-filter <?php if ($_GET['type']) { echo 'active'; }?>" data-bs-toggle="dropdown" aria-expanded="false">
             <?php if ($_GET['type'] || get_queried_object()->taxonomy): ?>
-              <i data-feather="users"></i><?php echo(get_term(get_queried_object()->term_id, 'vendor-type')->name); ?>
+            <i data-feather="users"></i><?php echo(get_term(get_queried_object()->term_id, 'vendor-type')->name); ?>
             <?php else: ?>
-              <i data-feather="users"></i><?php _e('ประเภทผู้ให้บริการ', 'ประเภทผู้ให้บริการ'); ?>
+            <i data-feather="users"></i><?php _e('ประเภทผู้ให้บริการ', 'wdl'); ?>
             <?php endif; ?>
             <i data-feather="chevron-down"></i>
           </div>
           <ul class="dropdown-menu dropdown-menu-end">
-            <li><a href="/vendor"><?php _e('ประเภททั้งหมด', 'ประเภททั้งหมด'); ?></a></li>
+            <li><a href="/vendor"><?php _e('ประเภททั้งหมด', 'wdl'); ?></a></li>
             <?php
             $vendor_type = get_terms(
               array(
@@ -23,13 +23,13 @@
     
             foreach ($vendor_type as $type):
               ?>
-              <li>
-                <a href="<?php echo get_term_link($type->term_id);
+            <li>
+              <a href="<?php echo get_term_link($type->term_id);
                 /* updateParam([
                   'type' => $type->slug
                 ]) */
                   ?>"><?php echo $type->name ?></a>
-              </li>
+            </li>
             <?php endforeach; ?>
           </ul>
         </div>
@@ -40,12 +40,12 @@
             <?php if ($_GET['character']): ?>
               <i data-feather="star"></i><?php echo(get_term_by('slug', $_GET['character'], 'vendor_character')->name); ?>
             <?php else: ?>
-              <i data-feather="star"></i><?php _e('จุดเด่นผู้ให้บริการ', 'จุดเด่นผู้ให้บริการ'); ?>
+              <i data-feather="star"></i><?php _e('จุดเด่นผู้ให้บริการ', 'wdl'); ?>
             <?php endif; ?>
             <i data-feather="chevron-down"></i>
           </div>
           <ul class="dropdown-menu dropdown-menu-end">
-            <li><a class="px-3" href="<?php removeParam('character')?>"><?php _e('จุดเด่นทั้งหมด', 'จุดเด่นทั้งหมด'); ?></a></li>
+            <li><a class="px-3" href="<?php removeParam('character')?>"><?php _e('จุดเด่นทั้งหมด', 'wdl'); ?></a></li>
             <?php
             $vendor_character = get_terms(
               array(
@@ -96,11 +96,11 @@
       </div> -->
       <div class="swiper-slide w-auto">
         <div class="dropdown wdl-dropdown">
-          <div class="wdl-btn-filter" data-bs-toggle="dropdown" aria-expanded="false">
+          <div class="wdl-btn-filter <?php if ($_GET['label']) { echo 'active'; }?>" data-bs-toggle="dropdown" aria-expanded="false">
             <?php if ($_GET['label']) { ?>
-              <i data-feather="bar-chart"></i><?php echo $_GET['label']; ?>
+            <i data-feather="bar-chart"></i><?php echo $_GET['label']; ?>
             <?php } else { ?>
-              <i data-feather="bar-chart"></i><?php _e('จัดเรียงโดย', 'จัดเรียงโดย');
+            <i data-feather="bar-chart"></i><?php _e('จัดเรียงโดย', 'wdl');
             } ?>
             <i data-feather="chevron-down"></i>
           </div>

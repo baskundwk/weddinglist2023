@@ -18,24 +18,34 @@
   ?>
   <?php
   if ($promotion->have_posts()): ?>
-  <section class="overflow-x-hidden">
+  <section>
     <div class="container">
-      <h2 class="h1 wdl-localnav-heading">
-        <?php echo (get_option('wdl_options', 'โปรโมชั่นงานแต่งงาน')['word-frontpage-promotion-title']); ?>
-      </h2>
-      <p class="mb-2">
-        <?php echo (get_option('wdl_options', 'รวบรวมโปรโมชั่นแต่งงานให้คุณไว้ที่เดียว')['word-frontpage-promotion-desc']); ?>
-      </p>
+      <div class="row mb-2">
+        <div class="col-lg">
+          <h2 class="h1 wdl-localnav-heading mb-0">
+            <?php echo (get_option('wdl_options', 'โปรโมชั่นงานแต่งงาน')['word-frontpage-promotion-title']); ?>
+          </h2>
+          <p class="mb-2">
+            <?php echo (get_option('wdl_options', 'รวบรวมโปรโมชั่นแต่งงานให้คุณไว้ที่เดียว')['word-frontpage-promotion-desc']); ?>
+          </p>
+        </div>
+        <div class="col-lg text-lg-end pt-lg-2 d-none d-lg-block">
+          <a href="<?php echo esc_html(get_post_type_archive_link('promotion')) ?>" class="wdl-btn-secondary py-2 px-3">
+            <?php _e('ดูโปรโมชั่นทั้งหมด', 'wdl') ?>
+          </a>
+        </div>
+      </div>
       <div class="wdl-archive wdl-archive-extended">
 
         <div id="promotions" class="swiper wdl-archive-swiper">
           <div class="swiper-wrapper 
-                  <?php if ($_GET['order'] || $_GET['orderby'] || $_GET['key']) {
+            <?php if ($_GET['order'] || $_GET['orderby'] || $_GET['key']) {
 
-                  } else {
-                    echo 'row-cols-archive-randomized';
-                  } ?> ">
-            <?php while ($promotion->have_posts()): ?>
+            } else {
+              echo 'row-cols-archive-randomized';
+            } ?> ">
+            <?php
+            while ($promotion->have_posts()): ?>
             <?php $promotion->the_post(); ?>
 
             <?php include get_stylesheet_directory() . '/components/cards/card-promotion.php' ?>
@@ -48,11 +58,10 @@
             <div class="swiper-button-next"></div>
           </div>
         </div>
-
       </div>
-      <div class="text-center mt-3 mb-5">
+      <div class="text-center pt-lg-2 d-block d-lg-none mb-4">
         <a href="<?php echo esc_html(get_post_type_archive_link('promotion')) ?>" class="wdl-btn-secondary py-2 px-3">
-          <?php _e('ดูโปรโมชั่นทั้งหมด', 'ดูโปรโมชั่นทั้งหมด') ?>
+          <?php _e('ดูโปรโมชั่นทั้งหมด', 'wdl') ?>
         </a>
       </div>
     </div>
@@ -72,14 +81,23 @@
   ?>
 
   <?php if ($weddingfair->have_posts()): ?>
-  <section class="overflow-x-hidden html-lazy">
+  <section class="html-lazy">
     <div class="container">
-      <h2 class="h1 wdl-localnav-heading">
-        <?php echo (get_option('wdl_options', 'Wedding Fair & Event')['word-frontpage-wedding-fair-title']); ?>
-      </h2>
-      <p class="mb-2">
-        <?php echo (get_option('wdl_options', 'รวบรวมงานแฟร์ และ อีเว้นท์ให้คุณไว้ที่เดียว')['word-frontpage-wedding-fair-desc']); ?>
-      </p>
+      <div class="row mb-2">
+        <div class="col-lg">
+          <h2 class="h1 wdl-localnav-heading mb-0">
+            <?php echo (get_option('wdl_options', 'Wedding Fair & Event')['word-frontpage-wedding-fair-title']); ?>
+          </h2>
+          <p class="mb-2">
+            <?php echo (get_option('wdl_options', 'รวบรวมงานแฟร์ และ อีเว้นท์ให้คุณไว้ที่เดียว')['word-frontpage-wedding-fair-desc']); ?>
+          </p>
+        </div>
+        <div class="col-lg text-lg-end pt-lg-3 d-none d-lg-block">
+          <a href="<?php echo esc_html(get_post_type_archive_link('wedding-fair')) ?>" class="wdl-btn-secondary py-2 px-3">
+            <?php _e('ดู Wedding Fair & Event ทั้งหมด', 'wdl') ?>
+          </a>
+        </div>
+      </div>
       <div class="wdl-archive wdl-archive-extended">
 
         <div class="swiper wdl-archive-swiper">
@@ -102,11 +120,11 @@
             <div class="swiper-button-next"></div>
           </div>
         </div>
-
       </div>
-      <div class="text-center mt-3 mb-5">
+
+      <div class="text-center pt-lg-3 d-block d-lg-none mb-4">
         <a href="<?php echo esc_html(get_post_type_archive_link('wedding-fair')) ?>" class="wdl-btn-secondary py-2 px-3">
-          <?php _e('ดู Wedding Fair & Event ทั้งหมด', 'ดู Wedding Fair & Event ทั้งหมด') ?>
+          <?php _e('ดู Wedding Fair & Event ทั้งหมด', 'wdl') ?>
         </a>
       </div>
     </div>
@@ -126,11 +144,11 @@
   ?>
   <?php if ($venue->have_posts()): ?>
 
-  <section class="overflow-x-hidden html-lazy">
+  <section class="html-lazy">
     <div class="container">
       <div class="row">
         <div class="col-md-6">
-          <h2 class="h1 wdl-localnav-heading">
+          <h2 class="h1 wdl-localnav-heading mb-0">
             <?php echo (get_option('wdl_options', 'สถานที่จัดงานแต่งงาน')['word-frontpage-venue-title']); ?>
           </h2>
           <p class="mb-2">
@@ -176,9 +194,9 @@
           </div>
         </div>
       </div>
-      <div class="text-center mt-3 mb-5">
+      <div class="text-center mb-3">
         <a href="<?php echo esc_html(get_post_type_archive_link('venue')) ?>" class="wdl-btn-secondary py-2 px-3">
-          <?php _e('ดูสถานที่จัดงานแต่งงานทั้งหมด', 'ดูสถานที่จัดงานแต่งงานทั้งหมด') ?>
+          <?php _e('ดูสถานที่จัดงานแต่งงานทั้งหมด', 'wdl') ?>
         </a>
       </div>
     </div>
@@ -209,7 +227,7 @@
   <?php if ($vendor->have_posts()): ?>
   <section class="overflow-hidden html-lazy">
     <div class="container">
-      <h2 class="h1 wdl-localnav-heading">
+      <h2 class="h1 wdl-localnav-heading mb-0">
         <?php echo (get_option('wdl_options', 'ผู้ให้บริการงานแต่งงาน')['word-frontpage-vendor-title']); ?>
       </h2>
       <p class="mb-2">
@@ -246,7 +264,7 @@
             if ($type_query): ?>
         <div id="tab-vendor-<?php echo $type->slug ?>" class="tab-pane fade">
           <div class="wdl-archive wdl-archive-extended">
-            <div id="promotion-swiper" class="swiper wdl-archive-swiper">
+            <div id="vendor-swiper" class="swiper wdl-archive-swiper">
               <div class="swiper-wrapper row-cols-archive-randomized opacity-1">
                 <?php foreach ($type_query as $post): ?>
                 <?php include get_stylesheet_directory() . '/components/cards/card-vendor.php' ?>
@@ -259,9 +277,9 @@
               <div class="swiper-pagination"></div>
             </div>
 
-            <div class="text-center mt-4 mb-5">
+            <div class="text-center mt-4 mb-3">
               <a href="<?php echo esc_html(get_term_link($type)) ?>" class="wdl-btn-secondary py-2 px-3">
-                <?php _e('ดู ' . $type->name . ' ทั้งหมด', 'ดู ' . $type->name . ' ทั้งหมด') ?>
+                <?php _e('ดู ' . $type->name . ' ทั้งหมด', 'wdl') ?>
               </a>
             </div>
           </div>
@@ -288,7 +306,7 @@
 
   <section class="pb-5 html-lazy">
     <div class="container">
-      <h2 class="h1 wdl-localnav-heading">
+      <h2 class="h1 wdl-localnav-heading mb-0">
         <?php echo (get_option('wdl_options', 'บทความล่าสุด')['word-frontpage-post-title']); ?>
       </h2>
       <p class="text-secondary">
@@ -301,7 +319,7 @@
         <a href="<?php echo esc_html(get_category_link(get_cat_ID('ฤกษ์แต่งงาน'))) ?>" class="wdl-badge-sm-secondary">ฤกษ์แต่งงาน</a>
       </div>
       <?php if ($postAll->have_posts()): ?>
-      <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-2 wdl-archive wdl-archive-extended opacity-1">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-2 wdl-archive wdl-archive-extended opacity-1">
         <?php while ($postAll->have_posts()): ?>
         <?php $postAll->the_post(); ?>
         <div class="col">
@@ -315,7 +333,7 @@
           </div>
         </div>
       </div>
-      <div class="text-center mt-3 mb-5">
+      <div class="text-center">
         <a href="<?php echo esc_html(get_post_type_archive_link('post')) ?>" class="wdl-btn-secondary py-2 px-3">
           <?php _e('ดูบทความทั้งหมด', 'ดูบทความทั้งหมด') ?>
         </a>

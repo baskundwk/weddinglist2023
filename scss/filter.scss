@@ -78,4 +78,8 @@
     height: 16px;
     flex: 0 0 auto;
   }
+
+  &.active {
+    color: #ff2758 !important;
+  }
 }

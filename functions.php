@@ -97,8 +97,7 @@ add_filter('rank_math/frontend/breadcrumb/items', function ($crumbs, $class) {
 add_action('wp_ajax_send_email', 'send_email');
 add_action('wp_ajax_nopriv_send_email', 'send_email');
 
-function send_email()
-{
+function send_email() {
 
 	$toClient = $_REQUEST['toClient'];
 	$name = $_REQUEST['name'];
@@ -125,6 +124,7 @@ function send_email()
 	if ($selectedCoupon !== '') {
 		$selectedCouponBody = '<li>คูปองที่เลือก : <strong>' . implode(", ", $selectedCouponTitle) . '</strong></li>';
 	}
+
 
 	//$appoint = $_REQUEST['appoint'];
 	$appointDate = $_REQUEST['appointDate'];
@@ -208,38 +208,6 @@ function send_email()
 
 	$mail = wp_mail($to, $subject, $email_body, $headers);
 
-	/* if($toClient === 'true') {
-				$couponImage = get_site_url() . get_field('Banner', $cardId)['sizes']['large'];
-
-
-				$email_body_client = 
-				"<div style='background: #EEE; padding: 32px;'>".
-				"	<div style='max-width: 600px; margin: auto;'>".
-				"		<div style='background: #FF2758; padding: 24px; text-align: center;'>".
-				"			<img src='$file' alt='Weddinglist' width='243' height='60'>".
-				"		</div>".
-				"		<div style='background: #FFF; padding: 16px; font-family: Tahoma; color: #555; line-height: 1.7;'>".
-				"			<p>สวัสดีค่ะ</p>".
-				"			<p>ทาง Weddinglist ขอนำส่งคูปอง “<strong>".$cardTitle."</strong>” ค่ะ <a href='".get_permalink($cardId)."'>กรุณาตรวจสอบเงื่อนไข</a> และวันที่การใช้งานคูปองก่อนวันหมดอายุ และ <strong>บันทึกรูปคูปอง</strong> หรือ <a href='$couponImage' download='ดาวน์โหลดคูปอง'>ดาวน์โหลดไฟล์คูปอง</a> เพื่อใช้ในการยืนยันสิทธิ์</p>".
-				"			<img src='". $couponImage ."' alt='".$cardTitle."' width='100%' />".
-				"			<p style='color: #999; font-weight: 700;'>ขอขอบพระคุณอย่างสูง<br>Weddinglist Support</p>".
-				"			<p style='font-size: 14px;'>แจ้งปัญหาการใช้งาน".
-				"				<br>โทร. <a href='tel:0634748111'>063 474 8111</a>".
-				"				<br>อีเมล <a href='mailto:support@weddinglist.co.th'>support@weddinglist.co.th</a>".
-				"			</p>".
-				"		</div>".
-				"	</div>".
-				"</div>";
-
-				$mailClient = wp_mail($email, 'นำส่งคูปอง '.$cardTitle.' จากทาง Weddinglist', $email_body_client, $headers);
-			}
-			
-			if($mail){
-				echo "Email Sent Successfully";
-			}; */
-
-	// Store lead in database
-
 	$lead_type = $_REQUEST['leadType'];
 
 
@@ -288,7 +256,7 @@ function send_email()
 			"			<p>สวัสดีค่ะ</p>" .
 			"			<p>รหัส OTP ของคุณคือ <br/><strong style='font-size:2em; color:#FF2758;'>" . $otp . "</strong></p>" .
 			"			<p><strong>กรุณายืนยันตัวตนด้วยลิงค์ภายในอีเมลฉบับนี้เพื่อยืนยันการรับสิทธิ์คูปอง</strong> โดยทาง Weddinglist จะนำส่งคูปองให้คุณในอีเมลฉบับถัดไปหลังจากการยืนยันตัวตน</p>" .
-			"			<a style='display:block; margin:auto; width:fit-content; text-decoration:none; background:#FF2758; padding:12px 24px; border-radius:8px; color:#FFF; font-weight:700;' href='https://www.weddinglist.co.th/verify?pid=" . $new_post_id . "&otp=" . $otp . "&t=" . $selectedCoupon . "'>คลิกที่นี่ เพื่อยืนยันตัวตนอัตโนมัติ</a>" .
+			"			<a style='display:block; margin:auto; width:fit-content; text-decoration:none; background:#FF2758; padding:12px 24px; border-radius:8px; color:#FFF; font-weight:700;' href='https://www.weddinglist.co.th/verify?cid=".$cardId."&pid=" . $new_post_id . "&otp=" . $otp . "&t=" . $selectedCoupon . "'>คลิกที่นี่ เพื่อยืนยันตัวตนอัตโนมัติ</a>" .
 			"			<p style='color:#999;'><em>ลิงค์ยืนยันตัวตนจะหมดอายุภายใน 24 ชม. หากยืนยันตัวตนเกินกำหนด กรุณาติดต่อแอดมินโดยแจ้งข้อมูลการลงทะเบียน และเลข OTP " . $otp . " เพื่อยืนยันตัวตน</em></p>" .
 			"			<p style='color:#999; font-weight:700;'>ขอขอบพระคุณอย่างสูง<br>Weddinglist Support</p>" .
 			"			<p style='font-size:14px;'>แจ้งปัญหาการใช้งาน" .
@@ -301,11 +269,10 @@ function send_email()
 
 		$mailClient = wp_mail($email, 'กรุณายืนยันตัวตนเพื่อรับสิทธิ์จากคูปอง', $email_body_client, $headers);
 	}
+
 }
 
-function send_mail_coupon($email, $name, $banners, $couponNames)
-{
-
+function send_mail_coupon($email, $name, $banners, $couponNames, $coupons, $pid, $cid) {
 	$headers = "MIME-Version: 1.0" . "\r\n";
 	$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
 	$headers .= "From: Weddinglist Team <support@weddinglist.co.th> \r\n";
@@ -325,6 +292,45 @@ function send_mail_coupon($email, $name, $banners, $couponNames)
 		$bannersBody .= "<img style='display:block; width:100%;' src='" . get_site_url() . $banner . "' />";
 	}
 
+	// Send coupon email notification to client
+	foreach ($coupons as $id) {
+		$couponTitle = get_the_title($id);
+		if(get_field('CouponEmail', $id)) {
+			$couponEmail = get_field('CouponEmail', $id);
+		} else {
+			$couponEmail = get_field('Email', $cid);;
+		}
+
+		$subject = "แจ้งเตือนการเก็บคูปอง $cardTitle ของคุณ ". get_the_title($pid);
+		
+		$email_body =
+		"<div style='background: #EEE; padding: 32px;'>" .
+		"	<div style='max-width: 600px; margin: auto;'>" .
+		"		<div style='background: #FF2758; padding: 24px; text-align: center;'>" .
+		"			<img src='$file' alt='Weddinglist' width='243' height='60'>" .
+		"		</div>" .
+		"		<div style='background: #FFF; padding: 16px; font-family: Tahoma; color: #555; line-height: 1.7;'>" .
+		"			<p>สวัสดีค่ะ</p>" .
+		"			<p><strong>มีลูกค้าสนใจรับคูปอง". $couponTitle ." และได้ยืนยันตัวตนเรียบร้อยแล้ว</strong></p>" .
+		"			<ul style='list-style: none; padding: 0;'>" .
+		"				<li>ลูกค้าชื่อ : <strong>". get_the_title($pid) ."</strong></li>" .
+		"				<li>อีเมล : <strong>". get_field('email', $pid) ."</strong></li>" .
+		"				<li>เบอร์โทร​ : <strong>". get_field('tel', $pid) ."</strong></li>" .
+		"				<li>LINE ID : <strong>". get_field('lineid', $pid) ."</strong></li>" .
+		"			</ul>" .
+		"			<p style='color: #999; font-weight: 700;'>ขอขอบพระคุณอย่างสูง<br>Weddinglist Support</p>" .
+		"			<p style='font-size: 14px;'>แจ้งปัญหาการใช้งาน" .
+		"				<br>โทร. <a href='tel:0634748111'>063 474 8111</a>" .
+		"				<br>อีเมล <a href='mailto:support@weddinglist.co.th'>support@weddinglist.co.th</a>" .
+		"			</p>" .
+		"		</div>" .
+		"	</div>" .
+		"</div>";
+
+		$couponMail = wp_mail($couponEmail, $subject, $email_body, $headers);
+
+	}
+
 
 	$email_body_client =
 		"<div style='background:#EEE; padding:32px;'>" .
@@ -336,7 +342,7 @@ function send_mail_coupon($email, $name, $banners, $couponNames)
 		"			<p>สวัสดีค่ะ</p>" .
 		"			<p>ขอบคุณสำหรับการยืนยันตัวตน ทาง Weddinglist ขอนำส่งคูปองที่ท่านเลือกไว้</p>" .
 		$bannersBody .
-		"			<p style='color:#FF2758;'><strong>กรุณาแสดงอีเมลนี้เพื่อใช้เป็นหลักฐานในการรับสิทธิ์ในชื่อ" . $name . "</strong></p>" .
+		"			<p style='color:#FF2758;'><strong>กรุณาแสดงอีเมลล์เพื่อใช้เป็นหลักฐานในการรับสิทธิ์กับเจ้าหน้าที่ทีม Wedding sales ในชื่อ " . $name . " โดยท่านจะสามารถได้รับสิทธิประโยชน์นี้เมื่อเป็นไปตามเงื่อนไขในรายละเอียดของคูปองเท่านั้น</strong></p>" .
 		"			<p style='color:#999; font-weight:700;'>ขอขอบพระคุณอย่างสูง<br>Weddinglist Support</p>" .
 		"			<p style='font-size:14px;'>แจ้งปัญหาการใช้งาน" .
 		"				<br>โทร. <a href='tel:0634748111'>063 474 8111</a>" .
@@ -346,7 +352,7 @@ function send_mail_coupon($email, $name, $banners, $couponNames)
 		"	</div>" .
 		"</div>";
 
-	$mailClient = wp_mail($email, 'นำส่งคูปอง ' . $couponNames . ' จากทาง Weddinglist', $email_body_client, $headers);
+	$mailClient = wp_mail($email, 'นำส่งคูปองเพื่อยืนยันสิทธิ์' . $couponNames . ' จากทาง Weddinglist', $email_body_client, $headers);
 }
 
 //require_once('customizer.php');
@@ -368,21 +374,20 @@ add_shortcode('seo_description', function () {
 });
 
 
-function updateParam($newParams)
-{
+function updateParam($newParams) {
 	// Function to get the current URL
 	$protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
 	$currentUrl = $protocol . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 
 	// Parse the URL and get its query parameters
 	$urlParts = parse_url($currentUrl);
-	parse_str($urlParts['query'] ?? '', $currentParams);
+	parse_str($urlParts['query'] ? $urlParts['query'] : '', $currentParams);
 
 	// New parameters to intersect
 	/* $newParams = [
-					'param1' => 'value1',
-					'param2' => 'value2',
-			]; */
+												'param1' => 'value1',
+												'param2' => 'value2',
+										]; */
 
 	// Intersect current parameters with new parameters
 	$updatedParams = array_merge($currentParams, $newParams);
@@ -397,8 +402,7 @@ function updateParam($newParams)
 	echo $newUrl;
 }
 
-function removeParam($param)
-{
+function removeParam($param) {
 	// Parse the URL into components
 	$protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
 	$currentUrl = $protocol . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
@@ -521,3 +525,170 @@ function shortcode_listing_card($atts)
 }
 
 add_shortcode('listing', 'shortcode_listing_card');
+
+
+function promotionDate($dateString, $type)
+{
+	$date = $dateString;
+
+	// Ensure $date is a valid date
+	if (!$date) {
+		return '';
+	}
+
+	// Convert date from 'd/m/Y' format to 'Y-m-d' for strtotime compatibility
+	$date_formatted = DateTime::createFromFormat('d/m/Y', $date, new DateTimeZone('Asia/Bangkok'));
+	if (!$date_formatted) {
+		return ''; // Return empty if the date format is invalid
+	}
+
+	$date_timestamp = $date_formatted->getTimestamp();
+
+	// Check if the date has passed
+	if ($date_timestamp < time()) {
+		if ($type === 'DateStart') {
+			return "วันนี้";
+		}
+		if ($type === 'DateEnd') {
+			return "";
+		}
+	} else {
+		// Convert date to Thai BE format
+		$thai_year = wp_date('Y', $date_timestamp) + 543;
+		$thai_date = wp_date('j F', $date_timestamp) . ' ' . $thai_year;
+		if ($type === 'DateStart') {
+			return $thai_date;
+		}
+		if ($type === 'DateEnd') {
+			return " - " . $thai_date;
+		}
+
+	}
+
+}
+
+function custom_menu_order($menu_order) {
+	return [
+		'index.php',
+		'text-title-1',
+		'edit.php',
+		'edit.php?post_type=page',
+		'edit.php?post_type=promotion',
+		'edit.php?post_type=wedding-fair',
+		'edit.php?post_type=venue',
+		'edit.php?post_type=vendor',
+		'edit.php?post_type=coupon',
+		'edit.php?post_type=listing',
+		'edit.php?post_type=moment',
+		'edit.php?post_type=video',
+		'edit.php?post_type=campaign',
+		'text-title-2',
+		'edit.php?post_type=lead',
+		'upload.php',
+		'users.php?post_type=lead',
+		'smush',
+		'blc_dash',
+		'rank-math',
+		'weddinglist-setting',
+		'loco',
+		'tools.php',
+		'themes.php',
+		'options-general.php',
+	];
+}
+add_filter('custom_menu_order', '__return_true');
+add_filter('menu_order', 'custom_menu_order');
+
+function remove_admin_menu_items() {
+	remove_menu_page('edit-comments.php'); // Comments
+	remove_menu_page('edit.php?post_type=project'); // Comments
+}
+add_action('admin_menu', 'remove_admin_menu_items');
+
+function add_dynamic_guiding_text_items() {
+	$dynamic_titles = [
+			'1' => 'Content',
+			'2' => 'Management',
+			//'3' => 'Administration'
+	];
+
+	foreach ($dynamic_titles as $slug => $title) {
+			add_menu_page(
+					$title,              // Page title
+					$title,              // Menu title
+					'read',              // Capability
+					"text-title-$slug",  // Unique slug
+					'',                  // Callback (no content needed)
+					'',                  // Icon
+					15                   // Position
+			);
+	}
+}
+add_action('admin_menu', 'add_dynamic_guiding_text_items');
+
+function enqueue_admin_styles() {
+	wp_enqueue_style(
+			'custom-admin-styles',                  // Handle name
+			get_theme_file_uri() . '/css/admin.css', // Path to the CSS file
+			array(),                                // Dependencies
+			'1.0',                                  // Version
+			'all'                                   // Media type
+	);
+}
+add_action('admin_enqueue_scripts', 'enqueue_admin_styles');
+
+function group_all_plugins_and_settings() {
+	global $menu, $submenu;
+
+	// Custom slug for the new group
+	$custom_top_menu_slug = 'options-general.php';
+
+	// List of menu slugs to move
+	$move_slugs = [
+			'plugins.php',
+			'users.php',
+			'cookie-law-info',
+			'copy-delete-posts',
+			'disable-wp-notification',
+			'vc-general',
+			'Wordfence',
+			'pmxe-admin-home',
+			'meowapps-main-menu',
+			'publishpress-future',
+			'wps_overview_page',
+			'et_divi_options',
+			'litespeed',
+			'googlesitekit-dashboard',
+			'duplicator',
+			'wp-mail-smtp',
+			'shortcodes-ultimate',
+			'edit.php?post_type=acf-field-group',
+			'edit.php?post_type=filter-set',
+			'catch-infinite-scroll',
+
+			// Add any additional slugs for plugins you want to include
+	];
+
+	// Move each slug as a submenu of the custom top menu
+	foreach ($menu as $key => $item) {
+		//echo '<script>console.log("'.$item[2].'");</script>';
+			if (in_array($item[2], $move_slugs)) {
+
+					if (isset($item[4])) {
+							// Remove the 'menu-top' class
+							$item[4] = str_replace('menu-top', '', $item[4]);
+					}
+
+					// Add to the custom menu's submenu
+					$submenu[$custom_top_menu_slug][] = $item;
+
+					// Remove from the top-level menu
+					unset($menu[$key]);
+			}
+	}
+}
+add_action('admin_menu', 'group_all_plugins_and_settings', 1000000); // Priority 100 ensures other menus are loaded first
+
+add_action('after_setup_theme', function () {
+	load_theme_textdomain('wdl', get_stylesheet_directory(  ) . '/languages');
+});

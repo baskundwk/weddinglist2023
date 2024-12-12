@@ -6,7 +6,7 @@
         <h2><?php _e('กรุณากรอกข้อมูลผู้ติดต่อ', 'กรุณากรอกข้อมูลผู้ติดต่อ') ?></h2>
         <hr class="mb-2">
         <ul class="wdl-form-general-list">
-          
+
         </ul>
         <form id="wdl-form-general" class="wdl-form-general" action="" method="post" enctype="multipart/form-data">
           <div class="row g-2 g-lg-3">
@@ -36,13 +36,13 @@
             </div>
             <div class="col-6">
               <div class="form-floating">
-                <input class="form-control" name="guest" id="guest" type="number" placeholder="จำนวนแขก*" />
+                <input class="form-control" name="guest" id="guest" type="number" placeholder="จำนวนแขก*" required />
                 <label for="guest">จำนวนแขก*</label>
               </div>
             </div>
             <div class="col-6">
               <div class="form-floating">
-                <input class="form-control" name="budget" id="budget" type="number" placeholder="งบประมาณ" />
+                <input class="form-control" name="budget" id="budget" type="number" placeholder="งบประมาณ*" required />
                 <label for="budget">งบประมาณ*</label>
               </div>
             </div>
@@ -55,9 +55,9 @@
             <div class="col-md-12">
               <div class="d-block"><label>ช่วงเวลาจัดงาน</label></div>
               <div class="wdl-checkbox-button">
-                <input type="checkbox" name="daytime" id="daytime-1" value="งานเลี้ยงเช้า"/><label for="daytime-1">งานเลี้ยงเช้า</label>
-                <input type="checkbox" name="daytime" id="daytime-2" value="งานเลี้ยงเที่ยง"/><label for="daytime-2">งานเลี้ยงเที่ยง</label>
-                <input type="checkbox" name="daytime" id="daytime-3" value="งานเลี้ยงเย็น"/><label for="daytime-3">งานเลี้ยงเย็น</label>
+                <input type="checkbox" name="daytime" id="daytime-1" value="งานเลี้ยงเช้า" /><label for="daytime-1">งานเลี้ยงเช้า</label>
+                <input type="checkbox" name="daytime" id="daytime-2" value="งานเลี้ยงเที่ยง" /><label for="daytime-2">งานเลี้ยงเที่ยง</label>
+                <input type="checkbox" name="daytime" id="daytime-3" value="งานเลี้ยงเย็น" /><label for="daytime-3">งานเลี้ยงเย็น</label>
               </div>
             </div>
             <div class="col-md-12">
@@ -113,46 +113,45 @@
   </div>
 </div>
 <script>
-  $(document).ready(() => {
-    $('#wdl-form-general').submit(function (e) {
-      e.preventDefault();
-
-      $('.wdl-form-general-modal .modal-body').addClass('submitting')
-
-      let selectedDaytime = []
-
-      $('input[name=daytime]:checked').each((index, element)=> {
-        selectedDaytime.push(element.value)
-      })
-      
-      $.post("<?php echo admin_url('admin-ajax.php'); ?>", {
-        action: 'send_email',
-        name: $('#name-lastname').val(),
-        tel: $('#tel').val(),
-        email: $('#email').val(),
-        lineid: $('#lineid').val(),
-        guest: $('#guest').val(),
-        budget: $('#budget').val(),
-        date: $('#date').val(),
-        daytime: selectedDaytime.join(', '),
-        //appoint: $('#appoint').is(':checked'),
-        appointDate: $('#appoint-date').val(),
-        appointTime: $('#appoint-time').val(),
-        message: $('#message').val(),
-        cardTitle: '<?php echo get_the_title()?>',
-        cardId: <?php echo get_the_id()?>,
-        leadType: 'Wedding Fair'
-      }, ()=> {
-        $('#wdl-form-general').removeClass('failed')
-        $('.wdl-form-general-modal').modal('hide')
-        $('.wdl-form-general-succeed-modal').modal('show')
-
-        $('.wdl-form-general-modal .modal-body').removeClass('submitting')
-        generalDirectData = {}
-      }).fail(()=> {
-        $('.wdl-form-general-modal .modal-body').removeClass('submitting')
-        $('#wdl-form-general').addClass('failed')
-      })
-    });
-  })
+$(document).ready(() => {
+  $('#wdl-form-general').submit(function(e) {
+    e.preventDefault();
+    $('.wdl-form-general-modal .modal-body').addClass('submitting')
+    let selectedDaytime = []
+    let selectedCoupon = []
+    $('.wdl-coupon-checkbox-target:checked').each((i, e) => {
+      selectedCoupon.push($(e).val())
+    })
+    $('input[name=daytime]:checked').each((index, element) => {
+      selectedDaytime.push(element.value)
+    })
+    $.post("<?php echo admin_url('admin-ajax.php'); ?>", {
+      action: 'send_email',
+      name: $('#name-lastname').val(),
+      tel: $('#tel').val(),
+      email: $('#email').val(),
+      lineid: $('#lineid').val(),
+      guest: $('#guest').val(),
+      budget: $('#budget').val(),
+      date: $('#date').val(),
+      daytime: selectedDaytime.join(', '),
+      appointDate: $('#appoint-date').val(),
+      appointTime: $('#appoint-time').val(),
+      message: $('#message').val(),
+      cardTitle: '<?php echo get_the_title()?>',
+      cardId: <?php echo get_the_id()?>,
+      leadType: 'Wedding Fair'
+      selectedCoupon: selectedCoupon.join(',')
+    }, () => {
+      $('#wdl-form-general').removeClass('failed')
+      $('.wdl-form-general-modal').modal('hide')
+      $('.wdl-form-general-succeed-modal').modal('show')
+      $('.wdl-form-general-modal .modal-body').removeClass('submitting')
+      generalDirectData = {}
+    }).fail(() => {
+      $('.wdl-form-general-modal .modal-body').removeClass('submitting')
+      $('#wdl-form-general').addClass('failed')
+    })
+  });
+})
 </script>
