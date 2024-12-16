@@ -41,6 +41,24 @@ if (window.innerWidth < 1200) {
       });
   });
 }
+
+// Lead Menu
+$(window).scrollTop() > 140 ? $('.wdl-lead-menu').addClass('inactive') : $('.wdl-lead-menu').removeClass('inactive')
+
+$(window).scroll(()=>{
+  $(window).scrollTop() > 140 ? $('.wdl-lead-menu').addClass('inactive') : $('.wdl-lead-menu').removeClass('inactive')
+})
+
+const leadMenuSwiper = new Swiper('.wdl-lead-menu-swiper', {
+  slidesPerView: 'auto',
+  spaceBetween: 8,
+  centerInsufficientSlides: true,
+  slideClass: 'menu-item',
+  navigation: {
+    prevEl: '.swiper-button-prev',
+    nextEl: '.swiper-button-next',
+  }
+})
 const initLocalnav = () => {
   let heading = $(".wdl-localnav-heading");
   $(heading).each((index, element) => {
@@ -358,6 +376,33 @@ const wdlCouponCardSwiper = new Swiper(".wdl-coupon-card-swiper", {
   spaceBetween: 8,
   slidesPerView: "auto",
 });
+const wdlVideoSwiper = new Swiper('.wdl-video-swiper', {
+  slidesPerView: 2,
+  spaceBetween: 8,
+  breakpoints: {
+    768: {
+      slidesPerView: 3,
+    },
+    992: {
+      slidesPerView: 5,
+    },
+    1024: {
+      slidesPerView: 6,
+    },
+    1280: {
+      slidesPerView: 7,
+    }
+  },
+  navigation: {
+    prevEl: '.swiper-button-prev',
+    nextEl: '.swiper-button-prev'
+  },
+  pagination: {
+    el: ".swiper-pagination",
+    type: "bullets",
+    clickable: true,
+  },
+})
 
 // Stickybar
 const wdlStickyBar = () => {

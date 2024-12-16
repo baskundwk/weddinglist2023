@@ -591,8 +591,10 @@ function custom_menu_order($menu_order) {
 		'rank-math',
 		'weddinglist-setting',
 		'loco',
+		'users.php',
 		'tools.php',
 		'themes.php',
+			'Wordfence',
 		'options-general.php',
 	];
 }
@@ -646,12 +648,10 @@ function group_all_plugins_and_settings() {
 	// List of menu slugs to move
 	$move_slugs = [
 			'plugins.php',
-			'users.php',
 			'cookie-law-info',
 			'copy-delete-posts',
 			'disable-wp-notification',
 			'vc-general',
-			'Wordfence',
 			'pmxe-admin-home',
 			'meowapps-main-menu',
 			'publishpress-future',

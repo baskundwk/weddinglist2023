@@ -1,13 +1,13 @@
 <?php include get_stylesheet_directory().'/components/header.php' ?>
 
 <main>
-  <?php include get_stylesheet_directory().'/components/lead-menu-revamped.php' ?>
+  <?php include get_stylesheet_directory().'/components/search.php' ?>
   <section class="wdl-archive wdl-archive-extended pb-5">
     <div class="container-xxl container-archive wdl-archive-infinite-scroll">
       <?php if (have_posts()): ?>
       <div class="row">
         <div class="col">
-          <h1>
+          <h1 class="mb-0">
             <?php single_term_title(); ?>
           </h1>
           <p class="text-secondary">

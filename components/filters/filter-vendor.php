@@ -1,4 +1,4 @@
-<div class="wdl-filter my-3">
+<div class="wdl-filter mb-2">
   <div class="wdl-filter-detail swiper wdl-swiper-auto">
     <div class="swiper-wrapper">
       <div class="swiper-slide w-auto">

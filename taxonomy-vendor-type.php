@@ -1,6 +1,6 @@
 <?php include 'components/header.php' ?>
 <main>
-  <?php include 'components/lead-menu-revamped.php' ?>
+  <?php include 'components/search.php' ?>
   <?php
     if(is_user_logged_in() === true) {
       $post_status = 'any';
@@ -33,7 +33,7 @@
       $key = $_GET['key'];
       
     } else {
-      $key = '';
+      $key = 'Status';
     }
 
     $current_url = explode("?", $_SERVER['REQUEST_URI'])[0];
@@ -73,7 +73,7 @@
     <div class="container-xl">
       <div class="row">
         <div class="col">
-          <h1>
+          <h1 class="mb-0">
             <?php echo do_shortcode('[seo_title]') ?>
           </h1>
           <p class="text-secondary mb-2">
@@ -87,7 +87,12 @@
   <?php if (have_posts()): ?>
   <section class="wdl-archive wdl-archive-extended pb-5">
     <div class="container-xxl container-archive wdl-archive-infinite-scroll">
-      <div class="wdl-archive-grid wdl-archive-infinite-scroll-wrapper" id="wdl-archive-infinite-scroll-wrapper">
+      <div class="wdl-archive-grid 
+        <?php if($_GET['order'] || $_GET['orderby'] || $_GET['key']) {
+
+        } else {
+          echo 'row-cols-archive-randomized';
+        }  ?> wdl-archive-infinite-scroll-wrapper" id="wdl-archive-infinite-scroll-wrapper">
         <?php while (have_posts()): ?>
         <?php the_post(); ?>
 

@@ -1,13 +1,13 @@
 <?php include get_stylesheet_directory().'/components/header.php' ?>
 
 <main>
-  <?php include get_stylesheet_directory().'/components/lead-menu-revamped.php' ?>
+  <?php include get_stylesheet_directory().'/components/search.php' ?>
 
   <section class="pb-4">
     <div class="container">
       <div class="row pb-3">
         <div class="col">
-          <h1>
+          <h1 class="mb-0">
             <?php _e('บทความล่าสุด', 'wdl') ?>
           </h1>
           <p class="text-secondary">

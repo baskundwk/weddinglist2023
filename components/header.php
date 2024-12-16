@@ -56,4 +56,6 @@
     </div>
   </header>
 
-  <?php endif; ?>
+<?php endif; ?>
+
+<?php include get_stylesheet_directory() . '/components/lead-menu.php' ?>

@@ -1,6 +1,6 @@
 <?php include get_stylesheet_directory() . '/components/header.php' ?>
 <main>
-  <?php include get_stylesheet_directory() . '/components/lead-menu-revamped.php' ?>
+  <?php include get_stylesheet_directory() . '/components/search.php' ?>
 
   <section class="wdl-listing-section wdl-archive-infinite-scroll">
     <?php

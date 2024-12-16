@@ -340,3 +340,25 @@ body.admin-bar.et_fixed_nav .wdl-sticky-bar {
     display: block;
   }
 }
+
+.wdl-single-video-sidebar {
+  width: 100%;
+  max-width: 367px;
+
+  .wdl-single-video-sidebar-cards {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0,1fr));
+    flex-direction: column;
+    gap: 10px;
+    
+    @include max-width-xl {
+      grid-template-columns: repeat(4, minmax(0,1fr));
+    }
+    @include max-width-sm {
+      grid-template-columns: repeat(2, minmax(0,1fr));
+    }
+  }
+  @include max-width-xl {
+    max-width: none;
+  }
+}

@@ -164,7 +164,6 @@
   left: 0;
   top: var(--header-height, 70px);
   width: 100%;
-  position: absolute;
   height: 70px;
   box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.15);
   z-index: 99998;
@@ -173,25 +172,33 @@
     0 0 10px rgba(0, 0, 0, 0.15),
     0 1px 0 #d9d9d9 !important;
   backdrop-filter: blur(5px) saturate(4);
+  transition: .35s cubic-bezier(0,0,0,1);
+
+  @include max-width-md {
+    height: 55px;
+  }
+
+  .wdl-lead-menu-swiper {
+    //mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+  }
 
   ul.wdl-lead-menu-wrapper {
-    display: flex;
-    gap: 32px;
     list-style: none;
-    justify-content: center;
-    align-items: center;
-
+    padding: 0;
+    margin: 0;
     @include max-width-xl {
       gap: 0;
     }
 
     > li {
+      width: auto;
       > a {
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
         width: fit-content;
+        min-width: 70px;
         flex: 0 0 auto;
         height: 70px;
         gap: 4px;
@@ -200,6 +207,12 @@
         line-height: 1.5;
         font-weight: 600;
         transition: .35s cubic-bezier(0,0,0,1);
+        white-space: nowrap;
+
+        @include max-width-md {
+          min-width: 50px;
+          height: 55px;
+        }
 
         img {
           width: 24px;
@@ -207,6 +220,11 @@
           margin: 0;
           display: block;
           transition: .35s cubic-bezier(0,0,0,1);
+
+          @include max-width-md {
+            width: 20px;
+            height: 20px;
+          }
         }
 
         &:hover,
@@ -218,11 +236,29 @@
           }
         }
       }
+      &.current-menu-item {
+        a {
+          color: #ff2758;
+
+          img {
+            filter: brightness(1.4) sepia(1) saturate(7) hue-rotate(313deg);
+          }
+        }
+      }
     }
+  }
+
+  &.inactive {
+    translate: 0 -100%;
+    opacity: 0;
   }
 }
 .admin-bar .wdl-lead-menu {
   top: calc(var(--header-height, 70px) + 32px);
+  
+  @media (max-width: 782px) {
+    top: calc(var(--header-height, 70px) + 46px);
+  }
 }
 .wdl-lead-menu-revamped-container {
   padding: 0;

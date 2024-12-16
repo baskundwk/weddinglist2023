@@ -74,9 +74,12 @@ main {
 }
 
 .wdl-lead-menu {
-  + main {
+  ~ main {
     margin-top: calc(var(--header-height, 110px) + 70px);
-
+    
+    @include max-width-md {
+      margin-top: calc(var(--header-height, 110px) + 55px);
+    }
   }
 }
 .cky-notice-des {
@@ -235,8 +238,7 @@ body .et_pb_button {
   border-radius: 8px;
   position: relative;
 }
-
-main {
+body {
   @media (min-width: 1400px) {
     .container,
     .container-lg,
@@ -293,7 +295,7 @@ main {
   }
   + .swiper-navigation,
   .swiper-navigation {
-    width: 93%;
+    width: 100%;
     .swiper-button-next:after,
     .swiper-button-prev:after {
       color: #ff2758;
@@ -310,6 +312,9 @@ main {
       width: 2.5rem;
       height: 2.5rem;
       border-radius: 5rem;
+      top: 50%;
+      margin-top: 0;
+      translate: 0 -50%;
 
       @media (max-width: 991px) {
         width: 1.5rem;
@@ -369,11 +374,11 @@ main {
   @media (max-width: 980px) {
     .swiper-navigation {
       .swiper-button-prev {
-        left: 10px;
+        left: -5px;
         //transform: translateX(50%);
       }
       .swiper-button-next {
-        right: 10px;
+        right: -5px;
         //transform: translateX(-50%);
       }
     }

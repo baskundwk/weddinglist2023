@@ -1,6 +1,6 @@
 <?php include get_stylesheet_directory().'/components/header.php' ?>
 <main>
-  <?php include get_stylesheet_directory().'/components/lead-menu-revamped.php' ?>
+  <?php include get_stylesheet_directory().'/components/search.php' ?>
 
   <?php
   $vendor_type = get_terms( array(
@@ -14,7 +14,8 @@
       array(
         'post_type' => 'vendor',
         'posts_per_page' => 40,
-        'orderby' => 'date',
+        'orderby' => 'meta_value',
+        'meta_key' => 'Status',
         'order' => 'DESC',
         'tax_query' => array(
           array(
@@ -27,10 +28,19 @@
     ); ?>
     <section class="overflow-hidden">
       <div class="container">
-        <div class="row">
-          <div class="col-md-6">
-            <h2 class="h1 wdl-localnav-heading">ผู้ให้บริการ <?php echo $type->name?></h2>
-            <p class="mb-2">รวบรวมผู้ให้บริการ <?php echo  $type->name?> ให้คุณไว้ที่เดียว</p>
+        <div class="row mb-2">
+          <div class="col-lg">
+            <h2 class="h1 wdl-localnav-heading mb-0">
+              <?php _e('ผู้ให้บริการ', 'wdl');
+              echo ' '.$type->name?>
+            </h2>
+          </div>
+          <div class="col-lg text-lg-end d-none d-lg-block">
+            <a href="<?php echo esc_html(get_post_type_archive_link('promotion')) ?>" class="wdl-btn-secondary ">
+            <?php _e('ดู ', 'wdl');
+                  echo $type->name; 
+                  _e(' ทั้งหมด', 'wdl'); ?>
+            </a>
           </div>
         </div>
         <div class="row">
@@ -49,12 +59,12 @@
                 <div class="swiper-pagination"></div>
               </div>
 
-              <div class="row">
-                <div class="col text-center mt-4 mb-5">
-                  <a href="<?php echo esc_html(get_term_link($type)) ?>" class="wdl-btn-secondary py-2 px-3">
-                    <?php _e('ดู '.$type->name.' ทั้งหมด', 'wdl') ?>
-                  </a>
-                </div>
+              <div class="text-center pt-lg-2 d-block d-lg-none mb-4">
+                <a href="<?php echo esc_html(get_term_link($type)) ?>" class="wdl-btn-secondary">
+                  <?php _e('ดู ', 'wdl');
+                  echo $type->name; 
+                  _e(' ทั้งหมด', 'wdl'); ?>
+                </a>
               </div>
             </div>
           </div>

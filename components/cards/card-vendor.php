@@ -2,6 +2,12 @@
   <?php if (has_post_thumbnail(get_the_ID())): ?>
     <a aria-label="<?php echo get_the_title(); ?>" title="<?php echo get_the_title(); ?>" class="card-img-top wdl-archive-card-img-top" href="<?php the_permalink(); ?>">
       <img loading="lazy" src="<?php echo esc_html(get_the_post_thumbnail_url($post, 'medium_large')) ?>" alt="<?php echo get_the_title(); ?>">
+
+      <?php $status = get_field('Status');
+      if ($status && in_array('Sponsored', $status)): ?>
+        <span class="badge wdl-badge-sm">Most Popular</span>
+      <?php endif; ?>
+      
       <div class="swiper-lazy-preloader"></div>
     </a>
   <?php endif; ?>

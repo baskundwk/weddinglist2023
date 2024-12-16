@@ -1,7 +1,7 @@
 <?php include get_stylesheet_directory() . '/components/header.php' ?>
 
 <main>
-  <?php include get_stylesheet_directory() . '/components/lead-menu-revamped.php' ?>
+  <?php include get_stylesheet_directory() . '/components/search.php' ?>
 
   <?php
   $paged = get_query_var('paged', 1);
@@ -19,11 +19,11 @@
     <div class="container">
       <div class="row pb-3">
         <div class="col">
-          <h1>
+          <h1 class="mb-0">
             <?php echo (get_option('wdl_options', 'โปรโมชั่นแต่งงาน & แพ็กเกจแต่งงาน')['word-post-title']); ?>
           </h1>
           <p class="text-secondary">
-            <?php echo (get_option('wdl_options', 'รวมโปรโมชั่น และ แพ็กเกจแต่งงาน จากสถานที่จัดงานแต่งงานชั้นนำทุกรูปแบบ อัพเดทล่าสุด 2024')['word-post-desc']); ?>
+            <?php echo (get_option('wdl_options', 'รวมโปรโมชั่น และ แพ็กเกจแต่งงาน จากสถานที่จัดงานแต่งงานชั้นนำทุกรูปแบบ อัพเดทล่าสุด')['word-post-desc']); ?>
           </p>
           <div class="wdl-badge-container">
             <a href="#" class="wdl-badge-sm-primary">ทั้งหมด</a>

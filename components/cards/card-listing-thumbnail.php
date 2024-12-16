@@ -3,8 +3,8 @@
     <div class="wdl-card-listing-thumbnail-image">
       <?php the_post_thumbnail( 'medium_large' )?>
     </div>
-    <!-- <div class="wdl-card-listing-thumbnail-title">
-      <?php the_title( )?>
-    </div> -->
+    <div class="wdl-card-listing-thumbnail-title">
+      <p><?php the_title( )?></p>
+    </div>
   </a>
 </div>

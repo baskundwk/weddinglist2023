@@ -34,7 +34,7 @@
     <div class="wdl-archive-pretitle">
       <?php $venueType = get_field('VenueType');
       if ($venueType) {
-        echo implode(' / ', array_map(function ($venueType) { return $venueType->name;}, $venueType));
+        echo $venueType[0]->name;
       }
       ?>
       <?php $venueCharacter = get_field('Character');
@@ -46,26 +46,26 @@
           $characterEffect = get_field('CharacterEffect', $venueCharacter);
           ?>
         <div class="wdl-character
-                      <?php if ($characterBorder) {
-                        echo ('wdl-character-border');
-                      } ?>
-                      <?php if ($characterEffect) {
-                        echo ('wdl-character-animation-' . $characterEffect);
-                      } ?>"
+          <?php if ($characterBorder) {
+            echo ('wdl-character-border');
+          } ?>
+          <?php if ($characterEffect) {
+            echo ('wdl-character-animation-' . $characterEffect);
+          } ?>"
           <?php
           if ($characterColor || $characterBackground): ?>
             style="
-                      --background-image: url(<?php echo ($characterBackground['url']) ?>);
-                      --box-shadow: none;
-                      --color: rgba(<?php echo ($characterColor['red']) ?>,<?php echo ($characterColor['green']) ?>,<?php echo ($characterColor['blue']) ?>,<?php echo ($characterColor['alpha']) ?>);
-                      --color-50: rgba(<?php echo ($characterColor['red']) ?>,<?php echo ($characterColor['green']) ?>,<?php echo ($characterColor['blue']) ?>, 50%);
-                      --color-0: rgba(<?php echo ($characterColor['red']) ?>,<?php echo ($characterColor['green']) ?>,<?php echo ($characterColor['blue']) ?>, 0);
-                    "
+              --background-image: url(<?php echo ($characterBackground['url']) ?>);
+              --box-shadow: none;
+              --color: rgba(<?php echo ($characterColor['red']) ?>,<?php echo ($characterColor['green']) ?>,<?php echo ($characterColor['blue']) ?>,<?php echo ($characterColor['alpha']) ?>);
+              --color-50: rgba(<?php echo ($characterColor['red']) ?>,<?php echo ($characterColor['green']) ?>,<?php echo ($characterColor['blue']) ?>, 50%);
+              --color-0: rgba(<?php echo ($characterColor['red']) ?>,<?php echo ($characterColor['green']) ?>,<?php echo ($characterColor['blue']) ?>, 0);
+            "
           <?php endif ?>>
           <span><?php echo esc_html($venueCharacter->name); ?></span>
         </div>
         <?php //endforeach; ?>
-      <?php endif ?>
+        <?php endif ?>
     </div>
     <h3 class="wdl-archive-title mb-0"><a href="<?php the_permalink(); ?>">
         <?php the_title(); ?>

@@ -479,8 +479,9 @@
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
   overflow: hidden;
+  color: #888888;
 
-  > a,
+  a,
   a:hover,
   a:focus,
   a:active {
@@ -700,4 +701,30 @@
   width: 100%;
   opacity: 0.15;
   text-align: center;
+}
+
+/* Normal pagination */
+
+.wp-pagenavi {
+  display: flex;
+  justify-content: center;
+  a, span {
+    line-height: 1;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    width: 30px;
+    height: 30px;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    font-size: 14px;
+    font-weight: 400;
+    color: #777777;
+    &.current {
+      background: #F6F6F6;
+      border-radius: 50px;
+      font-weight: 500;
+    }
+  }
 }

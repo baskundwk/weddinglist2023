@@ -1,8 +1,7 @@
 <?php include get_stylesheet_directory() . '/components/header.php' ?>
-<?php include get_stylesheet_directory() . '/components/lead-menu.php' ?>
 <main>
   <?php include get_stylesheet_directory() . '/components/hero-banner.php' ?>
-
+  <?php include get_stylesheet_directory().'/components/search.php' ?>
 
   <?php $weddingfairArgs = array(
     'post_type' => 'wedding-fair',
@@ -16,7 +15,7 @@
   ?>
 
   <?php if ($weddingfair->have_posts()): ?>
-  <section class="html-lazy mt-4">
+  <section class="html-lazy">
     <div class="container">
       <div class="row mb-2">
         <div class="col-lg">
@@ -142,15 +141,69 @@
             <?php _e('สถานที่จัดงานแต่งงาน', 'wdl') ?>
           </h2>
         </div>
-        <div class="col-auto pb-2 py-lg-1 text-start text-lg-end">
-          <?php foreach (get_terms('venue_type') as $term) {
-              echo '<a class="wdl-badge-sm-secondary m-1" href="/venue/?type=' . $term->slug . '">' . $term->name . '</a>';
-            } ?>
-        </div>
         <div class="col-lg text-lg-end d-none d-lg-block">
           <a href="<?php echo esc_html(get_post_type_archive_link('promotion')) ?>" class="wdl-btn-secondary ">
             <?php _e('ดูสถานที่จัดงานแต่งงานทั้งหมด', 'wdl') ?>
           </a>
+        </div>
+      </div>
+      <div class="row mb-2">
+        <div class="col-auto pb-2 py-lg-1 text-start text-lg-end d-flex flex-wrap gap-3">
+          <?php $venueType = get_field('VenueType');
+          if ($venueType) {
+            echo implode(' / ', array_map(function ($venueType) { return $venueType->name;}, $venueType));
+          }
+          ?>
+          <?php 
+          $venueSlugs = ['ultra-luxury','luxury','garden','modern','hall','contempory-thai-style','city-hotel-lifestyle','beachside'];
+          $venueCharacter = get_terms([
+            'taxonomy' => 'venue_character',
+            'hide_empty' => true,
+            'slug' => $venueSlugs,
+          ]);
+          if (!is_wp_error($venueCharacter) && !empty($venueCharacter)) {
+              // Create an associative array of terms keyed by slug for easy lookup
+              $terms_by_slug = [];
+              foreach ($venueCharacter as $term) {
+                  $terms_by_slug[$term->slug] = $term;
+              }
+          
+              // Sort the terms based on the order of the slug array
+              $sorted_terms = [];
+              foreach ($venueSlugs as $slug) {
+                  if (isset($terms_by_slug[$slug])) {
+                      $sorted_terms[] = $terms_by_slug[$slug];
+                  }
+              }
+          
+              // Display the sorted terms
+              foreach ($sorted_terms as $term) {
+                  $characterBackground = get_field('CharacterBackground', $term);
+                  $characterBorder = get_field('CharacterBorder', $term);
+                  $characterColor = get_field('CharacterColor', $term);
+                  $characterEffect = get_field('CharacterEffect', $term);
+                  ?>
+                  <a href="<?php echo home_url( '/venue/?character='.$term->slug ) ?>" class="wdl-character
+                    <?php if ($characterBorder) {
+                      echo ('wdl-character-border');
+                    } ?>
+                    <?php if ($characterEffect) {
+                      echo ('wdl-character-animation-' . $characterEffect);
+                    } ?>"
+                    <?php
+                    if ($characterColor || $characterBackground): ?>
+                      style="
+                        --background-image: url(<?php echo ($characterBackground['url']) ?>);
+                        --box-shadow: none;
+                        --color: rgba(<?php echo ($characterColor['red']) ?>,<?php echo ($characterColor['green']) ?>,<?php echo ($characterColor['blue']) ?>,<?php echo ($characterColor['alpha']) ?>);
+                        --color-50: rgba(<?php echo ($characterColor['red']) ?>,<?php echo ($characterColor['green']) ?>,<?php echo ($characterColor['blue']) ?>, 50%);
+                        --color-0: rgba(<?php echo ($characterColor['red']) ?>,<?php echo ($characterColor['green']) ?>,<?php echo ($characterColor['blue']) ?>, 0);
+                      "
+                    <?php endif ?>>
+                    <span><?php echo esc_html($term->name); ?></span>
+                  </a>
+              <?php }
+          } ?>
         </div>
       </div>
       <div class="wdl-archive wdl-archive-extended">
@@ -205,6 +258,8 @@
       'post_type' => 'vendor',
       'order' => 'DESC',
       'posts_per_page' => '9',
+      'orderby' => 'meta_value',
+      'meta_key' => 'Status',
     );
 
   $vendor = new WP_Query($vendorArgs); ?>
@@ -230,7 +285,8 @@
               array(
                 'post_type' => 'vendor',
                 'posts_per_page' => 9,
-                'orderby' => 'date',
+                'orderby' => 'meta_value',
+                'meta_key' => 'Status',
                 'order' => 'DESC',
                 'tax_query' => array(
                   array(
@@ -260,7 +316,9 @@
 
             <div class="text-center mt-4 mb-2">
               <a href="<?php echo esc_html(get_term_link($type)) ?>" class="wdl-btn-secondary ">
-                <?php _e('ดู ' . $type->name . ' ทั้งหมด', 'wdl') ?>
+              <?php _e('ดู ', 'wdl');
+                  echo $type->name; 
+                  _e(' ทั้งหมด', 'wdl'); ?>
               </a>
             </div>
           </div>
@@ -273,10 +331,51 @@
   <?php endif; ?>
 
 
+  <?php $videoArgs = array(
+    'post_type' => 'video',
+    'orderby' => 'meta_value',
+    'posts_per_page' => '7',
+  );
+
+  $video = new WP_Query($videoArgs);
+  ?>
+  <?php
+  if ($video->have_posts()): ?>
+  <section class="mb-4">
+    <div class="container">
+      <div class="row mb-2">
+        <div class="col-lg">
+          <h2 class="h1 wdl-localnav-heading mb-0">
+            <?php _e('รวมคลิปวิดีโอล่าสุด','wdl'); ?> <span class="badge wdl-badge-sm">มาใหม่</span>
+          </h2>
+        </div>
+        <div class="col-lg text-lg-end d-none d-lg-block">
+          <a href="<?php echo esc_html(get_post_type_archive_link('video')) ?>" class="wdl-btn-secondary">
+            <?php _e('ดูรวมคลิปวิดีโอทั้งหมด', 'wdl') ?>
+          </a>
+        </div>
+      </div>
+      <div id="video" class="wdl-video-grid">
+        <?php while ($video->have_posts()): ?>
+        <?php $video->the_post(); ?>
+
+        <?php include get_stylesheet_directory() . '/components/cards/card-video.php' ?>
+
+        <?php endwhile; ?>
+      </div>
+      <div class="text-center pt-lg-2 d-block d-lg-none mb-4">
+        <a href="<?php echo esc_html(get_post_type_archive_link('video')) ?>" class="wdl-btn-secondary ">
+          <?php _e('ดูรวมคลิปวิดีโอทั้งหมด', 'wdl') ?>
+        </a>
+      </div>
+    </div>
+  </section>
+  <?php endif; ?>
+
   <?php $listingArgs = array(
     'post_type' => 'listing',
     'orderby' => 'meta_value',
-    'posts_per_page' => '12',
+    'posts_per_page' => '8',
   );
 
   $listing = new WP_Query($listingArgs);
@@ -288,7 +387,7 @@
       <div class="row mb-2">
         <div class="col-lg">
           <h2 class="h1 wdl-localnav-heading mb-0">
-            <?php _e('แนะนำสถานที่จัดงาน','wdl'); ?>
+            <?php _e('สถานที่จัดงานแต่งงานแนะนำ','wdl'); ?> <span class="badge wdl-badge-sm">มาใหม่</span>
           </h2>
         </div>
         <div class="col-lg text-lg-end d-none d-lg-block">
@@ -305,7 +404,7 @@
 
         <?php endwhile; ?>
       </div>
-      <div class="text-center pt-lg-2 d-block d-lg-none mb-4">
+      <div class="text-center pt-lg-2 d-block d-lg-none mt-2 mb-4">
         <a href="<?php echo esc_html(get_post_type_archive_link('listing')) ?>" class="wdl-btn-secondary ">
           <?php _e('ดูรายการสถานที่ทั้งหมด', 'wdl') ?>
         </a>
@@ -328,7 +427,7 @@
         <?php _e('บทความล่าสุด', 'wdl')?>
       </h2>
       <div class="wdl-badge-container">
-        <a href="<?php get_permalink(get_page_by_path('blog')) ?>" class="wdl-badge-sm-primary">ทั้งหมด</a>
+        <a href="<?php get_permalink(get_page_by_path('blog')) ?>" class="wdl-badge-sm-primary"><?php _e('ทั้งหมด', 'wdl') ?></a>
         <a href="<?php echo esc_html(get_category_link(get_cat_ID('รีวิวแต่งงาน'))) ?>" class="wdl-badge-sm-secondary"><?php echo get_category( get_cat_ID('รีวิวแต่งงาน'))->name?></a>
         <a href="<?php echo esc_html(get_category_link(get_cat_ID('สถานที่จัดงานแต่งงาน'))) ?>" class="wdl-badge-sm-secondary"><?php echo get_category( get_cat_ID('สถานที่จัดงานแต่งงาน'))->name?></a>
         <a href="<?php echo esc_html(get_category_link(get_cat_ID('ฤกษ์แต่งงาน'))) ?>" class="wdl-badge-sm-secondary"><?php echo get_category( get_cat_ID('ฤกษ์แต่งงาน'))->name?></a>
