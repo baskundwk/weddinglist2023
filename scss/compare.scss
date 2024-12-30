@@ -113,7 +113,7 @@
           border-radius: 4px;
           border: 1px solid #777;
           background: #FFF;
-          padding: 4px 6px;
+          padding: 2px;
           position: relative;
           cursor: pointer;
           transition: .25s border ease-out;
@@ -144,15 +144,15 @@
           }
 
           &::before {
-            content: '\e051';
-            font-family: ETmodules !important;
-            position: absolute;
-            top: 0;
-            right: 0;
-            font-size: 16px;
-            line-height: 16px;
-            color: #333333;
-            transform: translate(50%, -50%);
+            content: "";
+            width: 8px;
+            height: 8px;
+            mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' fill='%23000000' viewBox='0 0 256 256'%3E%3Cpath d='M208.49,191.51a12,12,0,0,1-17,17L128,145,64.49,208.49a12,12,0,0,1-17-17L111,128,47.51,64.49a12,12,0,0,1,17-17L128,111l63.51-63.52a12,12,0,0,1,17,17L145,128Z'%3E%3C/path%3E%3C/svg%3E");
+            mask-repeat: no-repeat;
+            mask-size: contain;
+            mask-position: center center;
+            vertical-align: middle;
+            background-color: #333333;
             transition: .25s opacity ease-out, .25s color ease-out;
           }
 

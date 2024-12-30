@@ -18,7 +18,7 @@
     </div>
   </section>
   <?php if (have_posts()): ?>
-  <section class="wdl-archive wdl-archive-extended pb-5">
+  <section class="wdl-archive wdl-archive-extended pb-5 m-0">
     <div class="container wdl-archive-infinite-scroll">
       <div class="wdl-listing-grid wdl-archive-infinite-scroll-wrapper" id="wdl-archive-infinite-scroll-wrapper">
         <?php while (have_posts()): ?>

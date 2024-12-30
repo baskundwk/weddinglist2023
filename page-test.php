@@ -121,6 +121,66 @@
     </div>
   </section>
   <?php endif; ?>
+  
+  <?php $momentArgs = array(
+    'post_type' => 'moment',
+    'post_status' => 'publish',
+    'posts_per_page' => '9',
+    /* 'orderby' => 'meta_value',
+    'order' => 'DESC',
+    'meta_key' => 'HotDeal', */
+  );
+
+  $moment = new WP_Query($momentArgs);
+  ?>
+  <?php
+  if ($moment->have_posts()): ?>
+  <section>
+    <div class="container">
+      <div class="row mb-2">
+        <div class="col-lg">
+          <h2 class="h1 wdl-localnav-heading mb-0">
+            <?php _e('Moment ประสบการณ์ราคาพิเศษ', 'wdl'); ?>
+          </h2>
+        </div>
+        <div class="col-lg text-lg-end d-none d-lg-block">
+          <a href="<?php echo esc_html(get_post_type_archive_link('moment')) ?>" class="wdl-btn-secondary ">
+            <?php _e('ดู Moment ทั้งหมด', 'wdl') ?>
+          </a>
+        </div>
+      </div>
+      <div class="wdl-archive wdl-archive-extended">
+
+        <div id="promotions" class="swiper wdl-archive-swiper">
+          <div class="swiper-wrapper 
+            <?php if ($_GET['order'] || $_GET['orderby'] || $_GET['key']) {
+
+            } else {
+              echo 'row-cols-archive-randomized';
+            } ?> ">
+            <?php
+            while ($moment->have_posts()): ?>
+            <?php $moment->the_post(); ?>
+
+            <?php include get_stylesheet_directory() . '/components/cards/card-moment.php' ?>
+
+            <?php endwhile; ?>
+          </div>
+          <div class="swiper-pagination"></div>
+          <div class="swiper-navigation swiper-navigation-small">
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+          </div>
+        </div>
+      </div>
+      <div class="text-center pt-lg-2 d-block d-lg-none mb-4">
+        <a href="<?php echo esc_html(get_post_type_archive_link('promotion')) ?>" class="wdl-btn-secondary ">
+          <?php _e('ดูโปรโมชั่นทั้งหมด', 'wdl') ?>
+        </a>
+      </div>
+    </div>
+  </section>
+  <?php endif; ?>
 
   <?php
     $venueArgs = array(

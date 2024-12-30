@@ -484,7 +484,7 @@
     </div>
   </section>
   <?php endif; ?>
-  <section>
+  <section class="py-3">
     <div class="container">
       <div class="row">
         <div class="col text-secondary">

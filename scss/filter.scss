@@ -52,8 +52,8 @@
   padding: 6px 12px;
   padding-right: 8px;
   white-space: nowrap;
-  background: #ffffff;
   //box-shadow: 0 0 0 1px #C7C7C7 inset;
+  background: none !important;
   border: none;
   color: #777777 !important;
   border-radius: 4px;
@@ -66,7 +66,7 @@
   display: flex;
   gap: 4px;
   align-items: center;
-  max-width: 170px;
+  max-width: 170px !important;
 
   &:hover {
     color: #ff2758 !important;

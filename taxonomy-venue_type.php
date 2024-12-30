@@ -1,1 +1,1 @@
-<?php include get_stylesheet_directory().'/archive-venue.php';
+<?php wp_redirect( home_url( '/venue/?type='.get_queried_object(  )->slug ) )?>

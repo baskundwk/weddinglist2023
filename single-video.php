@@ -7,26 +7,16 @@
           <div class="wdl-breadcrumb">
             <p>
               <a href="<?php echo get_post_type_archive_link( get_post_type() )?>"><?php _e('Video', 'wdl') ?></a>
-              <?php
-              $videoCategories = get_the_terms(get_the_ID(), 'video-category');
-              $videoCategoriesLength = count($videoCategories);
-              $videoCategoriesIndex = 0;
-              if($videoCategoriesLength > 0) {?>
-                »
-              <span>
-                <?php foreach($videoCategories as $cat) {
-                $videoCategoriesIndex++;
-                ?>
-                  <a href="<?php echo get_term_link( $cat->term_id, 'video-category' ) ?>"><?php echo $cat->name ?></a><?php
-                  if($videoCategoriesIndex < $videoCategoriesLength) { ?>, <?php }
-                  } ?>
-              </span>
-              <?php }?>
+              
             </p>
           </div>
           <h1 class="wdl-single-title mb-2"><?php the_title(); ?></h1>
           <a href="<?php echo get_the_permalink( get_field('RelatedVenue')->ID ) ?>" class="mb-2 meta wdl-archive-location"><?php echo get_the_title(get_field('RelatedVenue')->ID)?></a>
-          <div class="wdl-single-video-player"><?php the_field('EmbedLink') ?></div>
+          <div class="wdl-single-video-player">
+            <?php if(get_field('EmbedCode')) {
+              the_field('EmbedCode');
+            } ?>
+          </div>
           <div class="content">
             <?php the_content(); ?>
           </div>
@@ -42,6 +32,48 @@
         if($videoRelated->have_posts()) {
         ?>
         <div class="wdl-single-video-sidebar">
+          <?php
+          $playlists = get_field('VideoPlaylist');
+          if($playlists) { ?>
+            <div class="wdl-video-playlist-related mb-3">
+              <div class="d-flex align-items-baseline justify-content-between">
+                <h2>Playlist</h2>
+                <select class="wdl-btn-filter w-fit wdl-video-playlist-select text-end">
+                <?php foreach($playlists as $playlist) { ?>
+                  <option value="<?php echo get_term($playlist)->term_id?>"><?php echo get_term($playlist)->name ?></option>
+                <?php }?>
+                </select>
+              </div>
+              <div class="wdl-video-playlist-contents">
+                <?php foreach($playlists as $playlist) {
+                  $playlistQuery = new WP_Query([
+                    'post_type' => 'video',
+                    'tax_query' => [
+                      [
+                        'taxonomy' => 'video-playlist',
+                        'field' => 'term_id',
+                        'terms' => $playlist,
+                      ]
+                    ]
+                  ]);
+                  if($playlistQuery->have_posts()) { ?>
+                  <div data-content-id="<?php echo get_term($playlist)->term_id ?>" class="wdl-video-playlist-content swiper">
+                    <div class="swiper-wrapper">
+                    <?php while($playlistQuery->have_posts()) {
+                      $playlistQuery->the_post();?>
+                      <?php include get_stylesheet_directory().'/components/cards/card-video.php'; ?>
+                    <?php } ?>
+                    </div>
+                    <div class="swiper-navigation swiper-navigation-small">
+                      <div class="swiper-button-prev"></div>
+                      <div class="swiper-button-next"></div>
+                    </div>
+                  </div>
+                  <?php }
+                }?>
+              </div>
+            </div>
+          <?php }?>
           <h2>วิดีโอล่าสุด</h2>
           <div class="wdl-single-video-sidebar-cards">
             <?php while($videoRelated->have_posts()) {

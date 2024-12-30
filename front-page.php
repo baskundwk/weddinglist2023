@@ -16,7 +16,7 @@
 
   <?php if ($weddingfair->have_posts()): ?>
   <section class="html-lazy">
-    <div class="container">
+    <div class="container-xl">
       <div class="row mb-2">
         <div class="col-lg">
           <h2 class="h1 wdl-localnav-heading mb-0">
@@ -32,12 +32,7 @@
       <div class="wdl-archive wdl-archive-extended">
 
         <div class="swiper wdl-archive-swiper">
-          <div class="swiper-wrapper 
-              <?php if ($_GET['order'] || $_GET['orderby'] || $_GET['key']) {
-
-              } else {
-                echo 'row-cols-archive-randomized';
-              } ?> ">
+          <div class="swiper-wrapper row-cols-archive-randomized">
             <?php while ($weddingfair->have_posts()): ?>
             <?php $weddingfair->the_post(); ?>
 
@@ -76,7 +71,7 @@
   <?php
   if ($promotion->have_posts()): ?>
   <section>
-    <div class="container">
+    <div class="container-xl">
       <div class="row mb-2">
         <div class="col-lg">
           <h2 class="h1 wdl-localnav-heading mb-0">
@@ -92,12 +87,7 @@
       <div class="wdl-archive wdl-archive-extended">
 
         <div id="promotions" class="swiper wdl-archive-swiper">
-          <div class="swiper-wrapper 
-            <?php if ($_GET['order'] || $_GET['orderby'] || $_GET['key']) {
-
-            } else {
-              echo 'row-cols-archive-randomized';
-            } ?> ">
+          <div class="swiper-wrapper row-cols-archive-randomized'">
             <?php
             while ($promotion->have_posts()): ?>
             <?php $promotion->the_post(); ?>
@@ -134,7 +124,7 @@
   $venue = new WP_Query($venueArgs);?>
   <?php if ($venue->have_posts()): ?>
   <section class="html-lazy">
-    <div class="container">
+    <div class="container-xl">
       <div class="row g-2">
         <div class="col-auto">
           <h2 class="h1 wdl-localnav-heading mb-0">
@@ -142,7 +132,7 @@
           </h2>
         </div>
         <div class="col-lg text-lg-end d-none d-lg-block">
-          <a href="<?php echo esc_html(get_post_type_archive_link('promotion')) ?>" class="wdl-btn-secondary ">
+          <a href="<?php echo esc_html(get_post_type_archive_link('venue')) ?>" class="wdl-btn-secondary ">
             <?php _e('ดูสถานที่จัดงานแต่งงานทั้งหมด', 'wdl') ?>
           </a>
         </div>
@@ -208,12 +198,7 @@
       </div>
       <div class="wdl-archive wdl-archive-extended">
         <div class="swiper wdl-archive-swiper">
-          <div class="swiper-wrapper  
-              <?php if ($_GET['order'] || $_GET['orderby'] || $_GET['key']) {
-
-              } else {
-                echo 'row-cols-archive-randomized';
-              } ?> ">
+          <div class="swiper-wrapper row-cols-archive-randomized">
 
             <?php while ($venue->have_posts()): ?>
             <?php $venue->the_post();
@@ -265,7 +250,7 @@
   $vendor = new WP_Query($vendorArgs); ?>
   <?php if ($vendor->have_posts()): ?>
   <section class="overflow-hidden html-lazy">
-    <div class="container">
+    <div class="container-xl">
       <h2 class="h1 wdl-localnav-heading mb-0">
         <?php _e('ผู้ให้บริการงานแต่งงาน', 'wdl')?>
       </h2>
@@ -334,7 +319,7 @@
   <?php $videoArgs = array(
     'post_type' => 'video',
     'orderby' => 'meta_value',
-    'posts_per_page' => '7',
+    'posts_per_page' => '12',
   );
 
   $video = new WP_Query($videoArgs);
@@ -342,7 +327,7 @@
   <?php
   if ($video->have_posts()): ?>
   <section class="mb-4">
-    <div class="container">
+    <div class="container-xl">
       <div class="row mb-2">
         <div class="col-lg">
           <h2 class="h1 wdl-localnav-heading mb-0">
@@ -355,15 +340,22 @@
           </a>
         </div>
       </div>
-      <div id="video" class="wdl-video-grid">
-        <?php while ($video->have_posts()): ?>
-        <?php $video->the_post(); ?>
-
-        <?php include get_stylesheet_directory() . '/components/cards/card-video.php' ?>
-
-        <?php endwhile; ?>
+      <div class="wdl-archive-extended">
+        <div id="video" class="swiper wdl-video-swiper overflow-hidden px-2 wdl-archive-swiper">
+          <div class="swiper-wrapper">
+            <?php while ($video->have_posts()): ?>
+            <?php $video->the_post(); ?>
+            <?php include get_stylesheet_directory() . '/components/cards/card-video.php' ?>
+            <?php endwhile; ?>
+          </div>
+          <div class="swiper-navigation swiper-navigation-small mt-2">
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+          </div>
+          <div class="swiper-pagination position-relative"></div>
+        </div>
       </div>
-      <div class="text-center pt-lg-2 d-block d-lg-none mb-4">
+      <div class="text-center pt-2 d-block d-lg-none mb-4">
         <a href="<?php echo esc_html(get_post_type_archive_link('video')) ?>" class="wdl-btn-secondary ">
           <?php _e('ดูรวมคลิปวิดีโอทั้งหมด', 'wdl') ?>
         </a>
@@ -383,7 +375,7 @@
   <?php
   if ($listing->have_posts()): ?>
   <section class="mb-4">
-    <div class="container">
+    <div class="container-xl">
       <div class="row mb-2">
         <div class="col-lg">
           <h2 class="h1 wdl-localnav-heading mb-0">
@@ -422,7 +414,7 @@
   ) ?>
 
   <section class="pb-5 html-lazy">
-    <div class="container">
+    <div class="container-xl">
       <h2 class="h1 wdl-localnav-heading mb-0">
         <?php _e('บทความล่าสุด', 'wdl')?>
       </h2>

@@ -4,10 +4,8 @@
 <head>
   <meta charset="<?php bloginfo('charset'); ?>" />
   <link rel="pingback" href="<?php bloginfo('pingback_url'); ?>" />
-  <script type="text/javascript">
-  document.documentElement.className = 'js';
-  </script>
-
+  <title><?php echo wp_title()?></title>
+  <script id="jquery-slim" type="text/javascript" src="<?php echo get_theme_file_uri() . '/library/jquery/jquery-3.7.1.min.js' ?>"></script>
   <?php wp_head(); ?>
 </head>
 
@@ -23,13 +21,9 @@
     <div class="navbar navbar-expand-xl">
       <div class="container-xl">
         <div class="navbar-brand">
-          <?php echo esc_url(wp_get_attachment_image_src(get_theme_mod('custom_logo'), 'full')[0]); ?>
-          <?php
-          $logo = ($user_logo = et_get_option('divi_logo')) && !empty($user_logo)
-            ? $user_logo
-            : $template_directory_uri . '/images/logo.png';
-          ?>
-          <a href="<?php echo esc_url(home_url('/')); ?>" title="ไปหน้าแรกของ Weddinglist"><img loading="lazy" src="<?php echo esc_attr($logo); ?>" alt="Weddinglist" width="181" height="44"></a>
+          <a href="<?php echo esc_url(home_url('/')); ?>" title="ไปหน้าแรกของ Weddinglist">
+            <img loading="lazy" src="<?php echo get_theme_file_uri() . '/images/logo.png';?>" alt="Weddinglist" width="181" height="44">
+          </a>
         </div>
         <nav class="navbar-social">
           <ul class="navbar-nav">
@@ -44,7 +38,7 @@
         <?php
         wp_nav_menu(
           array(
-            'theme_location' => 'primary-menu',
+            'menu' => 'Main menu',
             'container_class' => 'collapse navbar-collapse',
             'container_id' => 'top-menu-collapse',
             'menu_class' => 'navbar-nav nav justify-content-end w-100',

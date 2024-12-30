@@ -2,7 +2,7 @@
 
 <main>
   <?php include get_stylesheet_directory().'/components/search.php' ?>
-  <?php include get_stylesheet_directory().'/queries/query-promotion.php' ?>
+  <?php include get_stylesheet_directory().'/components/query-promotion.php' ?>
   <section>
     <div class="container-xl">
       <div class="row">
@@ -21,7 +21,7 @@
     </div>
   </section>
   <?php if (have_posts()): ?>
-  <section class="wdl-archive wdl-archive-extended pb-5">
+  <section class="wdl-archive wdl-archive-extended pb-5 m-0">
     <div class="container-xxl container-archive wdl-archive-infinite-scroll">
       <div class="wdl-archive-grid 
         <?php if($_GET['order'] || $_GET['orderby'] || $_GET['key']) {

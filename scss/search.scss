@@ -86,6 +86,7 @@
     max-width: 140px !important;
     font-size: 0.875rem;
     display: -webkit-box;
+    line-clamp: 1;
     -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
     overflow: hidden !important;
@@ -152,15 +153,21 @@ body .wpc-filters-main-wrap a.wpc-filters-submit-button {
 }
 
 .wpc-search-field-wrapper .wpc-search-icon:before {
+
+  content: "";
+  width: 14px;
+  height: 14px;
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' fill='%23000000' viewBox='0 0 256 256'%3E%3Cpath d='M232.49,215.51,185,168a92.12,92.12,0,1,0-17,17l47.53,47.54a12,12,0,0,0,17-17ZM44,112a68,68,0,1,1,68,68A68.07,68.07,0,0,1,44,112Z'%3E%3C/path%3E%3C/svg%3E");
+  mask-repeat: no-repeat;
+  mask-size: contain;
+  mask-position: center center;
+  vertical-align: middle;
+  background-color: #cccccc;
+  margin-right: 0.25rem;
+  transition: .25s opacity ease-out, .25s color ease-out;
+
   vertical-align: baseline;
   line-height: 1;
-  background-image: none;
-  background-repeat: no-repeat;
-  background-size: 14px;
-  content: "U";
-  font-family: ETmodules;
-  font-size: 1.25rem !important;
-  color: #cccccc !important;
   position: absolute;
   top: 0;
   right: 0;

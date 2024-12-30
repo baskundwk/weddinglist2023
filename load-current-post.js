@@ -80,54 +80,53 @@ const listToc = () => {
   const headers = content.querySelectorAll("h2, h3, h4, h5, h6");
   const tocList = document.createElement("ul");
 
-  let lastLevel = 2;
-  let currentList = tocList;
-  const listsByLevel = { 2: tocList };
-
-  headers.forEach((header) => {
-    const level = parseInt(header.tagName.substring(1));
-    const item = document.createElement("li");
-    const link = document.createElement("a");
-
-    // Set up the anchor link
-    const id = header.textContent.replace(/\s+/g, "-").toLowerCase();
-    header.id = id;
-    link.href = `#${id}`;
-    link.textContent = header.textContent;
-    item.appendChild(link);
-
-    // Adjust list hierarchy based on level
-    if (level > lastLevel) {
-      const nestedList = document.createElement("ul");
-      listsByLevel[lastLevel].lastElementChild.appendChild(nestedList);
-      listsByLevel[level] = nestedList;
-    } else if (level < lastLevel) {
-      delete listsByLevel[lastLevel];
-    }
-
-    listsByLevel[level].appendChild(item);
-    lastLevel = level;
-  });
-
-  console.log("content", content);
-  console.log("tocList", tocList);
-
-  toc.appendChild(tocList);
-
-  toc.classList.remove("disabled");
+  if(document.querySelector('#post-content-container h2')) {
+    let lastLevel = 2;
+    let currentList = tocList;
+    const listsByLevel = { 2: tocList };
+  
+    headers.forEach((header) => {
+      const level = parseInt(header.tagName.substring(1));
+      const item = document.createElement("li");
+      const link = document.createElement("a");
+  
+      // Set up the anchor link
+      const id = header.textContent.replace(/\s+/g, "-").toLowerCase();
+      header.id = id;
+      link.href = `#${id}`;
+      link.textContent = header.textContent;
+      item.appendChild(link);
+  
+      // Adjust list hierarchy based on level
+      if (level > lastLevel) {
+        const nestedList = document.createElement("ul");
+        listsByLevel[lastLevel].lastElementChild.appendChild(nestedList);
+        listsByLevel[level] = nestedList;
+      } else if (level < lastLevel) {
+        delete listsByLevel[lastLevel];
+      }
+  
+      listsByLevel[level].appendChild(item);
+      lastLevel = level;
+    });
+  
+    toc.appendChild(tocList);
+  
+    toc.classList.remove("disabled");
+  }
 };
 
 if (document.querySelector("#post-content-container")) {
-  $(document).ready(function ($) {
+  jQuery(document).ready(function ($) {
     $.ajax({
-      url: ajax_params.ajax_url, // AJAX URL from localized script
+      url: ajax_params.ajax_url,
       type: "POST",
       data: {
         action: "load_current_post",
-        post_id: ajax_params.post_id, // Send the current post ID
+        post_id: ajax_params.post_id,
       },
       success: function (response) {
-        $("#post-content-container").html(response); // Insert post content into the container
+        $("#post-content-container").html(response);
         prepareContentSwiper();
         $("#post-content-container").removeClass("loading");
         listToc();

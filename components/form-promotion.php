@@ -173,6 +173,9 @@
 </div>
 <script>
 $(document).ready(() => {
+  const modal = new bootstrap.Modal(document.querySelector('.wdl-form-general-modal'));
+  const modalVerify = new bootstrap.Modal(document.querySelector('.wdl-form-general-coupon-verify'));
+  const modalSuccess = new bootstrap.Modal(document.querySelector('.wdl-form-general-succeed-modal'));
   $('#wdl-form-general').submit(function(e) {
     e.preventDefault();
     $('.wdl-form-general-modal .modal-body').addClass('submitting')
@@ -203,11 +206,12 @@ $(document).ready(() => {
       selectedCoupon: selectedCoupon.join(',')
     }, () => {
       $('#wdl-form-general').removeClass('failed')
-      $('.wdl-form-general-modal').modal('hide')
+      modal.hide();
+        
       if (selectedCoupon.length > 0) {
-        $('.wdl-form-general-coupon-verify').modal('show')
+        modalVerify.show();
       } else {
-        $('.wdl-form-general-succeed-modal').modal('show')
+        modalSuccess.show();
       }
       $('.wdl-form-general-modal .modal-body').removeClass('submitting')
       generalDirectData = {}

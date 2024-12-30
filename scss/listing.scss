@@ -176,10 +176,17 @@
             font-size: 14px;
             width: fit-content;
             &:before {
-              content: "N";
-              font-family: ETmodules;
-              font-size: 0.875rem;
-              color: #37bad6;
+              content: "";
+              width: 14px;
+              height: 14px;
+              mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' fill='%23000000' viewBox='0 0 256 256'%3E%3Cpath d='M232.49,80.49l-128,128a12,12,0,0,1-17,0l-56-56a12,12,0,1,1,17-17L96,183,215.51,63.51a12,12,0,0,1,17,17Z'%3E%3C/path%3E%3C/svg%3E");
+              mask-repeat: no-repeat;
+              mask-size: contain;
+              mask-position: center center;
+              vertical-align: middle;
+              background-color: #37bad6;
+              margin-right: 0.25rem;
+              transition: .25s opacity ease-out, .25s color ease-out;
               vertical-align: middle;
             }
           }
@@ -274,7 +281,7 @@
     height: 100%;
     transition: .35s cubic-bezier(0,0,0,1);
     z-index: 0;
-    filter: grayscale(1);
+    //filter: grayscale(1);
     
     img {
       width: 100%;
@@ -289,33 +296,34 @@
     align-items: center;
     width: 100%;
     height: 100%;
-    background: rgba(255,255,255,.9);
+    background: rgba(0,0,0,.2);
     z-index: 1;
     position: relative;
     font-weight: 600;
     text-align: center;
     padding: 16px;
-    font-size: 14px;
+    font-size: 20px;
     line-height: 1.25;
     //box-shadow: 0 0 0 2px #ff2758 inset; 
 
     p {
       //background: #FFF;
-      color: #ff2758;
+      color: #FFF;
       width: fit-content;
       font-weight: 600;
       border-radius: 4px;
       text-align: center;
       padding: 4px;
-      box-shadow: 0 1px 2pxrgba(0, 0, 0, 0.3);
+      text-shadow: 0 1px 4px rgba(0, 0, 0, 1);
       font-size: 18px;
       line-height: 1.2;
+      margin-bottom: 0;
     }
   }
 
   &:hover {
     .wdl-card-listing-thumbnail-image {
-      scale: 1.3;
+      scale: 1.1;
     }
   }
 }

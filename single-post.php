@@ -30,17 +30,17 @@ $currentPostID = get_the_ID();
         <img loading="eager" src="<?php echo esc_html(get_the_post_thumbnail_url($currentPostID, 'medium_large')) ?>" width="100%" alt="<?php echo get_the_title() ?>">
       </div>
 
-      <div class="wdl-single-content mb-2  px-3 px-xl-0">
+      <div class="wdl-single-content mb-2 px-3 px-xl-0">
         <div id="post-content-container" class="loading"></div>
         <?php /* the_content(); */ ?>
         <div class="wdl-single-content-readmore">
-          <div class="wdl-btn">อ่านเพิ่มเติม</div>
+          <div class="wdl-btn"><?php _e('อ่านเพิ่มเติม', 'wdl')?></div>
         </div>
       </div>
       <?php } ?>
     </div>
 
-    <div class="wdl-single-stickybar">
+    <div class="wdl-single-stickybar pb-2 py-xl-3">
       <div class="wdl-single-stickybar-toggle">
         <i data-feather="bookmark"></i>
       </div>
@@ -48,7 +48,7 @@ $currentPostID = get_the_ID();
         <div class="wdl-toc-inner disabled">
           <!-- <?php echo do_shortcode('[ez-toc post_in="'.$currentPostID.'"]') ?> -->
           <div class="wdl-toc-header">
-            <p class="font-bold mb-0">เลือกหัวข้อที่ต้องการอ่าน</p>
+            <p class="font-bold mb-0"><?php _e('เลือกหัวข้อที่ต้องการอ่าน', 'wdl')?></p>
             <span class="wdl-toc-toggle"></span>
           </div>
         </div>
@@ -84,7 +84,7 @@ $currentPostID = get_the_ID();
     )) ?>
   <?php if ($query_promotion->have_posts()): ?>
   <div class="container-xl wdl-archive wdl-archive-extended wdl-archive-no-compare mx-auto">
-    <h3>โปรโมชั่นที่เกี่ยวข้อง</h3>
+    <h3><?php _e('โปรโมชั่นที่เกี่ยวข้อง', 'wdl')?></h3>
     <div class="swiper wdl-archive-swiper">
       <div class="swiper-wrapper">
         <?php while ($query_promotion->have_posts()):
@@ -136,7 +136,7 @@ $currentPostID = get_the_ID();
     )) ?>
   <?php if ($query_venue->have_posts()): ?>
   <div class="container-xl wdl-archive wdl-archive-extended wdl-archive-no-compare mx-auto">
-    <h3>สถานที่จัดงานที่เกี่ยวข้อง</h3>
+    <h3><?php _e('สถานที่จัดงานที่เกี่ยวข้อง', 'wdl')?></h3>
     <div class="swiper wdl-archive-swiper">
       <div class="swiper-wrapper">
         <?php while ($query_venue->have_posts()):
@@ -162,7 +162,7 @@ $currentPostID = get_the_ID();
     )) ?>
   <?php if ($query_vendor->have_posts()): ?>
   <div class="container-xl wdl-archive wdl-archive-extended wdl-archive-no-compare mx-auto">
-    <h3>ผู้ให้บริการที่เกี่ยวข้อง</h3>
+    <h3><?php _e('ผู้ให้บริการที่เกี่ยวข้อง', 'wdl')?></h3>
     <div class="swiper wdl-archive-swiper">
       <div class="swiper-wrapper">
         <?php while ($query_vendor->have_posts()):
@@ -180,11 +180,11 @@ $currentPostID = get_the_ID();
     'order' => 'DESC',
     'orderby' => 'date',
     'post_status' => 'publish',
-    'posts_per_page' => '3',
+    'posts_per_page' => '4',
   )) ?>
   <?php if ($latest_posts->have_posts()): ?>
   <div class="container-xl wdl-archive wdl-archive-extended wdl-archive-no-compare mx-auto">
-    <h3>บทความล่าสุด</h3>
+    <h3><?php _e('บทความล่าสุด', 'wdl')?></h3>
     <div class="swiper wdl-archive-swiper">
       <div class="swiper-wrapper">
         <?php while ($latest_posts->have_posts()):

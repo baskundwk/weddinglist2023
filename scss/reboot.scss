@@ -155,13 +155,15 @@
   font-weight: 400;
 }
 /* Bootstrap Patches */
-tbody,
-td,
-tfoot,
-th,
-thead,
-tr {
-  border-width: 1px;
+table:not(.table-borderless) {
+  tbody,
+  td,
+  tfoot,
+  th,
+  thead,
+  tr {
+    border-width: 1px;
+  }
 }
 .form-control:focus {
   box-shadow: none;

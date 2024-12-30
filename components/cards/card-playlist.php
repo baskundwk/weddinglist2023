@@ -59,11 +59,6 @@ $lastVideo->the_post();?>
         <p class="title lineclamp-2">
           <?php echo $playlist->name ?>
         </p>
-        <?php if(get_field('RelatedVenue')) { ?>
-        <p class="wdl-archive-location lineclamp-1">
-          <?php echo get_the_title(get_field('RelatedVenue')->ID)?>
-        </p>
-        <?php } ?>
       </div>
     </a>
   </div>

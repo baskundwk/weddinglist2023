@@ -1,0 +1,214 @@
+.wdl-moment-gallery {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0,1fr));
+  gap: 8px;
+
+  .wdl-moment-gallery-item {
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(0,0,0,.15);
+    position: relative;
+    img {
+      aspect-ratio: 3/2;
+      object-fit: cover;
+      object-position: center center;
+    }
+    &:first-child {
+      grid-column: span 4;
+      img {
+        aspect-ratio: 88/40;
+      }
+    }
+  }
+  .wdl-moment-gallery-item-more {
+    position: absolute;
+    inset: 0 0 0 0;
+    background: rgba(0,0,0,.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #FFFFFF;
+    font-size: 40px;
+    line-height: 1.5;
+    font-weight: 600;
+    text-align: center;
+  }
+}
+
+.wdl-moment-card {
+  .wdl-archive-card-img-top {
+    position: relative;
+    z-index: 1;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.15);
+    border-radius: 8px;
+    overflow: hidden;
+    display: block;
+    img {
+      aspect-ratio: 314/200;
+      object-fit: cover;
+      object-position: center center;
+      transition: .35s cubic-bezier(0,0,0,1);
+    }
+  }
+
+  &:hover {
+    .wdl-archive-card-img-top {
+      img {
+        scale: 1.1
+      }
+    }
+  }
+
+  .wdl-archive-card-body {
+    margin: 0 8px;
+    border-radius: 0 0 8px 8px;
+    box-shadow: 0 0 0 1px #D9D9D9;
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .wdl-archive-title {
+    font-size: 15px;
+    line-height: 1.35;
+  }
+}
+
+.wdl-moment-set {
+  border-radius: 16px;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  gap: 16px;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 32px;
+
+  @include max-width-lg {
+    flex-direction: column;
+    padding: 16px;
+  }
+  .wdl-moment-set-background {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
+
+    &:after {
+      content: '';
+      position: absolute;
+      inset: auto 0 0 0;
+      background: linear-gradient(to bottom, transparent, transparent, rgba(0,0,0,.5));
+      width: 100%;
+      height: 100%;
+    }
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center center;
+    }
+  }
+  .wdl-moment-set-text {
+    flex: 1 1 0;
+    color: #FFFFFF;
+    position: relative;
+    z-index: 1;
+
+    @include max-width-lg {
+      text-align: center;
+    }
+    .title {
+      font-weight: 600;
+      font-size: 40px;
+      line-height: 1.35;
+      color: #FFFFFF;
+
+      @include max-width-lg {
+        font-size: 24px;
+      }
+    }
+    .desc {
+      font-size: 20px;
+      line-height: 1.35;
+      color: #FFFFFF;
+      
+      @include max-width-lg {
+        font-size: 14px;
+      }
+    }
+    
+    a {
+      font-size: 20px;
+      line-height: 1.35;
+      color: #FFFFFF;
+      
+      @include max-width-lg {
+        font-size: 14px;
+      }
+    }
+  }
+  .wdl-moment-set-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex: 0 0 auto;
+  }
+  .wdl-moment-set-subset {
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+    display: flex;
+    box-shadow: 0 0 0 1px rgba(217,217,217,.5);
+    max-width: 500px;
+    background: #FFFFFF;
+    line-height: 1.35;
+
+    .card-img-top {
+      aspect-ratio: 5/4;
+      max-width: 150px;
+      position: relative;
+      img {
+        aspect-ratio: 5/4;
+        object-fit: cover;
+        object-position: center center;
+      }
+    }
+    
+    .card-body {
+      padding: 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .wdl-archive-title {
+      @extend .lineclamp-1;
+      font-size: 14px;
+      line-height: 1.35;
+    }
+
+    .wdl-metadata {
+      line-height: 1.2;
+
+      svg {
+        width: 16px;
+        height: 16px;
+      }
+    }
+  }
+
+
+
+  &.wdl-moment-set-banner {
+    padding: 66px 24px;
+
+    .wdl-moment-set-text {
+      max-width: 900px;
+    }
+  }
+}

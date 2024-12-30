@@ -1,17 +1,29 @@
-<?php include get_stylesheet_directory().'/components/header.php' ?>
+<?php include get_stylesheet_directory() . '/components/header.php' ?>
 
 <main>
-  <?php include get_stylesheet_directory().'/components/search.php' ?>
+  <?php include get_stylesheet_directory() . '/components/search.php' ?>
 
+  <?php
+  $paged = get_query_var('paged', 1);
+  $postAll = new WP_Query(
+    array(
+      'post_type' => 'post',
+      'post_status' => 'publish',
+      'posts_per_page' => 12,
+      'paged' => $paged,
+      'orderby' => 'post_date',
+      'order' => 'DESC'
+    )
+  ) ?>
   <section class="pb-4">
     <div class="container">
       <div class="row pb-3">
         <div class="col">
           <h1 class="mb-0">
-            <?php _e('บทความล่าสุด', 'wdl') ?>
+            <?php echo (get_option('wdl_options', 'โปรโมชั่นแต่งงาน & แพ็กเกจแต่งงาน')['word-post-title']); ?>
           </h1>
           <p class="text-secondary">
-            <?php _e('รวบรวมบทความให้คุณไว้ที่เดียว', 'wdl') ?>
+            <?php echo (get_option('wdl_options', 'รวมโปรโมชั่น และ แพ็กเกจแต่งงาน จากสถานที่จัดงานแต่งงานชั้นนำทุกรูปแบบ อัพเดทล่าสุด')['word-post-desc']); ?>
           </p>
           <div class="wdl-badge-container">
             <a href="#" class="wdl-badge-sm-primary">ทั้งหมด</a>
@@ -21,20 +33,21 @@
           </div>
         </div>
       </div>
-
-      <?php if (have_posts()): ?>
-      <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-2 wdl-archive wdl-archive-extended opacity-1">
-        <?php while (have_posts()): ?>
-        <?php the_post(); ?>
-        <div class="col"><?php include get_stylesheet_directory().'/components/cards/card-post.php' ?></div>
-        <?php endwhile;
-        wp_reset_postdata(); ?>
-      </div>
-      <div class="row">
-        <div class="col text-center">
-          <?php pagination(); ?>
+      <?php if ($postAll->have_posts()): ?>
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-2 wdl-archive wdl-archive-extended opacity-1">
+          <?php while ($postAll->have_posts()): ?>
+            <?php $postAll->the_post(); ?>
+            <div class="col">
+              <?php include get_stylesheet_directory() . '/components/cards/card-post.php' ?>
+            </div>
+          <?php endwhile;
+          wp_reset_postdata(); ?>
         </div>
-      </div>
+        <div class="row">
+          <div class="col text-center">
+            <?php pagination(); ?>
+          </div>
+        </div>
       <?php endif; ?>
     </div>
   </section>
@@ -52,41 +65,45 @@
   ) ?>
 
   <?php if ($postCat1->have_posts()): ?>
-  <section class="wdl-archive wdl-archive-extended py-4 overflow-hidden bg-gray">
-    <div class="container">
+    <section class="wdl-archive wdl-archive-extended py-4 overflow-hidden bg-gray">
+      <div class="container">
 
-      <div class="row">
-        <div class="col">
-          <h2>
-            <?php _e('รีวิวแต่งงาน', 'wdl') ?>
-          </h2>
+        <div class="row">
+          <div class="col">
+            <h2>
+              <?php _e('รีวิวแต่งงาน', 'wdl') ?>
+            </h2>
+          </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="col">
-          <div class="swiper wdl-archive-swiper">
-            <div class="swiper-wrapper">
-              <?php while ($postCat1->have_posts()): ?>
-              <?php $postCat1->the_post(); ?>
-              <?php include get_stylesheet_directory().'/components/cards/card-post.php' ?>
-              <?php endwhile;
+        <div class="row">
+          <div class="col">
+            <div class="swiper wdl-archive-swiper">
+              <div class="swiper-wrapper">
+                <?php while ($postCat1->have_posts()): ?>
+                  <?php $postCat1->the_post(); ?>
+
+                  <div class="swiper-slide h-auto">
+                    <?php include get_stylesheet_directory() . '/components/cards/card-post.php' ?>
+                  </div>
+
+                <?php endwhile;
                 wp_reset_postdata(); ?>
-            </div>
-            <div class="swiper-pagination"></div>
-            <div class="swiper-navigation swiper-navigation-small">
-              <div class="swiper-button-prev"></div>
-              <div class="swiper-button-next"></div>
+              </div>
+              <div class="swiper-pagination"></div>
+              <div class="swiper-navigation swiper-navigation-small">
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next"></div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <!-- <div class="row">
+        <!-- <div class="row">
           <div class="col">
             <?php pagination(); ?>
           </div>
         </div> -->
-    </div>
-  </section>
+      </div>
+    </section>
   <?php endif; ?>
 
   <?php
@@ -102,41 +119,45 @@
   ) ?>
 
   <?php if ($postCat2->have_posts()): ?>
-  <section class="wdl-archive wdl-archive-extended pb-4 overflow-hidden bg-gray">
-    <div class="container">
+    <section class="wdl-archive wdl-archive-extended pb-4 overflow-hidden bg-gray">
+      <div class="container">
 
-      <div class="row">
-        <div class="col">
-          <h2>
-            <?php _e('เตรียมตัวแต่งงาน', 'wdl') ?>
-          </h2>
+        <div class="row">
+          <div class="col">
+            <h2>
+              <?php _e('เตรียมตัวแต่งงาน', 'wdl') ?>
+            </h2>
+          </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="col">
-          <div class="swiper wdl-archive-swiper">
-            <div class="swiper-wrapper">
-              <?php while ($postCat2->have_posts()): ?>
-              <?php $postCat2->the_post(); ?>
-              <?php include get_stylesheet_directory().'/components/cards/card-post.php' ?>
-              <?php endwhile;
+        <div class="row">
+          <div class="col">
+            <div class="swiper wdl-archive-swiper">
+              <div class="swiper-wrapper">
+                <?php while ($postCat2->have_posts()): ?>
+                  <?php $postCat2->the_post(); ?>
+
+                  <div class="swiper-slide h-auto">
+                    <?php include get_stylesheet_directory() . '/components/cards/card-post.php' ?>
+                  </div>
+
+                <?php endwhile;
                 wp_reset_postdata(); ?>
-            </div>
-            <div class="swiper-pagination"></div>
-            <div class="swiper-navigation swiper-navigation-small">
-              <div class="swiper-button-prev"></div>
-              <div class="swiper-button-next"></div>
+              </div>
+              <div class="swiper-pagination"></div>
+              <div class="swiper-navigation swiper-navigation-small">
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next"></div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <!-- <div class="row">
+        <!-- <div class="row">
           <div class="col">
             <?php pagination(); ?>
           </div>
         </div> -->
-    </div>
-  </section>
+      </div>
+    </section>
   <?php endif; ?>
 
   <?php
@@ -152,42 +173,46 @@
   ) ?>
 
   <?php if ($postCat3->have_posts()): ?>
-  <section class="wdl-archive wdl-archive-extended pb-4 overflow-hidden bg-gray">
-    <div class="container">
+    <section class="wdl-archive wdl-archive-extended pb-4 overflow-hidden bg-gray">
+      <div class="container">
 
-      <div class="row">
-        <div class="col">
-          <h2>
-            <?php _e('ไลฟ์สไตล์', 'wdl') ?>
-          </h2>
+        <div class="row">
+          <div class="col">
+            <h2>
+              <?php _e('ไลฟ์สไตล์', 'wdl') ?>
+            </h2>
+          </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="col">
-          <div class="swiper wdl-archive-swiper">
-            <div class="swiper-wrapper">
-              <?php while ($postCat3->have_posts()): ?>
-              <?php $postCat3->the_post(); ?>
-              <?php include get_stylesheet_directory().'/components/cards/card-post.php' ?>
-              <?php endwhile;
+        <div class="row">
+          <div class="col">
+            <div class="swiper wdl-archive-swiper">
+              <div class="swiper-wrapper">
+                <?php while ($postCat3->have_posts()): ?>
+                  <?php $postCat3->the_post(); ?>
+
+                  <div class="swiper-slide h-auto">
+                    <?php include get_stylesheet_directory() . '/components/cards/card-post.php' ?>
+                  </div>
+
+                <?php endwhile;
                 wp_reset_postdata(); ?>
-            </div>
-            <div class="swiper-pagination"></div>
-            <div class="swiper-navigation swiper-navigation-small">
-              <div class="swiper-button-prev"></div>
-              <div class="swiper-button-next"></div>
+              </div>
+              <div class="swiper-pagination"></div>
+              <div class="swiper-navigation swiper-navigation-small">
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next"></div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <!-- <div class="row">
+        <!-- <div class="row">
           <div class="col">
             <?php pagination(); ?>
           </div>
         </div> -->
-    </div>
-  </section>
+      </div>
+    </section>
   <?php endif; ?>
 </main>
 
-<?php include get_stylesheet_directory().'/components/footer.php' ?>
+<?php include get_stylesheet_directory() . '/components/footer.php' ?>

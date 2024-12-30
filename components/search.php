@@ -5,7 +5,10 @@
         <div class="wdl-search">
           <form class="searchform" action="/">
             <div class="input-group d-flex">
-              <input class="form-control p-2" type="text" name="s" id="search" placeholder="คุณกำลังมองหาอะไร..." value="<?php echo esc_html($_GET['s']) ?>">
+              <input class="form-control p-2" type="text" name="s" id="search" placeholder="คุณกำลังมองหาอะไร..." value="<?php 
+              if(isset($_GET['s'])) { 
+                echo esc_html($_GET['s']);
+              } ?>">
               <select id="type" name="type" value="<?php if ($_GET['type']) {
                 echo $_GET['type'];
               } else {

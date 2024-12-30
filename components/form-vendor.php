@@ -90,6 +90,8 @@
 </div>
 <script>
 $(document).ready(() => {
+  const modal = new bootstrap.Modal(document.querySelector('.wdl-form-general-modal'));
+  const modalSuccess = new bootstrap.Modal(document.querySelector('.wdl-form-general-succeed-modal'));
   $('#wdl-form-general').submit(function(e) {
     e.preventDefault();
     $('.wdl-form-general-modal .modal-body').addClass('submitting')
@@ -118,8 +120,8 @@ $(document).ready(() => {
       selectedCoupon: selectedCoupon.join(',')
     }, () => {
       $('#wdl-form-general').removeClass('failed')
-      $('.wdl-form-general-modal').modal('hide')
-      $('.wdl-form-general-succeed-modal').modal('show')
+      modal.hide();
+      modalSuccess.show();
       $('.wdl-form-general-modal .modal-body').removeClass('submitting')
       generalDirectData = {}
     }).fail(() => {

@@ -395,12 +395,16 @@ const wdlVideoSwiper = new Swiper('.wdl-video-swiper', {
   },
   navigation: {
     prevEl: '.swiper-button-prev',
-    nextEl: '.swiper-button-prev'
+    nextEl: '.swiper-button-next'
   },
   pagination: {
     el: ".swiper-pagination",
     type: "bullets",
     clickable: true,
+  },
+  speed: 1000,
+  autoplay: {
+    delay: 5000,
   },
 })
 
@@ -1065,11 +1069,14 @@ $(".wdl-iframe").each((index, element) => {
 });
 
 // Auto-trigger modal
-$(window).load(() => {
-  setTimeout(() => {
-    $(".wdl-modal-autotrigger").modal("show");
-  }, 50);
-});
+if(document.querySelector('.wdl-modal-autotrigger')) {
+  $(document).ready(() => {
+    setTimeout(() => {
+      let modal = new bootstrap.Modal(document.querySelector('.wdl-modal-autotrigger'));
+      modal.show();
+    }, 50);
+  });
+}
 
 // Init Feather icons
 $(document).ready(() => {
@@ -1243,4 +1250,98 @@ function searchRedirect(event) {
 
   // Redirect to the constructed URL
   window.location.href = url;
+}
+
+$('#form-line-contact').submit((event)=>{
+  event.preventDefault();
+  const formItems = $('#form-line-contact').attr('data-items').split(',')
+  console.log(formItems)
+  const messageArray = [$('#form-line-contact').attr('data-message-prefix')]
+  formItems.forEach((e,i)=>{
+    if($('#' + e).attr('type') === 'date') { 
+      const date = new Date($('#' + e).val());
+      const options = { day: "2-digit", month: "short", year: "numeric" };
+      const formattedDate = date.toLocaleDateString("en-US", options);
+      messageArray.push($('#' + e).attr('placeholder') + ' : ' + formattedDate);
+    } else {
+      messageArray.push($('#' + e).attr('placeholder') + ' : ' + $('#' + e).val())
+    }
+  })
+
+  const messageBody = messageArray.join('\r')
+
+  const isMobileOrTablet = () => {
+    const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+    
+    // Check for mobile
+    if (/android/i.test(userAgent)) return true;
+    if (/iPhone|iPad|iPod/i.test(userAgent)) return true;
+    if (/windows phone/i.test(userAgent)) return true;
+  
+    return false;
+  }
+  
+  if (isMobileOrTablet()) {
+    window.location.href = "https://line.me/R/oaMessage/@ety4154i/?" + encodeURI(messageBody)
+  } else {
+    const qrcode = new QRCode(document.querySelector("#wdl-lineqr-container"), {
+      text: "https://line.me/R/oaMessage/@ety4154i/?" + encodeURI(messageBody),
+      width: 600,
+      height: 600,
+      colorDark : "#ff2758",
+      colorLight : "#ffffff",
+      correctLevel : QRCode.CorrectLevel.Q
+    });
+    
+    let modal = new bootstrap.Modal(document.querySelector('#modalLineQr'));
+    modal.show();
+  }
+  
+
+})
+
+document.addEventListener("DOMContentLoaded", () => {
+  const tiktokIframes = document.querySelectorAll('iframe[src*="tiktok.com"]');
+
+  tiktokIframes.forEach((iframe) => {
+    iframe.style.width = "100%";  // Set full width
+    iframe.style.maxWidth = "100%"; // Set max width
+    iframe.style.height = "900px";  // Set height
+  });
+});
+
+new Swiper('.wdl-video-playlist-content', {
+  slidesPerView: 2,
+  spaceBetween: 8,
+  /* breakpoints: {
+    552: {
+      slidesPerView: 4
+    },
+    768: {
+      slidesPerView: 5
+    },
+    1024: {
+      slidesPerView: 6
+    },
+    1200: {
+      slidesPerView: 2
+    },
+  }, */
+  navigation: {
+    prevEl: '.swiper-button-prev',
+    nextEl: '.swiper-button-next',
+  }
+})
+
+const relatedVideoPlaylists = document.querySelectorAll('.wdl-video-playlist-content')
+if(relatedVideoPlaylists.length > 0) {
+  const selector = document.querySelector('.wdl-video-playlist-select')
+  relatedVideoPlaylists[0].classList.add('active')
+
+  selector.addEventListener('change', (event) => {
+    relatedVideoPlaylists.forEach((e,i) => {
+      e.classList.remove('active')
+    })
+    document.querySelector('.wdl-video-playlist-content[data-content-id="' + event.target.value + '"]').classList.add('active')
+  })
 }
