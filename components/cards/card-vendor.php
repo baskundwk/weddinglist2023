@@ -1,7 +1,18 @@
-<div id="wdl-post-<?php the_ID(); ?>" class="swiper-slide card wdl-archive-card wdl-archive-infinite-scroll-post">
+<div id="wdl-post-<?php the_ID(); ?>" class="swiper-slide card wdl-archive-card 
+  <?php if(isset($campaignModeEnabled) && isset($campaignRelated['Vendor']) && in_array(get_the_ID(), $campaignRelated['Vendor'])) {
+    echo esc_html('wdl-campaign-card');
+  };
+  ?> wdl-archive-infinite-scroll-post" style="
+  <?php if(isset($campaignModeEnabled) && isset($campaignRelated['Vendor']) && in_array(get_the_ID(), $campaignRelated['Vendor'])) {
+    echo esc_html('--campaign-color-1: '.$campaignColor1.'; --campaign-color-2: '.$campaignColor2.';');
+  }?>">
   <?php if (has_post_thumbnail(get_the_ID())): ?>
     <a aria-label="<?php echo get_the_title(); ?>" title="<?php echo get_the_title(); ?>" class="card-img-top wdl-archive-card-img-top" href="<?php the_permalink(); ?>">
       <img loading="lazy" src="<?php echo esc_html(get_the_post_thumbnail_url($post, 'medium_large')) ?>" alt="<?php echo get_the_title(); ?>">
+
+      <?php if(isset($campaignModeEnabled) && isset($campaignRelated['Vendor']) && in_array(get_the_ID(), $campaignRelated['Vendor'])) {
+        echo $campaignLogo;
+      } ?>
 
       <?php $status = get_field('Status');
       if ($status && in_array('Sponsored', $status)): ?>

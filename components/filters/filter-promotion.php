@@ -6,7 +6,7 @@
         'posts_per_page' => -1,          // Get all posts
         'meta_key' => 'RelatedVenue',    // Only posts that have the 'RelatedVenue' field
         'meta_compare' => 'EXISTS',
-        'status' => 'publish'
+        'post_status' => 'publish'
       ));
 
       if ($promotionWithVeueMeta->have_posts()): ?>

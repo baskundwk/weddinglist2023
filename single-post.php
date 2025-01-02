@@ -10,7 +10,7 @@ $currentPostID = get_the_ID();
       <?php include get_stylesheet_directory().'/components/all-page-ads.php' ?>
       <?php $post = new WP_Query(array(
         'ID' => $currentPostID,
-        'status' => 'any'
+        'post_status' => 'any'
       ));
       ?>
       <?php

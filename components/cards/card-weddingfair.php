@@ -2,11 +2,22 @@
     echo esc_html('wdl-archive-primary');
   } else {
     echo esc_html('wdl-archive-default');
-  } ?> wdl-archive-infinite-scroll-post">
+  } ?>
+  <?php if(isset($campaignModeEnabled) && isset($campaignRelated['WeddingFair']) && in_array(get_the_ID(), $campaignRelated['WeddingFair'])) {
+    echo esc_html('wdl-campaign-card');
+  };
+  ?> wdl-archive-infinite-scroll-post" style="
+  <?php if(isset($campaignModeEnabled) && isset($campaignRelated['WeddingFair']) && in_array(get_the_ID(), $campaignRelated['WeddingFair'])) {
+    echo esc_html('--campaign-color-1: '.$campaignColor1.'; --campaign-color-2: '.$campaignColor2.';');
+  }?>">
   <?php if (has_post_thumbnail(get_the_ID())): ?>
     <a aria-label="<?php echo get_the_title(); ?>" class="card-img-top wdl-archive-card-img-top" title="<?php echo get_the_title(); ?>" href="<?php the_permalink(); ?>">
       <img loading="lazy" src="<?php echo esc_html(wp_get_attachment_image_src(get_post_thumbnail_id(), 'medium_large')[0]) ?>" srcset="<?php echo esc_html(wp_get_attachment_image_src(get_post_thumbnail_id(), 'medium_large')[0]) ?> 1x,
             <?php echo esc_html(wp_get_attachment_image_src(get_post_thumbnail_id(), 'medium_large')[0]) ?> 2x" alt="<?php get_the_title() ?>">
+
+      <?php if(isset($campaignModeEnabled) && isset($campaignRelated['WeddingFair']) && in_array(get_the_ID(), $campaignRelated['WeddingFair'])) {
+        echo $campaignLogo;
+      } ?>
       <div class="swiper-lazy-preloader"></div>
     </a>
   <?php endif; ?>

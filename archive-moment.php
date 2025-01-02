@@ -60,7 +60,7 @@
     </div>
     <?php else: ?>
     <?php 
-      $empty_type = 'venue';
+      $empty_type = 'moment';
       include get_stylesheet_directory().'/components/result-empty.php';
     ?>
     <?php endif; ?>

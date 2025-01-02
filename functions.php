@@ -692,3 +692,53 @@ add_action('admin_menu', 'group_all_plugins_and_settings', 1000000); // Priority
 add_action('after_setup_theme', function () {
 	load_theme_textdomain('wdl', get_stylesheet_directory(  ) . '/languages');
 });
+
+/* Dynamic campaign help text in Campaign Edit Page */
+function enqueue_dynamic_text_script($hook) {
+	// Load only on post edit pages
+	if ($hook === 'post.php' || $hook === 'post-new.php') {
+			wp_enqueue_script(
+					'dynamic-text-script',
+					get_template_directory_uri() . '/admin-editor.js', // Adjust path if necessary
+					['jquery'],
+					null,
+					true
+			);
+	}
+}
+add_action('admin_enqueue_scripts', 'enqueue_dynamic_text_script');
+
+function add_dynamic_text_meta_box() {
+	add_meta_box(
+			'dynamic_text_meta_box',         // Meta box ID
+			'Dynamic Text',                  // Meta box title
+			'render_dynamic_text_meta_box', // Callback function
+			'campaign',         // Custom post type
+			'side',                          // Context
+			'default'                        // Priority
+	);
+}
+add_action('add_meta_boxes', 'add_dynamic_text_meta_box');
+
+function render_dynamic_text_meta_box($post) {
+	// Get the post slug
+	$post_slug = $post->post_name;
+
+	// Define dynamic text based on the slug
+	$text = '';
+
+	$text = '
+	<p style="padding: 0 10px"><strong>Campaign announcement page: </strong>
+		<a target="_blank" href="'.home_url( '/campaign-info/?i='.$post_slug ).'">'.home_url( '/campaign-info/?i=').'<strong>'.$post_slug.'</strong></a>
+	</p>
+	<p style="padding: 0 10px"><strong>Campaign preview page: </strong>
+		<a target="_blank" href="'.home_url( '/campaign-preview/?i='.$post_slug ).'">'.home_url( '/campaign-preview/?i=').'<strong>'.$post_slug.'</strong></a>
+	</p>
+	<p style="padding: 0 10px"><strong>Campaign debug parameter: </strong>
+		<code><strong>?campaignDebug='.$post_slug.'</strong></code>
+	</p>
+	';
+
+	// Add a hidden container for the JavaScript to move
+	echo '<div id="dynamic-text-container" style="display:none;">' . $text . '</div>';
+}

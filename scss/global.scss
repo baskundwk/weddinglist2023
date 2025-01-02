@@ -64,7 +64,7 @@ select {
 }
 
 main {
-  margin-top: var(--header-height, 110px);
+  //margin-top: var(--header-height, 110px);
   //overflow: hidden;
   min-height: calc(100vh - (var(--wp-admin--admin-bar--height) + var(--header-height) + var(--footer-height)));
 
@@ -73,7 +73,7 @@ main {
   }
 }
 
-.wdl-lead-menu {
+/* .wdl-lead-menu {
   ~ main {
     margin-top: calc(var(--header-height, 110px) + 70px);
     
@@ -81,7 +81,7 @@ main {
       margin-top: calc(var(--header-height, 110px) + 55px);
     }
   }
-}
+} */
 .cky-notice-des {
   overflow-y: auto !important;
 }
@@ -264,8 +264,6 @@ body {
     .container-xl,
     .container-xxl {
       max-width: 1280px;
-      padding-left: 0;
-      padding-right: 0;
     }
   }
 }

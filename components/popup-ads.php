@@ -8,6 +8,58 @@
 );
 
 $popup = new WP_Query($popupArgs);
+
+$today = current_time('Y-m-d');
+
+$campaignPopupBefore = new WP_Query([
+  'post_type' => 'campaign',
+  'posts_per_page' => -1,
+  'post_status' => 'publish',
+  'meta_query'     => [
+      'relation' => 'AND',
+      [
+          'key'     => 'CampaignBeforeDate',
+          'value'   => $today,
+          'compare' => '<=',
+          'type'    => 'DATE',
+      ],
+      [
+          'key'     => 'CampaignDateStart',
+          'value'   => $today,
+          'compare' => '>=',
+          'type'    => 'DATE',
+      ],
+      [
+        'key'     => 'CampaignPopupBefore',
+        'compare' => 'EXISTS',
+      ],
+  ],
+]);
+
+$campaignPopupMiddle = new WP_Query([
+  'post_type' => 'campaign',
+  'posts_per_page' => -1,
+  'post_status' => 'publish',
+  'meta_query'     => [
+      'relation' => 'AND',
+      [
+          'key'     => 'CampaignDateStart',
+          'value'   => $today,
+          'compare' => '<=',
+          'type'    => 'DATE',
+      ],
+      [
+          'key'     => 'CampaignDateEnd',
+          'value'   => $today,
+          'compare' => '>=',
+          'type'    => 'DATE',
+      ],
+      [
+        'key'     => 'CampaignPopupMiddle',
+        'compare' => 'EXISTS',
+      ],
+  ],
+]);
 ?>
 <?php if($popup->have_posts()): ?>
   <div class="modal fade wdl-ad-popup-extended wdl-modal-autotrigger" tabindex="-1">
@@ -16,7 +68,32 @@ $popup = new WP_Query($popupArgs);
         <button class="btn-close" data-bs-dismiss="modal" aria-label="Close" type="button" ่></button>
         <div class="swiper wdl-ad-popup-swiper p-lg-3">
           <div class="swiper-wrapper">
-            <?php while($popup->have_posts()):
+            <?php if($campaignPopupBefore->have_posts()) :
+            while($campaignPopupBefore->have_posts()):
+            $campaignPopupBefore->the_post(); ?>
+            <div class="swiper-slide">
+              <a href="<?php the_permalink();?>">
+                <figure>
+                  <img class="no-lazyload" src="<?php echo esc_html(get_field('CampaignPopupBefore')['url']) ?>" width="600" height="600" alt="<?php the_title(); ?>">
+                </figure>
+              </a>
+            </div>
+            <?php endwhile;
+            endif; ?>
+            <?php if($campaignPopupMiddle->have_posts()) :
+            while($campaignPopupMiddle->have_posts()):
+            $campaignPopupMiddle->the_post(); ?>
+            <div class="swiper-slide">
+              <a href="<?php the_permalink();?>">
+                <figure>
+                  <img class="no-lazyload" src="<?php echo esc_html(get_field('CampaignPopupMiddle')['url']) ?>" width="600" height="600" alt="<?php the_title(); ?>">
+                </figure>
+              </a>
+            </div>
+            <?php endwhile;
+            endif; ?>
+            <?php if($popup->have_posts()) :
+            while($popup->have_posts()):
             $popup->the_post(); ?>
             <div class="swiper-slide">
               <a href="<?php
@@ -31,7 +108,8 @@ $popup = new WP_Query($popupArgs);
                 </figure>
               </a>
             </div>
-            <?php endwhile; ?>
+            <?php endwhile;
+            endif; ?>
           </div>
           <div class="swiper-navigation swiper-navigation-small">
             <div class="swiper-button-prev"></div>

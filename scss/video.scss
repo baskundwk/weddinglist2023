@@ -3,7 +3,7 @@
   position: relative;
   z-index: 2;
   overflow: hidden;
-  border-radius: 8px;
+  border-radius: 12px;
   .wdl-video-icon {
     background: radial-gradient(farthest-side at 0 0, #FF2758, transparent);
     width: 30px;
@@ -144,7 +144,7 @@
 
 .wdl-video-playlist-content {
   background: #333333;
-  border-radius: 8px;
+  border-radius: 12px;
   padding: 8px;
   position: relative;
   overflow: hidden;

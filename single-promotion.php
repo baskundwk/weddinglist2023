@@ -1,5 +1,11 @@
 <?php include get_stylesheet_directory() . '/components/header.php' ?>
-<main>
+<main class="<?php if(isset($campaignModeEnabled) && isset($campaignRelated['Promotion']) && in_array(get_the_ID(), $campaignRelated['Promotion'])) {
+    echo esc_html('wdl-campaign-single');
+  };
+?>" style="
+<?php if(isset($campaignModeEnabled) && isset($campaignRelated['Promotion']) && in_array(get_the_ID(), $campaignRelated['Promotion'])) {
+  echo esc_html('--campaign-color-1: '.$campaignColor1.'; --campaign-color-2: '.$campaignColor2.';');
+}?>">
   <section>
     <div class="container-xl">
       <div class="row pb-3 pt-lg-3">
@@ -53,7 +59,7 @@
       </div>
     </div>
   </section>
-  <section class="wdl-main-bar">
+  <section class="wdl-main-bar pb-3">
     <div class="container-xl">
       <div class="row align-items-center">
         <div class="col-sm-2 mb-4 mb-xl-0 d-none d-lg-block">
@@ -120,7 +126,7 @@
       </div>
     </div>
   </section>
-
+  <?php include get_stylesheet_directory() . '/components/campaign-bar.php' ?>
   <?php
   $coupon = get_posts(
     array(
@@ -137,7 +143,7 @@
   );
 
   if ($coupon): ?>
-  <section class="py-3">
+  <section class="pb-3">
     <div class="container">
       <h2 class="h6 mb-1"><?php _e('คูปองที่ร่วมรายการ', 'wdl') ?></h2>
       <div class="d-flex flex-wrap gap-3 my-2 align-items-stretch">

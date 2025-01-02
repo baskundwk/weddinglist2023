@@ -157,6 +157,9 @@
 
   .wdl-metadata-logo {
     flex: 0 0 auto;
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
     img {
       aspect-ratio: 1/1;
       height: 40px;
@@ -368,5 +371,13 @@ body.admin-bar.et_fixed_nav .wdl-sticky-bar {
   }
   @include max-width-xl {
     max-width: none;
+  }
+}
+
+.wdl-main-bar {
+  .wdl-metadata-logo {
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
   }
 }

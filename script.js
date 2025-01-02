@@ -424,7 +424,6 @@ const wdlStickyBar = () => {
 
   const positioning = () => {
     document.querySelector(".wdl-sticky-bar").style.top =
-      document.querySelector("#main-header").offsetTop +
       document.querySelector("#main-header").clientHeight +
       "px";
   };
@@ -1343,5 +1342,47 @@ if(relatedVideoPlaylists.length > 0) {
       e.classList.remove('active')
     })
     document.querySelector('.wdl-video-playlist-content[data-content-id="' + event.target.value + '"]').classList.add('active')
+  })
+}
+
+//Campaign Countdown
+// Set the date we're counting down to
+const eCampaignCountdown = document.querySelectorAll('.wdl-campaign-countdown')
+
+if(eCampaignCountdown.length > 0) {
+  eCampaignCountdown.forEach((e,i) => {
+    const countDownDate = new Date(e.getAttribute('data-date')).getTime();
+    
+    // Update the count down every 1 second
+    const x = setInterval(function() {
+    
+      // Get today's date and time
+      const now = new Date().getTime();
+    
+      // Find the distance between now and the count down date
+      const distance = countDownDate - now;
+    
+      // Time calculations for days, hours, minutes and seconds
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    
+      // Display the result in the element with id="demo"
+      e.querySelector(" .day .number").innerText = days
+      e.querySelector(" .hour .number").innerText = hours
+      e.querySelector(" .minute .number").innerText = minutes
+      e.querySelector(" .second .number").innerText = seconds
+    
+      e.querySelectorAll(' .number').forEach((e,i) => {
+        e.classList.remove('loading')
+      })
+    
+      // If the count down is finished, write some text
+      if (distance < 0) {
+        clearInterval(x);
+        e.innerHTML = "EXPIRED";
+      }
+    }, 1000);
   })
 }

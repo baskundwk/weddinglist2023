@@ -63,7 +63,7 @@
   </section>
   <?php else: ?>
   <?php 
-    $empty_type = 'promotion';
+    $empty_type = 'video';
     include get_stylesheet_directory().'/components/result-empty.php';
   ?>
   <?php endif; ?>

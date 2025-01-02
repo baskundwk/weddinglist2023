@@ -32,7 +32,12 @@
       <div class="wdl-archive wdl-archive-extended">
 
         <div class="swiper wdl-archive-swiper">
-          <div class="swiper-wrapper row-cols-archive-randomized">
+          <div class="swiper-wrapper 
+              <?php if ($_GET['order'] || $_GET['orderby'] || $_GET['key']) {
+
+              } else {
+                echo 'row-cols-archive-randomized';
+              } ?> ">
             <?php while ($weddingfair->have_posts()): ?>
             <?php $weddingfair->the_post(); ?>
 
@@ -87,12 +92,77 @@
       <div class="wdl-archive wdl-archive-extended">
 
         <div id="promotions" class="swiper wdl-archive-swiper">
-          <div class="swiper-wrapper row-cols-archive-randomized'">
+          <div class="swiper-wrapper 
+            <?php if ($_GET['order'] || $_GET['orderby'] || $_GET['key']) {
+
+            } else {
+              echo 'row-cols-archive-randomized';
+            } ?> ">
             <?php
             while ($promotion->have_posts()): ?>
             <?php $promotion->the_post(); ?>
 
             <?php include get_stylesheet_directory() . '/components/cards/card-promotion.php' ?>
+
+            <?php endwhile; ?>
+          </div>
+          <div class="swiper-pagination"></div>
+          <div class="swiper-navigation swiper-navigation-small">
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+          </div>
+        </div>
+      </div>
+      <div class="text-center pt-lg-2 d-block d-lg-none mb-4">
+        <a href="<?php echo esc_html(get_post_type_archive_link('promotion')) ?>" class="wdl-btn-secondary ">
+          <?php _e('ดูโปรโมชั่นทั้งหมด', 'wdl') ?>
+        </a>
+      </div>
+    </div>
+  </section>
+  <?php endif; ?>
+  
+  <?php $momentArgs = array(
+    'post_type' => 'moment',
+    'post_status' => 'publish',
+    'posts_per_page' => '9',
+    /* 'orderby' => 'meta_value',
+    'order' => 'DESC',
+    'meta_key' => 'HotDeal', */
+  );
+
+  $moment = new WP_Query($momentArgs);
+  ?>
+  <?php
+  if ($moment->have_posts()): ?>
+  <section>
+    <div class="container-xl">
+      <div class="row mb-2">
+        <div class="col-lg">
+          <h2 class="h1 wdl-localnav-heading mb-0">
+            <?php _e('Moment ประสบการณ์ราคาพิเศษ', 'wdl'); ?>
+          </h2>
+        </div>
+        <div class="col-lg text-lg-end d-none d-lg-block">
+          <a href="<?php echo esc_html(get_post_type_archive_link('moment')) ?>" class="wdl-btn-secondary ">
+            <?php _e('ดู Moment ทั้งหมด', 'wdl') ?>
+          </a>
+        </div>
+      </div>
+      <div class="wdl-archive wdl-archive-extended">
+
+        <div id="promotions" class="swiper wdl-archive-swiper">
+          <div class="swiper-wrapper 
+            <?php if ($_GET['order'] || $_GET['orderby'] || $_GET['key']) {
+
+            } else {
+              echo 'row-cols-archive-randomized';
+            } ?> ">
+            <?php
+            while ($moment->have_posts()): ?>
+            <?php $moment->the_post(); ?>
+
+            <?php include get_stylesheet_directory() . '/components/cards/card-moment.php' ?>
 
             <?php endwhile; ?>
           </div>
@@ -132,7 +202,7 @@
           </h2>
         </div>
         <div class="col-lg text-lg-end d-none d-lg-block">
-          <a href="<?php echo esc_html(get_post_type_archive_link('venue')) ?>" class="wdl-btn-secondary ">
+          <a href="<?php echo esc_html(get_post_type_archive_link('promotion')) ?>" class="wdl-btn-secondary ">
             <?php _e('ดูสถานที่จัดงานแต่งงานทั้งหมด', 'wdl') ?>
           </a>
         </div>
@@ -198,7 +268,12 @@
       </div>
       <div class="wdl-archive wdl-archive-extended">
         <div class="swiper wdl-archive-swiper">
-          <div class="swiper-wrapper row-cols-archive-randomized">
+          <div class="swiper-wrapper  
+              <?php if ($_GET['order'] || $_GET['orderby'] || $_GET['key']) {
+
+              } else {
+                echo 'row-cols-archive-randomized';
+              } ?> ">
 
             <?php while ($venue->have_posts()): ?>
             <?php $venue->the_post();
@@ -319,7 +394,7 @@
   <?php $videoArgs = array(
     'post_type' => 'video',
     'orderby' => 'meta_value',
-    'posts_per_page' => '12',
+    'posts_per_page' => '7',
   );
 
   $video = new WP_Query($videoArgs);
@@ -340,22 +415,15 @@
           </a>
         </div>
       </div>
-      <div class="wdl-archive-extended">
-        <div id="video" class="swiper wdl-video-swiper overflow-hidden px-2 wdl-archive-swiper">
-          <div class="swiper-wrapper">
-            <?php while ($video->have_posts()): ?>
-            <?php $video->the_post(); ?>
-            <?php include get_stylesheet_directory() . '/components/cards/card-video.php' ?>
-            <?php endwhile; ?>
-          </div>
-          <div class="swiper-navigation swiper-navigation-small mt-2">
-            <div class="swiper-button-prev"></div>
-            <div class="swiper-button-next"></div>
-          </div>
-          <div class="swiper-pagination position-relative"></div>
-        </div>
+      <div id="video" class="wdl-video-grid">
+        <?php while ($video->have_posts()): ?>
+        <?php $video->the_post(); ?>
+
+        <?php include get_stylesheet_directory() . '/components/cards/card-video.php' ?>
+
+        <?php endwhile; ?>
       </div>
-      <div class="text-center pt-2 d-block d-lg-none mb-4">
+      <div class="text-center pt-lg-2 d-block d-lg-none mb-4">
         <a href="<?php echo esc_html(get_post_type_archive_link('video')) ?>" class="wdl-btn-secondary ">
           <?php _e('ดูรวมคลิปวิดีโอทั้งหมด', 'wdl') ?>
         </a>
@@ -418,7 +486,7 @@
       <h2 class="h1 wdl-localnav-heading mb-0">
         <?php _e('บทความล่าสุด', 'wdl')?>
       </h2>
-      <div class="wdl-badge-container">
+      <div class="wdl-badge-container-xl">
         <a href="<?php get_permalink(get_page_by_path('blog')) ?>" class="wdl-badge-sm-primary"><?php _e('ทั้งหมด', 'wdl') ?></a>
         <a href="<?php echo esc_html(get_category_link(get_cat_ID('รีวิวแต่งงาน'))) ?>" class="wdl-badge-sm-secondary"><?php echo get_category( get_cat_ID('รีวิวแต่งงาน'))->name?></a>
         <a href="<?php echo esc_html(get_category_link(get_cat_ID('สถานที่จัดงานแต่งงาน'))) ?>" class="wdl-badge-sm-secondary"><?php echo get_category( get_cat_ID('สถานที่จัดงานแต่งงาน'))->name?></a>

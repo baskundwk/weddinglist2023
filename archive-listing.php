@@ -37,7 +37,7 @@
   </section>
   <?php else: ?>
   <?php 
-    $empty_type = 'promotion';
+    $empty_type = 'listing';
     include get_stylesheet_directory().'/components/result-empty.php';
   ?>
   <?php endif; ?>

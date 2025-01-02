@@ -1,5 +1,11 @@
 <?php include get_stylesheet_directory() . '/components/header.php' ?>
-<main>
+<main class="<?php if(isset($campaignModeEnabled) && isset($campaignRelated['Vendor']) && in_array(get_the_ID(), $campaignRelated['Vendor'])) {
+    echo esc_html('wdl-campaign-single');
+  };
+?>" style="
+<?php if(isset($campaignModeEnabled) && isset($campaignRelated['Vendor']) && in_array(get_the_ID(), $campaignRelated['Vendor'])) {
+  echo esc_html('--campaign-color-1: '.$campaignColor1.'; --campaign-color-2: '.$campaignColor2.';');
+}?>">
   <section class="py-3 overflow-hidden">
     <div class="container-fluid">
       <?php
@@ -82,7 +88,7 @@
       </div>
     </div>
   </section>
-  <section class="wdl-main-bar">
+  <section class="wdl-main-bar mb-3">
     <div class="container-xl">
       <div class="row">
         <div class="col-lg-2 mb-4 mb-lg-0">
@@ -230,6 +236,7 @@
       </div>
     </div>
   </section>
+  <?php include get_stylesheet_directory() . '/components/campaign-bar.php' ?>
   <?php
 	$coupon = get_posts(
 		array(

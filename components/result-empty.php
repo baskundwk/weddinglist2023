@@ -25,7 +25,7 @@ if ($empty_type) {
       'post_type' => $empty_query,
       'order' => 'DESC',
       'orderby' => 'post_date',
-      'post_status' => 'published',
+      'post_status' => 'publish',
       'posts_per_page' => 8,
     ]);
     ?>

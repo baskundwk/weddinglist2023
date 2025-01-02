@@ -1,0 +1,272 @@
+.wdl-campaign-banner {
+  --campaign-color-1: #FF2758;
+  --campaign-color-2: #FF92AB;
+  background-color: var(--campaign-color-1, #FF2758);
+  background: linear-gradient(to right, var(--campaign-color-1, #FF2758), var(--campaign-color-2, #FF92AB));
+  position: relative;
+  border-radius: 12px;
+  color: #FFFFFF;
+  overflow: hidden;
+  padding: 96px 24px;
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+
+  @include max-width-lg {
+    padding: 60px 16px;
+    text-align: center;
+    align-items: center;
+  }
+
+  > * {
+    position: relative;
+    z-index: 1;
+  }
+  .background {
+    position: absolute !important;
+    width: 100%;
+    height: 100%;
+    inset: 0 0 0 0;
+    z-index: 0 !important;
+    mix-blend-mode: soft-light;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center center;
+      filter: grayscale(1);
+    }
+  }
+  
+  .logo {
+    margin-bottom: 16px;
+    img {
+      height: 50px;
+      width: auto;
+    }
+  }
+  
+  .title {
+    font-weight: 600;
+    font-size: 30px;
+    line-height: 1;
+    color: #FFFFFF;
+    margin-bottom: 8px;
+  }
+  
+  .date {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1;
+    color: #FFFFFF;
+  }
+}
+
+.wdl-campaign-announcement { 
+  color: #424242;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.wdl-campaign-header, .wdl-campaign-bar {
+  --campaign-color-1: #FF2758;
+  --campaign-color-2: #FF92AB;
+  background-color: var(--campaign-color-1, #FF2758);
+  background: linear-gradient(to right, var(--campaign-color-1, #FF2758), var(--campaign-color-2, #FF92AB));
+  position: relative;
+  color: #FFFFFF;
+  overflow: hidden;
+  height: 56px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &.wdl-campaign-bar {
+    border-radius: 8px;
+    overflow: hidden;
+    padding: 4px 24px;
+    display: none;
+  }
+
+  .logo {
+    img {
+      height: 50px;
+    }
+  }
+  .countdown {
+    display: flex;
+    gap: 20px;
+    line-height: 1;
+    align-items: baseline;
+
+    .text {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      margin: 0;
+    }
+    a {
+      color: #FFF;
+      font-weight: 700;
+      display: flex;
+      gap: 10px;
+    }
+  }
+}
+
+.wdl-campaign-countdown {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+
+  .unit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: #FFFFFF;
+    border-radius: 8px ;
+    padding: 4px;
+    min-width: 31px;
+  }
+
+  .number {
+    font-size: 20px;
+    line-height: 1;
+    font-weight: 700;
+    color: var(--campaign-color-1, #FF2758);
+    transition: .5s cubic-bezier(0,0,0,1);
+    min-width: 23px;
+    min-height: 20px;
+    display: block;
+    border-radius: 4px;
+    background: transparent;
+    
+    &.loading {
+      background: #EEEEEE;
+      color: transparent;
+    }
+  }
+
+  .suffix {
+    font-size: 12px;
+    line-height: 1;
+    color: #424242;
+  }
+  
+  .separator {
+    font-size: 20px;
+    line-height: 1;
+    font-weight: 700;
+    color: #FFFFFF;
+  }
+}
+
+.wdl-campaign-card {
+  .card-img-top {
+    position: relative;
+    &:before {
+      content: '';
+      position: absolute;
+      inset: 0 0 0 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      box-shadow: 0 0 0 5px var(--campaign-color-1) inset !important;
+      border-radius: 12px 12px 0 0;
+    }
+  }
+
+  .wdl-btn-cta {
+    background: linear-gradient(to right, var(--campaign-color-1), var(--campaign-color-2)) !important;
+  }
+
+  .wdl-btn-more {
+    color: var(--campaign-color-1) !important;
+    
+    &::after {
+      color: var(--campaign-color-1) !important;
+    }
+  }
+
+  .wdl-campaign-card-logo {
+    background: linear-gradient(to right, var(--campaign-color-1), var(--campaign-color-2)) !important;
+    object-fit: contain;
+    width: 130px;
+    height: 35px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+    pointer-events: none;
+    clip-path: polygon(0 0, 75% 0, 100% 100%, 0% 100%);
+    padding: 2px 16px 2px 2px;
+
+    img {
+      width: 100% !important;
+      height: 100%;
+      object-fit: contain !important;
+      object-position: center center;
+    }
+  }
+}
+
+.wdl-campaign-single {
+  .wdl-metadata-logo {
+    &:before {
+      content: '';
+      position: absolute;
+      inset: 0 0 0 0;
+      width: 100%;
+      height: 100%;
+      box-shadow: 0 0 0 5px var(--campaign-color-1) inset !important;
+      z-index: 1;
+      pointer-events: none;
+      border-radius: 8px;
+    }
+  }
+
+  .wdl-campaign-bar {
+    display: block;
+  }
+
+  .wdl-btn-lg, .wdl-btn,
+  .wdl-btn-line-cta {
+    background: linear-gradient(to right, var(--campaign-color-1), var(--campaign-color-2));
+  }
+  
+  .wdl-btn-line-cta {
+    box-shadow: none;
+  }
+}
+
+.wdl-campaign-single-background {
+  position: fixed;
+  inset: 0 0 0 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  filter: grayscale(1) blur(10px);
+  mask-image: linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,0) 75vh);
+  opacity: 0.5;
+  img {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.wdl-campaign-section {
+  .title {
+    margin-bottom: 8px;
+    padding: 16px;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 1;
+    background: linear-gradient(to right, var(--campaign-color-1), var(--campaign-color-2));
+    color: #FFFFFF;
+  }
+}

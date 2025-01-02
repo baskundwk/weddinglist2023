@@ -1,4 +1,11 @@
-<div id="wdl-post-<?php the_ID(); ?>" class="card swiper-slide wdl-archive-card wdl-archive-infinite-scroll-post">
+<div id="wdl-post-<?php the_ID(); ?>" class="card swiper-slide wdl-archive-card 
+  <?php if(isset($campaignModeEnabled) && isset($campaignRelated['Venue']) && in_array(get_the_ID(), $campaignRelated['Venue'])) {
+    echo esc_html('wdl-campaign-card');
+  };
+  ?> wdl-archive-infinite-scroll-post" style="
+  <?php if(isset($campaignModeEnabled) && isset($campaignRelated['Venue']) && in_array(get_the_ID(), $campaignRelated['Venue'])) {
+    echo esc_html('--campaign-color-1: '.$campaignColor1.'; --campaign-color-2: '.$campaignColor2.';');
+  }?>">
   <?php if (has_post_thumbnail(get_the_ID())): ?>
     <a
       aria-label="<?php echo get_the_title(); ?>"
@@ -9,6 +16,10 @@
         loading="lazy"
         src="<?php echo esc_html(get_the_post_thumbnail_url($post)) ?>"
         alt="<?php echo get_the_title(); ?>" />
+
+      <?php if(isset($campaignModeEnabled) && isset($campaignRelated['Venue']) && in_array(get_the_ID(), $campaignRelated['Venue'])) {
+        echo $campaignLogo;
+      } ?>
 
       <?php $sponsored = get_field('Sponsor');
       if ($sponsored && in_array('Sponsored', $sponsored)): ?>
@@ -78,25 +89,23 @@
       <p class="lineclamp-3 mb-2 text-sm text-secondary"><?php echo get_the_excerpt(); ?></p>
     <?php endif; ?>
 
-    <div class="wdl-metadata">
-      <?php
-      $locations = get_field('Location');
-      if ($locations): ?>
-        <div class="wdl-archive-neighborhood"><?php echo implode(' / ', array_map(function ($location) { return $location->name;}, $locations));?></div>
-      <?php endif; ?>
+    <?php
+    $locations = get_field('Location');
+    if ($locations): ?>
+      <div class="wdl-metadata wdl-archive-neighborhood"><?php echo implode(' / ', array_map(function ($location) { return $location->name;}, $locations));?></div>
+    <?php endif; ?>
 
-      <?php
-      $minPrice = get_field('MinPrice');
-      if ($minPrice): ?>
-        <div class="wdl-archive-min-price"><?php _e('ราคาเริ่มต้น', 'wdl') ?>&nbsp;<strong> <?php echo number_format(get_field('MinPrice')) ?>+ <?php _e('บาท', 'wdl') ?></strong></div>
-      <?php endif; ?>
+    <?php
+    $minPrice = get_field('MinPrice');
+    if ($minPrice): ?>
+      <div class="wdl-metadata wdl-archive-min-price"><?php _e('ราคาเริ่มต้น', 'wdl') ?>&nbsp;<strong> <?php echo number_format(get_field('MinPrice')) ?>+ <?php _e('บาท', 'wdl') ?></strong></div>
+    <?php endif; ?>
 
-      <?php
-      $maxGuest = get_field('MaxGuest');
-      if ($maxGuest): ?>
-        <div class="wdl-archive-max-guest"><?php _e('รองรับแขกสูงสุด', 'wdl') ?>&nbsp;<strong><?php echo number_format(get_field('MaxGuest')) ?> <?php _e('คน', 'wdl') ?></strong></div>
-      <?php endif; ?>
-    </div>
+    <?php
+    $maxGuest = get_field('MaxGuest');
+    if ($maxGuest): ?>
+      <div class="wdl-metadata wdl-archive-max-guest"><?php _e('รองรับแขกสูงสุด', 'wdl') ?>&nbsp;<strong><?php echo number_format(get_field('MaxGuest')) ?> <?php _e('คน', 'wdl') ?></strong></div>
+    <?php endif; ?>
   </div>
 
   <div class="card-footer">
