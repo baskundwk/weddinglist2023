@@ -14,7 +14,7 @@
       )
     ) ?>
     <?php if ($listingQuery->have_posts()): ?>
-      <div class="container gap-2 wdl-archive-infinite-scroll-wrapper" id="wdl-archive-infinite-scroll-wrapper">
+      <div class="container-xl gap-2 wdl-archive-infinite-scroll-wrapper" id="wdl-archive-infinite-scroll-wrapper">
         <?php while ($listingQuery->have_posts()): ?>
           <?php $listingQuery->the_post(); ?>
           <?php include get_stylesheet_directory() . '/components/cards/card-listing.php' ?>
@@ -27,5 +27,5 @@
     </div>
   </section>
 </main>
-<?php include get_stylesheet_directory() . '/components/form-general.php' ?>
+<?php include get_stylesheet_directory() . '/components/form-lead.php' ?>
 <?php include get_stylesheet_directory() . '/components/footer.php' ?>

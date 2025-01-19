@@ -64,7 +64,7 @@
     a:active {
       display: block;
       padding: 8px 15px !important;
-      box-shadow: 0 0 0 1px #777777;
+      box-shadow: 0 0 0 .25px #777777;
       border-radius: 5rem;
       font-size: 14px;
       font-weight: 400;
@@ -94,12 +94,12 @@
   }
 }
 .wdl-badge-primary {
-  padding: 8px 24px;
+  padding: 8px 24px !important;
   white-space: nowrap;
   background: #ff2758;
   color: #ffffff !important;
-  border-radius: 5rem;
-  font-size: 0.75rem;
+  border-radius: 50px;
+  font-size: 0.750px;
   font-weight: 400;
   line-height: 1.5;
   display: inline;
@@ -109,13 +109,13 @@
   }
 }
 .wdl-badge-sm-primary {
-  padding: 4px 12px;
+  padding: 6px 12px;
   white-space: nowrap;
   background: #ff2758;
   color: #ffffff !important;
-  border-radius: 5rem;
-  font-size: 0.75rem;
-  font-weight: 400;
+  border-radius: 50px;
+  font-size: 16px;
+  font-weight: 600;
   line-height: 1;
   display: inline-block;
 
@@ -124,14 +124,14 @@
   }
 }
 .wdl-badge-sm {
-  padding: 4px 12px;
+  padding: 6px 12px !important;
   white-space: nowrap;
-  box-shadow: 0 0 0 1px #ff2758 inset;
+  box-shadow: 0 0 0 .25px #ff2758 inset;
   background: #ffffff;
   color: #ff2758 !important;
-  border-radius: 5rem;
-  font-size: 0.75rem;
-  font-weight: 400;
+  border-radius: 50px;
+  font-size: 16px;
+  font-weight: 600;
   line-height: 1;
   display: inline-block;
   transition: 0.35s cubic-bezier(0, 0, 0, 1);
@@ -140,7 +140,7 @@
     color: #ff2758 !important;
   }
 
-  &:hover {
+  &.primary {
     background: #ff2758;
     box-shadow: 0 0 0 1px #ff2758 inset;
     color: #ffffff !important;
@@ -149,34 +149,41 @@
       color: #ffffff !important;
     }
   }
+  
+  &.secondary {
+    background: #37bad6;
+    box-shadow: 0 0 0 1px #37bad6 inset;
+    color: #ffffff !important;
+
+    a {
+      color: #ffffff !important;
+    }
+  }
+  
+  &.tertiary {
+    background: #ff9319;
+    box-shadow: 0 0 0 1px #ff9319 inset;
+    color: #ffffff !important;
+
+    a {
+      color: #ffffff !important;
+    }
+  }
 }
 .wdl-badge-sm-secondary {
-  padding: 4px 12px;
+  padding: 6px 12px !important;
   white-space: nowrap;
-  box-shadow: 0 0 0 1px #777777 inset;
+  box-shadow: 0 0 0 .25px #777777 inset;
   color: #777777 !important;
-  border-radius: 5rem;
-  font-size: 0.75rem;
-  font-weight: 400;
+  border-radius: 50px;
+  font-size: 16px;
+  font-weight: 600;
   line-height: 1;
   transition: 0.35s cubic-bezier(0, 0, 0, 1);
   display: inline-block;
 
   a {
     color: #777777 !important;
-  }
-
-  &:hover {
-    box-shadow: 0 0 0 1px #ff2758 inset;
-    color: #ff2758 !important;
-
-    a {
-      color: #ff2758 !important;
-    }
-  }
-
-  a {
-    color: #777777;
   }
 }
 .wdl-badge-xs {

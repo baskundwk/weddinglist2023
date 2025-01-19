@@ -81,7 +81,7 @@
   transition: 0.25s all ease-out;
 
   &.opacity-1 {
-    opacity: 1;
+    opacity: 1 !important;
   }
 }
 
@@ -186,6 +186,11 @@
           aspect-ratio: 30/18;
           object-fit: cover;
         }
+
+        .wdl-badge-sm {
+          padding: 3px 6px !important;
+          font-size: 12px !important;
+        }
       }
 
       .wdl-archive-title {
@@ -218,6 +223,7 @@
     align-items: stretch;
   }
   .card {
+    cursor: pointer;
     border: 0;
     box-shadow: 0 0 0 rgba(0, 0, 0, 0.05);
     display: flex;
@@ -237,6 +243,11 @@
 
     .card-body {
       padding: 0.5rem 0.5rem 0.5rem;
+
+      .wdl-badge-sm {
+        font-size: 13px;
+        padding: 4px 8px !important;
+      }
     }
 
     .card-img-top {
@@ -247,6 +258,11 @@
         aspect-ratio: 30/18;
         object-fit: cover;
       }
+
+      .wdl-badge-sm {
+        padding: 3px 6px !important;
+        font-size: 12px !important;
+      }
     }
 
     .wdl-archive-card-img-top {
@@ -256,6 +272,7 @@
         bottom: 4px;
         right: 4px;
         z-index: 1;
+        padding: 0;
       }
 
       img {
@@ -671,11 +688,11 @@
 }
 
 .wdl-metadata-logo {
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
   img {
     aspect-ratio: 1/1;
     object-fit: contain;
     border-radius: 8px;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
   }
 }
 

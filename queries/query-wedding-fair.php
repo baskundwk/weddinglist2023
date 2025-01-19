@@ -1,6 +1,6 @@
 <?php
 if (is_user_logged_in()) {
-  $post_status = 'publish';
+  $post_status = 'any';
 } else {
   $post_status = 'publish';
 }

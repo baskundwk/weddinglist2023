@@ -1,5 +1,5 @@
 <section class="pt-2 overflow-hidden">
-  <div class="container">
+  <div class="container-xl">
     <div class="row mb-2">
       <?php
       wp_nav_menu(

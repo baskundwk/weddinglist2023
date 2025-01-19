@@ -1,5 +1,5 @@
 <section>
-  <div class="container">
+  <div class="container-xl">
     <div class="row mb-2">
       <div class="col-12 py-2">
         <?php if (function_exists('rank_math_the_breadcrumbs')): ?>
@@ -14,8 +14,8 @@
         <div class="wdl-search">
           <form role="search" method="get" id="searchform" class="searchform" action="<?php echo esc_url(home_url('/')); ?>">
             <div class="form-floating d-flex">
-              <input class="form-control" type="text" name="s" id="s" placeholder="<?php _e('คุณกำลังมองหาอะไร', 'wdl')?>">
-              <label for="s"><?php _e('คุณกำลังมองหาอะไร', 'wdl')?></label>
+              <input class="form-control" type="text" name="s" id="s" placeholder="<?php _e('คุณกำลังมองหาอะไร...', 'wdl')?>">
+              <label for="s"><?php _e('คุณกำลังมองหาอะไร...', 'wdl')?></label>
               <input class="wdl-search-submit" type="submit" id="searchsubmit" value="Search">
             </div>
           </form>

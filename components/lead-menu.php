@@ -1,5 +1,5 @@
 <nav class="wdl-lead-menu">
-  <div class="container">
+  <div class="container-xl">
     <div class="wdl-lead-menu-swiper swiper overflow-visible">
       <?php
         wp_nav_menu(

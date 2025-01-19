@@ -1,19 +1,22 @@
 <?php
 if (is_user_logged_in()) {
   //$post_status = 'any';
-  $post_status = 'publish';
+  $post_status = 'any';
 } else {
   $post_status = 'publish';
 }
 
 $paged = get_query_var('paged', 1);
-if ($_GET['order']) {
+$order = 'DESC';
+if (isset($_GET['order'])) {
   $order = $_GET['order'];
-} else {
-  $order = 'DESC';
 }
 
-if ($_GET['orderby']) {
+
+$orderby = 'meta_value';
+$has_field = array();
+
+if (isset($_GET['orderby'])) {
   $orderby = $_GET['orderby'];
   if ($_GET['orderby'] === 'meta_value_num') {
     $has_field = array(
@@ -32,15 +35,11 @@ if ($_GET['orderby']) {
   } else {
     $has_field = array();
   }
-} else {
-  $orderby = 'meta_value';
-  $has_field = array();
 }
 
-if ($_GET['key']) {
+$key = 'HotDeal';
+if (isset($_GET['key'])) {
   $key = $_GET['key'];
-} else {
-  $key = 'HotDeal';
 }
 
 
@@ -58,7 +57,7 @@ $arg = [
 ];
 
 
-if ($_GET['type']) {
+if (isset($_GET['type'])) {
   $arg['tax_query'][] = array(
     'taxonomy' => 'promotion-category',
     'field' => 'slug',
@@ -66,7 +65,7 @@ if ($_GET['type']) {
   );
 }
 
-if ($_GET['relate']) {
+if (isset($_GET['relate'])) {
   $arg['meta_query'][] = array(
     'key' => 'RelatedVenue',
     'value' => sprintf(':"%d";', $_GET['relate']),
@@ -74,7 +73,7 @@ if ($_GET['relate']) {
   );
 }
 
-if ($_GET['period']) {
+if (isset($_GET['period'])) {
   $period = explode('-', $_GET['period']);
   $selected_month = $period[1]; // March
   $selected_year = $period[0];
@@ -92,7 +91,7 @@ if ($_GET['period']) {
   ];
 }
 
-if (get_queried_object()->taxonomy) {
+if (isset(get_queried_object()->taxonomy)) {
   $current_term_id = get_queried_object()->term_id;
   $current_tax = get_queried_object()->taxonomy;
 

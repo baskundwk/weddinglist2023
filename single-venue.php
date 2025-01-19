@@ -70,18 +70,30 @@
           </p>
         </div>
         <div class="col-12 d-flex flex-row gap-2 col-lg-3 text-center text-lg-end mb-2 mb-sm-0">
-          <a href="#apply" data-bs-target="#apply" data-bs-toggle="modal" class="flex-fill wdl-btn">
+          <a href="#apply" data-bs-target="#apply" data-bs-toggle="modal" class="flex-fill wdl-btn"
+            data-dlev="buttonClick"
+            data-dlcomp="button - venue - cta"
+            data-dltgt="<?php the_title() ?>">
             <?php _e('คลิกขอแพ็กเกจ', 'wdl'); ?>
           </a>
 
-          <a class="wdl-btn-line d-inline-flex d-lg-none" href="https://line.me/R/oaMessage/%40ety4154i/?สวัสดี%20ต้องการขอแพ็กเกจ%20<?php the_title(); ?>%0A<?php the_permalink(); ?>">
+          <a class="wdl-btn-line d-inline-flex d-lg-none" href="https://line.me/R/oaMessage/%40ety4154i/?<?php _e('สวัสดี%20ต้องการขอแพ็กเกจ', 'wdl')?>%20<?php the_title(); ?>%0A<?php the_permalink(); ?>"
+            data-dlev="buttonClick"
+            data-dlcomp="button - venue - line"
+            data-dltgt="<?php the_title() ?>">
             <!-- <?php _e('ติดต่อแอดมินผ่าน LINE', 'wdl'); ?> -->
           </a>
-          <a class="wdl-btn-line d-none d-lg-inline-flex" href="https://line.me/R/ti/p/%40ety4154i">
+          <a class="wdl-btn-line d-none d-lg-inline-flex" href="https://line.me/R/ti/p/%40ety4154i"
+            data-dlev="buttonClick"
+            data-dlcomp="button - venue - line"
+            data-dltgt="<?php the_title() ?>">
             <!-- <?php _e('ติดต่อแอดมินผ่าน LINE', 'wdl'); ?> -->
           </a>
 
-          <a class="wdl-btn-tertiary" href="tel:+66-88-989-8411" aria-label="โทรติดต่อแอดมิน"><i width="16" data-feather="phone"></i></a>
+          <a class="wdl-btn-tertiary" href="tel:+66-88-989-8411" aria-label="<?php _e('โทรติดต่อแอดมิน', 'wdl')?>"
+            data-dlev="buttonClick"
+            data-dlcomp="button - venue - tel"
+            data-dltgt="<?php the_title() ?>"><i width="16" data-feather="phone"></i></a>
         </div>
       </div>
     </div>
@@ -99,7 +111,10 @@
           <?php $brochure = get_field('Brochure');
           if ($brochure): ?>
           <div class="mt-1 text-center">
-            <a href="#brochure" data-bs-toggle="modal" class="wdl-link-brochure">ดูโบรชัวร์โรงแรม</a>
+            <a href="#brochure" data-bs-toggle="modal" class="wdl-link-brochure"
+              data-dlev="linkClick"
+              data-dlcomp="link - venue - brochure"
+              data-dltgt="<?php the_title() ?>">ดูโบรชัวร์โรงแรม</a>
           </div>
           <div class="modal fade modal-xl" id="brochure">
             <div class="modal-dialog modal-dialog-centered m-auto">
@@ -108,13 +123,22 @@
                 <div class="modal-body">
                   <iframe class="wdl-iframe wdl-iframe-80vh" src="<?php echo ($brochure) ?>" width="100%" height="560"></iframe>
                   <div class="d-flex flex-column flex-sm-row align-items-center justify-content-center gap-3 mt-3">
-                    <a id="apply-cta" href="#apply" class="wdl-btn d-inline-block" data-bs-toggle="modal">
+                    <a id="apply-cta" href="#apply" class="wdl-btn d-inline-block" data-bs-toggle="modal"
+                      data-dlev="buttonClick"
+                      data-dlcomp="button - venue - cta"
+                      data-dltgt="<?php the_title() ?>">
                       <?php _e('คลิกขอแพ็กเกจ', 'wdl'); ?>
                     </a>
-                    <a class="wdl-btn-line d-inline-flex d-lg-none" href="https://line.me/R/oaMessage/%40ety4154i/?สวัสดี%20ต้องการขอแพ็กเกจ%20<?php the_title(); ?>%0A<?php the_permalink(); ?>">
+                    <a class="wdl-btn-line d-inline-flex d-lg-none" href="https://line.me/R/oaMessage/%40ety4154i/?<?php _e('สวัสดี%20ต้องการขอแพ็กเกจ', 'wdl')?>%20<?php the_title(); ?>%0A<?php the_permalink(); ?>"
+                      data-dlev="buttonClick"
+                      data-dlcomp="button - venue - line"
+                      data-dltgt="<?php the_title() ?>">
                       <?php _e('ติดต่อแอดมินผ่าน LINE', 'wdl'); ?>
                     </a>
-                    <a class="wdl-btn-line d-none d-lg-inline-flex" href="https://line.me/R/ti/p/%40ety4154i">
+                    <a class="wdl-btn-line d-none d-lg-inline-flex" href="https://line.me/R/ti/p/%40ety4154i"
+                      data-dlev="buttonClick"
+                      data-dlcomp="button - venue - line"
+                      data-dltgt="<?php the_title() ?>">
                       <?php _e('ติดต่อแอดมินผ่าน LINE', 'wdl'); ?>
                     </a>
                   </div>
@@ -190,7 +214,10 @@
               <?php the_field('Address') ?>
               <?php if ($googleMaps): ?>
               <strong>
-                <a href="<?php echo esc_url(the_field('GoogleMaps')) ?>" target="_blank" class="wdl-link-external">
+                <a href="<?php echo esc_url(the_field('GoogleMaps')) ?>" target="_blank" class="wdl-link-external"
+                  data-dlev="linkClick"
+                  data-dlcomp="link - venue - map"
+                  data-dltgt="<?php the_title() ?>">
                   <?php _e('ดูแผนที่', 'wdl') ?>
                 </a>
               </strong>
@@ -221,7 +248,7 @@
           </p>
           <?php endif; ?>
           <?php
-          $minPrice = get_field('MinPrice', $relatedVenue->ID);
+          $minPrice = get_field('MinPrice');
           if ($minPrice): ?>
           <p class="wdl-metadata wdl-archive-min-price mb-0">
             <span>
@@ -235,17 +262,30 @@
           <?php endif; ?>
         </div>
         <div class="col-lg-auto text-center py-3 d-flex flex-column">
-          <a id="apply-cta" href="#apply" class="wdl-btn-lg d-block mb-3" data-bs-toggle="modal">
+          <a id="apply-cta" href="#apply" class="wdl-btn-lg d-block mb-3" data-bs-toggle="modal"
+            data-dlev="buttonClick"
+            data-dlcomp="button - venue - cta"
+            data-dltgt="<?php the_title() ?>">
             <?php _e('คลิกขอแพ็กเกจ', 'wdl'); ?>
           </a>
-          <a class="wdl-btn-line-lg d-flex d-lg-none" href="https://line.me/R/oaMessage/%40ety4154i/?สวัสดี%20ต้องการขอแพ็กเกจ%20<?php the_title(); ?>%0A<?php the_permalink(); ?>">
+          <a class="wdl-btn-line-lg d-flex d-lg-none" href="https://line.me/R/oaMessage/%40ety4154i/?สวัสดี%20ต้องการขอแพ็กเกจ%20<?php the_title(); ?>%0A<?php the_permalink(); ?>"
+            data-dlev="buttonClick"
+            data-dlcomp="button - venue - line"
+            data-dltgt="<?php the_title() ?>">
             <?php _e('ติดต่อแอดมินผ่าน LINE', 'wdl'); ?>
           </a>
-          <a class="wdl-btn-line-lg d-none d-lg-inline-flex" href="https://line.me/R/ti/p/%40ety4154i">
+          <a class="wdl-btn-line-lg d-none d-lg-inline-flex" href="https://line.me/R/ti/p/%40ety4154i"
+            data-dlev="buttonClick"
+            data-dlcomp="button - venue - line"
+            data-dltgt="<?php the_title() ?>">
             <?php _e('ติดต่อแอดมินผ่าน LINE', 'wdl'); ?>
           </a>
 
-          <a class="mt-3 wdl-btn-tertiary-lg" href="tel:+66-88-989-8411"><i width="20" data-feather="phone"></i> โทรติดต่อแอดมิน</a>
+          <a class="mt-3 wdl-btn-tertiary-lg" href="tel:+66-88-989-8411"
+            data-dlev="buttonClick"
+            data-dlcomp="button - venue - tel"
+            data-dltgt="<?php the_title() ?>"
+          ><i width="20" data-feather="phone"></i> <?php _e('โทรติดต่อแอดมิน', 'wdl')?></a>
         </div>
       </div>
     </div>
@@ -318,17 +358,17 @@
       <ul class="wdl-tab nav mb-3 wdl-tab-related">
         <?php if ($relatedPromotions): ?>
         <li class="nav-item">
-          <a role="tab" aria-controls="tab-promotion" data-bs-toggle="tab" data-bs-target="#tab-promotion" class="nav-link" aria-current="tab" href="#"><i class="wdl-tab-icon" data-feather="tag"></i> โปรโมชั่น</a>
+          <a role="tab" aria-controls="tab-promotion" data-bs-toggle="tab" data-bs-target="#tab-promotion" class="nav-link" aria-current="tab" href="#"><i class="wdl-tab-icon" data-feather="tag"></i> <?php _e('โปรโมชั่น', 'wdl')?></a>
         </li>
         <?php endif; ?>
         <?php if ($relatedWeddingFairs): ?>
         <li class="nav-item">
-          <a role="tab" aria-controls="tab-wedding-fair" data-bs-toggle="tab" data-bs-target="#tab-wedding-fair" class="nav-link" href="#"><i class="wdl-tab-icon" data-feather="calendar"></i> Wedding Fair & Event</a>
+          <a role="tab" aria-controls="tab-wedding-fair" data-bs-toggle="tab" data-bs-target="#tab-wedding-fair" class="nav-link" href="#"><i class="wdl-tab-icon" data-feather="calendar"></i> <?php _e('Wedding Fair & Event', 'wdl')?></a>
         </li>
         <?php endif; ?>
         <?php if ($relatedPosts): ?>
         <li class="nav-item">
-          <a role="tab" aria-controls="tab-post" data-bs-toggle="tab" data-bs-target="#tab-post" class="nav-link" href="#"><i class="wdl-tab-icon" data-feather="bookmark"></i> บทความ</a>
+          <a role="tab" aria-controls="tab-post" data-bs-toggle="tab" data-bs-target="#tab-post" class="nav-link" href="#"><i class="wdl-tab-icon" data-feather="bookmark"></i> <?php _e('บทความ', 'wdl')?></a>
         </li>
         <?php endif; ?>
       </ul>
@@ -358,7 +398,7 @@
                           <?php endif; ?>
                           <?php $hotDeal = get_field('HotDeal', $relatedPromotion->ID);
                                 if ($hotDeal && in_array('Hot Deal', $hotDeal)): ?>
-                          <span class="badge wdl-badge-sm">Hot Deal</span>
+                          <span class="badge wdl-badge-sm"><?php _e('Hot Deal', 'wdl')?></span>
                           <?php endif; ?>
                         </div>
 
@@ -454,7 +494,7 @@
                           <?php endif; ?>
                           <?php $hotDeal = get_field('HotDeal', $relatedPost->ID);
                                 if ($hotDeal && in_array('Hot Deal', $hotDeal)): ?>
-                          <span class="badge wdl-badge-sm">Hot Deal</span>
+                          <span class="badge wdl-badge-sm"><?php _e('Hot Deal', 'wdl')?></span>
                           <?php endif; ?>
                         </div>
 
@@ -499,7 +539,7 @@
 
   if ($coupon): ?>
   <section class="pb-3">
-    <div class="container">
+    <div class="container-xl">
       <h2 class="h6 mb-1"><?php _e('คูปองที่ร่วมรายการ', 'wdl') ?></h2>
       <div class="d-flex flex-wrap gap-2 align-items-stretch">
         <?php foreach ($coupon as $singleCoupon): ?>
@@ -510,157 +550,253 @@
   </section>
   <?php endif; ?>
   <section class="pb-3">
-    <div class="container">
+    <div class="container-xl">
 
       <div class="row">
         <div class="col text-secondary">
           <?php the_content(); ?>
-          <?php if (have_rows('Pricing')): ?>
+
+          <?php if (have_rows('Pricing') || have_rows('PricingConvention')): ?>
           <div class="wdl-main-content">
             <h2>
               <?php _e('ข้อมูลค่าใช้จ่าย', 'wdl') ?>
             </h2>
+            <?php if (have_rows('Pricing')) :?>
 
-            <?php
-              $package = array_filter(get_field('Pricing'), function ($item) {
+              <?php $package = array_filter(get_field('Pricing'), function ($item) {
                 return ($item["acf_fc_layout"] === 'Package');
               });
               if (count($package) > 0):
-                ?>
-            <h3 class="h6 text-secondary">
-              <?php _e('แพ็กเกจงานหมั้น', 'wdl') ?>
-            </h3>
-            <div class="px-2">
-              <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-5 row-cols-xl-6 wdl-pricing-row mb-4">
-                <?php while (have_rows('Pricing')):
-                      the_row(); ?>
+              ?>
+                <h3 class="h6 text-secondary">
+                  <?php _e('แพ็กเกจงานหมั้น', 'wdl') ?>
+                </h3>
+                <div class="px-2">
+                  <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-5 row-cols-xl-6 wdl-pricing-row mb-4">
+                    <?php while (have_rows('Pricing')):
+                          the_row(); ?>
 
-                <?php if (get_row_layout() == 'Package'): ?>
-                <div class="col">
-                  <div class="wdl-pricing-card">
-                    <div class="text-primary fw-semibold">
-                      <?php if (get_sub_field('PackageType')): ?>
-                      <?php $packageType = get_sub_field('PackageType'); ?>
-                      <?php if (get_field('icon', $packageType)): ?>
-                      <img loading="lazy" src="<?php echo esc_url(get_field('icon', $packageType)['url']) ?>" alt="">
-                      <?php endif; ?>
-                      <p class="mb-0">
-                        <?php echo esc_html($packageType->name); ?>
-                      </p>
-                      <?php endif; ?>
-                    </div>
+                    <?php if (get_row_layout() == 'Package'): ?>
+                    <div class="col">
+                      <div class="wdl-pricing-card">
+                        <div class="text-primary fw-semibold">
+                          <?php if (get_sub_field('PackageType')): ?>
+                          <?php $packageType = get_sub_field('PackageType'); ?>
+                          <?php if (get_field('icon', $packageType)): ?>
+                          <img loading="lazy" src="<?php echo esc_url(get_field('icon', $packageType)['url']) ?>" alt="">
+                          <?php endif; ?>
+                          <p class="mb-0">
+                            <?php echo esc_html($packageType->name); ?>
+                          </p>
+                          <?php endif; ?>
+                        </div>
 
-                    <div class="text-red">
-                      <?php if (get_sub_field('PackagePrice')):
-                                the_sub_field('PackagePrice');
-                              endif; ?>
+                        <div class="text-red">
+                          <?php if (get_sub_field('PackagePrice')):
+                                    the_sub_field('PackagePrice');
+                                  endif; ?>
+                        </div>
+                        <div class="wdl-metadata justify-content-center text-center">
+                          <?php if (get_sub_field('PackageNote')):
+                                    the_sub_field('PackageNote');
+                                  endif; ?>
+                        </div>
+                      </div>
                     </div>
-                    <div class="wdl-metadata">
-                      <?php if (get_sub_field('PackageNote')):
-                                the_sub_field('PackageNote');
-                              endif; ?>
-                    </div>
+                    <?php endif; ?>
+                    <?php endwhile; ?>
                   </div>
                 </div>
-                <?php endif; ?>
-                <?php endwhile; ?>
-              </div>
-            </div>
-            <?php endif; ?>
+              <?php endif; ?>
 
-            <?php
-              $weddingPackage = array_filter(get_field('Pricing'), function ($item) {
+              <?php $weddingPackage = array_filter(get_field('Pricing'), function ($item) {
                 return ($item["acf_fc_layout"] === 'WeddingPackage');
               });
               if (count($weddingPackage) > 0):
-                ?>
-            <h3 class="h6 text-secondary">
-              <?php _e('แพ็กเกจงานแต่งงาน', 'wdl') ?>
-            </h3>
-            <div class="px-2">
-              <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-5 row-cols-xl-6 wdl-pricing-row mb-4">
-                <?php while (have_rows('Pricing')):
-                      the_row(); ?>
+              ?>
+                <h3 class="h6 text-secondary">
+                  <?php _e('แพ็กเกจงานแต่งงาน', 'wdl') ?>
+                </h3>
+                <div class="px-2">
+                  <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-5 row-cols-xl-6 wdl-pricing-row mb-4">
+                    <?php while (have_rows('Pricing')):
+                          the_row(); ?>
 
-                <?php if (get_row_layout() == 'WeddingPackage'): ?>
-                <div class="col">
-                  <div class="wdl-pricing-card">
-                    <div class="text-primary fw-semibold">
-                      <?php if (get_sub_field('WeddingPackageType')): ?>
-                      <?php $weddingPackageType = get_sub_field('WeddingPackageType'); ?>
-                      <?php if (get_field('icon', $weddingPackageType)): ?>
-                      <img loading="lazy" src="<?php echo esc_url(get_field('icon', $weddingPackageType)['url']) ?>" alt="">
-                      <?php endif; ?>
-                      <p class="mb-0">
-                        <?php echo esc_html($weddingPackageType->name); ?>
-                      </p>
-                      <?php endif; ?>
-                    </div>
+                    <?php if (get_row_layout() == 'WeddingPackage'): ?>
+                    <div class="col">
+                      <div class="wdl-pricing-card">
+                        <div class="text-primary fw-semibold">
+                          <?php if (get_sub_field('WeddingPackageType')): ?>
+                          <?php $weddingPackageType = get_sub_field('WeddingPackageType'); ?>
+                          <?php if (get_field('icon', $weddingPackageType)): ?>
+                          <img loading="lazy" src="<?php echo esc_url(get_field('icon', $weddingPackageType)['url']) ?>" alt="">
+                          <?php endif; ?>
+                          <p class="mb-0">
+                            <?php echo esc_html($weddingPackageType->name); ?>
+                          </p>
+                          <?php endif; ?>
+                        </div>
 
-                    <div class="text-red">
-                      <?php if (get_sub_field('WeddingPackagePrice')):
-                                the_sub_field('WeddingPackagePrice');
-                              endif; ?>
+                        <div class="text-red">
+                          <?php if (get_sub_field('WeddingPackagePrice')):
+                                    the_sub_field('WeddingPackagePrice');
+                                  endif; ?>
+                        </div>
+                        <div class="wdl-metadata justify-content-center text-center">
+                          <?php if (get_sub_field('WeddingPackageNote')):
+                                    the_sub_field('WeddingPackageNote');
+                                  endif; ?>
+                        </div>
+                      </div>
                     </div>
-                    <div class="wdl-metadata">
-                      <?php if (get_sub_field('WeddingPackageNote')):
-                                the_sub_field('WeddingPackageNote');
-                              endif; ?>
-                    </div>
+                    <?php endif; ?>
+                    <?php endwhile; ?>
                   </div>
                 </div>
-                <?php endif; ?>
-                <?php endwhile; ?>
-              </div>
-            </div>
-            <?php endif; ?>
+              <?php endif; ?>
 
-            <?php
-              $fbPackage = array_filter(get_field('Pricing'), function ($item) {
+              <?php $fbPackage = array_filter(get_field('Pricing'), function ($item) {
                 return ($item["acf_fc_layout"] === 'FoodBeverage');
               });
               if (count($fbPackage) > 0):
-                ?>
-            <h3 class="h6 text-secondary">
-              <?php _e('อาหารและเครื่องดื่ม', 'wdl') ?>
-            </h3>
-            <div class="px-2">
-              <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-5 row-cols-xl-6 wdl-pricing-row">
-                <?php while (have_rows('Pricing')):
-                      the_row(); ?>
+              ?>
+                <h3 class="h6 text-secondary">
+                  <?php _e('อาหารและเครื่องดื่ม', 'wdl') ?>
+                </h3>
+                <div class="px-2">
+                  <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-5 row-cols-xl-6 wdl-pricing-row mb-4">
+                    <?php while (have_rows('Pricing')):
+                          the_row(); ?>
 
-                <?php if (get_row_layout() == 'FoodBeverage'): ?>
-                <div class="col">
-                  <div class="wdl-pricing-card">
-                    <div class="text-primary fw-semibold">
-                      <?php if (get_sub_field('FoodBeverageType')):
-                                $fbType = get_sub_field('FoodBeverageType'); ?>
-                      <?php if (get_field('icon', $fbType)): ?>
-                      <img loading="lazy" src="<?php echo esc_url(get_field('icon', $fbType)['url']) ?>" alt="">
-                      <?php endif; ?>
-                      <p class="mb-0">
-                        <?php echo esc_html($fbType->name); ?>
-                      </p>
-                      <?php endif; ?>
-                    </div>
+                    <?php if (get_row_layout() == 'FoodBeverage'): ?>
+                    <div class="col">
+                      <div class="wdl-pricing-card">
+                        <div class="text-primary fw-semibold">
+                          <?php if (get_sub_field('FoodBeverageType')):
+                                    $fbType = get_sub_field('FoodBeverageType'); ?>
+                          <?php if (get_field('icon', $fbType)): ?>
+                          <img loading="lazy" src="<?php echo esc_url(get_field('icon', $fbType)['url']) ?>" alt="">
+                          <?php endif; ?>
+                          <p class="mb-0">
+                            <?php echo esc_html($fbType->name); ?>
+                          </p>
+                          <?php endif; ?>
+                        </div>
 
-                    <div class="text-red">
-                      <?php if (get_sub_field('FoodBeveragePrice')):
-                                the_sub_field('FoodBeveragePrice');
-                              endif; ?>
+                        <div class="text-red">
+                          <?php if (get_sub_field('FoodBeveragePrice')):
+                                    the_sub_field('FoodBeveragePrice');
+                                  endif; ?>
+                        </div>
+                        <div class="wdl-metadata justify-content-center text-center">
+                          <?php if (get_sub_field('FoodBeverageNote')):
+                                    the_sub_field('FoodBeverageNote');
+                                  endif; ?>
+                        </div>
+                      </div>
                     </div>
-                    <div class="wdl-metadata">
-                      <?php if (get_sub_field('FoodBeverageNote')):
-                                the_sub_field('FoodBeverageNote');
-                              endif; ?>
-                    </div>
+                    <?php endif; ?>
+
+                    <?php endwhile; ?>
                   </div>
                 </div>
-                <?php endif; ?>
+              
+              <?php endif; ?>
 
-                <?php endwhile; ?>
-              </div>
-            </div>
+            <?php endif; ?>
+
+            <?php if (have_rows('PricingConvention')): ?>
+              <?php $conventionPackage = array_filter(get_field('PricingConvention'), function ($item) {
+                return ($item["acf_fc_layout"] === 'ConventionPackage');
+              });
+              if (count($conventionPackage) > 0):
+              ?>
+                <h3 class="h6 text-secondary">
+                  <?php _e('แพ็กเกจงานประชุม', 'wdl') ?>
+                </h3>
+                <div class="px-2">
+                  <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-5 row-cols-xl-6 wdl-pricing-row mb-4">
+                    <?php while (have_rows('PricingConvention')):
+                          the_row(); ?>
+
+                    <?php if (get_row_layout() == 'ConventionPackage'): ?>
+                    <div class="col">
+                      <div class="wdl-pricing-card">
+                        <div class="text-primary fw-semibold">
+                          <?php if (get_sub_field('ConventionPackageType')): ?>
+                          <?php $conventionPackageType = get_sub_field('ConventionPackageType'); ?>
+                          <?php if (get_field('icon', $conventionPackageType)): ?>
+                          <img loading="lazy" src="<?php echo esc_url(get_field('icon', $conventionPackageType)['url']) ?>" alt="">
+                          <?php endif; ?>
+                          <p class="mb-0">
+                            <?php echo esc_html($conventionPackageType->name); ?>
+                          </p>
+                          <?php endif; ?>
+                        </div>
+
+                        <div class="text-red">
+                          <?php if (get_sub_field('ConventionPackagePrice')):
+                            the_sub_field('ConventionPackagePrice');
+                          endif; ?>
+                        </div>
+                        <div class="wdl-metadata justify-content-center text-center">
+                          <?php if (get_sub_field('ConventionPackageNote')):
+                                    the_sub_field('ConventionPackageNote');
+                                  endif; ?>
+                        </div>
+                      </div>
+                    </div>
+                    <?php endif; ?>
+                    <?php endwhile; ?>
+                  </div>
+                </div>
+              <?php endif; ?>
+
+              <?php $partyPackage = array_filter(get_field('PricingConvention'), function ($item) {
+                return ($item["acf_fc_layout"] === 'PartyPackage');
+              });
+              if (count($partyPackage) > 0):
+              ?>
+                <h3 class="h6 text-secondary">
+                  <?php _e('แพ็กเกจงานปาร์ตี้', 'wdl') ?>
+                </h3>
+                <div class="px-2">
+                  <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-5 row-cols-xl-6 wdl-pricing-row mb-4">
+                    <?php while (have_rows('PricingConvention')):
+                          the_row(); ?>
+
+                    <?php if (get_row_layout() == 'PartyPackage'): ?>
+                    <div class="col">
+                      <div class="wdl-pricing-card">
+                        <div class="text-primary fw-semibold">
+                          <?php if (get_sub_field('PartyPackageType')): ?>
+                          <?php $partyPackageType = get_sub_field('PartyPackageType'); ?>
+                            <?php if (get_field('icon', $partyPackageType)): ?>
+                            <img loading="lazy" src="<?php echo esc_url(get_field('icon', $partyPackageType)['url']) ?>" alt="">
+                            <?php endif; ?>
+                          <p class="mb-0">
+                            <?php echo esc_html($partyPackageType->name); ?>
+                          </p>
+                          <?php endif; ?>
+                        </div>
+
+                        <div class="text-red">
+                          <?php if (get_sub_field('PartyPackagePrice')):
+                                    the_sub_field('PartyPackagePrice');
+                                  endif; ?>
+                        </div>
+                        <div class="wdl-metadata justify-content-center text-center">
+                          <?php if (get_sub_field('PartyPackageNote')):
+                                    the_sub_field('PartyPackageNote');
+                                  endif; ?>
+                        </div>
+                      </div>
+                    </div>
+                    <?php endif; ?>
+                    <?php endwhile; ?>
+                  </div>
+                </div>
+              <?php endif; ?>
             <?php endif; ?>
 
           </div>
@@ -709,7 +845,7 @@
     </div>
   </section>
   <section class="pb-3 overflow-hidden">
-    <div class="container">
+    <div class="container-xl">
       <?php if (have_rows('BanquetRoom')): ?>
       <div class="row">
         <div class="col text-secondary">
@@ -903,5 +1039,5 @@
   <?php endif; ?>
 </main>
 
-<?php include get_stylesheet_directory() . '/components/form-venue.php' ?>
+<?php include get_stylesheet_directory() . '/components/form-lead.php' ?>
 <?php include get_stylesheet_directory() . '/components/footer.php' ?>

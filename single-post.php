@@ -31,8 +31,14 @@ $currentPostID = get_the_ID();
       </div>
 
       <div class="wdl-single-content mb-2 px-3 px-xl-0">
-        <div id="post-content-container" class="loading"></div>
-        <?php /* the_content(); */ ?>
+        <?php $postSetting = get_field('PostSetting', $currentPostID);?>  
+        <?php if(isset($postSetting) && in_array('DisableLazyLoad' , $postSetting)) { ?>
+          <div class="post-content-container">
+            <?php the_content(); ?>
+          </div>
+        <?php } else { ?>
+          <div id="post-content-container" class="loading"></div>
+        <?php }?>
         <div class="wdl-single-content-readmore">
           <div class="wdl-btn"><?php _e('อ่านเพิ่มเติม', 'wdl')?></div>
         </div>
@@ -44,27 +50,41 @@ $currentPostID = get_the_ID();
       <div class="wdl-single-stickybar-toggle">
         <i data-feather="bookmark"></i>
       </div>
-      <div class="wdl-single-stickybar-toc mb-3">
-        <div class="wdl-toc-inner disabled">
-          <!-- <?php echo do_shortcode('[ez-toc post_in="'.$currentPostID.'"]') ?> -->
-          <div class="wdl-toc-header">
-            <p class="font-bold mb-0"><?php _e('เลือกหัวข้อที่ต้องการอ่าน', 'wdl')?></p>
-            <span class="wdl-toc-toggle"></span>
+      <?php if(!isset($postSetting) || !in_array('DisableToc' , $postSetting)) { ?>
+        <div class="wdl-single-stickybar-toc mb-3">
+          <div class="wdl-toc-inner disabled">
+            <!-- <?php echo do_shortcode('[ez-toc post_in="'.$currentPostID.'"]') ?> -->
+            <div class="wdl-toc-header">
+              <p class="font-bold mb-0"><?php _e('เลือกหัวข้อที่ต้องการอ่าน', 'wdl')?></p>
+              <span class="wdl-toc-toggle"></span>
+            </div>
           </div>
         </div>
-      </div>
+      <?php } ?>
 
       <div class="wdl-single-stickybar-social">
-        <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=<?php echo esc_html(get_post_permalink()) ?>" class="wdl-share-icon">
+        <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=<?php echo esc_html(get_post_permalink()) ?>" class="wdl-share-icon"
+          data-dlev="linkClick"
+          data-dlcomp="link - post - facebook"
+          data-dltgt="Facebook share">
           <img width="30" height="30" loading="eager" src="<?php echo (get_theme_file_uri()) ?>/images/share-facebook.svg" alt="Share to Facebook">
         </a>
-        <a target="_blank" href="http://x.com/share?url=<?php echo esc_html(get_post_permalink()) ?>" class="wdl-share-icon">
+        <a target="_blank" href="http://x.com/share?url=<?php echo esc_html(get_post_permalink()) ?>" class="wdl-share-icon"
+          data-dlev="linkClick"
+          data-dlcomp="link - post - x"
+          data-dltgt="X share">
           <img width="30" height="30" loading="eager" src="<?php echo (get_theme_file_uri()) ?>/images/share-x.svg" alt="Share to X">
         </a>
-        <a target="_blank" href="https://social-plugins.line.me/lineit/share?url=<?php echo esc_html(get_post_permalink()) ?>" class="wdl-share-icon">
+        <a target="_blank" href="https://social-plugins.line.me/lineit/share?url=<?php echo esc_html(get_post_permalink()) ?>" class="wdl-share-icon"
+          data-dlev="linkClick"
+          data-dlcomp="link - post - line"
+          data-dltgt="Line share">
           <img width="30" height="30" loading="eager" src="<?php echo (get_theme_file_uri()) ?>/images/share-line.svg" alt="Share to LINE">
         </a>
-        <a target="_blank" href="mailto:?body=<?php echo esc_html(get_the_title() . '%0D%0A' . get_post_permalink()) ?>" class="wdl-share-icon">
+        <a target="_blank" href="mailto:?body=<?php echo esc_html(get_the_title() . '%0D%0A' . get_post_permalink()) ?>" class="wdl-share-icon"
+          data-dlev="linkClick"
+          data-dlcomp="link - post - mail"
+          data-dltgt="Mail share">
           <img width="30" height="30" loading="eager" src="<?php echo (get_theme_file_uri()) ?>/images/share-mail.svg" alt="Share to Email">
         </a>
       </div>

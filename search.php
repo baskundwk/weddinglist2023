@@ -14,12 +14,19 @@ if ($type && $searchTerm):
   ?>
 
 <?php include get_stylesheet_directory() . '/components/header.php' ?>
-<main>
+<main
+  data-dlev="search"
+  data-dlcomp="search - page"
+  data-dldt="{
+    'keyword': '<?php echo $searchTerm ?>'
+    'type': '<?php echo $type ?>'
+  }"
+>
   <?php include get_stylesheet_directory() . '/components/search.php' ?>
   <section>
     <div class="overflow-hidden mt-4">
       <div class="container-xl">
-        <h1><?php echo (_e('ผลการค้นหา', 'ผลการค้นหา') . ' "' . $searchTerm . '"') ?></h1>
+        <h1><?php echo (_e('ผลการค้นหา', 'wdl') . ' "' . $searchTerm . '"') ?></h1>
         <nav class="wdl-swiper-auto">
           <ul class="wdl-tab swiper-wrapper mb-3 p-0">
             <li class="swiper-slide w-auto">
@@ -77,6 +84,28 @@ if ($type && $searchTerm):
                     echo updateParam(['type' => 'post']);
                   } ?>"><i class="wdl-tab-icon" data-feather="bookmark"></i> บทความ</a>
             </li>
+            <li class="swiper-slide w-auto">
+              <a role="tab" aria-controls="tab-video" class="nav-link <?php if ($type === "video") {
+                  echo 'active';
+                } ?>" aria-current="<?php if ($type === "video") {
+                   echo 'page';
+                 } ?>" href="<?php if ($type === 'video') {
+                    echo '#';
+                  } else {
+                    echo updateParam(['type' => 'video']);
+                  } ?>"><i class="wdl-tab-icon" data-feather="film"></i> คลิปวิดีโอ</a>
+            </li>
+            <?php /* <li class="swiper-slide w-auto">
+              <a role="tab" aria-controls="tab-listing" class="nav-link <?php if ($type === "listing") {
+                  echo 'active';
+                } ?>" aria-current="<?php if ($type === "listing") {
+                   echo 'page';
+                 } ?>" href="<?php if ($type === 'listing') {
+                    echo '#';
+                  } else {
+                    echo updateParam(['type' => 'listing']);
+                  } ?>"><i class="wdl-tab-icon" data-feather="file-text"></i> รายการแนะนำ</a>
+            </li> */ ?>
           </ul>
         </nav>
       </div>
@@ -156,10 +185,38 @@ if ($type && $searchTerm):
         </div>
       </div>
       <?php endif; ?>
+      <?php if ($type === 'video'): ?>
+      <div class="container-xl overflow-hidden pb-4">
+        <div class="wdl-video-grid <?php echo esc_attr($atts['class']); ?>">
+          <?php
+                while ($query->have_posts()) {
+                  $query->the_post();
+                  ?>
+          <?php include get_stylesheet_directory() . '/components/cards/card-video.php' ?>
+          <?php
+                }
+                rewind_posts(); ?>
+        </div>
+      </div>
+      <?php endif; ?>
+      <?php /* if ($type === 'listing'): ?>
+      <div class="container-xxl container-archive overflow-hidden pb-4">
+        <div class="wdl-archive wdl-archive-extended wdl-archive-grid <?php echo esc_attr($atts['class']); ?>">
+          <?php
+                while ($query->have_posts()) {
+                  $query->the_post();
+                  ?>
+          <?php include get_stylesheet_directory() . '/components/cards/card-listing-thumbnail.php' ?>
+          <?php
+                }
+                rewind_posts(); ?>
+        </div>
+      </div>
+      <?php endif; */ ?>
     </div>
     <?php else: ?>
     <section class="pb-5">
-      <div class="container">
+      <div class="container-xl">
         <div class="row justify-content-center align-items-center py-5">
           <div class="col-12 text-center py-5">
             <i data-feather="search" class="mb-4" width="60" height="60" stroke="#DADADA" stroke-width="1"></i>
@@ -178,7 +235,7 @@ if ($type && $searchTerm):
   <?php include get_stylesheet_directory() . '/components/compare-bar.php' ?>
 </main>
 
-<?php include get_stylesheet_directory() . '/components/form-general.php' ?>
+<?php include get_stylesheet_directory() . '/components/form-lead.php' ?>
 <?php include get_stylesheet_directory() . '/components/footer.php' ?>
 
 <?php else:

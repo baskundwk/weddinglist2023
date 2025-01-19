@@ -22,7 +22,7 @@
       'hide_empty' => true,
       'posts_per_page' => 10,
     ])?>
-    <div class="container mb-2 pb-1">
+    <div class="container-xl mb-2 pb-1">
       <div class="swiper wdl-hero-swiper">
         <div class="swiper-wrapper">
           <?php foreach($momentSets as $momentSet) {?>
@@ -68,5 +68,5 @@
   </section>
   <?php include get_stylesheet_directory().'/components/compare-bar.php' ?>
 </main>
-<?php include get_stylesheet_directory().'/components/form-general.php' ?>
+<?php include get_stylesheet_directory().'/components/form-lead.php' ?>
 <?php include get_stylesheet_directory().'/components/footer.php' ?>

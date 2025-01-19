@@ -13,6 +13,17 @@
   'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
   })(window,document,'script','dataLayer','GTM-PFFL69SH');</script>
   <!-- End Google Tag Manager -->
+  
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-1HEF5P2XD1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-1HEF5P2XD1');
+  </script>
+  
   <?php wp_head(); ?>
 </head>
 
@@ -99,7 +110,10 @@ if(isset($campaignModeEnabled)) {
   <?php
   wp_body_open();
   $post_type = get_post_type();
-  $popup = $_GET['popup'];
+  $popup = false;
+  if(isset($_GET['popup'])) {
+    $popup = $_GET['popup'];
+  }
   if($popup != true || $post_type != 'coupon') :
   ?>
 
@@ -111,7 +125,7 @@ if(isset($campaignModeEnabled)) {
     --campaign-color-1: <?php the_field('CampaignColor1');?>;
     --campaign-color-2: <?php the_field('CampaignColor2');?>;
   ">
-    <div class="container d-flex flex-column justify-content-center flex-lg-row justify-content-lg-between align-items-center">
+    <div class="container-xl d-flex flex-column justify-content-center flex-lg-row justify-content-lg-between align-items-center">
       <div class="logo">
         <img src="<?php echo get_field('CampaignLogo')['url'];?>" alt="<?php the_title(); ?>">
       </div>
@@ -146,7 +160,10 @@ if(isset($campaignModeEnabled)) {
             </div>
           </div>
         </div>
-        <a href="<?php echo the_permalink()?>">
+        <a href="<?php echo the_permalink()?>"
+          data-dlev="linkClick",
+          data-dlcomp="link - campaign - bar",
+          data-dltgt="<?php the_title()?>">
           <?php _e('ไปยังหน้าแคมเปญ', 'wdl') ?>
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M4.16663 10H15.8333" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -169,9 +186,29 @@ if(isset($campaignModeEnabled)) {
         </div>
         <nav class="navbar-social">
           <ul class="navbar-nav">
-            <li><a aria-label="Weddinglist Facebook Page" title="Weddinglist Facebook Page" href="https://www.facebook.com/weddinglist.th/" target="_blank"><i class="wdl-icon-facebook"></i></a></li>
-            <li><a aria-label="Weddinglist Line Official" title="Weddinglist Line Official" href="https://line.me/R/ti/p/%40ety4154i" target="_blank"><i class="wdl-icon-line"></i></a></li>
-            <li><a aria-label="Weddinglist Email Address" title="Weddinglist Email Address" href="mailto:sales@weddinglist.co.th"><i class="wdl-icon-email"></i></a></li>
+            <li><a
+              data-dlev="linkClick"
+              data-dlcomp="link - header - facebook"
+              aria-label="Weddinglist Facebook Page"
+              title="Weddinglist Facebook Page"
+              href="https://www.facebook.com/weddinglist.th/"
+              target="_blank"><i class="wdl-icon-facebook"
+            ></i></a></li>
+            <li><a
+              data-dlev="linkClick"
+              data-dlcomp="link - header - line"
+              aria-label="Weddinglist Line Official"
+              title="Weddinglist Line Official"
+              href="https://line.me/R/ti/p/%40ety4154i"
+              target="_blank"><i class="wdl-icon-line"
+            ></i></a></li>
+            <li><a
+              data-dlev="linkClick"
+              data-dlcomp="link - header - email"
+              aria-label="Weddinglist Email Address"
+              title="Weddinglist Email Address"
+              href="mailto:sales@weddinglist.co.th"
+            ><i class="wdl-icon-email"></i></a></li>
           </ul>
         </nav>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#top-menu-collapse" aria-controls="wdlNavbar" aria-expanded="false" aria-label="Toggle navigation">

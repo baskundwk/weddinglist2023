@@ -1,10 +1,10 @@
 <section class="pt-2 overflow-hidden">
-  <div class="container">
+  <div class="container-xl">
     <div class="d-flex gap-2 flex-column flex-xl-row mb-2 align-items-xl-center">
       <div class="wdl-search">
         <form class="searchform" onsubmit="searchRedirect(event)">
           <div class="input-group d-flex">
-            <input class="form-control p-2" type="text" name="s" id="search" placeholder="คุณกำลังมองหาอะไร..." value="<?php echo esc_html($_GET['s']) ?>">
+            <input class="form-control p-2" type="text" name="s" id="search" placeholder="<?php _e('คุณกำลังมองหาอะไร...','wdl')?>" value="<?php echo esc_html($_GET['s']) ?>">
             <select id="s-type" value="<?php if ($_GET['type']) {
               echo $_GET['type'];
             } else {

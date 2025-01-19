@@ -71,18 +71,30 @@
         </div>
         <?php $sponsored = get_field('Sponsor', $relatedPost->ID); ?>
         <div class="col-12 d-flex flex-row gap-2 col-lg-3 text-center text-lg-end mb-2 mb-sm-0">
-          <a href="#apply" data-bs-target="#apply" data-bs-toggle="modal" class="flex-fill wdl-btn">
+          <a href="#apply" data-bs-target="#apply" data-bs-toggle="modal" class="flex-fill wdl-btn"
+            data-dlev="buttonClick"
+            data-dlcomp="button - vendor - cta"
+            data-dltgt="<?php the_title() ?>">
             <?php _e('คลิกขอแพ็กเกจ', 'wdl'); ?>
           </a>
 
-          <a class="wdl-btn-line d-inline-flex d-lg-none" href="https://line.me/R/oaMessage/%40ety4154i/?สวัสดี%20ต้องการขอแพ็กเกจ%20<?php the_title(); ?>%0A<?php the_permalink(); ?>">
+          <a class="wdl-btn-line d-inline-flex d-lg-none" href="https://line.me/R/oaMessage/%40ety4154i/?<?php _e('สวัสดี%20ต้องการขอแพ็กเกจ%20','wdl')?><?php the_title(); ?>%0A<?php the_permalink(); ?>"
+            data-dlev="buttonClick"
+            data-dlcomp="button - vendor - line"
+            data-dltgt="<?php the_title() ?>">
             <!-- <?php _e('ติดต่อแอดมินผ่าน LINE', 'wdl'); ?> -->
           </a>
-          <a class="wdl-btn-line d-none d-lg-inline-flex" href="https://line.me/R/ti/p/%40ety4154i">
+          <a class="wdl-btn-line d-none d-lg-inline-flex" href="https://line.me/R/ti/p/%40ety4154i"
+            data-dlev="buttonClick"
+            data-dlcomp="button - vendor - line"
+            data-dltgt="<?php the_title() ?>">
             <!-- <?php _e('ติดต่อแอดมินผ่าน LINE', 'wdl'); ?> -->
           </a>
 
-          <a class="wdl-btn-tertiary" href="tel:+66-88-989-8411" aria-label="โทรติดต่อแอดมิน"><i width="16" data-feather="phone"></i></a>
+          <a class="wdl-btn-tertiary" href="tel:+66-88-989-8411" aria-label="โทรติดต่อแอดมิน"><i width="16" data-feather="phone"
+            data-dlev="buttonClick"
+            data-dlcomp="button - vendor - tel"
+            data-dltgt="<?php the_title() ?>"></i></a>
         </div>
 
       </div>
@@ -101,7 +113,10 @@
           <?php $brochure = get_field('Brochure');
 					if ($brochure): ?>
           <div class="mt-1 text-center">
-            <a href="#brochure" data-bs-toggle="modal" class="wdl-link-brochure">ดูโบรชัวร์โรงแรม</a>
+            <a href="#brochure" data-bs-toggle="modal" class="wdl-link-brochure"
+            data-dlev="linkClick"
+            data-dlcomp="link - vendor - brochure"
+            data-dltgt="<?php the_title() ?>"><?php _e('ดูโบรชัวร์โรงแรม', 'wdl') ?></a>
           </div>
           <div class="modal fade modal-xl" id="brochure">
             <div class="modal-dialog modal-dialog-centered m-auto">
@@ -193,7 +208,10 @@
               &nbsp;
               <?php if ($googleMaps): ?>
               <strong>
-                <a href="<?php echo esc_url(the_field('GoogleMaps')) ?>" target="_blank" class="wdl-link-external">
+                <a href="<?php echo esc_url(the_field('GoogleMaps')) ?>" target="_blank" class="wdl-link-external"
+                data-dlev="linkClick"
+                data-dlcomp="link - vendor - map"
+                data-dltgt="<?php the_title() ?>">
                   <?php _e('ดูแผนที่', 'wdl') ?>
                 </a>
               </strong>
@@ -205,7 +223,10 @@
           <?php
 					if (get_field('Facebook') && get_field('FacebookLink')): ?>
           <p class="wdl-metadata wdl-archive-facebook mb-0">
-            <a href="<?php echo get_field('FacebookLink') ?>" target="_blank">
+            <a href="<?php echo get_field('FacebookLink') ?>" target="_blank"
+            data-dlev="linkClick"
+            data-dlcomp="link - vendor - facebook"
+            data-dltgt="<?php the_title() ?>">
               <?php echo get_field('Facebook') ?>
             </a>
           </p>
@@ -214,24 +235,39 @@
           <?php
 					if (get_field('Instagram') && get_field('InstagramLink')): ?>
           <p class="wdl-metadata wdl-archive-instagram mb-0">
-            <a href="<?php echo get_field('InstagramLink') ?>" target="_blank">
+            <a href="<?php echo get_field('InstagramLink') ?>" target="_blank"
+            data-dlev="linkClick"
+            data-dlcomp="link - vendor - instagram"
+            data-dltgt="<?php the_title() ?>">
               <?php echo get_field('Instagram') ?>
             </a>
           </p>
           <?php endif; ?>
         </div>
         <div class="col-lg-auto text-center py-3 d-flex flex-column">
-          <a id="apply-cta" href="#apply" class="wdl-btn-lg d-block mb-3" data-bs-toggle="modal">
+          <a id="apply-cta" href="#apply" class="wdl-btn-lg d-block mb-3" data-bs-toggle="modal"
+            data-dlev="buttonClick"
+            data-dlcomp="button - vendor - cta"
+            data-dltgt="<?php the_title() ?>">
             <?php _e('คลิกขอแพ็กเกจ', 'wdl'); ?>
           </a>
-          <a class="wdl-btn-line-lg d-flex d-lg-none" href="https://line.me/R/oaMessage/%40ety4154i/?สวัสดี%20ต้องการขอแพ็กเกจ%20<?php the_title(); ?>%0A<?php the_permalink(); ?>">
+          <a class="wdl-btn-line-lg d-flex d-lg-none" href="https://line.me/R/oaMessage/%40ety4154i/?สวัสดี%20ต้องการขอแพ็กเกจ%20<?php the_title(); ?>%0A<?php the_permalink(); ?>"
+            data-dlev="buttonClick"
+            data-dlcomp="button - vendor - line"
+            data-dltgt="<?php the_title() ?>">
             <?php _e('ติดต่อแอดมินผ่าน LINE', 'wdl'); ?>
           </a>
-          <a class="wdl-btn-line-lg d-none d-lg-inline-flex" href="https://line.me/R/ti/p/%40ety4154i">
+          <a class="wdl-btn-line-lg d-none d-lg-inline-flex" href="https://line.me/R/ti/p/%40ety4154i"
+            data-dlev="buttonClick"
+            data-dlcomp="button - vendor - line"
+            data-dltgt="<?php the_title() ?>">
             <?php _e('ติดต่อแอดมินผ่าน LINE', 'wdl'); ?>
           </a>
 
-          <a class="mt-3 wdl-btn-tertiary-lg" href="tel:+66-88-989-8411"><i width="20" data-feather="phone"></i> โทรติดต่อแอดมิน</a>
+          <a class="mt-3 wdl-btn-tertiary-lg" href="tel:+66-88-989-8411"
+            data-dlev="buttonClick"
+            data-dlcomp="button - vendor - tel"
+            data-dltgt="<?php the_title() ?>"><i width="20" data-feather="phone"></i> <?php _e('โทรติดต่อแอดมิน','wdl')?></a>
         </div>
       </div>
     </div>
@@ -254,7 +290,7 @@
 
 	if ($coupon): ?>
   <section class="py-3">
-    <div class="container">
+    <div class="container-xl">
       <h2 class="h6 mb-1"><?php _e('คูปองที่ร่วมรายการ', 'wdl') ?></h2>
       <div class="d-flex flex-wrap gap-3 my-2 align-items-stretch">
         <?php foreach ($coupon as $singleCoupon):
@@ -319,17 +355,17 @@
       <ul class="wdl-tab nav mb-3 wdl-tab-related">
         <?php if ($relatedPromotions): ?>
         <li class="nav-item">
-          <a role="tab" aria-control="tab-promotion" data-bs-toggle="tab" data-bs-target="#tab-promotion" class="nav-link" aria-current="tab" href="#"><i class="wdl-tab-icon" data-feather="tag"></i> โปรโมชั่น</a>
+          <a role="tab" aria-control="tab-promotion" data-bs-toggle="tab" data-bs-target="#tab-promotion" class="nav-link" aria-current="tab" href="#"><i class="wdl-tab-icon" data-feather="tag"></i> <?php _e('โปรโมชั่น', 'wdl')?></a>
         </li>
         <?php endif; ?>
         <?php if ($relatedWeddingFairs): ?>
         <li class="nav-item">
-          <a role="tab" aria-control="tab-wedding-fair" data-bs-toggle="tab" data-bs-target="#tab-wedding-fair" class="nav-link" href="#"><i class="wdl-tab-icon" data-feather="calendar"></i> Wedding Fair & Event</a>
+          <a role="tab" aria-control="tab-wedding-fair" data-bs-toggle="tab" data-bs-target="#tab-wedding-fair" class="nav-link" href="#"><i class="wdl-tab-icon" data-feather="calendar"></i> <?php _e('Wedding Fair & Event', 'wdl')?></a>
         </li>
         <?php endif; ?>
         <?php if ($relatedPosts): ?>
         <li class="nav-item">
-          <a role="tab" aria-control="tab-post" data-bs-toggle="tab" data-bs-target="#tab-post" class="nav-link" href="#"><i class="wdl-tab-icon" data-feather="bookmark"></i> บทความ</a>
+          <a role="tab" aria-control="tab-post" data-bs-toggle="tab" data-bs-target="#tab-post" class="nav-link" href="#"><i class="wdl-tab-icon" data-feather="bookmark"></i> <?php _e('บทความ', 'wdl')?></a>
         </li>
         <?php endif; ?>
       </ul>
@@ -408,7 +444,7 @@
                           <?php endif; ?>
                           <?php $hotDeal = get_field('HotDeal', $relatedWeddingFair->ID);
 																			if ($hotDeal && in_array('Hot Deal', $hotDeal)): ?>
-                          <span class="badge wdl-badge-sm">Hot Deal</span>
+                          <span class="badge wdl-badge-sm"><?php _e('Hot Deal', 'wdl')?></span>
                           <?php endif; ?>
                         </div>
 
@@ -492,7 +528,7 @@
   </section>
   <?php endif; ?>
   <section class="py-3">
-    <div class="container">
+    <div class="container-xl">
       <div class="row">
         <div class="col text-secondary">
           <?php the_content(); ?>
@@ -601,5 +637,5 @@
   </div>
 </main>
 
-<?php include get_stylesheet_directory() . '/components/form-vendor.php' ?>
+<?php include get_stylesheet_directory() . '/components/form-lead.php' ?>
 <?php include get_stylesheet_directory() . '/components/footer.php' ?>

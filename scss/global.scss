@@ -470,3 +470,8 @@ body:not(.admin-bar) {
     display: none;
   }
 }
+
+.overflow-x-clip {
+  overflow-x: clip;
+  overflow-y: visible;
+}

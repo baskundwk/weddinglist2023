@@ -32,7 +32,7 @@
       <div class="row">
         <div class="col">
           <h4>
-            <?php esc_html_e('ไม่พบโพสต์ในหมวดหมู่ดังกล่าว', 'Post not found'); ?>
+            <?php _e('ไม่พบโพสต์ในหมวดหมู่ดังกล่าว', 'wdl'); ?>
           </h4>
         </div>
       </div>

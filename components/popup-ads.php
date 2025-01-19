@@ -72,7 +72,10 @@ $campaignPopupMiddle = new WP_Query([
             while($campaignPopupBefore->have_posts()):
             $campaignPopupBefore->the_post(); ?>
             <div class="swiper-slide">
-              <a href="<?php the_permalink();?>">
+              <a href="<?php the_permalink();?>"
+                data-dlev="adsClick",
+                data-dlcomp="ads - popup",
+                data-dltgt="<?php the_title()?>">
                 <figure>
                   <img class="no-lazyload" src="<?php echo esc_html(get_field('CampaignPopupBefore')['url']) ?>" width="600" height="600" alt="<?php the_title(); ?>">
                 </figure>
@@ -84,7 +87,10 @@ $campaignPopupMiddle = new WP_Query([
             while($campaignPopupMiddle->have_posts()):
             $campaignPopupMiddle->the_post(); ?>
             <div class="swiper-slide">
-              <a href="<?php the_permalink();?>">
+              <a href="<?php the_permalink();?>"
+                data-dlev="adsClick",
+                data-dlcomp="ads - popup",
+                data-dltgt="<?php the_title()?>">
                 <figure>
                   <img class="no-lazyload" src="<?php echo esc_html(get_field('CampaignPopupMiddle')['url']) ?>" width="600" height="600" alt="<?php the_title(); ?>">
                 </figure>
@@ -102,7 +108,10 @@ $campaignPopupMiddle = new WP_Query([
               } else {
                 the_permalink();
               }
-              ?>">
+              ?>"
+              data-dlev="adsClick",
+              data-dlcomp="ads - popup",
+              data-dltgt="<?php the_title()?>">
                 <figure>
                   <img class="no-lazyload" src="<?php echo esc_html(get_field('PopupAdImage')['url']) ?>" width="600" height="600" alt="<?php get_field('PopupAdImage')['alt'] ?>">
                 </figure>

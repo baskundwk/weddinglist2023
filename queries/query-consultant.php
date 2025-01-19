@@ -47,7 +47,7 @@ if ($_GET['key']) {
 $current_url = explode("?", $_SERVER['REQUEST_URI'])[0];
 
 $arg = [
-  'post_type' => 'video',
+  'post_type' => 'consultant',
   'order' => $order,
   'meta_key' => $key,
   'orderby' => $orderby,

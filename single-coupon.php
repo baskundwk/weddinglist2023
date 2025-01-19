@@ -2,7 +2,7 @@
 
 <main>
   <section class="py-4">
-    <div class="container">
+    <div class="container-xl">
       <div class="row justify-content-center">
         <div class="col-lg-8">
           <div class="card wdl-coupon-card">
@@ -29,9 +29,9 @@
                     <?php if (get_field('DateTimeStart') && get_field('DateTimeEnd')) {
 												echo get_field('DateTimeStart') . ' - ' . get_field('DateTimeEnd');
 											} elseif (get_field('DateTimeStart')) {
-												echo 'ตั้งแต่ ' . get_field('DateTimeStart');
+												echo __('ตั้งแต่','wdl').' ' . get_field('DateTimeStart');
 											} elseif (get_field('DateTimeEnd')) {
-												echo 'จนถึง ' . get_field('DateTimeEnd');
+												echo __('จนถึง','wdl').' ' . get_field('DateTimeEnd');
 											} ?>
                   </strong>
                 </p>
@@ -52,15 +52,6 @@
               </h2>
               <?php echo get_field('Condition') ?>
             </div>
-            <!-- <a href="#apply" data-bs-toggle="modal" class="wdl-btn-lg text-center mb-2">
-							<?php _e('รับคูปอง', 'wdl') ?>
-						</a>
-						<a class="wdl-btn-line-lg d-flex d-lg-none" href="https://line.me/R/oaMessage/%40ety4154i/?สวัสดี%20ต้องการขอคูปอง%20<?php the_title(); ?>%0A<?php the_permalink(); ?>">
-							<?php _e('ติดต่อแอดมินผ่าน LINE', 'wdl'); ?>
-						</a>
-						<a class="wdl-btn-line-lg d-none d-lg-inline-flex" href="https://line.me/R/ti/p/%40ety4154i">
-							<?php _e('ติดต่อแอดมินผ่าน LINE', 'wdl'); ?>
-						</a> -->
           </div>
 
         </div>
@@ -213,6 +204,6 @@
 
 </main>
 
-<?php // include get_stylesheet_directory() . '/components/form-coupon.php' ?>
+<?php // include get_stylesheet_directory() . '/components/form-lead.php' ?>
 <?php include get_stylesheet_directory() . '/components/share-modal.php' ?>
 <?php include get_stylesheet_directory() . '/components/footer.php' ?>

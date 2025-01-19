@@ -2,7 +2,7 @@
   while($currentCampaignQuery->have_posts()) {
     $currentCampaignQuery->the_post(); ?>
   <section class="pb-3">
-    <div class="container">
+    <div class="container-xl">
       <div id="campaign-bar" class="wdl-campaign-bar"
       style="
         --campaign-color-1: <?php the_field('CampaignColor1');?>;

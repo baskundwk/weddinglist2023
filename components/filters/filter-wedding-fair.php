@@ -68,25 +68,25 @@
             <i data-feather="chevron-down"></i>
           </div>
           <ul class="dropdown-menu dropdown-menu-end">
-            <li><a href="<?php echo ($current_url) ?>">Wedding Fair แนะนำ</a></li>
+            <li><a href="<?php echo ($current_url) ?>"><?php _e('Wedding Fair แนะนำ', 'wdl')?></a></li>
             <li><a href="<?php updateParam([
               'order' => 'ASC',
               'orderby' => 'meta_value',
               'key' => 'DateEnd',
               'label' => 'ระยะเวลา'
-            ]) ?>">ระยะเวลา</a></li>
+            ]) ?>"><?php _e('ระยะเวลา', 'wdl')?></a></li>
             <li><a href="<?php updateParam([
               'order' => 'ASC',
               'orderby' => 'title',
               'key' => '',
               'label' => 'ตามตัวอักษร'
-            ]) ?>">ตามต้วอักษร A-Z ก-ฮ</a></li>
+            ]) ?>"><?php _e('ตามต้วอักษร A-Z ก-ฮ', 'wdl')?></a></li>
             <li><a href="<?php updateParam([
               'order' => 'DESC',
               'orderby' => 'title',
               'key' => '',
               'label' => 'ย้อนตัวอักษร'
-            ]) ?>">ย้อนตัวอักษร ฮ-ก Z-A</a></li>
+            ]) ?>"><?php _e('ย้อนตัวอักษร ฮ-ก Z-A', 'wdl')?></a></li>
           </ul>
         </div>
       </div>

@@ -1283,6 +1283,7 @@ $('#form-line-contact').submit((event)=>{
   if (isMobileOrTablet()) {
     window.location.href = "https://line.me/R/oaMessage/@ety4154i/?" + encodeURI(messageBody)
   } else {
+    $("#wdl-lineqr-container").html('')
     const qrcode = new QRCode(document.querySelector("#wdl-lineqr-container"), {
       text: "https://line.me/R/oaMessage/@ety4154i/?" + encodeURI(messageBody),
       width: 600,
@@ -1295,8 +1296,40 @@ $('#form-line-contact').submit((event)=>{
     let modal = new bootstrap.Modal(document.querySelector('#modalLineQr'));
     modal.show();
   }
-  
+})
 
+$('.wdl-btn-line-contact').each((i,e) => {
+  $(e).click(()=>{
+    const messageBody = $(e).attr('data-text')
+
+    const isMobileOrTablet = () => {
+      const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+      
+      // Check for mobile
+      if (/android/i.test(userAgent)) return true;
+      if (/iPhone|iPad|iPod/i.test(userAgent)) return true;
+      if (/windows phone/i.test(userAgent)) return true;
+    
+      return false;
+    }
+
+    if (isMobileOrTablet()) {
+      window.location.href = "https://line.me/R/oaMessage/@ety4154i/?" + encodeURI(messageBody)
+    } else {
+      $("#wdl-lineqr-container").html('')
+      const qrcode = new QRCode(document.querySelector("#wdl-lineqr-container"), {
+        text: "https://line.me/R/oaMessage/@ety4154i/?" + encodeURI(messageBody),
+        width: 600,
+        height: 600,
+        colorDark : "#ff2758",
+        colorLight : "#ffffff",
+        correctLevel : QRCode.CorrectLevel.Q
+      });
+      
+      let modal = new bootstrap.Modal(document.querySelector('#modalLineQr'));
+      modal.show();
+    }
+  })
 })
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -1312,20 +1345,14 @@ document.addEventListener("DOMContentLoaded", () => {
 new Swiper('.wdl-video-playlist-content', {
   slidesPerView: 2,
   spaceBetween: 8,
-  /* breakpoints: {
-    552: {
+  breakpoints: {
+    576: {
       slidesPerView: 4
     },
-    768: {
-      slidesPerView: 5
-    },
     1024: {
-      slidesPerView: 6
-    },
-    1200: {
       slidesPerView: 2
     },
-  }, */
+  },
   navigation: {
     prevEl: '.swiper-button-prev',
     nextEl: '.swiper-button-next',
@@ -1386,3 +1413,55 @@ if(eCampaignCountdown.length > 0) {
     }, 1000);
   })
 }
+
+
+const wdlConsultantSwiper = new Swiper('.wdl-consultant-swiper', {
+  slidesPerView: 1,
+  spaceBetween: 8,
+  breakpoints: {
+    576: {
+      slidesPerView: 2,
+    },
+    768: {
+      slidesPerView: 3,
+    },
+    992: {
+      slidesPerView: 4,
+    },
+    1280: {
+      slidesPerView: 5,
+    }
+  },
+  navigation: {
+    prevEl: '.swiper-nested-prev',
+    nextEl: '.swiper-nested-next'
+  },
+  pagination: {
+    el: ".swiper-pagination",
+    type: "bullets",
+    clickable: true,
+  },
+  speed: 1000,
+  autoplay: {
+    delay: 5000,
+    pauseOnMouseEnter: true,
+  },
+})
+
+/* Consult Module */
+new Swiper('.wdl-consultant-gallery-swiper', {
+  slidesPerView: 'auto',
+  spaceBetween: 8,
+
+  pagination: {
+    el: ".swiper-pagination",
+    clickable: true,
+    dynamicBullets: true,
+    dynamicMainBullets: 5,
+  },
+  navigation: {
+    nextEl: ".swiper-button-next",
+    prevEl: ".swiper-button-prev",
+  },
+  nested: true
+})

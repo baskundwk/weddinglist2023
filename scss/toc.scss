@@ -2,6 +2,7 @@
   .wdl-toc-inner {
     transition: 0.35s cubic-bezier(0, 0, 0, 1);
     &.disabled {
+      display: none;
       opacity: 0;
     }
   }

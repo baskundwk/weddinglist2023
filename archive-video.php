@@ -45,7 +45,7 @@
   </section>
   <?php if (have_posts()): ?>
   <section class="pb-5">
-    <div class="container wdl-archive-infinite-scroll">
+    <div class="container-xl wdl-archive-infinite-scroll">
       <h2 class="mb-2"><?php _e('Video ล่าสุด', 'wdl')?></h2>
       <div class="wdl-video-grid wdl-archive-infinite-scroll-wrapper" id="wdl-archive-infinite-scroll-wrapper">
         <?php while (have_posts()): ?>
@@ -69,5 +69,5 @@
   <?php endif; ?>
   
 </main>
-<?php include get_stylesheet_directory().'/components/form-general.php' ?>
+<?php include get_stylesheet_directory().'/components/form-lead.php' ?>
 <?php include get_stylesheet_directory().'/components/footer.php' ?>

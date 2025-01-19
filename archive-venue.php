@@ -49,5 +49,5 @@
   </section>
   <?php include get_stylesheet_directory().'/components/compare-bar.php' ?>
 </main>
-<?php include get_stylesheet_directory().'/components/form-general.php' ?>
+<?php include get_stylesheet_directory().'/components/form-lead.php' ?>
 <?php include get_stylesheet_directory().'/components/footer.php' ?>

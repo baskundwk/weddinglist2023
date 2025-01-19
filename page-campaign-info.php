@@ -16,7 +16,7 @@
     <?php if($campaignQuery->have_posts()) {
       while($campaignQuery->have_posts()) {
         $campaignQuery->the_post(); ?>
-        <div class="container">
+        <div class="container-xl">
           <div class="mb-3 pb-lg-1">
             <div class="wdl-campaign-banner" style="
               --campaign-color-1: <?php the_field('CampaignColor1');?>;

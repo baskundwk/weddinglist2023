@@ -2,7 +2,7 @@
 
 <main>
   <section>
-    <div class="container">
+    <div class="container-xl">
       <?php the_content(); ?>
     </div>
   </section>

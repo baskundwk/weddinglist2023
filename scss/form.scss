@@ -301,17 +301,22 @@ textarea {
 }
 .wdl-checkbox-button .wpcf7-list-item,
 .wdl-checkbox-button input[type="checkbox"] + label,
-.wdl-checkbox-button input[type="checkbox"] + .wpcf7-list-item-label {
+.wdl-checkbox-button input[type="radio"] + label,
+.wdl-checkbox-button input[type="checkbox"] + .wpcf7-list-item-label,
+.wdl-checkbox-button input[type="radio"] + .wpcf7-list-item-label {
   display: inline-block;
   margin: 0;
 }
 
-.wdl-checkbox-button input[type="checkbox"] {
+.wdl-checkbox-button input[type="checkbox"],
+.wdl-checkbox-button input[type="radio"] {
   display: none;
 }
 
 .wdl-checkbox-button input[type="checkbox"] + label,
-.wdl-checkbox-button input[type="checkbox"] + .wpcf7-list-item-label {
+.wdl-checkbox-button input[type="radio"] + label,
+.wdl-checkbox-button input[type="checkbox"] + .wpcf7-list-item-label,
+.wdl-checkbox-button input[type="radio"] + .wpcf7-list-item-label {
   background: #fff;
   box-shadow: 0 0 0 1px #cccccc inset;
   padding: 4px 8px;
@@ -323,16 +328,22 @@ textarea {
 }
 
 .wdl-checkbox-button input[type="checkbox"]:checked + label,
-.wdl-checkbox-button input[type="checkbox"]:checked + .wpcf7-list-item-label {
+.wdl-checkbox-button input[type="radio"]:checked + label,
+.wdl-checkbox-button input[type="checkbox"]:checked + .wpcf7-list-item-label,
+.wdl-checkbox-button input[type="radio"]:checked + .wpcf7-list-item-label {
   background: #ff2758;
   color: #fff;
   box-shadow: 0 0 0 0 #cccccc inset;
 }
 
 .wdl-checkbox-button input[type="checkbox"] + label:before,
+.wdl-checkbox-button input[type="radio"] + label:before,
 .wdl-checkbox-button input[type="checkbox"] + label:after,
+.wdl-checkbox-button input[type="radio"] + label:after,
 .wdl-checkbox-button input[type="checkbox"] + .wpcf7-list-item-label:before,
-.wdl-checkbox-button input[type="checkbox"] + .wpcf7-list-item-label:after {
+.wdl-checkbox-button input[type="radio"] + .wpcf7-list-item-label:before,
+.wdl-checkbox-button input[type="checkbox"] + .wpcf7-list-item-label:after,
+.wdl-checkbox-button input[type="radio"] + .wpcf7-list-item-label:after {
   content: none;
 }
 

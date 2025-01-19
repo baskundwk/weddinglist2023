@@ -12,7 +12,7 @@ $campaignLogo = '<div class="wdl-campaign-card-logo"><img src="'.get_field('Camp
     <?php if(have_posts()) {
       while(have_posts()) {
         the_post(); ?>
-        <div class="container">
+        <div class="container-xl">
           <div class="mb-3 pb-lg-1">
             <div class="wdl-campaign-banner flex-row align-items-center" style="
               --campaign-color-1: <?php the_field('CampaignColor1');?>;
@@ -77,7 +77,7 @@ $campaignLogo = '<div class="wdl-campaign-card-logo"><img src="'.get_field('Camp
               'card' => 'card-promotion'
             ],
             'Wedding Fair' => [
-              'title' => __('Wedding Fair & Events ที่ร่วมรายการ', 'wdl'),
+              'title' => __('Wedding Fair & Event ที่ร่วมรายการ', 'wdl'),
               'slug' => 'wedding-fair',
               'name' => 'WeddingFair',
               'card' => 'card-weddingfair'
@@ -134,7 +134,7 @@ $campaignLogo = '<div class="wdl-campaign-card-logo"><img src="'.get_field('Camp
             
             if($typeQuery->have_posts()) {?>
             <section class="wdl-campaign-section mb-3 pb-1">
-              <div class="container">
+              <div class="container-xl">
                 <h2 class="title">
                   <?php echo $type['title']; ?>
                 </h2>

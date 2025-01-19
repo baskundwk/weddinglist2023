@@ -19,7 +19,7 @@
     </div>
   </section>
   <section class="wdl-listing-section wdl-archive-infinite-scroll">
-    <div class="container gap-2 wdl-archive-infinite-scroll-wrapper" id="wdl-archive-infinite-scroll-wrapper">
+    <div class="container-xl gap-2 wdl-archive-infinite-scroll-wrapper" id="wdl-archive-infinite-scroll-wrapper">
       <?php foreach (get_field('List') as $item): 
         $listID =  $item['ListVenue']->ID;
         ?>
@@ -28,5 +28,5 @@
     </div>
   </section>
 </main>
-<?php include get_stylesheet_directory().'/components/form-general.php' ?>
+<?php include get_stylesheet_directory().'/components/form-lead.php' ?>
 <?php include get_stylesheet_directory().'/components/footer.php' ?>

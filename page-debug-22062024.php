@@ -6,19 +6,10 @@
   include get_stylesheet_directory().'/queries/venue-query.php';
 ?>
 <main class="py-4">
-  <div class="container">
+  <div class="container-xl">
     <h1>Weddinglist Debug</h1>
     
   </div>
-  <pre>
-    <?php 
-    if(get_queried_object()->taxonomy) {
-      print_r(1);
-    } else {
-      print_r(0);
-    }
-    ?>
-  </pre>
 </main>
 <?php
   include get_stylesheet_directory().'/components/footer.php';

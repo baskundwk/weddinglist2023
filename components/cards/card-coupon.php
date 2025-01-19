@@ -1,4 +1,7 @@
-<div class="wdl-coupon-picker wdl-coupon-proxy">
+<div class="wdl-coupon-picker wdl-coupon-proxy"
+  data-dlev="buttonClick"
+  data-dlcomp="button - <?php echo get_post_type() ?> - coupon"
+  data-dltgt="<?php the_title() ?>">
   <div class="wdl-coupon-picker-image">
     <img src="<?php echo (get_field('Image', $singleCoupon->ID)['sizes']['medium']) ?>" />
   </div>

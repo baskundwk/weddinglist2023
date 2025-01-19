@@ -1,7 +1,7 @@
 <?php include get_stylesheet_directory() . '/components/header.php' ?>
 <main>
   <section class="py-3">
-    <div class="container">
+    <div class="container-xl">
       <div class="d-flex flex-column flex-xl-row gap-2">
         <div class="wdl-single-video-main">
           <div class="wdl-breadcrumb">
@@ -37,7 +37,7 @@
           if($playlists) { ?>
             <div class="wdl-video-playlist-related mb-3">
               <div class="d-flex align-items-baseline justify-content-between">
-                <h2>Playlist</h2>
+                <h2><?php _e('Playlist', 'wdl')?></h2>
                 <select class="wdl-btn-filter w-fit wdl-video-playlist-select text-end">
                 <?php foreach($playlists as $playlist) { ?>
                   <option value="<?php echo get_term($playlist)->term_id?>"><?php echo get_term($playlist)->name ?></option>
@@ -74,7 +74,7 @@
               </div>
             </div>
           <?php }?>
-          <h2>วิดีโอล่าสุด</h2>
+          <h2><?php _e('วิดีโอล่าสุด', 'wdl')?></h2>
           <div class="wdl-single-video-sidebar-cards">
             <?php while($videoRelated->have_posts()) {
               $videoRelated->the_post();

@@ -11,7 +11,10 @@
       aria-label="<?php echo get_the_title(); ?>"
       class="card-img-top wdl-archive-card-img-top"
       title="<?php echo get_the_title(); ?>"
-      href="<?php the_permalink(); ?>">
+      href="<?php the_permalink(); ?>"
+      data-dlev="cardClick",
+      data-dlcomp="card - moment",
+      data-dltgt="<?php the_title()?>">
       <img
         loading="lazy"
         src="<?php echo esc_html(get_the_post_thumbnail_url($post)) ?>"

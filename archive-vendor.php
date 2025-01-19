@@ -27,7 +27,7 @@
       )
     ); ?>
     <section class="overflow-hidden">
-      <div class="container">
+      <div class="container-xl">
         <div class="row mb-2">
           <div class="col-lg">
             <h2 class="h1 wdl-localnav-heading mb-0">
@@ -36,10 +36,10 @@
             </h2>
           </div>
           <div class="col-lg text-lg-end d-none d-lg-block">
-            <a href="<?php echo esc_html(get_post_type_archive_link('promotion')) ?>" class="wdl-btn-secondary ">
-            <?php _e('ดู ', 'wdl');
-                  echo $type->name; 
-                  _e(' ทั้งหมด', 'wdl'); ?>
+            <a href="<?php echo esc_html(get_term_link($type->term_id)) ?>" class="wdl-btn-secondary ">
+            <?php _e('ดู', 'wdl');
+                  echo ' '.$type->name.' '; 
+                  _e('ทั้งหมด', 'wdl'); ?>
             </a>
           </div>
         </div>
@@ -61,9 +61,9 @@
 
               <div class="text-center pt-lg-2 d-block d-lg-none mb-4">
                 <a href="<?php echo esc_html(get_term_link($type)) ?>" class="wdl-btn-secondary">
-                  <?php _e('ดู ', 'wdl');
-                  echo $type->name; 
-                  _e(' ทั้งหมด', 'wdl'); ?>
+                  <?php _e('ดู', 'wdl');
+                  echo ' '.$type->name.' '; 
+                  _e('ทั้งหมด', 'wdl'); ?>
                 </a>
               </div>
             </div>
@@ -76,5 +76,5 @@
   <?php include get_stylesheet_directory().'/components/compare-bar.php' ?>
 </main>
 
-<?php include get_stylesheet_directory().'/components/form-general.php' ?>
+<?php include get_stylesheet_directory().'/components/form-lead.php' ?>
 <?php include get_stylesheet_directory().'/components/footer.php' ?>

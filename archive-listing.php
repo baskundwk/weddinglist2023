@@ -19,7 +19,7 @@
   </section>
   <?php if (have_posts()): ?>
   <section class="wdl-archive wdl-archive-extended pb-5 m-0">
-    <div class="container wdl-archive-infinite-scroll">
+    <div class="container-xl wdl-archive-infinite-scroll">
       <div class="wdl-listing-grid wdl-archive-infinite-scroll-wrapper" id="wdl-archive-infinite-scroll-wrapper">
         <?php while (have_posts()): ?>
           <?php the_post();
@@ -43,5 +43,5 @@
   <?php endif; ?>
   
 </main>
-<?php include get_stylesheet_directory().'/components/form-general.php' ?>
+<?php include get_stylesheet_directory().'/components/form-lead.php' ?>
 <?php include get_stylesheet_directory().'/components/footer.php' ?>

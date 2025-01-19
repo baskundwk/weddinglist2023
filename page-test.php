@@ -16,7 +16,7 @@
 
   <?php if ($weddingfair->have_posts()): ?>
   <section class="html-lazy">
-    <div class="container">
+    <div class="container-xl">
       <div class="row mb-2">
         <div class="col-lg">
           <h2 class="h1 wdl-localnav-heading mb-0">
@@ -24,7 +24,10 @@
           </h2>
         </div>
         <div class="col-lg text-lg-end d-none d-lg-block">
-          <a href="<?php echo esc_html(get_post_type_archive_link('wedding-fair')) ?>" class="wdl-btn-secondary ">
+          <a href="<?php echo esc_html(get_post_type_archive_link('wedding-fair')) ?>" class="wdl-btn-secondary"
+            data-dlev="buttonClick"
+            data-dlcomp="button - front page - wedding-fair"
+            data-dltgt="Wedding Fair">
             <?php _e('ดู Wedding Fair & Event ทั้งหมด', 'wdl') ?>
           </a>
         </div>
@@ -54,7 +57,10 @@
       </div>
 
       <div class="text-center pt-lg-2 d-block d-lg-none mb-4">
-        <a href="<?php echo esc_html(get_post_type_archive_link('wedding-fair')) ?>" class="wdl-btn-secondary ">
+        <a href="<?php echo esc_html(get_post_type_archive_link('wedding-fair')) ?>" class="wdl-btn-secondary"
+          data-dlev="buttonClick"
+          data-dlcomp="button - front page - wedding-fair"
+          data-dltgt="Wedding Fair">
           <?php _e('ดู Wedding Fair & Event ทั้งหมด', 'wdl') ?>
         </a>
       </div>
@@ -76,15 +82,18 @@
   <?php
   if ($promotion->have_posts()): ?>
   <section>
-    <div class="container">
+    <div class="container-xl">
       <div class="row mb-2">
         <div class="col-lg">
           <h2 class="h1 wdl-localnav-heading mb-0">
-            <?php _e('โปรโมชั่นงานแต่งงาน', 'wdl'); ?>
+            <?php _e('โปรโมชั่นแต่งงาน & แพ็กเกจแต่งงาน', 'wdl'); ?>
           </h2>
         </div>
         <div class="col-lg text-lg-end d-none d-lg-block">
-          <a href="<?php echo esc_html(get_post_type_archive_link('promotion')) ?>" class="wdl-btn-secondary ">
+          <a href="<?php echo esc_html(get_post_type_archive_link('promotion')) ?>" class="wdl-btn-secondary"
+            data-dlev="buttonClick"
+            data-dlcomp="button - front page - promotion"
+            data-dltgt="Promotion">
             <?php _e('ดูโปรโมชั่นทั้งหมด', 'wdl') ?>
           </a>
         </div>
@@ -92,12 +101,7 @@
       <div class="wdl-archive wdl-archive-extended">
 
         <div id="promotions" class="swiper wdl-archive-swiper">
-          <div class="swiper-wrapper 
-            <?php if ($_GET['order'] || $_GET['orderby'] || $_GET['key']) {
-
-            } else {
-              echo 'row-cols-archive-randomized';
-            } ?> ">
+          <div class="swiper-wrapper row-cols-archive-randomized">
             <?php
             while ($promotion->have_posts()): ?>
             <?php $promotion->the_post(); ?>
@@ -114,7 +118,10 @@
         </div>
       </div>
       <div class="text-center pt-lg-2 d-block d-lg-none mb-4">
-        <a href="<?php echo esc_html(get_post_type_archive_link('promotion')) ?>" class="wdl-btn-secondary ">
+        <a href="<?php echo esc_html(get_post_type_archive_link('promotion')) ?>" class="wdl-btn-secondary"
+          data-dlev="buttonClick"
+          data-dlcomp="button - front page - promotion"
+          data-dltgt="Promotion">
           <?php _e('ดูโปรโมชั่นทั้งหมด', 'wdl') ?>
         </a>
       </div>
@@ -136,7 +143,7 @@
   <?php
   if ($moment->have_posts()): ?>
   <section>
-    <div class="container">
+    <div class="container-xl">
       <div class="row mb-2">
         <div class="col-lg">
           <h2 class="h1 wdl-localnav-heading mb-0">
@@ -144,7 +151,10 @@
           </h2>
         </div>
         <div class="col-lg text-lg-end d-none d-lg-block">
-          <a href="<?php echo esc_html(get_post_type_archive_link('moment')) ?>" class="wdl-btn-secondary ">
+          <a href="<?php echo esc_html(get_post_type_archive_link('moment')) ?>" class="wdl-btn-secondary"
+            data-dlev="buttonClick"
+            data-dlcomp="button - front page - moment"
+            data-dltgt="Moment">
             <?php _e('ดู Moment ทั้งหมด', 'wdl') ?>
           </a>
         </div>
@@ -152,12 +162,7 @@
       <div class="wdl-archive wdl-archive-extended">
 
         <div id="promotions" class="swiper wdl-archive-swiper">
-          <div class="swiper-wrapper 
-            <?php if ($_GET['order'] || $_GET['orderby'] || $_GET['key']) {
-
-            } else {
-              echo 'row-cols-archive-randomized';
-            } ?> ">
+          <div class="swiper-wrapper row-cols-archive-randomized">
             <?php
             while ($moment->have_posts()): ?>
             <?php $moment->the_post(); ?>
@@ -174,8 +179,11 @@
         </div>
       </div>
       <div class="text-center pt-lg-2 d-block d-lg-none mb-4">
-        <a href="<?php echo esc_html(get_post_type_archive_link('promotion')) ?>" class="wdl-btn-secondary ">
-          <?php _e('ดูโปรโมชั่นทั้งหมด', 'wdl') ?>
+        <a href="<?php echo esc_html(get_post_type_archive_link('promotion')) ?>" class="wdl-btn-secondary"
+          data-dlev="buttonClick"
+          data-dlcomp="button - front page - moment"
+          data-dltgt="Moment">
+          <?php _e('ดู Moment ทั้งหมด', 'wdl') ?>
         </a>
       </div>
     </div>
@@ -194,7 +202,7 @@
   $venue = new WP_Query($venueArgs);?>
   <?php if ($venue->have_posts()): ?>
   <section class="html-lazy">
-    <div class="container">
+    <div class="container-xl">
       <div class="row g-2">
         <div class="col-auto">
           <h2 class="h1 wdl-localnav-heading mb-0">
@@ -202,7 +210,10 @@
           </h2>
         </div>
         <div class="col-lg text-lg-end d-none d-lg-block">
-          <a href="<?php echo esc_html(get_post_type_archive_link('promotion')) ?>" class="wdl-btn-secondary ">
+          <a href="<?php echo esc_html(get_post_type_archive_link('venue')) ?>" class="wdl-btn-secondary"
+            data-dlev="buttonClick"
+            data-dlcomp="button - front page - venue"
+            data-dltgt="Venue">
             <?php _e('ดูสถานที่จัดงานแต่งงานทั้งหมด', 'wdl') ?>
           </a>
         </div>
@@ -259,7 +270,10 @@
                         --color-50: rgba(<?php echo ($characterColor['red']) ?>,<?php echo ($characterColor['green']) ?>,<?php echo ($characterColor['blue']) ?>, 50%);
                         --color-0: rgba(<?php echo ($characterColor['red']) ?>,<?php echo ($characterColor['green']) ?>,<?php echo ($characterColor['blue']) ?>, 0);
                       "
-                    <?php endif ?>>
+                    <?php endif ?>
+                  data-dlev="tagClick",
+                  data-dlcomp="tag - front page - venue character",
+                  data-dltgt="<?php echo esc_html($term->name); ?>">
                     <span><?php echo esc_html($term->name); ?></span>
                   </a>
               <?php }
@@ -268,12 +282,7 @@
       </div>
       <div class="wdl-archive wdl-archive-extended">
         <div class="swiper wdl-archive-swiper">
-          <div class="swiper-wrapper  
-              <?php if ($_GET['order'] || $_GET['orderby'] || $_GET['key']) {
-
-              } else {
-                echo 'row-cols-archive-randomized';
-              } ?> ">
+          <div class="swiper-wrapper row-cols-archive-randomized">
 
             <?php while ($venue->have_posts()): ?>
             <?php $venue->the_post();
@@ -300,7 +309,10 @@
         </div>
       </div>
       <div class="text-center pt-lg-2 d-block d-lg-none mb-4">
-        <a href="<?php echo esc_html(get_post_type_archive_link('venue')) ?>" class="wdl-btn-secondary ">
+        <a href="<?php echo esc_html(get_post_type_archive_link('venue')) ?>" class="wdl-btn-secondary"
+          data-dlev="buttonClick"
+          data-dlcomp="button - front page - venue"
+          data-dltgt="Venue">
           <?php _e('ดูสถานที่จัดงานแต่งงานทั้งหมด', 'wdl') ?>
         </a>
       </div>
@@ -325,7 +337,7 @@
   $vendor = new WP_Query($vendorArgs); ?>
   <?php if ($vendor->have_posts()): ?>
   <section class="overflow-hidden html-lazy">
-    <div class="container">
+    <div class="container-xl">
       <h2 class="h1 wdl-localnav-heading mb-0">
         <?php _e('ผู้ให้บริการงานแต่งงาน', 'wdl')?>
       </h2>
@@ -375,10 +387,11 @@
             </div>
 
             <div class="text-center mt-4 mb-2">
-              <a href="<?php echo esc_html(get_term_link($type)) ?>" class="wdl-btn-secondary ">
-              <?php _e('ดู ', 'wdl');
-                  echo $type->name; 
-                  _e(' ทั้งหมด', 'wdl'); ?>
+              <a href="<?php echo esc_html(get_term_link($type)) ?>" class="wdl-btn-secondary"
+                data-dlev="buttonClick"
+                data-dlcomp="button - front page - vendor"
+                data-dltgt="Vendor">
+              <?php _e('ดูผู้ให้บริการทั้งหมด', 'wdl'); ?>
               </a>
             </div>
           </div>
@@ -393,8 +406,7 @@
 
   <?php $videoArgs = array(
     'post_type' => 'video',
-    'orderby' => 'meta_value',
-    'posts_per_page' => '7',
+    'posts_per_page' => '12',
   );
 
   $video = new WP_Query($videoArgs);
@@ -402,7 +414,7 @@
   <?php
   if ($video->have_posts()): ?>
   <section class="mb-4">
-    <div class="container">
+    <div class="container-xl">
       <div class="row mb-2">
         <div class="col-lg">
           <h2 class="h1 wdl-localnav-heading mb-0">
@@ -410,22 +422,87 @@
           </h2>
         </div>
         <div class="col-lg text-lg-end d-none d-lg-block">
-          <a href="<?php echo esc_html(get_post_type_archive_link('video')) ?>" class="wdl-btn-secondary">
-            <?php _e('ดูรวมคลิปวิดีโอทั้งหมด', 'wdl') ?>
+          <a href="<?php echo esc_html(get_post_type_archive_link('video')) ?>" class="wdl-btn-secondary"
+            data-dlev="buttonClick"
+            data-dlcomp="button - front page - video"
+            data-dltgt="Video">
+            <?php _e('ดูคลิปวิดีโอทั้งหมด', 'wdl') ?>
           </a>
         </div>
       </div>
-      <div id="video" class="wdl-video-grid">
-        <?php while ($video->have_posts()): ?>
-        <?php $video->the_post(); ?>
-
-        <?php include get_stylesheet_directory() . '/components/cards/card-video.php' ?>
-
-        <?php endwhile; ?>
+      <div id="video" class="swiper wdl-video-swiper">
+        <div class="swiper-wrapper">
+          <?php while ($video->have_posts()): ?>
+          <?php $video->the_post(); ?>
+          <?php include get_stylesheet_directory() . '/components/cards/card-video.php' ?>
+          <?php endwhile; ?>
+        </div>
+        <div class="swiper-pagination position-relative"></div>
+        <div class="swiper-navigation swiper-navigation-small">
+          <div class="swiper-button-prev"></div>
+          <div class="swiper-button-next"></div>
+        </div>
       </div>
       <div class="text-center pt-lg-2 d-block d-lg-none mb-4">
-        <a href="<?php echo esc_html(get_post_type_archive_link('video')) ?>" class="wdl-btn-secondary ">
-          <?php _e('ดูรวมคลิปวิดีโอทั้งหมด', 'wdl') ?>
+        <a href="<?php echo esc_html(get_post_type_archive_link('video')) ?>" class="wdl-btn-secondary"
+          data-dlev="buttonClick"
+          data-dlcomp="button - front page - video"
+          data-dltgt="Video">
+          <?php _e('ดูคลิปวิดีโอทั้งหมด', 'wdl') ?>
+        </a>
+      </div>
+    </div>
+  </section>
+  <?php endif; ?>
+  
+  <?php $consultantArgs = array(
+    'post_type' => 'consultant',
+    'orderby' => 'meta_value',
+    'posts_per_page' => '8',
+    'order' => 'DESC',
+    'meta_key' => 'Status',
+  );
+
+  $consultant = new WP_Query($consultantArgs);
+  ?>
+  <?php
+  if ($consultant->have_posts()): ?>
+  <section class="mb-4">
+    <div class="container-xl">
+      <div class="row mb-2">
+        <div class="col-lg">
+          <h2 class="h1 wdl-localnav-heading mb-0">
+            <?php _e('ที่ปรึกษาการจัดงาน','wdl'); ?> <span class="badge wdl-badge-sm">มาใหม่</span>
+          </h2>
+        </div>
+        <div class="col-lg text-lg-end d-none d-lg-block">
+          <a href="<?php echo esc_html(get_post_type_archive_link('consultant')) ?>" class="wdl-btn-secondary"
+          data-dlev="buttonClick"
+          data-dlcomp="button - front page - consultant"
+          data-dltgt="Consultant">
+            <?php _e('ดูที่ปรึกษาทั้งหมด', 'wdl') ?>
+          </a>
+        </div>
+      </div>
+      <div id="consultant" class="swiper wdl-consultant-swiper overflow-x-clip">
+        <div class="swiper-wrapper">
+          <?php while ($consultant->have_posts()): ?>
+          <?php $consultant->the_post(); ?>
+            <?php include get_stylesheet_directory() . '/components/cards/card-consultant.php' ?>
+          <?php endwhile; ?>
+        </div>
+        <div class="swiper-pagination position-relative"></div>
+        <div class="swiper-navigation swiper-navigation-small">
+          <div class="swiper-button-prev swiper-nested-prev"></div>
+          <div class="swiper-button-next swiper-nested-next"></div>
+        </div>
+      </div>
+      <div class="text-center pt-lg-2 d-block d-lg-none mb-4">
+        <a href="<?php echo esc_html(get_post_type_archive_link('consultant')) ?>" class="wdl-btn-secondary"
+          data-dlev="buttonClick"
+          data-dlcomp="button - front page - consultant"
+          data-dltgt="Consultant">
+          <?php _e('ดูที่ปรึกษาทั้งหมด', 'wdl') ?>
         </a>
       </div>
     </div>
@@ -443,7 +520,7 @@
   <?php
   if ($listing->have_posts()): ?>
   <section class="mb-4">
-    <div class="container">
+    <div class="container-xl">
       <div class="row mb-2">
         <div class="col-lg">
           <h2 class="h1 wdl-localnav-heading mb-0">
@@ -451,7 +528,10 @@
           </h2>
         </div>
         <div class="col-lg text-lg-end d-none d-lg-block">
-          <a href="<?php echo esc_html(get_post_type_archive_link('listing')) ?>" class="wdl-btn-secondary ">
+          <a href="<?php echo esc_html(get_post_type_archive_link('listing')) ?>" class="wdl-btn-secondary"
+            data-dlev="buttonClick"
+            data-dlcomp="button - front page - listing"
+            data-dltgt="Listing">
             <?php _e('ดูรายการสถานที่ทั้งหมด', 'wdl') ?>
           </a>
         </div>
@@ -465,7 +545,10 @@
         <?php endwhile; ?>
       </div>
       <div class="text-center pt-lg-2 d-block d-lg-none mt-2 mb-4">
-        <a href="<?php echo esc_html(get_post_type_archive_link('listing')) ?>" class="wdl-btn-secondary ">
+        <a href="<?php echo esc_html(get_post_type_archive_link('listing')) ?>" class="wdl-btn-secondary"
+          data-dlev="buttonClick"
+          data-dlcomp="button - front page - listing"
+          data-dltgt="Listing">
           <?php _e('ดูรายการสถานที่ทั้งหมด', 'wdl') ?>
         </a>
       </div>
@@ -482,15 +565,31 @@
   ) ?>
 
   <section class="pb-5 html-lazy">
-    <div class="container">
+    <div class="container-xl">
       <h2 class="h1 wdl-localnav-heading mb-0">
         <?php _e('บทความล่าสุด', 'wdl')?>
       </h2>
-      <div class="wdl-badge-container">
-        <a href="<?php get_permalink(get_page_by_path('blog')) ?>" class="wdl-badge-sm-primary"><?php _e('ทั้งหมด', 'wdl') ?></a>
-        <a href="<?php echo esc_html(get_category_link(get_cat_ID('รีวิวแต่งงาน'))) ?>" class="wdl-badge-sm-secondary"><?php echo get_category( get_cat_ID('รีวิวแต่งงาน'))->name?></a>
-        <a href="<?php echo esc_html(get_category_link(get_cat_ID('สถานที่จัดงานแต่งงาน'))) ?>" class="wdl-badge-sm-secondary"><?php echo get_category( get_cat_ID('สถานที่จัดงานแต่งงาน'))->name?></a>
-        <a href="<?php echo esc_html(get_category_link(get_cat_ID('ฤกษ์แต่งงาน'))) ?>" class="wdl-badge-sm-secondary"><?php echo get_category( get_cat_ID('ฤกษ์แต่งงาน'))->name?></a>
+      <div class="wdl-badge-container-xl">
+        <a
+          data-dlev="tagClick",
+          data-dlcomp="tag - front page - post category",
+          data-dltgt="<?php _e('ทั้งหมด', 'wdl') ?>"
+          href="<?php get_permalink(get_page_by_path('blog')) ?>" class="wdl-badge-sm-primary"><?php _e('ทั้งหมด', 'wdl') ?></a>
+        <a
+          data-dlev="tagClick",
+          data-dlcomp="tag - front page - post category",
+          data-dltgt="<?php echo get_category( get_cat_ID('รีวิวแต่งงาน'))->name?>"
+          href="<?php echo esc_html(get_category_link(get_cat_ID('รีวิวแต่งงาน'))) ?>" class="wdl-badge-sm-secondary"><?php echo get_category( get_cat_ID('รีวิวแต่งงาน'))->name?></a>
+        <a
+          data-dlev="tagClick",
+          data-dlcomp="tag - front page - post category",
+          data-dltgt="<?php echo get_category( get_cat_ID('สถานที่จัดงานแต่งงาน'))->name?>"
+          href="<?php echo esc_html(get_category_link(get_cat_ID('สถานที่จัดงานแต่งงาน'))) ?>" class="wdl-badge-sm-secondary"><?php echo get_category( get_cat_ID('สถานที่จัดงานแต่งงาน'))->name?></a>
+        <a
+          data-dlev="tagClick",
+          data-dlcomp="tag - front page - post category",
+          data-dltgt="<?php echo get_category( get_cat_ID('ฤกษ์แต่งงาน'))->name?>"
+          href="<?php echo esc_html(get_category_link(get_cat_ID('ฤกษ์แต่งงาน'))) ?>" class="wdl-badge-sm-secondary"><?php echo get_category( get_cat_ID('ฤกษ์แต่งงาน'))->name?></a>
       </div>
       <?php if ($postAll->have_posts()): ?>
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-4 g-2 wdl-archive wdl-archive-extended opacity-1">
@@ -508,7 +607,10 @@
         </div>
       </div>
       <div class="text-center">
-        <a href="<?php echo esc_html(get_post_type_archive_link('post')) ?>" class="wdl-btn-secondary ">
+        <a href="<?php echo esc_html(get_post_type_archive_link('post')) ?>" class="wdl-btn-secondary"
+          data-dlev="buttonClick"
+          data-dlcomp="button - front page - blog"
+          data-dltgt="Blog">
           <?php _e('ดูบทความทั้งหมด', 'wdl') ?>
         </a>
       </div>
@@ -519,6 +621,6 @@
   <?php include get_stylesheet_directory() . '/components/compare-bar.php' ?>
 </main>
 
-<?php include get_stylesheet_directory() . '/components/form-general.php' ?>
+<?php include get_stylesheet_directory() . '/components/form-lead.php' ?>
 <?php include get_stylesheet_directory() . '/components/popup-ads.php' ?>
 <?php include get_stylesheet_directory() . '/components/footer.php' ?>

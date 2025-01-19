@@ -1,6 +1,6 @@
 <?php defined('ABSPATH') || exit; ?>
 
-<div class="container pt-0">
+<div class="container-xl pt-0">
   <div class="row">
     <div class="col px-0">
       <div class="wdl-hero su-posts su-posts-default-loop <?php echo esc_attr($atts['class']); ?>">

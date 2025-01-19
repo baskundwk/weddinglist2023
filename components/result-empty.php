@@ -1,8 +1,17 @@
 <?php
-$empty_word = 'โพสต์';
+$empty_word = [
+  'wedding-fair' => __('ไม่พบ Wedding Fair & Event ที่คุณกำลังหา', 'wdl'),
+  'promotion' => __('ไม่พบโปรโมชั่นที่คุณกำลังหา', 'wdl'),
+  'venue' => __('ไม่พบสถานที่จัดงานที่คุณกำลังหา', 'wdl'),
+  'vendor' => __('ไม่พบผู้ให้บริการที่คุณกำลังหา', 'wdl'),
+  'listing' => __('ไม่พบรายการสถานที่จัดงานที่คุณกำลังหา', 'wdl'),
+  'consultant' => __('ไม่พบที่ปรึกษาที่คุณกำลังหา', 'wdl'),
+  'moment' => __('ไม่พบ Moment ที่คุณกำลังหา', 'wdl'),
+  'video' => __('ไม่พบคลิปวิดีโอที่คุณกำลังหา', 'wdl'),
+  'post' => __('ไม่พบบทความที่คุณกำลังหา', 'wdl'),
+];
 $empty_query = 'post';
 if ($empty_type) {
-  $empty_word = get_option('wdl_options', 'โพสต์')['word-' . $empty_type];
   $empty_query = $empty_type;
 }
 ?>
@@ -15,7 +24,7 @@ if ($empty_type) {
           <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
         </svg>
       </div>
-      <p>ไม่พบ <?php echo $empty_word ?> ที่คุณกำลังหา</p>
+      <p><?php echo $empty_word[$empty_query] ?></p>
     </div>
   </div>
 </section>
@@ -32,7 +41,7 @@ if ($empty_type) {
     <?php if ($emptySuggestionQuery->have_posts()): ?>
       <div class="row">
         <div class="col mb-2">
-          <h2><?php echo $empty_word ?>ที่คุณอาจสนใจ</h2>
+          <h2><?php __('คุณอาจสนใจ','wdl')?></h2>
         </div>
       </div>
       <div class="row">

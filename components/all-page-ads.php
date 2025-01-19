@@ -86,7 +86,10 @@ $randomItem = $postRotation[$randomKey];
                 }
                 ?>"
                 aria-label="Go to page: <?php echo get_the_title();?>"
-                title="Go to page: <?php echo get_the_title();?>">
+                title="Go to page: <?php echo get_the_title();?>"
+                data-dlev="adsClick",
+                data-dlcomp="ads - allpage",
+                data-dltgt="<?php the_title()?>">
                   <figure>
                     <img loading="eager" src="<?php echo esc_html(get_field('AllPageAdImage')['url']) ?>" width="100%" height="187" alt="<?php get_field('AllPageAdImage')['alt'] ?>">
                   </figure>
@@ -99,7 +102,10 @@ $randomItem = $postRotation[$randomKey];
             <div id="ad-allpage-<?php the_ID(); ?>" class="wdl-ad-allpage">
               <a href="<?php the_permalink();?>"
                 aria-label="Go to page: <?php the_title();?>"
-                title="Go to page: <?php the_title();?>">
+                title="Go to page: <?php the_title();?>"
+                data-dlev="adsClick",
+                data-dlcomp="ads - allpage",
+                data-dltgt="<?php the_title()?>">
                   <figure>
                     <img loading="eager" src="<?php echo esc_html(get_field('CampaignAllpageBefore')['url']) ?>" width="100%" height="187" alt="<?php the_title() ?>">
                   </figure>
@@ -111,7 +117,10 @@ $randomItem = $postRotation[$randomKey];
             <div id="ad-allpage-<?php the_ID(); ?>" class="wdl-ad-allpage">
               <a href="<?php the_permalink();?>"
                 aria-label="Go to page: <?php the_title();?>"
-                title="Go to page: <?php the_title();?>">
+                title="Go to page: <?php the_title();?>"
+                data-dlev="adsClick",
+                data-dlcomp="ads - allpage",
+                data-dltgt="<?php the_title()?>">
                   <figure>
                     <img loading="eager" src="<?php echo esc_html(get_field('CampaignAllpageMiddle')['url']) ?>" width="100%" height="187" alt="<?php the_title() ?>">
                   </figure>

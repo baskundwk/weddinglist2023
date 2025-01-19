@@ -7,7 +7,7 @@
     array(
       'key' => 'HeroBanner',
       'compare' => 'LIKE',
-      'value' => '"ขึ้น Hero Banner"'
+      'value' => 'ขึ้น Hero Banner'
     )
   )
 );
@@ -86,7 +86,10 @@ $campaignHeroMiddle = new WP_Query([
                           echo (get_field('HeroBannerLink'));
                         } else {
                           the_permalink();
-                        } ?>">
+                        } ?>"
+                        data-dlev="adsClick",
+                        data-dlcomp="ads - hero",
+                        data-dltgt="">
                           <picture>
                             <source srcset="<?php echo esc_html(get_field('CampaignHeroBefore')['sizes']['w1160']) ?>" width="<?php echo esc_html(get_field('CampaignHeroBefore')['sizes']['w1160-width']) ?>" height="<?php echo esc_html(get_field('CampaignHeroBefore')['sizes']['w1160-height']) ?>" media="(min-width: 576px)" />
                             <img loading="lazy" src="<?php echo esc_html(get_field('CampaignHeroBefore')['sizes']['h270']) ?>" alt="<?php get_the_title() ?>" sizes="100%">
@@ -97,7 +100,10 @@ $campaignHeroMiddle = new WP_Query([
                           echo (get_field('HeroBannerLink'));
                         } else {
                           the_permalink();
-                        } ?>">
+                        } ?>"
+                        data-dlev="adsClick",
+                        data-dlcomp="ads - hero",
+                        data-dltgt="">
                           <img loading="lazy" src="<?php echo esc_html(get_field('CampaignHeroBefore')) ?>" alt="<?php get_the_title() ?>" sizes="100%">
                         </a>
                       <?php endif; ?>
@@ -117,7 +123,10 @@ $campaignHeroMiddle = new WP_Query([
                           echo (get_field('HeroBannerLink'));
                         } else {
                           the_permalink();
-                        } ?>">
+                        } ?>"
+                        data-dlev="adsClick",
+                        data-dlcomp="ads - hero",
+                        data-dltgt="">
                           <picture>
                             <source srcset="<?php echo esc_html(get_field('CampaignHeroMiddle')['sizes']['w1160']) ?>" width="<?php echo esc_html(get_field('CampaignHeroMiddle')['sizes']['w1160-width']) ?>" height="<?php echo esc_html(get_field('CampaignHeroMiddle')['sizes']['w1160-height']) ?>" media="(min-width: 576px)" />
                             <img loading="lazy" src="<?php echo esc_html(get_field('CampaignHeroMiddle')['sizes']['h270']) ?>" alt="<?php get_the_title() ?>" sizes="100%">
@@ -128,7 +137,10 @@ $campaignHeroMiddle = new WP_Query([
                           echo (get_field('HeroBannerLink'));
                         } else {
                           the_permalink();
-                        } ?>">
+                        } ?>"
+                        data-dlev="adsClick",
+                        data-dlcomp="ads - hero",
+                        data-dltgt="">
                           <img loading="lazy" src="<?php echo esc_html(get_field('CampaignHeroMiddle')) ?>" alt="<?php get_the_title() ?>" sizes="100%">
                         </a>
                       <?php endif; ?>
@@ -148,7 +160,10 @@ $campaignHeroMiddle = new WP_Query([
                           echo (get_field('HeroBannerLink'));
                         } else {
                           the_permalink();
-                        } ?>">
+                        } ?>"
+                        data-dlev="adsClick",
+                        data-dlcomp="ads - hero",
+                        data-dltgt="">
                           <picture>
                             <source srcset="<?php echo esc_html(get_field('HeroBannerImage')['sizes']['w1160']) ?>" width="<?php echo esc_html(get_field('HeroBannerImage')['sizes']['w1160-width']) ?>" height="<?php echo esc_html(get_field('HeroBannerImage')['sizes']['w1160-height']) ?>" media="(min-width: 576px)" />
                             <img loading="lazy" src="<?php echo esc_html(get_field('HeroBannerImage')['sizes']['h270']) ?>" alt="<?php get_the_title() ?>" sizes="100%">
@@ -159,7 +174,10 @@ $campaignHeroMiddle = new WP_Query([
                           echo (get_field('HeroBannerLink'));
                         } else {
                           the_permalink();
-                        } ?>">
+                        } ?>"
+                        data-dlev="adsClick",
+                        data-dlcomp="ads - hero",
+                        data-dltgt="">
                           <img loading="lazy" src="<?php echo esc_html(get_field('HeroBannerImage')) ?>" alt="<?php get_the_title() ?>" sizes="100%">
                         </a>
                       <?php endif; ?>

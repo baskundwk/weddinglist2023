@@ -4,7 +4,7 @@
   <?php include get_stylesheet_directory().'/components/search.php' ?>
 
   <section class="pb-5">
-    <div class="container">
+    <div class="container-xl">
       <div class="row justify-content-center align-items-center py-5">
         <div class="col-12 text-center py-5">
           <p class="display-3 text-red fw-semibold mb-5">404</p>

@@ -1,1 +1,1 @@
-/Users/kunassavamachai/Local Sites/wedding-list-poc/app/public/wp-content/themes/weddinglist2023/taxonomy-character.php
+<?php wp_redirect( home_url( '/venue/?character='.get_queried_object(  )->term_id ) )?>

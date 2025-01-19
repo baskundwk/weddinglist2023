@@ -1,3 +1,4 @@
+
 <div id="wdl-post-<?php the_ID(); ?>" class="card swiper-slide wdl-archive-card 
   <?php if(isset($campaignModeEnabled) && isset($campaignRelated['Venue']) && in_array(get_the_ID(), $campaignRelated['Venue'])) {
     echo esc_html('wdl-campaign-card');
@@ -11,7 +12,10 @@
       aria-label="<?php echo get_the_title(); ?>"
       class="card-img-top wdl-archive-card-img-top"
       title="<?php echo get_the_title(); ?>"
-      href="<?php the_permalink(); ?>">
+      href="<?php the_permalink(); ?>"
+      data-dlev="cardClick",
+      data-dlcomp="card - venue",
+      data-dltgt="<?php the_title()?>">
       <img
         loading="lazy"
         src="<?php echo esc_html(get_the_post_thumbnail_url($post)) ?>"
@@ -20,11 +24,24 @@
       <?php if(isset($campaignModeEnabled) && isset($campaignRelated['Venue']) && in_array(get_the_ID(), $campaignRelated['Venue'])) {
         echo $campaignLogo;
       } ?>
-
-      <?php $sponsored = get_field('Sponsor');
-      if ($sponsored && in_array('Sponsored', $sponsored)): ?>
-        <span class="badge wdl-badge-sm">Most Popular</span>
-      <?php endif; ?>
+      <div class="badge">
+        <?php
+          if(checkPackage('Package') || checkPackage('WeddingPackage')) {?>
+            <span class="wdl-badge-sm primary"><?php _e('Wedding', 'wdl')?></span>
+          <?php }
+          if(checkPackage('ConventionPackage')) {?>
+            <span class="wdl-badge-sm secondary"><?php _e('ประชุม', 'wdl')?></span>
+          <?php }
+          if(checkPackage('Party')) {?>
+            <span class="wdl-badge-sm tertiary"><?php _e('Party', 'wdl')?></span>
+          <?php }
+        ?>
+  
+        <?php $sponsored = get_field('Sponsor');
+        if ($sponsored && in_array('Sponsored', $sponsored)): ?>
+          <span class="wdl-badge-sm"><?php _e('Most Popular', 'wdl')?></span>
+        <?php endif; ?>
+      </div>
       <div class="swiper-lazy-preloader"></div>
     </a>
   <?php endif; ?>
@@ -78,7 +95,12 @@
         <?php //endforeach; ?>
         <?php endif ?>
     </div>
-    <h3 class="wdl-archive-title mb-0"><a href="<?php the_permalink(); ?>">
+    <h3 class="wdl-archive-title mb-0">
+      <a 
+        href="<?php the_permalink(); ?>"
+        data-dlev="cardClick",
+        data-dlcomp="card - venue",
+        data-dltgt="<?php the_title()?>">
         <?php the_title(); ?>
       </a>
     </h3>
@@ -109,7 +131,13 @@
   </div>
 
   <div class="card-footer">
-    <a href="#" class="wdl-btn-cta wdl-form-general-direct" data-bs-toggle="modal" data-bs-target=".wdl-form-general-modal"><?php _e('คลิกขอแพ็กเกจ', 'wdl')?></a>
-    <a href="<?php the_permalink() ?>" class="wdl-btn-more"><?php _e('ดูรายละเอียด', 'wdl') ?></a>
+    <a href="#" class="wdl-btn-cta wdl-form-general-direct" data-bs-toggle="modal" data-bs-target=".wdl-form-general-modal">
+      <?php _e('คลิกขอแพ็กเกจ', 'wdl')?>
+    </a>
+    <a href="<?php the_permalink() ?>" class="wdl-btn-more"
+      data-dlev="cardClick",
+      data-dlcomp="card - venue",
+      data-dltgt="<?php the_title()?>">
+      <?php _e('ดูรายละเอียด', 'wdl') ?></a>
   </div>
 </div>

@@ -16,20 +16,20 @@
     )
   ) ?>
   <section class="pb-4">
-    <div class="container">
+    <div class="container-xl">
       <div class="row pb-3">
         <div class="col">
           <h1 class="mb-0">
-            <?php echo (get_option('wdl_options', 'โปรโมชั่นแต่งงาน & แพ็กเกจแต่งงาน')['word-post-title']); ?>
+            <?php _e('โปรโมชั่นแต่งงาน & แพ็กเกจแต่งงาน', 'wdl'); ?>
           </h1>
           <p class="text-secondary">
-            <?php echo (get_option('wdl_options', 'รวมโปรโมชั่น และ แพ็กเกจแต่งงาน จากสถานที่จัดงานแต่งงานชั้นนำทุกรูปแบบ อัพเดทล่าสุด')['word-post-desc']); ?>
+            <?php _e('รวมโปรโมชั่น และ แพ็กเกจแต่งงาน จากสถานที่จัดงานแต่งงานชั้นนำทุกรูปแบบ อัพเดทล่าสุด', 'wdl'); ?>
           </p>
           <div class="wdl-badge-container">
-            <a href="#" class="wdl-badge-sm-primary">ทั้งหมด</a>
-            <a href="<?php echo esc_html(get_category_link(get_cat_ID('รีวิวแต่งงาน'))) ?>" class="wdl-badge-sm-secondary">รีวิวแต่งงาน</a>
-            <a href="<?php echo esc_html(get_category_link(get_cat_ID('เตรียมตัวแต่งงาน'))) ?>" class="wdl-badge-sm-secondary">เตรียมตัวแต่งงาน</a>
-            <a href="<?php echo esc_html(get_category_link(get_cat_ID('ไลฟ์สไตล์'))) ?>" class="wdl-badge-sm-secondary">ไลฟ์สไตล์</a>
+            <a href="#" class="wdl-badge-sm-primary"><?php _e('ทั้งหมด', 'wdl')?></a>
+            <a href="<?php echo esc_html(get_category_link(get_cat_ID('รีวิวแต่งงาน'))) ?>" class="wdl-badge-sm-secondary"><?php _e('รีวิวแต่งงาน', 'wdl')?></a>
+            <a href="<?php echo esc_html(get_category_link(get_cat_ID('เตรียมตัวแต่งงาน'))) ?>" class="wdl-badge-sm-secondary"><?php _e('เตรียมตัวแต่งงาน', 'wdl')?></a>
+            <a href="<?php echo esc_html(get_category_link(get_cat_ID('ไลฟ์สไตล์'))) ?>" class="wdl-badge-sm-secondary"><?php _e('ไลฟ์สไตล์', 'wdl')?></a>
           </div>
         </div>
       </div>
@@ -66,7 +66,7 @@
 
   <?php if ($postCat1->have_posts()): ?>
     <section class="wdl-archive wdl-archive-extended py-4 overflow-hidden bg-gray">
-      <div class="container">
+      <div class="container-xl">
 
         <div class="row">
           <div class="col">
@@ -120,7 +120,7 @@
 
   <?php if ($postCat2->have_posts()): ?>
     <section class="wdl-archive wdl-archive-extended pb-4 overflow-hidden bg-gray">
-      <div class="container">
+      <div class="container-xl">
 
         <div class="row">
           <div class="col">
@@ -174,7 +174,7 @@
 
   <?php if ($postCat3->have_posts()): ?>
     <section class="wdl-archive wdl-archive-extended pb-4 overflow-hidden bg-gray">
-      <div class="container">
+      <div class="container-xl">
 
         <div class="row">
           <div class="col">

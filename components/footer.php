@@ -10,7 +10,7 @@
 <footer class="wdl-footer html-lazy">
 
   <div class="wdl-footer-nav">
-    <div class="container">
+    <div class="container-xl">
       <div class="row">
         <div class="col-md-4 text-center text-md-start">
           <a href="<?php echo esc_url(home_url('/')); ?>" title="ไปหน้าแรกของ Weddinglist">
@@ -35,7 +35,7 @@
   </div>
 
   <div class="wdl-footer-bottom">
-    <div class="container clearfix">
+    <div class="container-xl clearfix">
       <div class="row">
         <div class="col-md-8 text-center text-md-start d-flex align-items-baseline justify-content-center justify-content-md-start flex-wrap gap-4">
           <small><?php _e('For advertisement, please contact', 'wdl')?> </small>
@@ -52,7 +52,7 @@
           ?>
         </div>
         <div class="col-md-4 text-center text-md-end">
-          <p>©2024 Weddinglist สงวนสิทธิ์ทั้งหมด </p>
+          <p><?php _e('©2025 Weddinglist สงวนสิทธิ์ทั้งหมด', 'wdl')?></p>
         </div>
       </div>
     </div>

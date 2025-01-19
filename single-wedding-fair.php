@@ -38,18 +38,29 @@
           </p>
         </div>
         <div class="col-12 d-flex flex-row gap-2 col-lg-3 text-center text-lg-end mb-2 mb-sm-0">
-          <a href="#apply" data-bs-target="#apply" data-bs-toggle="modal" class="flex-fill wdl-btn">
+          <a href="#apply" data-bs-target="#apply" data-bs-toggle="modal" class="flex-fill wdl-btn"
+            data-dlev="buttonClick"
+            data-dlcomp="button - wedding-fair - cta"
+            data-dltgt="<?php the_title() ?>">
             <?php _e('ลงทะเบียนเข้าร่วมงาน', 'wdl'); ?>
           </a>
 
-          <a class="wdl-btn-line d-inline-flex d-lg-none" href="https://line.me/R/oaMessage/%40ety4154i/?สวัสดี%20ต้องการรับโปรโมชั่น%20<?php the_title(); ?>%0A<?php the_permalink(); ?>">
+          <a class="wdl-btn-line d-inline-flex d-lg-none" href="https://line.me/R/oaMessage/%40ety4154i/?<?php _e('สวัสดี%20ต้องการลงทะเบียนเข้าร่วมงาน', 'wdl')?>%20<?php the_title(); ?>%0A<?php the_permalink(); ?>"
+            data-dlev="buttonClick"
+            data-dlcomp="button - wedding-fair - line"
+            data-dltgt="<?php the_title() ?>">
             <!-- <?php _e('ติดต่อแอดมินผ่าน LINE', 'wdl'); ?> -->
           </a>
-          <a class="wdl-btn-line d-none d-lg-inline-flex" href="https://line.me/R/ti/p/%40ety4154i">
+          <a class="wdl-btn-line d-none d-lg-inline-flex" href="https://line.me/R/ti/p/%40ety4154i"
+            data-dlev="buttonClick"
+            data-dlcomp="button - wedding-fair - line">
             <!-- <?php _e('ติดต่อแอดมินผ่าน LINE', 'wdl'); ?> -->
           </a>
 
-          <a class="wdl-btn-tertiary" href="tel:+66-88-989-8411" aria-label="โทรติดต่อแอดมิน"><i width="16" data-feather="phone"></i></a>
+          <a class="wdl-btn-tertiary" href="tel:+66-88-989-8411" aria-label="<?php _e('โทรติดต่อแอดมิน', 'wdl')?>"><i width="16" data-feather="phone"
+            data-dlev="buttonClick"
+            data-dlcomp="button - wedding-fair - tel"
+            data-dltgt="<?php the_title() ?>"></i></a>
         </div>
       </div>
     </div>
@@ -100,17 +111,29 @@
             <?php endforeach; endif; ?>
         </div>
         <div class="col-lg-auto text-center py-3 d-flex flex-column">
-          <a id="apply-cta" href="#apply" class="wdl-btn-lg d-block mb-3" data-bs-toggle="modal">
+          <a id="apply-cta" href="#apply" class="wdl-btn-lg d-block mb-3" data-bs-toggle="modal"
+            data-dlev="buttonClick"
+            data-dlcomp="button - promotion - cta"
+            data-dltgt="<?php the_title() ?>">
             <?php _e('ลงทะเบียนเข้าร่วมงาน', 'wdl'); ?>
           </a>
-          <a class="wdl-btn-line-lg d-flex d-lg-none" href="https://line.me/R/oaMessage/%40ety4154i/?สวัสดี%20ต้องการลงทะเบียนเข้าร่วมงาน%20<?php the_title(); ?>%0A<?php the_permalink(); ?>">
+          <a class="wdl-btn-line-lg d-flex d-lg-none" href="https://line.me/R/oaMessage/%40ety4154i/?<?php _e('สวัสดี%20ต้องการลงทะเบียนเข้าร่วมงาน', 'wdl') ?>%20<?php the_title(); ?>%0A<?php the_permalink(); ?>"
+            data-dlev="buttonClick"
+            data-dlcomp="button - wedding-fair - line"
+            data-dltgt="<?php the_title() ?>">
             <?php _e('ติดต่อแอดมินผ่าน LINE', 'wdl'); ?>
           </a>
-          <a class="wdl-btn-line-lg d-none d-lg-inline-flex" href="https://line.me/R/ti/p/%40ety4154i">
+          <a class="wdl-btn-line-lg d-none d-lg-inline-flex" href="https://line.me/R/ti/p/%40ety4154i"
+            data-dlev="buttonClick"
+            data-dlcomp="button - wedding-fair - line"
+            data-dltgt="<?php the_title() ?>">
             <?php _e('ติดต่อแอดมินผ่าน LINE', 'wdl'); ?>
           </a>
 
-          <a class="mt-3 wdl-btn-tertiary-lg" href="tel:+66-88-989-8411"><i width="20" data-feather="phone"></i> โทรติดต่อแอดมิน</a>
+          <a class="mt-3 wdl-btn-tertiary-lg" href="tel:+66-88-989-8411"
+            data-dlev="buttonClick"
+            data-dlcomp="button - wedding-fair - tel"
+            data-dltgt="<?php the_title() ?>"><i width="20" data-feather="phone"></i> <?php _e('โทรติดต่อแอดมิน', 'wdl')?></a>
         </div>
       </div>
     </div>
@@ -132,7 +155,7 @@
 
   if ($coupon): ?>
     <section class="py-3">
-      <div class="container">
+      <div class="container-xl">
         <h2 class="h6 mb-1"><?php _e('คูปองที่ร่วมรายการ', 'wdl') ?></h2>
         <div class="d-flex flex-wrap gap-3 my-2 align-items-stretch">
           <?php foreach ($coupon as $singleCoupon):
@@ -166,7 +189,7 @@
         ?>
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 my-4 wdl-gallery">
           <div class="col-12 col-sm-12 col-md-12">
-            <h3 class="h6 text-secondary">ตัวอย่างภาพถ่ายจากสถานที่จริง</h3>
+            <h3 class="h6 text-secondary"><?php _e('ตัวอย่างภาพถ่ายจากสถานที่จริง', 'wdl')?></h3>
           </div>
           <?php
           // Grab each image.
@@ -271,5 +294,5 @@
 
 </main>
 
-<?php include get_stylesheet_directory() . '/components/form-wedding-fair.php' ?>
+<?php include get_stylesheet_directory() . '/components/form-lead.php' ?>
 <?php include get_stylesheet_directory() . '/components/footer.php' ?>

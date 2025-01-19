@@ -135,43 +135,43 @@
             <i data-feather="chevron-down"></i>
           </div>
           <ul class="dropdown-menu dropdown-menu-end">
-            <li><a href="<?php echo ($current_url) ?>">สถานที่แนะนำ</a></li>
+            <li><a href="<?php echo ($current_url) ?>"><?php _e('สถานที่แนะนำ', 'wdl')?></a></li>
             <li><a href="<?php updateParam([
               'order' => 'ASC',
               'orderby' => 'title',
               'key' => '',
               'label' => 'ตามตัวอักษร'
-            ]) ?>">ตามต้วอักษร A-Z ก-ฮ</a></li>
+            ]) ?>"><?php _e('ตามต้วอักษร A-Z ก-ฮ', 'wdl')?></a></li>
             <li><a href="<?php updateParam([
               'order' => 'DESC',
               'orderby' => 'title',
               'key' => '',
               'label' => 'ย้อนตัวอักษร'
-            ]) ?>">ย้อนตัวอักษร ฮ-ก Z-A</a></li>
+            ]) ?>"><?php _e('ย้อนตัวอักษร ฮ-ก Z-A', 'wdl')?></a></li>
             <li><a href="<?php updateParam([
               'order' => 'ASC',
               'orderby' => 'meta_value_num',
               'key' => 'MinPrice',
               'label' => 'ราคาเริ่มต้นถูกที่สุด'
-            ]) ?>">ราคาเริ่มต้นถูกที่สุด</a></li>
+            ]) ?>"><?php _e('ราคาเริ่มต้นถูกที่สุด', 'wdl')?></a></li>
             <li><a href="<?php updateParam([
               'order' => 'DESC',
               'orderby' => 'meta_value_num',
               'key' => 'MinPrice',
               'label' => 'ราคาเริ่มต้นสูงที่สุด'
-            ]) ?>">ราคาเริ่มต้นสูงที่สุด</a></li>
+            ]) ?>"><?php _e('ราคาเริ่มต้นสูงที่สุด', 'wdl')?></a></li>
             <li><a href="<?php updateParam([
               'order' => 'ASC',
               'orderby' => 'meta_value_num',
               'key' => 'MaxGuest',
               'label' => 'จำนวนแขกน้อยไปมาก'
-            ]) ?>">จำนวนแขกน้อยไปมาก</a></li>
+            ]) ?>"><?php _e('จำนวนแขกน้อยไปมาก', 'wdl')?></a></li>
             <li><a href="<?php updateParam([
               'order' => 'DESC',
               'orderby' => 'meta_value_num',
               'key' => 'MaxGuest',
               'label' => 'จำนวนแขกมากไปน้อย'
-            ]) ?>">จำนวนแขกมากไปน้อย</a></li>
+            ]) ?>"><?php _e('จำนวนแขกมากไปน้อย', 'wdl')?></a></li>
           </ul>
         </div>
       </div>

@@ -7,7 +7,14 @@
     echo esc_html('--campaign-color-1: '.$campaignColor1.'; --campaign-color-2: '.$campaignColor2.';');
   }?>">
   <?php if (has_post_thumbnail(get_the_ID())): ?>
-    <a aria-label="<?php echo get_the_title(); ?>" title="<?php echo get_the_title(); ?>" class="card-img-top wdl-archive-card-img-top" href="<?php the_permalink(); ?>">
+    <a 
+      aria-label="<?php echo get_the_title(); ?>"
+      title="<?php echo get_the_title(); ?>"
+      class="card-img-top wdl-archive-card-img-top"
+      href="<?php the_permalink(); ?>"
+      data-dlev="cardClick",
+      data-dlcomp="card - vendor",
+      data-dltgt="<?php the_title()?>">
       <img loading="lazy" src="<?php echo esc_html(get_the_post_thumbnail_url($post, 'medium_large')) ?>" alt="<?php echo get_the_title(); ?>">
 
       <?php if(isset($campaignModeEnabled) && isset($campaignRelated['Vendor']) && in_array(get_the_ID(), $campaignRelated['Vendor'])) {
@@ -73,7 +80,13 @@
     </div>
 
     <h3 class="wdl-archive-title mb-0">
-      <a href="<?php the_permalink(); ?>" title="<?php echo get_the_title() ?>" data-label="<?php echo get_the_title() ?>">
+      <a 
+        href="<?php the_permalink(); ?>"
+        title="<?php echo get_the_title() ?>"
+        data-label="<?php echo get_the_title() ?>"
+        data-dlev="cardClick",
+        data-dlcomp="card - vendor",
+        data-dltgt="<?php the_title()?>">
         <?php the_title(); ?>
       </a>
     </h3>
@@ -95,8 +108,8 @@
     </p>
 
     <?php if (get_field('MinPrice')): ?>
-      <div class="text-red fw-semibold mb-2">เริ่มต้น
-        <?php echo number_format(get_field('MinPrice')); ?> บาท
+      <div class="text-red fw-semibold mb-2"><?php _e('เริ่มต้น', 'wdl') ?>
+        <?php echo number_format(get_field('MinPrice')); ?> <?php _e('บาท', 'wdl')?>
       </div>
     <?php endif; ?>
 
@@ -115,7 +128,10 @@
     );
 
     if ($coupon): ?>
-      <a class="d-flex flex-wrap gap-2 align-items-stretch" href="<?php the_permalink(); ?>">
+      <a class="d-flex flex-wrap gap-2 align-items-stretch" href="<?php the_permalink(); ?>"
+        data-dlev="cardClick",
+        data-dlcomp="card - vendor",
+        data-dltgt="<?php the_title()?>">
         <?php foreach ($coupon as $singleCoupon): ?>
           <div class="wdl-coupon-picker wdl-coupon-picker-small">
             <div class="wdl-coupon-picker-image">
@@ -135,6 +151,9 @@
 
   <div class="card-footer">
     <a href="#" class="wdl-btn-cta wdl-form-general-direct" data-bs-toggle="modal" data-bs-target=".wdl-form-general-modal"><?php _e('คลิกขอแพ็กเกจ', 'wdl')?></a>
-    <a href="<?php the_permalink() ?>" class="wdl-btn-more"><?php _e('ดูรายละเอียด', 'wdl') ?></a>
+    <a href="<?php the_permalink() ?>" class="wdl-btn-more"
+      data-dlev="cardClick",
+      data-dlcomp="card - vendor",
+      data-dltgt="<?php the_title()?>"><?php _e('ดูรายละเอียด', 'wdl') ?></a>
   </div>
 </div>

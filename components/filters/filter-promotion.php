@@ -13,8 +13,8 @@
       <div class="swiper-slide w-auto">
         <div class="dropdown wdl-dropdown">
 
-          <div class="wdl-btn-filter <?php if ($_GET['relate']) { echo 'active'; }?>" data-bs-toggle="dropdown" aria-expanded="false">
-            <?php if ($_GET['relate']): ?>
+          <div class="wdl-btn-filter <?php if (isset($_GET['relate'])) { echo 'active'; }?>" data-bs-toggle="dropdown" aria-expanded="false">
+            <?php if (isset($_GET['relate'])): ?>
             <i data-feather="map-pin"></i><span class="lineclamp-1"><?php echo (get_the_title($_GET['relate'])); ?></span>
             <?php else: ?>
             <i data-feather="map-pin"></i><?php _e('สถานที่', 'wdl'); ?>
@@ -79,8 +79,8 @@
         ?>
       <div class="swiper-slide w-auto">
         <div class="dropdown wdl-dropdown">
-          <div class="wdl-btn-filter <?php if ($_GET['type']) { echo 'active'; }?>" data-bs-toggle="dropdown" aria-expanded="false">
-            <?php if ($_GET['type']): ?>
+          <div class="wdl-btn-filter <?php if (isset($_GET['type'])) { echo 'active'; }?>" data-bs-toggle="dropdown" aria-expanded="false">
+            <?php if (isset($_GET['type'])): ?>
             <i data-feather="grid"></i><?php echo (get_term_by('slug', $_GET['type'], 'promotion-category')->name); ?>
             <?php else: ?>
             <i data-feather="grid"></i><?php _e('ประเภท', 'wdl'); ?>
@@ -108,7 +108,7 @@
       <!-- <div class="swiper-slide w-auto">
         <div class="dropdown wdl-dropdown">
           <div class="wdl-btn-filter" data-bs-toggle="dropdown" aria-expanded="false">
-            <?php if ($_GET['type']): ?>
+            <?php if (isset($_GET['type'])): ?>
             <i data-feather="calendar"></i><?php echo (get_term_by('slug', $_GET['type'], 'promotion-category')->name); ?>
             <?php else: ?>
             <i data-feather="calendar"></i><?php _e('ระยะเวลา', 'wdl'); ?>
@@ -194,8 +194,8 @@
       </div> -->
       <div class="swiper-slide w-auto">
         <div class="dropdown wdl-dropdown">
-          <div class="wdl-btn-filter <?php if ($_GET['label']) { echo 'active'; }?>" data-bs-toggle="dropdown" aria-expanded="false">
-            <?php if ($_GET['label']) { ?>
+          <div class="wdl-btn-filter <?php if (isset($_GET['label'])) { echo 'active'; }?>" data-bs-toggle="dropdown" aria-expanded="false">
+            <?php if (isset($_GET['label'])) { ?>
             <i data-feather="bar-chart"></i><?php echo $_GET['label']; ?>
             <?php } else { ?>
             <i data-feather="bar-chart"></i><?php _e('จัดเรียงโดย', 'wdl');
@@ -203,25 +203,25 @@
             <i data-feather="chevron-down"></i>
           </div>
           <ul class="dropdown-menu dropdown-menu-end">
-            <li><a href="<?php echo ($current_url) ?>">โปรโมชั่นแนะนำ</a></li>
+            <li><a href="<?php echo ($current_url) ?>"><?php _e('โปรโมชั่นแนะนำ', 'wdl')?></a></li>
             <li><a href="<?php updateParam([
               'order' => 'ASC',
               'orderby' => 'meta_value',
               'key' => 'DateEnd',
               'label' => 'ระยะเวลา'
-            ]) ?>">ระยะเวลา</a></li>
+            ]) ?>"><?php _e('ระยะเวลา', 'wdl')?></a></li>
             <li><a href="<?php updateParam([
               'order' => 'ASC',
               'orderby' => 'title',
               'key' => '',
               'label' => 'ตามตัวอักษร'
-            ]) ?>">ตามต้วอักษร A-Z ก-ฮ</a></li>
+            ]) ?>"><?php _e('ตามต้วอักษร A-Z ก-ฮ', 'wdl')?></a></li>
             <li><a href="<?php updateParam([
               'order' => 'DESC',
               'orderby' => 'title',
               'key' => '',
               'label' => 'ย้อนตัวอักษร'
-            ]) ?>">ย้อนตัวอักษร ฮ-ก Z-A</a></li>
+            ]) ?>"><?php _e('ย้อนตัวอักษร ฮ-ก Z-A', 'wdl')?></a></li>
           </ul>
         </div>
       </div>

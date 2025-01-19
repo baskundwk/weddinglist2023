@@ -75,13 +75,13 @@
     ?>
     <form id="wdl-form-verify">
       <?php if(verifyOtp($otp, $pid) === null) {
-        echo '<p>กรุณากรอกรหัส OTP เพื่อยืนยันตัวตน</p>';
+        echo '<p>'.__('กรุณากรอกรหัส OTP เพื่อยืนยันตัวตน', 'wdl').'</p>';
       } else {
-        echo '<p class="text-red">รหัส OTP ไม่ถูกต้อง กรุณาลองใหม่</p>';
+        echo '<p class="text-red">'.__('รหัส OTP ไม่ถูกต้อง กรุณาลองใหม่', 'wdl').'</p>';
       }?>
       <input class="wdl-verify-otp-input" type="text" maxlength="6">
       <button type="submit" class="wdl-btn-lg mt-3">
-        ยืนยัน
+        <?php _e('ยืนยัน', 'wdl') ?>
       </button>
     </form>
     <?php

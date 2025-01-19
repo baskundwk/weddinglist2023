@@ -129,6 +129,10 @@
   width: 100%;
   max-width: 367px;
   flex: 0 0 auto;
+
+  @include max-width-xl {
+    max-width: none;
+  }
 }
 
 .wdl-video-grid {

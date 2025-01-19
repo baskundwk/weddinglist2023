@@ -1,5 +1,5 @@
 <section class="py-2">
-  <div class="container">
+  <div class="container-xl">
     <div class="row align-items-center g-3">
       <div class="col-lg">
         <div class="wdl-search">
@@ -19,6 +19,8 @@
                 <option value="wedding-fair"><a data-type="wedding-fair" href="#" class="px-3"><?php _e('Wedding Fair & Event', 'wdl') ?></a></option>
                 <option value="vendor"><a data-type="vendor" href="#" class="px-3"><?php _e('ผู้ให้บริการ', 'wdl') ?></a></option>
                 <option value="post"><a data-type="post" href="#" class="px-3"><?php _e('บทความ', 'wdl') ?></a></option>
+                <option value="video"><a data-type="video" href="#" class="px-3"><?php _e('คลิปวิดีโอ', 'wdl') ?></a></option>
+                <?php /* <option value="listing"><a data-type="listing" href="#" class="px-3"><?php _e('รายการแนะนำ', 'wdl') ?></a></option> */ ?>
               </select>
               <input class="wdl-search-submit" type="submit">
             </div>

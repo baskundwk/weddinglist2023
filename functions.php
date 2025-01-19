@@ -15,6 +15,7 @@ function wdl_enqueue_styles()
 	wp_enqueue_script('swiperjs', get_theme_file_uri() . '/library/swiperjs/swiper-bundle.min.js', array('jquery'), '', true);
 	wp_enqueue_script('qrcodejs', get_theme_file_uri() . '/library/qrcodejs/qrcode.min.js', array('jquery'), '', true);
 	wp_enqueue_script('theme-script', get_theme_file_uri() . '/script.js', array('jquery'), '', true);
+	wp_enqueue_script('data-layer', get_theme_file_uri() . '/data-layer.js', array('jquery'), '', true);
 }
 add_action('wp_enqueue_scripts', 'wdl_enqueue_styles', 1001);
 
@@ -98,7 +99,6 @@ add_action('wp_ajax_send_email', 'send_email');
 add_action('wp_ajax_nopriv_send_email', 'send_email');
 
 function send_email() {
-
 	$toClient = $_REQUEST['toClient'];
 	$name = $_REQUEST['name'];
 	$tel = $_REQUEST['tel'];
@@ -108,6 +108,7 @@ function send_email() {
 	$budget = $_REQUEST['budget'];
 	$date = $_REQUEST['date'];
 	$daytime = $_REQUEST['daytime'];
+	$packageType = $_REQUEST['packageType'];
 	$message = $_REQUEST['message'];
 	$cardId = $_REQUEST['cardId'];
 	$selectedCoupon = $_REQUEST['selectedCoupon'];
@@ -123,6 +124,12 @@ function send_email() {
 
 	if ($selectedCoupon !== '') {
 		$selectedCouponBody = '<li>คูปองที่เลือก : <strong>' . implode(", ", $selectedCouponTitle) . '</strong></li>';
+	}
+
+	$packageTypeBody = '';
+	
+	if ($packageType !== '') {
+		$packageTypeBody = '<li>ประเภทแพ็คเกจ : <strong>' . $packageType . '</strong></li>';
 	}
 
 
@@ -194,6 +201,7 @@ function send_email() {
 		"				<li>วันที่จัดงาน : <strong>$date</strong></li>" .
 		"				<li>ช่วงเวลาจัดงาน : <strong>$daytime</strong></li>" .
 		$selectedCouponBody .
+		$packageTypeBody .
 		"			</ul>" . $appointStatement .
 		"			<p>ข้อความเพิ่มเติม :</p>" .
 		"			<p><strong>$message</strong></p>" . $footer .
@@ -240,6 +248,7 @@ function send_email() {
 			'type' => $lead_type,
 			'appointment' => $appointDate . ' - ' . $appointTime,
 			'coupon' => implode(', ', $selectedCouponTitle),
+			'package-type' => $packageType,
 			'otp' => $otp,
 			'verified' => false,
 		]
@@ -381,7 +390,7 @@ function updateParam($newParams) {
 
 	// Parse the URL and get its query parameters
 	$urlParts = parse_url($currentUrl);
-	parse_str($urlParts['query'] ? $urlParts['query'] : '', $currentParams);
+	parse_str(isset($urlParts['query']) ? $urlParts['query'] : '', $currentParams);
 
 	// New parameters to intersect
 	/* $newParams = [
@@ -577,6 +586,7 @@ function custom_menu_order($menu_order) {
 		'edit.php?post_type=wedding-fair',
 		'edit.php?post_type=venue',
 		'edit.php?post_type=vendor',
+		'edit.php?post_type=consultant',
 		'edit.php?post_type=coupon',
 		'edit.php?post_type=listing',
 		'edit.php?post_type=moment',
@@ -742,3 +752,51 @@ function render_dynamic_text_meta_box($post) {
 	// Add a hidden container for the JavaScript to move
 	echo '<div id="dynamic-text-container" style="display:none;">' . $text . '</div>';
 }
+
+
+function checkPackage($packageName) {
+	$package = get_field('Pricing');
+	$packageConvention = get_field('PricingConvention');
+	if($package) {
+		foreach($package as $item) {
+			if(isset($item['acf_fc_layout']) && $item['acf_fc_layout'] === $packageName) {
+				return true;
+			}
+		}
+	}
+	if($packageConvention) {
+		foreach($packageConvention as $item) {
+			if(isset($item['acf_fc_layout']) && $item['acf_fc_layout'] === $packageName) {
+				return true;
+			}
+		}
+	}
+	return false;
+}
+
+$testerPromotionID = 346735;
+$testerWeddingFairID = 349717;
+$testerVenueID = 211970;
+$testerVendorID = 349719;
+$testerVideoID = 370518;
+$testerMomentID = 370055;
+$testerCouponID = null;
+/* 
+add_action('init', function() {
+    if (current_user_can('administrator')) {
+        // Enable debugging for admins
+        define('WP_DEBUG', true);
+        define('WP_DEBUG_LOG', true);
+        define('WP_DEBUG_DISPLAY', true);
+        @ini_set('display_errors', 1);
+
+        // Optional: Add a custom debug message
+        error_log('Debugging enabled for admin user: ' . wp_get_current_user()->user_login);
+    } else {
+        // Disable debugging for non-admins
+        define('WP_DEBUG', false);
+        define('WP_DEBUG_DISPLAY', false);
+        @ini_set('display_errors', 0);
+    }
+});
+ */

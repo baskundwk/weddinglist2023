@@ -1,4 +1,3 @@
-
 <div class="wdl-localnav">
   <div class="container-xl">
     <nav class="wdl-localnav-swiper">

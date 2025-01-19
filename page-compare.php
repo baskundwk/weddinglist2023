@@ -15,14 +15,14 @@
     <div class="container-xxl">
       <div class="row mb-3">
         <div class="col-md-6 text-center text-md-start">
-          <a class="wdl-link-back" href="#" onclick="history.back()">ย้อนกลับ</a>
+          <a class="wdl-link-back" href="#" onclick="history.back()"><?php _e('ย้อนกลับ','wdl')?></a>
           <h1>
             <?php _e('เปรียบเทียบสถานที่จัดงานแต่งงาน', 'wdl') ?>
           </h1>
         </div>
         <div class="col-md-6 pt-3 text-center text-md-end">
-          <a class="wdl-link-print" href="#">Print หน้านี้</a>
-          <a class="wdl-link-share" href="#share" data-bs-toggle="modal">แชร์หน้านี้</a>
+          <a class="wdl-link-print" href="#"><?php _e('Print หน้านี้','wdl')?></a>
+          <a class="wdl-link-share" href="#share" data-bs-toggle="modal"><?php _e('แชร์หน้านี้','wdl')?></a>
         </div>
       </div>
     </div>
@@ -114,7 +114,7 @@
                     the_row();?>
                     <?php if (get_row_layout() == 'Package'): ?>
                       <li class="wdl-metadata">
-                        งานหมั้น
+                        <?php _e('งานหมั้น','wdl')?>
                         <?php // echo esc_html(get_sub_field('PackageType')->name); ?>
                         <span class="text-red fw-semibold"><?php the_sub_field('PackagePrice'); ?></span>
                       </li>
@@ -126,7 +126,7 @@
                     
                     <?php if (get_row_layout() == 'WeddingPackage'): ?>
                       <li class="wdl-metadata">
-                        งานแต่งงาน
+                        <?php _e('งานแต่งงาน','wdl')?>
                         <?php // echo esc_html(get_sub_field('WeddingPackageType')->name); ?>
                         <span class="text-red fw-semibold"><?php the_sub_field('WeddingPackagePrice'); ?></span>
                       </li>
@@ -236,7 +236,7 @@
     <div class="modal-dialog modal-dialog-centered m-auto">
       <div class="modal-content mb-0">
         <div class="modal-header">
-          <h3 class="m-0">ตอบคำถามสั้น ๆ เพื่อรับสิทธิพิเศษสำหรับคุณ!</h3>
+          <h3 class="m-0"><?php _e('ตอบคำถามสั้น ๆ เพื่อรับสิทธิพิเศษสำหรับคุณ!','wdl')?></h3>
           
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
@@ -255,6 +255,6 @@
   </div>
 </main>
 
-<?php include get_stylesheet_directory().'/components/form-general.php' ?>
+<?php include get_stylesheet_directory().'/components/form-lead.php' ?>
 <?php include get_stylesheet_directory().'/components/share-modal.php' ?>
 <?php include get_stylesheet_directory().'/components/footer.php' ?>

@@ -1,1 +1,0 @@
-/Users/kunassavamachai/Local Sites/wedding-list-poc/app/public/wp-content/themes/weddinglist2023/page2.php

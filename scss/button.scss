@@ -23,7 +23,7 @@
   font-weight: 600;
   background: #ffffff;
   color: #37bad6;
-  box-shadow: 0 0 0 1px #37bad6 inset;
+  box-shadow: 0 0 0 .5px #37bad6 inset;
   border-radius: 8px;
   display: inline-block;
   transition: 0.25s background ease-out;
@@ -95,7 +95,7 @@
   font-weight: 600;
   background: #ffffff !important;
   color: #ff2758;
-  box-shadow: 0 0 0 1px #ff2758 inset;
+  box-shadow: 0 0 0 .25px #ff2758 inset;
   border-radius: 8px;
   display: inline-block;
   transition:
@@ -176,7 +176,7 @@
 .wdl-btn-line {
   @extend .wdl-btn;
   background: #ffffff !important;
-  box-shadow: 0 0 0 1px #28a745 inset;
+  box-shadow: 0 0 0 .5px #28a745 inset;
   color: #28a745 !important;
   transition: 0.35s cubic-bezier(0, 0, 0, 1);
   display: inline-flex;
@@ -207,7 +207,7 @@
 .wdl-btn-line-lg {
   @extend .wdl-btn-lg;
   background: #ffffff !important;
-  box-shadow: 0 0 0 1px #28a745 inset;
+  box-shadow: 0 0 0 .5px #28a745 inset;
   color: #28a745 !important;
   transition: 0.35s cubic-bezier(0, 0, 0, 1);
   display: inline-flex;
@@ -216,7 +216,7 @@
   font-size: 16px;
 
   &:hover {
-    background: #28a745;
+  background: #28a745 !important;
     color: #ffffff !important;
 
     &:before {
