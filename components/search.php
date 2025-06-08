@@ -1,4 +1,4 @@
-<section class="py-2">
+<!-- <section class="py-2">
   <div class="container-xl">
     <div class="row align-items-center g-3">
       <div class="col-lg">
@@ -41,4 +41,8 @@
       </div>
     </div>
   </div>
+</section> -->
+
+<section class="pb-3 bg-gray border-bottom">
+  <?php include get_stylesheet_directory() . '/components/friendlysearch.php' ?>
 </section>

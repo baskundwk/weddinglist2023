@@ -12,6 +12,7 @@
           <div class="logo">
             <img src="<?php echo get_field('CampaignLogo')['url'];?>" alt="<?php the_title(); ?>">
           </div>
+          <?php if(get_field('CampaignCountdown') && get_field('CampaignCountdown') === true) : ?>
           <div class="countdown">
             <div class="text">
               <?php _e('หมดเวลาใน', 'wdl') ?>
@@ -44,6 +45,7 @@
               </div>
             </div>
           </div>
+          <?php endif; ?>
         </div>
       </div>
     </div>

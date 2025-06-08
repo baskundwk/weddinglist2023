@@ -17,7 +17,7 @@ $campaignAllpageBefore = new WP_Query([
   'post_status' => 'publish',
   'orderby' => 'rand',
   'meta_query'     => [
-      'relation' => 'AND',
+      'relation' => $_GET['campaignDebug'] ? 'OR' : 'AND',
       [
           'key'     => 'CampaignBeforeDate',
           'value'   => $today,
@@ -43,7 +43,7 @@ $campaignAllpageMiddle = new WP_Query([
   'post_status' => 'publish',
   'orderby' => 'rand',
   'meta_query'     => [
-      'relation' => 'AND',
+      'relation' => $_GET['campaignDebug'] ? 'OR' : 'AND',
       [
           'key'     => 'CampaignDateStart',
           'value'   => $today,
@@ -85,13 +85,13 @@ $randomItem = $postRotation[$randomKey];
                   the_permalink();
                 }
                 ?>"
-                aria-label="Go to page: <?php echo get_the_title();?>"
-                title="Go to page: <?php echo get_the_title();?>"
-                data-dlev="adsClick",
-                data-dlcomp="ads - allpage",
-                data-dltgt="<?php the_title()?>">
+                aria-label="Go to page: <?php echo esc_attr( get_the_title() );?>"
+                title="Go to page: <?php echo esc_attr( get_the_title() );?>"
+                data-dlev="adsClick"
+                data-dlcomp="ads - allpage"
+                data-dltgt="<?php echo esc_attr(get_the_title()); ?>">
                   <figure>
-                    <img loading="eager" src="<?php echo esc_html(get_field('AllPageAdImage')['url']) ?>" width="100%" height="187" alt="<?php get_field('AllPageAdImage')['alt'] ?>">
+                    <img loading="eager" src="<?php echo esc_attr(get_field('AllPageAdImage')['url']) ?>" width="100%" height="187" alt="<?php echo esc_attr(get_field('AllPageAdImage')['alt']) ?>">
                   </figure>
                 </a>
             </div>
@@ -101,13 +101,13 @@ $randomItem = $postRotation[$randomKey];
           if (get_field('CampaignAllpageBefore')) { ?>
             <div id="ad-allpage-<?php the_ID(); ?>" class="wdl-ad-allpage">
               <a href="<?php the_permalink();?>"
-                aria-label="Go to page: <?php the_title();?>"
-                title="Go to page: <?php the_title();?>"
-                data-dlev="adsClick",
-                data-dlcomp="ads - allpage",
-                data-dltgt="<?php the_title()?>">
+                aria-label="Go to page: <?php echo esc_attr( get_the_title() );?>"
+                title="Go to page: <?php echo esc_attr( get_the_title() );?>"
+                data-dlev="adsClick"
+                data-dlcomp="ads - allpage"
+                data-dltgt="<?php echo esc_attr(get_the_title()); ?>">
                   <figure>
-                    <img loading="eager" src="<?php echo esc_html(get_field('CampaignAllpageBefore')['url']) ?>" width="100%" height="187" alt="<?php the_title() ?>">
+                    <img loading="eager" src="<?php echo esc_attr(get_field('CampaignAllpageBefore')['url']) ?>" width="100%" height="187" alt="<?php echo esc_attr( get_the_title() ); ?>">
                   </figure>
                 </a>
             </div>
@@ -116,13 +116,13 @@ $randomItem = $postRotation[$randomKey];
           if (get_field('CampaignAllpageMiddle')) { ?>
             <div id="ad-allpage-<?php the_ID(); ?>" class="wdl-ad-allpage">
               <a href="<?php the_permalink();?>"
-                aria-label="Go to page: <?php the_title();?>"
-                title="Go to page: <?php the_title();?>"
-                data-dlev="adsClick",
-                data-dlcomp="ads - allpage",
-                data-dltgt="<?php the_title()?>">
+                aria-label="Go to page: <?php echo esc_attr( get_the_title() );?>"
+                title="Go to page: <?php echo esc_attr( get_the_title() );?>"
+                data-dlev="adsClick"
+                data-dlcomp="ads - allpage"
+                data-dltgt="<?php echo esc_attr(get_the_title()); ?>">
                   <figure>
-                    <img loading="eager" src="<?php echo esc_html(get_field('CampaignAllpageMiddle')['url']) ?>" width="100%" height="187" alt="<?php the_title() ?>">
+                    <img loading="eager" src="<?php echo esc_attr(get_field('CampaignAllpageMiddle')['url']) ?>" width="100%" height="187" alt="<?php echo esc_attr( get_the_title() ); ?>">
                   </figure>
                 </a>
             </div>
@@ -130,6 +130,7 @@ $randomItem = $postRotation[$randomKey];
           }
         endwhile; ?>
       </div>
-    <?php endif; ?>
+    <?php wp_reset_postdata(  );
+    endif; ?>
   </div>
 </div>

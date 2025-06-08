@@ -45,9 +45,30 @@
       'post_status' => $post_status,
       'paged' => $paged,
       'posts_per_page' => 12,
-      'meta_query' => $has_field,
+      'meta_query' => [
+        'relation' => 'AND',
+        $has_field
+      ],
   ];
   
+  if(isset($_GET['budget']) && $_GET['budget'] !== '' && $_GET['budget'] !== 'any') {
+    $arg['meta_query'][] = array(
+      'key' => 'MinPrice',
+      'value' => floatval($_GET['budget']),
+      'type' => 'NUMERIC',
+      'compare' => '<=',
+    );
+  }
+  
+  if(isset($_GET['guest']) && $_GET['guest'] !== '' && $_GET['guest'] !== 'any') {
+    $arg['meta_query'][] = array(
+      'key' => 'MaxGuest',
+      'value' => floatval($_GET['guest']),
+      'type' => 'NUMERIC',
+      'compare' => '>=',
+    );
+  }
+
   if($_GET['character']) {
     $arg['tax_query'][] = array(
       'taxonomy' => 'venue_character',

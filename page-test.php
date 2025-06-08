@@ -1,7 +1,6 @@
 <?php include get_stylesheet_directory() . '/components/header.php' ?>
 <main>
-  <?php include get_stylesheet_directory() . '/components/hero-banner.php' ?>
-  <?php include get_stylesheet_directory().'/components/search.php' ?>
+  <?php include get_stylesheet_directory() . '/components/front-page-header.php' ?>
 
   <?php $weddingfairArgs = array(
     'post_type' => 'wedding-fair',
@@ -15,9 +14,9 @@
   ?>
 
   <?php if ($weddingfair->have_posts()): ?>
-  <section class="html-lazy">
+  <section class="html-lazy section-stripe pt-4 pb-3">
     <div class="container-xl">
-      <div class="row mb-2">
+      <div class="row mb-3 align-items-center">
         <div class="col-lg">
           <h2 class="h1 wdl-localnav-heading mb-0">
             <?php _e('Wedding Fair & Event', 'wdl'); ?>
@@ -34,7 +33,7 @@
       </div>
       <div class="wdl-archive wdl-archive-extended">
 
-        <div class="swiper wdl-archive-swiper">
+        <div class="swiper swiper-loose wdl-archive-swiper">
           <div class="swiper-wrapper 
               <?php if ($_GET['order'] || $_GET['orderby'] || $_GET['key']) {
 
@@ -81,9 +80,9 @@
   ?>
   <?php
   if ($promotion->have_posts()): ?>
-  <section>
+  <section class="html-lazy section-stripe pt-4 pb-3 border-top">
     <div class="container-xl">
-      <div class="row mb-2">
+      <div class="row mb-3 align-items-center">
         <div class="col-lg">
           <h2 class="h1 wdl-localnav-heading mb-0">
             <?php _e('โปรโมชั่นแต่งงาน & แพ็กเกจแต่งงาน', 'wdl'); ?>
@@ -100,7 +99,7 @@
       </div>
       <div class="wdl-archive wdl-archive-extended">
 
-        <div id="promotions" class="swiper wdl-archive-swiper">
+        <div id="promotions" class="swiper swiper-loose wdl-archive-swiper">
           <div class="swiper-wrapper row-cols-archive-randomized">
             <?php
             while ($promotion->have_posts()): ?>
@@ -142,9 +141,9 @@
   ?>
   <?php
   if ($moment->have_posts()): ?>
-  <section>
+  <section class="html-lazy section-stripe pt-4 pb-3 border-top">
     <div class="container-xl">
-      <div class="row mb-2">
+      <div class="row mb-3 align-items-center">
         <div class="col-lg">
           <h2 class="h1 wdl-localnav-heading mb-0">
             <?php _e('Moment ประสบการณ์ราคาพิเศษ', 'wdl'); ?>
@@ -161,7 +160,7 @@
       </div>
       <div class="wdl-archive wdl-archive-extended">
 
-        <div id="promotions" class="swiper wdl-archive-swiper">
+        <div id="promotions" class="swiper swiper-loose wdl-archive-swiper">
           <div class="swiper-wrapper row-cols-archive-randomized">
             <?php
             while ($moment->have_posts()): ?>
@@ -201,7 +200,7 @@
 
   $venue = new WP_Query($venueArgs);?>
   <?php if ($venue->have_posts()): ?>
-  <section class="html-lazy">
+  <section class="html-lazy section-stripe pt-4 pb-3 border-top">
     <div class="container-xl">
       <div class="row g-2">
         <div class="col-auto">
@@ -218,7 +217,7 @@
           </a>
         </div>
       </div>
-      <div class="row mb-2">
+      <div class="row mb-3 align-items-center">
         <div class="col-auto pb-2 py-lg-1 text-start text-lg-end d-flex flex-wrap gap-3">
           <?php $venueType = get_field('VenueType');
           if ($venueType) {
@@ -281,7 +280,7 @@
         </div>
       </div>
       <div class="wdl-archive wdl-archive-extended">
-        <div class="swiper wdl-archive-swiper">
+        <div class="swiper swiper-loose wdl-archive-swiper">
           <div class="swiper-wrapper row-cols-archive-randomized">
 
             <?php while ($venue->have_posts()): ?>
@@ -324,81 +323,14 @@
     $vendor_type = get_terms(array(
       'taxonomy' => 'vendor-type',
       'hide_empty' => true,
-    ));
-
-    $vendorArgs = array(
-      'post_type' => 'vendor',
-      'order' => 'DESC',
-      'posts_per_page' => '9',
-      'orderby' => 'meta_value',
-      'meta_key' => 'Status',
-    );
-
-  $vendor = new WP_Query($vendorArgs); ?>
-  <?php if ($vendor->have_posts()): ?>
-  <section class="overflow-hidden html-lazy">
+    )); ?>
+  <?php if (!is_wp_error($vendor_type) && !empty($vendor_type)): ?>
+  <section class="html-lazy section-stripe pt-4 pb-3 border-top">
     <div class="container-xl">
-      <h2 class="h1 wdl-localnav-heading mb-0">
+      <h2 class="h1 wdl-localnav-heading mb-3">
         <?php _e('ผู้ให้บริการงานแต่งงาน', 'wdl')?>
       </h2>
-      <div class="swiper wdl-swiper-auto">
-        <ul class="swiper-wrapper nav flex-nowrap p-0 wdl-tab mb-2 wdl-tab-related" role="tablist">
-          <?php foreach ($vendor_type as $type) { ?>
-          <li role="tab" aria-controls="tab-vendor-<?php echo $type->slug ?>" class="swiper-slide w-auto nav-item">
-            <a data-bs-toggle="tab" data-bs-target="#tab-vendor-<?php echo $type->slug ?>" class="nav-link" href="#"><?php echo $type->name ?></a>
-          </li>
-          <?php } ?>
-        </ul>
-      </div>
-      <div class="tab-content wdl-tab-related-content">
-        <?php
-          foreach ($vendor_type as $type) {
-            $type_query = get_posts(
-              array(
-                'post_type' => 'vendor',
-                'posts_per_page' => 9,
-                'orderby' => 'meta_value',
-                'meta_key' => 'Status',
-                'order' => 'DESC',
-                'tax_query' => array(
-                  array(
-                    'taxonomy' => 'vendor-type',
-                    'field' => 'term_id',
-                    'terms' => $type->term_id,
-                  )
-                )
-              )
-            );
-
-            if ($type_query): ?>
-        <div id="tab-vendor-<?php echo $type->slug ?>" class="tab-pane fade">
-          <div class="wdl-archive wdl-archive-extended">
-            <div id="vendor-swiper" class="swiper wdl-archive-swiper">
-              <div class="swiper-wrapper row-cols-archive-randomized opacity-1">
-                <?php foreach ($type_query as $post): ?>
-                <?php include get_stylesheet_directory() . '/components/cards/card-vendor.php' ?>
-                <?php endforeach; ?>
-              </div>
-              <div class="swiper-navigation swiper-navigation-small">
-                <div class="swiper-button-prev"></div>
-                <div class="swiper-button-next"></div>
-              </div>
-              <div class="swiper-pagination"></div>
-            </div>
-
-            <div class="text-center mt-4 mb-2">
-              <a href="<?php echo esc_html(get_term_link($type)) ?>" class="wdl-btn-secondary"
-                data-dlev="buttonClick"
-                data-dlcomp="button - front page - vendor"
-                data-dltgt="Vendor">
-              <?php _e('ดูผู้ให้บริการทั้งหมด', 'wdl'); ?>
-              </a>
-            </div>
-          </div>
-        </div>
-        <?php endif;
-          } ?>
-      </div>
+      <?php include get_stylesheet_directory() . '/components/vendor-thumbnails.php' ?>
     </div>
   </section>
   <?php endif; ?>
@@ -413,9 +345,9 @@
   ?>
   <?php
   if ($video->have_posts()): ?>
-  <section class="mb-4">
+  <section class="html-lazy section-stripe pt-4 pb-3 border-top">
     <div class="container-xl">
-      <div class="row mb-2">
+      <div class="row mb-3 align-items-center">
         <div class="col-lg">
           <h2 class="h1 wdl-localnav-heading mb-0">
             <?php _e('รวมคลิปวิดีโอล่าสุด','wdl'); ?> <span class="badge wdl-badge-sm">มาใหม่</span>
@@ -430,7 +362,7 @@
           </a>
         </div>
       </div>
-      <div id="video" class="swiper wdl-video-swiper">
+      <div id="video" class="swiper swiper-loose wdl-video-swiper">
         <div class="swiper-wrapper">
           <?php while ($video->have_posts()): ?>
           <?php $video->the_post(); ?>
@@ -467,9 +399,9 @@
   ?>
   <?php
   if ($consultant->have_posts()): ?>
-  <section class="mb-4">
+  <section class="html-lazy section-stripe pt-4 pb-3 border-top">
     <div class="container-xl">
-      <div class="row mb-2">
+      <div class="row mb-3 align-items-center">
         <div class="col-lg">
           <h2 class="h1 wdl-localnav-heading mb-0">
             <?php _e('ที่ปรึกษาการจัดงาน','wdl'); ?> <span class="badge wdl-badge-sm">มาใหม่</span>
@@ -484,7 +416,7 @@
           </a>
         </div>
       </div>
-      <div id="consultant" class="swiper wdl-consultant-swiper overflow-x-clip">
+      <div id="consultant" class="swiper swiper-loose wdl-consultant-swiper swiper-loose overflow-x-clip">
         <div class="swiper-wrapper">
           <?php while ($consultant->have_posts()): ?>
           <?php $consultant->the_post(); ?>
@@ -512,16 +444,16 @@
   <?php $listingArgs = array(
     'post_type' => 'listing',
     'orderby' => 'meta_value',
-    'posts_per_page' => '8',
+    'posts_per_page' => '12',
   );
 
   $listing = new WP_Query($listingArgs);
   ?>
   <?php
   if ($listing->have_posts()): ?>
-  <section class="mb-4">
+  <section class="html-lazy section-stripe pt-4 pb-3 border-top">
     <div class="container-xl">
-      <div class="row mb-2">
+      <div class="row mb-3 align-items-center">
         <div class="col-lg">
           <h2 class="h1 wdl-localnav-heading mb-0">
             <?php _e('สถานที่จัดงานแต่งงานแนะนำ','wdl'); ?> <span class="badge wdl-badge-sm">มาใหม่</span>
@@ -561,10 +493,11 @@
     array(
       'post_type' => 'post',
       'posts_per_page' => '12',
+      'category__not_in' => [get_term_by('slug', 'ข่าวสาร', 'category')->term_id, get_term_by('slug', 'announcement-en', 'category')->term_id]
     )
   ) ?>
 
-  <section class="pb-5 html-lazy">
+  <section class="html-lazy section-stripe pt-4 pb-3 border-top">
     <div class="container-xl">
       <h2 class="h1 wdl-localnav-heading mb-0">
         <?php _e('บทความล่าสุด', 'wdl')?>
@@ -574,12 +507,17 @@
           data-dlev="tagClick",
           data-dlcomp="tag - front page - post category",
           data-dltgt="<?php _e('ทั้งหมด', 'wdl') ?>"
-          href="<?php get_permalink(get_page_by_path('blog')) ?>" class="wdl-badge-sm-primary"><?php _e('ทั้งหมด', 'wdl') ?></a>
+          href="<?php get_the_permalink(get_page_by_path('blog')) ?>" class="wdl-badge-sm-primary"><?php _e('ทั้งหมด', 'wdl') ?></a>
+        <!-- <a
+          data-dlev="tagClick",
+          data-dlcomp="tag - front page - post category",
+          data-dltgt="<?php echo get_category( get_cat_ID('ข่าวประชาสัมพันธ์'))->name?>"
+          href="<?php echo esc_html(get_category_link(get_cat_ID('ข่าวประชาสัมพันธ์'))) ?>" class="wdl-badge-sm-secondary"><?php echo get_category( get_cat_ID('ข่าวประชาสัมพันธ์'))->name?></a> -->
         <a
           data-dlev="tagClick",
           data-dlcomp="tag - front page - post category",
-          data-dltgt="<?php echo get_category( get_cat_ID('รีวิวแต่งงาน'))->name?>"
-          href="<?php echo esc_html(get_category_link(get_cat_ID('รีวิวแต่งงาน'))) ?>" class="wdl-badge-sm-secondary"><?php echo get_category( get_cat_ID('รีวิวแต่งงาน'))->name?></a>
+          data-dltgt="<?php echo get_category( get_cat_ID('รีวิวงานแต่ง & สถานที่จัดงานแต่งงาน'))->name?>"
+          href="<?php echo esc_html(get_category_link(get_cat_ID('รีวิวงานแต่ง & สถานที่จัดงานแต่งงาน'))) ?>" class="wdl-badge-sm-secondary"><?php echo get_category( get_cat_ID('รีวิวงานแต่ง & สถานที่จัดงานแต่งงาน'))->name?></a>
         <a
           data-dlev="tagClick",
           data-dlcomp="tag - front page - post category",
@@ -592,7 +530,7 @@
           href="<?php echo esc_html(get_category_link(get_cat_ID('ฤกษ์แต่งงาน'))) ?>" class="wdl-badge-sm-secondary"><?php echo get_category( get_cat_ID('ฤกษ์แต่งงาน'))->name?></a>
       </div>
       <?php if ($postAll->have_posts()): ?>
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-4 g-2 wdl-archive wdl-archive-extended opacity-1">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-4 row-cols-xl-5 g-2 g-lg-4 wdl-archive pt-3 opacity-1">
         <?php while ($postAll->have_posts()): ?>
         <?php $postAll->the_post(); ?>
         <div class="col">
@@ -618,9 +556,56 @@
     </div>
   </section>
 
+
+  <?php
+  $announcement = new WP_Query(
+    array(
+      'post_type' => 'post',
+      'post_status' => 'publish',
+      'posts_per_page' => '8',
+      'category_name' => 'ข่าวสาร,announcement-en',
+    )
+  ) ?>
+  <?php if($announcement->have_posts()) { ?>
+  <section class="html-lazy section-stripe pt-4 pb-3 border-top wdl-archive wdl-archive-extended">
+    <div class="container-xl">
+
+      <div class="row mb-3 align-items-center">
+        <div class="col-lg">
+          <h2 class="h1 wdl-localnav-heading mb-0">
+            <?php _e('ข่าวประชาสัมพันธ์', 'wdl')?>
+          </h2>
+        </div>
+        <div class="col-lg text-lg-end d-none d-lg-block">
+          <a href="<?php echo home_url( '/blog/category/ข่าวสาร' ) ?>" class="wdl-btn-secondary"
+            data-dlev="buttonClick"
+            data-dlcomp="button - front page - listing"
+            data-dltgt="Listing">
+            <?php _e('ดูข่าวประชาสัมพันธ์ทั้งหมด', 'wdl') ?>
+          </a>
+        </div>
+      </div>
+      <?php if ($announcement->have_posts()): ?>
+      <div class="swiper swiper-loose wdl-archive-swiper">
+        <div class="swiper-wrapper">
+          <?php while ($announcement->have_posts()): ?>
+          <?php $announcement->the_post(); ?>
+          <?php include get_stylesheet_directory() . '/components/cards/card-post.php' ?>
+          <?php endwhile; wp_reset_postdata(); ?>
+        </div>
+        <div class="swiper-navigation swiper-naivgation-small">
+          <div class="swiper-button-prev"></div>
+          <div class="swiper-button-next"></div>
+        </div>
+        <div class="swiper-pagination"></div>
+      </div>
+      <?php endif; ?>
+    </div>
+  </section>
+  <?php } ?>
+
   <?php include get_stylesheet_directory() . '/components/compare-bar.php' ?>
 </main>
 
-<?php include get_stylesheet_directory() . '/components/form-lead.php' ?>
 <?php include get_stylesheet_directory() . '/components/popup-ads.php' ?>
 <?php include get_stylesheet_directory() . '/components/footer.php' ?>

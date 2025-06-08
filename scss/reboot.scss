@@ -179,3 +179,17 @@ table:not(.table-borderless) {
 .lazyloading {
   opacity: 1 !important;
 } */
+
+.swiper-fade {
+  .swiper-slide {
+    opacity: 0;
+
+    &.swiper-slide-active {
+      opacity: 1;
+    }
+  }
+}
+
+.wp-caption {
+  max-width: 100%;
+}

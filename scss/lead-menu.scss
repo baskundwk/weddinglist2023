@@ -61,7 +61,7 @@
       width: 100%;
       aspect-ratio: 3.4/1;
       @media (max-width: 767px) {
-        max-height: 90px;
+        max-height: 40px;
         aspect-ratio: auto;
       }
     }
@@ -119,7 +119,7 @@
       width: 100%;
       aspect-ratio: 3.4/1;
       @media (max-width: 767px) {
-        max-height: 90px;
+        max-height: 40px;
         aspect-ratio: auto;
       }
     }
@@ -133,7 +133,7 @@
 
     strong {
       font-size: 1rem;
-      font-weight: 700;
+      font-weight: 400;
     }
 
     @media (max-width: 991px) {
@@ -154,7 +154,7 @@
     .menu-item {
       aspect-ratio: 2/1;
       min-width: 180px !important;
-      min-height: 90px;
+      min-height: 40px;
       flex: 1 1 0;
     }
   }
@@ -162,9 +162,9 @@
 .wdl-lead-menu {
   position: sticky;
   left: 0;
-  top: var(--header-height, 70px);
+  top: var(--header-height, 40px);
   width: 100%;
-  height: 70px;
+  height: 40px;
   box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.15);
   z-index: 99997;
   background: rgba(255, 255, 255, 0.9);
@@ -176,7 +176,7 @@
   overflow: hidden;
 
   @include max-width-md {
-    height: 55px;
+    height: 40px;
   }
 
   .wdl-lead-menu-swiper {
@@ -195,14 +195,12 @@
       width: auto;
       > a {
         display: flex;
-        flex-direction: column;
         align-items: center;
         justify-content: center;
-        width: fit-content;
-        min-width: 70px;
-        flex: 0 0 auto;
-        height: 70px;
-        gap: 4px;
+        width: max-content;
+        flex: 1 0 auto;
+        height: 40px;
+        gap: 8px;
         color: #333333;
         font-size: 12px;
         line-height: 1.5;
@@ -211,13 +209,13 @@
         white-space: nowrap;
 
         @include max-width-md {
-          min-width: 50px;
-          height: 55px;
+          height: 40px;
         }
 
         img {
           width: 24px;
           height: 24px;
+          flex: 1 0 auto;
           margin: 0;
           display: block;
           transition: .35s cubic-bezier(0,0,0,1);
@@ -255,10 +253,10 @@
   }
 }
 .admin-bar .wdl-lead-menu {
-  top: calc(var(--header-height, 70px) + 32px);
+  top: calc(var(--header-height, 40px) + 32px);
   
   @media (max-width: 782px) {
-    top: calc(var(--header-height, 70px) + 46px);
+    top: calc(var(--header-height, 40px) + 46px);
   }
 }
 .wdl-lead-menu-revamped-container {
@@ -297,7 +295,7 @@
     align-items: center;
     text-align: center;
     color: #333333;
-    font-weight: 700;
+    font-weight: 400;
     font-size: 16px;
     flex: 1 0 auto;
     padding: 0;
@@ -324,7 +322,7 @@
     }
 
     @include max-width-xl {
-      width: 190px;
+      width: 140px;
     }
 
     @include max-width-md {

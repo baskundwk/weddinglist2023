@@ -38,7 +38,7 @@
 							$relatedVenue = get_field('RelatedVenue');
 							if ($relatedVenue):
 								foreach ($relatedVenue as $venue):
-									$venuePermalink = get_permalink($venue->ID);
+									$venuePermalink = get_the_permalink($venue->ID);
 									$venueTitle = get_the_title($venue->ID); ?>
 									<p class="wdl-archive-location mb-0"><a href="<?php echo esc_html($venuePermalink) ?>">
 											<?php echo esc_html($venueTitle); ?>

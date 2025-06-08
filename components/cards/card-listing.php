@@ -71,12 +71,11 @@ $itemQuery = new WP_Query(
       <?php endif ?>
       <?php $venueCharacter = get_field('Character');
         if ($venueCharacter): ?>
-      <?php //foreach ($venueCharacter as $character):
-                  $characterBackground = get_field('CharacterBackground', $venueCharacter);
-                  $characterBorder = get_field('CharacterBorder', $venueCharacter);
-                  $characterColor = get_field('CharacterColor', $venueCharacter);
-                  $characterEffect = get_field('CharacterEffect', $venueCharacter);
-                  ?>
+      <?php foreach ($venueCharacter as $character):
+        $characterBackground = get_field('CharacterBackground', $character);
+        $characterBorder = get_field('CharacterBorder', $character);
+        $characterColor = get_field('CharacterColor', $character);
+        $characterEffect = get_field('CharacterEffect', $character);?>
       <div class="wdl-character
       <?php if ($characterBorder) {
         echo ('wdl-character-border');
@@ -92,10 +91,10 @@ $itemQuery = new WP_Query(
       --color-0: rgba(<?php echo esc_html($characterColor['red']) ?>,<?php echo esc_html($characterColor['green']) ?>,<?php echo esc_html($characterColor['blue']) ?>, 0);
     " <?php endif ?>>
         <span>
-          <?php echo esc_html($venueCharacter->name); ?>
+          <?php echo esc_html($character->name); ?>
         </span>
       </div>
-      <?php //endforeach; ?>
+      <?php endforeach; ?>
       <?php endif ?>
     </a>
     <div class="wdl-listing-card-detail-address">
@@ -189,7 +188,7 @@ $itemQuery = new WP_Query(
       </div>
     </div>
     <div class="wdl-listing-card-detail-action">
-      <a href="#" class="wdl-btn wdl-form-general-direct" data-bs-toggle="modal" data-bs-target=".wdl-form-general-modal">
+      <a href="<?php echo get_the_permalink().'#apply'?>" class="wdl-btn wdl-form-general-direct">
         <?php _e('คลิกขอแพ็กเกจ', 'wdl'); ?>
       </a>
       <a href="<?php the_permalink(); ?>" class="wdl-btn-more">

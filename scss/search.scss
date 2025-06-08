@@ -82,6 +82,8 @@
   }
 
   select {
+    -webkit-appearance: none;
+    appearance: none;
     width: auto !important;
     max-width: 140px !important;
     font-size: 0.875rem;
@@ -94,6 +96,10 @@
     padding: 2px 8px 2px 4px;
     border-left: 1px solid #dddddd !important;
     border-right: 1px solid #dddddd !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' fill='%23000000' viewBox='0 0 256 256'%3E%3Cpath d='M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z'%3E%3C/path%3E%3C/svg%3E");
+    background-size: 12px 12px;
+    background-position: center right 8px;
+    background-repeat: no-repeat;
   }
 }
 

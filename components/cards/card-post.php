@@ -5,13 +5,13 @@
       href="<?php the_permalink(); ?>"
       title="<?php echo get_the_title()?>"
       aria-label="<?php echo get_the_title()?>">
-      <img loading="lazy" src="<?php echo esc_html(get_the_post_thumbnail_url($post, 'medium_large')) ?>" width="100%" alt="<?php echo get_the_title()?>">
+      <img loading="lazy" src="<?php echo esc_html(get_the_post_thumbnail_url($post, 'w425')) ?>" width="100%" alt="<?php echo get_the_title()?>">
       <div class="swiper-lazy-preloader"></div>
     </a>
   <?php endif; ?>
 
   <div class="card-body wdl-archive-card-body">
-    <div class="wdl-badge-container mb-1">
+    <?php /* <div class="wdl-badge-container mb-1">
       <?php
       $date = get_field('Date');
       if ($date): ?>
@@ -23,9 +23,9 @@
       if ($hotDeal && in_array('Hot Deal', $hotDeal)): ?>
         <span class="badge wdl-badge-sm">Hot Deal</span>
       <?php endif; ?>
-    </div>
+    </div> */ ?>
 
-    <h3 class="wdl-archive-title mb-0">
+    <h3 class="wdl-archive-title mb-0 lineclamp-2">
       <a
         href="<?php the_permalink(); ?>"
         title="<?php echo get_the_title() ?>"
@@ -38,9 +38,9 @@
     $relatedVenue = get_field('RelatedVenue');
     if ($relatedVenue):
       foreach ($relatedVenue as $venue):
-        $venuePermalink = get_permalink($venue->ID);
+        $venuePermalink = get_the_permalink($venue->ID);
         $venueTitle = get_the_title($venue->ID); ?>
-        <p class="wdl-archive-location"><a href="<?php echo esc_html($venuePermalink) ?>">
+        <p class="wdl-archive-location mt-2 lineclamp-1"><a href="<?php echo esc_html($venuePermalink) ?>">
             <?php echo esc_html($venueTitle); ?>
           </a></p>
       <?php endforeach;

@@ -3,7 +3,7 @@
 <main>
   <section>
     <div class="container-xl">
-      <div class="row pb-3 pt-lg-3">
+      <div class="row pb-3 pt-xl-3">
         <?php $banner = get_field('Banner');
         if ($banner): ?>
           <div class="col-12 order-xl-2 pb-0 px-0 px-xl-3">
@@ -101,7 +101,7 @@
           $relatedVenue = get_field('RelatedVenue');
           if ($relatedVenue):
             foreach ($relatedVenue as $venue):
-              $venuePermalink = get_permalink($venue->ID);
+              $venuePermalink = get_the_permalink($venue->ID);
               $venueTitle = get_the_title($venue->ID); ?>
               <p class="wdl-archive-location mb-0">
                 <a class="wdl-data-venue" href="<?php echo esc_html($venuePermalink) ?>">

@@ -12,15 +12,15 @@
   }?>">
   <?php if (has_post_thumbnail(get_the_ID())): ?>
     <a 
-      aria-label="<?php echo get_the_title(); ?>"
+      aria-label="<?php echo esc_attr(get_the_title()); ?>"
       class="card-img-top wdl-archive-card-img-top"
       title="<?php echo get_the_title(); ?>" href="<?php the_permalink(); ?>"
-      data-dlev="cardClick",
-      data-dlcomp="card - wedding-fair",
-      data-dltgt="<?php the_title() ?>"
+      data-dlev="cardClick"
+      data-dlcomp="card - wedding-fair"
+      data-dltgt="<?php echo esc_attr(get_the_title()) ?>"
     >
-      <img loading="lazy" src="<?php echo esc_html(wp_get_attachment_image_src(get_post_thumbnail_id(), 'medium_large')[0]) ?>" srcset="<?php echo esc_html(wp_get_attachment_image_src(get_post_thumbnail_id(), 'medium_large')[0]) ?> 1x,
-            <?php echo esc_html(wp_get_attachment_image_src(get_post_thumbnail_id(), 'medium_large')[0]) ?> 2x" alt="<?php get_the_title() ?>">
+      <img loading="lazy" src="<?php echo esc_html(wp_get_attachment_image_src(get_post_thumbnail_id(), 'w425')[0]) ?>" srcset="<?php echo esc_html(wp_get_attachment_image_src(get_post_thumbnail_id(), 'w425')[0]) ?> 1x,
+            <?php echo esc_html(wp_get_attachment_image_src(get_post_thumbnail_id(), 'w425')[0]) ?> 2x" alt="<?php get_the_title() ?>">
 
       <?php if(isset($campaignModeEnabled) && isset($campaignRelated['WeddingFair']) && in_array(get_the_ID(), $campaignRelated['WeddingFair'])) {
         echo $campaignLogo;
@@ -29,7 +29,7 @@
     </a>
   <?php endif; ?>
 
-  <div class="card-select wdl-checkbox">
+  <?php /* <div class="card-select wdl-checkbox">
     <input class="card-select-input" id="card-select-<?php the_ID() ?>" type="checkbox" data-select='
           {
             "title": "<?php the_title() ?>",
@@ -39,7 +39,7 @@
     <label for="card-select-<?php the_ID() ?>">
       <?php _e('เลือก', 'wdl') ?>
     </label>
-  </div>
+  </div> */ ?>
 
   <div class="card-body wdl-archive-card-body">
     <div class="wdl-badge-container mb-1">
@@ -78,12 +78,12 @@
     </div>
     <h3 class="wdl-archive-title mb-0">
       <a
-        href="<?php the_permalink(); ?>"
-        title="<?php echo get_the_title() ?>"
-        data-label="<?php echo get_the_title() ?>"
-        data-dlev="cardClick",
-        data-dlcomp="card - wedding-fair",
-        data-dltgt="<?php the_title() ?>"
+        href="<?php echo esc_attr(get_the_permalink()); ?>"
+        title="<?php echo esc_attr(get_the_title()) ?>"
+        data-label="<?php echo esc_attr(get_the_title()) ?>"
+        data-dlev="cardClick"
+        data-dlcomp="card - wedding-fair"
+        data-dltgt="<?php echo esc_attr(get_the_title()) ?>"
       >
         <?php the_title(); ?>
       </a>
@@ -93,13 +93,13 @@
     $relatedVenue = get_field('RelatedVenue');
     if ($relatedVenue):
       foreach ($relatedVenue as $venue):
-        $venuePermalink = get_permalink($venue->ID);
+        $venuePermalink = get_the_permalink($venue->ID);
         $venueTitle = get_the_title($venue->ID); ?>
         <p class="wdl-archive-location">
-          <a href="<?php echo esc_html($venuePermalink) ?>"
-            data-dlev="cardClick",
-            data-dlcomp="card - wedding-fair",
-            data-dltgt="<?php echo get_the_title().' -> '.esc_html($venueTitle) ?>">
+          <a href="<?php echo esc_attr($venuePermalink) ?>"
+            data-dlev="cardClick"
+            data-dlcomp="card - wedding-fair"
+            data-dltgt="<?php echo esc_attr(get_the_title()).' - '.esc_attr($venueTitle) ?>">
             <?php echo esc_html($venueTitle); ?>
           </a>
         </p>
@@ -121,10 +121,10 @@
     );
 
     if ($coupon): ?>
-      <a class="d-flex flex-wrap gap-2 align-items-stretch" href="<?php the_permalink(); ?>"
-        data-dlev="cardClick",
-        data-dlcomp="card - wedding-fair",
-        data-dltgt="<?php the_title() ?>"
+      <a class="d-flex flex-wrap gap-2 align-items-stretch" href="<?php echo esc_attr(get_the_permalink()); ?>"
+        data-dlev="cardClick"
+        data-dlcomp="card - wedding-fair"
+        data-dltgt="<?php echo esc_attr(get_the_title()) ?>"
       >
         <?php foreach ($coupon as $singleCoupon): ?>
           <div class="wdl-coupon-picker wdl-coupon-picker-small">
@@ -144,11 +144,11 @@
   </div>
 
   <div class="card-footer">
-    <a href="#" class="wdl-btn-cta wdl-form-general-direct" data-bs-toggle="modal" data-bs-target=".wdl-form-general-modal"><?php _e('ลงทะเบียนร่วมงาน', 'wdl')?></a>
-    <a href="<?php the_permalink() ?>" class="wdl-btn-more"
-      data-dlev="cardClick",
-      data-dlcomp="card - wedding-fair",
-      data-dltgt="<?php the_title() ?>"
+    <a href="<?php echo esc_attr(get_the_permalink()).'#apply'?>" class="wdl-btn-cta wdl-form-general-direct"><?php _e('ลงทะเบียนร่วมงาน', 'wdl')?></a>
+    <a href="<?php echo esc_attr(get_the_permalink()) ?>" class="wdl-btn-more"
+      data-dlev="cardClick"
+      data-dlcomp="card - wedding-fair"
+      data-dltgt="<?php echo esc_attr(get_the_title()) ?>"
     ><?php _e('ดูรายละเอียด', 'wdl') ?></a>
   </div>
 </div>

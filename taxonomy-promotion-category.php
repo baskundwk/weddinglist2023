@@ -93,7 +93,7 @@
                 $relatedVenue = get_field('RelatedVenue');
                 if ($relatedVenue):
                   foreach ($relatedVenue as $venue):
-                    $venuePermalink = get_permalink($venue->ID);
+                    $venuePermalink = get_the_permalink($venue->ID);
                     $venueTitle = get_the_title($venue->ID); ?>
               <p class="wdl-archive-location mb-0"><a href="<?php echo esc_html($venuePermalink) ?>">
                   <?php echo esc_html($venueTitle); ?>
@@ -138,7 +138,7 @@
             </div>
 
             <div class="card-footer">
-              <a href="#" class="wdl-btn-cta wdl-form-general-direct" data-bs-toggle="modal" data-bs-target=".wdl-form-general-modal"><?php _e('คลิกขอแพ็กเกจ', 'wdl') ?></a>
+              <a href="#<?php echo get_the_permalink().'#apply'?>" class="wdl-btn-cta wdl-form-general-direct"><?php _e('คลิกขอแพ็กเกจ', 'wdl') ?></a>
               <a href="<?php the_permalink() ?>" class="wdl-btn-more"><?php _e('ดูรายละเอียด', 'wdl') ?></a>
             </div>
           </div>
@@ -160,8 +160,6 @@
     include get_stylesheet_directory().'/components/result-empty.php';
   ?>
   <?php endif; ?>
-  <?php include get_stylesheet_directory().'/components/compare-bar.php' ?>
 
 </main>
-<?php include get_stylesheet_directory().'/components/form-lead.php' ?>
 <?php include get_stylesheet_directory().'/components/footer.php' ?>

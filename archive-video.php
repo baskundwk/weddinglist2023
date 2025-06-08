@@ -3,7 +3,7 @@
 <main>
   <?php include get_stylesheet_directory().'/components/search.php' ?>
   <?php include get_stylesheet_directory().'/queries/query-video.php' ?>
-  <section class="pt-2">
+  <section class="pt-4">
     <div class="container-xl">
       <div class="row mb-4">
         <div class="col">
@@ -69,5 +69,4 @@
   <?php endif; ?>
   
 </main>
-<?php include get_stylesheet_directory().'/components/form-lead.php' ?>
 <?php include get_stylesheet_directory().'/components/footer.php' ?>

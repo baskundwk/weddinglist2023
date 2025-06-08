@@ -135,6 +135,7 @@
   line-height: 1;
   display: inline-block;
   transition: 0.35s cubic-bezier(0, 0, 0, 1);
+  vertical-align: middle;
 
   a {
     color: #ff2758 !important;
@@ -205,5 +206,7 @@
 .wdl-badge-sm-subtle {
   color: #888888;
   font-weight: 600;
+  font-size: 13px;
+  line-height: 13px;
   padding: 0;
 }

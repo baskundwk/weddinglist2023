@@ -1,13 +1,13 @@
 <div class="wdl-filter mb-2">
   <div class="wdl-filter-detail swiper wdl-swiper-auto">
     <div class="swiper-wrapper">
-      <div class="swiper-slide w-auto">
+      <!-- <div class="swiper-slide w-auto">
         <div class="dropdown wdl-dropdown">
           <div class="wdl-btn-filter <?php if ($_GET['type']) { echo 'active'; }?>" data-bs-toggle="dropdown" aria-expanded="false">
             <?php if ($_GET['type'] || get_queried_object()->taxonomy): ?>
-            <i data-feather="users"></i><?php echo(get_term(get_queried_object()->term_id, 'vendor-type')->name); ?>
+            <i data-feather="users"></i> <?php echo(get_term(get_queried_object()->term_id, 'vendor-type')->name); ?>
             <?php else: ?>
-            <i data-feather="users"></i><?php _e('ประเภทผู้ให้บริการ', 'wdl'); ?>
+            <i data-feather="users"></i> <?php _e('ประเภทผู้ให้บริการ', 'wdl'); ?>
             <?php endif; ?>
             <i data-feather="chevron-down"></i>
           </div>
@@ -33,7 +33,7 @@
             <?php endforeach; ?>
           </ul>
         </div>
-      </div>
+      </div> -->
       <!-- <div class="swiper-slide w-auto">
         <div class="dropdown wdl-dropdown">
           <div class="wdl-btn-filter" data-bs-toggle="dropdown" aria-expanded="false">
@@ -147,5 +147,4 @@
       </div>
     </div>
   </div>
-</div>
 </div>

@@ -58,6 +58,11 @@
         )
       )
     );
+
+
+    if(isset($_GET['keyword']) && !empty($_GET['keyword'])) {
+      $arg['s'] = sanitize_text_field($_GET['keyword']);
+    }
   
     if($_GET['character']) {
       $arg['tax_query'][] = array(
@@ -72,16 +77,29 @@
   <section>
     <div class="container-xl">
       <div class="row">
+        <div class="col-lg">
+          <a href="<?php echo home_url( '/vendor' )?>" class="d-block my-2"><i data-feather="arrow-left"></i> ผู้ให้บริการทั้งหมด</a>
+        </div>
+        <div class="col-lg">
+          <?php include get_stylesheet_directory() . '/components/filters/filter-vendor.php' ?>
+        </div>
+      </div>
+      <div class="row">
         <div class="col">
           <h1 class="mb-0">
-            <?php echo do_shortcode('[seo_title]') ?>
+            <?php if(isset($_GET['keyword']) && !empty($_GET['keyword'])) {
+              echo __('ผลการค้นหา', 'wdl') . ' : ' . esc_html(sanitize_text_field($_GET['keyword'])) . ' - ' . get_queried_object()->name; 
+            } else {
+              _e('Weddinglist รวมผู้ให้บริการ Catering ยอดนิยม ทั่วประเทศ', 'wdl');
+            }
+            ?>
           </h1>
           <p class="text-secondary mb-2">
-            <?php echo do_shortcode('[seo_description]') ?>
+            <?php _e('Platform ที่รวบรวมสถานที่จัดงานแต่งงาน โรงแรม เวนิว ร้านอาหาร สถานที่จัดเลี้ยง ตอบทุกโจทย์ความต้องการแต่งงานของเจ้าบ่าวเจ้าสาว พร้อมเช็คราคาฟรี') ?>
           </p>
         </div>
       </div>
-      <?php include 'components/filters/filter-vendor.php' ?>
+      <div class="mb-3"><?php include get_stylesheet_directory() . '/components/subvendor-thumbnails.php' ?></div>
     </div>
   </section>
   <?php if (have_posts()): ?>
@@ -170,8 +188,6 @@
   </section>
   <?php endif; ?>
 
-  <?php include 'components/compare-bar.php' ?>
 </main>
 
-<?php include 'components/form-general.php' ?>
 <?php include 'components/footer.php' ?>

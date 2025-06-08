@@ -15,6 +15,7 @@ function wdl_enqueue_styles()
 	wp_enqueue_script('swiperjs', get_theme_file_uri() . '/library/swiperjs/swiper-bundle.min.js', array('jquery'), '', true);
 	wp_enqueue_script('qrcodejs', get_theme_file_uri() . '/library/qrcodejs/qrcode.min.js', array('jquery'), '', true);
 	wp_enqueue_script('theme-script', get_theme_file_uri() . '/script.js', array('jquery'), '', true);
+	wp_enqueue_script('friendlysearch', get_theme_file_uri() . '/friendlysearch.js', array('jquery'), '', true);
 	wp_enqueue_script('data-layer', get_theme_file_uri() . '/data-layer.js', array('jquery'), '', true);
 }
 add_action('wp_enqueue_scripts', 'wdl_enqueue_styles', 1001);
@@ -99,25 +100,32 @@ add_action('wp_ajax_send_email', 'send_email');
 add_action('wp_ajax_nopriv_send_email', 'send_email');
 
 function send_email() {
-	$toClient = $_REQUEST['toClient'];
-	$name = $_REQUEST['name'];
-	$tel = $_REQUEST['tel'];
-	$email = $_REQUEST['email'];
-	$lineid = $_REQUEST['lineid'];
-	$guest = $_REQUEST['guest'];
-	$budget = $_REQUEST['budget'];
-	$date = $_REQUEST['date'];
-	$daytime = $_REQUEST['daytime'];
-	$packageType = $_REQUEST['packageType'];
-	$message = $_REQUEST['message'];
-	$cardId = $_REQUEST['cardId'];
-	$selectedCoupon = $_REQUEST['selectedCoupon'];
-	$selectedCouponArray = explode(',', $selectedCoupon);
-
+	//$toClient = $_REQUEST['toClient'];
+	$name = sanitize_text_field($_REQUEST['name'] ?? '');
+	$tel = sanitize_text_field($_REQUEST['tel'] ?? '');
+	$email = sanitize_text_field($_REQUEST['email'] ?? '');
+	$lineid = sanitize_text_field($_REQUEST['lineid'] ?? '');
+	$guest = sanitize_text_field($_REQUEST['guest'] ?? '');
+	$budget = sanitize_text_field($_REQUEST['budget'] ?? '');
+	$date = sanitize_text_field($_REQUEST['date'] ?? '');
+	$daytime = sanitize_text_field($_REQUEST['daytime'] ?? '');
+	$packageType = sanitize_text_field($_REQUEST['packageType'] ?? '');
+	$message = sanitize_text_field($_REQUEST['message'] ?? '');
+	$cardId = sanitize_text_field($_REQUEST['cardId'] ?? '');
+	$selectedCoupon = sanitize_text_field($_REQUEST['selectedCoupon'] ?? '');
 	$selectedCouponTitle = [];
 
-	foreach ($selectedCouponArray as $id) {
-		$selectedCouponTitle[] = '"' . get_the_title($id) . '"';
+	$selectedCouponArray = [];
+
+	if(isset($selectedCoupon)) {
+		$selectedCouponArray = explode(',', $selectedCoupon);
+
+		foreach ($selectedCouponArray as $id) {
+			$title = get_the_title($id);
+			if (!empty($title)) {
+					$selectedCouponTitle[] = '"' . $title . '"';
+			}
+		}
 	}
 
 	$selectedCouponBody = '';
@@ -132,10 +140,13 @@ function send_email() {
 		$packageTypeBody = '<li>ประเภทแพ็คเกจ : <strong>' . $packageType . '</strong></li>';
 	}
 
+	echo "<script>console.log(" . json_encode($_REQUEST) . ");</script>";
+
+
 
 	//$appoint = $_REQUEST['appoint'];
-	$appointDate = $_REQUEST['appointDate'];
-	$appointTime = $_REQUEST['appointTime'];
+	$appointDate = sanitize_text_field($_REQUEST['appointDate']) ?? '';
+	$appointTime = sanitize_text_field($_REQUEST['appointTime']) ?? '';
 
 	$appointStatement = '';
 	if ($appointDate !== '' || $appointTime !== '') {
@@ -144,16 +155,17 @@ function send_email() {
 
 	$recepient = get_field('Email', $cardId);
 	if (get_post_type($cardId) === 'coupon') {
-		$recepient = "";
-		if (get_field('Venue', $cardId)) {
-			$venue = get_field('Venue', $cardId);
-
-			foreach ($venue as $item) {
-				$recepient != "" && $recepient .= ",";
-				$recepient .= get_field('Email', $item->ID);
-			}
-		}
+    $recepient = ""; 
+    if ($venue = get_field('Venue', $cardId)) {
+        foreach ($venue as $item) {
+            if (!empty($recepient)) {
+                $recepient .= ",";
+            }
+            $recepient .= get_field('Email', $item->ID);
+        }
+    }
 	}
+
 
 	$cardTitle = str_replace("&#038;", "&", get_the_title($cardId));
 	$microsite = get_field('Microsite', $cardId);
@@ -213,10 +225,11 @@ function send_email() {
 		"		</div>" .
 		"	</div>" .
 		"</div>";
-
-	$mail = wp_mail($to, $subject, $email_body, $headers);
-
-	$lead_type = $_REQUEST['leadType'];
+	
+		if (!empty($to)) {
+		$mail = wp_mail($to, $subject, $email_body, $headers);
+	}
+	$lead_type = sanitize_text_field($_REQUEST['leadType']) ?? 'General';
 
 
 	$post_type = get_post_type($cardId);
@@ -225,7 +238,8 @@ function send_email() {
 	if ($post_type === 'venue' || $post_type === 'vendor') {
 		$venue = $cardTitle;
 	} else {
-		$venue = get_field('RelatedVenue', $cardId)[0]->post_title;
+		$relatedVenue = get_field('RelatedVenue', $cardId);
+		$venue = !empty($relatedVenue) ? $relatedVenue[0]->post_title : '';
 	}
 
 	$otp = rand(100000, 999999);
@@ -246,7 +260,7 @@ function send_email() {
 			'source' => $cardTitle,
 			'venue' => $venue,
 			'type' => $lead_type,
-			'appointment' => $appointDate . ' - ' . $appointTime,
+			'appointment' => trim($appointDate . ' - ' . $appointTime, ' -'),
 			'coupon' => implode(', ', $selectedCouponTitle),
 			'package-type' => $packageType,
 			'otp' => $otp,
@@ -281,12 +295,17 @@ function send_email() {
 
 }
 
+add_action('wp_ajax_send_email_coupon', 'send_mail_coupon');
+add_action('wp_ajax_nopriv_send_email_coupon', 'send_mail_coupon');
+
 function send_mail_coupon($email, $name, $banners, $couponNames, $coupons, $pid, $cid) {
 	$headers = "MIME-Version: 1.0" . "\r\n";
 	$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
 	$headers .= "From: Weddinglist Team <support@weddinglist.co.th> \r\n";
 	$headers .= "Reply-To: support@weddinglist.co.th \r\n";
 	$headers .= "Bcc: support@weddinglist.co.th \r\n";
+	$headers .= "Return-Path: support@weddinglist.co.th \r\n";
+
 
 	$file = get_theme_file_uri() . '/images/logo-w.png'; //phpmailer will load this file
 
@@ -362,6 +381,68 @@ function send_mail_coupon($email, $name, $banners, $couponNames, $coupons, $pid,
 		"</div>";
 
 	$mailClient = wp_mail($email, 'นำส่งคูปองเพื่อยืนยันสิทธิ์' . $couponNames . ' จากทาง Weddinglist', $email_body_client, $headers);
+}
+
+add_action('wp_ajax_send_email_business', 'send_email_business');
+add_action('wp_ajax_nopriv_send_email_business', 'send_email_business');
+
+function send_email_business() {
+	$name = sanitize_text_field($_REQUEST['name'] ?? '');
+	$businessType = sanitize_text_field($_REQUEST['businessType'] ?? '');
+	$contactName = sanitize_text_field($_REQUEST['contactName'] ?? '');
+	$contactTel = sanitize_text_field($_REQUEST['contactTel'] ?? '');
+	$contactEmail = sanitize_text_field($_REQUEST['contactEmail'] ?? '');
+	$message = sanitize_text_field($_REQUEST['message'] ?? '');
+	$timestamp = sanitize_text_field(wp_date("d M Y H:i:s", null));
+
+	$subject = "คำขอลงทะเบียนธุรกิจจาก $name";
+	$to = 'event@weddinglist.co.th';
+	$headers = "MIME-Version: 1.0" . "\r\n";
+	$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+	$headers .= "From: Weddinglist Team <support@weddinglist.co.th> \r\n";
+	$headers .= "Reply-To: event@weddinglist.co.th \r\n";
+
+	$file = get_theme_file_uri() . '/images/logo-w.png'; //phpmailer will load this file
+
+	$email_body =
+		"<div style='background: #EEE; padding: 32px;'>" .
+		"	<div style='max-width: 600px; margin: auto;'>" .
+		"		<div style='background: #FF2758; padding: 24px; text-align: center;'>" .
+		"			<img src='$file' alt='Weddinglist' width='243' height='60'>" .
+		"		</div>" .
+		"		<div style='background: #FFF; padding: 16px; font-family: Tahoma; color: #555; line-height: 1.7;'>" .
+		"			<p>สวัสดีค่ะ</p>" .
+		"			<p><strong>คำขอลงทะเบียนธุรกิจจาก $name</strong></p>" .
+		"			<ul style='list-style: none; padding: 0;'>" .
+		"				<li>เวลาลงทะเบียน : <strong>$timestamp</strong></li>" .
+		"				<li>ชื่อกิจการ : <strong>$name</strong></li>" .
+		"				<li>ประเภทกิจการ : <strong>$businessType</strong></li>" .
+		"				<li>ชื่อผู้ติดต่อ : <strong>$contactName</strong></li>" .
+		"				<li>เบอร์โทร​ : <strong>$contactTel</strong></li>" .
+		"				<li>อีเมล : <strong>$contactEmail</strong></li>" .
+		"			</ul>".
+		"			<p>ข้อความเพิ่มเติม :</p>" .
+		"			<p><strong>$message</strong></p>" .
+		"		</div>" .
+		"	</div>" .
+		"</div>";
+	
+	if (!empty($to)) {
+		$mail = wp_mail($to, $subject, $email_body, $headers);
+	}
+
+	$new_post_id = wp_insert_post(array(
+		'post_title' => "$name : $contactName",
+		'post_type' => 'lead',
+		'post_status' => 'draft',
+		'meta_input' => [
+			'tel' => $contactTel,
+			'email' => $contactEmail,
+			'message' => "ประเภทกิจการ : $businessType \r\n
+				ข้อความเพิ่มเติม : $message",
+			'type' => 'Business',
+		]
+	));
 }
 
 //require_once('customizer.php');
@@ -670,7 +751,7 @@ function group_all_plugins_and_settings() {
 			'et_divi_options',
 			'googlesitekit-dashboard',
 			'duplicator',
-			'wp-mail-smtp',
+			//'wp-mail-smtp',
 			'shortcodes-ultimate',
 			'edit.php?post_type=acf-field-group',
 			'edit.php?post_type=filter-set',
@@ -800,3 +881,24 @@ add_action('init', function() {
     }
 });
  */
+
+add_filter( 'rank_math/sitemap/enable_caching', '__return_false');
+
+// Disable wptexturize everywhere
+add_filter( 'run_wptexturize', '__return_false', PHP_INT_MAX );
+remove_filter('the_title', 'wptexturize');
+remove_filter('the_content', 'wptexturize');
+remove_filter('the_excerpt', 'wptexturize');
+remove_filter('comment_text', 'wptexturize');
+remove_filter('list_cats', 'wptexturize');
+remove_filter('single_post_title', 'wptexturize');
+remove_filter('term_description', 'wptexturize');
+remove_filter('widget_text_content', 'wptexturize');
+
+
+// Filter category in post permalink to use only the lowest level category
+function use_child_category_in_permalink($category, $categories) {
+    // Use the last category in the list (usually the deepest subcategory)
+    return end($categories);
+}
+add_filter('post_link_category', 'use_child_category_in_permalink', 10, 2);

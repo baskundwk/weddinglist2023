@@ -1,6 +1,6 @@
 <?php
-$type = esc_html($_GET['type']);
-$searchTerm = esc_html($_GET['s']);
+$type = esc_attr($_GET['type']);
+$searchTerm = esc_attr($_GET['s']);
 if ($type && $searchTerm):
   $args = array(
     's' => $searchTerm,
@@ -17,10 +17,10 @@ if ($type && $searchTerm):
 <main
   data-dlev="search"
   data-dlcomp="search - page"
-  data-dldt="{
-    'keyword': '<?php echo $searchTerm ?>'
-    'type': '<?php echo $type ?>'
-  }"
+  data-dldt='{
+    "keyword": "<?php echo $searchTerm ?>",
+    "type": "<?php echo $type ?>"
+  }'
 >
   <?php include get_stylesheet_directory() . '/components/search.php' ?>
   <section>
@@ -235,7 +235,6 @@ if ($type && $searchTerm):
   <?php include get_stylesheet_directory() . '/components/compare-bar.php' ?>
 </main>
 
-<?php include get_stylesheet_directory() . '/components/form-lead.php' ?>
 <?php include get_stylesheet_directory() . '/components/footer.php' ?>
 
 <?php else:

@@ -21,7 +21,7 @@ $campaignLogo = '<div class="wdl-campaign-card-logo"><img src="'.get_field('Camp
               <div class="background">
                 <img src="<?php echo get_field('CampaignBackground')['url'];?>" alt="<?php the_title(); ?>">
               </div>
-              <div class="flex-fill d-flex flex-column align-items-start justify-content-center">
+              <!-- <div class="flex-fill d-flex flex-column align-items-start justify-content-center">
                 <div class="logo">
                   <img src="<?php echo get_field('CampaignLogo')['url'];?>" alt="<?php the_title(); ?>">
                 </div>
@@ -35,7 +35,8 @@ $campaignLogo = '<div class="wdl-campaign-card-logo"><img src="'.get_field('Camp
                     echo promotionDate(get_field('CampaignDateEnd'), 'DateEnd');
                   ?> 
                 </div>
-              </div>
+              </div> -->
+              <?php if(get_field('CampaignCountdown')) : ?>
               <div class="flex-fill d-flex gap-1 align-items-center justify-content-end">
                 <?php _e('หมดเวลาใน', 'wdl') ?>
                 <div class="wdl-campaign-countdown" data-date="<?php echo get_field('CampaignDateEnd');?>">
@@ -66,41 +67,11 @@ $campaignLogo = '<div class="wdl-campaign-card-logo"><img src="'.get_field('Camp
                   </div>
                 </div>
               </div>
+              <?php endif; ?>
             </div>
           </div>
           <?php
-          $relatedPosts = [
-            'Promotion' => [
-              'title' => __('โปรโมชั่นที่ร่วมรายการ', 'wdl'),
-              'slug' => 'promotion',
-              'name' => 'Promotion',
-              'card' => 'card-promotion'
-            ],
-            'Wedding Fair' => [
-              'title' => __('Wedding Fair & Event ที่ร่วมรายการ', 'wdl'),
-              'slug' => 'wedding-fair',
-              'name' => 'WeddingFair',
-              'card' => 'card-weddingfair'
-            ],
-            'Venue' => [
-              'title' => __('สถานที่จัดงานที่ร่วมรายการ', 'wdl'),
-              'slug' => 'venue',
-              'name' => 'Venue',
-              'card' => 'card-venue'
-            ],
-            'Vendor' => [
-              'title' => __('ผู้ให้บริการที่ร่วมรายการ', 'wdl'),
-              'slug' => 'vendor',
-              'name' => 'Vendor',
-              'card' => 'card-vendor'
-            ],
-            'Moment' => [
-              'title' => __('Moment ที่ร่วมรายการ', 'wdl'),
-              'slug' => 'moment',
-              'name' => 'Moment',
-              'card' => 'card-moment'
-            ],
-          ];
+          $relatedPosts = [];
 
 
           $campaignRelated = [];
@@ -109,18 +80,48 @@ $campaignLogo = '<div class="wdl-campaign-card-logo"><img src="'.get_field('Camp
           } 
           if(get_field('CampaignPromotion')) {
             $campaignRelated['Promotion'] = (array_map("relatedID", get_field('CampaignPromotion')));
+            $relatedPosts['Promotion'] = [
+              'title' => __('โปรโมชั่นที่ร่วมรายการ', 'wdl'),
+              'slug' => 'promotion',
+              'name' => 'Promotion',
+              'card' => 'card-promotion'
+            ];
           }
           if(get_field('CampaignWeddingFair')) {
             $campaignRelated['WeddingFair'] = (array_map("relatedID", get_field('CampaignWeddingFair')));
+            $relatedPosts['WeddingFair'] = [
+              'title' => __('Wedding Fair & Event ที่ร่วมรายการ', 'wdl'),
+              'slug' => 'wedding-fair',
+              'name' => 'WeddingFair',
+              'card' => 'card-weddingfair'
+            ];
           }
           if(get_field('CampaignVenue')) {
             $campaignRelated['Venue'] = (array_map("relatedID", get_field('CampaignVenue')));
+            $relatedPosts['Venue'] = [
+              'title' => __('สถานที่จัดงานที่ร่วมรายการ', 'wdl'),
+              'slug' => 'venue',
+              'name' => 'Venue',
+              'card' => 'card-venue'
+            ];
           }
           if(get_field('CampaignVendor')) {
             $campaignRelated['Vendor'] = (array_map("relatedID", get_field('CampaignVendor')));
+            $relatedPosts['Vendor'] = [
+              'title' => __('ผู้ให้บริการที่ร่วมรายการ', 'wdl'),
+              'slug' => 'vendor',
+              'name' => 'Vendor',
+              'card' => 'card-vendor'
+            ];
           }
           if(get_field('CampaignMoment')) {
             $campaignRelated['Moment'] = (array_map("relatedID", get_field('CampaignMoment')));
+            $relatedPosts['Moment'] = [
+              'title' => __('Moment ที่ร่วมรายการ', 'wdl'),
+              'slug' => 'moment',
+              'name' => 'Moment',
+              'card' => 'card-moment'
+            ];
           }
 
 
@@ -134,25 +135,23 @@ $campaignLogo = '<div class="wdl-campaign-card-logo"><img src="'.get_field('Camp
             
             if($typeQuery->have_posts()) {?>
             <section class="wdl-campaign-section mb-3 pb-1">
-              <div class="container-xl">
-                <h2 class="title">
-                  <?php echo $type['title']; ?>
-                </h2>
-                <div class="posts wdl-archive wdl-archive-extended">
-                  <div class="swiper wdl-archive-swiper overflow-hidden">
-                    <div class="swiper-wrapper">
-                      <?php while ($typeQuery->have_posts()): ?>
-                      <?php $typeQuery->the_post(); ?>
+              <h2 class="title">
+                <?php echo $type['title']; ?>
+              </h2>
+              <div class="posts wdl-archive wdl-archive-extended">
+                <div class="swiper wdl-archive-swiper overflow-hidden">
+                  <div class="swiper-wrapper">
+                    <?php while ($typeQuery->have_posts()): ?>
+                    <?php $typeQuery->the_post(); ?>
 
-                      <?php include get_stylesheet_directory() . '/components/cards/'.$type['card'].'.php' ?>
+                    <?php include get_stylesheet_directory() . '/components/cards/'.$type['card'].'.php' ?>
 
-                      <?php endwhile; ?>
-                    </div>
-                    <div class="swiper-pagination"></div>
-                    <div class="swiper-navigation swiper-navigation-small">
-                      <div class="swiper-button-prev"></div>
-                      <div class="swiper-button-next"></div>
-                    </div>
+                    <?php endwhile; ?>
+                  </div>
+                  <div class="swiper-pagination"></div>
+                  <div class="swiper-navigation swiper-navigation-small">
+                    <div class="swiper-button-prev"></div>
+                    <div class="swiper-button-next"></div>
                   </div>
                 </div>
               </div>

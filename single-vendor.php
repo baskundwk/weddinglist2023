@@ -190,7 +190,7 @@
 
           <?php
 					$relatedVenue = get_field('RelatedVenue');
-					$relatedVenuePermalink = get_permalink($relatedVenue);
+					$relatedVenuePermalink = get_the_permalink($relatedVenue);
 					$relatedVenueTitle = get_the_title($relatedVenue);
 					if ($relatedVenue): ?>
           <p class="wdl-archive-location mb-0"><a href="<?php echo esc_html($relatedVenuePermalink) ?>">
@@ -302,7 +302,137 @@
     </div>
   </section>
   <?php endif; ?>
-
+  <?php if(!in_array(('Free microsite'), get_field('Status')) && have_rows('Album')): ?>
+    <section class="py-3">
+      <div class="container-xl">
+        <div class="wdl-archive py-4">
+          <!-- <h2 class="h1 mb-4">
+            <?php _e('อัลบั้ม', 'wdl') ?>
+          </h2> -->
+          <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-5 row-cols-xl-6 g-5">
+            <?php
+              $albumIndex = 0;
+              $album = [];
+              while(have_rows('Album')):
+                $albumIndex++;
+                the_row(); 
+                $album[$albumIndex]['index'] = $albumIndex;
+                $album[$albumIndex]['title'] = get_sub_field('AlbumTitle');
+                $album[$albumIndex]['desc'] = get_sub_field('AlbumDesc');
+                $album[$albumIndex]['image'] = get_sub_field('AlbumImage')[0]['sizes']['medium_large'];
+              endwhile;
+  
+              foreach($album as $alb) :
+              ?>
+              <div class="col">
+                <a class="p-0" href="#album-<?php echo $alb['index'];?>">
+                  <div class="card-img-top wdl-archive-card-img-top ratio ratio-1x1"><img class="object-fit-cover" src="<?php echo $alb['image']; ?>" alt="<?php echo $alb['title'] ?>"></div>
+                  <div class="card-body pt-2">
+                    <div class="mb-0 lineclamp-1"><?php echo $alb['title']; ?></div>
+                    <?php if(isset($alb['desc'])) : ?>
+                      <p class="text-xs mb-0 text-secondary lineclamp-1"><?php echo $alb['desc']; ?></p>
+                    <?php endif; ?>
+                  </div>
+                </a>
+              </div>
+              <?php endforeach; ?>
+          </div>
+          
+          <hr>
+          <?php 
+            $albumIndex = 0;
+            while(have_rows('Album')):
+            $albumIndex++;
+            the_row(); ?>
+            <?php $albumImages = get_sub_field('AlbumImage') ?>
+            <?php if($albumImages) :?>
+            <div id="album-<?php echo $albumIndex;?>" class="wdl-vendor-album-group mt-4">
+              <div class="row">
+                <div class="col-md-3">
+                  <h3><?php the_sub_field('AlbumTitle'); ?></h3>
+                  <p><?php the_sub_field('AlbumDesc'); ?></p>
+                </div>
+                <div class="col">
+                  <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-3">
+                    <?php foreach($albumImages as $image) :?>
+                      <div class="col">
+                        <div class="wdl-vendor-album-image ratio ratio-1x1 border border-1"><img class="object-fit-cover" src="<?php echo $image['url'] ?>" alt="<?php the_sub_field('AlbumTitle'); ?>"></div>
+                      </div>
+                    <?php endforeach;?>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <hr>
+            <?php endif; ?>
+  
+          <?php endwhile; ?>
+  
+          
+        </div>
+        <?php endif; ?>
+        <?php if(!in_array(('Free microsite'), get_field('Status')) && have_rows('Pricing')): ?>
+        <div class="wdl-archive py-4">
+          <h2>
+            <?php _e('ข้อมูลค่าใช้จ่าย', 'wdl') ?>
+          </h2>
+          <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-3">
+              <?php while (have_rows('Pricing')):
+                    the_row();
+                $pricings[] = [
+                  'name' => get_sub_field('PricingName'),
+                  'desc' => get_sub_field('PricingDescription'),
+                  'price' => get_sub_field('PricingStart'),
+                ];
+              ?>
+              <div class="col">
+                <div class="card wdl-archive-card h-100">
+                  <?php if (get_sub_field('PricingName')): ?>
+                  <?php
+                              $pricingImages = get_sub_field('PricingGallery');
+                              if ($pricingImages):
+                                ?>
+                  <div class="card-img-top wdl-archive-card-img-top">
+                    <div id="hero-gallery" class="swiper wdl-archive-pricing-gallery-swiper">
+                      <div class="swiper-wrapper">
+                        <?php
+                          // Grab each image.
+                          foreach ($pricingImages as $image):
+                            $image_id = $image['ID'];
+                            $image_src = $image['ursl'];
+                            $image_caption = $image['caption'];
+                          ?>
+                        <div class="swiper-slide">
+                          <?php echo wp_get_attachment_image($image_id, 'w425'); ?>
+                        </div>
+                        <?php
+                                        endforeach;
+                                        ?>
+                      </div>
+                      <div class="swiper-navigation swiper-navigation-small">
+                        <div class="swiper-button-prev"></div>
+                        <div class="swiper-button-next"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <?php endif; ?>
+                  <div class="card-body">
+                    <?php $pricingName = get_sub_field('PricingName'); ?>
+                    <h3 class="h5"><?php echo esc_html(get_sub_field('PricingName')); ?></h3>
+                    <p class="text-sm"><?php echo esc_html(get_sub_field('PricingDescription')); ?></p>
+                    <p class="text-sm text-accent fw-semibold"><?php _e('ราคา', 'wdl') ?> : <?php echo esc_html(number_format(get_sub_field('PricingStart'))) ?> <?php if (get_sub_field('PricingEnd')) { ?> - <?php echo esc_html(number_format(get_sub_field('PricingEnd')));
+                                                    } ?></p>
+                  </div>
+                  <?php endif; ?>
+                </div>
+              </div>
+              <?php endwhile; ?>
+          </div>
+        </div>
+      </div>
+    </section>
+  <?php endif; ?>
+  
   <?php
 	$relatedPromotions = get_posts(
 		array(
@@ -375,12 +505,12 @@
           <div class="row align-items-center">
             <div class="col-12">
               <div class="wdl-archive <?php echo esc_attr($atts['class']); ?>">
-                <div id="promotion-swiper" class="swiper wdl-archive-swiper">
+                <div id="promotion-swiper" class="swiper wdl-archive-swiper pb-0">
                   <div class="swiper-wrapper">
                     <?php foreach ($relatedPromotions as $relatedPromotion): ?>
                     <div id="wdl-post-<?php echo $relatedPromotion->ID ?>" class="swiper-slide card wdl-archive-card <?php echo esc_attr($atts['class_single']); ?>">
 
-                      <a class="card-img-top wdl-archive-card-img-top" href="<?php echo get_permalink($relatedPromotion->ID); ?>">
+                      <a class="card-img-top wdl-archive-card-img-top" href="<?php echo get_the_permalink($relatedPromotion->ID); ?>">
                         <img loading="lazy" class="" src="<?php echo esc_html(get_the_post_thumbnail_url($relatedPromotion, 'medium_large')) ?>" width="100%">
                       </a>
 
@@ -400,7 +530,7 @@
                         </div>
 
                         <h3 class="wdl-archive-title mb-0">
-                          <a href="<?php echo get_permalink($relatedPromotion->ID); ?>">
+                          <a href="<?php echo get_the_permalink($relatedPromotion->ID); ?>">
                             <?php echo get_the_title($relatedPromotion->ID); ?>
                           </a>
                         </h3>
@@ -424,13 +554,13 @@
           <div class="row align-items-center">
             <div class="col-12">
               <div class="wdl-archive <?php echo esc_attr($atts['class']); ?>">
-                <div class="swiper wdl-archive-swiper">
+                <div class="swiper wdl-archive-swiper pb-0">
                   <div class="swiper-wrapper">
                     <?php foreach ($relatedWeddingFairs as $relatedWeddingFair): ?>
                     <div id="wdl-post-<?php echo $relatedWeddingFair->ID ?>" class="swiper-slide card wdl-archive-card <?php echo esc_attr($atts['class_single']); ?>">
 
                       <?php if (has_post_thumbnail($relatedWeddingFair->ID)): ?>
-                      <a class="card-img-top wdl-archive-card-img-top" href="<?php echo get_permalink($relatedWeddingFair->ID); ?>"><img loading="lazy" class="" src="<?php echo esc_html(get_the_post_thumbnail_url($relatedWeddingFair, 'medium_large')) ?>" width="100%"></a>
+                      <a class="card-img-top wdl-archive-card-img-top" href="<?php echo get_the_permalink($relatedWeddingFair->ID); ?>"><img loading="lazy" class="" src="<?php echo esc_html(get_the_post_thumbnail_url($relatedWeddingFair, 'medium_large')) ?>" width="100%"></a>
                       <?php endif; ?>
 
                       <div class="card-body wdl-archive-card-body">
@@ -448,7 +578,7 @@
                           <?php endif; ?>
                         </div>
 
-                        <h3 class="wdl-archive-title mb-0"><a href="<?php echo get_permalink($relatedWeddingFair->ID); ?>">
+                        <h3 class="wdl-archive-title mb-0"><a href="<?php echo get_the_permalink($relatedWeddingFair->ID); ?>">
                             <?php echo get_the_title($relatedWeddingFair->ID); ?>
                           </a></h3>
                       </div>
@@ -471,13 +601,13 @@
           <div class="row align-items-center">
             <div class="col-12">
               <div class="wdl-archive <?php echo esc_attr($atts['class']); ?>">
-                <div class="swiper wdl-archive-swiper">
+                <div class="swiper wdl-archive-swiper pb-0">
                   <div class="swiper-wrapper">
                     <?php foreach ($relatedPosts as $relatedPost): ?>
                     <div id="wdl-post-<?php echo $relatedPost->ID ?>" class="swiper-slide card wdl-archive-card <?php echo esc_attr($atts['class_single']); ?>">
 
                       <?php if (has_post_thumbnail($relatedPost->ID)): ?>
-                      <a class="card-img-top wdl-archive-card-img-top" href="<?php echo get_permalink($relatedPost->ID); ?>"><img loading="lazy" class="" src="<?php echo esc_html(get_the_post_thumbnail_url($relatedPost, 'medium_large')) ?>" width="100%"></a>
+                      <a class="card-img-top wdl-archive-card-img-top" href="<?php echo get_the_permalink($relatedPost->ID); ?>"><img loading="lazy" class="" src="<?php echo esc_html(get_the_post_thumbnail_url($relatedPost, 'medium_large')) ?>" width="100%"></a>
                       <?php endif; ?>
 
                       <div class="card-body wdl-archive-card-body">
@@ -495,7 +625,7 @@
                           <?php endif; ?>
                         </div>
 
-                        <h3 class="wdl-archive-title mb-0"><a href="<?php echo get_permalink($relatedPost->ID); ?>">
+                        <h3 class="wdl-archive-title mb-0"><a href="<?php echo get_the_permalink($relatedPost->ID); ?>">
                             <?php echo get_the_title($relatedPost->ID); ?>
                           </a></h3>
                       </div>
@@ -527,68 +657,12 @@
     </div>
   </section>
   <?php endif; ?>
+  <?php $pricings = [];?>
   <section class="py-3">
     <div class="container-xl">
       <div class="row">
         <div class="col text-secondary">
           <?php the_content(); ?>
-
-          <?php if (have_rows('Pricing')): ?>
-          <div class="wdl-main-content wdl-archive wdl-archive-extended">
-            <h2>
-              <?php _e('ข้อมูลค่าใช้จ่าย', 'wdl') ?>
-            </h2>
-            <div class="swiper wdl-archive-pricing-swiper px-2">
-              <div class="swiper-wrapper">
-                <?php while (have_rows('Pricing')):
-											the_row(); ?>
-                <div class="swiper-slide h-auto">
-                  <div class="card wdl-archive-card h-100">
-                    <?php if (get_sub_field('PricingName')): ?>
-                    <?php
-																$pricingImages = get_sub_field('PricingGallery');
-																if ($pricingImages):
-																	?>
-                    <div class="card-img-top wdl-archive-card-img-top">
-                      <div id="hero-gallery" class="swiper wdl-archive-pricing-gallery-swiper">
-                        <div class="swiper-wrapper">
-                          <?php
-																					// Grab each image.
-																					foreach ($pricingImages as $image):
-																						$image_id = $image['ID'];
-																						$image_src = $image['ursl'];
-																						$image_caption = $image['caption'];
-																						?>
-                          <div class="swiper-slide">
-                            <?php echo wp_get_attachment_image($image_id, 'w425'); ?>
-                          </div>
-                          <?php
-																					endforeach;
-																					?>
-                        </div>
-                        <div class="swiper-navigation swiper-navigation-small">
-                          <div class="swiper-button-prev"></div>
-                          <div class="swiper-button-next"></div>
-                        </div>
-                      </div>
-                    </div>
-                    <?php endif; ?>
-                    <div class="card-body">
-                      <?php $pricingName = get_sub_field('PricingName'); ?>
-                      <h3 class="h5"><?php echo esc_html(get_sub_field('PricingName')); ?></h3>
-                      <p class="text-sm"><?php echo esc_html(get_sub_field('PricingDescription')); ?></p>
-                      <p class="text-sm text-accent fw-semibold"><?php _e('ราคา', 'wdl') ?> : <?php echo esc_html(number_format(get_sub_field('PricingStart'))) ?> <?php if (get_sub_field('PricingEnd')) { ?> - <?php echo esc_html(number_format(get_sub_field('PricingEnd')));
-																											} ?></p>
-                    </div>
-                    <?php endif; ?>
-                  </div>
-                </div>
-                <?php endwhile; ?>
-              </div>
-              <div class="swiper-pagination position-relative"></div>
-            </div>
-          </div>
-          <?php endif; ?>
         </div>
       </div>
     </div>

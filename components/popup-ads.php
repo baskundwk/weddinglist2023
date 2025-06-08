@@ -15,8 +15,9 @@ $campaignPopupBefore = new WP_Query([
   'post_type' => 'campaign',
   'posts_per_page' => -1,
   'post_status' => 'publish',
+  'orderby' => 'rand',
   'meta_query'     => [
-      'relation' => 'AND',
+      'relation' => $_GET['campaignDebug'] ? 'OR' : 'AND',
       [
           'key'     => 'CampaignBeforeDate',
           'value'   => $today,
@@ -40,6 +41,7 @@ $campaignPopupMiddle = new WP_Query([
   'post_type' => 'campaign',
   'posts_per_page' => -1,
   'post_status' => 'publish',
+  'orderby' => 'rand',
   'meta_query'     => [
       'relation' => 'AND',
       [
@@ -65,19 +67,19 @@ $campaignPopupMiddle = new WP_Query([
   <div class="modal fade wdl-ad-popup-extended wdl-modal-autotrigger" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered modal-lg justify-content-center">
       <div class="modal-content mb-0">
-        <button class="btn-close" data-bs-dismiss="modal" aria-label="Close" type="button" ่></button>
-        <div class="swiper wdl-ad-popup-swiper p-lg-3">
+        <button class="btn-close" data-bs-dismiss="modal" aria-label="Close" type="button"></button>
+        <div class="swiper wdl-ad-popup-swiper">
           <div class="swiper-wrapper">
             <?php if($campaignPopupBefore->have_posts()) :
             while($campaignPopupBefore->have_posts()):
             $campaignPopupBefore->the_post(); ?>
             <div class="swiper-slide">
               <a href="<?php the_permalink();?>"
-                data-dlev="adsClick",
-                data-dlcomp="ads - popup",
-                data-dltgt="<?php the_title()?>">
+                data-dlev="adsClick"
+                data-dlcomp="ads - popup"
+                data-dltgt="<?php echo esc_attr(get_the_title()); ?>">
                 <figure>
-                  <img class="no-lazyload" src="<?php echo esc_html(get_field('CampaignPopupBefore')['url']) ?>" width="600" height="600" alt="<?php the_title(); ?>">
+                  <img class="no-lazyload" src="<?php echo esc_attr(get_field('CampaignPopupBefore')['url']) ?>" width="600" height="600" alt="<?php echo esc_attr(get_the_title()); ?>">
                 </figure>
               </a>
             </div>
@@ -88,11 +90,11 @@ $campaignPopupMiddle = new WP_Query([
             $campaignPopupMiddle->the_post(); ?>
             <div class="swiper-slide">
               <a href="<?php the_permalink();?>"
-                data-dlev="adsClick",
-                data-dlcomp="ads - popup",
-                data-dltgt="<?php the_title()?>">
+                data-dlev="adsClick"
+                data-dlcomp="ads - popup"
+                data-dltgt="<?php echo esc_attr(get_the_title()); ?>">
                 <figure>
-                  <img class="no-lazyload" src="<?php echo esc_html(get_field('CampaignPopupMiddle')['url']) ?>" width="600" height="600" alt="<?php the_title(); ?>">
+                  <img class="no-lazyload" src="<?php echo esc_attr(get_field('CampaignPopupMiddle')['url']) ?>" width="600" height="600" alt="<?php echo esc_attr(get_the_title()); ?>">
                 </figure>
               </a>
             </div>
@@ -109,18 +111,18 @@ $campaignPopupMiddle = new WP_Query([
                 the_permalink();
               }
               ?>"
-              data-dlev="adsClick",
-              data-dlcomp="ads - popup",
-              data-dltgt="<?php the_title()?>">
+              data-dlev="adsClick"
+              data-dlcomp="ads - popup"
+              data-dltgt="<?php echo esc_attr(get_the_title()); ?>">
                 <figure>
-                  <img class="no-lazyload" src="<?php echo esc_html(get_field('PopupAdImage')['url']) ?>" width="600" height="600" alt="<?php get_field('PopupAdImage')['alt'] ?>">
+                  <img class="no-lazyload" src="<?php echo esc_attr(get_field('PopupAdImage')['url']) ?>" width="600" height="600" alt="<?php echo esc_attr(get_field('PopupAdImage')['alt']) ?>">
                 </figure>
               </a>
             </div>
             <?php endwhile;
             endif; ?>
           </div>
-          <div class="swiper-navigation swiper-navigation-small">
+          <div class="swiper-navigation swiper-navigation-ad-popup swiper-navigation-small">
             <div class="swiper-button-prev"></div>
             <div class="swiper-button-next"></div>
           </div>

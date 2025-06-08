@@ -55,65 +55,13 @@ $arg = [
   'paged' => $paged,
   'posts_per_page' => 20,
   'meta_query' => $has_field,
-];
-
-
-if ($_GET['type']) {
-  $arg['tax_query'][] = array(
-    'taxonomy' => 'promotion-category',
-    'field' => 'slug',
-    'terms' => $_GET['type'],
-  );
-}
-
-if ($_GET['relate']) {
-  $arg['meta_query'][] = array(
-    'key' => 'RelatedVenue',
-    'value' => sprintf(':"%d";', $_GET['relate']),
-    'compare' => 'LIKE'
-  );
-}
-
-if ($_GET['period']) {
-  $period = explode('-', $_GET['period']);
-  $selected_month = $period[1]; // March
-  $selected_year = $period[0];
-
-  // Calculate the last day of the selected month
-  $first_day_of_month = date("Y-m-d", strtotime("$selected_year-$selected_month-01"));
-  $last_day_of_month = date("Y-m-t", strtotime("$selected_year-$selected_month-01"));
-
-  // WP_Query args
-  $arg['meta_query'][] = [
-    'key' => 'DateEnd', // ACF date field key
-    'value' => $last_day_of_month,
-    'compare' => '<=',
-    'type' => 'DATE',
-  ];
-}
-
-if (get_queried_object()->taxonomy) {
-  $current_term_id = get_queried_object()->term_id;
-  $current_tax = get_queried_object()->taxonomy;
-
-  $arg = array(
-    'post_type' => 'venue',
-    'order' => $order,
-    'meta_key' => $key,
-    'orderby' => $orderby,
-    'post_status' => $post_status,
-    'paged' => $paged,
-    'posts_per_page' => 12,
-    'meta_query' => $has_field,
-    'tax_query' => array(
+  'tax_query'      => array(
       array(
-        'taxonomy' => $current_tax,
-        'field' => 'term_id',
-        'terms' => $current_term_id
-      )
-    )
-  );
-}
+          'taxonomy' => 'listing-category',
+          'operator' => 'NOT EXISTS', // Get posts with no terms assigned
+      ),
+  ),
+];
 
 query_posts($arg);
 

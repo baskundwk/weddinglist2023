@@ -2,7 +2,7 @@
 
 <main>
   <?php include get_stylesheet_directory().'/components/search.php' ?>
-  <section class="wdl-archive wdl-archive-extended pb-5 m-0">
+  <section class="wdl-archive wdl-archive-extended pt-4 pb-5 m-0">
 
     <?php include get_stylesheet_directory().'/queries/query-venue.php' ?>
     <div class="container-xl">
@@ -11,12 +11,12 @@
           <h1 class="mb-0">
             <?php echo(get_option('wdl_options', 'โปรโมชั่นแต่งงาน & แพ็กเกจแต่งงาน')['word-venue-title']); ?>
           </h1>
-          <p class="text-secondary mb-2">
+          <p class="text-secondary mb-4">
             <?php echo(get_option('wdl_options', 'รวมโปรโมชั่น และ แพ็กเกจแต่งงาน จากสถานที่จัดงานแต่งงานชั้นนำทุกรูปแบบ อัพเดทล่าสุด')['word-venue-desc']); ?>
           </p>
         </div>
       </div>
-      <?php include get_stylesheet_directory().'/components/filters/filter-venue.php' ?>
+      <?php // include get_stylesheet_directory().'/components/filters/filter-venue.php' ?>
     </div>
     
     <?php if (have_posts()): ?>
@@ -49,5 +49,4 @@
   </section>
   <?php include get_stylesheet_directory().'/components/compare-bar.php' ?>
 </main>
-<?php include get_stylesheet_directory().'/components/form-lead.php' ?>
 <?php include get_stylesheet_directory().'/components/footer.php' ?>

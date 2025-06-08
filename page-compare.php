@@ -32,7 +32,7 @@
           <?php while ($comparePosts->have_posts()): ?>
             <?php $comparePosts->the_post(); ?>
 
-            <div id="wdl-post-<?php the_ID(); ?>" class="swiper-slide wdl-archive-card card p-0 h-100 <?php echo esc_attr($atts['class_single']); ?> wdl-archive-card-blog wdl-compare-card">
+            <div id="wdl-post-<?php the_ID(); ?>" class="swiper-slide wdl-archive-card card p-0 <?php echo esc_attr($atts['class_single']); ?> wdl-archive-card-blog wdl-compare-card">
 
               <div class="card-select d-none">
                 <div class="wdl-checkbox">
@@ -71,11 +71,11 @@
                 </div>
 
                 <div class="mb-4 wdl-compare-group" data-mh="wdl-compare-group-2">
-                  <a href="#" class="wdl-btn w-100 text-center wdl-apply-btn wdl-btn-cta wdl-form-general-direct" data-bs-toggle="modal" data-bs-target=".wdl-form-general-modal"><?php _e('คลิกขอแพ็กเกจ', 'wdl')?></a>
+                  <a href="<?php echo get_the_permalink().'#apply'?>" class="wdl-btn w-100 text-center wdl-apply-btn wdl-btn-cta wdl-form-general-direct"><?php _e('คลิกขอแพ็กเกจ', 'wdl')?></a>
                 </div>
 
                 <div class="mb-4 wdl-compare-group" data-mh="wdl-compare-group-3">
-                  <div class="wdl-metadata">
+                  <div class="wdl-metadata flex-column">
                       <?php
                       $locations = get_field('Location');
                       if ($locations) : ?>
@@ -108,12 +108,12 @@
 
                 <div class="mb-4 wdl-compare-group" data-mh="wdl-compare-group-4">
                   <h4><?php _e('ข้อมูลค่าใช้จ่าย','wdl')?></h4>
-                  <ul>
+                  <ul class="wdl-metadata flex-column">
                   <?php $pricings = get_field('Pricing');
                     while (have_rows('Pricing')):
                     the_row();?>
                     <?php if (get_row_layout() == 'Package'): ?>
-                      <li class="wdl-metadata">
+                      <li>
                         <?php _e('งานหมั้น','wdl')?>
                         <?php // echo esc_html(get_sub_field('PackageType')->name); ?>
                         <span class="text-red fw-semibold"><?php the_sub_field('PackagePrice'); ?></span>
@@ -125,7 +125,7 @@
                     the_row();?>
                     
                     <?php if (get_row_layout() == 'WeddingPackage'): ?>
-                      <li class="wdl-metadata">
+                      <li>
                         <?php _e('งานแต่งงาน','wdl')?>
                         <?php // echo esc_html(get_sub_field('WeddingPackageType')->name); ?>
                         <span class="text-red fw-semibold"><?php the_sub_field('WeddingPackagePrice'); ?></span>
@@ -136,7 +136,7 @@
                     <?php while (have_rows('Pricing')):
                     the_row();?>
                     <?php if (get_row_layout() == 'FoodBeverage'): ?>
-                      <li class="wdl-metadata">
+                      <li>
                         <?php echo esc_html(get_sub_field('FoodBeverageType')->name); ?>
                         <span class="text-red fw-semibold"><?php the_sub_field('FoodBeveragePrice'); ?></span>
                       </li>
@@ -147,10 +147,10 @@
 
                 <div class="mb-4 wdl-compare-group" data-mh="wdl-compare-group-5">
                   <h4><?php _e('รูปแบบการจัดงาน','wdl')?></h4>
-                  <ul>
+                  <ul class="wdl-metadata flex-column">
                   <?php $ceremonyTypes = get_field('CeremonyTypes');
                     foreach($ceremonyTypes as $ceremonyType) :	?>
-                      <li class="wdl-metadata">
+                      <li>
                         <?php echo esc_html($ceremonyType->name)?>
                       </li>
                   <?php endforeach; ?>
@@ -159,10 +159,10 @@
                 
                 <div class="mb-4 wdl-compare-group" data-mh="wdl-compare-group-6">
                   <h4><?php _e('สิ่งอำนวยความสะดวก','wdl')?></h4>
-                  <ul>
+                  <ul class="wdl-metadata flex-column">
                   <?php $amentities = get_field('Amentities');
                     foreach($amentities as $ceremonyType) :	?>
-                      <li class="wdl-metadata">
+                      <li>
                         <?php echo esc_html($ceremonyType->name)?>
                       </li>
                   <?php endforeach; ?>
@@ -255,6 +255,5 @@
   </div>
 </main>
 
-<?php include get_stylesheet_directory().'/components/form-lead.php' ?>
 <?php include get_stylesheet_directory().'/components/share-modal.php' ?>
 <?php include get_stylesheet_directory().'/components/footer.php' ?>

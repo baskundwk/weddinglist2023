@@ -51,12 +51,17 @@ $(window).scroll(()=>{
 
 const leadMenuSwiper = new Swiper('.wdl-lead-menu-swiper', {
   slidesPerView: 'auto',
-  spaceBetween: 8,
+  spaceBetween: 24,
   centerInsufficientSlides: true,
   slideClass: 'menu-item',
   navigation: {
     prevEl: '.swiper-button-prev',
     nextEl: '.swiper-button-next',
+  },
+  breakpoints: {
+    1024: {
+      spaceBetween: 32
+    }
   }
 })
 const initLocalnav = () => {
@@ -188,6 +193,14 @@ const wdlArchiveExtendedSwiper = new Swiper(
         slidesPerView: 4,
         spaceBetween: 8,
       },
+      1200: {
+        slidesPerView: 4,
+        spaceBetween: 16,  
+      },
+      1400: {
+        slidesPerView: 5,
+        spaceBetween: 16,  
+      },
     },
     pagination: {
       el: ".swiper-pagination",
@@ -249,23 +262,22 @@ const wdlHeroSwiper = new Swiper(".wdl-hero-swiper", {
     type: "bullets",
   },
   navigation: {
-    nextEl: ".swiper-button-next",
-    prevEl: ".swiper-button-prev",
+    nextEl: ".swiper-navigation-hero .swiper-button-next",
+    prevEl: ".swiper-navigation-hero .swiper-button-prev",
   },
   speed: 1500,
   autoplay: {
     delay: 5000,
   },
   loop: true,
+  effect: 'fade',
+  fadeEffect: {
+    crossFade: true
+  },
 });
 const wdlHero2Swiper = new Swiper(".wdl-hero-2-swiper", {
   slidesPerView: 1,
-  spaceBetween: 40,
-  pagination: {
-    el: ".swiper-pagination",
-    clickable: true,
-    type: "bullets",
-  },
+  spaceBetween: 0,
   navigation: {
     nextEl: ".swiper-button-next",
     prevEl: ".swiper-button-prev",
@@ -275,6 +287,11 @@ const wdlHero2Swiper = new Swiper(".wdl-hero-2-swiper", {
     delay: 5000,
   },
   loop: true,
+  breakpoints: {
+    1200: {
+      spaceBetween: 24
+    }
+  }
 });
 const wdlCompareGroupRoomSwiper = new Swiper(".wdl-compare-group-room-swiper", {
   slidesPerView: "1",
@@ -326,15 +343,13 @@ const wdlListingCardDetailRoomSwiper = new Swiper(
   }
 );
 const wdlAdPopupSwiper = new Swiper(".wdl-ad-popup-swiper", {
-  slidesPerView: 1,
-  spaceBetween: 16,
   speed: 1000,
   autoplay: {
     delay: 5000,
   },
   navigation: {
-    nextEl: ".swiper-navigation .swiper-button-next",
-    prevEl: ".swiper-navigation .swiper-button-prev",
+    nextEl: ".swiper-navigation-ad-popup .swiper-button-next",
+    prevEl: ".swiper-navigation-ad-popup .swiper-button-prev",
   },
 });
 const wdlArchivePricingSwiper = new Swiper(".wdl-archive-pricing-swiper", {
@@ -363,7 +378,7 @@ const wdlArchivePricingSwiper = new Swiper(".wdl-archive-pricing-swiper", {
 const wdlHeroGallerySwiper = new Swiper(".wdl-archive-pricing-gallery-swiper", {
   enableTouchSwipe: false,
   slidesPerView: "auto",
-  spaceBetween: 16,
+  spaceBetween: 0,
   navigation: {
     prevEl: ".swiper-button-prev",
     nextEl: ".swiper-button-next",
@@ -389,8 +404,12 @@ const wdlVideoSwiper = new Swiper('.wdl-video-swiper', {
     1024: {
       slidesPerView: 6,
     },
-    1280: {
+    1200: {
       slidesPerView: 7,
+    },
+    1400: {
+      slidesPerView: 7,
+      spaceBetween: 12,  
     }
   },
   navigation: {
@@ -401,6 +420,18 @@ const wdlVideoSwiper = new Swiper('.wdl-video-swiper', {
     el: ".swiper-pagination",
     type: "bullets",
     clickable: true,
+  },
+  speed: 1000,
+  autoplay: {
+    delay: 5000,
+  },
+})
+const wdlSubvendorSwiper = new Swiper('.wdl-subvendor-thumbnail-grid', {
+  slidesPerView: 'auto',
+  spaceBetween: 10,
+  navigation: {
+    prevEl: '.swiper-button-prev',
+    nextEl: '.swiper-button-next'
   },
   speed: 1000,
   autoplay: {
@@ -480,8 +511,8 @@ const wdlHeroGallery = () => {
         slidesPerView: "auto",
         spaceBetween: 16,
         navigation: {
-          prevEl: ".swiper-button-prev",
-          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-navigation-hero .swiper-button-prev",
+          nextEl: ".swiper-navigation-hero .swiper-button-next",
         },
         centerInsufficientSlides: true,
         loop: true,
@@ -492,8 +523,8 @@ const wdlHeroGallery = () => {
       slidesPerView: "auto",
       spaceBetween: 16,
       navigation: {
-        prevEl: ".swiper-button-prev",
-        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-navigation-hero .swiper-button-prev",
+        nextEl: ".swiper-navigation-hero .swiper-button-next",
       },
       centerInsufficientSlides: true,
       speed: 1000,
@@ -1464,4 +1495,64 @@ new Swiper('.wdl-consultant-gallery-swiper', {
     prevEl: ".swiper-button-prev",
   },
   nested: true
+})
+
+/* Auto-trigger Apply Modal */
+const applyModal = document.querySelector('#apply')
+
+if(applyModal) {
+  document.addEventListener('DOMContentLoaded', function () {
+    if (window.location.hash === '#apply') {
+      const modal = new bootstrap.Modal(applyModal);
+      modal.show();
+
+      $('#apply .btn-close').click(()=>{
+        modal.hide()
+      })
+    }
+  });
+}
+
+// Vendor album
+const vendorAlbum = new Swiper('.wdl-vendor-album-swiper', {
+  slidesPerView: 'auto',
+  spaceBetween: 8,
+  centerInsufficientSlides: true,
+  breakpoints: {
+    768: {
+      spaceBetween: 16
+    }
+  },
+  navigation: {
+    prevEl: '.swiper-navigation-vendor-album .swiper-button-prev',
+    nextEl: '.swiper-navigation-vendor-album .swiper-button-next'
+  },
+  pagination: {
+    el: '.swiper-pagination'
+  }
+})
+
+$('.wdl-vendor-album-toggle').each((i, e) => {
+  $(e).click(() => {
+    $('.wdl-vendor-album-group').addClass('d-none')
+    $($(e).attr('data-album')).removeClass('d-none')
+  })
+})
+
+// Vendor package
+$('.wdl-checkbox-bundle').each((i,e) => {
+  const item = $(e).find('.bundle-item')
+
+  $(item).each((i2, e2) => {
+    const input = $(e2).find('input')
+    $(input).change(()=>{
+      $(item).removeClass('active')
+      
+      if($(input).is(':checked')) {
+        $(e2).addClass('active')
+      } else {
+        $(e2).removeClass('active')
+      }
+    })
+  })
 })

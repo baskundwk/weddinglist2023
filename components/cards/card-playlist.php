@@ -49,7 +49,7 @@ $lastVideo->the_post();?>
         </div>
       </div>
       <div class="wdl-video-image">
-          <?php the_post_thumbnail( 'medium_large' )?>
+          <?php the_post_thumbnail( 'w425' )?>
       </div>
       <div class="wdl-video-text">
         <p class="pretitle">

@@ -8,17 +8,17 @@
   }?>">
   <?php if (has_post_thumbnail(get_the_ID())): ?>
     <a
-      aria-label="<?php echo get_the_title(); ?>"
+      aria-label="<?php echo esc_attr(get_the_title()); ?>"
       class="card-img-top wdl-archive-card-img-top"
-      title="<?php echo get_the_title(); ?>"
+      title="<?php echo esc_attr(get_the_title()); ?>"
       href="<?php the_permalink(); ?>"
-      data-dlev="cardClick",
-      data-dlcomp="card - moment",
-      data-dltgt="<?php the_title()?>">
+      data-dlev="cardClick"
+      data-dlcomp="card - moment"
+      data-dltgt="<?php echo esc_attr(get_the_title())?>">
       <img
         loading="lazy"
         src="<?php echo esc_html(get_the_post_thumbnail_url($post)) ?>"
-        alt="<?php echo get_the_title(); ?>" />
+        alt="<?php echo esc_attr(get_the_title()); ?>" />
 
       <?php if(isset($campaignModeEnabled) && isset($campaignRelated['Moment']) && in_array(get_the_ID(), $campaignRelated['Moment'])) {
         echo $campaignLogo;

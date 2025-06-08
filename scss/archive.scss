@@ -8,7 +8,7 @@
 
 .wdl-archive-grid {
   display: grid;
-  gap: 8px;
+  gap: 16px;
   grid-template-columns: repeat(1, 1fr);
 
   @include min-width-sm {
@@ -34,7 +34,7 @@
 
 .wdl-archive-grid-2 {
   display: grid;
-  gap: 8px;
+  gap: 16px;
   grid-template-columns: repeat(1, 1fr);
 
   @include min-width-sm {
@@ -161,7 +161,7 @@
       height: auto;
       border: 0;
       box-shadow:
-        0 0 0 1px rgba(0, 0, 0, 0.1) inset,
+        0 0 0 1px rgba(0, 0, 0, 0.1),
         0 0 0 rgba(0, 0, 0, 0.05);
       display: flex;
       flex-direction: column;
@@ -171,7 +171,7 @@
 
       &:hover {
         box-shadow:
-          0 0 0 1px rgba(0, 0, 0, 0.1) inset,
+          0 0 0 1px rgba(0, 0, 0, 0.1),
           0 4px 15px rgba(0, 0, 0, 0.05);
       }
 
@@ -231,23 +231,31 @@
     gap: 0;
     transition: 0.25s box-shadow;
     box-shadow:
-      0 0 0 1px rgba(0, 0, 0, 0.1) inset,
+      0 0 0 1px rgba(0, 0, 0, 0.1),
       0 0 0 rgba(0, 0, 0, 0.05);
     border-radius: 6px;
+    user-select: none;
 
     &:hover {
       box-shadow:
-        0 0 0 1px rgba(0, 0, 0, 0.1) inset,
+        0 0 0 1px rgba(0, 0, 0, 0.1),
         0 4px 15px rgba(0, 0, 0, 0.05);
     }
 
     .card-body {
-      padding: 0.5rem 0.5rem 0.5rem;
+      padding: 0.5rem;
+      font-size: 13px;
+      
+      p {
+        font-size: 13px;
+      }
 
       .wdl-badge-sm {
-        font-size: 13px;
-        padding: 4px 8px !important;
+        font-size: 12px;
+        padding: 3px 6px !important;
       }
+
+      
     }
 
     .card-img-top {
@@ -257,6 +265,7 @@
         border-radius: 0.5rem 0.5rem 0 0;
         aspect-ratio: 30/18;
         object-fit: cover;
+        display: block;
       }
 
       .wdl-badge-sm {
@@ -283,8 +292,8 @@
 }
 .wdl-archive-extended,
 .wdl-archive-extended .wdl-archive-swiper {
-  padding: 2px 8px 24px;
-  margin: -2px -8px -2px -8px;
+  padding: 2px 7px 24px;
+  margin: -2px -7px -2px -7px;
   //margin: -2px 0;
 
   .swiper-wrapper {
@@ -295,7 +304,7 @@
     border-radius: 12px;
     overflow: hidden;
     box-shadow:
-      0 0 0 1px rgba(0, 0, 0, 0.1) inset,
+      0 0 0 1px rgba(0, 0, 0, 0.1),
       0 0 0 0 rgba(0, 0, 0, 0.05);
 
     &::after {
@@ -304,7 +313,7 @@
     &:hover {
       z-index: 1;
       box-shadow:
-        0 0 0 1px rgba(0, 0, 0, 0.1) inset,
+        0 0 0 1px rgba(0, 0, 0, 0.1),
         0 4px 30px rgba(0, 0, 0, 0.05);
       .card-footer {
         opacity: 1;
@@ -321,7 +330,7 @@
     &.active {
       z-index: 1;
       box-shadow:
-        0 4px 15px rgba(0, 0, 0, 0.05) inset,
+        0 4px 15px rgba(0, 0, 0, 0.05),
         0 0 0 2px #ff2758;
     }
 
@@ -414,7 +423,7 @@
     @extend .wdl-btn;
     font-size: 14px !important;
     border-radius: 0 0.75rem 0 0.75rem !important;
-    padding: 6px 16px !important;
+    padding: 6px 10px !important;
     line-height: 1.3;
   }
   .wdl-btn-more {
@@ -443,13 +452,14 @@
   display: flex;
   gap: 4px;
   align-items: baseline;
-  line-height: 1.2;
+  line-height: 1.5;
+  margin-bottom: 4px;
 }
 .wdl-archive-title {
   @extend .lineclamp-2;
 
-  font-size: 1rem;
-  line-height: 1.5;
+  font-size: 14px;
+  line-height: 1.3;
   color: #333333;
   font-weight: 600;
 
@@ -457,6 +467,7 @@
   a:hover,
   a:focus,
   a:active {
+    font-size: 14px;
     font-weight: 600;
     color: #333333;
   }

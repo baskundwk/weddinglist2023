@@ -28,4 +28,14 @@
     opacity: 1;
     z-index: 2;
   }
+
+  .modal-fullscreen {
+    .btn-close {
+      transform: none;
+      top: 24px;
+      right: 24px;
+      background-size: 20px;
+      box-shadow: none;
+    }
+  }
 }

@@ -51,7 +51,7 @@ if ($empty_type) {
               <div class="swiper-wrapper">
                 <?php while ($emptySuggestionQuery->have_posts()): ?>
                   <?php $emptySuggestionQuery->the_post(); ?>
-                  <div class="swiper-slide"><?php include 'cards/card-venue.php' ?></div>
+                  <div class="swiper-slide"><?php include 'cards/card-'.$empty_query.'.php' ?></div>
                 <?php endwhile;
                 wp_reset_postdata(); ?>
               </div>
@@ -62,11 +62,6 @@ if ($empty_type) {
               <div class="swiper-pagination"></div>
             </div>
           </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col">
-          <?php pagination(); ?>
         </div>
       </div>
     <?php endif; ?>

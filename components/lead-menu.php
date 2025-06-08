@@ -7,7 +7,7 @@
             'container' => false,
             'menu' => 'Lead Menu (2025)',
             'menu_class' => 'wdl-lead-menu-wrapper swiper-wrapper',
-            'menu_id' => 'lead-menu',
+            'menu_id' => 'nav-menu',
           )
         );
       ?>

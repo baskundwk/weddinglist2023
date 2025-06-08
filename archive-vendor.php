@@ -1,7 +1,28 @@
 <?php include get_stylesheet_directory().'/components/header.php' ?>
 <main>
-  <?php include get_stylesheet_directory().'/components/search.php' ?>
+  <?php include get_stylesheet_directory().'/components/search.php';?>
 
+  <?php
+    $vendor_type = get_terms(array(
+      'taxonomy' => 'vendor-type',
+      'hide_empty' => true,
+    )); ?>
+  <?php if (!is_wp_error($vendor_type) && !empty($vendor_type)): ?>
+  <section class="overflow-hidden html-lazy py-4">
+    <div class="container-xl">
+      <h2 class="h1 wdl-localnav-heading mb-2">
+        <?php if(isset($_GET['keyword']) && !empty($_GET['keyword'])) {
+          echo __('ผลการค้นหา', 'wdl') . ' : ' . esc_html(sanitize_text_field($_GET['keyword'])) . ' - ' . __('ผู้ให้บริการงานแต่งงาน', 'wdl'); 
+        } else {
+          _e('ผู้ให้บริการงานแต่งงาน', 'wdl');
+        }
+        ?>
+      </h2>
+      <?php include get_stylesheet_directory() . '/components/vendor-thumbnails.php' ?>
+    </div>
+  </section>
+  <?php endif; ?>
+  
   <?php
   $vendor_type = get_terms( array(
     'taxonomy'   => 'vendor-type',
@@ -10,8 +31,7 @@
   ?>
 
   <?php foreach($vendor_type as $type) {
-    $type_query = get_posts(
-      array(
+    $type_query_arg = array(
         'post_type' => 'vendor',
         'posts_per_page' => 40,
         'orderby' => 'meta_value',
@@ -24,8 +44,14 @@
             'terms' => $type->term_id,
           )
         )
-      )
-    ); ?>
+      );
+    if(isset($_GET['keyword']) && !empty($_GET['keyword'])) {
+      $type_query_arg['s'] = sanitize_text_field($_GET['keyword']);
+    };
+    $type_query = get_posts($type_query_arg);
+    
+    if(!empty($type_query)) {
+    ?>
     <section class="overflow-hidden">
       <div class="container-xl">
         <div class="row mb-2">
@@ -71,10 +97,7 @@
         </div>
       </div>
     </section>
-  <?php } ?>
-
-  <?php include get_stylesheet_directory().'/components/compare-bar.php' ?>
+  <?php } } ?>
 </main>
 
-<?php include get_stylesheet_directory().'/components/form-lead.php' ?>
 <?php include get_stylesheet_directory().'/components/footer.php' ?>

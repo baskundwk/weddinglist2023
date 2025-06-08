@@ -2,7 +2,7 @@
 
 <main>
   <?php include get_stylesheet_directory().'/components/search.php' ?>
-  <section class="pt-2">
+  <section class="pt-4">
     <div class="container-xl wdl-archive-infinite-scroll">
       <div class="row mb-2">
         <div class="col">
@@ -31,5 +31,4 @@
     </div>
   </section>  
 </main>
-<?php include get_stylesheet_directory().'/components/form-lead.php' ?>
 <?php include get_stylesheet_directory().'/components/footer.php' ?>

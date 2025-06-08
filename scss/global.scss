@@ -1,7 +1,7 @@
 html,
 body {
-  scroll-margin-top: calc(var(--wp-admin--admin-bar--height) + var(--header-height) + 16px);
-  scroll-padding-top: calc(var(--wp-admin--admin-bar--height) + var(--header-height) + 16px);
+  scroll-margin-top: calc(var(--wp-admin--admin-bar--height, 0px) + var(--header-height, 70px) + 16px);
+  scroll-padding-top: calc(var(--wp-admin--admin-bar--height, 0px) + var(--header-height, 70px) + 16px);
 }
 
 body {
@@ -13,6 +13,9 @@ body {
 
   --bs-tooltip-bg: #333333;
   --bs-tooltip-color: #ffffff;
+  --bs-body-color: #6A6A6A;
+  --bs-card-border-color: #EBEBEB
+  --bs-border-color: #EBEBEB
 
   //--font-family: "Prompt", Helvetica, Arial, Lucida, sans-serif;
 
@@ -21,6 +24,11 @@ body {
   @include max-width-md {
     font-size: 0.875em;
   }
+}
+
+/* Fixed blocked cookie bar */
+[data-cky-tag] {
+  visibility: visible !important;
 }
 
 .wdl-btn,
@@ -35,6 +43,10 @@ body {
 
 a {
   font-weight: 600;
+}
+
+hr {
+  border-color: var(--bs-border-color, #EBEBEB);
 }
 
 .navbar-social {
@@ -271,6 +283,7 @@ body {
 /* General Swiper */
 .card {
   height: 100%;
+  --bs-card-border-color: #EBEBEB;
 }
 .swiper-lazy-preloader {
   width: 24px;
@@ -327,14 +340,14 @@ body {
 
     .swiper-button-prev {
       @media (min-width: 1200px) {
-        left: 0;
+        left: 12px;
         transform: translateX(-50%);
       }
     }
 
     .swiper-button-next {
       @media (min-width: 1200px) {
-        right: 0;
+        right: 12px;
         transform: translateX(50%);
       }
     }
@@ -401,7 +414,7 @@ body {
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
   overflow: hidden;
-  max-height: 1lh;
+  //max-height: 1lh;
 }
 .lineclamp-2,
 .lineclamp-2 > * {
@@ -410,7 +423,7 @@ body {
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
-  max-height: 2lh;
+  //max-height: 2lh;
 }
 .lineclamp-3,
 .lineclamp-3 > * {
@@ -419,7 +432,7 @@ body {
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
-  max-height: 3lh;
+  //max-height: 3lh;
 }
 .lineclamp-4,
 .lineclamp-4 > * {
@@ -428,7 +441,7 @@ body {
   -webkit-line-clamp: 4;
   -webkit-box-orient: vertical;
   overflow: hidden;
-  max-height: 4lh;
+  //max-height: 4lh;
 }
 
 .wdl-iframe {
@@ -474,4 +487,32 @@ body:not(.admin-bar) {
 .overflow-x-clip {
   overflow-x: clip;
   overflow-y: visible;
+}
+
+.section-stripe {
+  &:nth-of-type(even) {
+    @extend .bg-gray;
+  }
+
+  .h1 {
+    font-size: 30px;
+    line-height: 1.5;
+  }
+  .h1, .h2, .h3, .h4, .h5, .h6 {
+    font-weight: 500;
+  }
+
+  .container,
+  .container-sm,
+  .container-md,
+  .container-lg,
+  .container-xl,
+  .container-xxl {
+    max-width: 1680px;
+    
+    @include min-width-xl {
+      padding-left: 24px;
+      padding-right: 24px;
+    }
+  }
 }

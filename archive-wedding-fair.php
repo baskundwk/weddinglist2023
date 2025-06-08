@@ -8,10 +8,10 @@
       <div class="row">
         <div class="col-xl-8">
           <h1 class="mb-0">
-            <?php _e('โปรโมชั่นแต่งงาน & แพ็กเกจแต่งงาน', 'wdl'); ?>
+            <?php _e('Wedding Fair & Events', 'wdl'); ?>
           </h1>
           <p class="text-secondary mb-2">
-            <?php _e('รวมโปรโมชั่น และ แพ็กเกจแต่งงาน จากสถานที่จัดงานแต่งงานชั้นนำทุกรูปแบบ อัพเดทล่าสุด', 'wdl'); ?>
+            <?php _e('รวม Wedding Fair & Events จากสถานที่จัดงานแต่งงานชั้นนำทุกรูปแบบ อัพเดทล่าสุด', 'wdl'); ?>
           </p>
         </div>
         <div class="col-xl-4">
@@ -53,8 +53,5 @@
   ?>
   <?php endif; ?>
 
-  <?php include get_stylesheet_directory().'/components/compare-bar.php' ?>
-
 </main>
-<?php include get_stylesheet_directory().'/components/form-lead.php' ?>
 <?php include get_stylesheet_directory().'/components/footer.php' ?>

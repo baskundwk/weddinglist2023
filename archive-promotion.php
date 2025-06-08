@@ -8,10 +8,10 @@
       <div class="row">
         <div class="col-xl-8">
           <h1 class="mb-0">
-            <?php echo(get_option('wdl_options', 'โปรโมชั่นแต่งงาน & แพ็กเกจแต่งงาน')['word-promotion-title']); ?>
+            <?php echo esc_html(__('โปรโมชั่นแต่งงาน & แพ็กเกจแต่งงาน', 'wdl')); ?>
           </h1>
           <p class="text-secondary mb-2">
-            <?php echo(get_option('wdl_options', 'รวมโปรโมชั่น และ แพ็กเกจแต่งงาน จากสถานที่จัดงานแต่งงานชั้นนำทุกรูปแบบ อัพเดทล่าสุด')['word-promotion-desc']); ?>
+            <?php echo esc_html(__('รวมโปรโมชั่น และ แพ็กเกจแต่งงาน จากสถานที่จัดงานแต่งงานชั้นนำทุกรูปแบบ อัพเดทล่าสุด', 'wdl').' '.date('Y')); ?>
           </p>
         </div>
         <div class="col-xl-4">
@@ -48,8 +48,5 @@
     include get_stylesheet_directory().'/components/result-empty.php';
   ?>
   <?php endif; ?>
-  <?php include get_stylesheet_directory().'/components/compare-bar.php' ?>
-  
 </main>
-<?php include get_stylesheet_directory().'/components/form-lead.php' ?>
 <?php include get_stylesheet_directory().'/components/footer.php' ?>

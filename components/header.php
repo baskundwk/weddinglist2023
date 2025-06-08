@@ -6,6 +6,7 @@
   <link rel="pingback" href="<?php bloginfo('pingback_url'); ?>" />
   <title><?php echo wp_title()?></title>
   <script id="jquery-slim" type="text/javascript" src="<?php echo get_theme_file_uri() . '/library/jquery/jquery-3.7.1.min.js' ?>"></script>
+  <!-- 1HEF5P2XD1 -->
   <!-- Google Tag Manager -->
   <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
   new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -13,7 +14,7 @@
   'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
   })(window,document,'script','dataLayer','GTM-PFFL69SH');</script>
   <!-- End Google Tag Manager -->
-  
+
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-1HEF5P2XD1"></script>
   <script>
@@ -22,6 +23,16 @@
     gtag('js', new Date());
 
     gtag('config', 'G-1HEF5P2XD1');
+  </script>
+  
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-GTM-PFFL69SH"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-GTM-PFFL69SH');
   </script>
   
   <?php wp_head(); ?>
@@ -130,6 +141,7 @@ if(isset($campaignModeEnabled)) {
         <img src="<?php echo get_field('CampaignLogo')['url'];?>" alt="<?php the_title(); ?>">
       </div>
       <div class="countdown">
+        <?php if(get_field('CampaignCountdown')) : ?>
         <div class="text">
           <?php _e('หมดเวลาใน', 'wdl') ?>
           <div class="wdl-campaign-countdown" data-date="<?php echo get_field('CampaignDateEnd');?>">
@@ -160,6 +172,7 @@ if(isset($campaignModeEnabled)) {
             </div>
           </div>
         </div>
+        <?php endif; ?>
         <a href="<?php echo the_permalink()?>"
           data-dlev="linkClick",
           data-dlcomp="link - campaign - bar",
@@ -176,6 +189,7 @@ if(isset($campaignModeEnabled)) {
   <?php wp_reset_postdata();
   }?>
 <?php }?>
+  <?php if(!isset($hideNav) || !$hideNav === true) : ?>
   <header id="main-header" class="sticky-top">
     <div class="navbar navbar-expand-xl">
       <div class="container-xl">
@@ -228,7 +242,9 @@ if(isset($campaignModeEnabled)) {
       </div>
     </div>
   </header>
+  <?php endif; ?>
 
 <?php endif; ?>
-
+<?php if(!isset($hideNav) || !$hideNav === true) : ?>
 <?php include get_stylesheet_directory() . '/components/lead-menu.php' ?>
+<?php endif; ?>

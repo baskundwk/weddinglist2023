@@ -62,7 +62,7 @@
 							<?php
 							$relatedVenue = get_field('RelatedVenue');
 							if ($relatedVenue): ?>
-								<small><a href="<?php echo esc_html(get_permalink($relatedVenue)); ?>">
+								<small><a href="<?php echo esc_html(get_the_permalink($relatedVenue)); ?>">
 										<?php echo esc_html($relatedVenue->post_title); ?>
 									</a></small>
 							<?php endif; ?>

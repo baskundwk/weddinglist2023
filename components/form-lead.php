@@ -11,7 +11,7 @@
     <div class="modal-content m-1 mb-0">
       <button class="btn-close" data-bs-dismiss="modal" aria-label="Close modal"></button>
       <div class="modal-body p-3 p-lg-3">
-        <h2><?php _e('กรุณากรอกข้อมูลผู้ติดต่อ', 'wdl') ?></h2>
+        <h2><?php _e('กรุณากรอกข้อมูลเพื่อให้เซลล์ติดต่อกลับ', 'wdl') ?></h2>
         <hr class="mb-2">
         <?php if($formType === 'General') { ?>
           <ul class="wdl-form-general-list">
@@ -44,6 +44,7 @@
                 <label for="lineid"><?php _e('Line ID', 'wdl')?></label>
               </div>
             </div>
+            <?php if($formType !== 'Vendor') : ?>
             <div class="col-6">
               <div class="form-floating">
                 <input class="form-control" name="guest" id="guest" type="number" placeholder="<?php _e('จำนวนแขก*','wdl')?>" required />
@@ -70,7 +71,9 @@
                 <input type="checkbox" name="daytime" id="daytime-3" value="งานเลี้ยงเย็น" /><label for="daytime-3"><?php _e('งานเลี้ยงเย็น', 'wdl')?></label>
               </div>
             </div>
-            <?php if($formType === 'Venue') {
+            <?php endif; ?>
+
+            <?php if($formType !== 'Vendor') {
               $availablePackageTypes = [];
 
               if(checkPackage('Package') || checkPackage('WeddingPackage')) {
@@ -94,7 +97,28 @@
               </div>  
             <?php }
             } ?>
-            
+
+            <?php if($formType === 'Vendor' && isset($pricings) && count($pricings) > 0) {
+              $pricingIndex = 0?>
+              <div class="col-md-12">
+                <p class="h6 mb-1"><label><?php _e('Package ที่สนใจ
+                ', 'wdl')?></label></p>
+                <div class="wdl-checkbox-button wdl-checkbox-bundle">
+                  <?php 
+                  foreach($pricings as $pricing) { 
+                    $pricingIndex++?>
+                    <label class="bundle-item" for="packageType-<?php echo $pricingIndex ?>">
+                      <input <?php if(count($pricings) < 2) {echo 'checked';}?> type="radio" name="packageType" id="packageType-<?php echo $pricingIndex ?>" value="<?php echo $pricing['name'] ?>" />
+                      <div class="title h4 mb-0"><?php echo $pricing['name'] ?></div>
+                      <div class="desc text-xs lineclamp-3"><?php echo $pricing['desc'] ?></div>
+                      <div class="h3 mt-3 mb-0">เริ่มต้น <?php echo number_format($pricing['price']) ?></div>
+                    </label>
+                  <?php } ?>
+                </div>
+              </div>  
+            <?php } ?>
+
+            <?php if($formType !== 'Vendor') : ?>
             <div class="col-md-12">
               <hr class="mt-0" />
               <p class="h6 mb-1"><?php _e('นัดหมายเข้าชมสถานที่', 'wdl')?></p>
@@ -120,6 +144,7 @@
               </div>
               <hr class="mb-0" />
             </div>
+            <?php endif; ?>
 
             <?php
             if($formType !== 'General') {
@@ -303,7 +328,7 @@ $(document).ready(() => {
     })
     <?php } ?>
 
-    window.dayaLayer.push({
+    window.dataLayer.push({
       'event': 'formSubmit',
       'component': 'form - <?php echo $formType ?>'.toLowerCase(),
       'source': window.location.href,

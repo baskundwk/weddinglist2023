@@ -130,19 +130,26 @@
         top: 0;
         left: 0;
         right: auto;
-        opacity: 1;
+        opacity: 1 !important;
         transition: 0.25s height;
-        box-shadow: none;
-        width: 100%;
+        box-shadow: none !important;
+        width: 100% !important;
         border: none !important;
-        padding-top: 0;
+        padding: 0 !important;
+        display: none;
+        visibility: visible !important;
         li {
           display: block;
           width: 100%;
           a {
-            padding: 8px 14px;
+            padding: 8px 0 !important;
           }
         }
+      }
+
+      &.show {
+        display: block;
+        opacity: 1 !important;
       }
     }
 

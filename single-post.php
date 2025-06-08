@@ -1,48 +1,44 @@
-<?php include get_stylesheet_directory().'/components/header.php' ?>
 
 <?php
 $currentPostID = get_the_ID();
 ?>
+<?php include get_stylesheet_directory().'/components/header.php' ?>
+
 <main>
   <div class="d-flex align-items-start justify-content-center gap-3 mb-3">
 
     <div class="wdl-single-container pb-2 py-xl-3">
       <?php include get_stylesheet_directory().'/components/all-page-ads.php' ?>
-      <?php $post = new WP_Query(array(
-        'ID' => $currentPostID,
-        'post_status' => 'any'
-      ));
-      ?>
       <?php
-      if ($post->have_posts()) {
-        $post->the_post(); ?>
+      if (have_posts()) {
+          the_post(); ?>
 
-      <?php if (function_exists('rank_math_the_breadcrumbs')): ?>
-      <div class="wdl-breadcrumb mb-2 px-3 px-xl-0">
-        <?php rank_math_the_breadcrumbs(); ?>
-      </div>
-      <?php endif; ?>
-
-      <h1 class="wdl-single-title mb-2 px-3 px-xl-0">
-        <?php echo get_the_title($currentPostID); ?>
-      </h1>
-      <div class="wdl-single-thumbnail mb-3">
-        <img loading="eager" src="<?php echo esc_html(get_the_post_thumbnail_url($currentPostID, 'medium_large')) ?>" width="100%" alt="<?php echo get_the_title() ?>">
-      </div>
-
-      <div class="wdl-single-content mb-2 px-3 px-xl-0">
-        <?php $postSetting = get_field('PostSetting', $currentPostID);?>  
-        <?php if(isset($postSetting) && in_array('DisableLazyLoad' , $postSetting)) { ?>
-          <div class="post-content-container">
-            <?php the_content(); ?>
-          </div>
-        <?php } else { ?>
-          <div id="post-content-container" class="loading"></div>
-        <?php }?>
-        <div class="wdl-single-content-readmore">
-          <div class="wdl-btn"><?php _e('อ่านเพิ่มเติม', 'wdl')?></div>
+        <?php if (function_exists('rank_math_the_breadcrumbs')): ?>
+        <div class="wdl-breadcrumb mb-2 px-3 px-xl-0">
+          <?php rank_math_the_breadcrumbs(); ?>
         </div>
-      </div>
+        <?php endif; ?>
+
+        <h1 class="wdl-single-title mb-2 px-3 px-xl-0">
+          <?php the_title(); ?>
+        </h1>
+        <div class="wdl-single-thumbnail mb-3">
+          <img loading="eager" src="<?php echo esc_html(get_the_post_thumbnail_url($currentPostID, 'medium_large')) ?>" width="100%" alt="<?php echo get_the_title() ?>">
+        </div>
+
+        <div class="wdl-single-content mb-2 px-3 px-xl-0">
+          <?php $postSetting = get_field('PostSetting', $currentPostID);?>  
+          <?php if(isset($postSetting) && in_array('DisableLazyLoad' , $postSetting)) { ?>
+            <div class="post-content-container">
+              <?php the_content(); ?>
+            </div>
+          <?php } else { ?>
+            <div id="post-content-container" class="loading"></div>
+          <?php }?>
+          <div class="wdl-single-content-readmore">
+            <div class="wdl-btn"><?php _e('อ่านเพิ่มเติม', 'wdl')?></div>
+          </div>
+        </div>
       <?php } ?>
     </div>
 
@@ -100,7 +96,7 @@ $currentPostID = get_the_ID();
     $query_promotion = new WP_Query(array(
       'post_type' => 'promotion',
       'post_status' => 'publish',
-      'p' => $related_promotion_id
+      'post__in' => $related_promotion_id
     )) ?>
   <?php if ($query_promotion->have_posts()): ?>
   <div class="container-xl wdl-archive wdl-archive-extended wdl-archive-no-compare mx-auto">
@@ -126,7 +122,7 @@ $currentPostID = get_the_ID();
     $query_weddingfair = new WP_Query(array(
       'post_type' => 'wedding-fair',
       'post_status' => 'publish',
-      'p' => $related_weddingfair_id
+      'post__in' => $related_weddingfair_id
     )) ?>
   <?php if ($query_weddingfair->have_posts()): ?>
   <div class="container-xl wdl-archive wdl-archive-extended wdl-archive-no-compare mx-auto">
@@ -152,7 +148,7 @@ $currentPostID = get_the_ID();
     $query_venue = new WP_Query(array(
       'post_type' => 'venue',
       'post_status' => 'publish',
-      'p' => $related_venue_id
+      'post__in' => $related_venue_id
     )) ?>
   <?php if ($query_venue->have_posts()): ?>
   <div class="container-xl wdl-archive wdl-archive-extended wdl-archive-no-compare mx-auto">
@@ -178,7 +174,7 @@ $currentPostID = get_the_ID();
     $query_vendor = new WP_Query(array(
       'post_type' => 'vendor',
       'post_status' => 'publish',
-      'p' => $related_vendor_id
+      'post__in' => $related_vendor_id
     )) ?>
   <?php if ($query_vendor->have_posts()): ?>
   <div class="container-xl wdl-archive wdl-archive-extended wdl-archive-no-compare mx-auto">

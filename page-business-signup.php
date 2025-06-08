@@ -1,0 +1,139 @@
+<?php
+  $hideNav = true;
+  include get_stylesheet_directory().'/components/header.php';
+?>
+<section class="position-relative">
+  <div class="container-xl position-relative z-1">
+    <div class="row py-5 g-4 justify-content-center align-items-center min-vh-100 mt-0">
+      <div class="col-lg-5 order-lg-2 h-auto pb-4">
+        <h1 class="h1 text-center">ลงทะเบียน<br/>
+          <img class="mt-2" loading="lazy" src="<?php echo get_theme_file_uri() . '/images/logo.png';?>" alt="Weddinglist" height="80" >
+        </h1>
+        <p class="text-center">The Wedding Connect @ Pullman Bangkok King Power</p>
+        <div class="card rounded-4 h-auto">
+          <div class="card-body">
+            <form id="businessSignUp" action="" method="post">
+              <div class="mb-3">
+                <label for="businessName"><?php _e('บริษัท/ชื่อกิจการ','wdl')?><span class="text-red">*</span></label>
+                <input name="businessName" id="businessName" type="text" placeholder="<?php _e('บริษัท/ชื่อกิจการ','wdl')?>" required />
+              </div>
+              <div class="mb-3">
+                <label for="businessType"><?php _e('ประเภทกิจการ','wdl')?><span class="text-red">*</span></label>
+                <select name="businessType" id="businessType" required>
+                  <option disabled hidden selected>-- เลือกประเภทกิจการ --</option>
+                  <optgroup label="<?php _e('สถานที่จัดงานแต่งงาน', 'wdl')?>">
+                    <?php $venueTypes = get_terms([
+                      'taxonomy' => 'venue_type',
+                      'hide_empty' => false,
+                    ]);
+
+                    if (!is_wp_error($venueTypes)) {
+                      foreach ($venueTypes as $venueType) {
+                        echo '<option value="'.$venueType->name.'">'. $venueType->name . '</option>' ;
+                      }
+                    }?>
+                  </optgroup>
+                  <optgroup label="<?php _e('ผู้ให้บริการ', 'wdl')?>">
+                    <?php $vendorTypes = get_terms([
+                      'taxonomy' => 'vendor-type',
+                      'hide_empty' => false,
+                      'parent' => 0
+                    ]);
+
+                    if (!is_wp_error($vendorTypes)) {
+                      foreach ($vendorTypes as $vendorType) {
+                        echo '<option value="'.$vendorType->name.'">'. $vendorType->name . '</option>' ;
+                      }
+                    }?>
+                  </optgroup>
+                  <option value="อื่น ๆ">อื่น ๆ</option>
+                </select>
+              </div>
+              <div id="businessTypeSpecContainer" class="mb-3 d-none">
+                <label for="businessTypeSpec"><?php _e('ระบุประเภทกิจการ','wdl')?><span class="text-red">*</span></label>
+                <input name="businessTypeSpec" id="businessTypeSpec" type="text" placeholder="<?php _e('ระบุประเภทกิจการ','wdl')?>" />
+              </div>
+              <div class="mb-3">
+                <label for="contactName"><?php _e('ชื่อ-นามสกุลผู้ติดต่อ','wdl')?><span class="text-red">*</span></label>
+                <input name="contactName" id="contactName" type="text" placeholder="<?php _e('ชื่อ-นามสกุลผู้ติดต่อ','wdl')?>" required />
+              </div>
+              <div class="mb-3">
+                <label for="contactTel"><?php _e('เบอร์โทรผู้ติดต่อ','wdl')?><span class="text-red">*</span></label>
+                <input name="contactTel" id="contactTel" type="text" placeholder="<?php _e('เบอร์โทรผู้ติดต่อ','wdl')?>" required />
+              </div>
+              <div class="mb-3">
+                <label for="contactEmail"><?php _e('อีเมลผู้ติดต่อ','wdl')?><span class="text-red">*</span></label>
+                <input name="contactEmail" id="contactEmail" type="email" placeholder="<?php _e('อีเมลผู้ติดต่อ','wdl')?>" required />
+              </div>
+              <div class="mb-3">
+                <label for="message"><?php _e('ข้อความเพิ่มเติม','wdl')?></label>
+                <textarea name="message" id="message" type="tel" placeholder="<?php _e('ข้อความเพิ่มเติม','wdl')?>" rows="4"></textarea>
+              </div>
+              <button id="businessSignUp-submit" type="submit" name="submit" class="wdl-btn-lg wdl-form-submit w-100">
+                <span class="loader" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" viewBox="0 0 256 256"><path d="M232,128a104,104,0,0,1-208,0c0-41,23.81-78.36,60.66-95.27a8,8,0,0,1,6.68,14.54C60.15,61.59,40,93.27,40,128a88,88,0,0,0,176,0c0-34.73-20.15-66.41-51.34-80.73a8,8,0,0,1,6.68-14.54C208.19,49.64,232,87,232,128Z"></path></svg></span>
+                <?php _e('ลงทะเบียน','wdl')?>
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="background position-absolute top-0 left-0 w-100 h-100 z-0">
+    <img class="w-100 h-100 object-fit-cover" style="filter: grayscale(1); opacity: .2;" src="https://images.pexels.com/photos/1024993/pexels-photo-1024993.jpeg" alt="">
+  </div>
+</section>
+
+<div id="modal-thankyou" class="modal fade">
+  <div class="modal-dialog modal-dialog-centered modal-lg modal-fullscreen-md-down">
+    <div class="modal-content mb-0">
+      <button class="btn-close" data-bs-dismiss="modal"></button>
+      <div class="modal-body text-center">
+        <div class="py-4">
+          <img class="mb-4" src="<?php echo(get_theme_file_uri() . '/images/logo.png') ?>" alt="Weddinglist" width="180" height="43">
+          <p class="h2 text-red"><?php _e('ลงทะเบียนสำเร็จ ขอบคุณค่ะ','wdl') ?></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+$(document).ready(() => {
+  $('#businessType').change(()=>{
+    if ( $('#businessType').val() === "อื่น ๆ" ) {
+      $('#businessTypeSpecContainer').removeClass('d-none')
+      $('#businessTypeSpecContainer input').attr('required', true)
+    } else {
+      $('#businessTypeSpecContainer input').removeAttr('required')
+      $('#businessTypeSpecContainer').addClass('d-none')
+    }
+  })
+
+  const modalVerify = new bootstrap.Modal(document.querySelector('#modal-thankyou'));
+
+  $('#businessSignUp').submit(function(e) {
+    e.preventDefault();
+    $('#businessSignUp-submit').addClass('loading')
+    $.post("<?php echo admin_url('admin-ajax.php'); ?>", {
+      action: 'send_email_business',
+      name: $('#businessName').val(),
+      businessType: $('#businessType').val() !== 'อื่น ๆ' ? $('#businessType').val() : $('#businessTypeSpec').val(),
+      contactName: $('#contactName').val(),
+      contactTel: $('#contactTel').val(),
+      contactEmail: $('#contactEmail').val(),
+      message: $('#message').val(),
+      leadType: 'Business',
+    }, (res) => {
+      modalVerify.show();
+    }).fail((err) => {
+      alert('ระบบเกิดการผิดพลาด ขออภัยค่ะ กรุณาลองใหม่');
+    })
+
+    $('#businessSignUp-submit').remove('loading')
+
+  });
+})
+</script>
+
+<?php include get_stylesheet_directory().'/components/footer.php' ?>

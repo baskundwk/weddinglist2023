@@ -1,8 +1,8 @@
 <div id="wdl-post-<?php the_ID(); ?>" class="wdl-video swiper-slide wdl-archive-card wdl-archive-infinite-scroll-post">
-  <a href="<?php the_permalink()?>" aria-label="<?php the_title()?>"
-    data-dlev="cardClick",
-    data-dlcomp="card - video",
-    data-dltgt="<?php the_title()?>">
+  <a href="<?php echo esc_attr(the_permalink())?>" aria-label="<?php echo esc_attr(get_the_title())?>"
+    data-dlev="cardClick"
+    data-dlcomp="card - video"
+    data-dltgt="<?php echo esc_attr(get_the_title())?>">
     <div class="wdl-video-icon">
       <div class="shape">
         <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -31,7 +31,7 @@
       </div>
     </div>
     <div class="wdl-video-image">
-      <?php the_post_thumbnail( 'medium_large' )?>
+      <?php the_post_thumbnail( 'w425' )?>
     </div>
     <div class="wdl-video-text">
       <p class="meta lineclamp-1">

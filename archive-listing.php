@@ -2,8 +2,7 @@
 
 <main>
   <?php include get_stylesheet_directory().'/components/search.php' ?>
-  <?php include get_stylesheet_directory().'/queries/query-listing.php' ?>
-  <section>
+  <section class="pt-4">
     <div class="container-xl">
       <div class="row">
         <div class="col">
@@ -17,9 +16,46 @@
       </div>
     </div>
   </section>
+
+  <?php $listingCatArr = get_terms(array(
+    'taxonomy'   => 'listing-category',
+  ));
+  if (!empty($listingCatArr) && !is_wp_error($listingCatArr)) {
+    foreach ($listingCatArr as $term) {?>
+    <section class="py-4">
+      <div class="container-xl">
+        <h2 class="mb-2 border-bottom"><?php echo esc_html($term->name)?></h2>
+        <?php $args = array(
+            'post_type'      => 'listing',
+            'posts_per_page' => -1, // Get all listings in this category
+            'tax_query'      => array(
+                array(
+                    'taxonomy' => 'listing-category',
+                    'field'    => 'term_id',
+                    'terms'    => $term->term_id,
+                ),
+            ),
+        );
+
+        $query = new WP_Query($args);
+        if ($query->have_posts()) { ?>
+          <div class="wdl-listing-grid">
+            <?php while ($query->have_posts()) {
+              $query->the_post(); ?>
+              <?php include get_stylesheet_directory().'/components/cards/card-listing-thumbnail.php' ?>
+            <?php }?>
+          </div>
+        <?php }?>
+      </div>
+    </section>
+    <?php } 
+    } ?>
+
+  <?php include get_stylesheet_directory().'/queries/query-listing.php' ?>
   <?php if (have_posts()): ?>
-  <section class="wdl-archive wdl-archive-extended pb-5 m-0">
+  <section class="wdl-archive wdl-archive-extended m-0 py-4">
     <div class="container-xl wdl-archive-infinite-scroll">
+      <h2 class="mb-2 border-bottom"><?php _e('สถานที่จัดงานแต่งงานแนะนำในกลุ่มอื่น','wdl'); ?></h2>
       <div class="wdl-listing-grid wdl-archive-infinite-scroll-wrapper" id="wdl-archive-infinite-scroll-wrapper">
         <?php while (have_posts()): ?>
           <?php the_post();
@@ -43,5 +79,4 @@
   <?php endif; ?>
   
 </main>
-<?php include get_stylesheet_directory().'/components/form-lead.php' ?>
 <?php include get_stylesheet_directory().'/components/footer.php' ?>
