@@ -42,6 +42,10 @@
         if ($sponsored && in_array('Sponsored', $sponsored)): ?>
           <span class="wdl-badge-sm"><?php _e('Most Popular', 'wdl')?></span>
         <?php endif; ?>
+        <?php /* $sponsored = get_field('Microsite');
+        if ($sponsored && in_array('Free Microsite', $sponsored)): ?>
+          <span class="debug wdl-badge-sm"><?php _e('(Free microsite)', 'wdl')?></span>
+        <?php endif; */ ?>
       </div>
       <div class="swiper-lazy-preloader"></div>
     </a>
@@ -93,10 +97,10 @@
           <?php endif ?>>
           <span><?php echo esc_html($character->name); ?></span>
         </div>
-      <?php endforeach; ?>
+        <?php endforeach; ?>
       <?php endif ?>
     </div>
-    <h3 class="wdl-archive-title mb-0">
+    <h3 class="wdl-archive-title">
       <a 
         href="<?php echo esc_attr(the_permalink()); ?>"
         data-dlev="cardClick"
@@ -107,7 +111,7 @@
     </h3>
 
     <?php
-    if (get_the_excerpt() != ''):
+    if (trim(get_the_excerpt()) != ''):
       ?>
       <p class="lineclamp-2 mb-2 text-secondary"><?php echo get_the_excerpt(); ?></p>
     <?php endif; ?>
@@ -128,6 +132,44 @@
     $maxGuest = get_field('MaxGuest');
     if ($maxGuest): ?>
       <div class="wdl-metadata lineclamp-1 wdl-archive-max-guest"><?php _e('รองรับแขกสูงสุด', 'wdl') ?>&nbsp;<strong class="text-red"><?php echo number_format(get_field('MaxGuest')) ?> <?php _e('คน', 'wdl') ?></strong></div>
+    <?php endif; ?>
+
+     <?php $coupon = get_posts(
+      array(
+        'posts_per_page' => 1,
+        'post_type' => 'coupon',
+        'meta_query' => array(
+          array(
+            'key' => 'Venue',
+            'value' => '"' . get_the_ID() . '"',
+            'compare' => 'LIKE'
+          )
+        )
+      )
+    );
+
+    if ($coupon): ?>
+      <a 
+        class="d-flex flex-wrap gap-2 align-items-stretch my-2"
+        href="<?php echo esc_attr(the_permalink()); ?>"
+        data-dlev="cardClick"
+        data-dlcomp="card - promotion"
+        data-dltgt="<?php echo esc_attr(get_the_title()) ?>"
+      >
+        <?php foreach ($coupon as $singleCoupon): ?>
+          <div class="wdl-coupon-picker wdl-coupon-picker-small">
+            <div class="wdl-coupon-picker-image">
+              <img loading="lazy" src="<?php echo (get_field('Image', $singleCoupon->ID)['sizes']['medium']) ?>" alt="<?php echo esc_attr(get_the_title()); ?>" />
+              <div class="swiper-lazy-preloader"></div>
+            </div>
+            <div class="wdl-coupon-picker-info">
+              <div class="wdl-coupon-picker-title">
+                <?php echo (get_the_title($singleCoupon->ID)) ?>
+              </div>
+            </div>
+          </div>
+        <?php endforeach; ?>
+      </a>
     <?php endif; ?>
   </div>
 

@@ -2,7 +2,7 @@
   'post_type' => 'any',
   'post_status' => 'publish',
   'orderby' => 'rand',
-  'posts_per_page' => '-1',
+  'posts_per_page' => 8,
   'meta_query' => array(
     array(
       'key' => 'HeroBanner',
@@ -18,7 +18,7 @@ $today = current_time('Y-m-d');
 
 $campaignHeroBefore = new WP_Query([
   'post_type' => 'campaign',
-  'posts_per_page' => -1,
+  'posts_per_page' => 1,
   'post_status' => 'publish',
   'meta_query'     => [
       'relation' => 'AND',
@@ -43,7 +43,7 @@ $campaignHeroBefore = new WP_Query([
 
 $campaignHeroMiddle = new WP_Query([
   'post_type' => 'campaign',
-  'posts_per_page' => -1,
+  'posts_per_page' => 1,
   'post_status' => 'publish',
   'meta_query'     => [
       'relation' => $_GET['campaignDebug'] ? 'OR' : 'AND',
@@ -87,7 +87,7 @@ $campaignHeroMiddle = new WP_Query([
                   data-dltgt="<?php echo esc_attr(get_the_title()); ?>">
                     <picture>
                       <source srcset="<?php echo esc_attr(get_field('CampaignHeroBefore')['sizes']['w1160']) ?>" width="<?php echo esc_attr(get_field('CampaignHeroBefore')['sizes']['w1160-width']) ?>" height="<?php echo esc_attr(get_field('CampaignHeroBefore')['sizes']['w1160-height']) ?>" media="(min-width: 576px)" />
-                      <img loading="lazy" src="<?php echo esc_attr(get_field('CampaignHeroBefore')['sizes']['h270']) ?>" alt="<?php echo esc_attr(get_the_title()) ?>" sizes="100%">
+                      <img loading="eager" fetchpriority="high" src="<?php echo esc_attr(get_field('CampaignHeroBefore')['sizes']['h270']) ?>" alt="<?php echo esc_attr(get_the_title()) ?>" sizes="100%">
                     </picture>
                   </a>
                 <?php else: ?>
@@ -99,7 +99,7 @@ $campaignHeroMiddle = new WP_Query([
                   data-dlev="adsClick"
                   data-dlcomp="ads - hero"
                   data-dltgt="<?php echo esc_attr(get_the_title()); ?>">
-                    <img loading="lazy" src="<?php echo esc_attr(get_field('CampaignHeroBefore')) ?>" alt="<?php echo esc_attr(get_the_title()) ?>" sizes="100%">
+                    <img loading="eager" fetchpriority="high" src="<?php echo esc_attr(get_field('CampaignHeroBefore')) ?>" alt="<?php echo esc_attr(get_the_title()) ?>" sizes="100%">
                   </a>
                 <?php endif; ?>
               </div>
@@ -124,7 +124,7 @@ $campaignHeroMiddle = new WP_Query([
                   data-dltgt="<?php echo esc_attr(get_the_title()); ?>">
                     <picture>
                       <source srcset="<?php echo esc_attr(get_field('CampaignHeroMiddle')['sizes']['w1160']) ?>" width="<?php echo esc_attr(get_field('CampaignHeroMiddle')['sizes']['w1160-width']) ?>" height="<?php echo esc_attr(get_field('CampaignHeroMiddle')['sizes']['w1160-height']) ?>" media="(min-width: 576px)" />
-                      <img loading="lazy" src="<?php echo esc_attr(get_field('CampaignHeroMiddle')['sizes']['h270']) ?>" alt="<?php echo esc_attr(get_the_title()) ?>" sizes="100%">
+                      <img loading="eager" fetchpriority="high" src="<?php echo esc_attr(get_field('CampaignHeroMiddle')['sizes']['h270']) ?>" alt="<?php echo esc_attr(get_the_title()) ?>" sizes="100%">
                     </picture>
                   </a>
                 <?php else: ?>
@@ -136,7 +136,7 @@ $campaignHeroMiddle = new WP_Query([
                   data-dlev="adsClick"
                   data-dlcomp="ads - hero"
                   data-dltgt="<?php echo esc_attr(get_the_title()); ?>">
-                    <img loading="lazy" src="<?php echo esc_attr(get_field('CampaignHeroMiddle')) ?>" alt="<?php echo esc_attr(get_the_title()) ?>" sizes="100%">
+                    <img loading="eager" fetchpriority="high" src="<?php echo esc_attr(get_field('CampaignHeroMiddle')) ?>" alt="<?php echo esc_attr(get_the_title()) ?>" sizes="100%">
                   </a>
                 <?php endif; ?>
               </div>
@@ -161,7 +161,7 @@ $campaignHeroMiddle = new WP_Query([
                   data-dltgt="<?php echo esc_attr(get_the_title()); ?>">
                     <picture>
                       <source srcset="<?php echo esc_attr(get_field('HeroBannerImage')['sizes']['w1160']) ?>" width="<?php echo esc_attr(get_field('HeroBannerImage')['sizes']['w1160-width']) ?>" height="<?php echo esc_attr(get_field('HeroBannerImage')['sizes']['w1160-height']) ?>" media="(min-width: 576px)" />
-                      <img loading="lazy" src="<?php echo esc_attr(get_field('HeroBannerImage')['sizes']['h270']) ?>" alt="<?php echo esc_attr(get_the_title()) ?>" sizes="100%">
+                      <img loading="eager" fetchpriority="high" src="<?php echo esc_attr(get_field('HeroBannerImage')['sizes']['h270']) ?>" alt="<?php echo esc_attr(get_the_title()) ?>" sizes="100%">
                     </picture>
                   </a>
                 <?php else: ?>
@@ -173,7 +173,7 @@ $campaignHeroMiddle = new WP_Query([
                   data-dlev="adsClick"
                   data-dlcomp="ads - hero"
                   data-dltgt="<?php echo esc_attr(get_the_title()); ?>">
-                    <img loading="lazy" src="<?php echo esc_attr(get_field('HeroBannerImage')) ?>" alt="<?php echo esc_attr(get_the_title()) ?>" sizes="100%">
+                    <img loading="eager" fetchpriority="high" src="<?php echo esc_attr(get_field('HeroBannerImage')) ?>" alt="<?php echo esc_attr(get_the_title()) ?>" sizes="100%">
                   </a>
                 <?php endif; ?>
               </div>

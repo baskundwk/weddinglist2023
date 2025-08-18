@@ -33,7 +33,7 @@
   <?php foreach($vendor_type as $type) {
     $type_query_arg = array(
         'post_type' => 'vendor',
-        'posts_per_page' => 40,
+        'posts_per_page' => get_option( 'posts_per_page' ),
         'orderby' => 'meta_value',
         'meta_key' => 'Status',
         'order' => 'DESC',

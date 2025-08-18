@@ -7,14 +7,13 @@
           <div class="wdl-breadcrumb">
             <p>
               <a href="<?php echo get_post_type_archive_link( get_post_type() )?>"><?php _e('Video', 'wdl') ?></a>
-              
             </p>
           </div>
           <h1 class="wdl-single-title mb-2"><?php the_title(); ?></h1>
           <a href="<?php echo get_the_permalink( get_field('RelatedVenue')->ID ) ?>" class="mb-2 meta wdl-archive-location"><?php echo get_the_title(get_field('RelatedVenue')->ID)?></a>
           <div class="wdl-single-video-player">
             <?php if(get_field('EmbedCode')) {
-              the_field('EmbedCode');
+              echo get_field('EmbedCode');
             } ?>
           </div>
           <div class="content">

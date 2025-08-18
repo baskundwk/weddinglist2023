@@ -25,7 +25,7 @@
       <?php endif; ?>
     </div> */ ?>
 
-    <h3 class="wdl-archive-title mb-0 lineclamp-2">
+    <h3 class="wdl-archive-title lineclamp-2">
       <a
         href="<?php the_permalink(); ?>"
         title="<?php echo get_the_title() ?>"

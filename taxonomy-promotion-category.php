@@ -1,7 +1,6 @@
 <?php include get_stylesheet_directory().'/components/header.php' ?>
 
 <main>
-  <?php include get_stylesheet_directory().'/components/search.php' ?>
   <?php include get_stylesheet_directory().'/queries/query-promotion.php' ?>
   <section>
     <div class="container-xl">
@@ -85,7 +84,7 @@
                   ?>
               </div>
 
-              <h3 class="wdl-archive-title mb-0"><a href="<?php the_permalink(); ?>">
+              <h3 class="wdl-archive-title"><a href="<?php the_permalink(); ?>">
                   <?php the_title(); ?>
                 </a></h3>
 
@@ -117,7 +116,7 @@
                   if ($coupon): ?>
               <div class="mt-1">
                 <p class="text-sm mb-1 text-secondary"><?php _e('คูปองที่ร่วมรายการ', 'wdl') ?></p>
-                <div class="d-flex flex-wrap gap-2 align-items-stretch">
+                <div class="d-flex flex-wrap gap-2 align-items-stretch my-2">
                   <?php foreach ($coupon as $singleCoupon): ?>
                   <div class="wdl-coupon-picker wdl-coupon-picker-small">
                     <div class="wdl-coupon-picker-image">

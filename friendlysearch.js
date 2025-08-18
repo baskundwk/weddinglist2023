@@ -7,8 +7,15 @@ const elFormInput = document.querySelector('.wdl-form-input-group');
 const elAllTab = document.querySelectorAll('.wdl-friendly-search-nav button');
 const elAllFilter = document.querySelectorAll('.wdl-friendly-search-main .filters .filter');
 const elAllSkip = document.querySelectorAll('.wdl-friendly-search-modal .modal-title-skip');
+const elAllBack = document.querySelectorAll('.wdl-friendly-search-modal .modal-top-back');
 const elAllCancel = document.querySelectorAll('.wdl-friendly-search-modal .modal-top-cancel');
 const elAllModalChoice = document.querySelectorAll('.wdl-friendly-search-modal .modal-choice');
+
+const btnLocUpdate = document.querySelector('#friendlySearchFilterUpdateLocation')
+const selectLoc = document.querySelector('#friendlySearchFilterProvince')
+const selectSubLoc = document.querySelector('#friendlySearchFilterLocation')
+const inputLoc = document.querySelector('input[name="loc"]')
+const delay = 250
 
 const setFormData = (name, value) => {
   console.log(`Setting form data: ${name} = ${value}`);
@@ -22,12 +29,14 @@ const setFormData = (name, value) => {
 }
 
 const handleModalOpen = (step) => {
-  elModal?.classList.add('active');
-  elSection?.classList.add('active');
+  setTimeout(()=>{
+    elModal?.classList.add('active');
+    elSection?.classList.add('active');
 
-  elModal.querySelectorAll('.modal-step')?.forEach(e => e.classList.remove('active'));
-  elModal.setAttribute('data-current-step', step)
-  elModal.querySelector('.modal-step' + elModal.getAttribute('data-current-step'))?.classList.add('active');
+    elModal.querySelectorAll('.modal-step')?.forEach(e => e.classList.remove('active'));
+    elModal.setAttribute('data-current-step', step)
+    elModal.querySelector('.modal-step' + elModal.getAttribute('data-current-step'))?.classList.add('active');
+  }, delay)
 }
 
 const handleModalClose = () => {
@@ -35,8 +44,8 @@ const handleModalClose = () => {
     elSection?.classList.remove('active');
     elModal?.classList.remove('active');
     elModal?.classList.add('closing');
-    setTimeout(() => {elModal?.classList.remove('closing')}, 350)
-  }
+    elModal?.classList.remove('closing')
+  } 
 }
 
 const handleModalReset = () => {
@@ -48,6 +57,13 @@ const handleModalReset = () => {
     e.classList.remove('active');
     e.querySelector('.filter-label-value').innerText = '';
   })
+}
+
+const handleModalBack = () => {
+  const activeStep = document.querySelector('.modal-step.active')
+  const previousStep = activeStep.previousElementSibling
+  activeStep?.classList.remove('active')
+  previousStep?.classList.add('active')
 }
 
 const handleTabSwap = (tab) => {
@@ -66,9 +82,9 @@ const handleTabSwap = (tab) => {
 }
 
 const populateData = () => {
-  if(dataType) {
-    document.querySelector('#modal-step-1-1 .modal-grid').innerHTML = dataType.map((e, i) => 
-      `<div id="filter-1-1-${i}" class="thumb-card" data-form-name="type" data-form-value="${e.value}">
+  if(dataLocation) {
+    document.querySelector('#modal-step-1-1 .modal-grid').innerHTML = dataLocation.map((e, i) => 
+      `<div id="filter-1-2-${i}" class="thumb-card" data-form-name="loc" data-form-value="${e.value}">
         <div class="thumb-image">
           <img src="${e.thumbnail}" alt="${e.title}">
         </div>
@@ -76,9 +92,9 @@ const populateData = () => {
       </div>`
     ).join('');
   }
-  if(dataLocation) {
-    document.querySelector('#modal-step-1-2 .modal-grid').innerHTML = dataLocation.map((e, i) => 
-      `<div id="filter-1-2-${i}" class="thumb-card" data-form-name="loc" data-form-value="${e.value}">
+  if(dataType) {
+    document.querySelector('#modal-step-1-2 .modal-grid').innerHTML = dataType.map((e, i) => 
+      `<div id="filter-1-1-${i}" class="thumb-card" data-form-name="type" data-form-value="${e.value}">
         <div class="thumb-image">
           <img src="${e.thumbnail}" alt="${e.title}">
         </div>
@@ -110,6 +126,57 @@ const initModalChoice = () => {
       })
     })
   })
+}
+
+const handleUpdateLocation = () => {
+  const elFilter = elMain.querySelector('.filter[data-filter-name="loc"]')
+  const elLabel = elFilter.querySelector('.filter-label-value')
+  if(selectSubLoc.value !== '' && selectSubLoc.value !== 'all') {
+    setFormData('loc', selectSubLoc.value)
+    //handleModalClose()
+    elFilter.classList.add('active')
+    const label = selectSubLoc.querySelector(`option[value="${selectSubLoc.value}"]`).innerText.replace(/[\r\n]+/g, ' ');
+
+    elLabel.innerText = label
+  } else if (selectLoc.value !== '') {
+    setFormData('loc', selectLoc.value)
+    //handleModalClose()
+    elFilter.classList.add('active')
+    const label = selectLoc.querySelector(`option[value="${selectLoc.value}"]`).innerText.replace(/[\r\n]+/g, ' ');
+
+    elLabel.innerText = label
+  }
+
+  const currentModalStep = document.querySelector(elFilter.getAttribute('data-set-step'));
+  const nextModalStep = currentModalStep.nextElementSibling;
+  const nextSetStep = elFilter.nextElementSibling?.getAttribute('data-set-step');
+
+  currentModalStep.querySelectorAll('.thumb-card').forEach(e => e.classList.remove('active'))
+
+  if(currentModalStep?.getAttribute('data-group') === nextModalStep?.getAttribute('data-group') && nextSetStep) {
+    handleModalOpen(nextSetStep);
+  } else {
+    handleModalClose()
+  }
+}
+
+const handleSelectLocation = (id) => {
+  console.log('handeSelectLocation', id)
+  if(id === 'friendlySearchFilterLocation') {
+  } else if (id === 'friendlySearchFilterProvince') {
+    const value = selectLoc.value
+    selectSubLoc.querySelectorAll('option').forEach((e) => {
+      e.removeAttribute('selected')
+      if(e.getAttribute('data-parent') !== value && e.value !== '') {
+        e.setAttribute('hidden', true)
+      } else {
+        e.removeAttribute('hidden')
+      }
+    })
+    selectSubLoc.querySelector('option[value="all"]').removeAttribute('hidden')
+    selectSubLoc.querySelector('option[value="all"]').removeAttribute('disabled')
+    selectSubLoc.querySelector('option[value="all"]').setAttribute('selected', true)
+  }
 }
 
 const handleSkip = (name) => {
@@ -151,6 +218,11 @@ const initFriendlySearch = () => {
     })
   })
 
+  // On Location Update
+  btnLocUpdate.addEventListener('click', handleUpdateLocation)
+  selectLoc.addEventListener('change', (e) => handleSelectLocation(selectLoc.id))
+  selectSubLoc.addEventListener('change', (e) => handleSelectLocation(selectSubLoc.id))
+
   // On Select Change
   elBar.querySelectorAll('select').forEach((e) => {
     e.addEventListener('change', (e2) => {
@@ -163,6 +235,9 @@ const initFriendlySearch = () => {
   // On Filter Click
   elAllFilter.forEach((e) => {
     e.addEventListener('click', (e2) => {
+      const headerBottom = document.querySelector('header').getBoundingClientRect().bottom
+      const friendlySearchTop = elSection.getBoundingClientRect().top + (window.scrollY)
+      window.scrollTo(0 , friendlySearchTop - headerBottom)
       if(document.querySelector(e.getAttribute('data-set-step'))?.classList.contains('active') && elModal?.classList.contains('active')) {
         handleModalClose();
       } else {
@@ -178,10 +253,17 @@ const initFriendlySearch = () => {
     }
   })
 
+  // On Modal Back Click
+  elAllBack.forEach((e) => {
+    e.addEventListener('click', (e2) => {
+      handleModalBack();
+    })
+  })
+
   // On Modal Cancel Click
   elAllCancel.forEach((e) => {
     e.addEventListener('click', (e2) => {
-      handleModalReset();
+      //handleModalReset();
       handleModalClose();
     })
   })
@@ -195,8 +277,15 @@ const initFriendlySearch = () => {
       if(!e.classList.contains('modal-title-skip')) {
         const name = e.getAttribute('data-form-name');
         const value = e.getAttribute('data-form-value');
-        const label = e.innerText
+        const label = e.innerText.replace(/[\r\n]+/g, ' ');
+
         setFormData(name, value);
+
+        const parent = e.parentElement
+        const otherE = parent.querySelectorAll('[data-form-name]')
+
+        otherE.forEach(e3 => e3.classList.remove('active'))
+        e.classList.add('active')
         
         const currentElement = e;
         const currentModalStep = currentElement.closest('.modal-step');
@@ -230,8 +319,20 @@ const initFriendlySearch = () => {
   elBar.addEventListener('submit', (e) => {
     e.preventDefault();
     handleFormSubmit();
-    elBar.submit();
+    setTimeout(()=>{
+      elBar.submit();
+    }, delay)
   });
+
+  // Auto-submit in last modal-step
+  elModal.querySelectorAll('.modal-step:last-of-type [data-form-name]').forEach((e) => {
+    e.addEventListener('click', ()=> {
+      handleFormSubmit()
+      setTimeout(()=>{
+        elBar.submit()
+      }, delay)
+    })
+  })
 }
 
 elSection && initFriendlySearch()

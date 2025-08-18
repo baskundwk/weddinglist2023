@@ -25,6 +25,9 @@ if ($empty_type) {
         </svg>
       </div>
       <p><?php echo $empty_word[$empty_query] ?></p>
+      <a class="wdl-btn-secondary" href="<?php echo home_url( )?>">
+        กลับไปยังหน้าแรก
+      </a>
     </div>
   </div>
 </section>
@@ -41,7 +44,12 @@ if ($empty_type) {
     <?php if ($emptySuggestionQuery->have_posts()): ?>
       <div class="row">
         <div class="col mb-2">
-          <h2><?php __('คุณอาจสนใจ','wdl')?></h2>
+          <h2><?php
+          if($empty_type === 'venue') {
+            _e('สถานที่แนะนำอื่น ๆ');
+          } else {
+            _e('คุณอาจสนใจ','wdl');
+          }?></h2>
         </div>
       </div>
       <div class="row">

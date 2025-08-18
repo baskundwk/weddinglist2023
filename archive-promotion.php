@@ -1,23 +1,16 @@
 <?php include get_stylesheet_directory().'/components/header.php' ?>
 
 <main>
-  <?php include get_stylesheet_directory().'/components/search.php' ?>
   <?php include get_stylesheet_directory().'/queries/query-promotion.php' ?>
-  <section>
+  <section class="pt-4">
     <div class="container-xl">
-      <div class="row">
-        <div class="col-xl-8">
-          <h1 class="mb-0">
-            <?php echo esc_html(__('โปรโมชั่นแต่งงาน & แพ็กเกจแต่งงาน', 'wdl')); ?>
-          </h1>
-          <p class="text-secondary mb-2">
-            <?php echo esc_html(__('รวมโปรโมชั่น และ แพ็กเกจแต่งงาน จากสถานที่จัดงานแต่งงานชั้นนำทุกรูปแบบ อัพเดทล่าสุด', 'wdl').' '.date('Y')); ?>
-          </p>
-        </div>
-        <div class="col-xl-4">
-          <?php include get_stylesheet_directory().'/components/filters/filter-promotion.php' ?>
-        </div>
-      </div>
+      <h1 class="mb-0">
+        รวมแพคเกจงานแต่งงาน และโปรโมชั่นงานแต่ง จากโรงแรมและสถานที่ชั้นนำทั่วไทย
+      </h1>
+      <p class="text-secondary mb-4">
+        วางแผนแต่งงานปี 2568 นี้ให้ง่ายขึ้น ด้วยการเลือกจาก แพคเกจงานแต่งงาน ที่คัดสรรมาจากโรงแรม เราได้รวบรวม โปรโมชั่นแพคเกจงานแต่ง ที่อัปเดตล่าสุด ไม่ว่าจะเป็นแพคเกจงานหรูในโรงแรมระดับ 5 ดาว งานแต่งในสวนบรรยากาศอบอุ่น หรือแพคเกจริมทะเลสุดโรแมนติก พร้อมของแถมสุดคุ้ม ส่วนลดพิเศษ และสิทธิพิเศษเฉพาะผู้จองผ่าน Weddinglist เท่านั้น ทุก แพคเกจงานแต่งที่นี่มาพร้อมข้อมูลครบถ้วน ทั้งราคา รูปแบบงาน ความจุแขก รีวิวจากคู่รักจริง และเงื่อนไขโปรโมชั่น เพื่อช่วยให้คู่บ่าวสาวตัดสินใจง่าย ประหยัดเวลา และได้ดีลที่คุ้มค่าที่สุดสำหรับวันสำคัญของชีวิต 
+      </p>
+      <?php include get_stylesheet_directory().'/components/filters/filter-promotion.php' ?>
     </div>
   </section>
   <?php if (have_posts()): ?>

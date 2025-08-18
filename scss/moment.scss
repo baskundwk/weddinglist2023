@@ -9,14 +9,14 @@
     box-shadow: 0 2px 6px rgba(0,0,0,.15);
     position: relative;
     img {
-      aspect-ratio: 3/2;
+      aspect-ratio: 16/9;
       object-fit: cover;
       object-position: center center;
     }
     &:first-child {
       grid-column: span 4;
       img {
-        aspect-ratio: 88/40;
+        aspect-ratio: 16/9;
       }
     }
   }
@@ -44,7 +44,7 @@
     overflow: hidden;
     display: block;
     img {
-      aspect-ratio: 314/200;
+      aspect-ratio: 16/9;
       object-fit: cover;
       object-position: center center;
       transition: .35s cubic-bezier(0,0,0,1);
@@ -169,11 +169,11 @@
     line-height: 1.35;
 
     .card-img-top {
-      aspect-ratio: 5/4;
+      aspect-ratio: 16/9;
       max-width: 150px;
       position: relative;
       img {
-        aspect-ratio: 5/4;
+        aspect-ratio: 16/9;
         object-fit: cover;
         object-position: center center;
       }

@@ -1,10 +1,35 @@
 /* Search */
+/* body:not(.wdl-header-search-active) {
+  .wdl-header-search {
+    margin-top: -64px;
+    visibility: hidden;
+
+    @include max-width-lg {
+      margin-top: -110px;
+    }
+  }
+} */
+.wdl-header-search {
+  position: relative;
+  padding: 12px 0;
+  transition: .35s cubic-bezier(0,0,0,1);
+}
+
+#toggleSearch, #closeSearch {
+  border: none;
+  background: none;
+  color: #666666;
+  padding: 16px;
+
+  @include max-width-xl {
+    padding: 4px 12px;
+  }
+}
 .wdl-search {
   border-radius: 10px !important;
   transition: 0.25s box-shadow;
-  &:focus-within {
-    box-shadow: 0 0 0 1px #ff2758;
-  }
+  box-shadow: 0 0 0 2px #FFFFFF, 0 2px 10px rgba(0, 0, 0, 0.35) ;
+  overflow: hidden;
   .et_pb_searchform {
     .et_pb_s {
       border-radius: 10px 0 0 10px !important;
@@ -19,11 +44,10 @@
       border-radius: 0 10px 10px 0 !important;
     }
   }
-  .form-floating,
+  /* .form-floating,
   .input-group {
     &:before {
       content: "";
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24' stroke='currentColor' stroke-width='1' fill='none' stroke-linecap='round' stroke-linejoin='round' class='css-i6dzq1'%3E%3Ccircle cx='11' cy='11' r='8'%3E%3C/circle%3E%3Cline x1='21' y1='21' x2='16.65' y2='16.65'%3E%3C/line%3E%3C/svg%3E");
       background-repeat: no-repeat;
       background-position: center center;
       width: 20px;
@@ -39,7 +63,7 @@
       width: 65px;
       pointer-events: none;
     }
-  }
+  } */
 
   .forn-control {
     border-radius: 10px 0 0 10px;
@@ -52,14 +76,19 @@
   .wdl-search-submit {
     border: none;
     border-radius: 0 10px 10px 0;
-    color: transparent;
-    background: #f7f7f7;
-    padding: 0;
+    background: #ff3366;
+    color: #FFFFFF;
+    padding: 12px 16px;
+    font-size: 20px;
     margin: 0 !important;
+
+    @include max-width-xl {
+      font-size: 16px;
+    }
   }
 
   .input-group {
-    background: #f7f7f7;
+    background: #FFFFFF;
     border-radius: 12px;
     align-items: center;
 
@@ -85,21 +114,57 @@
     -webkit-appearance: none;
     appearance: none;
     width: auto !important;
-    max-width: 140px !important;
-    font-size: 0.875rem;
+    max-width: 240px !important;
+    font-size: 20px;
     display: -webkit-box;
     line-clamp: 1;
     -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
     overflow: hidden !important;
     text-overflow: ellipsis;
-    padding: 2px 8px 2px 4px;
+    padding: 12px 24px;
     border-left: 1px solid #dddddd !important;
     border-right: 1px solid #dddddd !important;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' fill='%23000000' viewBox='0 0 256 256'%3E%3Cpath d='M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z'%3E%3C/path%3E%3C/svg%3E");
     background-size: 12px 12px;
     background-position: center right 8px;
     background-repeat: no-repeat;
+
+    @include max-width-xl {
+      max-width: 120px !important;
+      font-size: 14px;
+      padding: 12px 6px;
+    }
+  }
+
+  input {
+    font-size: 20px;
+    padding: 12px 24px !important;
+
+    @include max-width-xl {
+      font-size: 14px;
+      padding: 12px !important;
+    }
+  }
+
+  .modal-close {
+    display: block;
+    padding: 8px;
+    font-size: 14px;
+    position: absolute;
+    inset: calc(100% + 16px) 0 auto;
+    margin: auto;
+    background: #FFFFFF;
+    color: #666666;
+    border-radius: 50px;
+    border: none;
+    width: fit-content;
+    line-height: 1;
+
+    svg {
+      width: 16px;
+      height: 16px;
+    }
   }
 }
 

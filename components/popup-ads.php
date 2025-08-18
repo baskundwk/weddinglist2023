@@ -2,7 +2,7 @@
   'post_type' => array('promotion', 'wedding-fair', 'venue', 'post', 'vendor'),
   'post_status' => 'publish',
   'orderby' => 'rand',
-  'posts_per_page' => '8',
+  'posts_per_page' => '5',
   'meta_key' => 'PopupActivate',
   'meta_value' => true,
 );

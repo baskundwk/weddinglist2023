@@ -6,6 +6,7 @@
   }
 
   .dropdown-menu {
+    margin: auto;
     margin-top: 0;
     border-radius: 8px;
     padding: 8px 0;
@@ -13,10 +14,10 @@
     border: none;
     width: max-content;
     position: absolute;
-    top: 100%;
+    inset: 100% auto auto 50% !important;
     background: #fff;
     border-radius: 8px;
-    right: 0;
+    right: auto;
     transition: 0.35s cubic-bezier(0, 0, 0, 1);
     transition-property: opacity, transform;
     list-style: none;
@@ -25,12 +26,12 @@
     overflow: auto;
     opacity: 0;
     display: block;
-    transform: translateY(-10px);
+    transform: translateX(-50%) translateY(-10px);
     transform-origin: top right;
     visibility: hidden;
     &.show {
       opacity: 1;
-      transform: translateY(0);
+      transform: translateX(-50%) translateY(0) !important;
       visibility: visible;
     }
 

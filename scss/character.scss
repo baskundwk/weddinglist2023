@@ -26,6 +26,20 @@
     text-transform: uppercase;
   }
 
+  &.wdl-character-lg {
+    
+    span {
+      font-weight: 600;
+      text-transform: capitalize;
+      font-size: 16px;
+      padding: 8px 12px;
+    }
+
+    &:hover {
+      translate: 0 -4px;
+    }
+  }
+
   &.wdl-character-border {
     > span {
       background: #ffffff;

@@ -161,7 +161,7 @@
       height: auto;
       border: 0;
       box-shadow:
-        0 0 0 1px rgba(0, 0, 0, 0.1),
+        0 0 0 1px rgba(0, 0, 0, 0.1) inset,
         0 0 0 rgba(0, 0, 0, 0.05);
       display: flex;
       flex-direction: column;
@@ -171,7 +171,7 @@
 
       &:hover {
         box-shadow:
-          0 0 0 1px rgba(0, 0, 0, 0.1),
+          0 0 0 1px rgba(0, 0, 0, 0.1) inset,
           0 4px 15px rgba(0, 0, 0, 0.05);
       }
 
@@ -223,7 +223,7 @@
     align-items: stretch;
   }
   .card {
-    cursor: pointer;
+    //cursor: pointer;
     border: 0;
     box-shadow: 0 0 0 rgba(0, 0, 0, 0.05);
     display: flex;
@@ -292,9 +292,7 @@
 }
 .wdl-archive-extended,
 .wdl-archive-extended .wdl-archive-swiper {
-  padding: 2px 7px 24px;
-  margin: -2px -7px -2px -7px;
-  //margin: -2px 0;
+  padding-bottom: 24px;
 
   .swiper-wrapper {
     align-items: stretch;
@@ -304,7 +302,7 @@
     border-radius: 12px;
     overflow: hidden;
     box-shadow:
-      0 0 0 1px rgba(0, 0, 0, 0.1),
+      0 0 0 1px rgba(0, 0, 0, 0.1) inset,
       0 0 0 0 rgba(0, 0, 0, 0.05);
 
     &::after {
@@ -313,7 +311,7 @@
     &:hover {
       z-index: 1;
       box-shadow:
-        0 0 0 1px rgba(0, 0, 0, 0.1),
+        0 0 0 1px rgba(0, 0, 0, 0.1) inset,
         0 4px 30px rgba(0, 0, 0, 0.05);
       .card-footer {
         opacity: 1;
@@ -450,6 +448,7 @@
   font-size: 0.8125rem;
   margin-bottom: 0;
   display: flex;
+  flex-wrap: wrap;
   gap: 4px;
   align-items: baseline;
   line-height: 1.5;
@@ -702,7 +701,7 @@
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
   img {
     aspect-ratio: 1/1;
-    object-fit: contain;
+    object-fit: cover;
     border-radius: 8px;
   }
 }
@@ -784,6 +783,20 @@
       background: #F6F6F6;
       border-radius: 50px;
       font-weight: 500;
+    }
+  }
+}
+
+
+.wdl-archive-card-static {
+  cursor: default !important;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1)inset !important;
+
+  &:hover {
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1)inset;
+
+    .wdl-archive-title {
+      color: #333333 !important;
     }
   }
 }

@@ -39,7 +39,7 @@
   </div> */ ?>
 
   <div class="card-body wdl-archive-card-body">
-    <div class="wdl-badge-container mb-1">
+    <div class="d-flex gap-2">
       <?php $promotionCategory = get_field('PromotionCategory');
       if ($promotionCategory) { ?>
         <div class="wdl-archive-pretitle mb-0">
@@ -53,21 +53,13 @@
           } ?>
         </div>
       <?php } ?>
-      <?php
-      if (get_field('DateStart') && get_field('DateEnd')): ?>
-        <span class="badge wdl-badge-sm-subtle">
-          <?php
-          echo promotionDate(get_field('DateStart'), 'DateStart');
-          echo promotionDate(get_field('DateEnd'), 'DateEnd');
-          ?>
-        </span>
-      <?php endif; ?>
+  
       <?php $hotDeal = get_field('HotDeal');
       if ($hotDeal && in_array('Hot Deal', $hotDeal)): ?>
         <span class="badge wdl-badge-sm">Hot Deal</span>
       <?php endif; ?>
     </div>
-    <h3 class="wdl-archive-title mb-0">
+    <h3 class="wdl-archive-title mt-1 mb-1">
       <a
       href="<?php the_permalink(); ?>"
       title="<?php echo esc_attr(get_the_title()) ?>"
@@ -79,21 +71,39 @@
       </a>
     </h3>
 
-    <?php
-    $relatedVenue = get_field('RelatedVenue');
-    if ($relatedVenue):
-      foreach ($relatedVenue as $venue):
-        $venuePermalink = get_the_permalink($venue->ID);
-        $venueTitle = get_the_title($venue->ID); ?>
-        <p class="wdl-archive-location lineclamp-1">
-          <a href="<?php echo esc_attr($venuePermalink) ?>"
-            data-dlev="cardClick"
-            data-dlcomp="card - promotion - venue"
-            data-dltgt="<?php echo esc_attr($venueTitle) ?>">
-            <?php echo esc_html($venueTitle); ?>
-          </a>
-        </p>
-      <?php endforeach; endif; ?>
+
+    <div class="mb-2">
+      <?php
+      $relatedVenue = get_field('RelatedVenue');
+      if ($relatedVenue):
+        foreach ($relatedVenue as $venue):
+          $venuePermalink = get_the_permalink($venue->ID);
+          $venueTitle = get_the_title($venue->ID); ?>
+          <p class="wdl-archive-location lineclamp-1 mb-0">
+            <a href="<?php echo esc_attr($venuePermalink) ?>"
+              data-dlev="cardClick"
+              data-dlcomp="card - promotion - venue"
+              data-dltgt="<?php echo esc_attr($venueTitle) ?>">
+              <?php echo esc_html($venueTitle); ?>
+            </a>
+          </p>
+        <?php endforeach; endif; ?>
+  
+      <?php
+      if (get_field('DateStart') && get_field('DateEnd')): ?>
+        <div class="wdl-badge-container mb-0">
+          <div class="text-accent text-sm">
+            <svg viewBox="0 0 24 24" width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+          </div>
+          <span class="badge wdl-badge-sm-subtle fw-normal">
+            <?php
+            echo promotionDate(get_field('DateStart'), 'DateStart');
+            echo promotionDate(get_field('DateEnd'), 'DateEnd');
+            ?>
+          </span>
+        </div>
+      <?php endif; ?>
+    </div>
 
     <?php $coupon = get_posts(
       array(
@@ -111,7 +121,7 @@
 
     if ($coupon): ?>
       <a 
-        class="d-flex flex-wrap gap-2 align-items-stretch"
+        class="d-flex flex-wrap gap-2 align-items-stretch my-2"
         href="<?php echo esc_attr(the_permalink()); ?>"
         data-dlev="cardClick"
         data-dlcomp="card - promotion"
@@ -132,10 +142,20 @@
         <?php endforeach; ?>
       </a>
     <?php endif; ?>
+    <?php $price = get_field('Price');
+     if($price && $price != 0) { ?>
+    <div class="debug">
+      <hr class="my-2">
+      <div class="text-end">
+          เริ่มต้น <span class="text-red fw-semibold"><?php echo esc_html(number_format($price)); ?> บาท</span>
+        </div>
+      </div>
+      <?php } ?>
   </div>
 
+
   <div class="card-footer">
-    <a href="<?php echo get_the_permalink().'#apply'?>" class="wdl-btn-cta wdl-form-general-direct"><?php _e('สนใจรับโปรโมชั่น', 'wdl')?></a>
+    <a href="<?php echo get_the_permalink().'#apply'?>" class="wdl-btn-cta wdl-form-general-direct"><?php _e('สนใจแพ็กเกจ', 'wdl')?></a>
     <a 
       href="<?php the_permalink() ?>"
       class="wdl-btn-more"

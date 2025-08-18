@@ -1,6 +1,6 @@
 <?php
-$type = esc_attr($_GET['type']);
-$searchTerm = esc_attr($_GET['s']);
+$type = $_GET['type'];
+$searchTerm = $_GET['s'];
 if ($type && $searchTerm):
   $args = array(
     's' => $searchTerm,
@@ -22,7 +22,9 @@ if ($type && $searchTerm):
     "type": "<?php echo $type ?>"
   }'
 >
-  <?php include get_stylesheet_directory() . '/components/search.php' ?>
+  <?php // include get_stylesheet_directory() . '/components/search.php';
+  $type = $_GET['type'];
+  ?>
   <section>
     <div class="overflow-hidden mt-4">
       <div class="container-xl">
@@ -115,7 +117,7 @@ if ($type && $searchTerm):
       if ($query->have_posts()): ?>
     <div class="search-result">
       <?php if ($type === 'venue'): ?>
-      <div class="wdl-listing-section py-2">
+      <div class="wdl-listing-section py-4 border-top">
         <div class="container-xl gap-2 d-flex flex-column">
           <?php
                 while ($query->have_posts()) {

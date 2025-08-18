@@ -227,7 +227,7 @@ const wdlCompareSwiper = new Swiper(".wdl-compare-swiper", {
     },
     1200: {
       slidesPerView: compareSlide,
-      spaceBetween: 55 - 8 * compareSlide,
+      spaceBetween: /* 55 - 8 * compareSlide */ 16,
       centerInsufficientSlides: true,
     },
   },
@@ -1556,3 +1556,129 @@ $('.wdl-checkbox-bundle').each((i,e) => {
     })
   })
 })
+
+
+$('#toggleSearch').on('click', ()=>{
+  setTimeout(()=>{
+    $('#search').focus()
+  }, 350)
+})
+
+const datepickerContainer = document.querySelectorAll('.wdl-datepicker-container')
+
+datepickerContainer.forEach((e, i) => {
+  const input = e.querySelector('.datepicker');
+  const datepickerToggle = e.querySelector('.datepicker-toggle')
+  const inputTarget = document.querySelector(`#${datepickerToggle.getAttribute('for')}`)
+  const datepickerClear = e.querySelectorAll('.datepicker-clear')
+  const datepickerReset = e.querySelectorAll('.datepicker-reset')
+
+  const localeObj = {
+      days: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+      daysShort: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+      daysMin: ['S', 'M', 'T', 'W', 'Th', 'F', 'S'],
+      months: ['January','February','March','April','May','June', 'July','August','September','October','November','December'],
+      monthsShort: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+      today: 'Today',
+      clear: 'Clear',
+      dateFormat: 'dd MMM yyyy',
+      timeFormat: 'hh:ii aa',
+      firstDay: 0
+  };
+
+
+
+  const datepicker = new AirDatepicker(input, {
+      locale: localeObj,
+      onSelect: ({date, formattedDate, datepicker}) => {
+        if(date) {
+          inputTarget.checked = true
+          inputTarget.value = formattedDate 
+          datepickerToggle.querySelector('span').innerText = formattedDate
+          e.classList.remove('active')
+        }
+      }
+  });
+
+
+  // Toggle datepicker click
+  datepickerToggle?.addEventListener('click' , (event) => {
+    event.preventDefault()
+    if(!datepicker.$datepicker.contains(event.target)) {
+      setTimeout(()=>{
+        e.classList.toggle('active')
+      }, 50)
+    }
+
+  })
+
+  // Clear datepicker click
+  datepickerClear.forEach((e2, i2) => e2?.addEventListener('click', () => {
+    datepicker.clear()
+    inputTarget.value = ''
+    datepickerToggle.querySelector('span').innerText = "ระบุวันที่"
+  }))
+
+  // Datepicker inner reset
+  datepickerReset.forEach((e2, i2) => e2?.addEventListener('click', (event) => {
+    event.preventDefault()
+    event.stopPropagation()
+    datepicker.clear()
+    e.classList.remove('active')
+    inputTarget.value = ''
+    inputTarget.checked = false
+    datepickerToggle.querySelector('span').innerText = "ระบุวันที่"
+  }))
+
+  // Outside click
+  document.addEventListener('click', function (event) {
+    const isInside = [input, datepicker.$datepicker, inputTarget].some(el => {
+      return el && el.contains(event.target);
+    });
+    
+    if (!isInside && e.classList.contains('active')) {
+      console.log('Datepicker outside click')
+      e.classList.remove('active');
+    }
+  });
+
+})
+
+jQuery(document).ready(function($) {
+  $('.select2').each((i, e)=>{
+    const $select = $(e)
+    $select.select2({
+      dropdownParent: $select.parent(),
+      width: "100%",
+      minimumResultsForSearch: -1,
+    })
+
+    $select.on('select2:open', function () {
+      // Get the dropdown container
+      const $dropdown = $('.select2-container--open .select2-dropdown');
+
+      // Disable interaction
+      $dropdown.css('pointer-events', 'none');
+
+      // Re-enable after a short delay (e.g., 500ms)
+      setTimeout(() => {
+        $dropdown.css('pointer-events', 'auto');
+      }, 350);
+    })
+  })
+
+
+  const resetSelect2 = (id) => {
+    $(id).val('').trigger('change.select2');
+    setTimeout(() => {
+      $('#appoint-time').select2('close');
+    }, 10);
+  }
+
+  $('[data-select2-reset]').each((i, e) => {
+    $(e).click(() => {
+      const target = $(e).attr('data-select2-reset');
+      resetSelect2(target);
+    });
+  });
+});

@@ -2,7 +2,7 @@
   <div class="wdl-filter-detail swiper wdl-swiper-auto">
     <div class="swiper-wrapper">
       <!-- <div class="swiper-slide w-auto">
-        <div class="dropdown wdl-dropdown">
+        <div class="dropdown-center wdl-dropdown">
           <div class="wdl-btn-filter <?php if ($_GET['type']) { echo 'active'; }?>" data-bs-toggle="dropdown" aria-expanded="false">
             <?php if ($_GET['type'] || get_queried_object()->taxonomy): ?>
             <i data-feather="users"></i> <?php echo(get_term(get_queried_object()->term_id, 'vendor-type')->name); ?>
@@ -11,7 +11,7 @@
             <?php endif; ?>
             <i data-feather="chevron-down"></i>
           </div>
-          <ul class="dropdown-menu dropdown-menu-end">
+          <ul class="dropdown-menu">
             <li><a href="/vendor"><?php _e('ประเภททั้งหมด', 'wdl'); ?></a></li>
             <?php
             $vendor_type = get_terms(
@@ -35,7 +35,7 @@
         </div>
       </div> -->
       <!-- <div class="swiper-slide w-auto">
-        <div class="dropdown wdl-dropdown">
+        <div class="dropdown-center wdl-dropdown">
           <div class="wdl-btn-filter" data-bs-toggle="dropdown" aria-expanded="false">
             <?php if ($_GET['character']): ?>
               <i data-feather="star"></i><?php echo(get_term_by('slug', $_GET['character'], 'vendor_character')->name); ?>
@@ -44,7 +44,7 @@
             <?php endif; ?>
             <i data-feather="chevron-down"></i>
           </div>
-          <ul class="dropdown-menu dropdown-menu-end">
+          <ul class="dropdown-menu">
             <li><a class="px-3" href="<?php removeParam('character')?>"><?php _e('จุดเด่นทั้งหมด', 'wdl'); ?></a></li>
             <?php
             $vendor_character = get_terms(
@@ -95,7 +95,7 @@
         </div>
       </div> -->
       <div class="swiper-slide w-auto">
-        <div class="dropdown wdl-dropdown">
+        <div class="dropdown-center wdl-dropdown">
           <div class="wdl-btn-filter <?php if ($_GET['label']) { echo 'active'; }?>" data-bs-toggle="dropdown" aria-expanded="false">
             <?php if ($_GET['label']) { ?>
             <i data-feather="bar-chart"></i><?php echo $_GET['label']; ?>
@@ -104,7 +104,7 @@
             } ?>
             <i data-feather="chevron-down"></i>
           </div>
-          <ul class="dropdown-menu dropdown-menu-end">
+          <ul class="dropdown-menu">
             <li><a href="<?php echo ($current_url) ?>"><?php _e('สถานที่แนะนำ', 'wdl')?></a></li>
             <li><a href="<?php updateParam([
               'order' => 'ASC',

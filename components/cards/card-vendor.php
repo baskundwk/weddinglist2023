@@ -85,7 +85,7 @@
       <?php endif ?>
     </div>
 
-    <h3 class="wdl-archive-title mb-0">
+    <h3 class="wdl-archive-title">
       <a 
         href="<?php echo esc_attr(get_the_permalink()); ?>"
         title="<?php echo esc_attr(get_the_title()) ?>"
@@ -134,7 +134,7 @@
     );
 
     if ($coupon): ?>
-      <a class="d-flex flex-wrap gap-2 align-items-stretch" href="<?php echo esc_attr(the_permalink()); ?>"
+      <a class="d-flex flex-wrap gap-2 align-items-stretch my-2" href="<?php echo esc_attr(the_permalink()); ?>"
         data-dlev="cardClick"
         data-dlcomp="card - vendor"
         data-dltgt="<?php echo esc_attr(get_the_title())?>">

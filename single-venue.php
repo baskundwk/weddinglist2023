@@ -45,10 +45,10 @@
                 endforeach;
                 ?>
             </div>
-          </div>
-          <div class="swiper-navigation container">
-            <div class="swiper-button-prev"></div>
-            <div class="swiper-button-next"></div>
+            <div class="swiper-navigation swiper-navigation-hero">
+              <div class="swiper-button-prev"></div>
+              <div class="swiper-button-next"></div>
+            </div>
           </div>
         </div>
       </div>
@@ -307,6 +307,7 @@
     array(
       'post_type' => 'promotion',
       'post_status' => 'publish',
+      'posts_per_page' => -1,
       'meta_query' => array(
         array(
           'key' => 'RelatedVenue',
@@ -320,6 +321,7 @@
     array(
       'post_type' => 'wedding-fair',
       'post_status' => 'publish',
+      'posts_per_page' => -1,
       'meta_query' => array(
         array(
           'key' => 'RelatedVenue',
@@ -332,39 +334,6 @@
 
   $tags = wp_get_post_tags(get_the_ID(), array('fields' => 'ids'));
   $tagsArray = wp_get_post_tags(get_the_ID());
-
-  $relatedPosts = get_posts(
-    array(
-      'post_type' => 'post',
-      'posts_per_page' => 8,
-      'orderby' => 'date',
-      'order' => 'DESC',
-      'post_status' => 'publish',
-      'meta_query' => [
-        [
-          'key'     => 'RelatedVenue',
-          'value'   => get_the_ID(),
-          'compare' => 'LIKE'
-        ]
-      ],
-    )
-  );
-  $relatedPostsTag = get_posts(
-    array(
-      'post_type' => 'post',
-      'posts_per_page' => 8,
-      'orderby' => 'date',
-      'order' => 'DESC',
-      'post_status' => 'publish',
-      'tax_query' => [
-        [
-          'taxonomy' => 'post_tag',
-          'field' => 'term_id',
-          'terms' => $tags,
-        ]
-      ],
-    )
-  );
 
   $relatedVideos = new WP_Query(
     array(
@@ -381,7 +350,7 @@
   );
   ?>
 
-  <?php if ($relatedPromotions || $relatedWeddingFairs || $relatedPosts || $relatedPostsTag || $relatedVideos): ?>
+  <?php if ($relatedPromotions || $relatedWeddingFairs || $relatedVideos): ?>
   <section class="pb-3 overflow-hidden">
     <div class="container-xl">
       <ul class="wdl-tab nav mb-3 wdl-tab-related">
@@ -393,11 +362,6 @@
         <?php if ($relatedWeddingFairs): ?>
         <li class="nav-item">
           <a role="tab" aria-controls="tab-wedding-fair" data-bs-toggle="tab" data-bs-target="#tab-wedding-fair" class="nav-link" href="#"><i class="wdl-tab-icon" data-feather="calendar"></i> <?php _e('Wedding Fair & Event', 'wdl')?></a>
-        </li>
-        <?php endif; ?>
-        <?php if ($relatedPosts || $relatedPostsTag): ?>
-        <li class="nav-item">
-          <a role="tab" aria-controls="tab-post" data-bs-toggle="tab" data-bs-target="#tab-post" class="nav-link" href="#"><i class="wdl-tab-icon" data-feather="bookmark"></i> <?php _e('บทความ', 'wdl')?></a>
         </li>
         <?php endif; ?>
         <?php if ($relatedVideos->have_posts()): ?>
@@ -436,7 +400,7 @@
                           <?php endif; ?>
                         </div>
   
-                        <h3 class="wdl-archive-title mb-0">
+                        <h3 class="wdl-archive-title">
                           <a href="<?php the_permalink($relatedPromotion->ID); ?>" title="<?php echo get_the_title($relatedPromotion->ID) ?>" data-label="<?php echo get_the_title($relatedPromotion->ID) ?>">
                             <?php echo get_the_title($relatedPromotion->ID); ?>
                           </a>
@@ -485,83 +449,8 @@
                           <?php endif; ?>
                         </div>
 
-                        <h3 class="wdl-archive-title mb-0"><a href="<?php echo get_the_permalink($relatedWeddingFair->ID); ?>">
+                        <h3 class="wdl-archive-title"><a href="<?php echo get_the_permalink($relatedWeddingFair->ID); ?>">
                             <?php echo get_the_title($relatedWeddingFair->ID); ?>
-                          </a></h3>
-                      </div>
-                    </div>
-                    <?php endforeach; ?>
-                  </div>
-                  <div class="swiper-navigation swiper-navigation-small">
-                    <div class="swiper-button-prev"></div>
-                    <div class="swiper-button-next"></div>
-                  </div>
-                  <div class="swiper-pagination"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <?php endif; ?>
-        <?php if ($relatedPosts || $relatedPostsTag): ?>
-        <div id="tab-post" class="tab-pane fade">
-          <div class="row align-items-center">
-            <div class="col-12">
-              <div class="wdl-archive <?php echo esc_attr($atts['class']); ?>">
-                <div class="swiper wdl-archive-swiper">
-                  <div class="swiper-wrapper">
-                    <?php foreach ($relatedPosts as $relatedPost): ?>
-                    <div id="wdl-post-<?php echo $relatedPost->ID ?>" class="swiper-slide card wdl-archive-card <?php echo esc_attr($atts['class_single']); ?>">
-
-                      <?php if (has_post_thumbnail($relatedPost->ID)): ?>
-                      <a class="card-img-top wdl-archive-card-img-top" href="<?php echo get_the_permalink($relatedPost->ID); ?>"><img loading="lazy" class="" src="<?php echo esc_html(get_the_post_thumbnail_url($relatedPost, 'medium_large')) ?>" width="100%"></a>
-                      <?php endif; ?>
-
-                      <div class="card-body wdl-archive-card-body">
-                        <div class="wdl-badge-container mb-1">
-                          <?php
-                                $date = get_field('Date', $relatedPost->ID);
-                                if ($date): ?>
-                          <span class="badge wdl-badge-sm-primary">
-                            <?php the_field('Date', $relatedPost->ID) ?>
-                          </span>
-                          <?php endif; ?>
-                          <?php $hotDeal = get_field('HotDeal', $relatedPost->ID);
-                                if ($hotDeal && in_array('Hot Deal', $hotDeal)): ?>
-                          <span class="badge wdl-badge-sm"><?php _e('Hot Deal', 'wdl')?></span>
-                          <?php endif; ?>
-                        </div>
-
-                        <h3 class="wdl-archive-title mb-0"><a href="<?php echo get_the_permalink($relatedPost->ID); ?>">
-                            <?php echo get_the_title($relatedPost->ID); ?>
-                          </a></h3>
-                      </div>
-                    </div>
-                    <?php endforeach; ?>
-                    <?php foreach ($relatedPostsTag as $relatedPost): ?>
-                    <div id="wdl-post-<?php echo $relatedPost->ID ?>" class="swiper-slide card wdl-archive-card <?php echo esc_attr($atts['class_single']); ?>">
-
-                      <?php if (has_post_thumbnail($relatedPost->ID)): ?>
-                      <a class="card-img-top wdl-archive-card-img-top" href="<?php echo get_the_permalink($relatedPost->ID); ?>"><img loading="lazy" class="" src="<?php echo esc_html(get_the_post_thumbnail_url($relatedPost, 'medium_large')) ?>" width="100%"></a>
-                      <?php endif; ?>
-
-                      <div class="card-body wdl-archive-card-body">
-                        <div class="wdl-badge-container mb-1">
-                          <?php
-                                $date = get_field('Date', $relatedPost->ID);
-                                if ($date): ?>
-                          <span class="badge wdl-badge-sm-primary">
-                            <?php the_field('Date', $relatedPost->ID) ?>
-                          </span>
-                          <?php endif; ?>
-                          <?php $hotDeal = get_field('HotDeal', $relatedPost->ID);
-                                if ($hotDeal && in_array('Hot Deal', $hotDeal)): ?>
-                          <span class="badge wdl-badge-sm"><?php _e('Hot Deal', 'wdl')?></span>
-                          <?php endif; ?>
-                        </div>
-
-                        <h3 class="wdl-archive-title mb-0"><a href="<?php echo get_the_permalink($relatedPost->ID); ?>">
-                            <?php echo get_the_title($relatedPost->ID); ?>
                           </a></h3>
                       </div>
                     </div>
@@ -628,7 +517,7 @@
   <section class="pb-3">
     <div class="container-xl">
       <h2 class="h6 mb-1"><?php _e('คูปองที่ร่วมรายการ', 'wdl') ?></h2>
-      <div class="d-flex flex-wrap gap-2 align-items-stretch">
+      <div class="d-flex flex-wrap gap-2 align-items-stretch my-2">
         <?php foreach ($coupon as $singleCoupon): ?>
         <?php include get_stylesheet_directory() . '/components/cards/card-coupon.php' ?>
         <?php endforeach; ?>
@@ -690,8 +579,9 @@
                         </div>
                       </div>
                     </div>
-                    <?php endif; ?>
-                    <?php endwhile; ?>
+                    <?php endif; 
+                    wp_reset_postdata();
+                    endwhile; ?>
                   </div>
                 </div>
               <?php endif; ?>
@@ -736,8 +626,9 @@
                         </div>
                       </div>
                     </div>
-                    <?php endif; ?>
-                    <?php endwhile; ?>
+                    <?php endif; 
+                    wp_reset_postdata();   
+                    endwhile; ?>
                   </div>
                 </div>
               <?php endif; ?>
@@ -782,9 +673,9 @@
                         </div>
                       </div>
                     </div>
-                    <?php endif; ?>
-
-                    <?php endwhile; ?>
+                    <?php endif;
+                    wp_reset_postdata();
+                    endwhile; ?>
                   </div>
                 </div>
               
@@ -833,8 +724,9 @@
                         </div>
                       </div>
                     </div>
-                    <?php endif; ?>
-                    <?php endwhile; ?>
+                    <?php endif;
+                    wp_reset_postdata();
+                    endwhile; ?>
                   </div>
                 </div>
               <?php endif; ?>
@@ -879,8 +771,9 @@
                         </div>
                       </div>
                     </div>
-                    <?php endif; ?>
-                    <?php endwhile; ?>
+                    <?php endif;
+                    wp_reset_postdata();
+                    endwhile; ?>
                   </div>
                 </div>
               <?php endif; ?>
@@ -947,26 +840,23 @@
                     the_row(); ?>
 
                 <?php if (get_row_layout() == 'BanquetRoomEntry'): ?>
-                <div class="swiper-slide card wdl-archive-card">
+                <div class="swiper-slide card wdl-archive-card wdl-archive-card-static">
                   <?php if (get_sub_field('BanquetRoomImage')): ?>
-                  <a class="card-img-top wdl-archive-card-img-top" <?php if (get_sub_field('BanquetRoomGallery')): ?> href="#" data-bs-toggle="modal" data-bs-target="#banquet-gallery-<?php echo get_row_index(); ?>" <?php endif; ?>>
+                  <div class="card-img-top wdl-archive-card-img-top">
                     <img loading="lazy" src="<?php the_sub_field('BanquetRoomImage') ?>" alt="">
-                  </a>
+                  </div>
                   <?php endif; ?>
                   <div class="card-body">
                     <div class="wdl-pricing-card">
                       <?php if (get_sub_field('BanquetRoomName')): ?>
-                      <?php if (get_sub_field('BanquetRoomGallery')): ?><a href="#" data-bs-toggle="modal" data-bs-target="#banquet-gallery-<?php echo get_row_index(); ?>"><?php endif; ?>
-                        <div class="wdl-archive-title mb-0 fw-semibold">
+                        <div class="wdl-archive-title fw-semibold">
                           <?php the_sub_field('BanquetRoomName') ?>
                         </div>
-                        <?php if (get_sub_field('BanquetRoomGallery')): ?>
-                      </a><?php endif; ?>
                       <?php endif; ?>
 
-                      <div class="row row-cols-2 pt-2">
+                      <div class="row pt-2 g-2">
                         <?php if (get_sub_field('BanquetRoomArea')): ?>
-                        <div class="col-12 wdl-metadata">
+                        <div class="col-12 d-flex justify-content-between wdl-metadata">
                           <div class="text-secondary">
                             <?php _e('พื้นที่', 'wdl') ?>
                           </div>
@@ -977,7 +867,7 @@
                         <?php endif; ?>
 
                         <?php if (get_sub_field('BanquetRoomChineseDinner')): ?>
-                        <div class="col wdl-metadata">
+                        <div class="col-12 d-flex justify-content-between wdl-metadata">
                           <div class="text-secondary">
                             <?php _e('โต๊ะจีน', 'wdl') ?>
                           </div>
@@ -988,7 +878,7 @@
                         <?php endif; ?>
 
                         <?php if (get_sub_field('BanquetRoomCocktailDinner')): ?>
-                        <div class="col wdl-metadata">
+                        <div class="col-12 d-flex justify-content-between wdl-metadata">
                           <div class="text-secondary">
                             <?php _e('ค็อกเทล', 'wdl') ?>
                           </div>
@@ -999,7 +889,7 @@
                         <?php endif; ?>
 
                         <?php if (get_sub_field('BanquetRoomBuffetDinner')): ?>
-                        <div class="col wdl-metadata">
+                        <div class="col-12 d-flex justify-content-between wdl-metadata">
                           <div class="text-secondary">
                             <?php _e('บุฟเฟ่ต์', 'wdl') ?>
                           </div>
@@ -1010,7 +900,7 @@
                         <?php endif; ?>
 
                         <?php if (get_sub_field('BanquetRoomSitdownDinner')): ?>
-                        <div class="col wdl-metadata">
+                        <div class="col-12 d-flex justify-content-between wdl-metadata">
                           <div class="text-secondary">
                             <?php _e('ซิทดาวน์', 'wdl') ?>
                           </div>
@@ -1024,8 +914,9 @@
                     </div>
                   </div>
                 </div>
-                <?php endif; ?>
-                <?php endwhile; ?>
+                <?php endif;
+                wp_reset_postdata();
+                endwhile; ?>
               </div>
               <div class="swiper-navigation swiper-navigation-small">
                 <div class="swiper-button-prev"></div>
@@ -1039,6 +930,197 @@
       <?php endif; ?>
     </div>
   </section>
+  <?php 
+  $review_cat = get_category_by_slug('reviews');
+  $review_cat_id = $review_cat ? $review_cat->term_id : 0;
+  $relatedPosts = get_posts(
+    array(
+      'post_type' => 'post',
+      'posts_per_page' => -1,
+      'orderby' => 'date',
+      'order' => 'DESC',
+      'post_status' => 'any',
+      'meta_query' => [
+        [
+          'key'     => 'RelatedVenue',
+          'value'   => get_the_ID(),
+          'compare' => 'LIKE'
+        ]
+      ],
+      'category__not_in' => array_merge(array($review_cat_id), get_term_children($review_cat_id, 'category')),
+    )
+  );
+
+  $relatedPostsTag = get_posts(
+    array(
+      'post_type' => 'post',
+      'posts_per_page' => 8,
+      'orderby' => 'date',
+      'order' => 'DESC',
+      'post_status' => 'any',
+      'tax_query' => [
+        [
+          'taxonomy' => 'post_tag',
+          'field' => 'term_id',
+          'terms' => $tags,
+        ]
+      ],
+      'category__not_in' => array_merge(array($review_cat_id), get_term_children($review_cat_id, 'category')),
+    )
+  );
+
+  // Merge and remove duplicates by post ID
+  $allRelatedPosts = array();
+  foreach (array_merge($relatedPosts, $relatedPostsTag) as $post) {
+    $allRelatedPosts[$post->ID] = $post;
+  }
+  $allRelatedPosts = array_values($allRelatedPosts);
+
+  // Get only posts in the review category
+  $relatedReview = get_posts(
+    array(
+      'post_type' => 'post',
+      'posts_per_page' => -1,
+      'orderby' => 'date',
+      'order' => 'DESC',
+      'post_status' => 'any',
+      'meta_query' => [
+        [
+          'key'     => 'RelatedVenue',
+          'value'   => get_the_ID(),
+          'compare' => 'LIKE'
+        ]
+      ],
+      'category__in' => array_merge(array($review_cat_id), get_term_children($review_cat_id, 'category')),
+    )
+  );
+  
+  $relatedReviewTag = get_posts(
+    array(
+      'post_type' => 'post',
+      'posts_per_page' => -1,
+      'orderby' => 'date',
+      'order' => 'DESC',
+      'post_status' => 'any',
+      'tax_query' => [
+        [
+          'taxonomy' => 'post_tag',
+          'field' => 'term_id',
+          'terms' => $tags,
+        ]
+      ],
+      'category__in' => array_merge(array($review_cat_id), get_term_children($review_cat_id, 'category')),
+    )
+  );
+
+  // Merge and remove duplicates by post ID
+  $allRelatedReview = array();
+  foreach (array_merge($relatedReview, $relatedReviewTag) as $post) {
+    $allRelatedReview[$post->ID] = $post;
+  }
+  $allRelatedReview = array_values($allRelatedReview);
+  ?>
+
+  <?php if ($allRelatedPosts || $allRelatedReview): ?>
+  <section>
+    <div class="container-xl">
+      <?php if ($allRelatedReview): ?>
+      <div class="my-3">
+        <h2><?php _e('รีวิวสถานที่จริง', 'wdl'); ?></h2>
+        <div class="wdl-archive wdl-archive-extended">
+          <div class="swiper wdl-archive-swiper">
+            <div class="swiper-wrapper">
+              <?php foreach ($allRelatedReview as $relatedPost): ?>
+              <div id="wdl-post-<?php echo $relatedPost->ID ?>" class="swiper-slide card wdl-archive-card <?php echo esc_attr($atts['class_single']); ?>">
+  
+                <?php if (has_post_thumbnail($relatedPost->ID)): ?>
+                <a class="card-img-top wdl-archive-card-img-top" href="<?php echo get_the_permalink($relatedPost->ID); ?>"><img loading="lazy" class="" src="<?php echo esc_html(get_the_post_thumbnail_url($relatedPost, 'medium_large')) ?>" width="100%"></a>
+                <?php endif; ?>
+  
+                <div class="card-body wdl-archive-card-body">
+                  <div class="wdl-badge-container mb-1">
+                    <?php
+                          $date = get_field('Date', $relatedPost->ID);
+                          if ($date): ?>
+                    <span class="badge wdl-badge-sm-primary">
+                      <?php the_field('Date', $relatedPost->ID) ?>
+                    </span>
+                    <?php endif; ?>
+                    <?php $hotDeal = get_field('HotDeal', $relatedPost->ID);
+                          if ($hotDeal && in_array('Hot Deal', $hotDeal)): ?>
+                    <span class="badge wdl-badge-sm"><?php _e('Hot Deal', 'wdl')?></span>
+                    <?php endif; ?>
+                  </div>
+  
+                  <h3 class="wdl-archive-title"><a href="<?php echo get_the_permalink($relatedPost->ID); ?>">
+                      <?php echo get_the_title($relatedPost->ID); ?>
+                    </a></h3>
+                </div>
+              </div>
+              <?php
+              wp_reset_postdata();
+              endforeach; ?>
+            </div>
+            <div class="swiper-navigation swiper-navigation-small">
+              <div class="swiper-button-prev"></div>
+              <div class="swiper-button-next"></div>
+            </div>
+            <div class="swiper-pagination"></div>
+          </div>
+        </div>
+      </div>
+      <?php endif; ?>
+    </div>
+    <div class="container-xl">
+      <?php if ($allRelatedPosts): ?>
+      <div class="my-3">
+        <h2><?php _e('บทความที่เกี่ยวข้อง', 'wdl'); ?></h2>
+        <div class="wdl-archive wdl-archive-extended">
+          <div class="swiper wdl-archive-swiper">
+            <div class="swiper-wrapper">
+              <?php foreach ($allRelatedPosts as $relatedPost): ?>
+              <div id="wdl-post-<?php echo $relatedPost->ID ?>" class="swiper-slide card wdl-archive-card <?php echo esc_attr($atts['class_single']); ?>">
+  
+                <?php if (has_post_thumbnail($relatedPost->ID)): ?>
+                <a class="card-img-top wdl-archive-card-img-top" href="<?php echo get_the_permalink($relatedPost->ID); ?>"><img loading="lazy" class="" src="<?php echo esc_html(get_the_post_thumbnail_url($relatedPost, 'medium_large')) ?>" width="100%"></a>
+                <?php endif; ?>
+  
+                <div class="card-body wdl-archive-card-body">
+                  <div class="wdl-badge-container mb-1">
+                    <?php
+                          $date = get_field('Date', $relatedPost->ID);
+                          if ($date): ?>
+                    <span class="badge wdl-badge-sm-primary">
+                      <?php the_field('Date', $relatedPost->ID) ?>
+                    </span>
+                    <?php endif; ?>
+                    <?php $hotDeal = get_field('HotDeal', $relatedPost->ID);
+                          if ($hotDeal && in_array('Hot Deal', $hotDeal)): ?>
+                    <span class="badge wdl-badge-sm"><?php _e('Hot Deal', 'wdl')?></span>
+                    <?php endif; ?>
+                  </div>
+  
+                  <h3 class="wdl-archive-title"><a href="<?php echo get_the_permalink($relatedPost->ID); ?>">
+                      <?php echo get_the_title($relatedPost->ID); ?>
+                    </a></h3>
+                </div>
+              </div>
+              <?php
+              wp_reset_postdata();
+              endforeach; ?>
+            </div>
+            <div class="swiper-navigation swiper-navigation-small">
+              <div class="swiper-button-prev"></div>
+              <div class="swiper-button-next"></div>
+            </div>
+            <div class="swiper-pagination"></div>
+          </div>
+        </div>
+      </div>
+      <?php endif; ?>
+    </div>
+  </section>
+  <?php endif; ?>
 
   <div class="modal fade wdl-gallery-modal" id="gallery">
     <div class="modal-dialog modal-dialog-centered modal-xl">
@@ -1121,8 +1203,9 @@
       </div>
     </div>
   </div>
-  <?php endif; ?>
-  <?php endwhile; ?>
+  <?php endif; 
+  wp_reset_postdata();
+  endwhile; ?>
   <?php endif; ?>
 </main>
 

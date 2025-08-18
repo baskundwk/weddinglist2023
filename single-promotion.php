@@ -36,7 +36,7 @@
         </div>
         <div class="col-12 d-flex flex-row gap-2 col-lg-3 text-center text-lg-end mb-2 mb-sm-0">
           <a href="#apply" data-bs-target="#apply" data-bs-toggle="modal" class="flex-fill wdl-btn">
-            <?php _e('สนใจรับโปรโมชั่น', 'สนใจรับโปรโมชั่น'); ?>
+            <?php _e('สนใจแพ็กเกจ', 'สนใจแพ็กเกจ'); ?>
           </a>
 
           <a class="wdl-btn-line d-inline-flex d-lg-none" href="https://line.me/R/oaMessage/%40ety4154i/?สวัสดี%20ต้องการรับโปรโมชั่น%20<?php the_title(); ?>%0A<?php the_permalink(); ?>"
@@ -116,7 +116,7 @@
             data-dlev="buttonClick"
             data-dlcomp="button - promotion - cta"
             data-dltgt="<?php the_title() ?>">
-            <?php _e('สนใจรับโปรโมชั่น', 'wdl'); ?>
+            <?php _e('สนใจแพ็กเกจ', 'wdl'); ?>
           </a>
           <a class="wdl-btn-line-lg d-flex d-lg-none" href="https://line.me/R/oaMessage/%40ety4154i/?<?php _e('สวัสดี%20ต้องการรับโปรโมชั่น%20','wdl')?><?php the_title(); ?>%0A<?php the_permalink(); ?>"
             data-dlev="buttonClick"
@@ -184,7 +184,7 @@
             data-dlev="buttonClick"
             data-dlcomp="button - promotion - cta"
             data-dltgt="<?php the_title() ?>">
-            <?php _e('สนใจรับโปรโมชั่น', 'wdl'); ?>
+            <?php _e('สนใจแพ็กเกจ', 'wdl'); ?>
           </a>
         </div>
       </div>

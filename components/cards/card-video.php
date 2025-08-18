@@ -54,8 +54,8 @@
         <?php the_title( )?>
       </p>
       <?php if(get_field('RelatedVenue')) { ?>
-      <p class="wdl-archive-location lineclamp-1">
-        <?php echo get_the_title(get_field('RelatedVenue')->ID)?>
+      <p class="wdl-archive-location">
+        <span class="lineclamp-1"><?php echo get_the_title(get_field('RelatedVenue')->ID)?></span>
       </p>
       <?php } ?>
     </div>

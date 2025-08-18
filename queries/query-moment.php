@@ -14,7 +14,7 @@
       'post_type' => 'moment',
       'post_status' => $post_status,
       'paged' => $paged,
-      'posts_per_page' => 12,
+      'posts_per_page' => get_option( 'posts_per_page' ),
   ];
   
   if($_GET['character']) {

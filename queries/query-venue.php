@@ -1,55 +1,53 @@
 <?php
+  $arg = [
+      'post_type' => 'venue',
+      'order' => 'DESC',
+      'post_status' => 'publish',
+      'paged' => get_query_var('paged', 1),
+      'posts_per_page' => get_option( 'posts_per_page' ),
+      'meta_query' => [
+        //'relation' => 'OR',
+        'sponsor_clause' => [
+          'key' => 'Sponsor',
+          //'value' => 'Sponsored',
+          //'compare' => 'LIKE'
+        ],
+        'freeMicrosite_clause' => [
+          'key' => 'Microsite',
+          //'value' => 'Free Microsite',
+          //'compare' => 'LIKE'
+        ]
+      ],
+      'orderby' => [
+        'sponsor_clause' => 'DESC',
+        'freeMicrosite_clause' => 'ASC'
+      ],
+  ];
+
   if(is_user_logged_in()) {
-    $post_status = 'any';
-  } else {
-    $post_status = 'publish';
+    $arg['post_status'] = 'any';
   }
 
-  $paged = get_query_var('paged', 1);
   if($_GET['order'] ) {
-    $order = $_GET['order'];
-  } else {
-    $order = 'DESC';
+    $arg['order'] = $_GET['order'];
   }
 
   if($_GET['orderby'] ) {
-    $orderby = $_GET['orderby'];
+    $arg['orderby'] = $_GET['orderby'];
     if($_GET['orderby'] === 'meta_value_num') {
-      $has_field =  array(
+      $arg['meta_query'] =  array(
         'key' => $_GET['key'],
         'value' => '0',
         'compare' => '>',
       );
-    } else {
-      $has_field = array();
     }
-  } else {
-    $orderby = 'meta_value';
-    $has_field = array();
   }
 
   if($_GET['key'] ) {
-    $key = $_GET['key'];
-  } else {
-    $key = 'Sponsor';
+    $arg['meta_key'] = $_GET['key'];
   }
 
-
   $current_url = explode("?", $_SERVER['REQUEST_URI'])[0];
-    
-  $arg = [
-      'post_type' => 'venue',
-      'order' => $order,
-      'meta_key' => $key,
-      'orderby' => $orderby,
-      'post_status' => $post_status,
-      'paged' => $paged,
-      'posts_per_page' => 12,
-      'meta_query' => [
-        'relation' => 'AND',
-        $has_field
-      ],
-  ];
   
   if(isset($_GET['budget']) && $_GET['budget'] !== '' && $_GET['budget'] !== 'any') {
     $arg['meta_query'][] = array(
@@ -70,11 +68,14 @@
   }
 
   if($_GET['character']) {
-    $arg['tax_query'][] = array(
-      'taxonomy' => 'venue_character',
-      'field' => 'slug',
-      'terms' => $_GET['character'],
-    );
+    $arg['tax_query'][] = [
+      'relation' => 'OR',
+      array(
+        'taxonomy' => 'venue_character',
+        'field' => 'slug',
+        'terms' => $_GET['character'],
+      ),
+    ];
   }
   if($_GET['loc']) {
     $arg['tax_query'][] = array(
@@ -117,7 +118,7 @@
       'orderby' => $orderby,
       'post_status' => $post_status,
       'paged' => $paged,
-      'posts_per_page' => 12,
+      'posts_per_page' => get_option( 'posts_per_page' ),
       'meta_query' => $has_field,
       'tax_query' => array(
         array(

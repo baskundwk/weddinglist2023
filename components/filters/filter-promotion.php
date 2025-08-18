@@ -11,7 +11,7 @@
 
       if ($promotionWithVeueMeta->have_posts()): ?>
       <div class="swiper-slide w-auto">
-        <div class="dropdown wdl-dropdown">
+        <div class="dropdown-center wdl-dropdown">
 
           <div class="wdl-btn-filter <?php if (isset($_GET['relate'])) { echo 'active'; }?>" data-bs-toggle="dropdown" aria-expanded="false">
             <?php if (isset($_GET['relate'])): ?>
@@ -54,7 +54,7 @@
               });
               ?>
 
-          <ul class="dropdown-menu dropdown-menu-end">
+          <ul class="dropdown-menu">
             <li><a class="px-3" href="<?php removeParam('relate') ?>"><?php _e('สถานที่ทั้งหมด', 'wdl'); ?></a></li>
             <?php foreach ($unique_venue_array as $venue) {
                   ?>
@@ -78,7 +78,7 @@
       if ($promotion_category):
         ?>
       <div class="swiper-slide w-auto">
-        <div class="dropdown wdl-dropdown">
+        <div class="dropdown-center wdl-dropdown">
           <div class="wdl-btn-filter <?php if (isset($_GET['type'])) { echo 'active'; }?>" data-bs-toggle="dropdown" aria-expanded="false">
             <?php if (isset($_GET['type'])): ?>
             <i data-feather="grid"></i><?php echo (get_term_by('slug', $_GET['type'], 'promotion-category')->name); ?>
@@ -87,7 +87,7 @@
             <?php endif; ?>
             <i data-feather="chevron-down"></i>
           </div>
-          <ul class="dropdown-menu dropdown-menu-end">
+          <ul class="dropdown-menu">
             <li><a class="px-3" href="<?php removeParam('type') ?>"><?php _e('ประเภททั้งหมด', 'wdl'); ?></a></li>
             <?php
 
@@ -106,7 +106,7 @@
       </div>
       <?php endif; ?>
       <!-- <div class="swiper-slide w-auto">
-        <div class="dropdown wdl-dropdown">
+        <div class="dropdown-center wdl-dropdown">
           <div class="wdl-btn-filter" data-bs-toggle="dropdown" aria-expanded="false">
             <?php if (isset($_GET['type'])): ?>
             <i data-feather="calendar"></i><?php echo (get_term_by('slug', $_GET['type'], 'promotion-category')->name); ?>
@@ -115,7 +115,7 @@
             <?php endif; ?>
             <i data-feather="chevron-down"></i>
           </div>
-          <ul class="dropdown-menu dropdown-menu-end">
+          <ul class="dropdown-menu">
             <li><a class="px-3" href="<?php removeParam('type') ?>"><?php _e('ระยะเวลาทั้งหมด', 'wdl'); ?></a></li>
 
             <?php
@@ -193,7 +193,7 @@
         </div>
       </div> -->
       <div class="swiper-slide w-auto">
-        <div class="dropdown wdl-dropdown">
+        <div class="dropdown-center wdl-dropdown">
           <div class="wdl-btn-filter <?php if (isset($_GET['label'])) { echo 'active'; }?>" data-bs-toggle="dropdown" aria-expanded="false">
             <?php if (isset($_GET['label'])) { ?>
             <i data-feather="bar-chart"></i><?php echo $_GET['label']; ?>
@@ -202,7 +202,7 @@
             } ?>
             <i data-feather="chevron-down"></i>
           </div>
-          <ul class="dropdown-menu dropdown-menu-end">
+          <ul class="dropdown-menu">
             <li><a href="<?php echo ($current_url) ?>"><?php _e('โปรโมชั่นแนะนำ', 'wdl')?></a></li>
             <li><a href="<?php updateParam([
               'order' => 'ASC',

@@ -1,7 +1,6 @@
 <?php include get_stylesheet_directory().'/components/header.php' ?>
 
 <main>
-  <?php include get_stylesheet_directory().'/components/search.php' ?>
   <section class="pt-4">
     <div class="container-xl">
       <div class="row">

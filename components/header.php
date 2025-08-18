@@ -131,7 +131,7 @@ if(isset($campaignModeEnabled)) {
 <?php if(isset($campaignModeEnabled)) { 
   while($currentCampaignQuery->have_posts()) {
     $currentCampaignQuery->the_post(); ?>
-  <div id="campaign-header" class="debug wdl-campaign-header"
+  <div id="campaign-header" class="wdl-campaign-header"
   style="
     --campaign-color-1: <?php the_field('CampaignColor1');?>;
     --campaign-color-2: <?php the_field('CampaignColor2');?>;
@@ -190,9 +190,43 @@ if(isset($campaignModeEnabled)) {
   }?>
 <?php }?>
   <?php if(!isset($hideNav) || !$hideNav === true) : ?>
+  <div id="modalSearch" class="modal fade">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <div class="wdl-search">
+          <form class="searchform" action="/">
+            <div class="input-group d-flex">
+              <input class="form-control p-2" type="text" name="s" id="search" placeholder="คุณกำลังมองหาอะไร..." value="<?php 
+              if(isset($_GET['s'])) { 
+                echo esc_html($_GET['s']);
+              } ?>">
+              <select id="type" name="type" value="<?php if ($_GET['type']) {
+                echo $_GET['type'];
+              } else {
+                echo 'venue';
+              } ?>">
+                <option value="venue"><a data-type="venue" href="#" class="px-3"><?php _e('สถานที่จัดงาน', 'wdl') ?></a></option>
+                <option value="promotion"><a data-type="promotion" href="#" class="px-3"><?php _e('โปรโมชั่น', 'wdl') ?></a></option>
+                <option value="wedding-fair"><a data-type="wedding-fair" href="#" class="px-3"><?php _e('Wedding Fair & Event', 'wdl') ?></a></option>
+                <option value="vendor"><a data-type="vendor" href="#" class="px-3"><?php _e('ผู้ให้บริการ', 'wdl') ?></a></option>
+                <option value="post"><a data-type="post" href="#" class="px-3"><?php _e('บทความ', 'wdl') ?></a></option>
+                <option value="video"><a data-type="video" href="#" class="px-3"><?php _e('คลิปวิดีโอ', 'wdl') ?></a></option>
+                <?php /* <option value="listing"><a data-type="listing" href="#" class="px-3"><?php _e('รายการแนะนำ', 'wdl') ?></a></option> */ ?>
+              </select>
+              <button type="submit" class="wdl-search-submit"><i data-feather="search"></i></button>
+            </div>
+          </form>
+          <button type="button" class="modal-close" data-bs-dismiss="modal"><i data-feather="x"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
   <header id="main-header" class="sticky-top">
     <div class="navbar navbar-expand-xl">
       <div class="container-xl">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#top-menu-collapse" aria-controls="wdlNavbar" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
         <div class="navbar-brand">
           <a href="<?php echo esc_url(home_url('/')); ?>" title="ไปหน้าแรกของ Weddinglist">
             <img loading="lazy" src="<?php echo get_theme_file_uri() . '/images/logo.png';?>" alt="Weddinglist" width="181" height="44">
@@ -225,11 +259,10 @@ if(isset($campaignModeEnabled)) {
             ><i class="wdl-icon-email"></i></a></li>
           </ul>
         </nav>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#top-menu-collapse" aria-controls="wdlNavbar" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
+        <button id="toggleSearch" type="button" class="ms-xl-2 me-2 me-xl-0 order-xl-last" title="Search" data-bs-toggle="modal" data-bs-target="#modalSearch">
+          <i data-feather="search"></i>
         </button>
-        <?php
-        wp_nav_menu(
+        <?php wp_nav_menu(
           array(
             'menu' => 'Main menu',
             'container_class' => 'collapse navbar-collapse',
@@ -237,8 +270,7 @@ if(isset($campaignModeEnabled)) {
             'menu_class' => 'navbar-nav nav justify-content-end w-100',
             'menu_id' => 'top-menu'
           )
-        );
-        ?>
+        ); ?>
       </div>
     </div>
   </header>

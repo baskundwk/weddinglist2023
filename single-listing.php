@@ -1,6 +1,5 @@
 <?php include get_stylesheet_directory().'/components/header.php' ?>
 <main>
-  <?php include get_stylesheet_directory().'/components/search.php' ?>
   <section class="pb-3">
     <div class="container-xl">
       <div class="flex flex-column justify-content-center">

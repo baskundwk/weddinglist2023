@@ -1,7 +1,5 @@
 <?php include get_stylesheet_directory().'/components/header.php' ?>
 <main>
-  <?php include get_stylesheet_directory().'/components/search.php' ?>
-
   <?php
   $comparePosts = new WP_Query(
     array(
@@ -11,11 +9,11 @@
     )
   ) ?>
 
-  <section class="wdl-archive overflow-hidden">
+  <section class="wdl-archive wdl-archive-extended overflow-hidden pt-4">
     <div class="container-xxl">
       <div class="row mb-3">
         <div class="col-md-6 text-center text-md-start">
-          <a class="wdl-link-back" href="#" onclick="history.back()"><?php _e('ย้อนกลับ','wdl')?></a>
+          <a class="wdl-link-back" href="#" onclick="history.back()"><i data-feather="chevron-left"></i> <?php _e('ย้อนกลับ','wdl')?></a>
           <h1>
             <?php _e('เปรียบเทียบสถานที่จัดงานแต่งงาน', 'wdl') ?>
           </h1>
@@ -61,7 +59,7 @@
                         }?>
                     </small>
                   </div>
-                  <h3 class="wdl-archive-title mb-0">
+                  <h3 class="wdl-archive-title">
                     <a href="<?php the_permalink(); ?>"
                     title="<?php echo get_the_title() ?>"
                     data-label="<?php echo get_the_title() ?>">

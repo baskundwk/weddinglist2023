@@ -10,21 +10,43 @@
   }
   
   $wp_query = new WP_Query($args)?>
-  <section class="wdl-archive wdl-archive-extended pb-5">
+  <section class="wdl-archive wdl-archive-extended pt-4 pb-5">
     <div class="container-xxl container-archive wdl-archive-infinite-scroll">
       <?php if (have_posts()): ?>
       <div class="row">
-        <div class="col">
-          <h1 class="mb-0">
+        <div class="col-md-7">
+          <h2 class="mb-0">
             <?php if(isset($_GET['keyword']) && !empty($_GET['keyword'])) {
               echo __('ผลการค้นหา', 'wdl') . ' : ' . esc_html(sanitize_text_field($_GET['keyword'])) . ' - ' . single_term_title('' , false); 
             } else {
-              single_term_title(); 
+              if(is_category()) {
+                $category = get_queried_object();
+                $cat_id = $category->term_id;
+                if(get_field('pageTitle', 'category_'. $cat_id)) {
+                  echo get_field('pageTitle', 'category_'. $cat_id);
+                } else {
+                  echo single_term_title(); 
+                }
+              } else {
+                echo single_term_title(); 
+              }
             }
             ?>
-          </h1>
+          </h2>
           <p class="text-secondary">
-            <?php _e('รวบรวมบทความให้คุณไว้ที่เดียว', 'wdl') ?>
+            <?php 
+              if(is_category()) {
+                $category = get_queried_object();
+                $cat_id = $category->term_id;
+                if(get_field('pageDesc', 'category_'. $cat_id)) {
+                  echo get_field('pageDesc', 'category_'. $cat_id);
+                } else {
+                  echo single_term_title(); 
+                  _e('รวบรวมบทความให้คุณไว้ที่เดียว', 'wdl');
+                }
+              } else {
+                _e('รวบรวมบทความให้คุณไว้ที่เดียว', 'wdl');
+              } ?>
           </p>
         </div>
       </div>

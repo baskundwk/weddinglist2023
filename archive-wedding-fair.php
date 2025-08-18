@@ -1,23 +1,16 @@
 <?php include get_stylesheet_directory().'/components/header.php' ?>
 
 <main>
-  <?php include get_stylesheet_directory().'/components/search.php' ?>
   <?php include get_stylesheet_directory().'/queries/query-wedding-fair.php' ?>
-  <section>
+  <section class="pt-4">
     <div class="container-xl">
-      <div class="row">
-        <div class="col-xl-8">
-          <h1 class="mb-0">
-            <?php _e('Wedding Fair & Events', 'wdl'); ?>
-          </h1>
-          <p class="text-secondary mb-2">
-            <?php _e('รวม Wedding Fair & Events จากสถานที่จัดงานแต่งงานชั้นนำทุกรูปแบบ อัพเดทล่าสุด', 'wdl'); ?>
-          </p>
-        </div>
-        <div class="col-xl-4">
-          <?php include get_stylesheet_directory().'/components/filters/filter-wedding-fair.php' ?>
-        </div>
-      </div>
+      <h1 class="mb-0">
+        <?php _e('Wedding Fair & Events', 'wdl'); ?>
+      </h1>
+      <p class="text-secondary mb-4">
+        <?php _e('รวม Wedding Fair & Events จากสถานที่จัดงานแต่งงานชั้นนำทุกรูปแบบ อัพเดทล่าสุด', 'wdl'); ?>
+      </p>
+      <?php include get_stylesheet_directory().'/components/filters/filter-wedding-fair.php' ?>
     </div>
   </section>
   <?php if (have_posts()): ?>

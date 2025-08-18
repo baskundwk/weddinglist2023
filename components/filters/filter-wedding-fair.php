@@ -3,7 +3,7 @@
     <div class="swiper-wrapper">
 
       <div class="swiper-slide w-auto">
-        <div class="dropdown wdl-dropdown">
+        <div class="dropdown-center wdl-dropdown">
 
           <div class="wdl-btn-filter <?php if ($_GET['relate']) { echo 'active'; }?>" data-bs-toggle="dropdown" aria-expanded="false">
             <?php if ($_GET['relate']): ?>
@@ -44,7 +44,7 @@
 
           if (!empty($unique_venues)) { ?>
 
-          <ul class="dropdown-menu dropdown-menu-end">
+          <ul class="dropdown-menu">
             <li><a class="px-3" href="<?php removeParam('relate') ?>"><?php _e('สถานที่ทั้งหมด', 'wdl'); ?></a></li>
             <?php foreach ($unique_venues as $venue) {
                 // Display the unique venues (example: output the title and link)
@@ -58,7 +58,7 @@
         </div>
       </div>
       <div class="swiper-slide w-auto">
-        <div class="dropdown wdl-dropdown">
+        <div class="dropdown-center wdl-dropdown">
           <div class="wdl-btn-filter <?php if ($_GET['label']) { echo 'active'; }?>" data-bs-toggle="dropdown" aria-expanded="false">
             <?php if ($_GET['label']) { ?>
             <i data-feather="bar-chart"></i><?php echo $_GET['label']; ?>
@@ -67,7 +67,7 @@
             } ?>
             <i data-feather="chevron-down"></i>
           </div>
-          <ul class="dropdown-menu dropdown-menu-end">
+          <ul class="dropdown-menu">
             <li><a href="<?php echo ($current_url) ?>"><?php _e('Wedding Fair แนะนำ', 'wdl')?></a></li>
             <li><a href="<?php updateParam([
               'order' => 'ASC',

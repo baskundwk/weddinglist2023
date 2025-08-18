@@ -52,7 +52,7 @@ $arg = [
   'orderby' => $orderby,
   'post_status' => $post_status,
   'paged' => $paged,
-  'posts_per_page' => 12,
+  'posts_per_page' => get_option( 'posts_per_page' ),
   'meta_query' => $has_field,
 ];
 
@@ -67,7 +67,7 @@ if (get_queried_object()->taxonomy) {
     'orderby' => $orderby,
     'post_status' => $post_status,
     'paged' => $paged,
-    'posts_per_page' => 12,
+    'posts_per_page' => get_option( 'posts_per_page' ),
     'meta_query' => $has_field,
     'tax_query' => array(
       array(

@@ -1,8 +1,7 @@
 <?php include get_stylesheet_directory().'/components/header.php' ?>
 
 <main>
-  <?php include get_stylesheet_directory().'/components/search.php' ?>
-  <section class="wdl-archive wdl-archive-extended pb-5 m-0">
+  <section class="wdl-archive wdl-archive-extended pt-4 pb-5 m-0">
     <div class="container-xl mb-2 pb-1">
       <?php include get_stylesheet_directory().'/components/banner-moment-set.php' ?>
     </div>

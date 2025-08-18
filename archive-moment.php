@@ -1,9 +1,7 @@
 <?php include get_stylesheet_directory().'/components/header.php' ?>
 
 <main>
-  <?php include get_stylesheet_directory().'/components/search.php' ?>
-  <section class="wdl-archive wdl-archive-extended pb-5 m-0">
-
+  <section class="wdl-archive wdl-archive-extended pt-4 pb-5 m-0">
     <?php include get_stylesheet_directory().'/queries/query-moment.php' ?>
     <div class="container-xl">
       <div class="row">
@@ -20,7 +18,7 @@
     <?php $momentSets = get_terms([
       'taxonomy' => 'moment-set',
       'hide_empty' => true,
-      'posts_per_page' => 10,
+      'posts_per_page' => get_option( 'posts_per_page' ),
     ])?>
     <div class="container-xl mb-2 pb-1">
       <div class="swiper wdl-hero-swiper">

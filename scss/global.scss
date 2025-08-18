@@ -54,12 +54,16 @@ hr {
   flex: 1 1 0;
   ul {
     display: flex;
-    gap: 16px;
+    gap: 12px;
     flex-direction: row;
 
     @include max-width-lg {
       display: none;
     }
+  }
+
+  @include max-width-xl {
+    display: none;
   }
 }
 
@@ -497,6 +501,10 @@ body:not(.admin-bar) {
   .h1 {
     font-size: 30px;
     line-height: 1.5;
+
+    @include max-width-lg {
+      font-size: 20px;
+    }
   }
   .h1, .h2, .h3, .h4, .h5, .h6 {
     font-weight: 500;

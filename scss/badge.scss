@@ -54,6 +54,10 @@
   padding: 0;
   flex-wrap: wrap;
   margin-bottom: 0;
+
+  @include max-width-xl {
+    gap: 6px;
+  }
   li {
     display: block;
     padding: 0 !important;
@@ -64,12 +68,17 @@
     a:active {
       display: block;
       padding: 8px 15px !important;
-      box-shadow: 0 0 0 .25px #777777;
+      box-shadow: 0 0 0 1px rgba(119, 119, 119, .25);
       border-radius: 5rem;
       font-size: 14px;
       font-weight: 400;
       line-height: 1;
       color: #777777 !important;
+
+      @include max-width-xl {
+        font-size: 13px;
+        padding: 6px 8px !important;
+      }
     }
   }
 
@@ -126,7 +135,7 @@
 .wdl-badge-sm {
   padding: 6px 12px !important;
   white-space: nowrap;
-  box-shadow: 0 0 0 .25px #ff2758 inset;
+  box-shadow: 0 0 0 1px rgba(255, 39, 88, .25) inset;
   background: #ffffff;
   color: #ff2758 !important;
   border-radius: 50px;
@@ -174,7 +183,7 @@
 .wdl-badge-sm-secondary {
   padding: 6px 12px !important;
   white-space: nowrap;
-  box-shadow: 0 0 0 .25px #777777 inset;
+  box-shadow: 0 0 0 1px rgba(119, 119, 119, .25) inset;
   color: #777777 !important;
   border-radius: 50px;
   font-size: 16px;

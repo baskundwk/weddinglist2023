@@ -1,20 +1,19 @@
 <?php include get_stylesheet_directory().'/components/header.php' ?>
 
 <main>
-  <?php include get_stylesheet_directory().'/components/search.php' ?>
   <?php include get_stylesheet_directory().'/queries/query-video.php' ?>
+  <section class="py-4 bg-gray border-bottom">
+    <div class="container-xl">
+      <h1 class="mb-0">
+        <?php _e('รวมวิดีโอแนะนำ','wdl'); ?>
+      </h1>
+      <p class="text-secondary mb-2">
+        <?php _e('รวมรายการรวมวิดีโอแนะนำ จากสถานที่จัดงานแต่งงานชั้นนำทุกรูปแบบ อัพเดทล่าสุด','wdl'); ?>
+      </p>
+    </div>
+  </section>
   <section class="pt-4">
     <div class="container-xl">
-      <div class="row mb-4">
-        <div class="col">
-          <h1 class="mb-0">
-            <?php _e('รวมวิดีโอแนะนำ','wdl'); ?>
-          </h1>
-          <p class="text-secondary mb-2">
-            <?php _e('รวมรายการรวมวิดีโอแนะนำ จากสถานที่จัดงานแต่งงานชั้นนำทุกรูปแบบ อัพเดทล่าสุด','wdl'); ?>
-          </p>
-        </div>
-      </div>
 
       <?php $playlists = get_terms([
         'taxonomy' => 'video-playlist',

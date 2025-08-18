@@ -193,3 +193,10 @@ table:not(.table-borderless) {
 .wp-caption {
   max-width: 100%;
 }
+
+.modal-backdrop {
+  background: rgba(0, 0, 0, 0.5) !important;
+  &.show {
+    opacity: 1 !important;
+  }
+}

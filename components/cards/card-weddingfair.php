@@ -76,7 +76,7 @@
         <span class="badge wdl-badge-sm">Hot Deal</span>
       <?php endif; ?>
     </div>
-    <h3 class="wdl-archive-title mb-0">
+    <h3 class="wdl-archive-title">
       <a
         href="<?php echo esc_attr(get_the_permalink()); ?>"
         title="<?php echo esc_attr(get_the_title()) ?>"
@@ -95,7 +95,7 @@
       foreach ($relatedVenue as $venue):
         $venuePermalink = get_the_permalink($venue->ID);
         $venueTitle = get_the_title($venue->ID); ?>
-        <p class="wdl-archive-location">
+        <p class="wdl-archive-location lineclamp-1">
           <a href="<?php echo esc_attr($venuePermalink) ?>"
             data-dlev="cardClick"
             data-dlcomp="card - wedding-fair"
@@ -121,7 +121,7 @@
     );
 
     if ($coupon): ?>
-      <a class="d-flex flex-wrap gap-2 align-items-stretch" href="<?php echo esc_attr(get_the_permalink()); ?>"
+      <a class="d-flex flex-wrap gap-2 align-items-stretch my-2" href="<?php echo esc_attr(get_the_permalink()); ?>"
         data-dlev="cardClick"
         data-dlcomp="card - wedding-fair"
         data-dltgt="<?php echo esc_attr(get_the_title()) ?>"

@@ -48,7 +48,7 @@
       'orderby' => $orderby,
       'post_status' => $post_status,
       'paged' => $paged,
-      'posts_per_page' => '16',
+      'posts_per_page' => get_option( 'posts_per_page' ),
       'meta_query' => $has_field,
       'tax_query' => array(
         array(
@@ -74,23 +74,16 @@
     
     query_posts($arg);
   ?>
-  <section>
+  <section class="pt-4">
     <div class="container-xl">
-      <div class="row">
-        <div class="col-lg">
-          <a href="<?php echo home_url( '/vendor' )?>" class="d-block my-2"><i data-feather="arrow-left"></i> ผู้ให้บริการทั้งหมด</a>
-        </div>
-        <div class="col-lg">
-          <?php include get_stylesheet_directory() . '/components/filters/filter-vendor.php' ?>
-        </div>
-      </div>
       <div class="row">
         <div class="col">
           <h1 class="mb-0">
             <?php if(isset($_GET['keyword']) && !empty($_GET['keyword'])) {
               echo __('ผลการค้นหา', 'wdl') . ' : ' . esc_html(sanitize_text_field($_GET['keyword'])) . ' - ' . get_queried_object()->name; 
             } else {
-              _e('Weddinglist รวมผู้ให้บริการ Catering ยอดนิยม ทั่วประเทศ', 'wdl');
+              $term_name = get_queried_object()->name;
+              echo __('Weddinglist รวมผู้ให้บริการ '.$term_name.' ยอดนิยม ทั่วประเทศ', 'wdl');
             }
             ?>
           </h1>
@@ -137,7 +130,7 @@
     array(
       'post_type' => 'post',
       'post_status' => 'publish',
-      'posts_per_page' => '40',
+      'posts_per_page' => get_option( 'posts_per_page' ),
       'orderby' => 'post_date',
       'order' => 'DESC',
       'tax_query' => array(

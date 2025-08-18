@@ -312,6 +312,10 @@
     line-height: 1.25;
     //box-shadow: 0 0 0 2px #ff2758 inset; 
 
+    @include max-width-lg {
+      font-size: 18px;
+    }
+
     p {
       //background: #FFF;
       color: #FFF;
@@ -324,6 +328,10 @@
       font-size: 28px;
       line-height: 1.2;
       margin-bottom: 0;
+
+      @include max-width-lg {
+        font-size: 18px;
+      }
     }
   }
 

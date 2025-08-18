@@ -6,14 +6,19 @@ function wdl_enqueue_styles()
 	wp_enqueue_style('glyphicon', get_theme_file_uri() . '/library/glyphicons/bootstrap-glyphicons.min.css');
 	wp_enqueue_style('boostrap', get_theme_file_uri() . '/library/bootstrap/css/bootstrap.min.css');
 	wp_enqueue_style('swiperjs', get_theme_file_uri() . '/library/swiperjs/swiper-bundle.min.css');
+	wp_enqueue_style('air-datepicker', get_theme_file_uri() . '/library/air-datepicker@3.6.0/air-datepicker.min.css');
+	wp_enqueue_style('select2', get_theme_file_uri() . '/library/select2/select2.min.css');
 	wp_enqueue_style('theme-style', get_theme_file_uri() . '/style.css');
+	
 	wp_enqueue_script('jquery', get_theme_file_uri() . '/library/jquery/jquery-3.7.1.min.js', array(), '3.7.1', true);
 	wp_enqueue_script('jquery-match-height', get_theme_file_uri() . '/library/jquery-match-height/jquery.matchHeight.js', array('jquery'), true);
 	wp_enqueue_script('jquery-shuffle', get_theme_file_uri() . '/library/jquery/jquery-shuffle.min.js', '', true);
+	wp_enqueue_script('select2', get_theme_file_uri() . '/library/select2/select2.min.js', array('jquery'), '', true);
 	wp_enqueue_script('feather-icons', get_theme_file_uri() . '/library/feather-icons/feather.min.js', array('jquery'), '', true);
 	wp_enqueue_script('boostrap', get_theme_file_uri() . '/library/bootstrap/js/bootstrap.bundle.min.js', array('jquery'), '', true);
 	wp_enqueue_script('swiperjs', get_theme_file_uri() . '/library/swiperjs/swiper-bundle.min.js', array('jquery'), '', true);
 	wp_enqueue_script('qrcodejs', get_theme_file_uri() . '/library/qrcodejs/qrcode.min.js', array('jquery'), '', true);
+	wp_enqueue_script('air-datepicker', get_theme_file_uri() . '/library/air-datepicker@3.6.0/air-datepicker.min.js', array(), '', true);
 	wp_enqueue_script('theme-script', get_theme_file_uri() . '/script.js', array('jquery'), '', true);
 	wp_enqueue_script('friendlysearch', get_theme_file_uri() . '/friendlysearch.js', array('jquery'), '', true);
 	wp_enqueue_script('data-layer', get_theme_file_uri() . '/data-layer.js', array('jquery'), '', true);
@@ -101,18 +106,18 @@ add_action('wp_ajax_nopriv_send_email', 'send_email');
 
 function send_email() {
 	//$toClient = $_REQUEST['toClient'];
-	$name = sanitize_text_field($_REQUEST['name'] ?? '');
-	$tel = sanitize_text_field($_REQUEST['tel'] ?? '');
-	$email = sanitize_text_field($_REQUEST['email'] ?? '');
-	$lineid = sanitize_text_field($_REQUEST['lineid'] ?? '');
-	$guest = sanitize_text_field($_REQUEST['guest'] ?? '');
-	$budget = sanitize_text_field($_REQUEST['budget'] ?? '');
-	$date = sanitize_text_field($_REQUEST['date'] ?? '');
-	$daytime = sanitize_text_field($_REQUEST['daytime'] ?? '');
-	$packageType = sanitize_text_field($_REQUEST['packageType'] ?? '');
-	$message = sanitize_text_field($_REQUEST['message'] ?? '');
-	$cardId = sanitize_text_field($_REQUEST['cardId'] ?? '');
-	$selectedCoupon = sanitize_text_field($_REQUEST['selectedCoupon'] ?? '');
+	$name = sanitize_text_field($_REQUEST['name']);
+	$tel = sanitize_text_field($_REQUEST['tel']);
+	$email = sanitize_text_field($_REQUEST['email']);
+	$lineid = sanitize_text_field($_REQUEST['lineid']);
+	$guest = sanitize_text_field($_REQUEST['guest']);
+	$budget = sanitize_text_field($_REQUEST['budget']);
+	$date = sanitize_text_field($_REQUEST['date']);
+	$daytime = sanitize_text_field($_REQUEST['daytime']);
+	$packageType = sanitize_text_field($_REQUEST['packageType']);
+	$message = sanitize_text_field($_REQUEST['message']);
+	$cardId = sanitize_text_field($_REQUEST['cardId']);
+	$selectedCoupon = sanitize_text_field($_REQUEST['selectedCoupon']);
 	$selectedCouponTitle = [];
 
 	$selectedCouponArray = [];
@@ -145,8 +150,8 @@ function send_email() {
 
 
 	//$appoint = $_REQUEST['appoint'];
-	$appointDate = sanitize_text_field($_REQUEST['appointDate']) ?? '';
-	$appointTime = sanitize_text_field($_REQUEST['appointTime']) ?? '';
+	$appointDate = sanitize_text_field($_REQUEST['appointDate']);
+	$appointTime = sanitize_text_field($_REQUEST['appointTime']);
 
 	$appointStatement = '';
 	if ($appointDate !== '' || $appointTime !== '') {
@@ -211,7 +216,7 @@ function send_email() {
 		"				<li>จำนวนแขก : <strong>$guest</strong></li>" .
 		"				<li>งบประมาณ : <strong>$budget</strong></li>" .
 		"				<li>วันที่จัดงาน : <strong>$date</strong></li>" .
-		"				<li>ช่วงเวลาจัดงาน : <strong>$daytime</strong></li>" .
+		//"				<li>ช่วงเวลาจัดงาน : <strong>$daytime</strong></li>" .
 		$selectedCouponBody .
 		$packageTypeBody .
 		"			</ul>" . $appointStatement .
@@ -229,7 +234,11 @@ function send_email() {
 		if (!empty($to)) {
 		$mail = wp_mail($to, $subject, $email_body, $headers);
 	}
-	$lead_type = sanitize_text_field($_REQUEST['leadType']) ?? 'General';
+	if(($_REQUEST['leadType'])) {
+		$lead_type = sanitize_text_field($_REQUEST['leadType']);
+	} else {
+		$lead_type = 'General';
+	}
 
 
 	$post_type = get_post_type($cardId);
@@ -387,12 +396,12 @@ add_action('wp_ajax_send_email_business', 'send_email_business');
 add_action('wp_ajax_nopriv_send_email_business', 'send_email_business');
 
 function send_email_business() {
-	$name = sanitize_text_field($_REQUEST['name'] ?? '');
-	$businessType = sanitize_text_field($_REQUEST['businessType'] ?? '');
-	$contactName = sanitize_text_field($_REQUEST['contactName'] ?? '');
-	$contactTel = sanitize_text_field($_REQUEST['contactTel'] ?? '');
-	$contactEmail = sanitize_text_field($_REQUEST['contactEmail'] ?? '');
-	$message = sanitize_text_field($_REQUEST['message'] ?? '');
+	$name = sanitize_text_field($_REQUEST['name']);
+	$businessType = sanitize_text_field($_REQUEST['businessType']);
+	$contactName = sanitize_text_field($_REQUEST['contactName']);
+	$contactTel = sanitize_text_field($_REQUEST['contactTel']);
+	$contactEmail = sanitize_text_field($_REQUEST['contactEmail']);
+	$message = sanitize_text_field($_REQUEST['message']);
 	$timestamp = sanitize_text_field(wp_date("d M Y H:i:s", null));
 
 	$subject = "คำขอลงทะเบียนธุรกิจจาก $name";
@@ -902,3 +911,94 @@ function use_child_category_in_permalink($category, $categories) {
     return end($categories);
 }
 add_filter('post_link_category', 'use_child_category_in_permalink', 10, 2);
+
+add_action('wp_ajax_handle_thailand_weddinglist', 'handle_thailand_weddinglist');
+add_action('wp_ajax_nopriv_handle_thailand_weddinglist', 'handle_thailand_weddinglist');
+
+function handle_thailand_weddinglist() {
+    // Sanitize and collect form data
+    $fields = [
+        'contactTel', 'contactEmail', 'contactGuest',
+        'contactDate', 'contactBudget',
+				'list',
+    ];
+    $post_data = [];
+    foreach ($fields as $field) {
+        $post_data[$field] = isset($_POST[$field]) ? sanitize_text_field($_POST[$field]) : '';
+    }
+    $contactName = isset($_POST['contactName']) ? sanitize_text_field($_POST['contactName']) : '';
+
+    // Insert post
+    $post_id = wp_insert_post([
+        'post_type'   => 'thailand-weddinglist',
+        'post_title'  => $contactName,
+        'post_status' => 'publish',
+    ]);
+
+    // Save meta fields
+    if ($post_id && !is_wp_error($post_id)) {
+        foreach ($post_data as $key => $value) {
+            update_post_meta($post_id, $key, $value);
+        }
+
+        // Prepare email content
+        $admin_email = get_option('admin_email');
+        $subject = 'มีการลงทะเบียน Thailand Weddinglist ใหม่';
+        $message = "มีผู้ลงทะเบียนใหม่:\n\n";
+        $message .= "ชื่อ: $contactName\n";
+        foreach ($post_data as $key => $value) {
+            $message .= "$key: $value\n";
+        }
+
+        // Send email to admin
+        wp_mail($admin_email, $subject, $message);
+
+        // Send email to user
+        if (!empty($post_data['contactEmail'])) {
+            $user_subject = 'ขอบคุณสำหรับการลงทะเบียน Thailand Weddinglist';
+            $user_message = "ขอบคุณสำหรับการลงทะเบียนค่ะ\n\n";
+            $user_message .= "ทีมงานจะติดต่อกลับโดยเร็วที่สุด";
+            wp_mail($post_data['contactEmail'], $user_subject, $user_message);
+        }
+
+        wp_send_json_success(['message' => 'ลงทะเบียนสำเร็จ']);
+    } else {
+        wp_send_json_error(['message' => 'เกิดข้อผิดพลาดในการบันทึกข้อมูล']);
+    }
+    wp_die();
+}
+
+add_action('pre_get_posts', function($query) {
+		$has_ppp = isset($_GET['_ppp']) && !empty($_GET['_ppp']);
+    if (!is_admin() && $query->is_main_query() && !is_user_logged_in() && !$has_ppp) {
+        // Check if it's a singular view
+        if (isset($query->query_vars['p'])) {
+            $post = get_post($query->query_vars['p']);
+
+            if ($post && $post->post_status === 'draft') {
+                $post_type = get_post_type($post);
+                $archive_url = get_post_type_archive_link($post_type);
+
+                if ($archive_url) {
+                    wp_redirect($archive_url, 301);
+                    exit;
+                }
+            }
+        }
+
+        // Alternatively, check by post_name if friendly URL:
+        /* if (isset($query->query_vars['name'])) {
+            $post = get_page_by_path($query->query_vars['name'], OBJECT, get_post_types());
+
+            if ($post && $post->post_status === 'draft') {
+                $post_type = get_post_type($post);
+                $archive_url = get_post_type_archive_link($post_type);
+
+                if ($archive_url) {
+                    wp_redirect($archive_url, 301);
+                    exit;
+                }
+            }
+        } */
+    }
+});

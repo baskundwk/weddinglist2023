@@ -9,7 +9,7 @@
       array(
         'post_type' => 'venue',
         'post_status' => 'publish',
-        'posts_per_page' => 30,
+        'posts_per_page' => get_option( 'posts_per_page' ),
         'paged' => $paged,
       )
     ) ?>

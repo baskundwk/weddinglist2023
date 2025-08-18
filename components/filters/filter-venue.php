@@ -1,8 +1,8 @@
 <div class="wdl-filter mb-2">
   <div class="wdl-filter-detail swiper wdl-swiper-auto">
     <div class="swiper-wrapper">
-      <div class="swiper-slide w-auto">
-        <div class="dropdown wdl-dropdown">
+      <?php /*<div class="swiper-slide w-auto">
+        <div class="dropdown-center wdl-dropdown">
           <div class="wdl-btn-filter <?php if ($_GET['type']) { echo 'active';}?>" data-bs-toggle="dropdown" aria-expanded="false">
             <?php if ($_GET['type']): ?>
             <i data-feather="home"></i><?php echo(get_term_by('slug', $_GET['type'], 'venue_type')->name); ?>
@@ -11,7 +11,7 @@
             <?php endif; ?>
             <i data-feather="chevron-down"></i>
           </div>
-          <ul class="dropdown-menu dropdown-menu-end">
+          <ul class="dropdown-menu">
             <li><a href="<?php removeParam('type')?>"><?php _e('ประเภททั้งหมด', 'wdl'); ?></a></li>
             <?php
             $venue_type = get_terms(
@@ -35,7 +35,7 @@
         </div>
       </div>
       <div class="swiper-slide w-auto">
-        <div class="dropdown wdl-dropdown">
+        <div class="dropdown-center wdl-dropdown">
           <div class="wdl-btn-filter <?php if ($_GET['loc']) { echo 'active'; }?>" data-bs-toggle="dropdown" aria-expanded="false">
             <?php if ($_GET['loc']): ?>
             <i data-feather="map-pin"></i><?php echo(get_term_by('term_id', $_GET['loc'], 'location')->name); ?>
@@ -44,7 +44,7 @@
             <?php endif; ?>
             <i data-feather="chevron-down"></i>
           </div>
-          <ul class="dropdown-menu dropdown-menu-end">
+          <ul class="dropdown-menu">
             <li><a href="<?php removeParam('loc')?>"><?php _e('ที่ตั้งทั้งหมด', 'wdl'); ?></a></li>
             <?php
             $venue_location = get_terms(
@@ -68,7 +68,7 @@
         </div>
       </div>
       <div class="swiper-slide w-auto">
-        <div class="dropdown wdl-dropdown">
+        <div class="dropdown-center wdl-dropdown">
           <div class="wdl-btn-filter <?php if ($_GET['character']) { echo 'active';}?>" data-bs-toggle="dropdown" aria-expanded="false">
             <?php if ($_GET['character']): ?>
             <i data-feather="star"></i><?php echo(get_term_by('slug', $_GET['character'], 'venue_character')->name); ?>
@@ -77,7 +77,7 @@
             <?php endif; ?>
             <i data-feather="chevron-down"></i>
           </div>
-          <ul class="dropdown-menu dropdown-menu-end">
+          <ul class="dropdown-menu">
             <li><a class="px-3" href="<?php removeParam('character')?>"><?php _e('จุดเด่นทั้งหมด', 'wdl'); ?></a></li>
             <?php
             $venue_character = get_terms(
@@ -123,9 +123,9 @@
             <?php endforeach; ?>
           </ul>
         </div>
-      </div>
+      </div>*/?>
       <div class="swiper-slide w-auto">
-        <div class="dropdown wdl-dropdown">
+        <div class="dropdown-center wdl-dropdown">
           <div class="wdl-btn-filter <?php if ($_GET['label']) { echo 'active'; }?>" data-bs-toggle="dropdown" aria-expanded="false">
             <?php if ($_GET['label']) { ?>
             <i data-feather="bar-chart"></i><?php echo $_GET['label']; ?>
@@ -134,9 +134,9 @@
             } ?>
             <i data-feather="chevron-down"></i>
           </div>
-          <ul class="dropdown-menu dropdown-menu-end">
+          <ul class="dropdown-menu">
             <li><a href="<?php echo ($current_url) ?>"><?php _e('สถานที่แนะนำ', 'wdl')?></a></li>
-            <li><a href="<?php updateParam([
+            <?php /* <li><a href="<?php updateParam([
               'order' => 'ASC',
               'orderby' => 'title',
               'key' => '',
@@ -147,7 +147,7 @@
               'orderby' => 'title',
               'key' => '',
               'label' => 'ย้อนตัวอักษร'
-            ]) ?>"><?php _e('ย้อนตัวอักษร ฮ-ก Z-A', 'wdl')?></a></li>
+            ]) ?>"><?php _e('ย้อนตัวอักษร ฮ-ก Z-A', 'wdl')?></a></li> */ ?>
             <li><a href="<?php updateParam([
               'order' => 'ASC',
               'orderby' => 'meta_value_num',
@@ -160,7 +160,7 @@
               'key' => 'MinPrice',
               'label' => 'ราคาเริ่มต้นสูงที่สุด'
             ]) ?>"><?php _e('ราคาเริ่มต้นสูงที่สุด', 'wdl')?></a></li>
-            <li><a href="<?php updateParam([
+            <?php /*<li><a href="<?php updateParam([
               'order' => 'ASC',
               'orderby' => 'meta_value_num',
               'key' => 'MaxGuest',
@@ -171,7 +171,7 @@
               'orderby' => 'meta_value_num',
               'key' => 'MaxGuest',
               'label' => 'จำนวนแขกมากไปน้อย'
-            ]) ?>"><?php _e('จำนวนแขกมากไปน้อย', 'wdl')?></a></li>
+            ]) ?>"><?php _e('จำนวนแขกมากไปน้อย', 'wdl')?></a></li>*/?>
           </ul>
         </div>
       </div>

@@ -52,9 +52,14 @@ $arg = [
   'orderby' => $orderby,
   'post_status' => $post_status,
   'paged' => $paged,
-  'posts_per_page' => 12,
+  'posts_per_page' => get_option( 'posts_per_page' ),
   'meta_query' => $has_field,
 ];
+
+
+  if(is_user_logged_in()) {
+    $arg['post_status'] = 'any';
+  }
 
 
 if (isset($_GET['type'])) {
@@ -102,7 +107,7 @@ if (isset(get_queried_object()->taxonomy)) {
     'orderby' => $orderby,
     'post_status' => $post_status,
     'paged' => $paged,
-    'posts_per_page' => 12,
+    'posts_per_page' => get_option( 'posts_per_page' ),
     'meta_query' => $has_field,
     'tax_query' => array(
       array(

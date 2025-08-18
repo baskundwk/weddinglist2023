@@ -372,6 +372,8 @@
         </div>
         <?php endif; ?>
         <?php if(!in_array(('Free microsite'), get_field('Status')) && have_rows('Pricing')): ?>
+        <?php $pricings = [];?>
+
         <div class="wdl-archive py-4">
           <h2>
             <?php _e('ข้อมูลค่าใช้จ่าย', 'wdl') ?>
@@ -529,7 +531,7 @@
                           <?php endif; ?>
                         </div>
 
-                        <h3 class="wdl-archive-title mb-0">
+                        <h3 class="wdl-archive-title">
                           <a href="<?php echo get_the_permalink($relatedPromotion->ID); ?>">
                             <?php echo get_the_title($relatedPromotion->ID); ?>
                           </a>
@@ -578,7 +580,7 @@
                           <?php endif; ?>
                         </div>
 
-                        <h3 class="wdl-archive-title mb-0"><a href="<?php echo get_the_permalink($relatedWeddingFair->ID); ?>">
+                        <h3 class="wdl-archive-title"><a href="<?php echo get_the_permalink($relatedWeddingFair->ID); ?>">
                             <?php echo get_the_title($relatedWeddingFair->ID); ?>
                           </a></h3>
                       </div>
@@ -625,7 +627,7 @@
                           <?php endif; ?>
                         </div>
 
-                        <h3 class="wdl-archive-title mb-0"><a href="<?php echo get_the_permalink($relatedPost->ID); ?>">
+                        <h3 class="wdl-archive-title"><a href="<?php echo get_the_permalink($relatedPost->ID); ?>">
                             <?php echo get_the_title($relatedPost->ID); ?>
                           </a></h3>
                       </div>
@@ -657,7 +659,6 @@
     </div>
   </section>
   <?php endif; ?>
-  <?php $pricings = [];?>
   <section class="py-3">
     <div class="container-xl">
       <div class="row">

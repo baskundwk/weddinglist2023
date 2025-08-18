@@ -2,6 +2,10 @@
   padding: 16px 0 0;
   position: relative;
 
+  @include max-width-xl {
+    position: static;
+  }
+
 
   &.active {
     z-index: 100001;
@@ -69,6 +73,11 @@
   box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.3), 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
   border-radius: 16px;
   gap: 12px;
+
+  @include max-width-xl {
+    padding: 28px 8px 8px;
+    gap: 8px;
+  }
   
   .filters {
     display: flex;
@@ -92,6 +101,12 @@
       cursor: pointer;
       min-height: 55px;
 
+      @include max-width-xl {
+        padding: 4px 48px 5px 12px;
+        min-height: 48px;
+        gap: 12px;
+      }
+
       .filter-number {
         background: #C1C1C1;
         width: 30px;
@@ -113,6 +128,10 @@
         .filter-label-title {
           font-size: 14px;
           color: #6C6E71;
+          @include max-width-xl {
+            font-size: 13px;
+            line-height: 1;
+          }
         }
         .filter-label-value {
           font-size: 16px;
@@ -166,6 +185,12 @@
     font-size: 18px;
     font-weight: 700;
     flex: 1 0 auto;
+
+    @include max-width-xl {
+      padding: 12px 24px;
+      font-size: 16px;
+      line-height: 1;
+    }
   }
 
   @include max-width-xl {
@@ -202,6 +227,10 @@
   animation: fadeInDown 0.35s cubic-bezier(0,0,0,1) both;
   z-index: 100004;
   overflow: auto;
+
+  @include max-width-xl {
+    padding-bottom: 24px;
+  }
 
   @keyframes fadeInDown {
     0% {
@@ -268,7 +297,6 @@
       gap: 10px;
 
       @include max-width-xl {
-        flex-direction: column;
         justify-content: center;
         text-align: center;
         gap: 4px;
@@ -290,18 +318,30 @@
     }
 
     .modal-title-skip {
-      font-size: 16px;
-      font-weight: 700;
-      color: #FF2758;
       display: flex;
-      align-items: center;
-      gap: 10px;
-      background: none;
-      border: none;
-
       @include max-width-xl {
-        padding: 8px 0;
+        display: none;
       }
+    }
+  }
+  .modal-title-skip {
+    font-size: 16px;
+    font-weight: 700;
+    color: #FF2758;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    background: none;
+    border: none;
+    width: 100%;
+    @include max-width-xl {
+      padding: 24px 0 8px;
+    }
+
+    @include min-width-xl {
+      display: none;
+      width: fit-content;
     }
   }
   
@@ -323,6 +363,7 @@
     }
     @include max-width-md {
       grid-template-columns: repeat(2, minmax(150px, 150px)) !important;
+      gap: 4px 8px;
     }
   }
 
@@ -331,7 +372,7 @@
     grid-template-columns: repeat(2, minmax(0px, 1fr));
     gap: 16px;
 
-    @include max-width-md {
+    @include max-width-xl {
       grid-template-columns: repeat(1, minmax(0px, 1fr));
       padding: 0 12px;
     }
@@ -341,9 +382,8 @@
       height: 100%;
       position: relative;
 
-      @include max-width-md {
-        height: auto;
-        max-width: none;
+      @include max-width-xl {
+        display: none;
       }
 
       img {
@@ -354,7 +394,7 @@
         object-fit: cover;
         object-position: center center;
 
-        @include max-width-md {
+        @include max-width-xl {
           height: auto;
           position: relative;
         }
@@ -369,9 +409,12 @@
       .modal-choice-item {
         padding: 8px 12px;
         background-color: #F7F7F7;
+        background-position: center right 12px;
         border-radius: 12px;
         color: #4A5057;
         cursor: pointer;
+        transition: .25s cubic-bezier(0,0,0,1);
+        box-shadow: 0 0 10px 2px #ff275900 inset;
         
         &.active {
           box-shadow: 0 0 0 2px #FF2758 inset;
@@ -397,11 +440,23 @@
   .thumb-card {
     text-align: center;
     background-color: #fff;
+    border-radius: 12px;
+    padding-bottom: 8px;
+    position: relative;
+    transition: .25s cubic-bezier(0,0,0,1);
+    box-shadow: 0 0 10px 2px #ff336600;
+    @include max-width-md {
+      padding-bottom: 4px;
+    }
+
     .thumb-image {
       background: #DDD;
       aspect-ratio: 1/1;
       margin-bottom: 8px;
       border-radius: 12px;
+      @include max-width-md {
+        margin-bottom: 4px;
+      }
       img {
         width: 100%;
         height: auto;
@@ -415,6 +470,39 @@
       font-size: 16px;
       font-weight: 600;
       margin-bottom: 0;
+
+      @include max-width-md {
+        margin-top: 4px;
+        font-size: 14px;
+      }
+    }
+
+    &::before {
+      content: '';
+      width: 16px;
+      height: 16px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24' stroke='%23FFFFFF' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round' class='css-i6dzq1'%3E%3Cpolyline points='20 6 9 17 4 12'%3E%3C/polyline%3E%3C/svg%3E");
+      background-size: 12px;
+      background-color: #ff3366;
+      background-repeat: no-repeat;
+      background-position: center center;
+      border-radius: 50px;
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      opacity: 0;
+      transition: .25s cubic-bezier(0,0,0,1);
+      color: #FFFFFF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    &.active {
+      box-shadow: 0 0 0 2px #ff3366;
+      &::before {
+        opacity: 1;
+      }
     }
   }
 
@@ -427,7 +515,8 @@
       font-size: 16px;
       font-weight: 700;
     }
-    .modal-top-cancel {
+    .modal-top-cancel,
+    .modal-top-back {
       color: #37BAD6;
       font-size: 16px;
       display: flex;
@@ -436,6 +525,11 @@
       background: none;
       border: none;
       padding: 0;
+      min-width: 90px;
+    }
+
+    .modal-top-cancel {
+      justify-content: flex-end;
     }
     @include min-width-xl {
       display: none;
@@ -457,8 +551,9 @@
       align-items: center;
       justify-content: center;
       flex-direction: column;
-      padding: 16px 12px 10px;
+      padding: 12px 12px 8px;
       gap: 10px;
+      margin-bottom: 8px;
     }
 
     .modal-grid {

@@ -204,21 +204,25 @@
   }
 
   &.wdl-coupon-picker-small {
-    box-shadow: none;
-    width: auto;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 100%;
     height: 40px;
-    max-width: 50%;
     flex-direction: row;
 
     .wdl-coupon-picker-image {
       img {
         width: auto;
         height: 40px;
+        aspect-ratio: 2/1;
+        object-fit: cover;
       }
     }
 
     .wdl-coupon-picker-info {
       padding: 4px;
+      display: block;
+      flex: 1 1 0;
+      @extend .lineclamp-2;
       .wdl-coupon-picker-title {
         margin-bottom: 0;
         font-weight: 500;

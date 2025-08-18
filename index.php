@@ -8,7 +8,7 @@
   $postAllArg = [
     'post_type' => 'post',
     'post_status' => 'publish',
-    'posts_per_page' => 30,
+    'posts_per_page' => get_option( 'posts_per_page' ),
     'paged' => $paged,
     'orderby' => 'post_date',
     'order' => 'DESC',
@@ -35,10 +35,10 @@
           </p>
           <div class="wdl-badge-container">
             <a href="#" class="wdl-badge-sm-primary"><?php _e('ทั้งหมด', 'wdl')?></a>
-            <!-- <a href="<?php echo esc_html(get_category_link(get_cat_ID('ข่าวประชาสัมพันธ์'))) ?>" class="wdl-badge-sm-secondary"><?php _e('ข่าวประชาสัมพันธ์', 'wdl')?></a> -->
-            <a href="<?php echo esc_html(get_category_link(get_cat_ID('รีวิวแต่งงาน'))) ?>" class="wdl-badge-sm-secondary"><?php _e('รีวิวแต่งงาน', 'wdl')?></a>
-            <a href="<?php echo esc_html(get_category_link(get_cat_ID('เตรียมตัวแต่งงาน'))) ?>" class="wdl-badge-sm-secondary"><?php _e('เตรียมตัวแต่งงาน', 'wdl')?></a>
-            <a href="<?php echo esc_html(get_category_link(get_cat_ID('ไลฟ์สไตล์'))) ?>" class="wdl-badge-sm-secondary"><?php _e('ไลฟ์สไตล์', 'wdl')?></a>
+            <a href="<?php echo esc_html(home_url( '/blog/category/ข่าวสาร')) ?>" class="wdl-badge-sm-secondary"><?php _e('ข่าวสาร', 'wdl')?></a>
+            <a href="<?php echo esc_html(home_url( '/blog/category/reviews/รีวิวแต่งงาน/')) ?>" class="wdl-badge-sm-secondary"><?php _e('รีวิวแต่งงาน', 'wdl')?></a>
+            <a href="<?php echo esc_html(home_url( '/blog/category/วางแผนแต่งงาน')) ?>" class="wdl-badge-sm-secondary"><?php _e('วางแผนแต่งงาน', 'wdl')?></a>
+            <a href="<?php echo esc_html(home_url( '/blog/category/ไลฟ์สไตล์')) ?>" class="wdl-badge-sm-secondary"><?php _e('ไลฟ์สไตล์', 'wdl')?></a>
           </div>
         </div>
       </div>
