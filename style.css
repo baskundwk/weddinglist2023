@@ -4804,7 +4804,8 @@ label {
   padding: 0 12px;
 }
 .navbar-brand img {
-  height: 44px;
+  height: 33px;
+  width: auto;
 }
 
 /* Modified DIVI Menu */
@@ -5900,6 +5901,10 @@ nav.et-menu-nav,
   text-align: center;
 }
 
+.wdl-moment-card {
+  display: flex;
+  flex-direction: column;
+}
 .wdl-moment-card .wdl-archive-card-img-top {
   position: relative;
   z-index: 1;
@@ -5925,6 +5930,7 @@ nav.et-menu-nav,
   display: flex;
   flex-direction: column;
   gap: 4px;
+  flex: 1 1 0;
 }
 .wdl-moment-card .wdl-archive-title {
   font-size: 15px;

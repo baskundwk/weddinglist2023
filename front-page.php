@@ -1,7 +1,9 @@
 <?php include get_stylesheet_directory() . '/components/header.php' ?>
 <main>
+  <!-- Section : Hero banner & friendly search -->
   <?php include get_stylesheet_directory() . '/components/front-page-header.php' ?>
 
+  <!-- Section : Wedding Fair -->
   <?php $weddingfairArgs = array(
     'post_type' => 'wedding-fair',
     'orderby' => 'meta_value',
@@ -67,6 +69,7 @@
   </section>
   <?php endif; ?>
 
+  <!-- Section : Promotion -->
   <?php $promotionArgs = array(
     'post_type' => 'promotion',
     'post_status' => 'publish',
@@ -128,6 +131,7 @@
   </section>
   <?php endif; ?>
   
+  <!-- Section : Moment -->
   <?php $momentArgs = array(
     'post_type' => 'moment',
     'post_status' => 'publish',
@@ -138,15 +142,13 @@
   );
 
   $moment = new WP_Query($momentArgs);
-  ?>
-  <?php
-  if ($moment->have_posts()): ?>
+  if (is_user_logged_in() && $moment->have_posts()): ?>
   <section class="html-lazy section-stripe pt-4 pb-3 border-top">
     <div class="container-xl">
       <div class="row mb-3 align-items-center">
         <div class="col-lg">
           <h2 class="h1 wdl-localnav-heading mb-0">
-            <?php _e('Moment ประสบการณ์ราคาพิเศษ', 'wdl'); ?>
+            <?php _e('Moment Package', 'wdl'); ?>
           </h2>
         </div>
         <div class="col-lg text-lg-end d-none d-lg-block">
@@ -178,7 +180,8 @@
         </div>
       </div>
       <div class="text-center pt-lg-2 d-block d-lg-none mb-4">
-        <a href="<?php echo esc_html(get_post_type_archive_link('promotion')) ?>" class="wdl-btn-secondary"
+        <a href="<?php echo esc_html(get_post_type_archive_link('promotion')) ?>"
+          class="wdl-btn-secondary"
           data-dlev="buttonClick"
           data-dlcomp="button - front page - moment"
           data-dltgt="Moment">
@@ -189,6 +192,7 @@
   </section>
   <?php endif; ?>
 
+  <!-- Section : Venue -->
   <?php
     $venueArgs = array(
     'post_type' => 'venue',
@@ -328,7 +332,8 @@
     </div>
   </section>
   <?php endif; ?>
-
+  
+  <!-- Section : Vendor -->
   <?php
     $vendor_type = get_terms(array(
       'taxonomy' => 'vendor-type',
@@ -345,7 +350,7 @@
   </section>
   <?php endif; ?>
 
-
+  <!-- Section : Video -->
   <?php $videoArgs = array(
     'post_type' => 'video',
     'posts_per_page' => 8,
@@ -397,6 +402,7 @@
   </section>
   <?php endif; ?>
   
+  <!-- Section : Consultant -->
   <?php $consultantArgs = array(
     'post_type' => 'consultant',
     'orderby' => 'meta_value',
@@ -451,6 +457,7 @@
   </section>
   <?php endif; ?>
 
+  <!-- Section : Listing -->
   <?php $listingArgs = array(
     'post_type' => 'listing',
     'orderby' => 'meta_value',
@@ -498,6 +505,7 @@
   </section>
   <?php endif; ?>
 
+  <!-- Section : Blog -->
   <?php
   $postAll = new WP_Query(
     array(
@@ -566,7 +574,7 @@
     </div>
   </section>
 
-
+  <!-- Section : Announcement -->
   <?php
   $announcement = new WP_Query(
     array(

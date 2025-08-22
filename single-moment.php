@@ -14,6 +14,11 @@
             <h1 class="mb-2"><?php the_title(); ?></h1>
   
             <figure class="wdl-gallery wdl-moment-gallery">
+              <?php if(has_post_thumbnail()) { ?>
+                <div data-bs-target="#gallery" data-bs-toggle="modal" class="wdl-gallery-item wdl-moment-gallery-item">
+                  <?php echo get_the_post_thumbnail(get_the_ID(), 'large', ['class' => 'img-fluid']); ?>
+                </div>
+              <?php } ?>
               <?php $gallery = get_field('MomentGallery');
               
               if($gallery) {
@@ -24,14 +29,14 @@
                   <div data-bs-target="#gallery" data-bs-toggle="modal" class="wdl-gallery-item wdl-moment-gallery-item">
                     <img src="<?php echo $image['sizes']['large'] ?>" alt="<?php the_title()?>">
                   </div>
-                  <?php } else if($galleryI < 5 ) { ?>
+                  <?php } else if($galleryI < 4 ) { ?>
                   <div data-bs-target="#gallery" data-bs-toggle="modal" class="wdl-gallery-item wdl-moment-gallery-item">
                     <img src="<?php echo $image['sizes']['medium'] ?>" alt="<?php the_title()?>">
                   </div>
-                  <?php } else if($galleryI === 5 ) { ?>
+                  <?php } else if($galleryI === 4 ) { ?>
                   <div data-bs-target="#gallery" data-bs-toggle="modal" class="wdl-gallery-item wdl-moment-gallery-item">
                     <div class="wdl-moment-gallery-item-more">
-                      5+
+                      <span class="wdl-moment-gallery-item-more-text">+<?php echo count($gallery) - 4; ?></span>
                     </div>
                     <img src="<?php echo $image['sizes']['medium'] ?>" alt="<?php the_title()?>">
                   </div>
@@ -58,7 +63,7 @@
                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" viewBox="0 0 256 256"><path d="M128,40a96,96,0,1,0,96,96A96.11,96.11,0,0,0,128,40Zm0,176a80,80,0,1,1,80-80A80.09,80.09,0,0,1,128,216ZM173.66,90.34a8,8,0,0,1,0,11.32l-40,40a8,8,0,0,1-11.32-11.32l40-40A8,8,0,0,1,173.66,90.34ZM96,16a8,8,0,0,1,8-8h48a8,8,0,0,1,0,16H104A8,8,0,0,1,96,16Z"></path></svg>
                 <?php if($momentAdvanceReservation) { echo __('จองล่วงหน้า').' '.$momentAdvanceReservation.' '.__('วัน'); }?>
                 <?php if($momentAdvanceReservation && $momentDuration) { echo '/'; }?>
-                <?php if($momentAdvanceReservation) { echo __('ทริป', 'wdl').' '.$momentDuration.' '.__('วัน', 'wdl'); }?>
+                <?php if($momentDuration) { echo __('ทริป', 'wdl').' '.$momentDuration.' '.__('วัน', 'wdl'); }?>
               </div>
               <?php } ?>
 
@@ -107,7 +112,7 @@
           </div>
           <div class="wdl-layout-card">
             <h2 class="h4"><?php _e('ติดต่อซื้อแพ็คเกจ Moment นี้', 'wdl') ?></h2>
-            <form id="form-line-contact" data-items="name,tel,date,package" action="https://line.me/R/oaMessage/@ety4154i/?" data-message-prefix="<?php _e('ติดต่อซื้อแพ็คเกจ Moment', 'wdl')?>">
+            <form id="form-line-contact" data-items="name,tel,email,package" action="https://line.me/R/oaMessage/@ety4154i/?" data-message-prefix="<?php _e('ติดต่อซื้อแพ็คเกจ Moment', 'wdl')?>">
               <div class="row mb-2 mb-lg-3 g-2 g-lg-3">
                 <div class="col-12">
                   <div class="form-floating">
@@ -123,10 +128,16 @@
                 </div>
                 <div class="col-12">
                   <div class="form-floating">
+                    <input name="email" id="email" class="form-control" type="email" placeholder="<?php _e('อีเมล', 'wdl')?>" required>
+                    <label for="email"><?php _e('อีเมล', 'wdl')?></label>
+                  </div>
+                </div>
+                <?php /* <div class="col-12">
+                  <div class="form-floating">
                     <input name="date" id="date" class="form-control" type="date" placeholder="<?php _e('จองวันที่', 'wdl')?>" required>
                     <label for="date"><?php _e('จองวันที่', 'wdl')?></label>
                   </div>
-                </div>
+                </div> */ ?>
                 <div class="col-12">
                   <div class="form-floating">
                     <select name="package" id="package" class="form-control" placeholder="<?php _e('แพ็คเกจที่ต้องการ', 'wdl')?>" required>
@@ -161,11 +172,12 @@
               <?php } ?>
             </form>
           </div>
+          <?php $momentIteration = get_field('MomentIteration');
+          if($momentIteration) { ?>
           <div class="wdl-layout-card">
             <h2 class="h4"><?php _e('แผนการเดินทาง', 'wdl')?></h2>
             <table class="table-borderless text-14" width="100%">
-              <?php $momentIteration = get_field('MomentIteration');
-              foreach($momentIteration as $iteration) { 
+              <?php foreach($momentIteration as $iteration) { 
                 if($iteration['MomentIterationTimeStart'] && $iteration['MomentIterationTimeEnd'] && $iteration['MomentIterationName']) {
               ?>
               <tr>
@@ -179,6 +191,7 @@
               <?php } } ?>
             </table>
           </div>
+          <?php } ?>
         </div>
       </div>
     </div>
