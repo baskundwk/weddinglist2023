@@ -46,7 +46,7 @@
                 <a href="#campaign-register" type="submit" name="submit" class="wdl-btn-lg text-center wdl-form-submit w-100 d-lg-none mb-3" style="  
                   --campaign-color-1: <?php the_field('CampaignColor1');?>;
                   --campaign-color-2: <?php the_field('CampaignColor2');?>;
-                  background: linear-gradient(to right, var(--campaign-color-1, #ff2758), var(--campaign-color-2, #ff2758));
+                  background: linear-gradient(to right, var(--campaign-color-1, #EB355D), var(--campaign-color-2, #EB355D));
                 "><?php _e('ลงทะเบียน','wdl')?></a>
                 <?php the_field('CampaignAnnouncement') ?>
               </div>
@@ -111,7 +111,7 @@
                     <button id="wdl-form-general-submit" type="submit" name="submit" class="wdl-btn-lg wdl-form-submit w-100" style="  
                       --campaign-color-1: <?php the_field('CampaignColor1');?>;
                       --campaign-color-2: <?php the_field('CampaignColor2');?>;
-                      background: linear-gradient(to right, var(--campaign-color-1, #ff2758), var(--campaign-color-2, #ff2758));
+                      background: linear-gradient(to right, var(--campaign-color-1, #EB355D), var(--campaign-color-2, #EB355D));
                     "><?php _e('ลงทะเบียน','wdl')?></button>
                   </form>
                 </div>

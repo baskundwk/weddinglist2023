@@ -8,17 +8,17 @@
 
 #main-header {
   background: rgba(255, 255, 255, 0.9);
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.15), 0 1px 0 #D9D9D9 !important;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05), 0 1px 0 #EEE !important;
   backdrop-filter: blur(5px) saturate(4);
   z-index: 99998;
 
 }
 
 #main-header.et-fixed-header {
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.15), 0 1px 0 #D9D9D9 !important;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05), 0 1px 0 #EEE !important;
 
   @media (min-width: 981px) {
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.15), 0 1px 0 #D9D9D9 !important;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05), 0 1px 0 #EEE !important;
   }
 }
 
@@ -67,7 +67,7 @@
       &::before {
         content: "";
         border: 5px solid transparent;
-        border-top-color: #333333;
+        border-top-color: #595959;
         border-bottom-width: 0;
         display: block;
       }
@@ -99,7 +99,7 @@
     .sub-menu {
       position: absolute;
       top: 100%;
-      background: #fff;
+      background: #FFFFFF;
       box-shadow: 0 8px 16px rgba(0, 0, 0, 0.16);
       border-radius: 8px;
       right: 0;
@@ -118,7 +118,8 @@
           line-height: 1.3;
           display: block;
           width: 200px;
-          color: #333333;
+          color: #595959;
+
 
           @media (max-width: 1199px) {
             width: 100%;

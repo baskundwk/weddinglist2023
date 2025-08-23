@@ -1,7 +1,7 @@
 #adminmenu {
   .menu-top[class*="toplevel_page_text-title-"] {
     pointer-events: none;
-    color: #999;
+    color: #999999;
     font-size: 13px;
     min-height: 0;
     .wp-menu-image {
@@ -87,7 +87,7 @@
   li.wp-has-current-submenu .wp-submenu .wp-submenu-head,
   li.wp-has-current-submenu a.wp-has-current-submenu,
   li.current.menu-top {
-    background: #ff2758;
+    background: #EB355D;
   }
 
   a,
@@ -105,7 +105,7 @@
   li.menu-top:hover,
   li.opensub > a.menu-top,
   li > a.menu-top:focus {
-    background: #ff2758;
+    background: #EB355D;
   }
 
   .wp-has-current-submenu .wp-submenu a:focus,
@@ -116,7 +116,7 @@
   .wp-submenu a:hover,
   a.wp-has-current-submenu:focus + .wp-submenu a:focus,
   a.wp-has-current-submenu:focus + .wp-submenu a:hover {
-    color: #ff2758;
+    color: #EB355D;
     box-shadow: inset 4px 0 0 0 currentColor;
   }
 }
@@ -127,14 +127,14 @@
   &.nojs .ab-top-menu > li.menupop:hover > .ab-item,
   &:not(.mobile) .ab-top-menu > li:hover > .ab-item,
   &:not(.mobile) .ab-top-menu > li > .ab-item:focus {
-    color: #ff2758;
+    color: #EB355D;
     background: transparent;
   }
 
   &:not(.mobile) > #wp-toolbar a:focus span.ab-label,
   &:not(.mobile) > #wp-toolbar li.hover span.ab-label,
   &:not(.mobile) > #wp-toolbar li:hover span.ab-label {
-    color: #ff2758;
+    color: #EB355D;
     background: transparent;
   }
 
@@ -142,7 +142,7 @@
   &:not(.mobile) li:hover .ab-icon:before,
   &:not(.mobile) li:hover .ab-item:after,
   &:not(.mobile) li:hover .ab-item:before {
-    color: #ff2758;
+    color: #EB355D;
   }
 
    .quicklinks .ab-sub-wrapper .menupop.hover > a,
@@ -163,6 +163,6 @@
    li:hover .ab-item:before,
   &.nojs .quicklinks .menupop:hover ul li a:focus,
   &.nojs .quicklinks .menupop:hover ul li a:hover {
-    color: #ff2758;
+    color: #EB355D;
   }
 }

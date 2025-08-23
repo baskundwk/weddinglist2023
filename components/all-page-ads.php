@@ -70,7 +70,7 @@ if($campaignAllpageMiddle->have_posts()) {$postRotation[] = $campaignAllpageMidd
 $randomKey = array_rand($postRotation);
 $randomItem = $postRotation[$randomKey];
 ?>
-<div class="row justify-content-center mb-2">
+<div class="row justify-content-center mb-3">
   <div class="col-12 wdl-metadata-banner">
     <?php if ($randomItem->have_posts()): ?>
       <div class="wdl-ad-allpage-loop <?php echo esc_attr($atts['class']); ?>">

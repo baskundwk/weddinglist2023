@@ -18,7 +18,7 @@
 #toggleSearch, #closeSearch {
   border: none;
   background: none;
-  color: #666666;
+  color: #999999;
   padding: 16px;
 
   @include max-width-xl {
@@ -182,7 +182,8 @@
   }
 
   li {
-    color: #333333;
+  color: #595959;
+
     padding: 0.5rem 0;
     font-size: 0.875rem;
   }
@@ -199,7 +200,7 @@ body .wpc-filters-main-wrap a.wpc-filters-submit-button {
   font-size: 16px;
   font-weight: 400;
   color: #ffffff;
-  background: #ff2758 !important;
+  background: #EB355D !important;
   border-radius: 4px !important;
   border: none !important;
   display: inline-block;
@@ -207,7 +208,7 @@ body .wpc-filters-main-wrap a.wpc-filters-submit-button {
 }
 
 .wpc-filters-range-inputs .ui-slider-horizontal .ui-slider-range {
-  background: #ff2758 !important;
+  background: #EB355D !important;
 }
 
 .wpc-search-icon {
@@ -269,7 +270,7 @@ body .wpc-filters-main-wrap a.wpc-filters-submit-button {
     p {
       text-align: center;
       font-size: 18px;
-      color: #666;
+      color: #666666;
       font-weight: 500;
     }
   }

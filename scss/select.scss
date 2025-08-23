@@ -16,7 +16,7 @@
 }
 
 .select2-container--default.select2-container--open.select2-container--below .select2-selection--single, .select2-container--default.select2-container--open.select2-container--below .select2-selection--multiple {
-    border-color: #ff2758;
+    border-color: #EB355D;
     border-radius: 25px;
 }
 
@@ -97,7 +97,7 @@
 }
 
 .select2-container--default .select2-results__option--highlighted.select2-results__option--selectable {
-    background-color: #ff2758;
+    background-color: #EB355D;
     font-weight: 600;
 }
 
@@ -105,7 +105,7 @@
     text-align: center;
     padding: 8px 24px;
     font-weight: 600;
-    color: #4A5057;
+    color: #595959;
     transition: .35s cubic-bezier(0,0,0,1);
 
     &:not(:first-child) {

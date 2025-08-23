@@ -90,7 +90,7 @@
 .wdl-badge {
   padding: 8px 24px;
   white-space: nowrap;
-  box-shadow: 0 0 0 1px #777777 inset;
+  box-shadow: 0 0 0 1px #CCCCCC inset;
   color: #777777 !important;
   border-radius: 5rem;
   font-size: 1rem;
@@ -105,7 +105,7 @@
 .wdl-badge-primary {
   padding: 8px 24px !important;
   white-space: nowrap;
-  background: #ff2758;
+  background: #EB355D;
   color: #ffffff !important;
   border-radius: 50px;
   font-size: 0.750px;
@@ -120,7 +120,7 @@
 .wdl-badge-sm-primary {
   padding: 6px 12px;
   white-space: nowrap;
-  background: #ff2758;
+  background: #EB355D;
   color: #ffffff !important;
   border-radius: 50px;
   font-size: 16px;
@@ -137,7 +137,7 @@
   white-space: nowrap;
   box-shadow: 0 0 0 1px rgba(255, 39, 88, .25) inset;
   background: #ffffff;
-  color: #ff2758 !important;
+  color: #EB355D !important;
   border-radius: 50px;
   font-size: 16px;
   font-weight: 600;
@@ -147,12 +147,12 @@
   vertical-align: middle;
 
   a {
-    color: #ff2758 !important;
+    color: #EB355D !important;
   }
 
   &.primary {
-    background: #ff2758;
-    box-shadow: 0 0 0 1px #ff2758 inset;
+    background: #EB355D;
+    box-shadow: 0 0 0 1px #EB355D inset;
     color: #ffffff !important;
 
     a {
@@ -199,16 +199,16 @@
 .wdl-badge-xs {
   padding: 4px 8px;
   white-space: nowrap;
-  box-shadow: 0 0 0 1px #ff2758 inset;
+  box-shadow: 0 0 0 1px #EB355D inset;
   background: #ffffff;
-  color: #ff2758 !important;
+  color: #EB355D !important;
   border-radius: 5rem;
   font-size: 0.75rem;
   font-weight: 700;
   line-height: 1;
   display: inline-block;
   a {
-    color: #ff2758 !important;
+    color: #EB355D !important;
   }
 }
 

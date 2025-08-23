@@ -5,7 +5,7 @@ $currentPostID = get_the_ID();
 <?php include get_stylesheet_directory().'/components/header.php' ?>
 
 <main>
-  <div class="d-flex align-items-start justify-content-center gap-3 mb-3">
+  <div class="d-flex align-items-start justify-content-center gap-4 mb-3">
 
     <div class="wdl-single-container pb-2 py-xl-3">
       <?php include get_stylesheet_directory().'/components/all-page-ads.php' ?>
@@ -51,7 +51,7 @@ $currentPostID = get_the_ID();
           <div class="wdl-toc-inner disabled">
             <!-- <?php echo do_shortcode('[ez-toc post_in="'.$currentPostID.'"]') ?> -->
             <div class="wdl-toc-header">
-              <p class="font-bold mb-0"><?php _e('เลือกหัวข้อที่ต้องการอ่าน', 'wdl')?></p>
+              <p class="fw-semibold mb-2"><?php _e('เลือกหัวข้อที่ต้องการอ่าน', 'wdl')?></p>
               <span class="wdl-toc-toggle"></span>
             </div>
           </div>

@@ -38,7 +38,7 @@
 								foreach ($relatedVenue as $venue):
 									$venueType = get_field('VenueType', $venue->ID);
 									?>
-									<div class="wdl-archive-pretitle mb-0">
+									<div class="wdl-archive-pretitle">
 										<small>
 											<?php echo $venueType[0]->name ?>
 										</small>

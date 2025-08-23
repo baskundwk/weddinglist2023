@@ -20,6 +20,7 @@ body {
   //--font-family: "Prompt", Helvetica, Arial, Lucida, sans-serif;
 
   --font-family: "Noto Sans Thai", Helvetica, Arial, Lucida, sans-serif;
+  color: #595959;
 
   @include max-width-md {
     font-size: 0.875em;
@@ -139,7 +140,7 @@ img {
 
 a {
   text-decoration: none;
-  color: #ff2758;
+  color: #EB355D;
   font-size: inherit;
 }
 
@@ -154,7 +155,7 @@ p {
 }
 
 .text-primary {
-  color: #333333 !important;
+  color: #595959 !important;
 }
 
 .text-accent {
@@ -166,7 +167,7 @@ p {
 }
 
 .text-red {
-  color: #ff2758 !important;
+  color: #EB355D !important;
 }
 
 .h1,
@@ -182,7 +183,7 @@ h4,
 h5,
 h6 {
   padding: 0;
-  color: #333333;
+  color: #595959;
   font-weight: 600;
   line-height: 1.5;
 }
@@ -307,9 +308,11 @@ body {
       width: 30px;
       height: 5px;
       border-radius: 5rem;
+      opacity: 0.05;
 
       &.swiper-pagination-bullet-active {
-        background: #ff2758;
+        background: #EB355D;
+        opacity: 0.75;
       }
     }
   }
@@ -318,7 +321,7 @@ body {
     width: 100%;
     .swiper-button-next:after,
     .swiper-button-prev:after {
-      color: #ff2758;
+      color: #EB355D;
       font-size: 1rem;
 
       @media (max-width: 991px) {
@@ -494,8 +497,9 @@ body:not(.admin-bar) {
 }
 
 .section-stripe {
+  border-color: #EEE !important;
   &:nth-of-type(even) {
-    @extend .bg-gray;
+    background: linear-gradient(to bottom, #F8F8F8, #FFFFFF);
   }
 
   .h1 {

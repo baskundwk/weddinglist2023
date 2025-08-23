@@ -4,7 +4,7 @@
   font-size: 16px;
   font-weight: 600;
   color: #ffffff !important;
-  background: #ff2758;
+  background: #EB355D;
   border-radius: 12px;
   display: inline-block;
   transition: 0.25s background ease-out;
@@ -59,7 +59,7 @@
   font-size: 16px;
   font-weight: 600;
   color: #ffffff !important;
-  background: #ff2758;
+  background: #EB355D;
   border-radius: 12px;
   display: inline-block;
   transition: 0.25s background ease-out;
@@ -102,8 +102,8 @@
   font-size: 16px;
   font-weight: 600;
   background: #ffffff !important;
-  color: #ff2758;
-  box-shadow: 0 0 0 1px rgba(255, 39, 89, 0.25) inset;
+  color: #EB355D;
+  box-shadow: 0 0 0 1px rgba(235, 53, 93, 0.25) inset;
   border-radius: 12px;
   display: inline-block;
   transition:
@@ -112,7 +112,7 @@
   position: relative;
 
   i {
-    color: #ff2758;
+    color: #EB355D;
   }
   &.disabled,
   &:disabled {
@@ -132,7 +132,7 @@
   font-size: 16px;
   font-weight: 600;
   color: #ffffff !important;
-  background: #ff2758;
+  background: #EB355D;
   border-radius: 50px;
   display: inline-block;
   transition: 0.25s background ease-out;
@@ -150,7 +150,7 @@
   font-size: 20px;
   font-weight: 600;
   color: #ffffff !important;
-  background: #ff2758;
+  background: #EB355D;
   border-radius: 12px;
   display: inline-block;
   transition: 0.25s background ease-out;
@@ -179,7 +179,7 @@
     height: 20px;
     background-color: currentColor;
     display: block;
-    color: #ff2758;
+    color: #EB355D;
     opacity: 1;
     transition:
       0.25s transform,
@@ -298,7 +298,7 @@
 
   svg {
     font-size: 60px;
-    color: #ff2758;
+    color: #EB355D;
     fill: currentColor;
     background: #f4f4f4 !important;
     padding: 16px;
@@ -313,7 +313,7 @@
 
   &:hover {
     svg {
-      box-shadow: 0 0 0 1px #ff2758 inset;
+      box-shadow: 0 0 0 1px #EB355D inset;
     }
   }
   &.disabled,
@@ -333,7 +333,7 @@
   padding: 4px 16px;
   font-size: 16px;
   font-weight: 600;
-  color: #ff2758 !important;
+  color: #EB355D !important;
   background: transparent;
   border-radius: 12px;
   display: inline-block;

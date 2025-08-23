@@ -71,7 +71,7 @@
 #adminmenu li.wp-has-current-submenu .wp-submenu .wp-submenu-head,
 #adminmenu li.wp-has-current-submenu a.wp-has-current-submenu,
 #adminmenu li.current.menu-top {
-  background: #ff2758;
+  background: #EB355D;
 }
 #adminmenu a,
 #adminmenu li.menu-top,
@@ -87,7 +87,7 @@
 #adminmenu li.menu-top:hover,
 #adminmenu li.opensub > a.menu-top,
 #adminmenu li > a.menu-top:focus {
-  background: #ff2758;
+  background: #EB355D;
 }
 #adminmenu .wp-has-current-submenu .wp-submenu a:focus,
 #adminmenu .wp-has-current-submenu .wp-submenu a:hover,
@@ -97,20 +97,20 @@
 #adminmenu .wp-submenu a:hover,
 #adminmenu a.wp-has-current-submenu:focus + .wp-submenu a:focus,
 #adminmenu a.wp-has-current-submenu:focus + .wp-submenu a:hover {
-  color: #ff2758;
+  color: #EB355D;
   box-shadow: inset 4px 0 0 0 currentColor;
 }
 
 #wpadminbar .ab-top-menu > li.menupop.hover > .ab-item, #wpadminbar.nojq .quicklinks .ab-top-menu > li > .ab-item:focus, #wpadminbar.nojs .ab-top-menu > li.menupop:hover > .ab-item, #wpadminbar:not(.mobile) .ab-top-menu > li:hover > .ab-item, #wpadminbar:not(.mobile) .ab-top-menu > li > .ab-item:focus {
-  color: #ff2758;
+  color: #EB355D;
   background: transparent;
 }
 #wpadminbar:not(.mobile) > #wp-toolbar a:focus span.ab-label, #wpadminbar:not(.mobile) > #wp-toolbar li.hover span.ab-label, #wpadminbar:not(.mobile) > #wp-toolbar li:hover span.ab-label {
-  color: #ff2758;
+  color: #EB355D;
   background: transparent;
 }
 #wpadminbar:not(.mobile) li:hover #adminbarsearch:before, #wpadminbar:not(.mobile) li:hover .ab-icon:before, #wpadminbar:not(.mobile) li:hover .ab-item:after, #wpadminbar:not(.mobile) li:hover .ab-item:before {
-  color: #ff2758;
+  color: #EB355D;
 }
 #wpadminbar .quicklinks .ab-sub-wrapper .menupop.hover > a,
 #wpadminbar .quicklinks .menupop ul li a:focus,
@@ -128,7 +128,7 @@
 #wpadminbar li:hover #adminbarsearch:before,
 #wpadminbar li:hover .ab-icon:before,
 #wpadminbar li:hover .ab-item:before, #wpadminbar.nojs .quicklinks .menupop:hover ul li a:focus, #wpadminbar.nojs .quicklinks .menupop:hover ul li a:hover {
-  color: #ff2758;
+  color: #EB355D;
 }
 
 /*# sourceMappingURL=admin.css.map */

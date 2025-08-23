@@ -2,7 +2,7 @@
   background: #FFFFFF;
   border-radius: 50px;
   padding: 4px;
-  box-shadow: 0 0 0 0 #ff2758, 0 0 10px rgba(0, 0, 0, 0.15), 0 1px 0 #d9d9d9;
+  box-shadow: 0 0 0 0 #EB355D, 0 0 10px rgba(0, 0, 0, 0.15), 0 1px 0 #d9d9d9;
   display: flex;
   align-items: center;
   gap: 8px;
@@ -33,7 +33,7 @@
       font-size: 14px;
       font-weight: 600;
       line-height: 1.2;
-      color: #333333;
+      color: #595959;
     }
   }
 
@@ -44,7 +44,7 @@
     svg {
       width: 20px;
       height: 20px;
-      color: #ff2758;
+      color: #EB355D;
     }
   }
 }
@@ -57,5 +57,5 @@
 }
 
 input[type="checkbox"]:checked + .wdl-card-mini {
-  box-shadow: 0 0 0 2px #ff2758, 0 0 10px rgba(0, 0, 0, 0.15), 0 1px 0 #d9d9d9;
+  box-shadow: 0 0 0 2px #EB355D, 0 0 10px rgba(0, 0, 0, 0.15), 0 1px 0 #d9d9d9;
 }

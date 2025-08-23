@@ -1,8 +1,8 @@
 .wdl-campaign-banner {
-  //--campaign-color-1: #FF2758;
+  //--campaign-color-1: #EB355D;
   //--campaign-color-2: #FF92AB;
-  //background-color: var(--campaign-color-1, #FF2758);
-  //background: linear-gradient(to right, var(--campaign-color-1, #FF2758), var(--campaign-color-2, #FF92AB));
+  //background-color: var(--campaign-color-1, #EB355D);
+  //background: linear-gradient(to right, var(--campaign-color-1, #EB355D), var(--campaign-color-2, #FF92AB));
   position: relative;
   border-radius: 12px;
   color: #FFFFFF;
@@ -55,16 +55,16 @@
 }
 
 .wdl-campaign-announcement { 
-  color: #424242;
+  color: #595959;
   font-size: 16px;
   line-height: 1.5;
 }
 
 .wdl-campaign-header, .wdl-campaign-bar {
-  --campaign-color-1: #FF2758;
+  --campaign-color-1: #EB355D;
   --campaign-color-2: #FF92AB;
-  background-color: var(--campaign-color-1, #FF2758);
-  background: linear-gradient(to right, var(--campaign-color-1, #FF2758), var(--campaign-color-2, #FF92AB));
+  background-color: var(--campaign-color-1, #EB355D);
+  background: linear-gradient(to right, var(--campaign-color-1, #EB355D), var(--campaign-color-2, #FF92AB));
   position: relative;
   color: #FFFFFF;
   overflow: hidden;
@@ -99,7 +99,7 @@
       margin: 0;
     }
     a {
-      color: #FFF;
+      color: #FFFFFF;
       font-weight: 700;
       display: flex;
       gap: 10px;
@@ -129,7 +129,7 @@
     font-size: 20px;
     line-height: 1;
     font-weight: 700;
-    color: var(--campaign-color-1, #FF2758);
+    color: var(--campaign-color-1, #EB355D);
     transition: .5s cubic-bezier(0,0,0,1);
     min-width: 23px;
     min-height: 20px;
@@ -146,7 +146,7 @@
   .suffix {
     font-size: 12px;
     line-height: 1;
-    color: #424242;
+    color: #595959;
   }
   
   .separator {

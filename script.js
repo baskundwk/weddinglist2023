@@ -130,7 +130,7 @@ const wdlMultistepProgressBar = () => {
   let circleProgress = $(".wdl-circle-progress").circleProgress({
     value: currentProgress / totalProgress,
     fill: {
-      color: ["#ff2758"],
+      color: ["#EB355D"],
     },
     size: 60,
     lineCap: "round",
@@ -1319,7 +1319,7 @@ $('#form-line-contact').submit((event)=>{
       text: "https://line.me/R/oaMessage/@ety4154i/?" + encodeURI(messageBody),
       width: 600,
       height: 600,
-      colorDark : "#ff2758",
+      colorDark : "#EB355D",
       colorLight : "#ffffff",
       correctLevel : QRCode.CorrectLevel.Q
     });
@@ -1352,7 +1352,7 @@ $('.wdl-btn-line-contact').each((i,e) => {
         text: "https://line.me/R/oaMessage/@ety4154i/?" + encodeURI(messageBody),
         width: 600,
         height: 600,
-        colorDark : "#ff2758",
+        colorDark : "#EB355D",
         colorLight : "#ffffff",
         correctLevel : QRCode.CorrectLevel.Q
       });

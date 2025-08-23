@@ -60,7 +60,7 @@ label {
 .wdl-label-aside {
   display: flex;
   align-items: center;
-  color: #333333;
+  color: #595959;
   font-size: 16px;
   width: 100%;
   max-width: 150px;
@@ -139,7 +139,7 @@ label {
   justify-content: center;
   padding: 0.5rem;
   font-weight: 700;
-  color: #ff2758;
+  color: #EB355D;
 }
 
 .wdl-circle-progress canvas {
@@ -163,7 +163,7 @@ label {
 
 .accordion-button:not(.collapsed) {
   background-color: #ffe2e2;
-  color: #ff2758;
+  color: #EB355D;
 }
 
 .wdl-radio input[type="radio"],
@@ -187,8 +187,8 @@ label {
 .wdl-radio input[type="radio"]:checked + label:before {
   box-shadow:
     0 0 0 3px #ffffff inset,
-    0 0 0 10px #ff2758 inset;
-  border-color: #ff2758;
+    0 0 0 10px #EB355D inset;
+  border-color: #EB355D;
 }
 
 .wdl-radio input[type="radio"]:disabled + label {
@@ -230,8 +230,8 @@ label {
 }
 
 .wdl-checkbox input[type="checkbox"]:checked + label:before {
-  background-color: #ff2758;
-  border: 2px solid #ff2758;
+  background-color: #EB355D;
+  border: 2px solid #EB355D;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' fill='%23FFF' viewBox='0 0 256 256'%3E%3Cpath d='M232.49,80.49l-128,128a12,12,0,0,1-17,0l-56-56a12,12,0,1,1,17-17L96,183,215.51,63.51a12,12,0,0,1,17,17Z'%3E%3C/path%3E%3C/svg%3E");
   color: #ffffff;
 }
@@ -255,7 +255,7 @@ label {
 }
 
 .wdl-radio-button input[type="radio"] + label {
-  background: #fff;
+  background: #FFFFFF;
   box-shadow: 0 0 0 1px #cccccc inset;
   padding: 8px 55px;
   border-radius: 8px;
@@ -268,8 +268,8 @@ label {
 }
 
 .wdl-radio-button input[type="radio"]:checked + label {
-  background: #ff2758;
-  color: #fff;
+  background: #EB355D;
+  color: #FFFFFF;
   box-shadow: 0 0 0 0 #cccccc inset;
 }
 
@@ -300,14 +300,14 @@ label {
     justify-content: center;
     align-items: center;
     margin: 0;
-    background: #fff;
+    background: #FFFFFF;
     padding: 8px 8px;
     flex: 1 0 auto;
     gap: 4px;
     border-radius: 0;
     border: 1px solid #CCCCCC;
     font-size: 16px;
-    color: #4A5057;
+    color: #595959;
     font-weight: 600;
     text-align: center;
     transition:
@@ -374,7 +374,7 @@ label {
     }
 
     &:hover {
-      color: #ff2758;
+      color: #EB355D;
     }
   }
     
@@ -382,9 +382,9 @@ label {
   input[type="radio"]:checked + label,
   input[type="checkbox"]:checked + .label,
   input[type="radio"]:checked + .label {
-    border-color: #ff2758;
-    background: #ff2758;
-    color: #fff;
+    border-color: #EB355D;
+    background: #EB355D;
+    color: #FFFFFF;
     box-shadow: 0 0 0 0 #cccccc inset;
 
     &:hover {
@@ -427,7 +427,7 @@ label {
       transition: .35s cubic-bezier(0,0,0,1);
 
       &.active {
-        box-shadow: 0 0 0 1px #ff2758 inset, 0 0 0 2px rgba(255, 39, 88, 30%);
+        box-shadow: 0 0 0 1px #EB355D inset, 0 0 0 2px rgba(255, 39, 88, 30%);
       }
     }
 
@@ -460,7 +460,7 @@ label {
       }
 
       &:hover {
-        color: #ff2758;
+        color: #EB355D;
       }
     }
   }
@@ -470,7 +470,7 @@ label {
   gap: 20px;
   padding-bottom: 1rem;
   margin-bottom: 1rem;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid #EEEEEE;
 }
 
 .wdl-form-progress p {
@@ -488,8 +488,8 @@ label {
   font-size: 16px;
   font-weight: 400;
   background: #fff !important;
-  color: #ff2758;
-  box-shadow: 0 0 0 1px #ff2758 inset;
+  color: #EB355D;
+  box-shadow: 0 0 0 1px #EB355D inset;
   border-radius: 4px;
   display: inline-block;
 }

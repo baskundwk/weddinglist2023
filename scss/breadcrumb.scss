@@ -16,10 +16,12 @@
       font-size: 14px;
     }
     .last {
-      color: #333333;
+      color: #595959;
+      flex: 1 1 0;
     }
     > .separator {
-      margin: 0 .5rem;
+      //margin: 0 .5rem;
+      color: #CCCCCC;
     }
 
     > * {

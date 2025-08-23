@@ -6,7 +6,7 @@
     border: 1px solid #ddd;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0,0,0,0.05);
-    background: #fff;
+    background: #FFFFFF;
   }
 
   .member-login-container h2 {
@@ -25,7 +25,7 @@
     width: 100%;
     padding: 0.7rem;
     margin-bottom: 1rem;
-    border: 1px solid #ccc;
+    border: 1px solid #CCCCCC;
     border-radius: 5px;
   }
 

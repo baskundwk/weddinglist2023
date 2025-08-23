@@ -42,7 +42,7 @@
     <div class="d-flex gap-2">
       <?php $promotionCategory = get_field('PromotionCategory');
       if ($promotionCategory) { ?>
-        <div class="wdl-archive-pretitle mb-0">
+        <div class="wdl-archive-pretitle">
           <?php $count = 1;
           foreach ($promotionCategory as $item) {
             if ($count > 1) {

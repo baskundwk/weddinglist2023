@@ -46,7 +46,7 @@
 
       <?php $weddingFairCategory = get_field('WeddingFairCategory');
       if ($weddingFairCategory) { ?>
-        <div class="wdl-archive-pretitle mb-0">
+        <div class="wdl-archive-pretitle">
           <?php $count = 1;
           foreach ($weddingFairCategory as $item) {
             if ($count > 1) {

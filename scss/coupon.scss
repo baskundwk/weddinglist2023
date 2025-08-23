@@ -34,7 +34,7 @@
   .wdl-coupon-card-subtitle {
     font-size: 16px;
     font-weight: 600;
-    color: #ff2758;
+    color: #EB355D;
     margin-bottom: 4px;
   }
 
@@ -111,7 +111,7 @@
       p,
       a {
         display: block;
-        color: #333333;
+        color: #595959;
         display: -webkit-box;
         line-clamp: 2;
         -webkit-line-clamp: 2;
@@ -121,7 +121,7 @@
     }
 
     .wdl-coupon-picker-action {
-      color: #ff2758;
+      color: #EB355D;
       font-family: var(--font-family);
       font-size: 12px;
       font-weight: 400;
@@ -134,8 +134,8 @@
       button {
         display: block;
         margin-bottom: 0;
-        border: 1px solid #ff2758;
-        color: #ff2758;
+        border: 1px solid #EB355D;
+        color: #EB355D;
         background: none;
         padding: 2px 8px;
         border-radius: 6px;
@@ -153,7 +153,7 @@
       text-decoration: underline;
 
       a {
-        color: #333333;
+        color: #595959;
         text-decoration: underline;
         margin-bottom: 0;
         font-weight: 400;
@@ -162,12 +162,12 @@
   }
 
   &.active {
-    background: #ff27581a;
+    background: #EB355D1a;
 
     .wdl-coupon-picker-info {
       .wdl-coupon-picker-action {
         p {
-          background: #ff27581a;
+          background: #EB355D1a;
           border: none;
         }
       }
@@ -182,7 +182,7 @@
     left: 50%;
     animation: wdl-coupon-picker-indicator 3s both;
     background-size: contain;
-    background-image: url("data:image/svg+xml,%3Csvg fill='%23ff2758' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 576 512'%3E%3C!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--%3E%3Cpath d='M64 64C28.7 64 0 92.7 0 128v64c0 8.8 7.4 15.7 15.7 18.6C34.5 217.1 48 235 48 256s-13.5 38.9-32.3 45.4C7.4 304.3 0 311.2 0 320v64c0 35.3 28.7 64 64 64H512c35.3 0 64-28.7 64-64V320c0-8.8-7.4-15.7-15.7-18.6C541.5 294.9 528 277 528 256s13.5-38.9 32.3-45.4c8.3-2.9 15.7-9.8 15.7-18.6V128c0-35.3-28.7-64-64-64H64zm64 112l0 160c0 8.8 7.2 16 16 16H432c8.8 0 16-7.2 16-16V176c0-8.8-7.2-16-16-16H144c-8.8 0-16 7.2-16 16zM96 160c0-17.7 14.3-32 32-32H448c17.7 0 32 14.3 32 32V352c0 17.7-14.3 32-32 32H128c-17.7 0-32-14.3-32-32V160z'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg fill='%23EB355D' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 576 512'%3E%3C!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--%3E%3Cpath d='M64 64C28.7 64 0 92.7 0 128v64c0 8.8 7.4 15.7 15.7 18.6C34.5 217.1 48 235 48 256s-13.5 38.9-32.3 45.4C7.4 304.3 0 311.2 0 320v64c0 35.3 28.7 64 64 64H512c35.3 0 64-28.7 64-64V320c0-8.8-7.4-15.7-15.7-18.6C541.5 294.9 528 277 528 256s13.5-38.9 32.3-45.4c8.3-2.9 15.7-9.8 15.7-18.6V128c0-35.3-28.7-64-64-64H64zm64 112l0 160c0 8.8 7.2 16 16 16H432c8.8 0 16-7.2 16-16V176c0-8.8-7.2-16-16-16H144c-8.8 0-16 7.2-16 16zM96 160c0-17.7 14.3-32 32-32H448c17.7 0 32 14.3 32 32V352c0 17.7-14.3 32-32 32H128c-17.7 0-32-14.3-32-32V160z'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
     background-position: center center;
     display: none;

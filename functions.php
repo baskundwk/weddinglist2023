@@ -155,7 +155,7 @@ function send_email() {
 
 	$appointStatement = '';
 	if ($appointDate !== '' || $appointTime !== '') {
-		$appointStatement = "<p style='text-decoration:underline;'><strong>ลูกค้าสนใจนัดหมายเพื่อเข้าชมสถานที่ วันที่ <span style='color: #FF2758'>" . date("d-M-Y", strtotime($appointDate)) . " " . $appointTime . "</span> กรุณาติดต่อลูกค้าเพื่อนัดหมายเพิ่มเติม</strong></p>";
+		$appointStatement = "<p style='text-decoration:underline;'><strong>ลูกค้าสนใจนัดหมายเพื่อเข้าชมสถานที่ วันที่ <span style='color: #EB355D'>" . date("d-M-Y", strtotime($appointDate)) . " " . $appointTime . "</span> กรุณาติดต่อลูกค้าเพื่อนัดหมายเพิ่มเติม</strong></p>";
 	}
 
 	$recepient = get_field('Email', $cardId);
@@ -199,12 +199,12 @@ function send_email() {
 	}
 
 	$email_body =
-		"<div style='background: #EEE; padding: 32px;'>" .
+		"<div style='background: #EEEEEE; padding: 32px;'>" .
 		"	<div style='max-width: 600px; margin: auto;'>" .
-		"		<div style='background: #FF2758; padding: 24px; text-align: center;'>" .
+		"		<div style='background: #EB355D; padding: 24px; text-align: center;'>" .
 		"			<img src='$file' alt='Weddinglist' width='243' height='60'>" .
 		"		</div>" .
-		"		<div style='background: #FFF; padding: 16px; font-family: Tahoma; color: #555; line-height: 1.7;'>" .
+		"		<div style='background: #FFFFFF; padding: 16px; font-family: Tahoma; color: #555555; line-height: 1.7;'>" .
 		"			<p>สวัสดีค่ะ</p>" .
 		"			<p><strong>มีลูกค้าสนใจรับสิทธิพิเศษผ่าน $cardTitle</strong></p>" .
 		"			<ul style='list-style: none; padding: 0;'>" .
@@ -222,7 +222,7 @@ function send_email() {
 		"			</ul>" . $appointStatement .
 		"			<p>ข้อความเพิ่มเติม :</p>" .
 		"			<p><strong>$message</strong></p>" . $footer .
-		"			<p style='color: #999; font-weight: 700;'>ขอขอบพระคุณอย่างสูง<br>Weddinglist Support</p>" .
+		"			<p style='color: #999999; font-weight: 700;'>ขอขอบพระคุณอย่างสูง<br>Weddinglist Support</p>" .
 		"			<p style='font-size: 14px;'>แจ้งปัญหาการใช้งาน" .
 		"				<br>โทร. <a href='tel:0634748111'>063 474 8111</a>" .
 		"				<br>อีเมล <a href='mailto:support@weddinglist.co.th'>support@weddinglist.co.th</a>" .
@@ -279,18 +279,18 @@ function send_email() {
 
 	if ($selectedCoupon && $selectedCoupon !== '') {
 		$email_body_client =
-			"<div style='background:#EEE; padding:32px;'>" .
+			"<div style='background:#EEEEEE; padding:32px;'>" .
 			"	<div style='max-width:600px; margin:auto;'>" .
-			"		<div style='background:#FF2758; padding:24px; text-align:center;'>" .
+			"		<div style='background:#EB355D; padding:24px; text-align:center;'>" .
 			"			<img src='$file' alt='Weddinglist' width='243' height='60'>" .
 			"		</div>" .
-			"		<div style='background:#FFF; padding:16px; font-family:Tahoma; color:#555; line-height:1.7;'>" .
+			"		<div style='background:#FFFFFF; padding:16px; font-family:Tahoma; color:#555555; line-height:1.7;'>" .
 			"			<p>สวัสดีค่ะ</p>" .
-			"			<p>รหัส OTP ของคุณคือ <br/><strong style='font-size:2em; color:#FF2758;'>" . $otp . "</strong></p>" .
+			"			<p>รหัส OTP ของคุณคือ <br/><strong style='font-size:2em; color:#EB355D;'>" . $otp . "</strong></p>" .
 			"			<p><strong>กรุณายืนยันตัวตนด้วยลิงค์ภายในอีเมลฉบับนี้เพื่อยืนยันการรับสิทธิ์คูปอง</strong> โดยทาง Weddinglist จะนำส่งคูปองให้คุณในอีเมลฉบับถัดไปหลังจากการยืนยันตัวตน</p>" .
-			"			<a style='display:block; margin:auto; width:fit-content; text-decoration:none; background:#FF2758; padding:12px 24px; border-radius:8px; color:#FFF; font-weight:700;' href='https://www.weddinglist.co.th/verify?cid=".$cardId."&pid=" . $new_post_id . "&otp=" . $otp . "&t=" . $selectedCoupon . "'>คลิกที่นี่ เพื่อยืนยันตัวตนอัตโนมัติ</a>" .
-			"			<p style='color:#999;'><em>ลิงค์ยืนยันตัวตนจะหมดอายุภายใน 24 ชม. หากยืนยันตัวตนเกินกำหนด กรุณาติดต่อแอดมินโดยแจ้งข้อมูลการลงทะเบียน และเลข OTP " . $otp . " เพื่อยืนยันตัวตน</em></p>" .
-			"			<p style='color:#999; font-weight:700;'>ขอขอบพระคุณอย่างสูง<br>Weddinglist Support</p>" .
+			"			<a style='display:block; margin:auto; width:fit-content; text-decoration:none; background:#EB355D; padding:12px 24px; border-radius:8px; color:#FFFFFF; font-weight:700;' href='https://www.weddinglist.co.th/verify?cid=".$cardId."&pid=" . $new_post_id . "&otp=" . $otp . "&t=" . $selectedCoupon . "'>คลิกที่นี่ เพื่อยืนยันตัวตนอัตโนมัติ</a>" .
+			"			<p style='color:#999999;'><em>ลิงค์ยืนยันตัวตนจะหมดอายุภายใน 24 ชม. หากยืนยันตัวตนเกินกำหนด กรุณาติดต่อแอดมินโดยแจ้งข้อมูลการลงทะเบียน และเลข OTP " . $otp . " เพื่อยืนยันตัวตน</em></p>" .
+			"			<p style='color:#999999; font-weight:700;'>ขอขอบพระคุณอย่างสูง<br>Weddinglist Support</p>" .
 			"			<p style='font-size:14px;'>แจ้งปัญหาการใช้งาน" .
 			"				<br>โทร. <a href='tel:0634748111'>063 474 8111</a>" .
 			"				<br>อีเมล <a href='mailto:support@weddinglist.co.th'>support@weddinglist.co.th</a>" .
@@ -341,12 +341,12 @@ function send_mail_coupon($email, $name, $banners, $couponNames, $coupons, $pid,
 		$subject = "แจ้งเตือนการเก็บคูปอง $cardTitle ของคุณ ". get_the_title($pid);
 		
 		$email_body =
-		"<div style='background: #EEE; padding: 32px;'>" .
+		"<div style='background: #EEEEEE; padding: 32px;'>" .
 		"	<div style='max-width: 600px; margin: auto;'>" .
-		"		<div style='background: #FF2758; padding: 24px; text-align: center;'>" .
+		"		<div style='background: #EB355D; padding: 24px; text-align: center;'>" .
 		"			<img src='$file' alt='Weddinglist' width='243' height='60'>" .
 		"		</div>" .
-		"		<div style='background: #FFF; padding: 16px; font-family: Tahoma; color: #555; line-height: 1.7;'>" .
+		"		<div style='background: #FFFFFF; padding: 16px; font-family: Tahoma; color: #555555; line-height: 1.7;'>" .
 		"			<p>สวัสดีค่ะ</p>" .
 		"			<p><strong>มีลูกค้าสนใจรับคูปอง". $couponTitle ." และได้ยืนยันตัวตนเรียบร้อยแล้ว</strong></p>" .
 		"			<ul style='list-style: none; padding: 0;'>" .
@@ -355,7 +355,7 @@ function send_mail_coupon($email, $name, $banners, $couponNames, $coupons, $pid,
 		"				<li>เบอร์โทร​ : <strong>". get_field('tel', $pid) ."</strong></li>" .
 		"				<li>LINE ID : <strong>". get_field('lineid', $pid) ."</strong></li>" .
 		"			</ul>" .
-		"			<p style='color: #999; font-weight: 700;'>ขอขอบพระคุณอย่างสูง<br>Weddinglist Support</p>" .
+		"			<p style='color: #999999; font-weight: 700;'>ขอขอบพระคุณอย่างสูง<br>Weddinglist Support</p>" .
 		"			<p style='font-size: 14px;'>แจ้งปัญหาการใช้งาน" .
 		"				<br>โทร. <a href='tel:0634748111'>063 474 8111</a>" .
 		"				<br>อีเมล <a href='mailto:support@weddinglist.co.th'>support@weddinglist.co.th</a>" .
@@ -370,17 +370,17 @@ function send_mail_coupon($email, $name, $banners, $couponNames, $coupons, $pid,
 
 
 	$email_body_client =
-		"<div style='background:#EEE; padding:32px;'>" .
+		"<div style='background:#EEEEEE; padding:32px;'>" .
 		"	<div style='max-width:600px; margin:auto;'>" .
-		"		<div style='background:#FF2758; padding:24px; text-align:center;'>" .
+		"		<div style='background:#EB355D; padding:24px; text-align:center;'>" .
 		"			<img src='$file' alt='Weddinglist' width='243' height='60'>" .
 		"		</div>" .
-		"		<div style='background:#FFF; padding:16px; font-family:Tahoma; color:#555; line-height:1.7;'>" .
+		"		<div style='background:#FFFFFF; padding:16px; font-family:Tahoma; color:#555555; line-height:1.7;'>" .
 		"			<p>สวัสดีค่ะ</p>" .
 		"			<p>ขอบคุณสำหรับการยืนยันตัวตน ทาง Weddinglist ขอนำส่งคูปองที่ท่านเลือกไว้</p>" .
 		$bannersBody .
-		"			<p style='color:#FF2758;'><strong>กรุณาแสดงอีเมลล์เพื่อใช้เป็นหลักฐานในการรับสิทธิ์กับเจ้าหน้าที่ทีม Wedding sales ในชื่อ " . $name . " โดยท่านจะสามารถได้รับสิทธิประโยชน์นี้เมื่อเป็นไปตามเงื่อนไขในรายละเอียดของคูปองเท่านั้น</strong></p>" .
-		"			<p style='color:#999; font-weight:700;'>ขอขอบพระคุณอย่างสูง<br>Weddinglist Support</p>" .
+		"			<p style='color:#EB355D;'><strong>กรุณาแสดงอีเมลล์เพื่อใช้เป็นหลักฐานในการรับสิทธิ์กับเจ้าหน้าที่ทีม Wedding sales ในชื่อ " . $name . " โดยท่านจะสามารถได้รับสิทธิประโยชน์นี้เมื่อเป็นไปตามเงื่อนไขในรายละเอียดของคูปองเท่านั้น</strong></p>" .
+		"			<p style='color:#999999; font-weight:700;'>ขอขอบพระคุณอย่างสูง<br>Weddinglist Support</p>" .
 		"			<p style='font-size:14px;'>แจ้งปัญหาการใช้งาน" .
 		"				<br>โทร. <a href='tel:0634748111'>063 474 8111</a>" .
 		"				<br>อีเมล <a href='mailto:support@weddinglist.co.th'>support@weddinglist.co.th</a>" .
@@ -414,12 +414,12 @@ function send_email_business() {
 	$file = get_theme_file_uri() . '/images/logo-w.png'; //phpmailer will load this file
 
 	$email_body =
-		"<div style='background: #EEE; padding: 32px;'>" .
+		"<div style='background: #EEEEEE; padding: 32px;'>" .
 		"	<div style='max-width: 600px; margin: auto;'>" .
-		"		<div style='background: #FF2758; padding: 24px; text-align: center;'>" .
+		"		<div style='background: #EB355D; padding: 24px; text-align: center;'>" .
 		"			<img src='$file' alt='Weddinglist' width='243' height='60'>" .
 		"		</div>" .
-		"		<div style='background: #FFF; padding: 16px; font-family: Tahoma; color: #555; line-height: 1.7;'>" .
+		"		<div style='background: #FFFFFF; padding: 16px; font-family: Tahoma; color: #555555; line-height: 1.7;'>" .
 		"			<p>สวัสดีค่ะ</p>" .
 		"			<p><strong>คำขอลงทะเบียนธุรกิจจาก $name</strong></p>" .
 		"			<ul style='list-style: none; padding: 0;'>" .

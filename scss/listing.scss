@@ -30,21 +30,22 @@
   background: #ffffff;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
   border-radius: 8px;
-  padding: 8px;
+  padding: 12px;
   --bs-gutter-x: 16px;
-  display: flex;
-  flex-direction: row;
-  gap: 8px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-bottom: 12px;
 
   @include max-width-md {
-    flex-direction: column;
+    grid-template-columns: repeat(1, minmax(0, 1fr));
     gap: 8px;
   }
 
   .wdl-listing-badge {
     --badge-background: #ffffff;
-    --badge-color: #ff2758;
-    --badge-border: #ff2758;
+    --badge-color: #EB355D;
+    --badge-border: #EB355D;
     position: absolute;
     top: 0;
     left: 0;
@@ -86,6 +87,7 @@
 
   .wdl-listing-card-gallery {
     overflow: hidden;
+    width: 100%;
 
     .wdl-listing-card-gallery-swiper {
       overflow: hidden;
@@ -108,9 +110,12 @@
     display: flex;
     flex-direction: column;
     gap: 16px;
+    grid-column: span 2;
+    width: 100%;
 
     @include max-width-md {
       gap: 8px;
+      grid-column: span 1;
     }
 
     .wdl-listing-card-detail-title {
@@ -310,15 +315,15 @@
     padding: 16px;
     font-size: 28px;
     line-height: 1.25;
-    //box-shadow: 0 0 0 2px #ff2758 inset; 
+    //box-shadow: 0 0 0 2px #EB355D inset; 
 
     @include max-width-lg {
       font-size: 18px;
     }
 
     p {
-      //background: #FFF;
-      color: #FFF;
+      //background: #FFFFFF;
+      color: #FFFFFF;
       width: fit-content;
       font-weight: 600;
       border-radius: 12px;

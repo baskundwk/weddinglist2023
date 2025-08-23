@@ -24,7 +24,7 @@ $itemQuery = new WP_Query(
   <?php if($item && $item['ListBadge']) : ?>
   <div class="wdl-listing-badge <?php echo $item['ListColor']?>"><?php echo $item['ListBadge']?></div>
   <?php endif; ?>
-  <div class="wdl-listing-card-gallery col-md-4">
+  <div class="wdl-listing-card-gallery">
     <?php if (get_field('Gallery')): ?>
     <div class="swiper wdl-listing-card-gallery-swiper">
       <div class="swiper-wrapper">
@@ -54,7 +54,7 @@ $itemQuery = new WP_Query(
     </div>
     <?php endif; ?>
   </div>
-  <div class="wdl-listing-card-detail col-md-8">
+  <div class="wdl-listing-card-detail">
     <a href="<?php the_permalink(); ?>" class="wdl-listing-card-detail-title">
       <h2>
         <?php echo get_the_title(); ?>

@@ -69,7 +69,7 @@
                 <?php endif; ?>
               </div>
 
-              <div class="wdl-archive-pretitle mb-0">
+              <div class="wdl-archive-pretitle">
                 <?php $promotionCategory = wp_get_post_terms(get_the_ID(), 'promotion-category');
                   if ($promotionCategory) {
                     $count = 1;

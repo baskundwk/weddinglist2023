@@ -18,7 +18,7 @@
   overflow: visible;
   z-index: 5;
   padding: 8px 0;
-  border: 1px solid #EEE;
+  border: 1px solid #EEEEEE;
   border-left: none;
   border-right: none;
 
@@ -73,8 +73,8 @@
   max-width: 170px !important;
 
   &:hover {
-    color: #ff2758 !important;
-    //box-shadow: 0 0 0 1px #ff2758 inset;
+    color: #EB355D !important;
+    //box-shadow: 0 0 0 1px #EB355D inset;
   }
 
   svg {
@@ -84,6 +84,6 @@
   }
 
   &.active {
-    color: #ff2758 !important;
+    color: #EB355D !important;
   }
 }

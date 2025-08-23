@@ -15,7 +15,7 @@
     width: max-content;
     position: absolute;
     inset: 100% auto auto 50% !important;
-    background: #fff;
+    background: #FFFFFF;
     border-radius: 8px;
     right: auto;
     transition: 0.35s cubic-bezier(0, 0, 0, 1);
@@ -45,12 +45,12 @@
         font-weight: 400;
         transition: 0.25s color;
         font-size: 14px;
-        color: #333333 !important;
+        color: #595959 !important;
         box-shadow: none;
         line-height: 1.25;
 
         &:hover {
-          color: #ff2758 !important;
+          color: #EB355D !important;
         }
       }
     }

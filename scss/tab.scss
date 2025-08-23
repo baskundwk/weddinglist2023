@@ -22,20 +22,20 @@
       }
 
       &.active {
-        color: #ff2758 !important;
-        box-shadow: 0 -3px 0 -.5px #ff2758 inset;
+        color: #EB355D !important;
+        box-shadow: 0 -3px 0 -.5px #EB355D inset;
       }
     }
 
     &:hover {
       > a {
-        color: #ff2758 !important;
+        color: #EB355D !important;
       }
     }
 
     &:active, &:focus {
       > a {
-        color: #ff2758 !important;
+        color: #EB355D !important;
       }
     }
   }

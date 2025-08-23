@@ -43,7 +43,21 @@
   </div> */ ?>
 
   <div class="card-body wdl-archive-card-body">
-    <div class="wdl-archive-pretitle mb-0 lineclamp-1">
+
+    <h3 class="wdl-archive-title mb-1">
+      <a 
+        href="<?php echo esc_attr(get_the_permalink()); ?>"
+        title="<?php echo esc_attr(get_the_title()) ?>"
+        data-label="<?php echo esc_attr(get_the_title()) ?>"
+        data-dlev="cardClick"
+        data-dlcomp="card - vendor"
+        data-dltgt="<?php echo esc_attr(get_the_title())?>">
+        <?php the_title(); ?>
+      </a>
+    </h3>
+
+
+    <div class="wdl-archive-pretitle lineclamp-1">
       <?php $vendorType = get_field('VendorType');
       if ($vendorType) {
         $vendorTypeIndex = 0;
@@ -85,18 +99,6 @@
       <?php endif ?>
     </div>
 
-    <h3 class="wdl-archive-title">
-      <a 
-        href="<?php echo esc_attr(get_the_permalink()); ?>"
-        title="<?php echo esc_attr(get_the_title()) ?>"
-        data-label="<?php echo esc_attr(get_the_title()) ?>"
-        data-dlev="cardClick"
-        data-dlcomp="card - vendor"
-        data-dltgt="<?php echo esc_attr(get_the_title())?>">
-        <?php the_title(); ?>
-      </a>
-    </h3>
-
     <?php
     $locations = get_field('Location');
     if ($locations): ?>
@@ -108,10 +110,11 @@
         ?>
       </div>
     <?php endif; ?>
-
-    <p class="lineclamp-3 mb-2 text-sm text-secondary">
+    <hr class="my-2">
+    <p class="lineclamp-3 mb-0 text-sm text-secondary">
       <?php echo (get_the_excerpt()); ?>
     </p>
+    <hr class="my-2">
 
     <?php if (get_field('MinPrice')): ?>
       <div class="text-red fw-semibold mb-2"><?php _e('เริ่มต้น', 'wdl') ?>
