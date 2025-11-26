@@ -1,3 +1,4 @@
+@use 'variable' as *;
 .wdl-single-container {
   max-width: 900px;
   //max-width: 870px;
@@ -92,7 +93,7 @@
   }
 }
 .wdl-single-stickybar {
-  position: sticky;
+  //position: sticky;
   top: 116px;
   bottom: 0;
   flex: 0 0 auto;
@@ -336,6 +337,24 @@ body.admin-bar.et_fixed_nav .wdl-sticky-bar {
 
     }
   }
+}
+
+.wdl-single-sidebar {
+  position: sticky;
+  top: 72px;
+  max-width: 300px;
+
+  @include max-width-xl {
+    max-width: none;
+    position: static;
+    top: auto;
+    width: 100%;
+    padding: 0 12px;
+  }
+}
+
+.admin-bar .wdl-single-sidebar {
+  top: 104px;
 }
 
 .et-db #et-boc .et_pb_widget {

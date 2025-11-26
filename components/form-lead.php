@@ -220,10 +220,16 @@
               <textarea rows="1" name="message" id="message" label="<?php _e('ข้อความเพิ่มเติม','wdl')?>"></textarea>
             </div>
             <div class="col-md-12">
-              <div class="wdl-checkbox p-0 m-0 my-xl-4">
+              <div class="wdl-checkbox p-0 m-0 mb-2">
                 <input type="checkbox" name="consent" id="consent" required>
                 <label for="consent" class="d-flex gap-2 align-items-center justify-content-start">
-                  <span>ในการลงทะเบียนครั้งนี้ ข้าพเจ้ายอมรับข้อตกลงและเงื่อนไขทุกประการ<br/>(โปรดอ่านและยอมรับ <a target="_blank" href="<?php echo home_url( 'term-of-use' )?>" class="text-accent">ข้อตกลงและเงื่อนไขการใช้งาน</a> และ <a target="_blank" href="<?php echo home_url( 'privacy-policy' )?>" class="text-accent">นโยบายความเป็นส่วนตัว</a> ก่อนดำเนินการต่อ)</span>
+                  <span>ในการลงทะเบียนครั้งนี้ ข้าพเจ้ายอมรับข้อตกลงและเงื่อนไขทุกประการ<br/>(โปรดอ่านและยอมรับ <a target="_blank" href="<?php echo home_url( 'term-of-use' )?>" class="text-accent">ข้อตกลงและเงื่อนไขการใช้งาน</a> และ <a target="_blank" href="<?php echo home_url( 'privacy-policy' )?>" class="text-accent">นโยบายความเป็นส่วนตัว</a> ก่อนดำเนินการต่อ) <span class="text-red">*</span></span>
+                </label>
+              </div>
+              <div class="wdl-checkbox p-0 m-0 mb-2">
+                <input type="checkbox" name="consentDisclosure" id="consentDisclosure" required>
+                <label for="consentDisclosure" class="d-flex gap-2 align-items-center justify-content-start">
+                  <span>ข้าพเจ้ายินยอมให้เว็บไซต์ Weddinglist เผยแพร่ข้อมูลส่วนบุคคลของข้าพเจ้า การลงทะเบียนเพื่อวัตถุประสงค์ในการหาสถานที่จัดงานแต่งงาน หรือระแวกใกล้เคียง <span class="text-red">*</span></span>
                 </label>
               </div>
             </div>
@@ -357,7 +363,7 @@ $(document).ready(() => {
       'component': 'form - <?php echo $formType ?>'.toLowerCase(),
       'source': window.location.href,
       'target': '',
-      'data': {
+      /* 'data': {
         'name': $('#name-lastname').val(),
         'tel': $('#tel').val(),
         'email': $('#email').val(),
@@ -374,7 +380,7 @@ $(document).ready(() => {
         'packageType': $('select[name=packageType]').val(),
         'leadType': '<?php echo $formType ?>',
         'selectedCoupon': selectedCoupon.join(',')
-      }
+      } */
     })
   });
 })

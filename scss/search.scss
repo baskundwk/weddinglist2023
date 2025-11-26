@@ -1,3 +1,4 @@
+@use 'variable' as *;
 /* Search */
 /* body:not(.wdl-header-search-active) {
   .wdl-header-search {
@@ -76,7 +77,7 @@
   .wdl-search-submit {
     border: none;
     border-radius: 0 10px 10px 0;
-    background: #ff3366;
+    background: #EB355D;
     color: #FFFFFF;
     padding: 12px 16px;
     font-size: 20px;

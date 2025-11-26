@@ -51,7 +51,7 @@
     </a>
   <?php endif; ?>
 
-  <div class="card-select wdl-checkbox">
+  <?php /* <div class="card-select wdl-checkbox">
     <input class="card-select-input" id="card-select-<?php the_ID() ?>" type="checkbox" data-select='
       {
         "title": "<?php the_title() ?>",
@@ -61,7 +61,9 @@
     <label for="card-select-<?php the_ID() ?>">
       <?php _e('เปรียบเทียบ', 'wdl') ?>
     </label>
-  </div>
+  </div> */ ?>
+
+  <?php include get_stylesheet_directory() . '/components/card-action.php' ?>
 
   <div class="card-body wdl-archive-card-body">
     <div class="wdl-archive-pretitle">
@@ -125,13 +127,17 @@
     <?php
     $minPrice = get_field('MinPrice');
     if ($minPrice): ?>
-      <div class="wdl-metadata lineclamp-1 wdl-archive-min-price"><?php _e('ราคาเริ่มต้น', 'wdl') ?>&nbsp;<strong class="text-red"> <?php echo number_format(get_field('MinPrice')) ?>+ <?php _e('บาท', 'wdl') ?></strong></div>
+      <div class="wdl-metadata wdl-archive-min-price">
+        <?php _e('ราคาเริ่มต้น', 'wdl') ?>&nbsp;<strong class="text-red"> <?php echo number_format(get_field('MinPrice')) ?>+ <?php _e('บาท', 'wdl') ?></strong>
+      </div>
     <?php endif; ?>
 
     <?php
     $maxGuest = get_field('MaxGuest');
     if ($maxGuest): ?>
-      <div class="wdl-metadata lineclamp-1 wdl-archive-max-guest"><?php _e('รองรับแขกสูงสุด', 'wdl') ?>&nbsp;<strong class="text-red"><?php echo number_format(get_field('MaxGuest')) ?> <?php _e('คน', 'wdl') ?></strong></div>
+      <div class="wdl-metadata wdl-archive-max-guest">
+        <?php _e('รองรับแขกสูงสุด', 'wdl') ?>&nbsp;<strong class="text-red"><?php echo number_format(get_field('MaxGuest')) ?> <?php _e('คน', 'wdl') ?></strong>
+      </div>
     <?php endif; ?>
 
      <?php $coupon = get_posts(
@@ -173,14 +179,28 @@
     <?php endif; ?>
   </div>
 
-  <div class="card-footer">
-    <a href="<?php echo esc_attr(get_the_permalink()).'#apply'?>" class="wdl-btn-cta wdl-form-general-direct">
-      <?php _e('คลิกขอแพ็กเกจ', 'wdl')?>
-    </a>
-    <a href="<?php echo esc_attr(get_the_permalink()) ?>" class="wdl-btn-more"
-      data-dlev="cardClick"
-      data-dlcomp="card - venue"
-      data-dltgt="<?php echo esc_attr(get_the_title())?>">
-      <?php _e('ดูรายละเอียด', 'wdl') ?></a>
-  </div>
+  <?php 
+  if(isset($member_data) && get_field('OwnerMerchant') && in_array($member_data->ID, get_field('OwnerMerchant'))) : ?>
+    <div class="card-footer px-2 pb-3 h-auto">
+      <div div class="border-top text-red d-flex justify-content-center align-items-center w-100 m-0 pt-2 text-13 gap-1">
+        <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" fill="currentColor" viewBox="0 0 256 256"><path d="M240,102c0,70-103.79,126.66-108.21,129a8,8,0,0,1-7.58,0C119.79,228.66,16,172,16,102A62.07,62.07,0,0,1,78,40c20.65,0,38.73,8.88,50,23.89C139.27,48.88,157.35,40,178,40A62.07,62.07,0,0,1,240,102Z"></path></svg>
+        <?php if(get_field('WishlistedBy')) : ?>
+          <span>ยอดในรายการโปรด <?php echo count(get_field('WishlistedBy')) ?> คน</span>
+        <?php else : ?>
+          <span>ยังไม่มียอดรายการโปรด</span>
+        <?php endif; ?>
+      </div>
+    </div>
+  <?php else : ?>
+    <div class="card-footer">
+      <a href="<?php echo esc_attr(get_the_permalink()).'#apply'?>" class="wdl-btn-cta wdl-form-general-direct">
+        <?php _e('คลิกขอแพ็กเกจ', 'wdl')?>
+      </a>
+      <a href="<?php echo esc_attr(get_the_permalink()) ?>" class="wdl-btn-more"
+        data-dlev="cardClick"
+        data-dlcomp="card - venue"
+        data-dltgt="<?php echo esc_attr(get_the_title())?>">
+        <?php _e('ดูรายละเอียด', 'wdl') ?></a>
+    </div>
+  <?php endif; ?>
 </div>

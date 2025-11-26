@@ -122,7 +122,6 @@ footer {
     .nav {
       gap: 16px;
       justify-content: center;
-      height: 100%;
       align-items: center;
 
       @media (max-width: 768px) {
@@ -138,6 +137,28 @@ footer {
           color: #666666;
           font-weight: 500;
         }
+      }
+    }
+
+    .footer-sponsor {
+      display: flex;
+      gap: 8px;
+      flex-direction: column;
+      
+      p {
+        font-size: 13px;
+        margin-bottom: 0;
+      }
+
+      img {
+        height: 24px;
+        width: auto;
+      }
+
+      .footer-sponsor-list {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
       }
     }
   }

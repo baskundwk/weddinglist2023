@@ -77,3 +77,90 @@ $(window).on("load", function () {
     });
   });
 });
+
+// Detect ad init & sliding to fire `adsView` event
+const popupAdSwiper = document.querySelector('.wdl-ad-popup-swiper')?.swiper;
+const heroAdSwiper = document.querySelector('.wdl-hero-2-swiper')?.swiper;
+const allPageAdsEl = document.querySelector('.wdl-ad-allpage [data-dlev="adsClick"]');
+const pushDataLayerOnAdsView = (swiper) => {
+  if (swiper) {
+    setTimeout(() => {
+      const firstSlide = swiper.slides[0];
+      const firstAdTarget = firstSlide?.querySelector('[data-dlev="adsClick"]')
+      window.dataLayer.push({
+        'event': 'adsView',
+        'component': firstAdTarget ? firstAdTarget.getAttribute('data-dlcomp') : '',
+        'source': window.location.href,
+        'target': firstAdTarget ? firstAdTarget.getAttribute('data-dltgt') : '',
+        'data': firstAdTarget ? firstAdTarget.getAttribute('data-dldt') : ''
+      });
+    }, 500)
+    swiper.on('slideChange', function () {
+      const currentSlide = swiper.slides[swiper.activeIndex];
+      const adTarget = currentSlide.querySelector('[data-dlev="adsClick"]')
+
+      window.dataLayer.push({
+        'event': 'adsView',
+        'component': adTarget ? adTarget.getAttribute('data-dlcomp') : '',
+        'source': window.location.href,
+        'target': adTarget ? adTarget.getAttribute('data-dltgt') : '',
+        'data': adTarget ? adTarget.getAttribute('data-dldt') : ''
+      });
+    })
+  }
+}
+pushDataLayerOnAdsView(popupAdSwiper);
+pushDataLayerOnAdsView(heroAdSwiper);
+
+if(allPageAdsEl) {
+  window.dataLayer.push({
+    'event': 'adsView',
+    'component': allPageAdsEl.getAttribute('data-dlcomp'),
+    'source': window.location.href,
+    'target': allPageAdsEl.getAttribute('data-dltgt'),
+    'data': allPageAdsEl.getAttribute('data-dldt')
+  });
+}
+
+// Handle friendlySearch form submission
+const friendlySearchForm = document.querySelector('.wdl-friendly-search-bar');
+
+if(friendlySearchForm) {
+  friendlySearchForm.addEventListener('submit', function(event) {
+    const searchInputs = friendlySearchForm.querySelectorAll('input');
+    const searchSelects = friendlySearchForm.querySelectorAll('input');
+    const currentTab = friendlySearchForm.querySelector('[data-tab].active').getAttribute('data-tab');
+
+    searchInputs.forEach(input => {
+      if(input.name && input.value && input.value.trim() !== '') {
+        window.dataLayer.push({
+          'event': 'friendlySearch',
+          'component': `friendlySearch - ${currentTab} - ${input.name}`,
+          'source': window.location.href,
+          'target': input.value,
+          'data': `{
+            "tab": "${currentTab}",
+            "name": "${input.name}",
+            "value": "${input.value}"
+          }`
+        })
+      }
+    })
+
+    searchSelects.forEach(select => {
+      if(select.name && select.value && select.value.trim() !== '') {
+        window.dataLayer.push({
+          'event': 'friendlySearch',
+          'component': `friendlySearch - ${currentTab} - ${select.name}`,
+          'source': window.location.href,
+          'target': select.value,
+          'data': `{
+            "tab": "${currentTab}",
+            "name": "${select.name}",
+            "value": "${select.value}"
+          }`
+        })
+      }
+    })
+  });
+}

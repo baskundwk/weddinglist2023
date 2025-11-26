@@ -77,6 +77,7 @@
 $currentCampaignQuery = new WP_Query($campaignArg);
 if($currentCampaignQuery->have_posts()) {
   $campaignModeEnabled = true;
+  $campaignId = $currentCampaignQuery->posts[0]->ID;
 }
 
 //Set page variables
@@ -128,67 +129,79 @@ if(isset($campaignModeEnabled)) {
   if($popup != true || $post_type != 'coupon') :
   ?>
 
-<?php if(isset($campaignModeEnabled)) { 
-  while($currentCampaignQuery->have_posts()) {
-    $currentCampaignQuery->the_post(); ?>
-  <div id="campaign-header" class="wdl-campaign-header"
-  style="
-    --campaign-color-1: <?php the_field('CampaignColor1');?>;
-    --campaign-color-2: <?php the_field('CampaignColor2');?>;
-  ">
-    <div class="container-xl d-flex flex-column justify-content-center flex-lg-row justify-content-lg-between align-items-center">
-      <div class="logo">
-        <img src="<?php echo get_field('CampaignLogo')['url'];?>" alt="<?php the_title(); ?>">
-      </div>
-      <div class="countdown">
-        <?php if(get_field('CampaignCountdown')) : ?>
-        <div class="text">
-          <?php _e('หมดเวลาใน', 'wdl') ?>
-          <div class="wdl-campaign-countdown" data-date="<?php echo get_field('CampaignDateEnd');?>">
-            <div class="unit day">
-              <div class="number loading"></div>
-              <div class="suffix"><?php _e('วัน','wdl') ?></div>
+  <?php if(isset($campaignModeEnabled)) { 
+    while($currentCampaignQuery->have_posts()) {
+      $currentCampaignQuery->the_post(); ?>
+
+    <a href="<?php echo the_permalink()?>"
+      data-dlev="linkClick",
+      data-dlcomp="link - campaign - bar",
+      data-dltgt="<?php the_title()?>">
+      <div id="campaign-header" class="wdl-campaign-header"
+      style="
+        --campaign-color-1: <?php the_field('CampaignColor1');?>;
+        --campaign-color-2: <?php the_field('CampaignColor1');?>;
+      ">
+        <div class="container-xl d-flex flex-column justify-content-center flex-lg-row justify-content-lg-between align-items-center">
+          <?php /* <div class="logo">
+            <img src="<?php echo get_field('CampaignLogo')['url'];?>" alt="<?php the_title(); ?>">
+          </div> */ ?>
+          <div class="countdown">
+            <?php if(get_field('CampaignCountdown')) : ?>
+            <div class="text">
+              <?php _e('หมดเวลาใน', 'wdl') ?>
+              <div class="wdl-campaign-countdown" data-date="<?php echo get_field('CampaignDateEnd');?>">
+                <div class="unit day">
+                  <div class="number loading"></div>
+                  <div class="suffix"><?php _e('วัน','wdl') ?></div>
+                </div>
+                <div class="separator">
+                  :
+                </div>
+                <div class="unit hour">
+                  <div class="number loading"></div>
+                  <div class="suffix"><?php _e('ชม.','wdl') ?></div>
+                </div>
+                <div class="separator">
+                  :
+                </div>
+                <div class="unit minute">
+                  <div class="number loading"></div>
+                  <div class="suffix"><?php _e('นาที','wdl') ?></div>
+                </div>
+                <div class="separator">
+                  :
+                </div>
+                <div class="unit second">
+                  <div class="number loading"></div>
+                  <div class="suffix"><?php _e('วินาที','wdl') ?></div>
+                </div>
+              </div>
             </div>
-            <div class="separator">
-              :
-            </div>
-            <div class="unit hour">
-              <div class="number loading"></div>
-              <div class="suffix"><?php _e('ชม.','wdl') ?></div>
-            </div>
-            <div class="separator">
-              :
-            </div>
-            <div class="unit minute">
-              <div class="number loading"></div>
-              <div class="suffix"><?php _e('นาที','wdl') ?></div>
-            </div>
-            <div class="separator">
-              :
-            </div>
-            <div class="unit second">
-              <div class="number loading"></div>
-              <div class="suffix"><?php _e('วินาที','wdl') ?></div>
-            </div>
+            <?php endif; ?>
           </div>
         </div>
-        <?php endif; ?>
-        <a href="<?php echo the_permalink()?>"
-          data-dlev="linkClick",
-          data-dlcomp="link - campaign - bar",
-          data-dltgt="<?php the_title()?>">
-          <?php _e('ไปยังหน้าแคมเปญ', 'wdl') ?>
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M4.16663 10H15.8333" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M10 4.16699L15.8333 10.0003L10 15.8337" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </a>
+        <?php
+          $campaignStripDesktop = get_field('HeaderStripDesktop');
+          $campaignStripMobile = get_field('HeaderStripMobile');
+
+          if($campaignStripDesktop && $campaignStripMobile) { ?>
+          <a href="<?php 
+          if(get_field('CampaignLandingPage')) {
+            echo esc_url( get_permalink(get_field('CampaignLandingPage')->ID));
+          } else {
+            the_permalink();
+          }
+          ?>" class="wdl-campaign-header-background">
+            <img class="d-none d-lg-block" src="<?php echo $campaignStripDesktop['url'];?>" alt="<?php the_title(); ?>">
+            <img class="d-block d-lg-none" src="<?php echo $campaignStripMobile['url'];?>" alt="<?php the_title(); ?>">
+          </a>
+        <?php } ?>
       </div>
-    </div>
-  </div>
-  <?php wp_reset_postdata();
-  }?>
-<?php }?>
+    </a>
+    <?php wp_reset_postdata();
+    }?>
+  <?php }?>
   <?php if(!isset($hideNav) || !$hideNav === true) : ?>
   <div id="modalSearch" class="modal fade">
     <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -229,10 +242,10 @@ if(isset($campaignModeEnabled)) {
         </button>
         <div class="navbar-brand">
           <a href="<?php echo esc_url(home_url('/')); ?>" title="ไปหน้าแรกของ Weddinglist">
-            <img loading="lazy" src="<?php echo get_theme_file_uri() . '/images/logo.png';?>" alt="Weddinglist" width="181" height="44">
+            <img class="grayscale" loading="lazy" src="<?php echo get_theme_file_uri() . '/images/logo.png';?>" alt="Weddinglist" width="181" height="44">
           </a>
         </div>
-        <nav class="navbar-social">
+        <nav class="navbar-social grayscale">
           <ul class="navbar-nav">
             <li><a
               data-dlev="linkClick"
@@ -259,9 +272,26 @@ if(isset($campaignModeEnabled)) {
             ><i class="wdl-icon-email"></i></a></li>
           </ul>
         </nav>
-        <button id="toggleSearch" type="button" class="ms-xl-2 me-2 me-xl-0 order-xl-last" title="Search" data-bs-toggle="modal" data-bs-target="#modalSearch">
+        <button id="toggleSearch" type="button" class="order-xl-last" title="Search" data-bs-toggle="modal" data-bs-target="#modalSearch">
           <i data-feather="search"></i>
         </button>
+        <?php
+        $member_data = get_current_member();
+        if(is_user_logged_in(  )) : 
+          if($member_data) :?>
+            <a href="<?php echo home_url( '/member/profile' ) ?>" class="wdl-btn-secondary py-2 d-none d-xl-flex gap-1 order-last text-14">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 256 256"><path d="M230.92,212c-15.23-26.33-38.7-45.21-66.09-54.16a72,72,0,1,0-73.66,0C63.78,166.78,40.31,185.66,25.08,212a8,8,0,1,0,13.85,8c18.84-32.56,52.14-52,89.07-52s70.23,19.44,89.07,52a8,8,0,1,0,13.85-8ZM72,96a56,56,0,1,1,56,56A56.06,56.06,0,0,1,72,96Z"></path></svg>
+              <span class="lineclamp-1">
+                <?php echo __('สวัสดี, ', 'wdl') . explode(' ', get_the_title($member_data->ID))[0]; ?>
+              </span>
+            </a>
+            <?php else : ?>
+            <a href="<?php echo esc_url( home_url( '/member' ) ); ?>" class="wdl-btn-secondary py-2 d-none d-xl-flex gap-1 order-last text-14">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 256 256"><path d="M230.92,212c-15.23-26.33-38.7-45.21-66.09-54.16a72,72,0,1,0-73.66,0C63.78,166.78,40.31,185.66,25.08,212a8,8,0,1,0,13.85,8c18.84-32.56,52.14-52,89.07-52s70.23,19.44,89.07,52a8,8,0,1,0,13.85-8ZM72,96a56,56,0,1,1,56,56A56.06,56.06,0,0,1,72,96Z"></path></svg>
+              <?php _e('ระบบสมาชิก', 'wdl') ?>
+            </a>
+          <?php endif; ?>
+        <?php endif; ?>
         <?php wp_nav_menu(
           array(
             'menu' => 'Main menu',

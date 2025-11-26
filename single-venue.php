@@ -291,7 +291,7 @@
     </div>
   </section>
   <?php include get_stylesheet_directory() . '/components/campaign-bar.php' ?>
-  <?php if (get_the_excerpt() != '' && is_user_logged_in()): ?>
+  <?php if (get_the_excerpt()): ?>
   <section class="pb-3">
     <div class="container-xl">
       <div class="alert alert-secondary">
@@ -497,9 +497,7 @@
   </section>
   <?php endif; ?>
 
-  <?php
-
-  $coupon = get_posts(
+  <?php $coupon = get_posts(
     array(
       'posts_per_page' => -1,
       'post_type' => 'coupon',
@@ -530,7 +528,6 @@
 
       <div class="row">
         <div class="col text-secondary">
-          <?php the_content(); ?>
 
           <?php if (have_rows('Pricing') || have_rows('PricingConvention')): ?>
           <div class="wdl-main-content">
@@ -822,6 +819,17 @@
       </div>
       <?php endif; ?>
 
+
+
+      <?php if(get_the_content()) : ?>
+      <div class="my-3">
+        <h2>รายละเอียดสถานที่</h2>
+        <div class="alert w-100">
+          <?php the_content(); ?>
+        </div>
+      </div>
+      <?php endif; ?>
+
     </div>
   </section>
   <section class="pb-3 overflow-hidden">
@@ -936,7 +944,7 @@
   $relatedPosts = get_posts(
     array(
       'post_type' => 'post',
-      'posts_per_page' => -1,
+      'numberposts' => -1,
       'orderby' => 'date',
       'order' => 'DESC',
       'post_status' => 'any',
@@ -954,7 +962,7 @@
   $relatedPostsTag = get_posts(
     array(
       'post_type' => 'post',
-      'posts_per_page' => 8,
+      'numberposts' => 8,
       'orderby' => 'date',
       'order' => 'DESC',
       'post_status' => 'any',
@@ -980,7 +988,7 @@
   $relatedReview = get_posts(
     array(
       'post_type' => 'post',
-      'posts_per_page' => -1,
+      'numberposts' => -1,
       'orderby' => 'date',
       'order' => 'DESC',
       'post_status' => 'any',
@@ -998,7 +1006,7 @@
   $relatedReviewTag = get_posts(
     array(
       'post_type' => 'post',
-      'posts_per_page' => -1,
+      'numberposts' => -1,
       'orderby' => 'date',
       'order' => 'DESC',
       'post_status' => 'any',

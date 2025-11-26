@@ -1,3 +1,17 @@
+.wdl-link {
+  display: inline-block;
+  color: #EB355D;
+  text-decoration: none;
+  font-weight: 600;
+  transition: .25s opacity ease-out, .25s color ease-out;
+  background: none;
+  border: none;
+  &:hover, &:focus {
+    color: darken(#EB355D, 10%);
+    text-decoration: none;
+    opacity: 0.8;
+  }
+}
 .wdl-link-back {
   display: inline-block;
   &:before {

@@ -1,13 +1,13 @@
 @mixin min-width-sm { @media (min-width: 576px) { @content; }}
 @mixin min-width-md { @media (min-width: 768px) { @content; }}
-@mixin min-width-lg { @media (min-width: 1024px) { @content; }}
+@mixin min-width-lg { @media (min-width: 992px) { @content; }}
 @mixin min-width-xl { @media (min-width: 1200px) { @content; }}
 @mixin min-width-xxl { @media (min-width: 1920px) { @content; }}
 @mixin min-width-xxxl { @media (min-width: 2100px) { @content; }}
 
 @mixin max-width-sm { @media (max-width: 575.98px) { @content; }}
 @mixin max-width-md { @media (max-width: 767.98px) { @content; }}
-@mixin max-width-lg { @media (max-width: 1023.98px) { @content; }}
+@mixin max-width-lg { @media (max-width: 991.98px) { @content; }}
 @mixin max-width-xl { @media (max-width: 1199.98px) { @content; }}
 @mixin max-width-xxl { @media (max-width: 1919.98px) { @content; }}
 @mixin max-width-xxxl { @media (max-width: 2099.98) { @content; }}

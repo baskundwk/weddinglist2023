@@ -1,4 +1,7 @@
 <?php include get_stylesheet_directory() . '/components/header.php' ?>
+<?php /*  include get_stylesheet_directory() . '/components/splash.php' */
+  $weddingFairPanelDesktop = get_field('WeddingFairPanelDesktop', $campaignId);
+  $weddingFairPanelMobile = get_field('WeddingFairPanelMobile', $campaignId); ?>
 <main>
   <!-- Section : Hero banner & friendly search -->
   <?php include get_stylesheet_directory() . '/components/front-page-header.php' ?>
@@ -15,7 +18,9 @@
   $weddingfair = new WP_Query($weddingfairArgs);
   ?>
 
-  <?php if ($weddingfair->have_posts()): ?>
+  <?php if ($weddingfair->have_posts() ||
+    (isset($campaignModeEnabled) && $campaignModeEnabled && $weddingFairPanelDesktop && $weddingFairPanelMobile)
+  ): ?>
   <section class="html-lazy section-stripe pt-4 pb-3">
     <div class="container-xl">
       <div class="row mb-3 align-items-center">
@@ -24,6 +29,7 @@
             <?php _e('Wedding Fair & Event', 'wdl'); ?>
           </h2>
         </div>
+        <?php if($weddingfair->have_posts()) :?>
         <div class="col-lg text-lg-end d-none d-lg-block">
           <a href="<?php echo esc_html(get_post_type_archive_link('wedding-fair')) ?>" class="wdl-btn-secondary"
             data-dlev="buttonClick"
@@ -32,9 +38,38 @@
             <?php _e('ดู Wedding Fair & Event ทั้งหมด', 'wdl') ?>
           </a>
         </div>
+        <?php endif; ?>
       </div>
       <div class="wdl-archive wdl-archive-extended">
+        <?php if(isset($campaignModeEnabled) && $campaignModeEnabled) { ?>
+          <?php
 
+            if($weddingFairPanelDesktop && $weddingFairPanelMobile) { ?>
+              <div class="wdl-campaign-weddingfair-panel d-none d-md-block mb-3">
+                <a href="<?php 
+                  if(get_field('CampaignLandingPage', $campaignId)) {
+                    echo esc_url( get_permalink(get_field('CampaignLandingPage', $campaignId)->ID));
+                  } else {
+                    the_permalink();
+                  }
+                  ?>">
+                  <img src="<?php echo esc_html($weddingFairPanelDesktop['url']) ?>" alt="<?php echo esc_html($weddingFairPanelDesktop['alt']) ?>">
+                </a>
+              </div>
+              <div class="wdl-campaign-weddingfair-panel d-block d-md-none mb-3">
+                <a href="<?php 
+                  if(get_field('CampaignLandingPage', $campaignId)) {
+                    echo esc_url( get_permalink(get_field('CampaignLandingPage', $campaignId)->ID));
+                  } else {
+                    the_permalink();
+                  }
+                  ?>">
+                  <img src="<?php echo esc_html($weddingFairPanelMobile['url']) ?>" alt="<?php echo esc_html($weddingFairPanelMobile['alt']) ?>">
+                </a>
+              </div>
+          <?php } ?>
+        <?php } ?>
+        <?php if($weddingfair->have_posts()) :?>
         <div class="swiper swiper-loose wdl-archive-swiper">
           <div class="swiper-wrapper 
               <?php if ($_GET['order'] || $_GET['orderby'] || $_GET['key']) {
@@ -55,6 +90,7 @@
             <div class="swiper-button-next"></div>
           </div>
         </div>
+        <?php endif; ?>
       </div>
 
       <div class="text-center pt-lg-2 d-block d-lg-none mb-4">
@@ -125,67 +161,6 @@
           data-dlcomp="button - front page - promotion"
           data-dltgt="Promotion">
           <?php _e('ดูแพ็กเกจทั้งหมด', 'wdl') ?>
-        </a>
-      </div>
-    </div>
-  </section>
-  <?php endif; ?>
-  
-  <!-- Section : Moment -->
-  <?php $momentArgs = array(
-    'post_type' => 'moment',
-    'post_status' => 'publish',
-    'posts_per_page' => 8,
-    /* 'orderby' => 'meta_value',
-    'order' => 'DESC',
-    'meta_key' => 'HotDeal', */
-  );
-
-  $moment = new WP_Query($momentArgs);
-  if (is_user_logged_in() && $moment->have_posts()): ?>
-  <section class="html-lazy section-stripe pt-4 pb-3 border-top">
-    <div class="container-xl">
-      <div class="row mb-3 align-items-center">
-        <div class="col-lg">
-          <h2 class="h1 wdl-localnav-heading mb-0">
-            <?php _e('Moment Package', 'wdl'); ?>
-          </h2>
-        </div>
-        <div class="col-lg text-lg-end d-none d-lg-block">
-          <a href="<?php echo esc_html(get_post_type_archive_link('moment')) ?>" class="wdl-btn-secondary"
-            data-dlev="buttonClick"
-            data-dlcomp="button - front page - moment"
-            data-dltgt="Moment">
-            <?php _e('ดู Moment ทั้งหมด', 'wdl') ?>
-          </a>
-        </div>
-      </div>
-      <div class="wdl-archive wdl-archive-extended">
-
-        <div id="promotions" class="swiper swiper-loose wdl-archive-swiper">
-          <div class="swiper-wrapper row-cols-archive-randomized">
-            <?php
-            while ($moment->have_posts()): ?>
-            <?php $moment->the_post(); ?>
-
-            <?php include get_stylesheet_directory() . '/components/cards/card-moment.php' ?>
-
-            <?php endwhile; ?>
-          </div>
-          <div class="swiper-pagination"></div>
-          <div class="swiper-navigation swiper-navigation-small">
-            <div class="swiper-button-prev"></div>
-            <div class="swiper-button-next"></div>
-          </div>
-        </div>
-      </div>
-      <div class="text-center pt-lg-2 d-block d-lg-none mb-4">
-        <a href="<?php echo esc_html(get_post_type_archive_link('promotion')) ?>"
-          class="wdl-btn-secondary"
-          data-dlev="buttonClick"
-          data-dlcomp="button - front page - moment"
-          data-dltgt="Moment">
-          <?php _e('ดู Moment ทั้งหมด', 'wdl') ?>
         </a>
       </div>
     </div>
@@ -327,6 +302,68 @@
           data-dlcomp="button - front page - venue"
           data-dltgt="Venue">
           <?php _e('ดูสถานที่จัดงานแต่งงานทั้งหมด', 'wdl') ?>
+        </a>
+      </div>
+    </div>
+  </section>
+  <?php endif; ?>
+
+  
+  <!-- Section : Moment -->
+  <?php $momentArgs = array(
+    'post_type' => 'moment',
+    'post_status' => 'publish',
+    'posts_per_page' => 8,
+    /* 'orderby' => 'meta_value',
+    'order' => 'DESC',
+    'meta_key' => 'HotDeal', */
+  );
+
+  $moment = new WP_Query($momentArgs);
+  if ($moment->have_posts()): ?>
+  <section class="html-lazy section-stripe pt-4 pb-3 border-top">
+    <div class="container-xl">
+      <div class="row mb-3 align-items-center">
+        <div class="col-lg">
+          <h2 class="h1 wdl-localnav-heading mb-0">
+            <?php _e('Moment Package', 'wdl'); ?>
+          </h2>
+        </div>
+        <div class="col-lg text-lg-end d-none d-lg-block">
+          <a href="<?php echo esc_html(get_post_type_archive_link('moment')) ?>" class="wdl-btn-secondary"
+            data-dlev="buttonClick"
+            data-dlcomp="button - front page - moment"
+            data-dltgt="Moment">
+            <?php _e('ดู Moment ทั้งหมด', 'wdl') ?>
+          </a>
+        </div>
+      </div>
+      <div class="wdl-archive wdl-archive-extended">
+
+        <div id="promotions" class="swiper swiper-loose wdl-archive-swiper">
+          <div class="swiper-wrapper row-cols-archive-randomized">
+            <?php
+            while ($moment->have_posts()): ?>
+            <?php $moment->the_post(); ?>
+
+            <?php include get_stylesheet_directory() . '/components/cards/card-moment.php' ?>
+
+            <?php endwhile; ?>
+          </div>
+          <div class="swiper-pagination"></div>
+          <div class="swiper-navigation swiper-navigation-small">
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+          </div>
+        </div>
+      </div>
+      <div class="text-center pt-lg-2 d-block d-lg-none mb-4">
+        <a href="<?php echo esc_html(get_post_type_archive_link('promotion')) ?>"
+          class="wdl-btn-secondary"
+          data-dlev="buttonClick"
+          data-dlcomp="button - front page - moment"
+          data-dltgt="Moment">
+          <?php _e('ดู Moment ทั้งหมด', 'wdl') ?>
         </a>
       </div>
     </div>

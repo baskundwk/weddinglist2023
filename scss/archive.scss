@@ -1,3 +1,6 @@
+@use 'variable' as *;
+@use 'global' as *;
+@use 'button' as *;
 .container-archive {
   @media (min-width: 1200px) {
     max-width: 2100px !important;
@@ -290,6 +293,77 @@
     }
   }
 }
+
+.card-actions {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 10;
+  padding: 4px;
+  display: flex;
+  gap: 4px;
+  color: #FFFFFF;
+  font-size: 13px;
+  
+  .card-action {
+    border-radius: 99px;
+    padding: 4px;
+    background: transparent;
+    display: flex;
+    gap: 0;
+    transition: .35s cubic-bezier(0,0,0,1);
+    cursor: pointer;
+
+    svg {
+      filter: drop-shadow(0 0 1px rgba(0, 0, 0, 1));
+      font-size: 20px;
+    }
+
+    .text-tips {
+      transition: .5s ease-in-out;
+      max-width: 0px;
+      opacity: 0;
+      white-space: nowrap;
+      padding-left: 0;
+      pointer-events: none;
+    }
+
+    &.disabled {
+      opacity: .5;
+      cursor: not-allowed;
+    }
+    
+    &:hover {
+      background: rgba(74, 80, 87, 0.75);
+      
+      .text-tips {
+        max-width: 150px;
+        opacity: 1;
+        padding-left: 4px;
+      }
+    }
+
+    .action-icon-passive {
+      display: block;
+    }
+
+    .action-icon-active {
+      display: none;
+    }
+    &.active {
+      .action-icon-passive {
+        display: none;
+      }
+      
+      .action-icon-active {
+        display: block;
+      }
+      background: rgba(255, 39, 88, 0.75);
+    }
+
+  }
+}
+
 .wdl-archive-extended,
 .wdl-archive-extended .wdl-archive-swiper {
   padding-bottom: 24px;
@@ -448,7 +522,7 @@
   font-size: 0.8125rem;
   display: flex;
   flex-wrap: wrap;
-  gap: 4px;
+  gap: 0 4px;
   align-items: baseline;
   line-height: 1.5;
   margin-bottom: 4px;

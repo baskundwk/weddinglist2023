@@ -1,7 +1,7 @@
 .alert {
-  background: #F4F4F4;
+  background: #F7F7F7;
   color: #595959;
-  box-shadow: 0 4px 20px rgba(0,0,0,.1);
+  //box-shadow: 0 4px 20px rgba(0,0,0,.1);
   width: fit-content;
   border: none;
   margin-bottom: 0;
@@ -9,7 +9,21 @@
 
   &.alert-secondary {
     background: none;
-    box-shadow: 0 0 0 1px #F4F4F4;
+    box-shadow: 0 0 0 1px #F7F7F7;
+  }
+
+  *:last-child {
+    margin-bottom: 0;
+  }
+
+  &.alert-success {
+    background: #E6F4EA;
+    color: #2D7A46;
+  }
+
+  &.alert-danger {
+    background: #FDEAEA;
+    color: #D93025;
   }
 }
 

@@ -100,7 +100,13 @@ $randomItem = $postRotation[$randomKey];
           }
           if (get_field('CampaignAllpageBefore')) { ?>
             <div id="ad-allpage-<?php the_ID(); ?>" class="wdl-ad-allpage">
-              <a href="<?php the_permalink();?>"
+              <a href="<?php 
+                if(get_field('CampaignLandingPage')) {
+                  echo esc_url( get_permalink(get_field('CampaignLandingPage')->ID));
+                } else {
+                  the_permalink();
+                }
+                ?>"
                 aria-label="Go to page: <?php echo esc_attr( get_the_title() );?>"
                 title="Go to page: <?php echo esc_attr( get_the_title() );?>"
                 data-dlev="adsClick"
@@ -115,7 +121,13 @@ $randomItem = $postRotation[$randomKey];
           }
           if (get_field('CampaignAllpageMiddle')) { ?>
             <div id="ad-allpage-<?php the_ID(); ?>" class="wdl-ad-allpage">
-              <a href="<?php the_permalink();?>"
+              <a href="<?php 
+                if(get_field('CampaignLandingPage')) {
+                  echo esc_url( get_permalink(get_field('CampaignLandingPage')->ID));
+                } else {
+                  the_permalink();
+                }
+                ?>"
                 aria-label="Go to page: <?php echo esc_attr( get_the_title() );?>"
                 title="Go to page: <?php echo esc_attr( get_the_title() );?>"
                 data-dlev="adsClick"

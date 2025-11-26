@@ -2,7 +2,7 @@
   'post_type' => 'any',
   'post_status' => 'publish',
   'orderby' => 'rand',
-  'posts_per_page' => '-1',
+  'posts_per_page' => -1,
   'meta_query' => array(
     array(
       'key' => 'HeroBanner',

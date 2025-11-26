@@ -1,0 +1,38 @@
+@use 'variable' as *;
+.wdl-splash-screen {
+  width: 100svw;
+  height: 100svh;
+  position: fixed;
+  inset: 0;
+  z-index: 99999999;
+  background: #000000;
+  transition: .35s ease-in-out;
+  .wdl-splash-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    flex-direction: column;
+    padding: 36px;
+    height: 100%;
+
+    @include max-width-md {
+      padding: 16px;
+    }
+
+    img {
+      width: 100%;
+      max-width: 600px;
+      border-radius: 12px;
+    }
+  }
+
+  .wdl-splash-close {
+    filter: grayscale(1);
+  }
+
+  &.hidden {
+    opacity: 0;
+    visibility: hidden;
+  }
+}

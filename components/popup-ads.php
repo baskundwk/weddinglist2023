@@ -2,7 +2,7 @@
   'post_type' => array('promotion', 'wedding-fair', 'venue', 'post', 'vendor'),
   'post_status' => 'publish',
   'orderby' => 'rand',
-  'posts_per_page' => '5',
+  'posts_per_page' => -1,
   'meta_key' => 'PopupActivate',
   'meta_value' => true,
 );
@@ -65,11 +65,14 @@ $campaignPopupMiddle = new WP_Query([
 ?>
 <?php if($popup->have_posts()): ?>
   <div class="modal fade wdl-ad-popup-extended wdl-modal-autotrigger" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered modal-lg justify-content-center">
+    <div class="modal-dialog modal-lg justify-content-center"> <!-- modal-dialog-centered -->
       <div class="modal-content mb-0">
         <button class="btn-close" data-bs-dismiss="modal" aria-label="Close" type="button"></button>
         <div class="swiper wdl-ad-popup-swiper">
           <div class="swiper-wrapper">
+            <div class="swiper-slide">
+              <img src="https://www.weddinglist.co.th/wp-content/uploads/2025/10/wdl-splash-queen-2025-10-28.png" alt="" srcset="">
+            </div>
             <?php if($campaignPopupBefore->have_posts()) :
             while($campaignPopupBefore->have_posts()):
             $campaignPopupBefore->the_post(); ?>

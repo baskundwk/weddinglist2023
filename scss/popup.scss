@@ -1,3 +1,4 @@
+@use 'variable' as *;
 /* Ads Popup */
 
 .wdl-ad-popup {
@@ -16,7 +17,7 @@
     padding: 24px;
 
     @include max-width-lg {
-      padding: 30px;
+      padding: 48px;
     }
   }
   .modal-content {

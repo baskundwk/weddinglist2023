@@ -1,3 +1,5 @@
+@use 'variable' as *;
+@use 'global' as *;
 .wdl-consultant-grid {
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
@@ -55,7 +57,7 @@
     margin-right: auto;
     .profile-photo {
       aspect-ratio: 1/1;
-      border-radius: 100%;
+      border-radius: 100% !important;
       width: 120px;
       height: 120px;
       object-fit: cover;
@@ -63,7 +65,7 @@
     }
     .logo {
       aspect-ratio: 1/1;
-      border-radius: 100%;
+      border-radius: 100% !important;
       width: 42px;
       height: 42px;
       box-shadow: 0 4px 4px -1px rgba(12,12,12,.10), 0 4px 4px -1px rgba(12,12,12,.05);

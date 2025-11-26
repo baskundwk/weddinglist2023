@@ -112,7 +112,9 @@
           </div>
           <div class="wdl-layout-card">
             <h2 class="h4"><?php _e('ติดต่อซื้อแพ็คเกจ Moment นี้', 'wdl') ?></h2>
-            <form id="form-line-contact" data-items="name,tel,email,package" action="https://line.me/R/oaMessage/@ety4154i/?" data-message-prefix="<?php _e('ติดต่อซื้อแพ็คเกจ Moment', 'wdl')?>">
+            <form id="form-line-contact" data-items="name,tel,email,package" action="https://line.me/R/oaMessage/@ety4154i/?"
+              data-message-prefix="<?php echo (__('ติดต่อซื้อแพ็คเกจ Moment', 'wdl'). ' : '. get_the_title())?>"
+              data-message-suffix="<?php echo get_the_permalink( )?>">
               <div class="row mb-2 mb-lg-3 g-2 g-lg-3">
                 <div class="col-12">
                   <div class="form-floating">

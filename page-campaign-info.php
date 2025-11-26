@@ -56,7 +56,10 @@
               <h2 class="h1">ลงทะเบียนสนใจเข้าร่วมงาน</h2>
               <div class="card rounded-4 h-auto">
                 <div class="card-body">
-                  <form action="">
+                  <form id="businessSignUp" method="POST" action="<?php echo esc_url(admin_url('admin-post.php')); ?>">
+                    <input type="hidden" name="action" value="send_email_business">
+                    <?php wp_nonce_field('tw2026_form', 'tw2026_nonce'); ?>
+
                     <div class="mb-3">
                       <label for="campaignBusinessName"><?php _e('บริษัท/ชื่อกิจการ','wdl')?><span class="text-red">*</span></label>
                       <input name="campaignBusinessName" id="campaignBusinessName" type="text" placeholder="<?php _e('บริษัท/ชื่อกิจการ','wdl')?>" required />
@@ -108,7 +111,7 @@
                       <label for="campaignMessage"><?php _e('ข้อความเพิ่มเติม','wdl')?></label>
                       <textarea name="campaignMessage" id="campaignMessage" type="tel" placeholder="<?php _e('ข้อความเพิ่มเติม','wdl')?>" rows="4"></textarea>
                     </div>
-                    <button id="wdl-form-general-submit" type="submit" name="submit" class="wdl-btn-lg wdl-form-submit w-100" style="  
+                    <button id="wdl-form-general-submit" type="submit" name="send_email_business_submit" value="1" class="wdl-btn-lg wdl-form-submit w-100" style="  
                       --campaign-color-1: <?php the_field('CampaignColor1');?>;
                       --campaign-color-2: <?php the_field('CampaignColor2');?>;
                       background: linear-gradient(to right, var(--campaign-color-1, #EB355D), var(--campaign-color-2, #EB355D));

@@ -1,4 +1,4 @@
-<?php if(isset($campaignModeEnabled)) { 
+<?php /* if(isset($campaignModeEnabled)) { 
   while($currentCampaignQuery->have_posts()) {
     $currentCampaignQuery->the_post(); ?>
   <section class="pb-3">
@@ -52,4 +52,4 @@
   </section>
   <?php wp_reset_postdata();
   }?>
-<?php }?>
+<?php } */?>

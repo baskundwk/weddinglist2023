@@ -1,4 +1,10 @@
-<?php include get_stylesheet_directory() . '/components/header.php';
+
+<?php
+if(get_field('CampaignLandingPage')) {
+  wp_redirect( get_permalink( get_field('CampaignLandingPage') ), 301, 'WordPress' );
+}
+
+include get_stylesheet_directory() . '/components/header.php';
 $campaignModeEnabled = true;
 $campaignColor1 = get_field('CampaignColor1');
 $campaignColor2 = get_field('CampaignColor2');

@@ -2,7 +2,7 @@
   'post_type' => 'any',
   'post_status' => 'publish',
   'orderby' => 'rand',
-  'posts_per_page' => 8,
+  'posts_per_page' => -1,
   'meta_query' => array(
     array(
       'key' => 'HeroBanner',
@@ -77,8 +77,8 @@ $campaignHeroMiddle = new WP_Query([
             <?php if (get_field('CampaignHeroBefore')): ?>
               <div id="hero-<?php the_ID(); ?>" class="swiper-slide">
                 <?php if (is_array(get_field('CampaignHeroBefore'))): ?>
-                  <a class="wdl-hero-banner" href="<?php if (get_field('HeroBannerLink')) {
-                    echo (get_field('HeroBannerLink'));
+                  <a class="wdl-hero-banner" href="<?php if (get_field('CampaignLandingPage')) {
+                    echo esc_url( get_permalink(get_field('CampaignLandingPage')->ID));
                   } else {
                     the_permalink();
                   } ?>"
@@ -114,8 +114,8 @@ $campaignHeroMiddle = new WP_Query([
             <?php if (get_field('CampaignHeroMiddle')): ?>
               <div id="hero-<?php the_ID(); ?>" class="swiper-slide">
                 <?php if (is_array(get_field('CampaignHeroMiddle'))): ?>
-                  <a class="wdl-hero-banner" href="<?php if (get_field('HeroBannerLink')) {
-                    echo (get_field('HeroBannerLink'));
+                  <a class="wdl-hero-banner" href="<?php if (get_field('CampaignLandingPage')) {
+                    echo esc_url( get_permalink(get_field('CampaignLandingPage')->ID));
                   } else {
                     the_permalink();
                   } ?>"
@@ -146,6 +146,7 @@ $campaignHeroMiddle = new WP_Query([
           endif; ?>
         
           <?php if($hero->have_posts()) :
+          $heroIndex = 0;
           while ($hero->have_posts()): ?>
             <?php $hero->the_post(); ?>
             <?php if (get_field('HeroBannerImage')): ?>
@@ -161,7 +162,11 @@ $campaignHeroMiddle = new WP_Query([
                   data-dltgt="<?php echo esc_attr(get_the_title()); ?>">
                     <picture>
                       <source srcset="<?php echo esc_attr(get_field('HeroBannerImage')['sizes']['w1160']) ?>" width="<?php echo esc_attr(get_field('HeroBannerImage')['sizes']['w1160-width']) ?>" height="<?php echo esc_attr(get_field('HeroBannerImage')['sizes']['w1160-height']) ?>" media="(min-width: 576px)" />
-                      <img loading="eager" fetchpriority="high" src="<?php echo esc_attr(get_field('HeroBannerImage')['sizes']['h270']) ?>" alt="<?php echo esc_attr(get_the_title()) ?>" sizes="100%">
+                      <img <?php if ($heroIndex === 0) {
+                        echo 'loading="eager" fetchpriority="high"';
+                      } else {
+                        echo 'loading="lazy"';
+                      } ?> src="<?php echo esc_attr(get_field('HeroBannerImage')['sizes']['h270']) ?>" alt="<?php echo esc_attr(get_the_title()) ?>" sizes="100%">
                     </picture>
                   </a>
                 <?php else: ?>
@@ -177,7 +182,9 @@ $campaignHeroMiddle = new WP_Query([
                   </a>
                 <?php endif; ?>
               </div>
-            <?php endif; ?>
+            <?php
+            $heroIndex++;
+           endif; ?>
 
           <?php endwhile;
           endif; ?>

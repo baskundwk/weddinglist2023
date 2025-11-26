@@ -52,7 +52,7 @@ $(window).scroll(()=>{
 const leadMenuSwiper = new Swiper('.wdl-lead-menu-swiper', {
   slidesPerView: 'auto',
   spaceBetween: 24,
-  centerInsufficientSlides: true,
+  //centerInsufficientSlides: true,
   slideClass: 'menu-item',
   navigation: {
     prevEl: '.swiper-button-prev',
@@ -110,10 +110,12 @@ const initLocalnav = () => {
     });
   });
 };
-$(document).ready(initLocalnav());
+$(document).ready(()=> {
+  initLocalnav()
+  $("html").css("--header-height", $("#main-header").height() + "px");
+  $("html").css("--footer-height", $(".wdl-footer").height() + "px");
+});
 
-$("html").css("--header-height", $("#main-header").height() + "px");
-$("html").css("--footer-height", $(".wdl-footer").height() + "px");
 
 // Form progress
 const wdlMultistepProgressBar = () => {
@@ -659,6 +661,45 @@ const selectAll = () => {
 
 document.querySelector(".select-all") ? selectAll() : false;
 
+const checkboxGroup = () => {
+  const checkboxes = document.querySelectorAll('input[type="checkbox"][data-checkbox-group]') ?? []
+
+  checkboxes?.forEach((checkbox) => {
+    const group = checkbox.getAttribute("data-checkbox-group");
+    const allCheckboxInGroup = document.querySelectorAll(`input[type="checkbox"][data-checkbox-group="${group}"]`);
+
+    checkbox.addEventListener("change", () => {
+      if (checkbox.checked) {
+        allCheckboxInGroup?.forEach((cb) => {
+          cb.required = false;
+        })
+      } else {
+        allCheckboxInGroup?.forEach((cb) => {
+          cb.required = true;
+        })
+      }
+    })
+  })
+
+  if (checkboxes?.length > 0) {
+    if(Array.from(checkboxes).find((checkbox) => checkbox.checked)) {
+      const checkbox = Array.from(checkboxes).find((checkbox) => checkbox.checked);
+      const group = checkbox.getAttribute("data-checkbox-group");
+      const allCheckboxInGroup = document.querySelectorAll(`input[type="checkbox"][data-checkbox-group="${group}"]`);
+  
+      allCheckboxInGroup?.forEach((cb) => {
+        cb.required = true;
+      })
+    }
+  } else {
+    checkboxes?.forEach((cb) => {
+      cb.required = false;
+    })
+  }
+}
+
+document.querySelector('input[type="checkbox"][data-checkbox-group]') && checkboxGroup()
+
 // Search type selection
 if (document.querySelectorAll("#searchform #search-type")) {
   document.querySelectorAll("#searchform #search-type a").forEach((e) => {
@@ -735,37 +776,37 @@ document.querySelector(".wdl-checkbox-convert") ? collectCheckbox() : false;
 
 /* Prefill form */
 $(".wpcf7-submit").click(() => {
-  localStorage.setItem("wdl-name-lastname", $("#name-lastname").val());
-  localStorage.setItem("wdl-tel", $("#tel").val());
-  localStorage.setItem("wdl-email", $("#email").val());
-  localStorage.setItem("wdl-lineid", $("#lineid").val());
-  localStorage.setItem("wdl-guest", $("#guest").val());
-  localStorage.setItem("wdl-budget", $("#budget").val());
-  localStorage.setItem("wdl-date", $("#date").val());
-  localStorage.setItem("wdl-message", $("#message").val());
+  $("#name-lastname").val() && localStorage.setItem("wdl-name-lastname", $("#name-lastname").val());
+  $("#tel").val() && localStorage.setItem("wdl-tel", $("#tel").val());
+  $("#email").val() && localStorage.setItem("wdl-email", $("#email").val());
+  $("#lineid").val() && localStorage.setItem("wdl-lineid", $("#lineid").val());
+  $("#guest").val() && localStorage.setItem("wdl-guest", $("#guest").val());
+  $("#budget").val() && localStorage.setItem("wdl-budget", $("#budget").val());
+  $("#date").val() && localStorage.setItem("wdl-date", $("#date").val());
+  $("#message").val() && localStorage.setItem("wdl-message", $("#message").val());
 });
 $(".wdl-form-submit").click(() => {
-  localStorage.setItem("wdl-name-lastname", $("#name-lastname").val());
-  localStorage.setItem("wdl-tel", $("#tel").val());
-  localStorage.setItem("wdl-email", $("#email").val());
-  localStorage.setItem("wdl-lineid", $("#lineid").val());
-  localStorage.setItem("wdl-guest", $("#guest").val());
-  localStorage.setItem("wdl-budget", $("#budget").val());
-  localStorage.setItem("wdl-date", $("#date").val());
-  localStorage.setItem("wdl-message", $("#message").val());
+  $("#name-lastname").val() && localStorage.setItem("wdl-name-lastname", $("#name-lastname").val());
+  $("#tel").val() && localStorage.setItem("wdl-tel", $("#tel").val());
+  $("#email").val() && localStorage.setItem("wdl-email", $("#email").val());
+  $("#lineid").val() && localStorage.setItem("wdl-lineid", $("#lineid").val());
+  $("#guest").val() && localStorage.setItem("wdl-guest", $("#guest").val());
+  $("#budget").val() && localStorage.setItem("wdl-budget", $("#budget").val());
+  $("#date").val() && localStorage.setItem("wdl-date", $("#date").val());
+  $("#message").val() && localStorage.setItem("wdl-message", $("#message").val());
 });
 
 if($('#wdl-form-general').length > 0) {
   $(document).ready(() => {
     setTimeout(() => {
-      $("#name-lastname").val(localStorage.getItem("wdl-name-lastname"));
-      $("#tel").val(localStorage.getItem("wdl-tel"));
-      $("#email").val(localStorage.getItem("wdl-email"));
-      $("#lineid").val(localStorage.getItem("wdl-lineid"));
-      $("#guest").val(localStorage.getItem("wdl-guest"));
-      $("#budget").val(localStorage.getItem("wdl-budget"));
-      $("#date").val(localStorage.getItem("wdl-date"));
-      $("#message").val(localStorage.getItem("wdl-message"));
+      $("#name-lastname").val(localStorage.getItem("wdl-name-lastname") || '');
+      $("#tel").val(localStorage.getItem("wdl-tel") || '');
+      $("#email").val(localStorage.getItem("wdl-email") || '');
+      $("#lineid").val(localStorage.getItem("wdl-lineid") || '');
+      $("#guest").val(localStorage.getItem("wdl-guest") || '');
+      $("#budget").val(localStorage.getItem("wdl-budget") || '');
+      $("#date").val(localStorage.getItem("wdl-date") || '');
+      $("#message").val(localStorage.getItem("wdl-message") || '');
   
       //checkAllGeneralFields();
     }, 2000);
@@ -940,22 +981,9 @@ $(window).click((event) => {
       $(`<li><span>${generalDirectData[0].title}</span></li>`)
     );
   }
-  if ($(event.target).hasClass("card-select-input")) {
-    compareBarUpdate($(event.target));
-    // Compare : prevent over-selection
-    if (selectedCard.length < 5) {
-      $(".card-select input[type=checkbox]").prop("disabled", false);
-    } else {
-      $(".card-select input[type=checkbox]:not(:checked)").prop(
-        "disabled",
-        true
-      );
-    }
-    let formGeneralList = () => {
-      return selectedCard.map((card) => `<li><span>${card.title}</span></li>`);
-    };
-    $(".wdl-form-general-list").html(formGeneralList());
-  }
+  /* if ($(event.target).hasClass("card-action-compare")) {
+    
+  } */
   /* if(generalDirectData) {
     } else {
       
@@ -969,24 +997,58 @@ $(window).click((event) => {
 // Compare : reset all selection after coming 'back'
 $(document).ready(() => {
   setTimeout(() => {
-    $(".card-select input[type=checkbox]").prop("checked", false);
+    $(".card-action-compare").removeClass("disabled");
   }, 50);
 });
 
 // Compare : add or remove selection
 const compareBarUpdate = (element) => {
-  if ($(element).is(":checked")) {
+  if ($(element).hasClass("active")) {
     selectedCard.push(JSON.parse($(element).attr("data-select")));
     compareBarAdd(JSON.parse($(element).attr("data-select")).title);
-    $(element).closest(".card").addClass("active");
+    $(element).addClass("active");
   } else {
     selectedCard.pop(JSON.parse($(element).attr("data-select")));
     compareBarRemove(JSON.parse($(element).attr("data-select")).title);
-    $(element).closest(".card").removeClass("active");
+    $(element).removeClass("active");
   }
 
   compareBarActive();
 };
+
+
+
+$('.card-action-compare').each((index, element) => {
+    $(element).click(() => {
+      console.log(element)
+
+      if ($(element).hasClass("disabled")) return;
+
+      if($(element).hasClass("active")) {
+        $(element).removeClass("active");
+      } else {
+        $(element).addClass("active");
+      }
+
+      compareBarUpdate($(element));
+
+      // Compare : prevent over-selection
+      if (selectedCard.length < 5) {
+        $('.card-action-compare').each((i, e) => {$(e).removeClass("disabled");})
+      } else {
+        $('.card-action-compare:not(.active)').each((i, e) => {$(e).addClass("disabled");})
+      }
+      
+      let formGeneralList = () => {
+        return selectedCard.map((card) => `<li><span>${card.title}</span></li>`);
+      };
+
+      $(".wdl-form-general-list").html(formGeneralList());
+      
+
+
+    })
+})
 
 // Compare : checkbox trigger
 /* $(".card-select input[type=checkbox]").each((index, element) => {
@@ -1020,27 +1082,24 @@ $(".wdl-compare-bar .wdl-compare-bar-selection-card").each((index, element) => {
       JSON.parse(
         $(titleEl)
           .closest(".card")
-          .find(".card-select input[type=checkbox]")
+          .find(".card-action-compare")
           .attr("data-select")
       )
     );
 
     $(titleEl)
       .closest(".card")
-      .find(".card-select input[type=checkbox]")
-      .prop("checked", false);
+      .find(".card-action-compare")
+      .removeClass("active");
     $(titleEl).closest(".card").removeClass("active");
 
     compareBarActive();
 
     // Compare : prevent over-selection
     if (selectedCard.length < 5) {
-      $(".card-select input[type=checkbox]").prop("disabled", false);
+      $(".card-action-compare").removeClass("disabled");
     } else {
-      $(".card-select input[type=checkbox]:not(:checked)").prop(
-        "disabled",
-        true
-      );
+      $(".card-action-compare:not(.active)").addClass("disabled");
     }
   });
 });
@@ -1287,6 +1346,7 @@ $('#form-line-contact').submit((event)=>{
   const formItems = $('#form-line-contact').attr('data-items').split(',')
   console.log(formItems)
   const messageArray = [$('#form-line-contact').attr('data-message-prefix')]
+  const messageSuffix = $('#form-line-contact').attr('data-message-suffix') ?? undefined
   formItems.forEach((e,i)=>{
     if($('#' + e).attr('type') === 'date') { 
       const date = new Date($('#' + e).val());
@@ -1297,6 +1357,7 @@ $('#form-line-contact').submit((event)=>{
       messageArray.push($('#' + e).attr('placeholder') + ' : ' + $('#' + e).val())
     }
   })
+  messageArray.push(messageSuffix)
 
   const messageBody = messageArray.join('\r')
 
@@ -1682,3 +1743,37 @@ jQuery(document).ready(function($) {
     });
   });
 });
+
+
+$('.wdl-album-toggle').each((i, e) => {
+  const $toggle = $(e);
+  const target = $toggle.attr('href');
+  $toggle.on('click', (event) => {
+    event.preventDefault();
+    const modal = new bootstrap.Modal(document.querySelector('#modal-album'));
+    modal.show();
+
+    $('.wdl-album-swiper').each((i, e) => $(e).addClass('d-none'));
+    $(target).removeClass('d-none');
+  });
+});
+
+$('.wdl-file-upload').each((i, e) => {
+  const input = $(e).find('input[type="file"]');
+  const preview = $(e).find('.image-preview');
+
+  input.on('change', (event) => {
+    const files = event.target.files;
+    if (files.length) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        preview.attr('src', e.target.result);
+      };
+      reader.readAsDataURL(files[0]);
+    }
+  });
+})
+
+$(document).ready(() => {
+  AOS.init();
+})

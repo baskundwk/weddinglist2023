@@ -1,0 +1,1 @@
+<?php handle_member_logout(); ?>

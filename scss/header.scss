@@ -1,3 +1,4 @@
+@use 'variable' as *;
 .admin-bar #main-header {
   top: 32px;
 
@@ -12,6 +13,13 @@
   backdrop-filter: blur(5px) saturate(4);
   z-index: 99998;
 
+  .navbar {
+    height: 72px;
+
+    @include max-width-xl {
+      height: 60px;
+    }
+  }
 }
 
 #main-header.et-fixed-header {

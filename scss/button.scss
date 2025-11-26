@@ -7,6 +7,7 @@
   background: #EB355D;
   border-radius: 12px;
   display: inline-block;
+  text-align: center;
   transition: 0.25s background ease-out;
   position: relative;
   &.disabled,
@@ -30,6 +31,7 @@
   box-shadow: 0 0 0 .5px #37bad6 inset;
   border-radius: 8px;
   display: inline-block;
+  text-align: center;
   transition: 0.25s background ease-out;
   position: relative;
 
@@ -62,6 +64,7 @@
   background: #EB355D;
   border-radius: 12px;
   display: inline-block;
+  text-align: center;
   transition: 0.25s background ease-out;
   position: relative;
   &.disabled,
@@ -85,6 +88,7 @@
   box-shadow: none;
   border-radius: 12px;
   display: inline-block;
+  text-align: center;
   transition:
     0.25s background ease-out,
     0.25s color ease-out;
@@ -106,6 +110,7 @@
   box-shadow: 0 0 0 1px rgba(235, 53, 93, 0.25) inset;
   border-radius: 12px;
   display: inline-block;
+  text-align: center;
   transition:
     0.25s background ease-out,
     0.25s color ease-out;
@@ -135,6 +140,7 @@
   background: #EB355D;
   border-radius: 50px;
   display: inline-block;
+  text-align: center;
   transition: 0.25s background ease-out;
   position: relative;
   &.disabled,
@@ -153,6 +159,7 @@
   background: #EB355D;
   border-radius: 12px;
   display: inline-block;
+  text-align: center;
   transition: 0.25s background ease-out;
   position: relative;
   &.disabled,
@@ -181,6 +188,7 @@
     display: block;
     color: #EB355D;
     opacity: 1;
+  text-align: center;
     transition:
       0.25s transform,
       0.25s opacity;
@@ -193,6 +201,7 @@
   background: #ffffff !important;
   box-shadow: 0 0 0 .5px #28a745 inset;
   color: #28a745 !important;
+  text-align: center;
   transition: 0.35s cubic-bezier(0, 0, 0, 1);
   display: inline-flex;
   gap: 10px;
@@ -215,6 +224,7 @@
     width: 20px;
     height: 20px;
     display: block;
+  text-align: center;
     transition: 0.35s cubic-bezier(0, 0, 0, 1);
   }
 }
@@ -224,6 +234,7 @@
   background: #ffffff !important;
   box-shadow: 0 0 0 .5px #28a745 inset;
   color: #28a745 !important;
+  text-align: center;
   transition: 0.35s cubic-bezier(0, 0, 0, 1);
   display: inline-flex;
   gap: 10px;
@@ -247,6 +258,7 @@
     width: 20px;
     height: 20px;
     display: block;
+  text-align: center;
     transition: 0.35s cubic-bezier(0, 0, 0, 1);
   }
 }
@@ -256,6 +268,7 @@
   color: #ffffff;
   box-shadow: 0 0 0 1px #28a745 inset;
   background: #28a745;
+  text-align: center;
   transition: 0.35s cubic-bezier(0, 0, 0, 1);
   display: inline-flex;
   gap: 10px;
@@ -276,6 +289,7 @@
     width: 20px;
     height: 20px;
     display: block;
+  text-align: center;
     transition: 0.35s cubic-bezier(0, 0, 0, 1);
   }
 }
@@ -283,6 +297,7 @@
 .wdl-btn-share {
   border: none;
   font-weight: 600;
+  text-align: center;
   transition:
     0.25s background ease-out,
     0.25s color ease-out,
@@ -305,6 +320,7 @@
     border-radius: 100px;
     aspect-ratio: 1/1;
     margin-bottom: 8px;
+  text-align: center;
     transition:
       0.25s background ease-out,
       0.25s color ease-out,
@@ -337,6 +353,7 @@
   background: transparent;
   border-radius: 12px;
   display: inline-block;
+  text-align: center;
   transition: 0.25s background ease-out;
   position: relative;
   &.disabled,
