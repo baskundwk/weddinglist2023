@@ -65,19 +65,21 @@ $campaignPopupMiddle = new WP_Query([
 ?>
 <?php if($popup->have_posts()): ?>
   <div class="modal fade wdl-ad-popup-extended wdl-modal-autotrigger" tabindex="-1">
-    <div class="modal-dialog modal-lg justify-content-center"> <!-- modal-dialog-centered -->
+    <div class="modal-dialog modal-lg justify-content-center modal-dialog-centered">
       <div class="modal-content mb-0">
         <button class="btn-close" data-bs-dismiss="modal" aria-label="Close" type="button"></button>
         <div class="swiper wdl-ad-popup-swiper">
           <div class="swiper-wrapper">
-            <div class="swiper-slide">
-              <img src="https://www.weddinglist.co.th/wp-content/uploads/2025/10/wdl-splash-queen-2025-10-28.png" alt="" srcset="">
-            </div>
             <?php if($campaignPopupBefore->have_posts()) :
             while($campaignPopupBefore->have_posts()):
-            $campaignPopupBefore->the_post(); ?>
+            $campaignPopupBefore->the_post();
+            if(get_field('CampaignPopupBefore')) : ?>
             <div class="swiper-slide">
-              <a href="<?php the_permalink();?>"
+              <a href="<?php if(get_field('CampaignLandingPage', $campaignId)) {
+                    echo esc_url( get_permalink(get_field('CampaignLandingPage', $campaignId)->ID));
+                  } else {
+                    the_permalink();
+                  }?>?utm_source=website&utm_medium=website&utm_campaign=tw2026&utm_content=popup"
                 data-dlev="adsClick"
                 data-dlcomp="ads - popup"
                 data-dltgt="<?php echo esc_attr(get_the_title()); ?>">
@@ -86,13 +88,19 @@ $campaignPopupMiddle = new WP_Query([
                 </figure>
               </a>
             </div>
-            <?php endwhile;
+            <?php endif;
+            endwhile;
             endif; ?>
             <?php if($campaignPopupMiddle->have_posts()) :
             while($campaignPopupMiddle->have_posts()):
-            $campaignPopupMiddle->the_post(); ?>
+            $campaignPopupMiddle->the_post();
+            if(get_field('CampaignPopupMiddle')) : ?>
             <div class="swiper-slide">
-              <a href="<?php the_permalink();?>"
+              <a href="<?php if(get_field('CampaignLandingPage', $campaignId)) {
+                    echo esc_url( get_permalink(get_field('CampaignLandingPage', $campaignId)->ID));
+                  } else {
+                    the_permalink();
+                  }?>?utm_source=website&utm_medium=website&utm_campaign=tw2026&utm_content=popup"
                 data-dlev="adsClick"
                 data-dlcomp="ads - popup"
                 data-dltgt="<?php echo esc_attr(get_the_title()); ?>">
@@ -101,11 +109,13 @@ $campaignPopupMiddle = new WP_Query([
                 </figure>
               </a>
             </div>
-            <?php endwhile;
+            <?php endif;
+            endwhile;
             endif; ?>
             <?php if($popup->have_posts()) :
             while($popup->have_posts()):
-            $popup->the_post(); ?>
+            $popup->the_post();
+            if(get_field('PopupAdImage')) : ?>
             <div class="swiper-slide">
               <a href="<?php
               if(get_field('PopupAdLink')) {
@@ -122,7 +132,8 @@ $campaignPopupMiddle = new WP_Query([
                 </figure>
               </a>
             </div>
-            <?php endwhile;
+            <?php endif;
+            endwhile;
             endif; ?>
           </div>
           <div class="swiper-navigation swiper-navigation-ad-popup swiper-navigation-small">

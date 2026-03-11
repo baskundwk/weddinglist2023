@@ -1,7 +1,7 @@
 <?php
 if (is_user_logged_in()) {
   //$post_status = 'any';
-  $post_status = 'publish';
+  $post_status = 'any';
 } else {
   $post_status = 'publish';
 }
@@ -120,9 +120,3 @@ if (isset(get_queried_object()->taxonomy)) {
 }
 
 query_posts($arg);
-
-
-/*   if(is_user_logged_in()) {
-    print_r(get_queried_object());
-  }
- */

@@ -1,6 +1,6 @@
 #adminmenu .menu-top[class*=toplevel_page_text-title-] {
   pointer-events: none;
-  color: #999;
+  color: #999999;
   font-size: 13px;
   min-height: 0;
 }
@@ -88,6 +88,12 @@
 #adminmenu li.opensub > a.menu-top,
 #adminmenu li > a.menu-top:focus {
   background: #EB355D;
+  color: #FFFFFF;
+}
+#adminmenu li a:focus div.wp-menu-image:before,
+#adminmenu li.opensub div.wp-menu-image:before,
+#adminmenu li:hover div.wp-menu-image:before {
+  color: #FFFFFF;
 }
 #adminmenu .wp-has-current-submenu .wp-submenu a:focus,
 #adminmenu .wp-has-current-submenu .wp-submenu a:hover,

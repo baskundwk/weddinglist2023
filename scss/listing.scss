@@ -267,17 +267,22 @@
   @include min-width-md {
     grid-template-columns: repeat(3, 1fr);
   } */
-
-  @include max-width-sm {
-    gap: 8px;
-  }
-  @include max-width-md {
-    gap: 16px;
-  }
+  
   @include min-width-lg {
     grid-template-columns: repeat(4, 1fr);
   }
+  @include max-width-sm {
+    gap: 8px;
+  }
+}
 
+.wdl-listing-grid-swiper {
+  .wdl-card-listing-thumbnail {
+    .wdl-card-listing-thumbnail-title,
+    .wdl-card-listing-thumbnail-title p {
+      font-size: 16px;
+    }
+  }
 }
 
 .wdl-card-listing-thumbnail {

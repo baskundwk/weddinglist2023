@@ -330,10 +330,14 @@
   justify-content: start;
   gap: 8px;
   text-shadow: 0 1px 3px rgba(0,0,0,0.2);
+  text-align: center;
   
   @include max-width-md {
     left: 50%;
     transform: translateX(-50%);
     right: auto;
+    font-size: 14px;
+    justify-content: center;
+    width: calc(100% - 24px);
   }
 }

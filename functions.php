@@ -45,6 +45,27 @@ add_image_size('w425', '425', '425', false);
 add_image_size('h270', '999', '270', false);
 apply_filters('post_thumbnail_size', 'w350');
 
+/* Helper function to check if post has a real thumbnail (not default) */
+function wdl_has_real_thumbnail($post_id = null) {
+	if (!$post_id) {
+		$post_id = get_the_ID();
+	}
+	
+	// Check if post has thumbnail
+	if (!has_post_thumbnail($post_id)) {
+		return false;
+	}
+	
+	// Get the thumbnail ID
+	$thumbnail_id = get_post_thumbnail_id($post_id);
+	
+	// Get default thumbnail ID (set by Default Featured Image plugin)
+	$default_thumbnail_id = get_option('dfi_image_id');
+	
+	// Compare: if thumbnail is not the default one, return true
+	return ($thumbnail_id && $thumbnail_id != $default_thumbnail_id);
+}
+
 /* * Customize plugin WP Search Suggest */
 function wp_search_suggest_custom($query_args) {
 	$query_args += ['posts_per_page' => 10, 'orderby' => 'relevance'];
@@ -276,6 +297,11 @@ function send_email() {
 		]
 	));
 
+
+	// Update user's IP address to post meta
+	$user_ip = $_SERVER['REMOTE_ADDR'];
+	update_post_meta($new_post_id, 'user_ip', $user_ip);
+
 	if ($selectedCoupon && $selectedCoupon !== '') {
 		$email_body_client =
 			"<div style='background:#EEEEEE; padding:32px;'>" .
@@ -479,6 +505,11 @@ function send_email_business() {
 			'message' => $message,
 		]
 	));
+
+
+	// Update user's IP address to post meta
+	$user_ip = $_SERVER['REMOTE_ADDR'];
+	update_post_meta($new_post_id, 'user_ip', $user_ip);
 
 	$current_url = wp_get_referer();
 	wp_redirect(add_query_arg('status', 'error', $current_url));
@@ -700,26 +731,29 @@ function custom_menu_order($menu_order) {
 		'edit.php?post_type=wedding-fair',
 		'edit.php?post_type=venue',
 		'edit.php?post_type=vendor',
-		'edit.php?post_type=consultant',
-		'edit.php?post_type=coupon',
-		'edit.php?post_type=listing',
 		'edit.php?post_type=moment',
+		'edit.php?post_type=listing',
+		'edit.php?post_type=consultant',
+		'edit.php?post_type=testimonial',
+		'edit.php?post_type=coupon',
 		'edit.php?post_type=video',
 		'edit.php?post_type=campaign',
+		'edit.php?post_type=tw-review',
 		'text-title-2',
-		'edit.php?post_type=lead',
 		'upload.php',
-		'users.php?post_type=lead',
-		'smush',
-		'blc_dash',
-		'rank-math',
+		'edit.php?post_type=lead',
+		'edit.php?post_type=tw-lead',
+		'edit.php?post_type=tw-lead-business',
+		'edit.php?post_type=member',
 		'weddinglist-setting',
-		'loco',
+		'archive-setting',
+		'friendly-search-setting',
+		'rank-math',
 		'users.php',
-		'tools.php',
-		'litespeed',
 		'themes.php',
-		'Wordfence',
+		'tools.php',
+		'plugins.php',
+		'text-title-3',
 		'options-general.php',
 	];
 }
@@ -736,7 +770,7 @@ function add_dynamic_guiding_text_items() {
 	$dynamic_titles = [
 		'1' => 'Content',
 		'2' => 'Management',
-		//'3' => 'Administration'
+		'3' => 'Administration'
 	];
 
 	foreach ($dynamic_titles as $slug => $title) {
@@ -771,7 +805,7 @@ function group_all_plugins_and_settings() {
 	$custom_top_menu_slug = 'options-general.php';
 
 	// List of menu slugs to move
-	$move_slugs = [
+	/* $move_slugs = [
 		'plugins.php',
 		'cookie-law-info',
 		'copy-delete-posts',
@@ -791,10 +825,10 @@ function group_all_plugins_and_settings() {
 		'catch-infinite-scroll',
 
 		// Add any additional slugs for plugins you want to include
-	];
+	]; */
 
 	// Move each slug as a submenu of the custom top menu
-	foreach ($menu as $key => $item) {
+	/* foreach ($menu as $key => $item) {
 		//echo '<script>console.log("'.$item[2].'");</script>';
 		if (in_array($item[2], $move_slugs)) {
 
@@ -809,7 +843,7 @@ function group_all_plugins_and_settings() {
 			// Remove from the top-level menu
 			unset($menu[$key]);
 		}
-	}
+	} */
 }
 add_action('admin_menu', 'group_all_plugins_and_settings', 1000000); // Priority 100 ensures other menus are loaded first
 
@@ -991,6 +1025,10 @@ function handleTW2026FormSubmit() {
 			'contactEmail',
 			'contactLine',
 			'province',
+			'utm_source',
+			'utm_medium',
+			'utm_campaign',
+			'utm_content'
 		];
 		$post_data = [];
 		foreach ($fields as $field) {
@@ -1019,6 +1057,10 @@ function handleTW2026FormSubmit() {
 			foreach ($post_data as $key => $value) {
 				update_post_meta($post_id, $key, $value);
 			}
+
+			// Update user's IP address to post meta
+			$user_ip = $_SERVER['REMOTE_ADDR'];
+			update_post_meta($post_id, 'user_ip', $user_ip);
 
 			// Prepare email content
 			$admin_email = 'support@weddinglist.co.th';

@@ -6,7 +6,6 @@
   <link rel="pingback" href="<?php bloginfo('pingback_url'); ?>" />
   <title><?php echo wp_title()?></title>
   <script id="jquery-slim" type="text/javascript" src="<?php echo get_theme_file_uri() . '/library/jquery/jquery-3.7.1.min.js' ?>"></script>
-  <!-- 1HEF5P2XD1 -->
   <!-- Google Tag Manager -->
   <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
   new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -15,26 +14,15 @@
   })(window,document,'script','dataLayer','GTM-PFFL69SH');</script>
   <!-- End Google Tag Manager -->
 
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-1HEF5P2XD1"></script>
+  <!-- Google tag (gtag.js) : TW2026 Conversion -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-16540240935"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
 
-    gtag('config', 'G-1HEF5P2XD1');
+    gtag('config', 'AW-16540240935');
   </script>
-  
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-GTM-PFFL69SH"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-
-    gtag('config', 'G-GTM-PFFL69SH');
-  </script>
-  
   <?php wp_head(); ?>
 </head>
 
@@ -114,11 +102,13 @@ if(isset($campaignModeEnabled)) {
 ?>
 
 <body <?php body_class(); ?>>
-  <!-- Google Tag Manager (noscript) -->
-  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PFFL69SH"
-  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-  <!-- End Google Tag Manager (noscript) -->
-
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-PFFL69SH');</script>
+  <!-- End Google Tag Manager -->
   <?php
   wp_body_open();
   $post_type = get_post_type();
@@ -129,79 +119,79 @@ if(isset($campaignModeEnabled)) {
   if($popup != true || $post_type != 'coupon') :
   ?>
 
+  <?php if(!isset($hideStrip) || !$hideStrip) : ?>
   <?php if(isset($campaignModeEnabled)) { 
     while($currentCampaignQuery->have_posts()) {
       $currentCampaignQuery->the_post(); ?>
 
-    <a href="<?php echo the_permalink()?>"
-      data-dlev="linkClick",
-      data-dlcomp="link - campaign - bar",
-      data-dltgt="<?php the_title()?>">
-      <div id="campaign-header" class="wdl-campaign-header"
-      style="
-        --campaign-color-1: <?php the_field('CampaignColor1');?>;
-        --campaign-color-2: <?php the_field('CampaignColor1');?>;
-      ">
-        <div class="container-xl d-flex flex-column justify-content-center flex-lg-row justify-content-lg-between align-items-center">
-          <?php /* <div class="logo">
-            <img src="<?php echo get_field('CampaignLogo')['url'];?>" alt="<?php the_title(); ?>">
-          </div> */ ?>
-          <div class="countdown">
-            <?php if(get_field('CampaignCountdown')) : ?>
-            <div class="text">
-              <?php _e('หมดเวลาใน', 'wdl') ?>
-              <div class="wdl-campaign-countdown" data-date="<?php echo get_field('CampaignDateEnd');?>">
-                <div class="unit day">
-                  <div class="number loading"></div>
-                  <div class="suffix"><?php _e('วัน','wdl') ?></div>
-                </div>
-                <div class="separator">
-                  :
-                </div>
-                <div class="unit hour">
-                  <div class="number loading"></div>
-                  <div class="suffix"><?php _e('ชม.','wdl') ?></div>
-                </div>
-                <div class="separator">
-                  :
-                </div>
-                <div class="unit minute">
-                  <div class="number loading"></div>
-                  <div class="suffix"><?php _e('นาที','wdl') ?></div>
-                </div>
-                <div class="separator">
-                  :
-                </div>
-                <div class="unit second">
-                  <div class="number loading"></div>
-                  <div class="suffix"><?php _e('วินาที','wdl') ?></div>
-                </div>
+    <div id="campaign-header" class="wdl-campaign-header"
+    style="
+      --campaign-color-1: <?php the_field('CampaignColor1');?>;
+      --campaign-color-2: <?php the_field('CampaignColor1');?>;
+    ">
+      <div class="container-xl d-flex flex-column justify-content-center flex-lg-row justify-content-lg-between align-items-center">
+        <?php /* <div class="logo">
+          <img src="<?php echo get_field('CampaignLogo')['url'];?>" alt="<?php the_title(); ?>">
+        </div> */ ?>
+        <div class="countdown">
+          <?php if(get_field('CampaignCountdown')) : ?>
+          <div class="text">
+            <?php _e('หมดเวลาใน', 'wdl') ?>
+            <div class="wdl-campaign-countdown" data-date="<?php echo get_field('CampaignDateEnd');?>">
+              <div class="unit day">
+                <div class="number loading"></div>
+                <div class="suffix"><?php _e('วัน','wdl') ?></div>
+              </div>
+              <div class="separator">
+                :
+              </div>
+              <div class="unit hour">
+                <div class="number loading"></div>
+                <div class="suffix"><?php _e('ชม.','wdl') ?></div>
+              </div>
+              <div class="separator">
+                :
+              </div>
+              <div class="unit minute">
+                <div class="number loading"></div>
+                <div class="suffix"><?php _e('นาที','wdl') ?></div>
+              </div>
+              <div class="separator">
+                :
+              </div>
+              <div class="unit second">
+                <div class="number loading"></div>
+                <div class="suffix"><?php _e('วินาที','wdl') ?></div>
               </div>
             </div>
-            <?php endif; ?>
           </div>
+          <?php endif; ?>
         </div>
-        <?php
-          $campaignStripDesktop = get_field('HeaderStripDesktop');
-          $campaignStripMobile = get_field('HeaderStripMobile');
-
-          if($campaignStripDesktop && $campaignStripMobile) { ?>
-          <a href="<?php 
-          if(get_field('CampaignLandingPage')) {
-            echo esc_url( get_permalink(get_field('CampaignLandingPage')->ID));
-          } else {
-            the_permalink();
-          }
-          ?>" class="wdl-campaign-header-background">
-            <img class="d-none d-lg-block" src="<?php echo $campaignStripDesktop['url'];?>" alt="<?php the_title(); ?>">
-            <img class="d-block d-lg-none" src="<?php echo $campaignStripMobile['url'];?>" alt="<?php the_title(); ?>">
-          </a>
-        <?php } ?>
       </div>
-    </a>
+      <?php
+        $campaignStripDesktop = get_field('HeaderStripDesktop');
+        $campaignStripMobile = get_field('HeaderStripMobile');
+
+        if($campaignStripDesktop && $campaignStripMobile) { ?>
+        <a href="<?php 
+        if(get_field('CampaignLandingPage')) {
+          echo esc_url( get_permalink(get_field('CampaignLandingPage')->ID));
+        } else {
+          the_permalink();
+        }
+        ?>?utm_source=website&utm_medium=website&utm_campaign=tw2026&utm_content=strip" class="wdl-campaign-header-background"
+        data-dlev="linkClick"
+        data-dlcomp="link - campaign - bar"
+        data-dltgt="<?php the_title()?>">
+          <img class="d-none d-lg-block" src="<?php echo $campaignStripDesktop['url'];?>" alt="<?php the_title(); ?>">
+          <img class="d-block d-lg-none" src="<?php echo $campaignStripMobile['url'];?>" alt="<?php the_title(); ?>">
+        </a>
+      <?php } ?>
+    </div>
     <?php wp_reset_postdata();
     }?>
   <?php }?>
+  <?php endif; ?>
   <?php if(!isset($hideNav) || !$hideNav === true) : ?>
   <div id="modalSearch" class="modal fade">
     <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -236,16 +226,16 @@ if(isset($campaignModeEnabled)) {
   </div>
   <header id="main-header" class="sticky-top">
     <div class="navbar navbar-expand-xl">
-      <div class="container-xl">
+      <div class="container-xxl">
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#top-menu-collapse" aria-controls="wdlNavbar" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="navbar-brand">
           <a href="<?php echo esc_url(home_url('/')); ?>" title="ไปหน้าแรกของ Weddinglist">
-            <img class="grayscale" loading="lazy" src="<?php echo get_theme_file_uri() . '/images/logo.png';?>" alt="Weddinglist" width="181" height="44">
+            <img loading="lazy" src="<?php echo get_theme_file_uri() . '/images/logo.webp';?>" alt="Weddinglist" width="181" height="44">
           </a>
         </div>
-        <nav class="navbar-social grayscale">
+        <nav class="navbar-social">
           <ul class="navbar-nav">
             <li><a
               data-dlev="linkClick"
@@ -277,20 +267,18 @@ if(isset($campaignModeEnabled)) {
         </button>
         <?php
         $member_data = get_current_member();
-        if(is_user_logged_in(  )) : 
-          if($member_data) :?>
-            <a href="<?php echo home_url( '/member/profile' ) ?>" class="wdl-btn-secondary py-2 d-none d-xl-flex gap-1 order-last text-14">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 256 256"><path d="M230.92,212c-15.23-26.33-38.7-45.21-66.09-54.16a72,72,0,1,0-73.66,0C63.78,166.78,40.31,185.66,25.08,212a8,8,0,1,0,13.85,8c18.84-32.56,52.14-52,89.07-52s70.23,19.44,89.07,52a8,8,0,1,0,13.85-8ZM72,96a56,56,0,1,1,56,56A56.06,56.06,0,0,1,72,96Z"></path></svg>
-              <span class="lineclamp-1">
-                <?php echo __('สวัสดี, ', 'wdl') . explode(' ', get_the_title($member_data->ID))[0]; ?>
-              </span>
-            </a>
-            <?php else : ?>
-            <a href="<?php echo esc_url( home_url( '/member' ) ); ?>" class="wdl-btn-secondary py-2 d-none d-xl-flex gap-1 order-last text-14">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 256 256"><path d="M230.92,212c-15.23-26.33-38.7-45.21-66.09-54.16a72,72,0,1,0-73.66,0C63.78,166.78,40.31,185.66,25.08,212a8,8,0,1,0,13.85,8c18.84-32.56,52.14-52,89.07-52s70.23,19.44,89.07,52a8,8,0,1,0,13.85-8ZM72,96a56,56,0,1,1,56,56A56.06,56.06,0,0,1,72,96Z"></path></svg>
-              <?php _e('ระบบสมาชิก', 'wdl') ?>
-            </a>
-          <?php endif; ?>
+        if($member_data) :?>
+          <a href="<?php echo home_url( '/member/profile' ) ?>" class="wdl-btn-secondary py-2 d-none d-xl-flex gap-1 order-last text-14">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 256 256"><path d="M230.92,212c-15.23-26.33-38.7-45.21-66.09-54.16a72,72,0,1,0-73.66,0C63.78,166.78,40.31,185.66,25.08,212a8,8,0,1,0,13.85,8c18.84-32.56,52.14-52,89.07-52s70.23,19.44,89.07,52a8,8,0,1,0,13.85-8ZM72,96a56,56,0,1,1,56,56A56.06,56.06,0,0,1,72,96Z"></path></svg>
+            <span class="lineclamp-1">
+              <?php echo __('สวัสดี, ', 'wdl') . explode(' ', get_the_title($member_data->ID))[0]; ?>
+            </span>
+          </a>
+          <?php else : ?>
+          <a href="<?php echo esc_url( home_url( '/member' ) ); ?>" class="wdl-btn-secondary py-2 d-none d-xl-flex gap-1 order-last text-14">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 256 256"><path d="M230.92,212c-15.23-26.33-38.7-45.21-66.09-54.16a72,72,0,1,0-73.66,0C63.78,166.78,40.31,185.66,25.08,212a8,8,0,1,0,13.85,8c18.84-32.56,52.14-52,89.07-52s70.23,19.44,89.07,52a8,8,0,1,0,13.85-8ZM72,96a56,56,0,1,1,56,56A56.06,56.06,0,0,1,72,96Z"></path></svg>
+            <?php _e('ระบบสมาชิก', 'wdl') ?>
+          </a>
         <?php endif; ?>
         <?php wp_nav_menu(
           array(

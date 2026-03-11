@@ -7,7 +7,7 @@
     data-dlcomp="card - listing"
     data-dltgt="<?php echo esc_attr(get_the_title())?>">
       <div class="wdl-card-listing-thumbnail-image">
-        <?php the_post_thumbnail( 'w425' )?>
+        <?php the_post_thumbnail( 'w425', array( 'loading' => 'lazy' ) )?>
       </div>
       <div class="wdl-card-listing-thumbnail-title">
         <p><?php 

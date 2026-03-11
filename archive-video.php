@@ -1,11 +1,22 @@
 <?php include get_stylesheet_directory().'/components/header.php' ?>
 
 <main>
-  <?php include get_stylesheet_directory().'/queries/query-video.php' ?>
+  <?php 
+    if(!isset($query_override)) {
+      include get_stylesheet_directory().'/queries/query-video.php';
+    }?>
   <section class="py-4 bg-gray border-bottom">
     <div class="container-xl">
       <h1 class="mb-0">
-        <?php _e('รวมวิดีโอแนะนำ','wdl'); ?>
+        <?php if(isset($title_override)): ?>
+          <?php echo esc_html($title_override); ?>
+        <?php else: ?>
+          <?php if(get_field('video_archive_title', 'option')): ?>
+            <?php echo esc_html(get_field('video_archive_title', 'option')); ?>
+          <?php else: ?>
+            <?php _e('รวมวิดีโอแนะนำ','wdl'); ?>
+          <?php endif; ?>
+        <?php endif; ?>
       </h1>
       <p class="text-secondary mb-2">
         <?php _e('รวมรายการรวมวิดีโอแนะนำ จากสถานที่จัดงานแต่งงานชั้นนำทุกรูปแบบ อัพเดทล่าสุด','wdl'); ?>
@@ -21,7 +32,7 @@
         'posts_per_page' => 7
       ]);?>
 
-      <?php if(count($playlists) > 0) {?>
+      <?php if(count($playlists) > 0 && !isset($query_override)) {?>
       <div class="d-flex justify-content-between align-items-baseline">
         <h2 class="mb-2"><?php _e('Playlist ล่าสุด', 'wdl')?></h2>
         <a href="<?php echo home_url( '/video-playlist' )?>" class="wdl-btn-more"><?php _e('ดู Playlist ทั้งหมด','wdl')?></a>
@@ -45,6 +56,13 @@
   <?php if (have_posts()): ?>
   <section class="pb-5">
     <div class="container-xl wdl-archive-infinite-scroll">
+      <?php 
+        if(isset($title_override)) { ?>
+          <a href="<?php echo home_url( '/video' ) ?>" class="d-block mb-3">
+            <i data-feather="chevron-left"></i><span>วิดีโอทั้งหมด</span>
+          </a>
+        <?php }
+      ?>
       <h2 class="mb-2"><?php _e('Video ล่าสุด', 'wdl')?></h2>
       <div class="wdl-video-grid wdl-archive-infinite-scroll-wrapper" id="wdl-archive-infinite-scroll-wrapper">
         <?php while (have_posts()): ?>

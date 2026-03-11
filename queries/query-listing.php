@@ -64,9 +64,3 @@ $arg = [
 ];
 
 query_posts($arg);
-
-
-/*   if(is_user_logged_in()) {
-    print_r(get_queried_object());
-  }
- */

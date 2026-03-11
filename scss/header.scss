@@ -102,6 +102,10 @@
         background: none;
         color: #fa0403;
       }
+
+      @include max-width-xxl {
+        padding: 12px 0;
+      }
     }
 
     .sub-menu {
@@ -258,9 +262,10 @@ nav.et-menu-nav,
   width: 100%;
   justify-content: space-between;
   padding-left: 20px;
+  gap: 12px;
 }
 
-@media (min-width: 1200px) {
+@include min-width-xxl {
   nav#top-menu-nav,
   #top-menu,
   nav.et-menu-nav,
@@ -278,4 +283,16 @@ nav.et-menu-nav,
 #top-menu ul {
   display: flex;
   list-style: none;
+}
+
+#top-menu-collapse {
+  @include max-width-xl {
+    padding: 12px;
+    background: #FFFFFF;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.16);
+    width: 100%;
+    position: absolute;
+    top: 100%;
+    left: 0;
+  }
 }

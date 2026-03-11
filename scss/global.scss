@@ -68,7 +68,7 @@ hr {
     }
   }
 
-  @include max-width-xl {
+  @include max-width-xxl {
     display: none;
   }
 }
@@ -195,6 +195,10 @@ h6 {
 
 .font-mitr {
   font-family: 'Mitr', sans-serif !important;
+
+  input {
+    font-family: 'Mitr', sans-serif !important;
+  }
 }
 
 h1,
@@ -356,14 +360,14 @@ body {
 
     .swiper-button-prev {
       @media (min-width: 1200px) {
-        left: 12px;
+        left: 8px;
         transform: translateX(-50%);
       }
     }
 
     .swiper-button-next {
       @media (min-width: 1200px) {
-        right: 12px;
+        right: 8px;
         transform: translateX(50%);
       }
     }
@@ -372,19 +376,19 @@ body {
       .swiper-button-next,
       .swiper-button-prev {
         background: #ffffff;
-        width: 1.75rem;
-        height: 1.75rem;
+        width: 1.5rem;
+        height: 1.5rem;
         border-radius: 5rem;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
         transition: 0.35s opacity;
 
         &:after {
-          font-size: 0.85rem;
+          font-size: 0.75rem;
         }
 
         @media (max-width: 991px) {
-          width: 1.5rem;
-          height: 1.5rem;
+          width: 1.25rem;
+          height: 1.25rem;
         }
 
         &[aria-disabled="true"] {
@@ -482,6 +486,15 @@ body {
 .bg-gray {
   background: #fafafa;
 }
+.bg-gray2 {
+  background: #EAEAEA;
+}
+.bg-red {
+  background: #EB355D;
+}
+.text-gray {
+  color: #777777 !important;
+}
 .text-13 {
   font-size: 13px;
   line-height: 1.25;
@@ -552,4 +565,12 @@ img {
 
 .grayscale {
   filter: grayscale(1);
+}
+
+.wdl-frontpage-title {
+  font-size: 28px;
+
+  @include max-width-md {
+    font-size: 16px;
+  }
 }

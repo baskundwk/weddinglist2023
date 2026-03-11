@@ -1,1 +1,0 @@
-<?php include 'taxonomy-vendor-type.php' ?>

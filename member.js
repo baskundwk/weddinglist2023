@@ -351,7 +351,7 @@ $(document).ready(()=>{
   })
 
   /* Wishlist */
-  $('.card-action-wishlist').each((i, e) => {
+  $('div.card-action-wishlist').each((i, e) => {
     $(e).click(() => {
 
       const memberAuth = document.cookie.split('; ').find(row => row.startsWith('member_auth='));

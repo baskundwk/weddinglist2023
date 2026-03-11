@@ -636,3 +636,17 @@ label {
     font-weight: 400;
   }
 }
+
+form {
+  button[type="submit"] {
+    &.loading {
+      pointer-events: none;
+      opacity: 0.6;
+      cursor: not-allowed;
+
+      .loader {
+        display: inline-block;
+      }
+    }
+  }
+}

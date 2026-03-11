@@ -70,7 +70,7 @@
     }
 
     @include max-width-sm {
-      bottom: 36px;
+      bottom: 16px;
 
       .subtitle {
         font-size: 18px;
@@ -88,11 +88,18 @@
     justify-content: flex-end;
     gap: 20px;
 
-    @include max-width-lg {
-      display: none;
-    }
     img {
-      width: 50px;
+      height: 50px;
+    }
+
+    @include max-width-lg {
+      justify-content: center;
+      margin-top: 8px;
+      gap: 12px;
+
+      img {
+        height: 35px;
+      }
     }
   }
 
@@ -258,6 +265,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
   .showcase-grid {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -412,7 +420,7 @@
         display: flex;
         flex-direction: column;
         gap: 8px;
-        .wedding-lis-our-partner-content-title {
+        .wdl-our-partner-content-title {
           display: flex;
           flex-direction: column;
           gap: 12px;
@@ -445,7 +453,7 @@
             }
           }
         }
-        .wedding-lis-our-partner-content-logo {
+        .wdl-our-partner-content-logo {
           .partner-grid-wrapper {
             display: grid;
             grid-template-columns: repeat(11, minmax(0, 1fr));
@@ -460,6 +468,7 @@
               img {
                 aspect-ratio: 1/1;
                 object-fit: contain;
+                width: 100%;
               }
             }
           }
@@ -1264,6 +1273,7 @@
 
     @include max-width-lg {
       gap: 12px;
+      align-items: center;
     }
 
     .highlight {
@@ -1499,6 +1509,10 @@
   position: relative;
   padding: 80px 0;
   background-size: cover;
+
+  @include max-width-lg {
+    padding: 40px 0;
+  }
 
   .form-card {
     max-width: 900px;

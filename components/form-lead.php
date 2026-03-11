@@ -1,3 +1,4 @@
+<!-- General Form -->
 <?php 
   if(is_single( )) {
     $formType = get_post_type_object(get_post_type())->labels->singular_name;
@@ -84,7 +85,7 @@
             <?php } ?>
 
 
-            <?php /* if($formType !== 'Vendor') {
+            <?php if($formType !== 'Vendor') {
               $availablePackageTypes = [];
 
               if(checkPackage('Package') || checkPackage('WeddingPackage')) {
@@ -98,16 +99,20 @@
               }
             if(count($availablePackageTypes) > 0) { ?>
               <div class="col-md-12">
-                <div class="d-block"><label><?php _e('ประเภท Package', 'wdl')?></label></div>
-                <div class="wdl-checkbox-button">
-                  <?php 
-                  foreach($availablePackageTypes as $packageType) { ?>
-                    <input <?php if(count($availablePackageTypes) < 2) {echo 'checked';}?> type="radio" name="packageType" id="packageType-<?php echo $packageType ?>" value="<?php echo $packageType ?>" /><label for="packageType-<?php echo $packageType ?>"><?php echo $packageType ?></label>
-                  <?php } ?>
+                <div id="package-type-field" class="d-flex flex-column flex-xl-row align-items-xl-center gap-xl-5 position-relative z-1">
+                  <div class="wdl-label-aside"><?php _e('ประเภท Package', 'wdl')?></div>
+                  <div class="w-100">
+                    <div class="wdl-checkbox-button">
+                      <?php 
+                      foreach($availablePackageTypes as $packageType) { ?>
+                        <input <?php if(count($availablePackageTypes) < 2) {echo 'checked';}?> type="radio" name="packageType" id="packageType-<?php echo $packageType ?>" value="<?php echo $packageType ?>" /><label for="packageType-<?php echo $packageType ?>"><?php echo $packageType ?></label>
+                      <?php } ?>
+                    </div>
+                  </div>
                 </div>
               </div>  
             <?php }
-            } */ ?>
+            } ?>
 
             <?php if($formType !== 'Vendor') : ?>
             <hr class="my-2 my-md-3">
@@ -251,7 +256,7 @@
         data-dlcomp="button - <?php echo $formType ?> - cta"></button>
       <div class="modal-body text-center">
         <div class="py-4">
-          <img class="mb-4" src="<?php echo(get_theme_file_uri() . '/images/logo.png') ?>" alt="Weddinglist" width="180" height="43">
+          <img class="mb-4" src="<?php echo(get_theme_file_uri() . '/images/logo.webp') ?>" alt="Weddinglist" width="180" height="43">
           <p class="h2 text-red"><?php _e('ลงทะเบียนสำเร็จ กรุณายืนยันตัวตนเพื่อรับคูปอง','wdl') ?></p>
           <p><?php _e('ระบบได้ส่งลิงค์ยืนยันตัวตนไปยังอีเมล<br/>หากไม่พบอีเมลดังกล่าวกรุณาตรวจสอบในกล่องเมลขยะของบัญชีคุณ', 'wdl') ?></p>
         </div>
@@ -265,7 +270,7 @@
       <button class="btn-close" data-bs-dismiss="modal" aria-label="Close modal"></button>
       <div class="modal-body text-center">
         <div class="py-4">
-          <img class="mb-4" src="<?php echo(get_theme_file_uri() . '/images/logo.png') ?>" alt="Weddinglist" width="180" height="43">
+          <img class="mb-4" src="<?php echo(get_theme_file_uri() . '/images/logo.webp') ?>" alt="Weddinglist" width="180" height="43">
           <p class="h2 text-red"><?php _e('ลงทะเบียนสำเร็จ','wdl') ?></p>
           <p><?php _e('ทางโรงแรมที่ท่านได้เลือกไว้จะติดต่อกลับมาในไม่ช้า ขอบคุณค่ะ', 'wdl') ?></p>
         </div>

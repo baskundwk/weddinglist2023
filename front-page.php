@@ -52,7 +52,7 @@
                   } else {
                     the_permalink();
                   }
-                  ?>">
+                  ?>?utm_source=website&utm_medium=website&utm_campaign=tw2026&utm_content=weddingfair-panel">
                   <img src="<?php echo esc_html($weddingFairPanelDesktop['url']) ?>" alt="<?php echo esc_html($weddingFairPanelDesktop['alt']) ?>">
                 </a>
               </div>
@@ -63,7 +63,7 @@
                   } else {
                     the_permalink();
                   }
-                  ?>">
+                  ?>?utm_source=website&utm_medium=website&utm_campaign=tw2026&utm_content=weddingfair-panel">
                   <img src="<?php echo esc_html($weddingFairPanelMobile['url']) ?>" alt="<?php echo esc_html($weddingFairPanelMobile['alt']) ?>">
                 </a>
               </div>
@@ -402,7 +402,7 @@
       <div class="row mb-3 align-items-center">
         <div class="col-lg">
           <h2 class="h1 wdl-localnav-heading mb-0">
-            <?php _e('รวมคลิปวิดีโอล่าสุด','wdl'); ?> <span class="badge wdl-badge-sm">มาใหม่</span>
+            <?php _e('วิดีโองานแต่ง รีวิวสถานที่จัดงานแต่งงาน','wdl'); ?>
           </h2>
         </div>
         <div class="col-lg text-lg-end d-none d-lg-block">
@@ -457,7 +457,7 @@
       <div class="row mb-3 align-items-center">
         <div class="col-lg">
           <h2 class="h1 wdl-localnav-heading mb-0">
-            <?php _e('ที่ปรึกษาการจัดงาน','wdl'); ?> <span class="badge wdl-badge-sm">มาใหม่</span>
+            <?php _e('ที่ปรึกษาการจัดงาน','wdl'); ?>
           </h2>
         </div>
         <div class="col-lg text-lg-end d-none d-lg-block">
@@ -510,7 +510,7 @@
       <div class="row mb-3 align-items-center">
         <div class="col-lg">
           <h2 class="h1 wdl-localnav-heading mb-0">
-            <?php _e('สถานที่จัดงานแต่งงานแนะนำ','wdl'); ?> <span class="badge wdl-badge-sm">มาใหม่</span>
+            <?php _e('สถานที่จัดงานแต่งงานแนะนำ','wdl'); ?>
           </h2>
         </div>
         <div class="col-lg text-lg-end d-none d-lg-block">
@@ -552,12 +552,12 @@
     )
   ) ?>
 
-  <section class="html-lazy section-stripe pt-4 pb-3 border-top">
+  <section class="html-lazy section-stripe pt-4 pb-3 border-top overflow-hidden">
     <div class="container-xl">
       <h2 class="h1 wdl-localnav-heading mb-0">
-        <?php _e('บทความล่าสุด', 'wdl')?>
+        <?php _e('บทความล่าสุดจาก Weddinglist', 'wdl')?>
       </h2>
-      <div class="wdl-badge-container-xl">
+      <div class="wdl-badge-container">
         <a
           data-dlev="tagClick",
           data-dlcomp="tag - front page - post category",

@@ -89,6 +89,11 @@
           <h1 class="wdl-single-title">
             <?php the_title(); ?>
           </h1>
+          <?php if(get_field('Price')) : ?>
+            <div class="wdl-metadata wdl-archive-price fs-5">
+              <?php _e('ราคาเริ่มต้น', 'wdl') ?>&nbsp;<strong class="text-red"> <?php echo number_format(get_field('Price')) ?> <?php _e('บาท', 'wdl') ?></strong>
+            </div>
+          <?php endif; ?>
           <?php
           if (get_field('DateStart') && get_field('DateEnd')): ?>
           <p><span class="text-red fw-semibold">

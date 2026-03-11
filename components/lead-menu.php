@@ -23,10 +23,12 @@
   </div>
 </nav>
 
-<?php if(isset($campaignModeEnabled) && $campaignModeEnabled && isset($campaignId)): ?>
-  <a class="wdl-campaign-floating-cta" href="<?php echo get_permalink( get_field('CampaignLandingPage', $campaignId)->ID . '#register' ) ?>"
-    style="
-      --campaign-color-1: <?php the_field('CampaignColor2', $campaignId);?>;
-      --campaign-color-2: <?php the_field('CampaignColor2', $campaignId);?>;
-    ">ลงทะเบียน <?php echo get_the_title($campaignId) ?></a>
+<?php if(!isset($hideCTA) || !$hideCTA): ?>
+  <?php if(isset($campaignModeEnabled) && $campaignModeEnabled && isset($campaignId)): ?>
+    <a class="wdl-campaign-floating-cta" href="<?php echo get_permalink( get_field('CampaignLandingPage', $campaignId)->ID).'#register'  ?>?utm_source=website&utm_medium=website&utm_campaign=tw2026&utm_content=floating-cta"
+      style="
+        --campaign-color-1: <?php the_field('CampaignColor2', $campaignId);?>;
+        --campaign-color-2: <?php the_field('CampaignColor2', $campaignId);?>;
+      ">ลงทะเบียน <?php echo get_the_title($campaignId) ?></a>
+  <?php endif; ?>
 <?php endif; ?>

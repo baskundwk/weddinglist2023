@@ -1,46 +1,14 @@
 <div class="wdl-filter mb-2">
   <div class="wdl-filter-detail swiper wdl-swiper-auto">
     <div class="swiper-wrapper">
-      <?php /*<div class="swiper-slide w-auto">
-        <div class="dropdown-center wdl-dropdown">
-          <div class="wdl-btn-filter <?php if ($_GET['type']) { echo 'active';}?>" data-bs-toggle="dropdown" aria-expanded="false">
-            <?php if ($_GET['type']): ?>
-            <i data-feather="home"></i><?php echo(get_term_by('slug', $_GET['type'], 'venue_type')->name); ?>
-            <?php else: ?>
-            <i data-feather="home"></i><?php _e('ประเภทสถานที่', 'wdl'); ?>
-            <?php endif; ?>
-            <i data-feather="chevron-down"></i>
-          </div>
-          <ul class="dropdown-menu">
-            <li><a href="<?php removeParam('type')?>"><?php _e('ประเภททั้งหมด', 'wdl'); ?></a></li>
-            <?php
-            $venue_type = get_terms(
-              array(
-                'taxonomy' => 'venue_type',
-                'hide_empty' => true,
-              )
-            );
-    
-            foreach ($venue_type as $type):
-              ?>
-            <li>
-              <a href="<?php
-                updateParam([
-                  'type' => $type->slug
-                ])
-                  ?>"><?php echo $type->name ?></a>
-            </li>
-            <?php endforeach; ?>
-          </ul>
-        </div>
-      </div>
+      <!-- Filter : Location -->
       <div class="swiper-slide w-auto">
         <div class="dropdown-center wdl-dropdown">
           <div class="wdl-btn-filter <?php if ($_GET['loc']) { echo 'active'; }?>" data-bs-toggle="dropdown" aria-expanded="false">
             <?php if ($_GET['loc']): ?>
-            <i data-feather="map-pin"></i><?php echo(get_term_by('term_id', $_GET['loc'], 'location')->name); ?>
+            <i data-feather="map-pin"></i><span class="lineclamp-1"><?php echo(get_term_by('term_id', $_GET['loc'], 'location')->name); ?></span>
             <?php else: ?>
-            <i data-feather="map-pin"></i><?php _e('ที่ตั้งสถานที่', 'wdl'); ?>
+            <i data-feather="map-pin"></i><span class="lineclamp-1"><?php _e('ที่ตั้งสถานที่', 'wdl'); ?></span>
             <?php endif; ?>
             <i data-feather="chevron-down"></i>
           </div>
@@ -67,13 +35,126 @@
           </ul>
         </div>
       </div>
+      <!-- Filter : Venue Type -->
+      <div class="swiper-slide w-auto">
+        <div class="dropdown-center wdl-dropdown">
+          <div class="wdl-btn-filter <?php if ($_GET['type']) { echo 'active';}?>" data-bs-toggle="dropdown" aria-expanded="false">
+            <?php if ($_GET['type']): ?>
+            <i data-feather="home"></i><span class="lineclamp-1"><?php echo(get_term_by('slug', $_GET['type'], 'venue_type')->name); ?></span>
+            <?php else: ?>
+            <i data-feather="home"></i><span class="lineclamp-1"><?php _e('ประเภทสถานที่', 'wdl'); ?></span>
+            <?php endif; ?>
+            <i data-feather="chevron-down"></i>
+          </div>
+          <ul class="dropdown-menu">
+            <li><a href="<?php removeParam('type')?>"><?php _e('ประเภททั้งหมด', 'wdl'); ?></a></li>
+            <?php
+            $venue_type = get_terms(
+              array(
+                'taxonomy' => 'venue_type',
+                'hide_empty' => true,
+              )
+            );
+    
+            foreach ($venue_type as $type):
+              ?>
+            <li>
+              <a href="<?php
+                updateParam([
+                  'type' => $type->slug
+                ])
+                  ?>"><?php echo $type->name ?></a>
+            </li>
+            <?php endforeach; ?>
+          </ul>
+        </div>
+      </div>
+      <!-- Filter : Guest -->
+      <div class="swiper-slide w-auto">
+        <div class="dropdown-center wdl-dropdown">
+          <div class="wdl-btn-filter <?php if ($_GET['guest']) { echo 'active'; }?>" data-bs-toggle="dropdown" aria-expanded="false">
+            <?php if ($_GET['guest']): ?>
+            <i data-feather="users"></i><span class="lineclamp-1"><?php 
+              if($_GET['guest'] === 'any') {
+                echo __('500 คนขึ้นไป');
+              } else {
+                if($_GET['guest'][0] === '>') {
+                  echo __('มากกว่า ').substr($_GET['guest'], 1).__(' คน');
+                } else {
+                  echo __('ไม่เกิน ').$_GET['guest'].__(' คน');
+                }
+              }
+            ?></span>
+            <?php else: ?>
+            <i data-feather="users"></i><span class="lineclamp-1"><?php _e('จำนวนแขก', 'wdl'); ?></span>
+            <?php endif; ?>
+            <i data-feather="chevron-down"></i>
+          </div>
+          <ul class="dropdown-menu">
+            <li><a href="<?php removeParam('guest')?>"><?php _e('จำนวนแขกทั้งหมด', 'wdl'); ?></a></li>
+            <?php
+            $friendlySearchGuest = get_field('FriendlySearchGuest', 'option');
+            $guestChoices = preg_split('/\r\n|\r|\n/', $friendlySearchGuest);
+            foreach($guestChoices as $choice) {
+              $value = explode(' : ', $choice)[0] ? explode(' : ', $choice)[0] : '';
+              $label = explode(' : ', $choice)[1] ? explode(' : ', $choice)[1] : '';
+              ?>
+            <li>
+              <a href="<?php
+                updateParam([
+                  'guest' => $value
+                ])
+                  ?>"><?php echo $label ?></a>
+            </li>
+            <?php } ?>
+          </ul>
+        </div>
+      </div>
+      <!-- Filter : Budget -->
+      <div class="swiper-slide w-auto">
+        <div class="dropdown-center wdl-dropdown">
+          <div class="wdl-btn-filter <?php if ($_GET['budget']) { echo 'active'; }?>" data-bs-toggle="dropdown" aria-expanded="false">
+            <?php if ($_GET['budget']): ?>
+            <i data-feather="dollar-sign"></i><span class="lineclamp-1"><?php 
+              if($_GET['budget'] === 'any') {
+                echo __('800,000 บาทขึ้นไป');
+              } else {
+                echo __('ไม่เกิน ').number_format($_GET['budget']).__(' บาท');
+              }
+            ?></span>
+            <?php else: ?>
+            <i data-feather="dollar-sign"></i><span class="lineclamp-1"><?php _e('งบประมาณ', 'wdl'); ?></span>
+            <?php endif; ?>
+            <i data-feather="chevron-down"></i>
+          </div>
+          <ul class="dropdown-menu">
+            <li><a href="<?php removeParam('budget')?>"><?php _e('งบประมาณทั้งหมด', 'wdl'); ?></a></li>
+            <?php
+            $friendlySearchBudget = get_field('FriendlySearchBudget', 'option');
+            $budgetChoices = preg_split('/\r\n|\r|\n/', $friendlySearchBudget);
+            foreach($budgetChoices as $choice) {
+              $value = explode(' : ', $choice)[0] ? explode(' : ', $choice)[0] : '';
+              $label = explode(' : ', $choice)[1] ? explode(' : ', $choice)[1] : '';
+              ?>
+            <li>
+              <a href="<?php
+                updateParam([
+                  'budget' => $value
+                ])
+                  ?>"><?php echo $label ?></a>
+            </li>
+            <?php } ?>
+          </ul>
+        </div>
+      </div>
+      <!-- Filter : Venue Character -->
       <div class="swiper-slide w-auto">
         <div class="dropdown-center wdl-dropdown">
           <div class="wdl-btn-filter <?php if ($_GET['character']) { echo 'active';}?>" data-bs-toggle="dropdown" aria-expanded="false">
             <?php if ($_GET['character']): ?>
-            <i data-feather="star"></i><?php echo(get_term_by('slug', $_GET['character'], 'venue_character')->name); ?>
+            <i data-feather="star"></i><span class="lineclamp-1"><?php echo(get_term_by('slug', $_GET['character'], 'venue_character')->name); ?></span>
             <?php else: ?>
-            <i data-feather="star"></i><?php _e('จุดเด่นสถานที่', 'wdl'); ?>
+            <i data-feather="star"></i><span class="lineclamp-1"><?php _e('จุดเด่นสถานที่', 'wdl'); ?></span>
             <?php endif; ?>
             <i data-feather="chevron-down"></i>
           </div>
@@ -123,7 +204,8 @@
             <?php endforeach; ?>
           </ul>
         </div>
-      </div>*/?>
+      </div>
+      <!-- Sort By -->
       <div class="swiper-slide w-auto">
         <div class="dropdown-center wdl-dropdown">
           <div class="wdl-btn-filter <?php if ($_GET['label']) { echo 'active'; }?>" data-bs-toggle="dropdown" aria-expanded="false">

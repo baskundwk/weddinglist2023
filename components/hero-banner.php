@@ -81,12 +81,14 @@ $campaignHeroMiddle = new WP_Query([
                   <?php $campaignHeroBefore->the_post(); ?>
                   <?php if (get_field('CampaignHeroBefore')): ?>
                     <div id="su-post-<?php the_ID(); ?>" class="swiper-slide su-post <?php echo esc_attr($atts['class_single']); ?>">
-                      <?php if (is_array(get_field('CampaignHeroBefore'))): ?>
+                      <?php if(get_field('CampaignLandingPage', $campaignId)) {
+                          echo esc_url( get_permalink(get_field('CampaignLandingPage', $campaignId)->ID));
+                        } else if (is_array(get_field('CampaignHeroBefore'))): ?>
                         <a class="wdl-hero-banner" href="<?php if (get_field('HeroBannerLink')) {
                           echo (get_field('HeroBannerLink'));
                         } else {
                           the_permalink();
-                        } ?>"
+                        } ?>?utm_source=website&utm_medium=website&utm_campaign=tw2026&utm_content=hero"
                         data-dlev="adsClick"
                         data-dlcomp="ads - hero"
                         data-dltgt="<?php echo esc_attr(get_the_title()); ?>">
@@ -96,11 +98,13 @@ $campaignHeroMiddle = new WP_Query([
                           </picture>
                         </a>
                       <?php else: ?>
-                        <a class="wdl-hero-banner" href="<?php if (get_field('HeroBannerLink')) {
+                        <a class="wdl-hero-banner" href="<?php if(get_field('CampaignLandingPage', $campaignId)) {
+                          echo esc_url( get_permalink(get_field('CampaignLandingPage', $campaignId)->ID));
+                        } else if (get_field('HeroBannerLink')) {
                           echo (get_field('HeroBannerLink'));
                         } else {
                           the_permalink();
-                        } ?>"
+                        } ?>?utm_source=website&utm_medium=website&utm_campaign=tw2026&utm_content=hero"
                         data-dlev="adsClick"
                         data-dlcomp="ads - hero"
                         data-dltgt="<?php echo esc_attr(get_the_title()); ?>">
@@ -119,11 +123,13 @@ $campaignHeroMiddle = new WP_Query([
                   <?php if (get_field('CampaignHeroMiddle')): ?>
                     <div id="su-post-<?php the_ID(); ?>" class="swiper-slide su-post <?php echo esc_attr($atts['class_single']); ?>">
                       <?php if (is_array(get_field('CampaignHeroMiddle'))): ?>
-                        <a class="wdl-hero-banner" href="<?php if (get_field('HeroBannerLink')) {
+                        <a class="wdl-hero-banner" href="<?php if(get_field('CampaignLandingPage', $campaignId)) {
+                          echo esc_url( get_permalink(get_field('CampaignLandingPage', $campaignId)->ID));
+                        } else if (get_field('HeroBannerLink')) {
                           echo (get_field('HeroBannerLink'));
                         } else {
                           the_permalink();
-                        } ?>"
+                        } ?>?utm_source=website&utm_medium=website&utm_campaign=tw2026&utm_content=hero"
                         data-dlev="adsClick"
                         data-dlcomp="ads - hero"
                         data-dltgt="<?php echo esc_attr(get_the_title()); ?>">
@@ -133,11 +139,13 @@ $campaignHeroMiddle = new WP_Query([
                           </picture>
                         </a>
                       <?php else: ?>
-                        <a class="wdl-hero-banner" href="<?php if (get_field('HeroBannerLink')) {
+                        <a class="wdl-hero-banner" href="<?php if(get_field('CampaignLandingPage', $campaignId)) {
+                          echo esc_url( get_permalink(get_field('CampaignLandingPage', $campaignId)->ID));
+                        } else if (get_field('HeroBannerLink')) {
                           echo (get_field('HeroBannerLink'));
                         } else {
                           the_permalink();
-                        } ?>"
+                        } ?>?utm_source=website&utm_medium=website&utm_campaign=tw2026&utm_content=hero"
                         data-dlev="adsClick"
                         data-dlcomp="ads - hero"
                         data-dltgt="<?php echo esc_attr(get_the_title()); ?>">

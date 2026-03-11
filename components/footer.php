@@ -14,9 +14,8 @@
         <div class="row">
           <div class="col-md-12 text-center text-md-start d-flex flex-column flex-xl-row" style="align-items: center; gap: 16px;">
             <a href="<?php echo esc_url(home_url('/')); ?>" title="ไปหน้าแรกของ Weddinglist">
-              <img class="grayscale" loading="lazy" src="<?php echo get_theme_file_uri() . '/images/logo.png';?>" alt="Weddinglist" width="181" height="44">
+              <img loading="lazy" src="<?php echo get_theme_file_uri() . '/images/logo.webp';?>" alt="Weddinglist" width="181" height="44">
             </a>
-            <?php if(is_user_logged_in(  )) : ?>
             <div class="footer-sponsor">
               <p>สนับสนุนโดย</p>
               <div class="footer-sponsor-list">
@@ -24,7 +23,6 @@
                 <img src="/wp-content/uploads/2025/10/Amazing_Thailand_Logo.svg.png" alt="">
               </div>
             </div>
-            <?php endif; ?>
           </div>
           <!-- <div class="col-md-8 text-center text-md-end">
             <?php
@@ -46,7 +44,7 @@
     <div class="wdl-footer-bottom">
       <div class="container-xl clearfix">
         <div class="row">
-          <div class="col-md-8 text-center text-md-start d-flex align-items-center justify-content-center justify-content-md-start flex-wrap" style="gap: 12px;">
+          <div class="col-md-8 text-center text-md-start d-flex align-items-center justify-content-center justify-content-md-start flex-wrap gap-2">
             <small><?php _e('For advertisement, please contact', 'wdl')?> </small>
 
             <?php

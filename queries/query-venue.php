@@ -28,23 +28,24 @@
     $arg['post_status'] = 'any';
   }
 
-  if($_GET['order'] ) {
-    $arg['order'] = $_GET['order'];
-  }
-
-  if($_GET['orderby'] ) {
-    $arg['orderby'] = $_GET['orderby'];
-    if($_GET['orderby'] === 'meta_value_num') {
-      $arg['meta_query'] =  array(
-        'key' => $_GET['key'],
-        'value' => '0',
-        'compare' => '>',
-      );
-    }
-  }
-
+  
   if($_GET['key'] ) {
     $arg['meta_key'] = $_GET['key'];
+    
+    if($_GET['order'] ) {
+      $arg['order'] = $_GET['order'];
+    }
+  
+    if($_GET['orderby'] ) {
+      $arg['orderby'] = $_GET['orderby'];
+      /* if($_GET['orderby'] === 'meta_value_num') {
+        $arg['meta_query'] =  array(
+          'key' => $_GET['key'],
+          'value' => '0',
+          'compare' => '>',
+        );
+      } */
+    }
   }
 
   $current_url = explode("?", $_SERVER['REQUEST_URI'])[0];
@@ -59,12 +60,22 @@
   }
   
   if(isset($_GET['guest']) && $_GET['guest'] !== '' && $_GET['guest'] !== 'any') {
-    $arg['meta_query'][] = array(
-      'key' => 'MaxGuest',
-      'value' => floatval($_GET['guest']),
-      'type' => 'NUMERIC',
-      'compare' => '>=',
-    );
+    /* Check if guest param contains '>' */
+    if($_GET['guest'][0] === '>') {
+      $arg['meta_query'][] = array(
+        'key' => 'MaxGuest',
+        'value' => floatval(substr($_GET['guest'], 1)),
+        'type' => 'NUMERIC',
+        'compare' => '>=',
+      );
+    } else {
+      $arg['meta_query'][] = array(
+        'key' => 'MaxGuest',
+        'value' => floatval($_GET['guest']),
+        'type' => 'NUMERIC',
+        'compare' => '<=',
+      );
+    }
   }
 
   if($_GET['character']) {
@@ -131,9 +142,3 @@
   } */
 
   query_posts($arg);
-
-
-/*   if(is_user_logged_in()) {
-    print_r(get_queried_object());
-  }
- */

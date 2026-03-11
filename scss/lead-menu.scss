@@ -174,7 +174,7 @@
   overflow: hidden;
 
   @include max-width-md {
-    height: 40px;
+    height: 32px;
   }
 
   .wdl-lead-menu-swiper {
@@ -207,7 +207,7 @@
         white-space: nowrap;
 
         @include max-width-md {
-          height: 40px;
+          height: 32px;
         }
 
         img {

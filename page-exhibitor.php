@@ -1,3 +1,4 @@
+<?php $hideCTA = true; ?>
 <?php include get_stylesheet_directory().'/components/header.php' ?>
 
 <main>
@@ -35,7 +36,7 @@
             </div>
           </div>
           <div class="row g-4">
-            <div class="col-lg-8">
+            <div class="col-lg">
               <div class="wdl-campaign-announcement">
                 <a href="#campaign-register" type="submit" name="submit" class="wdl-btn-lg text-center wdl-form-submit w-100 d-lg-none mb-3" style="  
                   --campaign-color-1: <?php the_field('CampaignColor1');?>;
@@ -45,7 +46,7 @@
                 <?php the_field('CampaignAnnouncement') ?>
               </div>
             </div>
-            <?php if(get_field('CampaignMerchantRegister')) : ?>
+            <?php /* if(get_field('CampaignMerchantRegister')) : ?>
             <div class="col-lg-4" id="campaign-register">
               <h2 class="h1">ลงทะเบียนร่วมแสดงสินค้า</h2>
               <div class="card rounded-4 h-auto">
@@ -54,7 +55,7 @@
                 </div>
               </div>
             </div>
-            <?php endif; ?>
+            <?php endif; */ ?>
           </div>
         </div>
       <?php }

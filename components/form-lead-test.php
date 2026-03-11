@@ -203,7 +203,7 @@
         data-dlcomp="button - <?php echo $formType ?> - cta"></button>
       <div class="modal-body text-center">
         <div class="py-4">
-          <img class="mb-4" src="<?php echo(get_theme_file_uri() . '/images/logo.png') ?>" alt="Weddinglist" width="180" height="43">
+          <img class="mb-4" src="<?php echo(get_theme_file_uri() . '/images/logo.webp') ?>" alt="Weddinglist" width="180" height="43">
           <p class="h2 text-red"><?php _e('ลงทะเบียนสำเร็จ กรุณายืนยันตัวตนเพื่อรับคูปอง','wdl') ?></p>
           <p><?php _e('ระบบได้ส่งลิงค์ยืนยันตัวตนไปยังอีเมล<br/>หากไม่พบอีเมลดังกล่าวกรุณาตรวจสอบในกล่องเมลขยะของบัญชีคุณ', 'wdl') ?></p>
         </div>
@@ -217,7 +217,7 @@
       <button class="btn-close" data-bs-dismiss="modal" aria-label="Close modal"></button>
       <div class="modal-body text-center">
         <div class="py-4">
-          <img class="mb-4" src="<?php echo(get_theme_file_uri() . '/images/logo.png') ?>" alt="Weddinglist" width="180" height="43">
+          <img class="mb-4" src="<?php echo(get_theme_file_uri() . '/images/logo.webp') ?>" alt="Weddinglist" width="180" height="43">
           <p class="h2 text-red"><?php _e('ลงทะเบียนสำเร็จ','wdl') ?></p>
           <p><?php _e('ทางโรงแรมที่ท่านได้เลือกไว้จะติดต่อกลับมาในไม่ช้า ขอบคุณค่ะ', 'wdl') ?></p>
         </div>

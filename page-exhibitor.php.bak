@@ -7,7 +7,7 @@
     <div class="row py-5 g-4 justify-content-center align-items-center min-vh-100 mt-0">
       <div class="col-lg-5 order-lg-2 h-auto pb-4">
         <h1 class="h1 text-center">ลงทะเบียนร่วมออกบูธ<br/>
-          <img class="mt-2" loading="lazy" src="<?php echo get_theme_file_uri() . '/images/logo.png';?>" alt="Weddinglist" height="80" >
+          <img class="mt-2" loading="lazy" src="<?php echo get_theme_file_uri() . '/images/logo.webp';?>" alt="Weddinglist" height="80" >
         </h1>
         <p class="text-center">Thailand Weddinglist 2026 @ ศูนย์ประชุมแห่งชาติสิริกิ</p>
         <div class="card rounded-4 h-auto">
@@ -90,7 +90,7 @@
       <button class="btn-close" data-bs-dismiss="modal"></button>
       <div class="modal-body text-center">
         <div class="py-4">
-          <img class="mb-4" src="<?php echo(get_theme_file_uri() . '/images/logo.png') ?>" alt="Weddinglist" width="180" height="43">
+          <img class="mb-4" src="<?php echo(get_theme_file_uri() . '/images/logo.webp') ?>" alt="Weddinglist" width="180" height="43">
           <p class="h2 text-red"><?php _e('ลงทะเบียนสำเร็จ ขอบคุณค่ะ','wdl') ?></p>
         </div>
       </div>

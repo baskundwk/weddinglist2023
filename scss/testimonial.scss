@@ -1,0 +1,254 @@
+@use 'variable' as *;
+
+.wdl-twreview-swiper {
+  .swiper-wrapper {
+    transition-timing-function: linear;
+  }
+  .swiper-slide {
+    width: auto;
+  }
+}
+.wdl-twreview-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+  justify-content: center;
+
+  @include max-width-md {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 8px;
+  }
+}
+
+.wdl-card-twreview {
+  background-color: #FFFFFF;
+  background-repeat: no-repeat;
+  background-position: top center;
+  background-size: contain;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px;
+  //margin-top: 36px;
+  width: 270px;
+  max-width: 100%;
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.3), 0px 8px 6px -4px rgba(0, 0, 0, 0.15);
+
+  @include max-width-sm {
+    //margin-top: 16px;
+  }
+  
+  .wdl-card-twreview-gallery {
+    overflow: hidden;
+    .gallery-item {
+    
+    }
+  }
+  .wdl-card-twreview-top {
+    display: flex;
+    gap: 10px;
+    align-items: flex-end;
+    width: 100%;
+  }
+
+  .title {
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+    align-items: baseline;
+    justify-content: space-between;
+    //padding-bottom: 10px;
+    width: 100%;
+
+    font-family: 'Sriracha', cursive;
+    text-align: right;
+    color: #37BAD6;
+    margin-top: 8px;
+    margin-bottom: 0;
+
+    small {
+      flex: 0 0 auto;
+      font-size: 14px;
+      color: #4A5057;
+      font-weight: 400;
+    }
+  }
+
+  .wdl-card-twreview-content {
+    font-size: 13px;
+    
+    p {
+      font-size: 13px;
+      margin-bottom: 0;
+    }
+  }
+
+  .wdl-card-twreview-thumbnail {
+    width: 100%;
+    &.gradient {
+  
+    }
+
+    img {
+      width: 100%;
+      aspect-ratio: 3/4;
+      object-fit: cover;
+      display: block;
+      margin: auto;
+      border-radius: 8px;
+    }
+  }
+  .wdl-card-twreview-gallery {
+    img {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+  }
+  .wdl-card-twreview-meta {
+  
+  }
+}
+
+.modal-twreview-content {
+  img {
+    max-width: 100%;
+    border-radius: 12px;
+  }
+}
+
+.wdl-testimonial-swiper {
+  .swiper-wrapper {
+  }
+  .swiper-slide {
+    width: auto;
+  }
+}
+.wdl-testimonial-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+  justify-content: center;
+
+  @include max-width-md {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 8px;
+  }
+}
+
+.wdl-card-testimonial {
+  background-color: #FFFFFF;
+  background-repeat: no-repeat;
+  background-position: top center;
+  background-size: contain;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  //padding: 12px;
+  //margin-top: 36px;
+  width: 270px;
+  max-width: 100%;
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.3), 0px 8px 6px -4px rgba(0, 0, 0, 0.15);
+  display: flex;
+  gap: 12px;
+  flex-direction: column;
+  overflow: hidden;
+
+  @include max-width-sm {
+    //margin-top: 16px;
+  }
+  
+  .wdl-card-testimonial-gallery {
+    overflow: hidden;
+    .gallery-item {
+    
+    }
+  }
+  .wdl-card-testimonial-top {
+    display: flex;
+    gap: 10px;
+    align-items: flex-end;
+    width: 100%;
+    padding: 12px;
+    padding-bottom: 0;
+  }
+
+  .title {
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+    align-items: baseline;
+    justify-content: space-between;
+    //padding-bottom: 10px;
+    width: 100%;
+    font-family: 'Sriracha', cursive;
+    text-align: right;
+    color: #37BAD6;
+    margin-top: 8px;
+    margin-bottom: 0;
+
+    small {
+      flex: 0 0 auto;
+      font-size: 14px;
+      color: #4A5057;
+      font-weight: 400;
+    }
+  }
+
+  .wdl-card-testimonial-content {
+    font-size: 13px;
+    padding: 0 12px;
+
+    
+    p {
+      font-size: 13px;
+      margin-bottom: 0;
+    }
+  }
+
+  .wdl-card-testimonial-thumbnail {
+    width: 100%;
+    &.gradient {
+  
+    }
+
+    img {
+      width: 100%;
+      aspect-ratio: 3/4;
+      object-fit: cover;
+      display: block;
+      margin: auto;
+      border-radius: 8px;
+    }
+  }
+  .wdl-card-testimonial-gallery {
+    img {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+  }
+  .wdl-card-testimonial-meta {
+    padding: 8px;
+    background: #F7F7F7;
+    font-size: 14px;
+    text-align: center;
+
+    a {
+      color: #EB355D;
+      text-decoration: none;
+      display: block;
+    }
+  }
+}
+
+.modal-testimonial-content {
+  img {
+    max-width: 100%;
+    border-radius: 12px;
+  }
+}

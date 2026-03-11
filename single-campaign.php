@@ -1,6 +1,6 @@
 
 <?php
-if(get_field('CampaignLandingPage')) {
+/* if(get_field('CampaignLandingPage')) {
   wp_redirect( get_permalink( get_field('CampaignLandingPage') ), 301, 'WordPress' );
 }
 
@@ -169,4 +169,5 @@ $campaignLogo = '<div class="wdl-campaign-card-logo"><img src="'.get_field('Camp
     }?>
   </section>
 </main>
-<?php include get_stylesheet_directory() . '/components/footer.php' ?>
+<?php include get_stylesheet_directory() . '/components/footer.php'  */?>
+<?php include get_stylesheet_directory() . '/page-tw2026.php';

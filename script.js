@@ -59,7 +59,7 @@ const leadMenuSwiper = new Swiper('.wdl-lead-menu-swiper', {
     nextEl: '.swiper-button-next',
   },
   breakpoints: {
-    1024: {
+    1280: {
       spaceBetween: 32
     }
   }
@@ -1480,18 +1480,19 @@ if(eCampaignCountdown.length > 0) {
     
       // Find the distance between now and the count down date
       const distance = countDownDate - now;
+
     
       // Time calculations for days, hours, minutes and seconds
-      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      const days = Math.max(0, Math.floor(distance / (1000 * 60 * 60 * 24)));
+      const hours = Math.max(0, Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)));
+      const minutes = Math.max(0, Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)));
+      const seconds = Math.max(0, Math.floor((distance % (1000 * 60)) / 1000));
     
       // Display the result in the element with id="demo"
       e.querySelector(" .day .number").innerText = days
-      e.querySelector(" .hour .number").innerText = hours
-      e.querySelector(" .minute .number").innerText = minutes
-      e.querySelector(" .second .number").innerText = seconds
+      e.querySelector(" .hour .number").innerText = String(hours).padStart(2, '0')
+      e.querySelector(" .minute .number").innerText = String(minutes).padStart(2, '0')
+      e.querySelector(" .second .number").innerText = String(seconds).padStart(2, '0')
     
       e.querySelectorAll(' .number').forEach((e,i) => {
         e.classList.remove('loading')
@@ -1500,7 +1501,7 @@ if(eCampaignCountdown.length > 0) {
       // If the count down is finished, write some text
       if (distance < 0) {
         clearInterval(x);
-        e.innerHTML = "EXPIRED";
+        //e.innerHTML = "EXPIRED";
       }
     }, 1000);
   })
@@ -1777,3 +1778,247 @@ $('.wdl-file-upload').each((i, e) => {
 $(document).ready(() => {
   AOS.init();
 })
+
+$('.form-with-loader').each((i, e) => {
+  $(e).on('submit', () => {
+    $(e).find('button[type="submit"]').each((i2, e2) => {
+      $(e2).addClass('loading');
+
+      setTimeout(() => {
+        $(e2).removeClass('loading');
+      }, 5000);
+    })
+  });
+});
+
+// twReview Swiper
+const twReviewSwiperEls = document.querySelectorAll('.wdl-twreview-swiper')
+if(twReviewSwiperEls.length > 0) {
+  twReviewSwiperEls.forEach((e,i) => {
+    const slideLength = e.querySelectorAll('.swiper-slide').length
+    const twReviewSwiperEl = new Swiper(e, {
+      slidesPerView: 'auto',
+      spaceBetween: 20,
+      navigation: {
+        prevEl: '.swiper-button-prev',
+        nextEl: '.swiper-button-next',
+      },
+      pagination: {
+        el: ".swiper-pagination",
+        type: "bullets",
+        clickable: true,
+      },
+      loop: true,
+      breakpoints: {
+        768: {
+          spaceBetween: 48,
+        }
+      },
+      speed: 500 * slideLength,
+      autoplay: {
+        delay: 0,
+        pauseOnMouseEnter: true,
+      },
+      effect: 'coverflow',
+      centeredSlides: true,
+      coverflowEffect: {
+        rotate: 0,
+        slideShadows: false,
+      },
+    })
+  })
+}
+
+// twReview Gallery Swiper
+const twReviewGallerySwiperEls = document.querySelectorAll('.wdl-card-testomonial-gallery-swiper')
+if(twReviewGallerySwiperEls.length > 0) {
+  twReviewGallerySwiperEls.forEach((e,i) => {
+    const twReviewGallerySwiperEl = new Swiper(e, {
+      slidesPerView: 'auto',
+      spaceBetween: 8,
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+        dynamicBullets: true,
+        dynamicMainBullets: 5,
+      },
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+      },
+      nested: true
+    })
+  })
+}
+
+/**
+ * twReview Gallery Lightbox Script
+ * Handles clicking on images in wdl-card-twReview-gallery
+ * and displays them in wdl-twReview-lightbox-modal
+ */
+
+(function() {
+  'use strict';
+
+  // Wait for DOM to be ready
+  document.addEventListener('DOMContentLoaded', function() {
+    initTwReviewLightbox();
+  });
+
+  function initTwReviewLightbox() {
+    // Get all images within twReview galleries
+    const galleryImages = document.querySelectorAll('.wdl-card-twReview-gallery img');
+    const lightboxModal = document.getElementById('wdl-twReview-lightbox-modal');
+
+    if (!lightboxModal) {
+      return;
+    }
+
+    // Get the modal content container
+    const modalContent = lightboxModal.querySelector('.modal-twReview-content');
+    
+    if (!modalContent) {
+      return;
+    }
+
+    // Add click event to each gallery image
+    galleryImages.forEach(function(img) {
+      // Add cursor pointer style
+      img.style.cursor = 'pointer';
+
+      img.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        // Get the image source and alt text
+        const imgSrc = this.getAttribute('src');
+        const imgAlt = this.getAttribute('alt') || 'Testimonial Image';
+        
+        // Get the full-size image if available
+        const fullSizeSrc = this.getAttribute('data-full-src') || imgSrc;
+        
+        // Clear existing content
+        modalContent.innerHTML = '';
+        
+        // Create new image element
+        const modalImage = document.createElement('img');
+        modalImage.src = fullSizeSrc;
+        modalImage.alt = imgAlt;
+        modalImage.className = 'img-fluid w-100';
+        modalImage.style.maxHeight = '80vh';
+        modalImage.style.objectFit = 'contain';
+        
+        // Add loading state
+        modalImage.style.opacity = '0';
+        modalImage.addEventListener('load', function() {
+          this.style.transition = 'opacity 0.3s ease';
+          this.style.opacity = '1';
+        });
+        
+        // Append image to modal
+        modalContent.appendChild(modalImage);
+        
+        // Open the modal using Bootstrap's modal API
+        if (typeof bootstrap !== 'undefined' && bootstrap.Modal) {
+          const bsModal = new bootstrap.Modal(lightboxModal);
+          bsModal.show();
+        } else {
+          // Fallback if Bootstrap JS is not loaded
+          lightboxModal.classList.add('show');
+          lightboxModal.style.display = 'block';
+          document.body.classList.add('modal-open');
+          
+          // Create backdrop
+          const backdrop = document.createElement('div');
+          backdrop.className = 'modal-backdrop fade show';
+          document.body.appendChild(backdrop);
+          
+          // Add close functionality
+          const closeBtn = lightboxModal.querySelector('.btn-close');
+          if (closeBtn) {
+            closeBtn.addEventListener('click', function() {
+              lightboxModal.classList.remove('show');
+              lightboxModal.style.display = 'none';
+              document.body.classList.remove('modal-open');
+              backdrop.remove();
+            });
+          }
+          
+          // Close on backdrop click
+          lightboxModal.addEventListener('click', function(e) {
+            if (e.target === lightboxModal) {
+              lightboxModal.classList.remove('show');
+              lightboxModal.style.display = 'none';
+              document.body.classList.remove('modal-open');
+              backdrop.remove();
+            }
+          });
+        }
+      });
+    });
+  }
+
+  // Re-initialize when new content is loaded dynamically (e.g., via AJAX)
+  window.reinitTwReviewLightbox = initTwReviewLightbox;
+})();
+
+
+// testimonial Swiper
+const testimonialSwiperEls = document.querySelectorAll('.wdl-testimonial-swiper')
+if(testimonialSwiperEls.length > 0) {
+  testimonialSwiperEls.forEach((e,i) => {
+    const testimonialSwiperEl = new Swiper(e, {
+      slidesPerView: 'auto',
+      spaceBetween: 12,
+      navigation: {
+        prevEl: '.swiper-button-prev',
+        nextEl: '.swiper-button-next',
+      },
+      pagination: {
+        el: ".swiper-pagination",
+        type: "bullets",
+        clickable: true,
+      },
+      breakpoints: {
+        768: {
+          spaceBetween: 16,
+        }
+      },
+      speed: 1000,
+      autoplay: {
+        delay: 5000,
+        pauseOnMouseEnter: true,
+      },
+    })
+  })
+}
+
+// Listing grid swiper
+const listingGridSwiperEls = document.querySelectorAll('.wdl-listing-grid-swiper')
+if(listingGridSwiperEls.length > 0) {
+  listingGridSwiperEls.forEach((e,i) => {
+    const listingGridSwiperEl = new Swiper(e, {
+      slidesPerView: 2,
+      spaceBetween: 8,
+      breakpoints: {
+        576: {
+          spaceBetween: 16,
+        },
+        768: {
+          slidesPerView: 4,
+        },
+        1024: {
+          slidesPerView: 6,
+        }
+      },
+      navigation: {
+        prevEl: '.swiper-button-prev',
+        nextEl: '.swiper-button-next',
+      },
+      speed: 1000,
+      autoplay: {
+        delay: 5000,
+        pauseOnMouseEnter: true,
+      },
+    })
+  })
+}

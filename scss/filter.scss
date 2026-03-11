@@ -86,5 +86,7 @@
 
   &.active {
     color: #EB355D !important;
+    box-shadow: 0 0 0 2px #EB355D inset;
+    font-weight: 600;
   }
 }

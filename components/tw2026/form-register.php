@@ -1,9 +1,20 @@
-<form id="visitorSignUp" method="post">
+<!-- TW2026 : Visitor Form -->
+
+<form id="visitorSignUp" class="form-with-loader" method="post">
   <?php if( isset($_GET['status']) && $_GET['status'] === 'success'): ?>
     <div class="alert alert-success w-100 mb-3">ขอบคุณสำหรับการลงทะเบียน Thailand Weddinglist 2026 ค่ะ</div>
   <?php elseif( isset($_GET['status']) && $_GET['status'] === 'error'): ?>
     <div class="alert alert-danger w-100 mb-3">เกิดข้อผิดพลาดในการส่งข้อมูล กรุณาลองใหม่อีกครั้ง</div>
   <?php endif; ?>
+
+  <?php // UTM paramters to hidden input fields
+  $utm_parameters = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content'];
+  foreach ($utm_parameters as $param) {
+      if (isset($_GET[$param])) {
+          $value = sanitize_text_field($_GET[$param]);
+          echo '<input type="hidden" name="' . esc_attr($param) . '" value="' . esc_attr($value) . '">';
+      }
+  } ?>
   <input type="hidden" name="action" value="handleTW2026FormSubmit">
   <?php wp_nonce_field('tw2026_form', 'tw2026_nonce'); ?>
 
@@ -231,7 +242,7 @@
     <div class="wdl-checkbox p-0 m-0 my-3 my-xl-4">
       <input type="checkbox" name="consentDisclosure" id="consentDisclosure" required>
       <label for="consentDisclosure" class="d-flex gap-2 align-items-center justify-content-start">
-        <span>ข้าพเจ้ายินยอมให้เว็บไซต์ Weddinglist เผยแพร่ข้อมูลส่วนบุคคลของข้าพเจ้า การลงทะเบียนเพื่อวัตถุประสงค์ในการหาสถานที่จัดงานแต่งงาน หรือระแวกใกล้เคียง <span class="text-red">*</span></span>
+        <span>ข้าพเจ้ายินยอมให้เปิดเผยข้อมูลส่วนบุคคลแก่พาร์ทเนอร์และผู้ร่วมออกบูธในงาน Thailand Weddinglist 2026 เพื่อวัตถุประสงค์ทางการตลาด การนำเสนอสิทธิพิเศษ โปรโมชั่น สิทธิ์ลุ้นรางวัล และข่าวสารที่เกี่ยวข้อง <span class="text-red">*</span> <a target="_blank" class="fw-light" href="<?php echo home_url( '/privacy-policy/' ) ?>">อ่านเพิ่มเติมเกี่ยวกับนโยบายความเป็นส่วนตัว</a></span>
       </label>
     </div>
   </div>

@@ -106,7 +106,7 @@ $randomItem = $postRotation[$randomKey];
                 } else {
                   the_permalink();
                 }
-                ?>"
+                ?>?utm_source=website&utm_medium=website&utm_campaign=tw2026&utm_content=allpage"
                 aria-label="Go to page: <?php echo esc_attr( get_the_title() );?>"
                 title="Go to page: <?php echo esc_attr( get_the_title() );?>"
                 data-dlev="adsClick"
@@ -127,7 +127,7 @@ $randomItem = $postRotation[$randomKey];
                 } else {
                   the_permalink();
                 }
-                ?>"
+                ?>?utm_source=website&utm_medium=website&utm_campaign=tw2026&utm_content=allpage"
                 aria-label="Go to page: <?php echo esc_attr( get_the_title() );?>"
                 title="Go to page: <?php echo esc_attr( get_the_title() );?>"
                 data-dlev="adsClick"

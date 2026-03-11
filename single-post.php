@@ -55,7 +55,7 @@ $currentPostID = get_the_ID();
                   } else {
                     the_permalink();
                   }
-                  ?>">
+                  ?>?utm_source=website&utm_medium=website&utm_campaign=tw2026&utm_content=post-sidebar">
                 <img src="<?php echo esc_html($postSidebarBanner['url']) ?>" alt="<?php echo esc_html($postSidebarBanner['alt']) ?>">
               </a>
             </div>
@@ -105,6 +105,20 @@ $currentPostID = get_the_ID();
           </a>
         </div>
       </div>
+
+      <?php
+      $post_tags = get_the_tags($currentPostID);
+      if ($post_tags) { ?>
+          <div class="my-2 px-3 px-xl-0 ">
+            <p class="h4">Tag ที่เกี่ยวข้อง</p>
+            <div class="wdl-badge-small-container gap-2">
+              <?php foreach ($post_tags as $tag) {
+                  $tag_link = get_tag_link($tag->term_id);
+                  echo '<a href="' . esc_url($tag_link) . '" class="wdl-badge-sm">' . esc_html($tag->name) . '</a>';
+              } ?>
+            </div>
+          </div>
+      <?php } ?>
 
       <hr/>
       <a href="https://ktc.cards/wdc" target="_blank" class="wdl-ktc-button">

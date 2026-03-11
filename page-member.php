@@ -10,6 +10,26 @@
 
           <div class="member-step member-step-username">
             <div class="h2 text-center mb-3">เข้าสู่ระบบสมาชิก</div>
+            <div class="row row-cols-2 mb-3 g-2">
+              <div class="col">
+                <div class="card p-3 d-flex gap-2 align-content-center justify-content-center text-center">
+                  <div class="text-red"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" viewBox="0 0 256 256"><path d="M178,40c-20.65,0-38.73,8.88-50,23.89C116.73,48.88,98.65,40,78,40a62.07,62.07,0,0,0-62,62c0,70,103.79,126.66,108.21,129a8,8,0,0,0,7.58,0C136.21,228.66,240,172,240,102A62.07,62.07,0,0,0,178,40ZM128,214.8C109.74,204.16,32,155.69,32,102A46.06,46.06,0,0,1,78,56c19.45,0,35.78,10.36,42.6,27a8,8,0,0,0,14.8,0c6.82-16.67,23.15-27,42.6-27a46.06,46.06,0,0,1,46,46C224,155.61,146.24,204.15,128,214.8Z"></path></svg></div>
+                  <div class="text-14 text-center">
+                    <div class="fw-semibold">รายการโปรด</div>
+                    <div class="fw-normal">บันทึกรายการที่คุณสนใจ</div>
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="card p-3 d-flex gap-2 align-content-center justify-content-center text-center">
+                  <div class="text-red"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" viewBox="0 0 256 256"><path d="M232,104a8,8,0,0,0,8-8V64a16,16,0,0,0-16-16H32A16,16,0,0,0,16,64V96a8,8,0,0,0,8,8,24,24,0,0,1,0,48,8,8,0,0,0-8,8v32a16,16,0,0,0,16,16H224a16,16,0,0,0,16-16V160a8,8,0,0,0-8-8,24,24,0,0,1,0-48ZM32,167.2a40,40,0,0,0,0-78.4V64H88V192H32Zm192,0V192H104V64H224V88.8a40,40,0,0,0,0,78.4Z"></path></svg></div>
+                  <div class="text-14 text-center">
+                    <div class="fw-semibold">สิทธิพิเศษเฉพาะสมาชิก</div>
+                    <div class="fw-normal">(เร็ว ๆ นี้)</div>
+                  </div>
+                </div>
+              </div>
+            </div>
             <form class="form-login">
               <label for="member_username">E-mail</label>
               <input type="text" name="member_username" id="member_username" />

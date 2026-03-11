@@ -280,7 +280,7 @@
       <button class="btn-close" data-bs-dismiss="modal"></button>
       <div class="modal-body text-center">
         <div class="py-4">
-          <img class="mb-4" src="<?php echo(get_theme_file_uri() . '/images/logo.png') ?>" alt="Weddinglist" width="180" height="43">
+          <img class="mb-4" src="<?php echo(get_theme_file_uri() . '/images/logo.webp') ?>" alt="Weddinglist" width="180" height="43">
           <p class="h2 text-red"><?php _e('ลงทะเบียนสำเร็จ ขอบคุณค่ะ','wdl') ?></p>
         </div>
       </div>

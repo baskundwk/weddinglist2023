@@ -154,7 +154,7 @@
           $venueTypes = get_field('VenueType');
           $venueCharacter = get_field('Character');
           if ($venueCharacter || $venueTypes): ?>
-          <div class="mb-0 d-flex gap-3">
+          <div class="mb-1 d-flex gap-2">
             <?php if ($venueCharacter): ?>
             <?php foreach ($venueCharacter as $character):
                     $characterBackground = get_field('CharacterBackground', $character);
@@ -231,13 +231,19 @@
           $maxCarpark = get_field('MaxCarpark');
           if ($maxGuest || $maxCarpark): ?>
           <p class="wdl-metadata wdl-archive-max-guest mb-0">
+            <?php if( $maxGuest ): ?>
             <span>
               <?php _e('รองรับแขกสูงสุด', 'wdl') ?>
               <strong class="text-red">
                 <?php echo number_format(get_field('MaxGuest')) ?>
               </strong>
               <?php _e('คน', 'wdl') ?>
-            </span> /
+            </span>
+            <?php endif; ?>
+            <?php if( $maxGuest && $maxCarpark ): ?>
+            <span class="mx-2">|</span>
+            <?php endif; ?>
+            <?php if( $maxCarpark ): ?>
             <span>
               <?php _e('จอดรถได้', 'wdl') ?>
               <strong class="text-red">
@@ -245,6 +251,7 @@
               </strong>
               <?php _e('คัน', 'wdl') ?>
             </span>
+            <?php endif; ?>
           </p>
           <?php endif; ?>
           <?php
@@ -262,12 +269,26 @@
           <?php endif; ?>
         </div>
         <div class="col-lg-auto text-center py-3 d-flex flex-column">
-          <a id="apply-cta" href="#apply" class="wdl-btn-lg d-block mb-3" data-bs-toggle="modal"
-            data-dlev="buttonClick"
-            data-dlcomp="button - venue - cta"
-            data-dltgt="<?php the_title() ?>">
-            <?php _e('คลิกขอแพ็กเกจ', 'wdl'); ?>
-          </a>
+          <div class="d-flex flex-column mb-2">
+            <a id="apply-cta" href="#apply" class="wdl-btn-lg d-block mb-1" data-bs-toggle="modal"
+              data-dlev="buttonClick"
+              data-dlcomp="button - venue - cta"
+              data-dltgt="<?php the_title() ?>">
+              <?php _e('คลิกขอแพ็กเกจ', 'wdl'); ?>
+            </a>
+  
+            <p class="text-xs mb-0 text-red">
+              <?php echo implode(' / ', array_filter(array_map(function($type) {
+                $wording = [
+                  'Package' => __('งานหมั้น', 'wdl'),
+                  'WeddingPackage' => __('งานแต่ง', 'wdl'),
+                  'ConventionPackage' => __('งานประชุม', 'wdl'),
+                  'PartyPackage' => __('งานเลี้ยง', 'wdl')
+                ];
+              return checkPackage($type) ? $wording[$type] : null;
+            }, ['Package', 'WeddingPackage', 'ConventionPackage', 'PartyPackage']))) ?>
+            </p>
+          </div>
           <a class="wdl-btn-line-lg d-flex d-lg-none" href="https://line.me/R/oaMessage/%40ety4154i/?สวัสดี%20ต้องการขอแพ็กเกจ%20<?php the_title(); ?>%0A<?php the_permalink(); ?>"
             data-dlev="buttonClick"
             data-dlcomp="button - venue - line"
@@ -291,17 +312,6 @@
     </div>
   </section>
   <?php include get_stylesheet_directory() . '/components/campaign-bar.php' ?>
-  <?php if (get_the_excerpt()): ?>
-  <section class="pb-3">
-    <div class="container-xl">
-      <div class="alert alert-secondary">
-        <p class="mb-0">
-          <?php echo (get_the_excerpt()); ?>
-        </p>
-      </div>
-    </div>
-  </section>
-  <?php endif; ?>
   <?php
   $relatedPromotions = get_posts(
     array(
@@ -818,18 +828,6 @@
         </div>
       </div>
       <?php endif; ?>
-
-
-
-      <?php if(get_the_content()) : ?>
-      <div class="my-3">
-        <h2>รายละเอียดสถานที่</h2>
-        <div class="alert w-100">
-          <?php the_content(); ?>
-        </div>
-      </div>
-      <?php endif; ?>
-
     </div>
   </section>
   <section class="pb-3 overflow-hidden">
@@ -936,8 +934,57 @@
         </div>
       </div>
       <?php endif; ?>
+      <?php if(get_the_content()) : ?>
+      <div class="wdl-single-content short my-3">
+        <h2>รายละเอียดสถานที่</h2>
+        <div class="alert fw-normal w-100">
+          <?php the_content(); ?>
+        </div>
+        <div class="wdl-single-content-readmore">
+          <div class="wdl-btn">อ่านเพิ่มเติม</div>
+        </div>
+      </div>
+      <?php endif; ?>
     </div>
+
   </section>
+
+  <?php $testimonials = new WP_Query([
+    'post_type' => 'testimonial',
+    'posts_per_page' => 16,
+    'meta_query' => [
+      [
+        'key'     => 'MentionedTo',
+        'value'   => get_the_ID(),
+        'compare' => 'LIKE'
+      ]
+    ]
+  ]);
+
+  if ($testimonials->have_posts()) : ?>
+    <section class="py-4 bg-gray overflow-hidden">
+      <div class="container-xl">
+        <h2 class="mb-4">ประสบการณ์จากผู้ใช้บริการ</h2>
+        <div class="wdl-testimonial-swiper swiper overflow-visible">
+          <div class="swiper-wrapper">
+            <?php while ($testimonials->have_posts()) :
+              $testimonials->the_post(); ?>
+              <div class="swiper-slide">
+                <?php include get_stylesheet_directory() . '/components/cards/card-testimonial.php'; ?>
+              </div>
+            <?php endwhile; ?>
+          </div>
+          <div class="swiper-navigation swiper-navigation-small">
+            <div class="swiper-pagination position-relative mt-4"></div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <?php wp_reset_postdata(); ?>
+  <?php endif; ?>
+
   <?php 
   $review_cat = get_category_by_slug('reviews');
   $review_cat_id = $review_cat ? $review_cat->term_id : 0;
@@ -1083,6 +1130,15 @@
       <?php if ($allRelatedPosts): ?>
       <div class="my-3">
         <h2><?php _e('บทความที่เกี่ยวข้อง', 'wdl'); ?></h2>
+        <?php $relatedTags = get_field('RelatedTag'); 
+          if($relatedTags) : ?>
+            <div class="wdl-badge-small-container gap-2 mb-2">
+              <?php foreach($relatedTags as $tag) { ?>
+                <a href="<?php echo get_tag_link($tag->term_id); ?>" class="wdl-badge-sm"><?php echo esc_html($tag->name); ?></a>                
+              <?php } ?>
+            </div>
+          <?php endif;
+        ?>
         <div class="wdl-archive wdl-archive-extended">
           <div class="swiper wdl-archive-swiper">
             <div class="swiper-wrapper">
@@ -1218,4 +1274,5 @@
 </main>
 
 <?php include get_stylesheet_directory() . '/components/form-lead.php' ?>
+<?php include get_stylesheet_directory() . '/components/footer-keyword.php' ?>
 <?php include get_stylesheet_directory() . '/components/footer.php' ?>

@@ -659,7 +659,7 @@ function send_email_add_microsite() {
 	$contact_message = isset($_POST['contactMessage']) ? sanitize_textarea_field($_POST['contactMessage']) : '';
 
 	// Logo file URL
-	$file = get_template_directory_uri() . '/images/weddinglist-logo-white.svg';
+	$file = get_template_directory_uri() . '/images/logo-w.png';
 	
 	// Prepare email headers
 	$headers = [];

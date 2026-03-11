@@ -4,12 +4,15 @@
   "description": "",
   "main": "",
   "scripts": {
-    "start": "sass -w scss/style.scss:style.css"
+    "start": "concurrently \"sass -w scss/style.scss:style.css\" \"sass -w scss/admin.scss:css/admin.css\""
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "concurrently": "^9.2.1",
+    "git": "^0.1.5",
+    "git-filter-repo": "^0.0.30",
     "sass": "^1.86.3"
   }
 }

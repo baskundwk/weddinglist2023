@@ -116,9 +116,3 @@ if (get_queried_object()->taxonomy) {
 }
 
 query_posts($arg);
-
-
-/*   if(is_user_logged_in()) {
-    print_r(get_queried_object());
-  }
- */

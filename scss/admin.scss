@@ -106,6 +106,13 @@
   li.opensub > a.menu-top,
   li > a.menu-top:focus {
     background: #EB355D;
+    color: #FFFFFF;
+  }
+
+  li a:focus div.wp-menu-image:before,
+  li.opensub div.wp-menu-image:before,
+  li:hover div.wp-menu-image:before {
+    color: #FFFFFF;
   }
 
   .wp-has-current-submenu .wp-submenu a:focus,

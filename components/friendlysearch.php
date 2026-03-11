@@ -328,9 +328,9 @@ $friendlySearchCharacter = get_field('FriendlySearchCharacter', 'option');
             <div class="modal-choice-group">
               <?php $guestChoices = preg_split('/\r\n|\r|\n/', $friendlySearchGuest);
               foreach($guestChoices as $choice) {
-                $value = explode(' : ', $choice)[0] ?? '';
-                $label = explode(' : ', $choice)[1] ?? '';
-                $desc = explode(' : ', $choice)[2] ?? ''; ?>
+                $value = explode(' : ', $choice)[0] ? explode(' : ', $choice)[0] : '';
+                $label = explode(' : ', $choice)[1] ? explode(' : ', $choice)[1] : '';
+                $desc = explode(' : ', $choice)[2] ? explode(' : ', $choice)[2] : ''; ?>
                 <div class="modal-choice-item" data-form-name="guest" data-form-value="<?php echo $value ?>">
                   <div class="modal-choice-title">
                     <?php echo $label ?>
@@ -366,9 +366,9 @@ $friendlySearchCharacter = get_field('FriendlySearchCharacter', 'option');
             <div class="modal-choice-group">
               <?php $budgetChoices = preg_split('/\r\n|\r|\n/', $friendlySearchBudget);
               foreach($budgetChoices as $choice) {
-                $value = explode(' : ', $choice)[0] ?? '';
-                $label = explode(' : ', $choice)[1] ?? '';
-                $desc = explode(' : ', $choice)[2] ?? ''; ?>
+                $value = explode(' : ', $choice)[0] ? explode(' : ', $choice)[0] : '';
+                $label = explode(' : ', $choice)[1] ? explode(' : ', $choice)[1] : '';
+                $desc = explode(' : ', $choice)[2] ? explode(' : ', $choice)[2] : ''; ?>
                 <div class="modal-choice-item" data-form-name="budget" data-form-value="<?php echo $value ?>">
                   <div class="modal-choice-title">
                     <?php echo $label ?>

@@ -11,6 +11,9 @@
         </div>
       <?php endif; ?>
       <div><?php the_content(); ?></div>
+      <div class="debug">
+        
+      </div>
     </div>
   </section>
 </main>

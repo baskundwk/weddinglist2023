@@ -109,7 +109,7 @@
     </div>
       
     <?php if(get_field('MomentPriceStart')) {?>
-    <div class="mt-1 w-100 text-center fw-bold text-red">
+    <div class="mt-auto pt-1 w-100 text-center fw-bold text-red">
       <?php echo __('เริ่มต้น', 'wdl').' '. number_format(get_field('MomentPriceStart')).' '.__('บาท','')?>
     </div>
     <?php } ?>

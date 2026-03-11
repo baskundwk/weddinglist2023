@@ -51,7 +51,7 @@
 
   @include max-width-lg {
     grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 12px;
+    gap: 8px;
   }
   @include max-width-md {
     grid-template-columns: repeat(3, minmax(0, 1fr));
