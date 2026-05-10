@@ -59,6 +59,40 @@
     </div>
   </section>
 
+
+
+  <?php $venue = get_field('Venue');
+		if ($venue): ?>
+  <section class="mb-4 pb-0 overflow-hidden wdl-archive wdl-archive-extended">
+    <div class="container-xl">
+      <div class="row align-items-center">
+        <div class="col-12">
+          <div class="wdl-archive <?php echo esc_attr($atts['class']); ?>">
+            <h3 class="h2 mb-4">
+              <?php _e('สถานที่จัดงานแต่งงานที่ร่วมรายการ', 'wdl') ?>
+            </h3>
+            <div class="swiper wdl-archive-swiper overflow-visible">
+              <div class="swiper-wrapper">
+                <?php foreach ($venue as $post):
+											// Setup this post for WP functions (variable must be named $post).
+											setup_postdata($post); ?>
+
+                <?php include get_stylesheet_directory() . '/components/cards/card-venue.php' ?>
+
+                <?php
+											wp_reset_postdata();
+										endforeach;
+										?>
+              </div>
+              <div class="swiper-pagination"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <?php endif; ?>
+
   <?php
 	$post_type = get_post_type();
 	$popup = $_GET['popup'];
@@ -128,38 +162,6 @@
                 <div class="swiper-button-prev"></div>
                 <div class="swiper-button-next"></div>
               </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <?php endif; ?>
-
-  <?php $venue = get_field('Venue');
-		if ($venue): ?>
-  <section class="mb-4 pb-0 overflow-hidden wdl-archive wdl-archive-extended">
-    <div class="container-xl">
-      <div class="row align-items-center">
-        <div class="col-12">
-          <div class="wdl-archive <?php echo esc_attr($atts['class']); ?>">
-            <h3 class="h2 mb-4">
-              <?php _e('สถานที่จัดงานแต่งงานที่ร่วมรายการ', 'wdl') ?>
-            </h3>
-            <div class="swiper wdl-archive-swiper overflow-visible">
-              <div class="swiper-wrapper">
-                <?php foreach ($venue as $post):
-											// Setup this post for WP functions (variable must be named $post).
-											setup_postdata($post); ?>
-
-                <?php include get_stylesheet_directory() . '/components/cards/card-venue.php' ?>
-
-                <?php
-											wp_reset_postdata();
-										endforeach;
-										?>
-              </div>
-              <div class="swiper-pagination"></div>
             </div>
           </div>
         </div>

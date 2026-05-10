@@ -34,3 +34,32 @@
   transform: translateX(-50%);
   z-index: 110000;
 }
+
+.wdl-alert-center {
+  position: fixed;
+  inset: 0;
+  margin: auto;
+  z-index: 5;
+  background: rgba(255, 255, 255, 0.8);
+  padding: 12px;
+  width: 500px;
+  height: fit-content;
+  max-width: 100svw;
+  font-size: 20px;
+  font-weight: 400;
+  text-align: center;
+  pointer-events: none;
+  border-radius: 12px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
+    transition: opacity 0.3s ease-in-out;
+
+  &:not(.active) {
+    visibility: hidden;
+    opacity: 0;
+  }
+
+  &.active {
+    visibility: visible;
+    opacity: 1;
+  }
+}

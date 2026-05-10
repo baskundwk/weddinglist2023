@@ -50,31 +50,55 @@
 
   $current_url = explode("?", $_SERVER['REQUEST_URI'])[0];
   
-  if(isset($_GET['budget']) && $_GET['budget'] !== '' && $_GET['budget'] !== 'any') {
-    $arg['meta_query'][] = array(
-      'key' => 'MinPrice',
-      'value' => floatval($_GET['budget']),
-      'type' => 'NUMERIC',
-      'compare' => '<=',
-    );
-  }
-  
-  if(isset($_GET['guest']) && $_GET['guest'] !== '' && $_GET['guest'] !== 'any') {
-    /* Check if guest param contains '>' */
-    if($_GET['guest'][0] === '>') {
+  if(isset($_GET['budget']) && $_GET['budget'] !== '') {
+    $budgetParam = sanitize_text_field($_GET['budget']);
+
+    if($budgetParam === 'any') {
+      // "any" is used in the UI as the highest range (800,000+).
       $arg['meta_query'][] = array(
-        'key' => 'MaxGuest',
-        'value' => floatval(substr($_GET['guest'], 1)),
+        'key' => 'MinPrice',
+        'value' => 800000,
         'type' => 'NUMERIC',
         'compare' => '>=',
       );
     } else {
       $arg['meta_query'][] = array(
-        'key' => 'MaxGuest',
-        'value' => floatval($_GET['guest']),
+        'key' => 'MinPrice',
+        'value' => floatval($budgetParam),
         'type' => 'NUMERIC',
         'compare' => '<=',
       );
+    }
+  }
+  
+  if(isset($_GET['guest']) && $_GET['guest'] !== '') {
+    $guestParam = sanitize_text_field($_GET['guest']);
+
+    if($guestParam === 'any') {
+      // "any" is used in the UI as the highest range (500+ guests).
+      $arg['meta_query'][] = array(
+        'key' => 'MaxGuest',
+        'value' => 500,
+        'type' => 'NUMERIC',
+        'compare' => '>=',
+      );
+    } else {
+      /* Support explicit range prefix. Ex: >500 */
+      if($guestParam[0] === '>') {
+        $arg['meta_query'][] = array(
+          'key' => 'MaxGuest',
+          'value' => floatval(substr($guestParam, 1)),
+          'type' => 'NUMERIC',
+          'compare' => '>=',
+        );
+      } else {
+        $arg['meta_query'][] = array(
+          'key' => 'MaxGuest',
+          'value' => floatval($guestParam),
+          'type' => 'NUMERIC',
+          'compare' => '>=',
+        );
+      }
     }
   }
 

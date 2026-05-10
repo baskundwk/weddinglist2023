@@ -208,11 +208,11 @@
   justify-content: center;
 
   &:hover {
-    background: #28a745;
+    background: #28a745 !important;
     color: #ffffff !important;
 
     &:before {
-      background: #ffffff;
+      background: #ffffff !important;
     }
   }
 

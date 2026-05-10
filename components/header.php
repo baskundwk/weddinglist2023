@@ -298,3 +298,4 @@ if(isset($campaignModeEnabled)) {
 <?php if(!isset($hideNav) || !$hideNav === true) : ?>
 <?php include get_stylesheet_directory() . '/components/lead-menu.php' ?>
 <?php endif; ?>
+<?php include get_stylesheet_directory() . '/components/floatbar.php' ?>

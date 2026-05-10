@@ -32,7 +32,7 @@
                 ]);
                 ?>
             <?php if($listigs->have_posts()): ?>
-            <h2 class="mt-2 mb-1 pt-2 text-center border-top debug">สถานที่จัดงานแต่งงานแนะนำ</h2>
+            <h2 class="mt-2 mb-1 pt-2 text-center border-top">สถานที่จัดงานแต่งงานแนะนำ</h2>
             <div class="wdl-listing-grid-swiper swiper position-relative mt-1 mb-3">
               <div class="swiper-wrapper">
                 <?php while($listigs->have_posts()): 

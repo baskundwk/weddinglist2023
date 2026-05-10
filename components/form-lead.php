@@ -5,8 +5,9 @@
   } else {
     $formType = 'General';
   }
+  $nomodal = isset($nomodal) ? $nomodal : false;
 ?>
-
+<?php if(!$nomodal) : ?>
 <div id="apply" class="wdl-form-general-modal modal fade html-lazy">
   <div class="modal-dialog modal-dialog-centered modal-lg">
     <div class="modal-content m-1 mb-0">
@@ -14,7 +15,10 @@
       <div class="modal-body py-3 py-md-4 px-md-5">
         <h2 class="mb-2 h1 text-center fw-medium"><?php _e('ลงทะเบียนเพื่อรับสิทธิพิเศษ', 'wdl') ?></h2>
         <hr class="my-2 mt-xl-3 mb-xl-4">
+        <?php endif; ?>
         <form id="wdl-form-general" class="wdl-form-general" action="" method="post" enctype="multipart/form-data">
+          <!-- nonce field -->
+          <input type="hidden" name="wdl_form_nonce" value="<?php echo wp_create_nonce('wdl_form_nonce'); ?>">
           <div class="row gy-3 gx-md-4">
             <?php if($formType !== 'Vendor') : ?>
             <div class="col-md-12 d-flex flex-column flex-xl-row align-items-xl-center gap-xl-5 position-relative z-2">
@@ -114,7 +118,7 @@
             <?php }
             } ?>
 
-            <?php if($formType !== 'Vendor') : ?>
+            <?php if($formType === 'Venue') : ?>
             <hr class="my-2 my-md-3">
             <div class="col-md-12 mt-0">
               <div id="appoint-field" class="d-flex flex-column flex-xl-row align-items-xl-center gap-xl-5 position-relative z-1">
@@ -166,6 +170,7 @@
             $coupon = get_posts($couponArg);
             if($coupon) { ?>
               <div class="col-md-12 mt-3">
+                <div id="coupon-pick-alert" class="wdl-alert-center"><p class="my-4 fs-3">เก็บคูปองแล้ว</p></div>
                 <p class="h6 mb-1"><?php _e('คูปองที่ร่วมรายการ', 'wdl') ?></p>
                 <div class="d-flex flex-wrap gap-3 my-2 align-items-stretch">
                   <?php foreach ($coupon as $singleCoupon): ?>
@@ -244,10 +249,12 @@
             </div>
           </div>
         </form>
+        <?php if(!$nomodal) : ?>
       </div>
     </div>
   </div>
 </div>
+<?php endif; ?>
 <div class="wdl-form-general-coupon-verify modal fade">
   <div class="modal-dialog modal-dialog-centered modal-lg">
     <div class="modal-content mb-0">
@@ -280,11 +287,13 @@
 </div>
 <script>
 $(document).ready(() => {
-  const modal = new bootstrap.Modal(document.querySelector('.wdl-form-general-modal'));
-  const modalVerify = new bootstrap.Modal(document.querySelector('.wdl-form-general-coupon-verify'));
-  const modalSuccess = new bootstrap.Modal(document.querySelector('.wdl-form-general-succeed-modal'));
+  console.log('Lead form script loaded')
+  const modal = document.querySelector('.wdl-form-general-modal') ? new bootstrap.Modal(document.querySelector('.wdl-form-general-modal')) : null;
+  const modalVerify = document.querySelector('.wdl-form-general-coupon-verify') ? new bootstrap.Modal(document.querySelector('.wdl-form-general-coupon-verify')) : null;
+  const modalSuccess = document.querySelector('.wdl-form-general-succeed-modal') ? new bootstrap.Modal(document.querySelector('.wdl-form-general-succeed-modal')) : null;
   $('#wdl-form-general').submit(function(e) {
     e.preventDefault();
+    console.log('Lead form submit triggered')
     $('.wdl-form-general-modal .modal-body').addClass('submitting')
     let selectedDaytime = []
     let selectedCoupon = []
@@ -296,36 +305,35 @@ $(document).ready(() => {
     })
     
     <?php if($formType === 'General') { ?>
-      let selectedItems = generalDirectData.length > 0 ? generalDirectData : selectedCard
-      selectedItems.forEach((e,i) => {
-        $.post("<?php echo admin_url('admin-ajax.php'); ?>", {
-          action: 'send_email',
-          name: $('#name-lastname').val(),
-          tel: $('#tel').val(),
-          email: $('#email').val(),
-          lineid: $('#lineid').val(),
-          guest: $('input[name=guest]:checked').val(),
-          budget: $('#budget').val(),
-          date: $('input[name=date]:checked').val(),
-          daytime: selectedDaytime.join(', '),
-          appointDate: $('#appoint-date').val(),
-          appointTime: $('#appoint-time').val(),
-          message: $('#message').val(),
-          cardTitle: e.title,
-          cardId: e.id,
-          leadType: '<?php echo $formType ?>',
-        }, () => {
-          $('#wdl-form-general').removeClass('failed')
-        
-          modal.hide();
-          modalSuccess.show();
-  
-          $('.wdl-form-general-modal .modal-body').removeClass('submitting')
-          generalDirectData = {}
-        }).fail(() => {
-          $('.wdl-form-general-modal .modal-body').removeClass('submitting')
-          $('#wdl-form-general').addClass('failed')
-        })
+      const formTitle = 'General Lead Form'
+      $.post("<?php echo admin_url('admin-ajax.php'); ?>", {
+        action: 'send_email',
+        name: $('#name-lastname').val(),
+        tel: $('#tel').val(),
+        email: $('#email').val(),
+        lineid: $('#lineid').val(),
+        guest: $('input[name=guest]:checked').val(),
+        budget: $('#budget').val(),
+        date: $('input[name=date]:checked').val(),
+        daytime: selectedDaytime.join(', '),
+        appointDate: $('#appoint-date').val(),
+        appointTime: $('#appoint-time').val(),
+        message: $('#message').val(),
+        cardTitle: formTitle,
+        cardId: e.id,
+        leadType: '<?php echo $formType ?>',
+        nonce: $('#wdl-form-general [name="wdl_form_nonce"]').val()
+      }, () => {
+        $('#wdl-form-general').removeClass('failed')
+        modal?.hide();
+        modalSuccess?.show();
+        $('.wdl-form-general-modal .modal-body').removeClass('submitting')
+        generalDirectData = {}
+        console.log('Lead form (general) submission success for card: ' + formTitle)
+      }).fail(() => {
+        $('.wdl-form-general-modal .modal-body').removeClass('submitting')
+        $('#wdl-form-general').addClass('failed')
+        console.log('Lead form (general) submission failed for card: ' + formTitle)
       })
     <?php } else { ?>
       $.post("<?php echo admin_url('admin-ajax.php'); ?>", {
@@ -345,21 +353,24 @@ $(document).ready(() => {
         cardId: <?php echo get_the_id()?>,
         packageType: $('select[name=packageType]').val(),
         leadType: '<?php echo $formType ?>',
-        selectedCoupon: selectedCoupon.join(',')
+        selectedCoupon: selectedCoupon.join(','),
+        nonce: $('#wdl-form-general [name="wdl_form_nonce"]').val()
       }, () => {
         $('#wdl-form-general').removeClass('failed')
-        modal.hide();
+        modal?.hide();
           
         if (selectedCoupon.length > 0) {
-          modalVerify.show();
+          modalVerify?.show();
         } else {
-          modalSuccess.show();
+          modalSuccess?.show();
         }
         $('.wdl-form-general-modal .modal-body').removeClass('submitting')
         generalDirectData = {}
+        console.log('Lead form submission success for card: ' + e.title)
       }).fail(() => {
         $('.wdl-form-general-modal .modal-body').removeClass('submitting')
         $('#wdl-form-general').addClass('failed')
+        console.log('Lead form submission failed for card: ' + e.title)
       })
     <?php } ?>
 

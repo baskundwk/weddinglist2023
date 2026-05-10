@@ -510,7 +510,6 @@ function handle_member_suspended_otp() {
 	$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
 	$headers .= "From: Weddinglist Team <support@weddinglist.co.th> \r\n";
 	$headers .= "Reply-To: support@weddinglist.co.th \r\n";
-	$headers .= "Bcc: support@weddinglist.co.th \r\n";
 	wp_mail($to, $subject, $body, $headers);
 
 	wp_send_json_success( ['message' => 'OTP sent successfully'], 200 );

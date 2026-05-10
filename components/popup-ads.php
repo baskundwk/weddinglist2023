@@ -1,5 +1,5 @@
 <?php $popupArgs = array(
-  'post_type' => array('promotion', 'wedding-fair', 'venue', 'post', 'vendor'),
+  'post_type' => 'any',
   'post_status' => 'publish',
   'orderby' => 'rand',
   'posts_per_page' => -1,

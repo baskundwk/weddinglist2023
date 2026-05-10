@@ -5,7 +5,7 @@
 ]);
 
 if (!empty($subvendor_terms) && !is_wp_error($subvendor_terms)) {?>
-<div class="swiper wdl-subvendor-thumbnail-grid debug">
+<div class="swiper wdl-subvendor-thumbnail-grid">
   <div class="swiper-wrapper">
     <?php foreach ($subvendor_terms as $subvendor) { ?>
     <div class="swiper-slide w-auto">

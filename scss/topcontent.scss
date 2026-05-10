@@ -1,0 +1,22 @@
+@use 'variable' as *;
+.wdl-ad-topcontent {
+  figure {
+    margin: 0;
+    
+    img {
+      aspect-ratio: 1393 / 48;
+      border-radius: 12px;
+      width: 100%;
+      
+      @include max-width-lg {
+        aspect-ratio: 336 / 80;
+        box-shadow: none;
+        border-radius: 0;
+      }
+    }
+  }
+
+  &:not(:first-of-type) {
+    display: none;
+  }
+}

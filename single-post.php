@@ -26,17 +26,55 @@ $currentPostID = get_the_ID();
           <img loading="eager" src="<?php echo esc_html(get_the_post_thumbnail_url($currentPostID, 'medium_large')) ?>" width="100%" alt="<?php echo get_the_title() ?>">
         </div>
 
+        <div class="row my-3 px-3 px-xl-0 g-3">
+          <div class="col-sm-6">
+            <a href="<?php echo home_url( '/register' ) ?>"  class="flex-fill wdl-btn w-100 p-2"
+              data-dlev="buttonClick"
+              data-dlcomp="button - post - cta"
+              data-dltgt="<?php the_title() ?>">
+              <?php _e('ลงทะเบียนรับโปรแต่งงานสุดคุ้ม', 'wdl'); ?>
+            </a>
+          </div>
+          <div class="col-sm-6">
+            <a class="wdl-btn-line w-100 p-2" href="https://line.me/ti/p/%40ety4154i/" target="_blank"
+              data-dlev="buttonClick"
+              data-dlcomp="button - post - line"
+              data-dltgt="<?php the_title() ?>">
+              <?php _e('ฟรี! ปรึกษาแอดมินช่วยหาสถานที่แต่งงาน', 'wdl'); ?>
+            </a>
+          </div>
+        </div>
+
         <div class="wdl-single-content mb-2 px-3 px-xl-0">
           <?php $postSetting = get_field('PostSetting', $currentPostID);?>  
           <?php if(isset($postSetting) && in_array('DisableLazyLoad' , $postSetting)) { ?>
             <div class="post-content-container">
               <?php the_content(); ?>
             </div>
-          <?php } else { ?>
+            <?php } else { ?>
             <div id="post-content-container" class="loading"></div>
-          <?php }?>
-          <div class="wdl-single-content-readmore">
-            <div class="wdl-btn"><?php _e('อ่านเพิ่มเติม', 'wdl')?></div>
+            <?php }?>
+            <div class="wdl-single-content-readmore">
+              <div class="wdl-btn"><?php _e('อ่านเพิ่มเติม', 'wdl')?></div>
+            </div>
+        </div>
+
+        <div class="row my-3 px-3 px-xl-0 g-3">
+          <div class="col-sm-6">
+            <a href="<?php echo home_url( '/register' ) ?>" class="flex-fill wdl-btn w-100 p-2"
+              data-dlev="buttonClick"
+              data-dlcomp="button - post - cta"
+              data-dltgt="<?php the_title() ?>">
+              <?php _e('ลงทะเบียนรับโปรแต่งงานสุดคุ้ม', 'wdl'); ?>
+            </a>
+          </div>
+          <div class="col-sm-6">
+            <a class="wdl-btn-line w-100 p-2" href="https://line.me/ti/p/%40ety4154i/" target="_blank"
+              data-dlev="buttonClick"
+              data-dlcomp="button - post - line"
+              data-dltgt="<?php the_title() ?>">
+              <?php _e('ฟรี! ปรึกษาแอดมินช่วยหาสถานที่แต่งงาน', 'wdl'); ?>
+            </a>
           </div>
         </div>
       <?php } ?>

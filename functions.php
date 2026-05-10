@@ -8,7 +8,7 @@ function wdl_enqueue_styles() {
 	wp_enqueue_style('air-datepicker', get_theme_file_uri() . '/library/air-datepicker@3.6.0/air-datepicker.min.css');
 	wp_enqueue_style('select2', get_theme_file_uri() . '/library/select2/select2.min.css');
 	wp_enqueue_style('theme-style', get_theme_file_uri() . '/style.css');
-	wp_enqueue_style( 'aos', get_theme_file_uri() . '/library/aos/aos.css');
+	wp_enqueue_style('aos', get_theme_file_uri() . '/library/aos/aos.css');
 
 	wp_enqueue_script('jquery', get_theme_file_uri() . '/library/jquery/jquery-3.7.1.min.js', array(), '3.7.1', true);
 	wp_enqueue_script('jquery-match-height', get_theme_file_uri() . '/library/jquery-match-height/jquery.matchHeight.js', array('jquery'), true);
@@ -19,7 +19,7 @@ function wdl_enqueue_styles() {
 	wp_enqueue_script('swiperjs', get_theme_file_uri() . '/library/swiperjs/swiper-bundle.min.js', array('jquery'), '', true);
 	wp_enqueue_script('qrcodejs', get_theme_file_uri() . '/library/qrcodejs/qrcode.min.js', array('jquery'), '', true);
 	wp_enqueue_script('air-datepicker', get_theme_file_uri() . '/library/air-datepicker@3.6.0/air-datepicker.min.js', array(), '', true);
-	wp_enqueue_script( 'aos-script', get_theme_file_uri() . '/library/aos/aos.js', array(), '', true );
+	wp_enqueue_script('aos-script', get_theme_file_uri() . '/library/aos/aos.js', array(), '', true);
 	wp_enqueue_script('theme-script', get_theme_file_uri() . '/script.js', array('jquery'), '', true);
 	wp_enqueue_script('friendlysearch', get_theme_file_uri() . '/friendlysearch.js', array('jquery'), '', true);
 	wp_enqueue_script('data-layer', get_theme_file_uri() . '/data-layer.js', array('jquery'), '', true);
@@ -50,18 +50,18 @@ function wdl_has_real_thumbnail($post_id = null) {
 	if (!$post_id) {
 		$post_id = get_the_ID();
 	}
-	
+
 	// Check if post has thumbnail
 	if (!has_post_thumbnail($post_id)) {
 		return false;
 	}
-	
+
 	// Get the thumbnail ID
 	$thumbnail_id = get_post_thumbnail_id($post_id);
-	
+
 	// Get default thumbnail ID (set by Default Featured Image plugin)
 	$default_thumbnail_id = get_option('dfi_image_id');
-	
+
 	// Compare: if thumbnail is not the default one, return true
 	return ($thumbnail_id && $thumbnail_id != $default_thumbnail_id);
 }
@@ -125,6 +125,13 @@ add_action('wp_ajax_send_email', 'send_email');
 add_action('wp_ajax_nopriv_send_email', 'send_email');
 
 function send_email() {
+	// Verify nonce for security
+	$nounceValue = isset($_REQUEST['nonce']) ? $_REQUEST['nonce'] : '';
+	if (!isset($nounceValue) || !wp_verify_nonce($nounceValue, 'wdl_form_nonce')) {
+		wp_send_json_error('Invalid nonce ' . $nounceValue);
+		return;
+	}
+
 	//$toClient = $_REQUEST['toClient'];
 	$name = sanitize_text_field($_REQUEST['name']);
 	$tel = sanitize_text_field($_REQUEST['tel']);
@@ -178,7 +185,7 @@ function send_email() {
 		$appointStatement = "<p style='text-decoration:underline;'><strong>ลูกค้าสนใจนัดหมายเพื่อเข้าชมสถานที่ วันที่ <span style='color: #EB355D'>" . date("d-M-Y", strtotime($appointDate)) . " " . $appointTime . "</span> กรุณาติดต่อลูกค้าเพื่อนัดหมายเพิ่มเติม</strong></p>";
 	}
 
-	$recepient = get_field('Email', $cardId);
+	$recepient = get_field('Email', $cardId) ? get_field('Email', $cardId) : 'support@weddinglist.co.th';
 	if (get_post_type($cardId) === 'coupon') {
 		$recepient = "";
 		if ($venue = get_field('Venue', $cardId)) {
@@ -192,7 +199,7 @@ function send_email() {
 	}
 
 
-	$cardTitle = str_replace("&#038;", "&", get_the_title($cardId));
+	$cardTitle = $cardId ? str_replace("&#038;", "&", get_the_title($cardId)) : "General Registration Page";
 	$microsite = get_field('Microsite', $cardId);
 
 	$timestamp = wp_date("d M Y H:i:s", null);
@@ -476,23 +483,23 @@ function send_email_business() {
 	$user_headers .= "From: Weddinglist Team <event@weddinglist.co.th> \r\n";
 	$user_headers .= "Reply-To: event@weddinglist.co.th \r\n";
 	$user_headers .= "Content-Type: text/html; charset=UTF-8";
-	
+
 	$banner_url = 'https://www.weddinglist.co.th/wp-content/uploads/2025/05/LINE_NOTE_251020_12.jpg';
 	$user_subject = 'ขอบคุณสำหรับการลงทะเบียนผู้จัดแสดง Thailand Weddinglist 2026';
 	$user_message = "<div style='background: #EEEEEE; padding: 32px;'>" .
-	"	<div style='max-width: 600px; margin: auto;'>" .
-	"		<div style='background: #EB355D; padding: 24px; text-align: center;'>" .
-	"			<img src='$file' alt='Weddinglist' width='243' style='display:block; margin:auto;'>" .
-	"		</div>" .
-	"		<div style='background: #FFFFFF; padding: 16px; font-family: Tahoma; color: #555555; line-height: 1.7;'>" .
-	"			<img style='display:block; width:100%; border-radius: 12px;' src='" . $banner_url . "' />" .
-	"			<p>สวัสดีค่ะ</p>" .
-	"			<p>ขอบคุณสำหรับการลงทะเบียนผู้จัดแสดง Thailand Weddinglist 2026 ค่ะ ทางทีมงานจะแจ้งผลการสมัครให้ทราบโดยเร็วที่สุด</p>" .
-	"		</div>" .
-	"	</div>" .
-	"</div>";
+		"	<div style='max-width: 600px; margin: auto;'>" .
+		"		<div style='background: #EB355D; padding: 24px; text-align: center;'>" .
+		"			<img src='$file' alt='Weddinglist' width='243' style='display:block; margin:auto;'>" .
+		"		</div>" .
+		"		<div style='background: #FFFFFF; padding: 16px; font-family: Tahoma; color: #555555; line-height: 1.7;'>" .
+		"			<img style='display:block; width:100%; border-radius: 12px;' src='" . $banner_url . "' />" .
+		"			<p>สวัสดีค่ะ</p>" .
+		"			<p>ขอบคุณสำหรับการลงทะเบียนผู้จัดแสดง Thailand Weddinglist 2026 ค่ะ ทางทีมงานจะแจ้งผลการสมัครให้ทราบโดยเร็วที่สุด</p>" .
+		"		</div>" .
+		"	</div>" .
+		"</div>";
 	$userMail = wp_mail($contactEmail, $user_subject, $user_message, $user_headers);
-	
+
 	$new_post_id = wp_insert_post(array(
 		'post_title' => $businessName,
 		'post_type' => 'tw-lead-business',
@@ -728,6 +735,7 @@ function custom_menu_order($menu_order) {
 		'edit.php',
 		'edit.php?post_type=page',
 		'edit.php?post_type=promotion',
+		'edit.php?post_type=offer',
 		'edit.php?post_type=wedding-fair',
 		'edit.php?post_type=venue',
 		'edit.php?post_type=vendor',
@@ -1075,31 +1083,31 @@ function handleTW2026FormSubmit() {
 			$headers .= "Content-Type: text/html; charset=UTF-8";
 
 			$email_body =
-			"<div style='background: #EEEEEE; padding: 32px;'>" .
-			"	<div style='max-width: 600px; margin: auto;'>" .
-			"		<div style='background: #EB355D; padding: 24px; text-align: center;'>" .
-			"			<img src='$file' alt='Weddinglist' width='243' style='display:block; margin:auto;'>" .
-			"		</div>" .
-			"		<div style='background: #FFFFFF; padding: 16px; font-family: Tahoma; color: #555555; line-height: 1.7;'>" .
-			"			<p>สวัสดีค่ะ</p>" .
-			"			<p><strong>มีผู้ลงทะเบียนใหม่ $contactName</strong></p>" .
-			"			<ul style='list-style: none; padding: 0;'>" .
-			"				<li>เวลาลงทะเบียน : <strong>$timestamp</strong></li>" .
-			"				<li>ชื่อ : <strong>$contactName</strong></li>" .
-			"				<li>ชื่อผู้ติดต่อ : <strong>$contactName</strong></li>" .
-			"				<li>เบอร์โทร​ : <strong>$contactTel</strong></li>" .
-			"				<li>อีเมล : <strong>$contactEmail</strong></li>" .
-			"				<li>วันที่ : <strong>$date</strong></li>" .
-			"				<li>จำนวนแขก : <strong>$guest</strong></li>" .
-			"				<li>งบประมาณ : <strong>$budget</strong></li>" .
-			"				<li>ช่องทางติดต่อ : <strong>$channel</strong></li>" .
-			"				<li>ความสนใจ : <strong>$interest</strong></li>" .
-			"				<li>จังหวัด : <strong>$province</strong></li>" .
-			"			</ul>" .
-			"			<p>รหัสลงทะเบียนคือ <strong class='font-weight: 600; color: #EB355D;'>TW2026-$post_id</strong></p>" .
-			"		</div>" .
-			"	</div>" .
-			"</div>";
+				"<div style='background: #EEEEEE; padding: 32px;'>" .
+				"	<div style='max-width: 600px; margin: auto;'>" .
+				"		<div style='background: #EB355D; padding: 24px; text-align: center;'>" .
+				"			<img src='$file' alt='Weddinglist' width='243' style='display:block; margin:auto;'>" .
+				"		</div>" .
+				"		<div style='background: #FFFFFF; padding: 16px; font-family: Tahoma; color: #555555; line-height: 1.7;'>" .
+				"			<p>สวัสดีค่ะ</p>" .
+				"			<p><strong>มีผู้ลงทะเบียนใหม่ $contactName</strong></p>" .
+				"			<ul style='list-style: none; padding: 0;'>" .
+				"				<li>เวลาลงทะเบียน : <strong>$timestamp</strong></li>" .
+				"				<li>ชื่อ : <strong>$contactName</strong></li>" .
+				"				<li>ชื่อผู้ติดต่อ : <strong>$contactName</strong></li>" .
+				"				<li>เบอร์โทร​ : <strong>$contactTel</strong></li>" .
+				"				<li>อีเมล : <strong>$contactEmail</strong></li>" .
+				"				<li>วันที่ : <strong>$date</strong></li>" .
+				"				<li>จำนวนแขก : <strong>$guest</strong></li>" .
+				"				<li>งบประมาณ : <strong>$budget</strong></li>" .
+				"				<li>ช่องทางติดต่อ : <strong>$channel</strong></li>" .
+				"				<li>ความสนใจ : <strong>$interest</strong></li>" .
+				"				<li>จังหวัด : <strong>$province</strong></li>" .
+				"			</ul>" .
+				"			<p>รหัสลงทะเบียนคือ <strong class='font-weight: 600; color: #EB355D;'>TW2026-$post_id</strong></p>" .
+				"		</div>" .
+				"	</div>" .
+				"</div>";
 
 			// Send email to admin in
 			wp_mail($admin_email, $subject, $email_body, $headers);
@@ -1115,48 +1123,48 @@ function handleTW2026FormSubmit() {
 				$banner_url = 'https://www.weddinglist.co.th/wp-content/uploads/2025/05/LINE_NOTE_251020_12.jpg';
 				$user_subject = 'ขอบคุณสำหรับการลงทะเบียน Thailand Weddinglist 2026';
 				$user_message = "<div style='background: #EEEEEE; padding: 32px;'>" .
-				"	<div style='max-width: 600px; margin: auto;'>" .
-				"		<div style='background: #EB355D; padding: 24px; text-align: center;'>" .
-				"			<img src='$file' alt='Weddinglist' width='243' style='display:block; margin:auto;'>" .
-				"		</div>" .
-				"		<div style='background: #FFFFFF; padding: 16px; font-family: Tahoma; color: #555555; line-height: 1.7;'>" .
-				"			<img style='display:block; width:100%; border-radius: 12px;' src='" . $banner_url . "' />" .
-				"			<p style='margin-left: 16px; display: flex;'><img style='margin-right: 12px;' src='https://www.weddinglist.co.th/wp-content/uploads/2025/11/icon-calendar.png' width='24' height='24' /> <span><strong>24 - 25 มกราคม 2026</strong> <a href='https://www.weddinglist.co.th/wp-content/uploads/2025/10/Thailand-Weddinglist-Event.ics' target='_blank'>คลิกที่นี่เพื่อตั้งเตือน</a></span></p>" .
-				"			<p style='margin-left: 16px; display: flex;'><img style='margin-right: 12px;' src='https://www.weddinglist.co.th/wp-content/uploads/2025/11/icon-time.png' width='24' height='24' /> <strong>10:00 - 21:00 น.</strong></p>" .
-				"			<p style='margin-left: 16px; display: flex;'><img style='margin-right: 12px;' src='https://www.weddinglist.co.th/wp-content/uploads/2025/11/icon-location.png' width='24' height='24' /> <a href='https://maps.app.goo.gl/Y4uFZLqbX8mEamdx8' target='_blank'><strong>ศูนย์ประชุมแห่งชาติสิริกิติ์</strong><br/>(Queen Sirikit National Convention Center)</a></p>" .
-				"			<p>รหัสลงทะเบียนของคุณคือ <strong style='font-weight: 600; color: #EB355D;'>TW2026-$post_id</strong> ข้อมูลที่ท่านใช้ลงทะเบียนคือ</p>" .
-				"			<ul style='list-style: none; margin: 0; padding: 16px 16px 16px 0; border: 1px solid #F2F2F2; border-radius: 12px;'>" .
-				"				<li>เวลาลงทะเบียน : <strong>$timestamp</strong></li>" .
-				"				<li>ชื่อ : <strong>$contactName</strong></li>" .
-				"				<li>ชื่อผู้ติดต่อ : <strong>$contactName</strong></li>" .
-				"				<li>เบอร์โทร​ : <strong>$contactTel</strong></li>" .
-				"				<li>อีเมล : <strong>$contactEmail</strong></li>" .
-				"				<li>วันที่ : <strong>$date</strong></li>" .
-				"				<li>จำนวนแขก : <strong>$guest</strong></li>" .
-				"				<li>งบประมาณ : <strong>$budget</strong></li>" .
-				"				<li>ช่องทางติดต่อ : <strong>$channel</strong></li>" .
-				"				<li>ความสนใจ : <strong>$interest</strong></li>" .
-				"				<li>จังหวัด : <strong>$province</strong></li>" .
-				"			</ul>" .
-				"			<p style='margin-bottom: 8px;'>เพียง <strong style='color: #EB355D;'>แคปหน้าจอข้อความ หรือ E-mail</strong> เพื่อยืนยันการลงทะเบียนของคุณ แล้วนำไปแสดงที่จุดลงทะเบียนในวันงาน รับของที่ระลึกทั้งหมดได้เลย !</p>".
-				"			<p style='margin-bottom: 8px;'>พิเศษยิ่งขึ้น! <strong>แลกรับของสมนาคุณตามยอดใช้จ่าย และรับสิทธิ์ชิงรางวัลใหญ่มูลค่าสูงสุดภายในงาน</strong></p>".
-				"			<p style='margin-bottom: 8px; font-weight: 600; color: #EB355D;'>งานใหญ่สำหรับคู่รัก Thailand Weddinglist 2026 - The Canvas of Love and Wedding Destination</p>".
-				"			<p style='margin-bottom: 8px;'>วันที่ 24-25 มกราคม 2569 ณ ศูนย์การประชุมแห่งชาติสิริกิติ์</p>".
-				"			<p style='margin-bottom: 8px;'>พิเศษ! เพียงลงทะเบียนล่วงหน้า... <strong>รับฟรี! ของที่ระลึกสุดพรีเมียม 3 รายการ</strong> ที่จุดลงทะเบียน</p>".
-				"			<ol>".
-				"				<li>กรอบรูปสุดพิเศษ (พร้อมถ่ายรูปในงาน ฟรี ! - จำนวนจำกัด)</li>".
-				"				<li>Mobile Wish ฟรี! ระบบสร้างคำอวยพรออนไลน์ผ่าน QR Code พร้อมเทมเพลตสุดเก๋</li>".
-				"				<li>Weddinglist Passport ร่วมสนุกสะสมแสตมป์ แลกของรางวัลสุดพิเศษภายในงาน</li>".
-				"			</ol>".
-				"		</div>" .
-				"	</div>" .
-				"</div>";
+					"	<div style='max-width: 600px; margin: auto;'>" .
+					"		<div style='background: #EB355D; padding: 24px; text-align: center;'>" .
+					"			<img src='$file' alt='Weddinglist' width='243' style='display:block; margin:auto;'>" .
+					"		</div>" .
+					"		<div style='background: #FFFFFF; padding: 16px; font-family: Tahoma; color: #555555; line-height: 1.7;'>" .
+					"			<img style='display:block; width:100%; border-radius: 12px;' src='" . $banner_url . "' />" .
+					"			<p style='margin-left: 16px; display: flex;'><img style='margin-right: 12px;' src='https://www.weddinglist.co.th/wp-content/uploads/2025/11/icon-calendar.png' width='24' height='24' /> <span><strong>24 - 25 มกราคม 2026</strong> <a href='https://www.weddinglist.co.th/wp-content/uploads/2025/10/Thailand-Weddinglist-Event.ics' target='_blank'>คลิกที่นี่เพื่อตั้งเตือน</a></span></p>" .
+					"			<p style='margin-left: 16px; display: flex;'><img style='margin-right: 12px;' src='https://www.weddinglist.co.th/wp-content/uploads/2025/11/icon-time.png' width='24' height='24' /> <strong>10:00 - 21:00 น.</strong></p>" .
+					"			<p style='margin-left: 16px; display: flex;'><img style='margin-right: 12px;' src='https://www.weddinglist.co.th/wp-content/uploads/2025/11/icon-location.png' width='24' height='24' /> <a href='https://maps.app.goo.gl/Y4uFZLqbX8mEamdx8' target='_blank'><strong>ศูนย์ประชุมแห่งชาติสิริกิติ์</strong><br/>(Queen Sirikit National Convention Center)</a></p>" .
+					"			<p>รหัสลงทะเบียนของคุณคือ <strong style='font-weight: 600; color: #EB355D;'>TW2026-$post_id</strong> ข้อมูลที่ท่านใช้ลงทะเบียนคือ</p>" .
+					"			<ul style='list-style: none; margin: 0; padding: 16px 16px 16px 0; border: 1px solid #F2F2F2; border-radius: 12px;'>" .
+					"				<li>เวลาลงทะเบียน : <strong>$timestamp</strong></li>" .
+					"				<li>ชื่อ : <strong>$contactName</strong></li>" .
+					"				<li>ชื่อผู้ติดต่อ : <strong>$contactName</strong></li>" .
+					"				<li>เบอร์โทร​ : <strong>$contactTel</strong></li>" .
+					"				<li>อีเมล : <strong>$contactEmail</strong></li>" .
+					"				<li>วันที่ : <strong>$date</strong></li>" .
+					"				<li>จำนวนแขก : <strong>$guest</strong></li>" .
+					"				<li>งบประมาณ : <strong>$budget</strong></li>" .
+					"				<li>ช่องทางติดต่อ : <strong>$channel</strong></li>" .
+					"				<li>ความสนใจ : <strong>$interest</strong></li>" .
+					"				<li>จังหวัด : <strong>$province</strong></li>" .
+					"			</ul>" .
+					"			<p style='margin-bottom: 8px;'>เพียง <strong style='color: #EB355D;'>แคปหน้าจอข้อความ หรือ E-mail</strong> เพื่อยืนยันการลงทะเบียนของคุณ แล้วนำไปแสดงที่จุดลงทะเบียนในวันงาน รับของที่ระลึกทั้งหมดได้เลย !</p>" .
+					"			<p style='margin-bottom: 8px;'>พิเศษยิ่งขึ้น! <strong>แลกรับของสมนาคุณตามยอดใช้จ่าย และรับสิทธิ์ชิงรางวัลใหญ่มูลค่าสูงสุดภายในงาน</strong></p>" .
+					"			<p style='margin-bottom: 8px; font-weight: 600; color: #EB355D;'>งานใหญ่สำหรับคู่รัก Thailand Weddinglist 2026 - The Canvas of Love and Wedding Destination</p>" .
+					"			<p style='margin-bottom: 8px;'>วันที่ 24-25 มกราคม 2569 ณ ศูนย์การประชุมแห่งชาติสิริกิติ์</p>" .
+					"			<p style='margin-bottom: 8px;'>พิเศษ! เพียงลงทะเบียนล่วงหน้า... <strong>รับฟรี! ของที่ระลึกสุดพรีเมียม 3 รายการ</strong> ที่จุดลงทะเบียน</p>" .
+					"			<ol>" .
+					"				<li>กรอบรูปสุดพิเศษ (พร้อมถ่ายรูปในงาน ฟรี ! - จำนวนจำกัด)</li>" .
+					"				<li>Mobile Wish ฟรี! ระบบสร้างคำอวยพรออนไลน์ผ่าน QR Code พร้อมเทมเพลตสุดเก๋</li>" .
+					"				<li>Weddinglist Passport ร่วมสนุกสะสมแสตมป์ แลกของรางวัลสุดพิเศษภายในงาน</li>" .
+					"			</ol>" .
+					"		</div>" .
+					"	</div>" .
+					"</div>";
 				wp_mail($post_data['contactEmail'], $user_subject, $user_message, $user_headers);
-				
+
 				//wp_send_json_success(['message' => 'ลงทะเบียนสำเร็จ']);
-				
-				wp_redirect(home_url( '/tw2026/register?id='.$post_id ));
-				
+
+				wp_redirect(home_url('/tw2026/register?id=' . $post_id));
+
 				exit;
 			}
 
@@ -1174,3 +1182,7 @@ function handleTW2026FormSubmit() {
 }
 
 add_action('init', 'handleTW2026FormSubmit');
+
+add_action('after_setup_theme', function () {
+	add_theme_support('publishpress-future');
+});
